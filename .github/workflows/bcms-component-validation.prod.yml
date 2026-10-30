@@ -1,4 +1,4 @@
-# bettercms-managed rung=prod api=https://api.bettercms.ai project=s_w0h4f0UHk4Dl8BxYDe2 — written by BetterCMS; do not edit
+# bettercms-managed rung=prod api=https://api.bettercms.ai project=OiAMdh8tElW2sopHBA18B — written by BetterCMS; do not edit
 # Validates one BetterCMS component in this repository's real app. No script in this repository is
 # required: BetterCMS dispatches the request, and this runner builds and checks the component.
 name: BetterCMS Component Validation
@@ -14,12 +14,12 @@ permissions:
 
 jobs:
   validate-component:
-    if: github.event.client_payload.projectId == 's_w0h4f0UHk4Dl8BxYDe2'
+    if: github.event.client_payload.projectId == 'OiAMdh8tElW2sopHBA18B'
     runs-on: ubuntu-latest
     timeout-minutes: 25
     env:
       BCMS_API_URL: https://api.bettercms.ai
-      BCMS_PROJECT_ID: s_w0h4f0UHk4Dl8BxYDe2
+      BCMS_PROJECT_ID: OiAMdh8tElW2sopHBA18B
       BCMS_REQUEST_ID: ${{ github.event.client_payload.requestId }}
       BCMS_COMPONENT_ID: ${{ github.event.client_payload.componentId }}
       BCMS_COMMIT_SHA: ${{ github.event.client_payload.targetCommitSha }}
