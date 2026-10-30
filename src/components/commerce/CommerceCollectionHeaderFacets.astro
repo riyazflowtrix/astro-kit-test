@@ -1,3 +1,6 @@
+---
+import { bcmsFormAction, bcmsFormId, bcmsFormMethod } from "../../bcms-forms";
+---
 <section id="commerce-collection-header-facets" class="section collection-header">
   <!-- kit: commerce-collection-header-facets -->
   <div class="container">
@@ -27,11 +30,11 @@
       </div>
     </div>
 
-    <form id="collection-filters" class="collection-header__filters" action="#" method="get" aria-label="Filter products">
+    <form id="collection-filters" class="collection-header__filters" action={bcmsFormAction("Filter products")} method={bcmsFormMethod("Filter products")} aria-label="Filter products" data-bcms-form={bcmsFormId("Filter products")} data-bcms-form-success="Thank you for your submission!">
       <fieldset class="facet">
         <legend>Product type</legend>
         <div class="facet__pills">
-          <label><input type="checkbox" name="productType" value="Skillets" /><span>Skillets <em>(6)</em></span></label>
+          <label data-bcms-form-field="productType"><input type="checkbox" name="productType" value="Skillets" /><span>Skillets <em>(6)</em></span></label>
           <label><input type="checkbox" name="productType" value="Dutch ovens" /><span>Dutch ovens <em>(4)</em></span></label>
           <label><input type="checkbox" name="productType" value="Griddles" /><span>Griddles <em>(3)</em></span></label>
           <label><input type="checkbox" name="productType" value="Accessories" /><span>Accessories <em>(1)</em></span></label>
@@ -41,7 +44,7 @@
       <fieldset class="facet">
         <legend>Finish</legend>
         <div class="facet__swatches">
-          <label><input type="checkbox" name="finish" value="Bare iron" /><span class="facet__swatch" style="background:#1E1B18"></span>Bare iron</label>
+          <label data-bcms-form-field="finish"><input type="checkbox" name="finish" value="Bare iron" /><span class="facet__swatch" style="background:#1E1B18"></span>Bare iron</label>
           <label><input type="checkbox" name="finish" value="Ember red" /><span class="facet__swatch" style="background:#B33A24"></span>Ember red</label>
           <label><input type="checkbox" name="finish" value="Speckled sage" /><span class="facet__swatch" style="background:#7D8F74"></span>Speckled sage</label>
         </div>
@@ -50,13 +53,13 @@
       <fieldset class="facet">
         <legend>Price</legend>
         <div class="facet__range">
-          <div class="field">
-            <label for="collection-price-min">Min ($)</label>
+          <div class="field" data-bcms-form-field="priceMin">
+            <label for="collection-price-min" data-bcms-form-part="label">Min ($)</label>
             <input id="collection-price-min" name="priceMin" type="number" min="0" step="10" value="0" inputmode="numeric" />
           </div>
           <span aria-hidden="true">&ndash;</span>
-          <div class="field">
-            <label for="collection-price-max">Max ($)</label>
+          <div class="field" data-bcms-form-field="priceMax">
+            <label for="collection-price-max" data-bcms-form-part="label">Max ($)</label>
             <input id="collection-price-max" name="priceMax" type="number" min="0" step="10" value="250" inputmode="numeric" />
           </div>
         </div>
@@ -64,9 +67,79 @@
 
       <fieldset class="facet">
         <legend>Availability</legend>
-        <label class="facet__check"><input type="checkbox" name="inStock" value="1" /> In stock only <em>(12)</em></label>
+        <label class="facet__check" data-bcms-form-field="inStock"><input type="checkbox" name="inStock" value="1" /> In stock only <em>(12)</em></label>
       </fieldset>
+    <div style="position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap"><input type="text" name="_bcms_hp" tabindex="-1" autocomplete="off" aria-hidden="true"></div>
+    <p class="bcms-form-msg" hidden></p>
     </form>
+    <script is:inline>
+function bcmsPhone(cc,raw,trunk){var d=String(raw||'').trim();if(!d)return '';if(d.charAt(0)==='+'){var i=d.replace(/\D/g,'');return i?'+'+i:'';}if(!cc)return d;var n=d.replace(/\D/g,'');if(trunk&&n.charAt(0)==='0')n=n.slice(1);return n?'+'+cc+n:'';}
+document.querySelectorAll('form[data-bcms-form]').forEach(function(f){
+  // Once per form: a page that runs this again (a server-rendered fragment's scripts after
+  // hydration, two fragments on one page) must not bind a second submit.
+  if(f.hasAttribute('data-bcms-form-on'))return;f.setAttribute('data-bcms-form-on','');
+  // One view per page load: the conversion rate's denominator. Only the dashboard's embed sent it,
+  // so a hosted or converted form read near zero views and its rate meant nothing. Counted on the
+  // live site only: never in a frame (the editor canvas) or on a preview, canvas or branch host.
+  try{var sa=f.action,ss='/submissions',h=location.hostname;if(window.top===window&&h.indexOf('preview-')!==0&&h.indexOf('canvas-')!==0&&h.indexOf('--')===-1&&sa.slice(-ss.length)===ss)fetch(sa.slice(0,-ss.length)+'/view',{method:'POST',keepalive:true});}catch(x){}
+  // Conditional fields. A hidden field's controls are DISABLED, not just hidden: a disabled control
+  // posts nothing and is never checked by native validation, so a hidden required field cannot
+  // block the submit and its stale answer never leaves the browser.
+  function conds(){
+    f.querySelectorAll('[data-bcms-showif]').forEach(function(w){
+      var c;try{c=JSON.parse(w.getAttribute('data-bcms-showif'));}catch(x){return;}
+      var vals=[];
+      f.querySelectorAll('[name]').forEach(function(el){
+        if(el.name!==c.field||el.disabled)return;
+        if(el.type==='checkbox'&&!el.hasAttribute('value'))vals.push(el.checked?'true':'false');
+        else if(el.type==='radio'||el.type==='checkbox'){if(el.checked)vals.push(el.value);}
+        else vals.push(el.value);
+      });
+      var show=vals.indexOf(c.equals)!==-1;
+      w.hidden=!show;
+      w.querySelectorAll('input,select,textarea').forEach(function(el){el.disabled=!show;});
+    });
+  }
+  f.addEventListener('input',conds);
+  f.addEventListener('change',conds);
+  conds();
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var msg=f.querySelector('.bcms-form-msg');
+    var data={};
+    // A checkboxes group posts one entry per checked box under the SAME name; the old
+    // one-at-a-time assignment kept only the last, so "pick many" delivered one answer.
+    // One checked box still arrives as a scalar — FormData cannot tell a group from a
+    // lone field — which is exactly why lib/forms/validate.ts's chosenValues() accepts
+    // both an array and a comma string.
+    new FormData(f).forEach(function(v,k){
+      if(k==='cf-turnstile-response')return;
+      if(Object.prototype.hasOwnProperty.call(data,k))data[k]=(Array.isArray(data[k])?data[k]:[data[k]]).concat(v);
+      else data[k]=v;
+    });
+    // Country-picker phone fields post ONE key. The __country select is scaffolding: it is
+    // composed into the field's own value here, AFTER collection, so a showIf that points at a
+    // phone key still compares the raw digits. Then it is removed from the body.
+    f.querySelectorAll('select[name$="__country"]').forEach(function(sel){
+      if(sel.disabled)return;
+      var k=sel.name.slice(0,-9);
+      var o=sel.options[sel.selectedIndex];
+      data[k]=bcmsPhone(o?(o.getAttribute('data-cc')||''):'',data[k],o?o.getAttribute('data-trunk')==='1':false);
+      delete data[k+'__country'];
+    });
+    // _bcms_t: whole ms since the page's navigation (too fast reads as a bot), not since this bound.
+    data._bcms_t=Math.round(performance.now());
+    var body={data:data};
+    var tok=f.querySelector('[name="cf-turnstile-response"]');
+    if(tok&&tok.value)body['cf-turnstile-response']=tok.value;
+    fetch(f.action,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)})
+      // The server names what is wrong ("Company is required"); say that rather than a shrug.
+      .then(function(r){return r.json().catch(function(){return {};}).then(function(j){var e=j&&j.errors;return {ok:r.ok,why:(e&&e[Object.keys(e)[0]])||(j&&j.error)};});})
+      .then(function(r){var ok=r.ok;if(msg){msg.hidden=false;msg.textContent=ok?(f.getAttribute('data-bcms-form-success')||'Thanks! Your submission was received.'):(r.why||'Sorry, something went wrong.');}if(ok){f.reset();conds();}})
+      .catch(function(){if(msg){msg.hidden=false;msg.textContent='Sorry, something went wrong.';}});
+  });
+});
+</script>
   </div>
 </section>
 

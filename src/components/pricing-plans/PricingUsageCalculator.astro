@@ -1,3 +1,6 @@
+---
+import { bcmsFormAction, bcmsFormId, bcmsFormMethod } from "../../bcms-forms";
+---
 <section id="pricing-usage-calculator" class="section section--muted calc">
   <!-- kit: pricing-usage-calculator -->
   <div class="container calc__layout">
@@ -5,25 +8,95 @@
       <h2>Estimate your monthly bill</h2>
       <p class="lead">Pay for the events you send. No per-endpoint fees, no surprise overages.</p>
 
-      <form class="calc__form" action="#" onsubmit="return false">
-        <div class="calc__input">
+      <form class="calc__form" action={bcmsFormAction("Estimate your monthly bill")} onsubmit="return false" method={bcmsFormMethod("Estimate your monthly bill")} data-bcms-form={bcmsFormId("Estimate your monthly bill")} data-bcms-form-success="Thank you for your submission!">
+        <div class="calc__input" data-bcms-form-field="calc-events">
           <div class="calc__label-row">
-            <label for="calc-events">Events a month</label>
+            <label for="calc-events" data-bcms-form-part="label">Events a month</label>
             <output for="calc-events" data-out="events">5M events</output>
           </div>
-          <input id="calc-events" type="range" min="0" max="1000" step="1" value="566" data-scale="log" data-min="100000" data-max="100000000" aria-describedby="calc-events-help" />
+          <input id="calc-events" type="range" min="0" max="1000" step="1" value="566" data-scale="log" data-min="100000" data-max="100000000" aria-describedby="calc-events-help" name="calc-events" />
           <div class="calc__ticks" aria-hidden="true"><span>100k</span><span>1M</span><span>10M</span><span>100M</span></div>
           <p id="calc-events-help" class="calc__help">Count every webhook delivery attempt, retries included.</p>
         </div>
-        <div class="calc__input">
+        <div class="calc__input" data-bcms-form-field="calc-retention">
           <div class="calc__label-row">
-            <label for="calc-retention">Event history</label>
+            <label for="calc-retention" data-bcms-form-part="label">Event history</label>
             <output for="calc-retention" data-out="retention">30 days</output>
           </div>
-          <input id="calc-retention" type="range" min="3" max="90" step="1" value="30" />
+          <input id="calc-retention" type="range" min="3" max="90" step="1" value="30" name="calc-retention" />
           <div class="calc__ticks" aria-hidden="true"><span>3 days</span><span>90 days</span></div>
         </div>
+      <div style="position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap"><input type="text" name="_bcms_hp" tabindex="-1" autocomplete="off" aria-hidden="true"></div>
+      <p class="bcms-form-msg" hidden></p>
       </form>
+      <script is:inline>
+function bcmsPhone(cc,raw,trunk){var d=String(raw||'').trim();if(!d)return '';if(d.charAt(0)==='+'){var i=d.replace(/\D/g,'');return i?'+'+i:'';}if(!cc)return d;var n=d.replace(/\D/g,'');if(trunk&&n.charAt(0)==='0')n=n.slice(1);return n?'+'+cc+n:'';}
+document.querySelectorAll('form[data-bcms-form]').forEach(function(f){
+  // Once per form: a page that runs this again (a server-rendered fragment's scripts after
+  // hydration, two fragments on one page) must not bind a second submit.
+  if(f.hasAttribute('data-bcms-form-on'))return;f.setAttribute('data-bcms-form-on','');
+  // One view per page load: the conversion rate's denominator. Only the dashboard's embed sent it,
+  // so a hosted or converted form read near zero views and its rate meant nothing. Counted on the
+  // live site only: never in a frame (the editor canvas) or on a preview, canvas or branch host.
+  try{var sa=f.action,ss='/submissions',h=location.hostname;if(window.top===window&&h.indexOf('preview-')!==0&&h.indexOf('canvas-')!==0&&h.indexOf('--')===-1&&sa.slice(-ss.length)===ss)fetch(sa.slice(0,-ss.length)+'/view',{method:'POST',keepalive:true});}catch(x){}
+  // Conditional fields. A hidden field's controls are DISABLED, not just hidden: a disabled control
+  // posts nothing and is never checked by native validation, so a hidden required field cannot
+  // block the submit and its stale answer never leaves the browser.
+  function conds(){
+    f.querySelectorAll('[data-bcms-showif]').forEach(function(w){
+      var c;try{c=JSON.parse(w.getAttribute('data-bcms-showif'));}catch(x){return;}
+      var vals=[];
+      f.querySelectorAll('[name]').forEach(function(el){
+        if(el.name!==c.field||el.disabled)return;
+        if(el.type==='checkbox'&&!el.hasAttribute('value'))vals.push(el.checked?'true':'false');
+        else if(el.type==='radio'||el.type==='checkbox'){if(el.checked)vals.push(el.value);}
+        else vals.push(el.value);
+      });
+      var show=vals.indexOf(c.equals)!==-1;
+      w.hidden=!show;
+      w.querySelectorAll('input,select,textarea').forEach(function(el){el.disabled=!show;});
+    });
+  }
+  f.addEventListener('input',conds);
+  f.addEventListener('change',conds);
+  conds();
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var msg=f.querySelector('.bcms-form-msg');
+    var data={};
+    // A checkboxes group posts one entry per checked box under the SAME name; the old
+    // one-at-a-time assignment kept only the last, so "pick many" delivered one answer.
+    // One checked box still arrives as a scalar — FormData cannot tell a group from a
+    // lone field — which is exactly why lib/forms/validate.ts's chosenValues() accepts
+    // both an array and a comma string.
+    new FormData(f).forEach(function(v,k){
+      if(k==='cf-turnstile-response')return;
+      if(Object.prototype.hasOwnProperty.call(data,k))data[k]=(Array.isArray(data[k])?data[k]:[data[k]]).concat(v);
+      else data[k]=v;
+    });
+    // Country-picker phone fields post ONE key. The __country select is scaffolding: it is
+    // composed into the field's own value here, AFTER collection, so a showIf that points at a
+    // phone key still compares the raw digits. Then it is removed from the body.
+    f.querySelectorAll('select[name$="__country"]').forEach(function(sel){
+      if(sel.disabled)return;
+      var k=sel.name.slice(0,-9);
+      var o=sel.options[sel.selectedIndex];
+      data[k]=bcmsPhone(o?(o.getAttribute('data-cc')||''):'',data[k],o?o.getAttribute('data-trunk')==='1':false);
+      delete data[k+'__country'];
+    });
+    // _bcms_t: whole ms since the page's navigation (too fast reads as a bot), not since this bound.
+    data._bcms_t=Math.round(performance.now());
+    var body={data:data};
+    var tok=f.querySelector('[name="cf-turnstile-response"]');
+    if(tok&&tok.value)body['cf-turnstile-response']=tok.value;
+    fetch(f.action,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)})
+      // The server names what is wrong ("Company is required"); say that rather than a shrug.
+      .then(function(r){return r.json().catch(function(){return {};}).then(function(j){var e=j&&j.errors;return {ok:r.ok,why:(e&&e[Object.keys(e)[0]])||(j&&j.error)};});})
+      .then(function(r){var ok=r.ok;if(msg){msg.hidden=false;msg.textContent=ok?(f.getAttribute('data-bcms-form-success')||'Thanks! Your submission was received.'):(r.why||'Sorry, something went wrong.');}if(ok){f.reset();conds();}})
+      .catch(function(){if(msg){msg.hidden=false;msg.textContent='Sorry, something went wrong.';}});
+  });
+});
+</script>
     </div>
 
     <div class="calc__result" aria-live="polite">

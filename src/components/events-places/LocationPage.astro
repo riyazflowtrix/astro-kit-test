@@ -1,4 +1,5 @@
 ---
+import { bcmsFormAction, bcmsFormId, bcmsFormMethod } from "../../bcms-forms";
 ---
 
 <section id="location-page" class="section place" data-booking-provider="resy" data-venue-id="58231" data-price-range="$$$">
@@ -53,14 +54,14 @@
 
       <section class="place__block" id="place-book">
         <h2>Book a table</h2>
-        <form class="place__booking card" action="#" method="get" data-provider="resy" data-venue-id="58231">
+        <form class="place__booking card" action={bcmsFormAction("Book a table")} method={bcmsFormMethod("Book a table")} data-provider="resy" data-venue-id="58231" data-bcms-form={bcmsFormId("Book a table")} data-bcms-form-success="Thank you for your submission!">
           <div class="place__booking-row">
-            <div class="field">
-              <label for="pl-date">Date</label>
+            <div class="field" data-bcms-form-field="date">
+              <label for="pl-date" data-bcms-form-part="label">Date</label>
               <input id="pl-date" name="date" type="date" required />
             </div>
-            <div class="field">
-              <label for="pl-party">Guests</label>
+            <div class="field" data-bcms-form-field="party">
+              <label for="pl-party" data-bcms-form-part="label">Guests</label>
               <select id="pl-party" name="party">
                 <option>1</option>
                 <option selected>2</option>
@@ -70,8 +71,8 @@
                 <option>6</option>
               </select>
             </div>
-            <div class="field">
-              <label for="pl-time">Time</label>
+            <div class="field" data-bcms-form-field="time">
+              <label for="pl-time" data-bcms-form-part="label">Time</label>
               <select id="pl-time" name="time">
                 <option>17:30</option>
                 <option>18:30</option>
@@ -81,8 +82,10 @@
               </select>
             </div>
           </div>
-          <button class="btn btn-primary" type="submit">Find a table</button>
+          <button class="btn btn-primary" type="submit" data-bcms-form-part="submit">Find a table</button>
           <p class="place__fine">Reservations by Resy. The bar and the counter by the oven are always kept for walk-ins.</p>
+        <div style="position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap"><input type="text" name="_bcms_hp" tabindex="-1" autocomplete="off" aria-hidden="true"></div>
+        <p class="bcms-form-msg" hidden></p>
         </form>
       </section>
 
@@ -93,26 +96,96 @@
           <p>Birthdays, rehearsal dinners and team suppers, with a set menu cooked over the oak fire.</p>
           <a class="btn btn-secondary" href="https://fiamma.co/media/private-dining-mission.pdf" download="private-dining-mission.pdf">Download the brochure (PDF, 2.4 MB)</a>
         </div>
-        <form class="place__private-form" action="#" method="post" data-form="form_private-dining-mission">
-          <div class="field">
-            <label for="pd-name">Name</label>
+        <form class="place__private-form" action={bcmsFormAction("The back room seats 24")} method={bcmsFormMethod("The back room seats 24")} data-form="form_private-dining-mission" data-bcms-form={bcmsFormId("The back room seats 24")} data-bcms-form-success="Thank you for your submission!">
+          <div class="field" data-bcms-form-field="name">
+            <label for="pd-name" data-bcms-form-part="label">Name</label>
             <input id="pd-name" name="name" type="text" autocomplete="name" required />
           </div>
-          <div class="field">
-            <label for="pd-email">Email</label>
+          <div class="field" data-bcms-form-field="email">
+            <label for="pd-email" data-bcms-form-part="label">Email</label>
             <input id="pd-email" name="email" type="email" autocomplete="email" required />
           </div>
-          <div class="field">
-            <label for="pd-guests">Number of guests</label>
+          <div class="field" data-bcms-form-field="guests">
+            <label for="pd-guests" data-bcms-form-part="label">Number of guests</label>
             <input id="pd-guests" name="guests" type="number" min="8" max="24" />
           </div>
-          <div class="field">
-            <label for="pd-date">Preferred date</label>
+          <div class="field" data-bcms-form-field="date">
+            <label for="pd-date" data-bcms-form-part="label">Preferred date</label>
             <input id="pd-date" name="date" type="date" />
           </div>
-          <button class="btn btn-primary" type="submit">Send enquiry</button>
+          <button class="btn btn-primary" type="submit" data-bcms-form-part="submit">Send enquiry</button>
           <p class="place__sent" role="status" hidden>Thanks — our events team will reply within a day.</p>
+        <div style="position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap"><input type="text" name="_bcms_hp" tabindex="-1" autocomplete="off" aria-hidden="true"></div>
+        <p class="bcms-form-msg" hidden></p>
         </form>
+        <script is:inline>
+function bcmsPhone(cc,raw,trunk){var d=String(raw||'').trim();if(!d)return '';if(d.charAt(0)==='+'){var i=d.replace(/\D/g,'');return i?'+'+i:'';}if(!cc)return d;var n=d.replace(/\D/g,'');if(trunk&&n.charAt(0)==='0')n=n.slice(1);return n?'+'+cc+n:'';}
+document.querySelectorAll('form[data-bcms-form]').forEach(function(f){
+  // Once per form: a page that runs this again (a server-rendered fragment's scripts after
+  // hydration, two fragments on one page) must not bind a second submit.
+  if(f.hasAttribute('data-bcms-form-on'))return;f.setAttribute('data-bcms-form-on','');
+  // One view per page load: the conversion rate's denominator. Only the dashboard's embed sent it,
+  // so a hosted or converted form read near zero views and its rate meant nothing. Counted on the
+  // live site only: never in a frame (the editor canvas) or on a preview, canvas or branch host.
+  try{var sa=f.action,ss='/submissions',h=location.hostname;if(window.top===window&&h.indexOf('preview-')!==0&&h.indexOf('canvas-')!==0&&h.indexOf('--')===-1&&sa.slice(-ss.length)===ss)fetch(sa.slice(0,-ss.length)+'/view',{method:'POST',keepalive:true});}catch(x){}
+  // Conditional fields. A hidden field's controls are DISABLED, not just hidden: a disabled control
+  // posts nothing and is never checked by native validation, so a hidden required field cannot
+  // block the submit and its stale answer never leaves the browser.
+  function conds(){
+    f.querySelectorAll('[data-bcms-showif]').forEach(function(w){
+      var c;try{c=JSON.parse(w.getAttribute('data-bcms-showif'));}catch(x){return;}
+      var vals=[];
+      f.querySelectorAll('[name]').forEach(function(el){
+        if(el.name!==c.field||el.disabled)return;
+        if(el.type==='checkbox'&&!el.hasAttribute('value'))vals.push(el.checked?'true':'false');
+        else if(el.type==='radio'||el.type==='checkbox'){if(el.checked)vals.push(el.value);}
+        else vals.push(el.value);
+      });
+      var show=vals.indexOf(c.equals)!==-1;
+      w.hidden=!show;
+      w.querySelectorAll('input,select,textarea').forEach(function(el){el.disabled=!show;});
+    });
+  }
+  f.addEventListener('input',conds);
+  f.addEventListener('change',conds);
+  conds();
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var msg=f.querySelector('.bcms-form-msg');
+    var data={};
+    // A checkboxes group posts one entry per checked box under the SAME name; the old
+    // one-at-a-time assignment kept only the last, so "pick many" delivered one answer.
+    // One checked box still arrives as a scalar — FormData cannot tell a group from a
+    // lone field — which is exactly why lib/forms/validate.ts's chosenValues() accepts
+    // both an array and a comma string.
+    new FormData(f).forEach(function(v,k){
+      if(k==='cf-turnstile-response')return;
+      if(Object.prototype.hasOwnProperty.call(data,k))data[k]=(Array.isArray(data[k])?data[k]:[data[k]]).concat(v);
+      else data[k]=v;
+    });
+    // Country-picker phone fields post ONE key. The __country select is scaffolding: it is
+    // composed into the field's own value here, AFTER collection, so a showIf that points at a
+    // phone key still compares the raw digits. Then it is removed from the body.
+    f.querySelectorAll('select[name$="__country"]').forEach(function(sel){
+      if(sel.disabled)return;
+      var k=sel.name.slice(0,-9);
+      var o=sel.options[sel.selectedIndex];
+      data[k]=bcmsPhone(o?(o.getAttribute('data-cc')||''):'',data[k],o?o.getAttribute('data-trunk')==='1':false);
+      delete data[k+'__country'];
+    });
+    // _bcms_t: whole ms since the page's navigation (too fast reads as a bot), not since this bound.
+    data._bcms_t=Math.round(performance.now());
+    var body={data:data};
+    var tok=f.querySelector('[name="cf-turnstile-response"]');
+    if(tok&&tok.value)body['cf-turnstile-response']=tok.value;
+    fetch(f.action,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)})
+      // The server names what is wrong ("Company is required"); say that rather than a shrug.
+      .then(function(r){return r.json().catch(function(){return {};}).then(function(j){var e=j&&j.errors;return {ok:r.ok,why:(e&&e[Object.keys(e)[0]])||(j&&j.error)};});})
+      .then(function(r){var ok=r.ok;if(msg){msg.hidden=false;msg.textContent=ok?(f.getAttribute('data-bcms-form-success')||'Thanks! Your submission was received.'):(r.why||'Sorry, something went wrong.');}if(ok){f.reset();conds();}})
+      .catch(function(){if(msg){msg.hidden=false;msg.textContent='Sorry, something went wrong.';}});
+  });
+});
+</script>
       </section>
     </div>
 

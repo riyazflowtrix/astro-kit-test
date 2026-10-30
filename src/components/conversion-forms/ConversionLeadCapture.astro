@@ -1,4 +1,5 @@
 ---
+import { bcmsFormAction, bcmsFormId, bcmsFormMethod } from "../../bcms-forms";
 ---
 
 <section id="conversion-lead-capture" class="section lead-capture" data-variant="form-right" data-on-success="download">
@@ -33,28 +34,28 @@
     </div>
 
     <div class="lead-capture__panel card">
-      <form class="lead-capture__form" action="#" method="post" data-form="form_wholesale">
+      <form class="lead-capture__form" action={bcmsFormAction("Stock Caldera in your store")} method={bcmsFormMethod("Stock Caldera in your store")} data-form="form_wholesale" data-bcms-form={bcmsFormId("Stock Caldera in your store")} data-bcms-form-success="Thank you for your submission!">
         <div class="lead-capture__two">
-          <div class="field">
-            <label for="lc-name">Your name</label>
+          <div class="field" data-bcms-form-field="name">
+            <label for="lc-name" data-bcms-form-part="label">Your name</label>
             <input id="lc-name" name="name" type="text" autocomplete="name" required />
           </div>
-          <div class="field">
-            <label for="lc-email">Work email</label>
+          <div class="field" data-bcms-form-field="email">
+            <label for="lc-email" data-bcms-form-part="label">Work email</label>
             <input id="lc-email" name="email" type="email" autocomplete="email" required />
           </div>
         </div>
-        <div class="field">
-          <label for="lc-store">Store name</label>
+        <div class="field" data-bcms-form-field="store">
+          <label for="lc-store" data-bcms-form-part="label">Store name</label>
           <input id="lc-store" name="store" type="text" autocomplete="organization" required />
         </div>
         <div class="lead-capture__two">
-          <div class="field">
-            <label for="lc-website">Website</label>
+          <div class="field" data-bcms-form-field="website">
+            <label for="lc-website" data-bcms-form-part="label">Website</label>
             <input id="lc-website" name="website" type="url" placeholder="https://" />
           </div>
-          <div class="field">
-            <label for="lc-type">Type of business</label>
+          <div class="field" data-bcms-form-field="business_type">
+            <label for="lc-type" data-bcms-form-part="label">Type of business</label>
             <select id="lc-type" name="business_type">
               <option>Outdoor outfitter</option>
               <option>Kitchen shop</option>
@@ -63,17 +64,87 @@
             </select>
           </div>
         </div>
-        <div class="field">
-          <label for="lc-message">Tell us about your store</label>
+        <div class="field" data-bcms-form-field="message">
+          <label for="lc-message" data-bcms-form-part="label">Tell us about your store</label>
           <textarea id="lc-message" name="message" rows="4"></textarea>
         </div>
-        <input type="hidden" name="lead_source" value="{{utm_source}}" />
-        <input type="hidden" name="landing_page" value="{{page_url}}" />
-        <button class="btn btn-primary lead-capture__submit" type="submit">Apply for wholesale</button>
+        <input type="hidden" name="lead_source" value="{{utm_source}}" data-bcms-form-field="lead_source" />
+        <input type="hidden" name="landing_page" value="{{page_url}}" data-bcms-form-field="landing_page" />
+        <button class="btn btn-primary lead-capture__submit" type="submit" data-bcms-form-part="submit">Apply for wholesale</button>
         <div class="lead-capture__privacy">
           <p>We only use your details to review your application. <a href="/privacy">Privacy policy</a>.</p>
         </div>
+      <div style="position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap"><input type="text" name="_bcms_hp" tabindex="-1" autocomplete="off" aria-hidden="true"></div>
+      <p class="bcms-form-msg" hidden></p>
       </form>
+      <script is:inline>
+function bcmsPhone(cc,raw,trunk){var d=String(raw||'').trim();if(!d)return '';if(d.charAt(0)==='+'){var i=d.replace(/\D/g,'');return i?'+'+i:'';}if(!cc)return d;var n=d.replace(/\D/g,'');if(trunk&&n.charAt(0)==='0')n=n.slice(1);return n?'+'+cc+n:'';}
+document.querySelectorAll('form[data-bcms-form]').forEach(function(f){
+  // Once per form: a page that runs this again (a server-rendered fragment's scripts after
+  // hydration, two fragments on one page) must not bind a second submit.
+  if(f.hasAttribute('data-bcms-form-on'))return;f.setAttribute('data-bcms-form-on','');
+  // One view per page load: the conversion rate's denominator. Only the dashboard's embed sent it,
+  // so a hosted or converted form read near zero views and its rate meant nothing. Counted on the
+  // live site only: never in a frame (the editor canvas) or on a preview, canvas or branch host.
+  try{var sa=f.action,ss='/submissions',h=location.hostname;if(window.top===window&&h.indexOf('preview-')!==0&&h.indexOf('canvas-')!==0&&h.indexOf('--')===-1&&sa.slice(-ss.length)===ss)fetch(sa.slice(0,-ss.length)+'/view',{method:'POST',keepalive:true});}catch(x){}
+  // Conditional fields. A hidden field's controls are DISABLED, not just hidden: a disabled control
+  // posts nothing and is never checked by native validation, so a hidden required field cannot
+  // block the submit and its stale answer never leaves the browser.
+  function conds(){
+    f.querySelectorAll('[data-bcms-showif]').forEach(function(w){
+      var c;try{c=JSON.parse(w.getAttribute('data-bcms-showif'));}catch(x){return;}
+      var vals=[];
+      f.querySelectorAll('[name]').forEach(function(el){
+        if(el.name!==c.field||el.disabled)return;
+        if(el.type==='checkbox'&&!el.hasAttribute('value'))vals.push(el.checked?'true':'false');
+        else if(el.type==='radio'||el.type==='checkbox'){if(el.checked)vals.push(el.value);}
+        else vals.push(el.value);
+      });
+      var show=vals.indexOf(c.equals)!==-1;
+      w.hidden=!show;
+      w.querySelectorAll('input,select,textarea').forEach(function(el){el.disabled=!show;});
+    });
+  }
+  f.addEventListener('input',conds);
+  f.addEventListener('change',conds);
+  conds();
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var msg=f.querySelector('.bcms-form-msg');
+    var data={};
+    // A checkboxes group posts one entry per checked box under the SAME name; the old
+    // one-at-a-time assignment kept only the last, so "pick many" delivered one answer.
+    // One checked box still arrives as a scalar — FormData cannot tell a group from a
+    // lone field — which is exactly why lib/forms/validate.ts's chosenValues() accepts
+    // both an array and a comma string.
+    new FormData(f).forEach(function(v,k){
+      if(k==='cf-turnstile-response')return;
+      if(Object.prototype.hasOwnProperty.call(data,k))data[k]=(Array.isArray(data[k])?data[k]:[data[k]]).concat(v);
+      else data[k]=v;
+    });
+    // Country-picker phone fields post ONE key. The __country select is scaffolding: it is
+    // composed into the field's own value here, AFTER collection, so a showIf that points at a
+    // phone key still compares the raw digits. Then it is removed from the body.
+    f.querySelectorAll('select[name$="__country"]').forEach(function(sel){
+      if(sel.disabled)return;
+      var k=sel.name.slice(0,-9);
+      var o=sel.options[sel.selectedIndex];
+      data[k]=bcmsPhone(o?(o.getAttribute('data-cc')||''):'',data[k],o?o.getAttribute('data-trunk')==='1':false);
+      delete data[k+'__country'];
+    });
+    // _bcms_t: whole ms since the page's navigation (too fast reads as a bot), not since this bound.
+    data._bcms_t=Math.round(performance.now());
+    var body={data:data};
+    var tok=f.querySelector('[name="cf-turnstile-response"]');
+    if(tok&&tok.value)body['cf-turnstile-response']=tok.value;
+    fetch(f.action,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)})
+      // The server names what is wrong ("Company is required"); say that rather than a shrug.
+      .then(function(r){return r.json().catch(function(){return {};}).then(function(j){var e=j&&j.errors;return {ok:r.ok,why:(e&&e[Object.keys(e)[0]])||(j&&j.error)};});})
+      .then(function(r){var ok=r.ok;if(msg){msg.hidden=false;msg.textContent=ok?(f.getAttribute('data-bcms-form-success')||'Thanks! Your submission was received.'):(r.why||'Sorry, something went wrong.');}if(ok){f.reset();conds();}})
+      .catch(function(){if(msg){msg.hidden=false;msg.textContent='Sorry, something went wrong.';}});
+  });
+});
+</script>
 
       <div class="lead-capture__success" role="status" hidden>
         <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M8 12l3 3 5-6" /></svg>

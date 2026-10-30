@@ -1,4 +1,5 @@
 ---
+import { bcmsFormAction, bcmsFormId, bcmsFormMethod } from "../../bcms-forms";
 ---
 
 <section id="conversion-multi-step-form" class="section section--muted msf" data-progress="steps">
@@ -16,25 +17,25 @@
         <li><span>3</span> Paying for care</li>
       </ol>
 
-      <form class="msf__form" action="#" method="post" data-form="form_contact" novalidate>
+      <form class="msf__form" action={bcmsFormAction("Book your first visit")} method={bcmsFormMethod("Book your first visit")} data-form="form_contact" novalidate data-bcms-form={bcmsFormId("Book your first visit")} data-bcms-form-success="Thank you for your submission!">
         <fieldset class="msf__step" data-step="1">
           <legend>About you</legend>
           <p class="msf__desc">So we can confirm your appointment.</p>
           <div class="msf__grid">
-            <div class="field">
-              <label for="msf-full_name">Full name</label>
+            <div class="field" data-bcms-form-field="full_name">
+              <label for="msf-full_name" data-bcms-form-part="label">Full name</label>
               <input id="msf-full_name" name="full_name" type="text" autocomplete="name" required />
             </div>
-            <div class="field">
-              <label for="msf-email">Email</label>
+            <div class="field" data-bcms-form-field="email">
+              <label for="msf-email" data-bcms-form-part="label">Email</label>
               <input id="msf-email" name="email" type="email" autocomplete="email" required />
             </div>
-            <div class="field">
-              <label for="msf-phone">Mobile number</label>
+            <div class="field" data-bcms-form-field="phone">
+              <label for="msf-phone" data-bcms-form-part="label">Mobile number</label>
               <input id="msf-phone" name="phone" type="tel" autocomplete="tel" required />
             </div>
-            <div class="field">
-              <label for="msf-dob">Date of birth</label>
+            <div class="field" data-bcms-form-field="date_of_birth">
+              <label for="msf-dob" data-bcms-form-part="label">Date of birth</label>
               <input id="msf-dob" name="date_of_birth" type="date" autocomplete="bday" required />
             </div>
           </div>
@@ -45,7 +46,7 @@
           <fieldset class="msf__group">
             <legend>Where does it hurt?</legend>
             <div class="msf__options">
-              <label class="msf__option"><input type="checkbox" name="area" value="neck" /> Neck</label>
+              <label class="msf__option" data-bcms-form-field="area"><input type="checkbox" name="area" value="neck" /> Neck</label>
               <label class="msf__option"><input type="checkbox" name="area" value="shoulder" /> Shoulder</label>
               <label class="msf__option"><input type="checkbox" name="area" value="lower-back" /> Lower back</label>
               <label class="msf__option"><input type="checkbox" name="area" value="hip" /> Hip</label>
@@ -54,8 +55,8 @@
             </div>
           </fieldset>
 
-          <div class="field msf__scale">
-            <label for="msf-pain">How bad is it on a typical day? <output for="msf-pain" class="msf__pain-value">5</output></label>
+          <div class="field msf__scale" data-bcms-form-field="pain_level">
+            <label for="msf-pain" data-bcms-form-part="label">How bad is it on a typical day? <output for="msf-pain" class="msf__pain-value">5</output></label>
             <input id="msf-pain" name="pain_level" type="range" min="0" max="10" step="1" value="5" />
             <div class="msf__scale-labels"><span>No pain</span><span>Worst pain imaginable</span></div>
           </div>
@@ -63,21 +64,21 @@
           <fieldset class="msf__group">
             <legend>Have you had surgery for this?</legend>
             <div class="msf__options">
-              <label class="msf__option"><input type="radio" name="had_surgery" value="yes" required /> Yes</label>
+              <label class="msf__option" data-bcms-form-field="had_surgery"><input type="radio" name="had_surgery" value="yes" required /> Yes</label>
               <label class="msf__option"><input type="radio" name="had_surgery" value="no" /> No</label>
             </div>
           </fieldset>
 
-          <div class="field" data-show-if="had_surgery" data-show-op="equals" data-show-value="yes" hidden>
-            <label for="msf-surgery_date">When was the surgery?</label>
+          <div class="field" data-show-if="had_surgery" data-show-op="equals" data-show-value="yes" hidden data-bcms-form-field="surgery_date">
+            <label for="msf-surgery_date" data-bcms-form-part="label">When was the surgery?</label>
             <input id="msf-surgery_date" name="surgery_date" type="date" required disabled />
           </div>
         </fieldset>
 
         <fieldset class="msf__step" data-step="3" hidden>
           <legend>Paying for care</legend>
-          <div class="field">
-            <label for="msf-insurer">How will you pay?</label>
+          <div class="field" data-bcms-form-field="insurer">
+            <label for="msf-insurer" data-bcms-form-part="label">How will you pay?</label>
             <select id="msf-insurer" name="insurer" required>
               <option value="">Choose one</option>
               <option value="aetna">Aetna</option>
@@ -86,11 +87,11 @@
               <option value="self-pay">Self-pay</option>
             </select>
           </div>
-          <div class="field" data-show-if="insurer" data-show-op="not" data-show-value="self-pay" hidden>
-            <label for="msf-member_id">Member ID</label>
+          <div class="field" data-show-if="insurer" data-show-op="not" data-show-value="self-pay" hidden data-bcms-form-field="member_id">
+            <label for="msf-member_id" data-bcms-form-part="label">Member ID</label>
             <input id="msf-member_id" name="member_id" type="text" required disabled />
           </div>
-          <label class="msf__consent">
+          <label class="msf__consent" data-bcms-form-field="privacy_consent">
             <input type="checkbox" name="privacy_consent" required />
             <span>I've read the <a href="/privacy-practices">Notice of Privacy Practices</a> and agree to Juniper Physio storing this information for my care.</span>
           </label>
@@ -101,9 +102,79 @@
         <div class="msf__nav">
           <button type="button" class="btn btn-secondary" data-action="back" hidden>Back</button>
           <button type="button" class="btn btn-primary" data-action="next">Continue</button>
-          <button type="submit" class="btn btn-primary" data-action="submit" hidden>Request appointment</button>
+          <button type="submit" class="btn btn-primary" data-action="submit" hidden data-bcms-form-part="submit">Request appointment</button>
         </div>
+      <div style="position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap"><input type="text" name="_bcms_hp" tabindex="-1" autocomplete="off" aria-hidden="true"></div>
+      <p class="bcms-form-msg" hidden></p>
       </form>
+      <script is:inline>
+function bcmsPhone(cc,raw,trunk){var d=String(raw||'').trim();if(!d)return '';if(d.charAt(0)==='+'){var i=d.replace(/\D/g,'');return i?'+'+i:'';}if(!cc)return d;var n=d.replace(/\D/g,'');if(trunk&&n.charAt(0)==='0')n=n.slice(1);return n?'+'+cc+n:'';}
+document.querySelectorAll('form[data-bcms-form]').forEach(function(f){
+  // Once per form: a page that runs this again (a server-rendered fragment's scripts after
+  // hydration, two fragments on one page) must not bind a second submit.
+  if(f.hasAttribute('data-bcms-form-on'))return;f.setAttribute('data-bcms-form-on','');
+  // One view per page load: the conversion rate's denominator. Only the dashboard's embed sent it,
+  // so a hosted or converted form read near zero views and its rate meant nothing. Counted on the
+  // live site only: never in a frame (the editor canvas) or on a preview, canvas or branch host.
+  try{var sa=f.action,ss='/submissions',h=location.hostname;if(window.top===window&&h.indexOf('preview-')!==0&&h.indexOf('canvas-')!==0&&h.indexOf('--')===-1&&sa.slice(-ss.length)===ss)fetch(sa.slice(0,-ss.length)+'/view',{method:'POST',keepalive:true});}catch(x){}
+  // Conditional fields. A hidden field's controls are DISABLED, not just hidden: a disabled control
+  // posts nothing and is never checked by native validation, so a hidden required field cannot
+  // block the submit and its stale answer never leaves the browser.
+  function conds(){
+    f.querySelectorAll('[data-bcms-showif]').forEach(function(w){
+      var c;try{c=JSON.parse(w.getAttribute('data-bcms-showif'));}catch(x){return;}
+      var vals=[];
+      f.querySelectorAll('[name]').forEach(function(el){
+        if(el.name!==c.field||el.disabled)return;
+        if(el.type==='checkbox'&&!el.hasAttribute('value'))vals.push(el.checked?'true':'false');
+        else if(el.type==='radio'||el.type==='checkbox'){if(el.checked)vals.push(el.value);}
+        else vals.push(el.value);
+      });
+      var show=vals.indexOf(c.equals)!==-1;
+      w.hidden=!show;
+      w.querySelectorAll('input,select,textarea').forEach(function(el){el.disabled=!show;});
+    });
+  }
+  f.addEventListener('input',conds);
+  f.addEventListener('change',conds);
+  conds();
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var msg=f.querySelector('.bcms-form-msg');
+    var data={};
+    // A checkboxes group posts one entry per checked box under the SAME name; the old
+    // one-at-a-time assignment kept only the last, so "pick many" delivered one answer.
+    // One checked box still arrives as a scalar — FormData cannot tell a group from a
+    // lone field — which is exactly why lib/forms/validate.ts's chosenValues() accepts
+    // both an array and a comma string.
+    new FormData(f).forEach(function(v,k){
+      if(k==='cf-turnstile-response')return;
+      if(Object.prototype.hasOwnProperty.call(data,k))data[k]=(Array.isArray(data[k])?data[k]:[data[k]]).concat(v);
+      else data[k]=v;
+    });
+    // Country-picker phone fields post ONE key. The __country select is scaffolding: it is
+    // composed into the field's own value here, AFTER collection, so a showIf that points at a
+    // phone key still compares the raw digits. Then it is removed from the body.
+    f.querySelectorAll('select[name$="__country"]').forEach(function(sel){
+      if(sel.disabled)return;
+      var k=sel.name.slice(0,-9);
+      var o=sel.options[sel.selectedIndex];
+      data[k]=bcmsPhone(o?(o.getAttribute('data-cc')||''):'',data[k],o?o.getAttribute('data-trunk')==='1':false);
+      delete data[k+'__country'];
+    });
+    // _bcms_t: whole ms since the page's navigation (too fast reads as a bot), not since this bound.
+    data._bcms_t=Math.round(performance.now());
+    var body={data:data};
+    var tok=f.querySelector('[name="cf-turnstile-response"]');
+    if(tok&&tok.value)body['cf-turnstile-response']=tok.value;
+    fetch(f.action,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)})
+      // The server names what is wrong ("Company is required"); say that rather than a shrug.
+      .then(function(r){return r.json().catch(function(){return {};}).then(function(j){var e=j&&j.errors;return {ok:r.ok,why:(e&&e[Object.keys(e)[0]])||(j&&j.error)};});})
+      .then(function(r){var ok=r.ok;if(msg){msg.hidden=false;msg.textContent=ok?(f.getAttribute('data-bcms-form-success')||'Thanks! Your submission was received.'):(r.why||'Sorry, something went wrong.');}if(ok){f.reset();conds();}})
+      .catch(function(){if(msg){msg.hidden=false;msg.textContent='Sorry, something went wrong.';}});
+  });
+});
+</script>
 
       <div class="msf__success" role="status" hidden>
         <p>Thanks — we'll text you within one business day with two appointment times to choose from.</p>

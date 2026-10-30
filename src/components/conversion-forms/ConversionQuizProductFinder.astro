@@ -1,4 +1,5 @@
 ---
+import { bcmsFormAction, bcmsFormId, bcmsFormMethod } from "../../bcms-forms";
 ---
 
 <section id="conversion-quiz-product-finder" class="section section--muted quiz" data-show-top="2" data-fallback="en_p3">
@@ -13,13 +14,13 @@
       </div>
     </div>
 
-    <form class="quiz__form" action="#" hidden>
+    <form class="quiz__form" action={bcmsFormAction("Form")} hidden method={bcmsFormMethod("Form")} data-bcms-form={bcmsFormId("Form")} data-bcms-form-success="Thank you for your submission!">
       <p class="quiz__count" aria-live="polite">Question <span class="quiz__num">1</span></p>
 
       <fieldset class="quiz__q card" data-key="where" data-style="images">
         <legend>Where do you cook most?</legend>
         <div class="quiz__answers quiz__answers--images">
-          <label class="quiz__answer quiz__answer--image" data-scores="en_p3:2,en_p2:2">
+          <label class="quiz__answer quiz__answer--image" data-scores="en_p3:2,en_p2:2" data-bcms-form-field="where">
             <input type="radio" name="where" value="home" />
             <img src="https://picsum.photos/seed/caldera-quiz-home/600/600" alt="A kitchen stove" width="600" height="600" loading="lazy" />
             <span>At home</span>
@@ -41,7 +42,7 @@
         <legend>How far do you carry your kit?</legend>
         <p class="quiz__help">Cast iron is heavy. Be honest.</p>
         <div class="quiz__answers">
-          <label class="quiz__answer" data-scores="en_p2:1"><input type="radio" name="carry" value="car" /> <span>From the car to the fire</span></label>
+          <label class="quiz__answer" data-scores="en_p2:1" data-bcms-form-field="carry"><input type="radio" name="carry" value="car" /> <span>From the car to the fire</span></label>
           <label class="quiz__answer" data-scores="en_p1:2,en_p3:-2"><input type="radio" name="carry" value="pack" /> <span>In my backpack</span></label>
         </div>
       </fieldset>
@@ -50,7 +51,7 @@
         <legend>What do you want to cook?</legend>
         <p class="quiz__help">Pick as many as you like.</p>
         <div class="quiz__answers">
-          <label class="quiz__answer" data-scores="en_p3:2,en_p1:1"><input type="checkbox" name="cook" value="sear" /> <span>Steaks and smash burgers</span></label>
+          <label class="quiz__answer" data-scores="en_p3:2,en_p1:1" data-bcms-form-field="cook"><input type="checkbox" name="cook" value="sear" /> <span>Steaks and smash burgers</span></label>
           <label class="quiz__answer" data-scores="en_p2:3"><input type="checkbox" name="cook" value="bake" /> <span>Bread and cobblers</span></label>
           <label class="quiz__answer" data-scores="en_p4:3"><input type="checkbox" name="cook" value="brew" /> <span>Coffee and noodles</span></label>
         </div>
@@ -60,7 +61,77 @@
         <button type="button" class="btn btn-secondary" data-action="prev">Back</button>
         <button type="button" class="btn btn-primary" data-action="next" disabled>Next</button>
       </div>
+    <div style="position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap"><input type="text" name="_bcms_hp" tabindex="-1" autocomplete="off" aria-hidden="true"></div>
+    <p class="bcms-form-msg" hidden></p>
     </form>
+    <script is:inline>
+function bcmsPhone(cc,raw,trunk){var d=String(raw||'').trim();if(!d)return '';if(d.charAt(0)==='+'){var i=d.replace(/\D/g,'');return i?'+'+i:'';}if(!cc)return d;var n=d.replace(/\D/g,'');if(trunk&&n.charAt(0)==='0')n=n.slice(1);return n?'+'+cc+n:'';}
+document.querySelectorAll('form[data-bcms-form]').forEach(function(f){
+  // Once per form: a page that runs this again (a server-rendered fragment's scripts after
+  // hydration, two fragments on one page) must not bind a second submit.
+  if(f.hasAttribute('data-bcms-form-on'))return;f.setAttribute('data-bcms-form-on','');
+  // One view per page load: the conversion rate's denominator. Only the dashboard's embed sent it,
+  // so a hosted or converted form read near zero views and its rate meant nothing. Counted on the
+  // live site only: never in a frame (the editor canvas) or on a preview, canvas or branch host.
+  try{var sa=f.action,ss='/submissions',h=location.hostname;if(window.top===window&&h.indexOf('preview-')!==0&&h.indexOf('canvas-')!==0&&h.indexOf('--')===-1&&sa.slice(-ss.length)===ss)fetch(sa.slice(0,-ss.length)+'/view',{method:'POST',keepalive:true});}catch(x){}
+  // Conditional fields. A hidden field's controls are DISABLED, not just hidden: a disabled control
+  // posts nothing and is never checked by native validation, so a hidden required field cannot
+  // block the submit and its stale answer never leaves the browser.
+  function conds(){
+    f.querySelectorAll('[data-bcms-showif]').forEach(function(w){
+      var c;try{c=JSON.parse(w.getAttribute('data-bcms-showif'));}catch(x){return;}
+      var vals=[];
+      f.querySelectorAll('[name]').forEach(function(el){
+        if(el.name!==c.field||el.disabled)return;
+        if(el.type==='checkbox'&&!el.hasAttribute('value'))vals.push(el.checked?'true':'false');
+        else if(el.type==='radio'||el.type==='checkbox'){if(el.checked)vals.push(el.value);}
+        else vals.push(el.value);
+      });
+      var show=vals.indexOf(c.equals)!==-1;
+      w.hidden=!show;
+      w.querySelectorAll('input,select,textarea').forEach(function(el){el.disabled=!show;});
+    });
+  }
+  f.addEventListener('input',conds);
+  f.addEventListener('change',conds);
+  conds();
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var msg=f.querySelector('.bcms-form-msg');
+    var data={};
+    // A checkboxes group posts one entry per checked box under the SAME name; the old
+    // one-at-a-time assignment kept only the last, so "pick many" delivered one answer.
+    // One checked box still arrives as a scalar — FormData cannot tell a group from a
+    // lone field — which is exactly why lib/forms/validate.ts's chosenValues() accepts
+    // both an array and a comma string.
+    new FormData(f).forEach(function(v,k){
+      if(k==='cf-turnstile-response')return;
+      if(Object.prototype.hasOwnProperty.call(data,k))data[k]=(Array.isArray(data[k])?data[k]:[data[k]]).concat(v);
+      else data[k]=v;
+    });
+    // Country-picker phone fields post ONE key. The __country select is scaffolding: it is
+    // composed into the field's own value here, AFTER collection, so a showIf that points at a
+    // phone key still compares the raw digits. Then it is removed from the body.
+    f.querySelectorAll('select[name$="__country"]').forEach(function(sel){
+      if(sel.disabled)return;
+      var k=sel.name.slice(0,-9);
+      var o=sel.options[sel.selectedIndex];
+      data[k]=bcmsPhone(o?(o.getAttribute('data-cc')||''):'',data[k],o?o.getAttribute('data-trunk')==='1':false);
+      delete data[k+'__country'];
+    });
+    // _bcms_t: whole ms since the page's navigation (too fast reads as a bot), not since this bound.
+    data._bcms_t=Math.round(performance.now());
+    var body={data:data};
+    var tok=f.querySelector('[name="cf-turnstile-response"]');
+    if(tok&&tok.value)body['cf-turnstile-response']=tok.value;
+    fetch(f.action,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)})
+      // The server names what is wrong ("Company is required"); say that rather than a shrug.
+      .then(function(r){return r.json().catch(function(){return {};}).then(function(j){var e=j&&j.errors;return {ok:r.ok,why:(e&&e[Object.keys(e)[0]])||(j&&j.error)};});})
+      .then(function(r){var ok=r.ok;if(msg){msg.hidden=false;msg.textContent=ok?(f.getAttribute('data-bcms-form-success')||'Thanks! Your submission was received.'):(r.why||'Sorry, something went wrong.');}if(ok){f.reset();conds();}})
+      .catch(function(){if(msg){msg.hidden=false;msg.textContent='Sorry, something went wrong.';}});
+  });
+});
+</script>
 
     <div class="quiz__results" hidden>
       <h2>Your match</h2>
