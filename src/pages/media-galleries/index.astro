@@ -1,0 +1,40 @@
+---
+import Base from "../../layouts/Base.astro";
+import MasonryGallery from "../../components/media-galleries/MasonryGallery.astro";
+import LightboxGalleryFilters from "../../components/media-galleries/LightboxGalleryFilters.astro";
+import VideoSection from "../../components/media-galleries/VideoSection.astro";
+import BeforeAfterSlider from "../../components/media-galleries/BeforeAfterSlider.astro";
+import ImageHotspots from "../../components/media-galleries/ImageHotspots.astro";
+import Interactive3dLottieEmbed from "../../components/media-galleries/Interactive3dLottieEmbed.astro";
+import MixedMediaCarousel from "../../components/media-galleries/MixedMediaCarousel.astro";
+import ParallaxImageOverlay from "../../components/media-galleries/ParallaxImageOverlay.astro";
+import UgcSocialFeed from "../../components/media-galleries/UgcSocialFeed.astro";
+---
+
+<Base title="Media & galleries" description="Galleries, video, before/after, hotspots, 3D embeds, carousels, parallax and social feeds from the BetterCMS Kit.">
+  <section class="section intro">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Kit library</span>
+        <h1>Media & galleries</h1>
+        <p class="lead">Nine ways to show photos, film and interactive media, each built as a plain section with sample content.</p>
+      </div>
+    </div>
+  </section>
+
+  <MasonryGallery />
+  <LightboxGalleryFilters />
+  <VideoSection />
+  <BeforeAfterSlider />
+  <ImageHotspots />
+  <Interactive3dLottieEmbed />
+  <MixedMediaCarousel />
+  <ParallaxImageOverlay />
+  <UgcSocialFeed />
+</Base>
+
+<style>
+  .intro {
+    padding-bottom: 0;
+  }
+</style>

@@ -1,0 +1,177 @@
+<section id="hero-video-fullbleed" class="section section--dark hvf" data-height="screen" data-autoplay="true" data-loop="true">
+  <!-- kit: hero-video-fullbleed -->
+  <div class="hvf__media">
+    <img class="hvf__poster" src="https://picsum.photos/seed/owt-klamath-poster/1920/1080" alt="Chinook salmon swimming upstream through clear water over red gravel" width="1920" height="1080" />
+    <div class="hvf__video" data-src="https://player.vimeo.com/video/883441207?background=1&autoplay=1&loop=1&muted=1" data-video-url="https://vimeo.com/883441207"></div>
+    <div class="hvf__overlay" style="--overlay: 0.45" aria-hidden="true"></div>
+  </div>
+  <p class="visually-hidden">Salmon swim upstream past the old Iron Gate dam site, now a free-flowing river lined with new willows.</p>
+
+  <div class="container hvf__content">
+    <span class="eyebrow hvf__eyebrow">Klamath River · 2026</span>
+    <h2 class="hvf__title">The dams came down. The salmon came back.</h2>
+    <p class="lead">Four dams removed, 400 river miles reopened. Your gift keeps the Klamath running free.</p>
+    <div class="btn-row">
+      <a class="btn btn-primary" href="/donate">Donate</a>
+      <a class="btn btn-secondary hvf__outline" href="/stories/klamath-film">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
+        Watch the 4-minute film
+      </a>
+    </div>
+  </div>
+
+  <div class="container hvf__bar">
+    <button class="hvf__pause" type="button" aria-pressed="false">
+      <svg class="hvf__icon-play" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
+      <svg class="hvf__icon-pause" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z" fill="currentColor"/></svg>
+      <span class="hvf__pause-label">Play background video</span>
+    </button>
+    <p class="hvf__a11y">
+      Captions:
+      <a href="https://cdn.bettercms.site/owt/klamath-hero-en.vtt" hreflang="en">English (CC)</a>,
+      <a href="https://cdn.bettercms.site/owt/klamath-hero-es.vtt" hreflang="es">Español</a>
+      · <a href="/stories/klamath-film/transcript">Read the transcript</a>
+    </p>
+  </div>
+</section>
+
+<script is:inline>
+  (function () {
+    var root = document.getElementById("hero-video-fullbleed");
+    if (!root) return;
+    var holder = root.querySelector(".hvf__video");
+    var button = root.querySelector(".hvf__pause");
+    var label = root.querySelector(".hvf__pause-label");
+    function play() {
+      var iframe = document.createElement("iframe");
+      iframe.src = holder.getAttribute("data-src");
+      iframe.title = "Klamath River background film (muted)";
+      iframe.allow = "autoplay; fullscreen; picture-in-picture";
+      iframe.setAttribute("tabindex", "-1");
+      holder.appendChild(iframe);
+      root.classList.add("is-playing");
+      button.setAttribute("aria-pressed", "true");
+      label.textContent = "Pause background video";
+    }
+    function stop() {
+      holder.innerHTML = "";
+      root.classList.remove("is-playing");
+      button.setAttribute("aria-pressed", "false");
+      label.textContent = "Play background video";
+    }
+    button.addEventListener("click", function () {
+      if (root.classList.contains("is-playing")) stop(); else play();
+    });
+  })();
+</script>
+
+<style>
+  .hvf {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: min(100svh, 860px);
+    padding-bottom: 1.5rem;
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  .hvf__media,
+  .hvf__poster,
+  .hvf__video,
+  .hvf__overlay {
+    position: absolute;
+    inset: 0;
+  }
+
+  .hvf__media {
+    z-index: -1;
+  }
+
+  .hvf__poster {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hvf__video :global(iframe) {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: max(100%, 177.78vh);
+    height: max(100%, 56.25vw);
+    transform: translate(-50%, -50%);
+    border: 0;
+    pointer-events: none;
+  }
+
+  .hvf__overlay {
+    background: linear-gradient(to top, rgb(0 0 0 / calc(var(--overlay) + 0.25)), rgb(0 0 0 / var(--overlay)));
+  }
+
+  .hvf__content {
+    max-width: var(--container);
+    padding-top: 6rem;
+  }
+
+  .hvf__eyebrow {
+    color: #ffd7a8;
+  }
+
+  .hvf__title {
+    max-width: 16ch;
+    font-size: clamp(2.5rem, 6.5vw, 4.75rem);
+  }
+
+  .hvf__outline {
+    border-color: rgb(255 255 255 / 0.45);
+  }
+
+  .hvf__outline:hover {
+    border-color: #fff;
+  }
+
+  .hvf__bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem 1.5rem;
+    margin-top: clamp(2.5rem, 6vw, 4.5rem);
+    font-size: 0.8125rem;
+  }
+
+  .hvf__pause {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 40px;
+    padding: 0 0.875rem;
+    border: 1px solid rgb(255 255 255 / 0.35);
+    border-radius: 999px;
+    background: rgb(0 0 0 / 0.35);
+    color: #fff;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .hvf__icon-pause,
+  .is-playing .hvf__icon-play {
+    display: none;
+  }
+
+  .is-playing .hvf__icon-pause {
+    display: block;
+  }
+
+  .hvf__a11y {
+    margin: 0;
+    color: rgb(255 255 255 / 0.8);
+  }
+
+  .hvf__a11y a {
+    color: #fff;
+  }
+</style>

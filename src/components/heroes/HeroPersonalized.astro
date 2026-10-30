@@ -1,0 +1,170 @@
+<section id="hero-personalized" class="section section--dark hpz" data-experiment="running" data-experiment-share="50" data-experiment-goal="signup" data-experiment-ends="2026-11-01">
+  <!-- kit: hero-personalized -->
+  <div class="container">
+    <div class="hpz__preview">
+      <span class="hpz__preview-label" id="hero-personalized-tabs-label">Preview as</span>
+      <div class="hpz__tabs" role="tablist" aria-labelledby="hero-personalized-tabs-label">
+        <button type="button" role="tab" id="hero-personalized-tab-default" aria-controls="hero-personalized-panel-default" aria-selected="true">Default</button>
+        <button type="button" role="tab" id="hero-personalized-tab-a1" aria-controls="hero-personalized-panel-a1" aria-selected="false" tabindex="-1">Kubernetes ad campaign</button>
+        <button type="button" role="tab" id="hero-personalized-tab-a2" aria-controls="hero-personalized-panel-a2" aria-selected="false" tabindex="-1">Enterprise visitors</button>
+        <button type="button" role="tab" id="hero-personalized-tab-a3" aria-controls="hero-personalized-panel-a3" aria-selected="false" tabindex="-1">Returning visitors</button>
+      </div>
+      <span class="hpz__test">A/B test running · 50% split · goal: sign-up · ends Nov 1, 2026</span>
+    </div>
+
+    <div class="hpz__grid">
+      <div class="hpz__panels">
+        <div class="hpz__panel" role="tabpanel" id="hero-personalized-panel-default" aria-labelledby="hero-personalized-tab-default" data-audience="default">
+          <span class="eyebrow hpz__eyebrow">Observability for on-call teams</span>
+          <h2 class="hpz__title">See why production is slow in one view, not twelve tabs.</h2>
+          <p class="lead">Tideline links traces, logs and deploys so the person holding the pager finds the cause in minutes.</p>
+          <a class="btn btn-primary" href="https://app.tideline.dev/signup">Start free</a>
+        </div>
+
+        <div class="hpz__panel" role="tabpanel" id="hero-personalized-panel-a1" aria-labelledby="hero-personalized-tab-a1" data-audience="utm_campaign=k8s-launch" hidden>
+          <span class="eyebrow hpz__eyebrow">New: Kubernetes traces</span>
+          <h2 class="hpz__title">Every pod, every span, one timeline.</h2>
+          <p class="lead">Tideline links traces, logs and deploys so the person holding the pager finds the cause in minutes.</p>
+          <a class="btn btn-primary" href="https://app.tideline.dev/signup?template=k8s">Try it on your cluster</a>
+        </div>
+
+        <div class="hpz__panel" role="tabpanel" id="hero-personalized-panel-a2" aria-labelledby="hero-personalized-tab-a2" data-audience="segment=enterprise" hidden>
+          <span class="eyebrow hpz__eyebrow">Observability for on-call teams</span>
+          <h2 class="hpz__title">Observability that passes your security review.</h2>
+          <p class="lead">SOC 2 Type II, SSO and SCIM, EU data residency and a named engineer from day one.</p>
+          <a class="btn btn-primary" href="/contact-sales">Talk to sales</a>
+        </div>
+
+        <div class="hpz__panel" role="tabpanel" id="hero-personalized-panel-a3" aria-labelledby="hero-personalized-tab-a3" data-audience="returning" hidden>
+          <span class="eyebrow hpz__eyebrow">Welcome back</span>
+          <h2 class="hpz__title">See why production is slow in one view, not twelve tabs.</h2>
+          <p class="lead">Tideline links traces, logs and deploys so the person holding the pager finds the cause in minutes.</p>
+          <a class="btn btn-primary" href="https://app.tideline.dev/login">Pick up your trial</a>
+        </div>
+      </div>
+
+      <div class="hpz__media">
+        <img src="https://picsum.photos/seed/tideline-timeline/2400/1500" alt="Tideline timeline showing a latency spike right after a deploy" width="2400" height="1500" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  (function () {
+    var root = document.getElementById("hero-personalized");
+    if (!root) return;
+    var tabs = Array.prototype.slice.call(root.querySelectorAll('[role="tab"]'));
+    function select(i) {
+      tabs.forEach(function (t, n) {
+        var on = n === i;
+        t.setAttribute("aria-selected", String(on));
+        t.tabIndex = on ? 0 : -1;
+        document.getElementById(t.getAttribute("aria-controls")).hidden = !on;
+      });
+      tabs[i].focus();
+    }
+    tabs.forEach(function (t, i) {
+      t.addEventListener("click", function () { select(i); });
+      t.addEventListener("keydown", function (e) {
+        if (e.key === "ArrowRight") { e.preventDefault(); select((i + 1) % tabs.length); }
+        if (e.key === "ArrowLeft") { e.preventDefault(); select((i - 1 + tabs.length) % tabs.length); }
+      });
+    });
+  })();
+</script>
+
+<style>
+  .hpz {
+    background: radial-gradient(ellipse at 80% 20%, #1b2a4a, #0b1020 70%);
+    overflow: hidden;
+  }
+
+  .hpz__preview {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem 1rem;
+    margin-bottom: clamp(2rem, 5vw, 3.5rem);
+    padding: 0.625rem 0.75rem;
+    border: 1px dashed rgb(255 255 255 / 0.25);
+    border-radius: var(--radius);
+    font-size: 0.8125rem;
+  }
+
+  .hpz__preview-label {
+    font-weight: 600;
+    color: color-mix(in srgb, var(--dark-ink) 65%, transparent);
+  }
+
+  .hpz__tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+  }
+
+  .hpz__tabs button {
+    min-height: 36px;
+    padding: 0 0.75rem;
+    border: 1px solid rgb(255 255 255 / 0.2);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--dark-ink);
+    font: inherit;
+    cursor: pointer;
+  }
+
+  .hpz__tabs button[aria-selected="true"] {
+    background: var(--dark-ink);
+    border-color: var(--dark-ink);
+    color: var(--dark);
+    font-weight: 600;
+  }
+
+  .hpz__test {
+    margin-left: auto;
+    color: #5ee0a0;
+  }
+
+  .hpz__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: center;
+  }
+
+  .hpz__panel[hidden] {
+    display: none;
+  }
+
+  .hpz__eyebrow {
+    color: #ff9a85;
+  }
+
+  .hpz__title {
+    font-size: clamp(2.25rem, 5vw, 3.5rem);
+  }
+
+  .hpz__panel .btn {
+    margin-top: 0.75rem;
+  }
+
+  .hpz__media img {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    border: 1px solid rgb(255 255 255 / 0.12);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 30px 60px rgb(0 0 0 / 0.45);
+  }
+
+  @media (max-width: 860px) {
+    .hpz__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .hpz__test {
+      margin-left: 0;
+    }
+  }
+</style>

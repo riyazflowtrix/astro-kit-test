@@ -1,0 +1,163 @@
+<section id="changelog" class="section changelog">
+  <!-- kit: changelog -->
+  <div class="container changelog__wrap">
+    <div class="changelog__head">
+      <div>
+        <h2>Changelog</h2>
+        <p class="lead">Every change to the Ledgerline API, dashboard and SDKs. Breaking changes come with 90 days' notice.</p>
+      </div>
+      <div class="changelog__subscribe">
+        <form action="#" method="post" class="changelog__form">
+          <label for="changelog-email" class="visually-hidden">Email address</label>
+          <input id="changelog-email" name="email" type="email" placeholder="you@company.com" autocomplete="email" required />
+          <button class="btn btn-primary" type="submit">Get updates</button>
+        </form>
+        <a class="changelog__rss" href="/changelog/rss.xml">
+          <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M5 19h.01 M5 11a8 8 0 0 1 8 8 M5 5a14 14 0 0 1 14 14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" /></svg>
+          RSS feed
+        </a>
+      </div>
+    </div>
+
+    <div class="changelog__filter" role="group" aria-label="Filter by change type">
+      <button type="button" aria-pressed="true" data-type="all">All</button>
+      <button type="button" aria-pressed="false" data-type="new">New</button>
+      <button type="button" aria-pressed="false" data-type="improved">Improved</button>
+      <button type="button" aria-pressed="false" data-type="fixed">Fixed</button>
+      <button type="button" aria-pressed="false" data-type="deprecated">Deprecated</button>
+      <button type="button" aria-pressed="false" data-type="security">Security</button>
+    </div>
+
+    <ol class="changelog__releases" role="list">
+      <li class="release">
+        <div class="release__aside">
+          <time datetime="2026-09-29">Sep 29, 2026</time>
+          <span class="release__version">v2.14.0</span>
+        </div>
+        <article class="release__body">
+          <h3>Multi-entity close and faster ledger exports</h3>
+          <img src="https://picsum.photos/seed/ledgerline-multientity/1600/1000" alt="The close checklist showing three entities side by side" width="3200" height="2000" loading="lazy" />
+          <ul class="release__changes" role="list">
+            <li data-change="new">
+              <span class="tag tag--new">New</span>
+              <div>
+                <p class="change__title">Close several entities in one checklist</p>
+                <p>Group subsidiaries under a parent and close them together. Intercompany eliminations post automatically.</p>
+                <p class="change__meta"><span>ledger</span><span>reports</span> <a href="https://docs.ledgerline.com/guides/multi-entity-close">Read the guide</a></p>
+              </div>
+            </li>
+            <li data-change="improved">
+              <span class="tag tag--improved">Improved</span>
+              <div>
+                <p class="change__title">Ledger CSV exports are 6&times; faster on books over 1M lines</p>
+                <p class="change__meta"><span>reports</span></p>
+              </div>
+            </li>
+            <li data-change="fixed">
+              <span class="tag tag--fixed">Fixed</span>
+              <div>
+                <p class="change__title">Webhook retries no longer duplicate <code>journal.posted</code> events</p>
+                <p class="change__meta"><span>webhooks</span></p>
+              </div>
+            </li>
+          </ul>
+        </article>
+      </li>
+      <li class="release">
+        <div class="release__aside">
+          <time datetime="2026-09-08">Sep 8, 2026</time>
+          <span class="release__version">v2.13.0</span>
+        </div>
+        <article class="release__body">
+          <h3>API versioning by date</h3>
+          <ul class="release__changes" role="list">
+            <li data-change="deprecated">
+              <span class="tag tag--deprecated">Deprecated</span>
+              <div>
+                <p class="change__title">The /v1/transactions list endpoint</p>
+                <p>Replaced by <code>GET /v2/journal-lines</code>, which paginates with cursors.</p>
+                <p class="change__removal">Removed on <time datetime="2026-12-08">December 8, 2026</time></p>
+                <details class="change__migration">
+                  <summary>How to migrate</summary>
+                  <p>Switch to <code>GET /v2/journal-lines</code>. Replace <code>page</code> with the <code>cursor</code> from the previous response. Field names are unchanged.</p>
+                </details>
+                <p class="change__meta"><span>ledger</span> <a href="https://docs.ledgerline.com/api/journal-lines">API reference</a></p>
+              </div>
+            </li>
+            <li data-change="security">
+              <span class="tag tag--security">Security</span>
+              <div>
+                <p class="change__title">API keys can now be scoped to read-only</p>
+                <p class="change__meta"><span>auth</span></p>
+              </div>
+            </li>
+          </ul>
+        </article>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<script>
+  const root = document.getElementById("changelog");
+  if (root) {
+    const buttons = root.querySelectorAll<HTMLButtonElement>(".changelog__filter button");
+    buttons.forEach((b) => b.addEventListener("click", () => {
+      const type = b.dataset.type ?? "all";
+      buttons.forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+      root.querySelectorAll<HTMLElement>("[data-change]").forEach((li) => { li.hidden = type !== "all" && li.dataset.change !== type; });
+      root.querySelectorAll<HTMLElement>(".release").forEach((rel) => {
+        rel.hidden = rel.querySelectorAll("[data-change]:not([hidden])").length === 0;
+      });
+    }));
+    root.querySelector(".changelog__form")?.addEventListener("submit", (e) => e.preventDefault());
+  }
+</script>
+
+<style>
+  .changelog__wrap { max-width: 960px; }
+  .changelog__head { display: grid; gap: 1.5rem; margin-bottom: 2rem; }
+  @media (min-width: 820px) { .changelog__head { grid-template-columns: 1fr auto; align-items: end; } }
+  .changelog__head .lead { margin: 0; }
+  .changelog__subscribe { display: grid; gap: 0.5rem; }
+  .changelog__form { display: flex; gap: 0.5rem; }
+  .changelog__form input { flex: 1; min-width: 0; min-height: 44px; padding: 0 0.875rem; border: 1px solid var(--line); border-radius: var(--radius-sm); }
+  .changelog__rss { display: inline-flex; align-items: center; gap: 0.375rem; font-size: 0.875rem; color: var(--warning); font-weight: 600; text-decoration: none; }
+  .changelog__filter { display: flex; flex-wrap: wrap; gap: 0.375rem; padding-bottom: 1.5rem; margin-bottom: 2rem; border-bottom: 1px solid var(--line); }
+  .changelog__filter button { min-height: 36px; padding: 0 0.875rem; border: 1px solid var(--line); border-radius: 999px; background: var(--bg); font: inherit; font-size: 0.875rem; cursor: pointer; }
+  .changelog__filter button[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--bg); }
+  .changelog__releases { list-style: none; margin: 0; padding: 0; display: grid; gap: 3rem; }
+  .release { display: grid; gap: 0.75rem; position: relative; }
+  @media (min-width: 760px) {
+    .release { grid-template-columns: 160px 1fr; gap: 2rem; }
+    .release__aside { position: sticky; top: 80px; align-self: start; }
+    .release__body { border-left: 2px solid var(--line); padding-left: 2rem; position: relative; }
+    .release__body::before { content: ""; position: absolute; left: -7px; top: 0.5rem; width: 12px; height: 12px; border-radius: 50%; background: var(--brand); box-shadow: 0 0 0 4px var(--bg); }
+  }
+  .release__aside { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; }
+  @media (min-width: 760px) { .release__aside { flex-direction: column; align-items: flex-start; } }
+  .release__aside time { font-weight: 600; font-size: 0.9375rem; }
+  .release__version { font-family: var(--font-mono); font-size: 0.8125rem; padding: 0.125rem 0.5rem; border-radius: var(--radius-sm); background: var(--surface-2); }
+  .release__body h3 { font-size: 1.375rem; }
+  .release__body > img { border-radius: var(--radius); border: 1px solid var(--line); margin-bottom: 1.5rem; width: 100%; }
+  .release__changes { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.25rem; }
+  .release__changes li { display: grid; grid-template-columns: 96px 1fr; gap: 1rem; align-items: start; }
+  @media (max-width: 480px) { .release__changes li { grid-template-columns: 1fr; gap: 0.375rem; } }
+  .release__changes p { margin: 0 0 0.375rem; color: var(--ink-2); font-size: 0.9375rem; }
+  .release__changes .change__title { color: var(--ink); font-weight: 600; font-size: 1rem; }
+  .release__changes code { font-family: var(--font-mono); font-size: 0.85em; padding: 0.05em 0.35em; border-radius: 4px; background: var(--surface-2); }
+  .release[hidden], .release__changes li[hidden] { display: none !important; }
+  .tag { display: inline-flex; justify-content: center; padding: 0.125rem 0.5rem; border-radius: 999px; font-size: 0.75rem; font-weight: 700; width: max-content; }
+  .tag--new { background: #e3f4ea; color: var(--success); }
+  .tag--improved { background: #e5ecfb; color: var(--accent); }
+  .tag--fixed { background: var(--surface-2); color: var(--ink-2); }
+  .tag--deprecated { background: #fbf1e1; color: var(--warning); }
+  .tag--security { background: var(--brand-soft); color: var(--brand); }
+  .change__meta { display: flex; flex-wrap: wrap; gap: 0.375rem; align-items: center; font-size: 0.8125rem !important; }
+  .change__meta span { font-family: var(--font-mono); padding: 0 0.375rem; border: 1px solid var(--line); border-radius: 4px; color: var(--ink-3); }
+  .change__meta a { color: var(--accent); font-weight: 600; margin-left: 0.25rem; }
+  .change__removal { font-weight: 600; color: var(--warning) !important; font-size: 0.875rem !important; }
+  .change__migration { margin: 0.5rem 0; padding: 0.75rem 1rem; border-radius: var(--radius-sm); background: var(--surface); }
+  .change__migration summary { font-weight: 600; cursor: pointer; font-size: 0.9375rem; }
+  .change__migration p { margin: 0.5rem 0 0; }
+</style>

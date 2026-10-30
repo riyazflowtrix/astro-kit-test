@@ -1,0 +1,240 @@
+---
+---
+
+<section id="table-comparison" class="section section--muted tcomp">
+  <!-- kit: table-comparison -->
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Field notes</span>
+      <h2>Which pan for which fire?</h2>
+      <p class="lead">Weights from our own scale, heat-up times over one chimney of lump charcoal.</p>
+    </div>
+
+    <div class="tcomp__frame">
+      <table class="tcomp__table" id="tbl_kit_pans" data-responsive="stack">
+        <caption class="visually-hidden">Caldera pans compared: weight, heat-up time, lid, price and rating</caption>
+        <thead>
+          <tr>
+            <th scope="col">Pan</th>
+            <th scope="col">Weight <span class="tcomp__unit">(kg)</span></th>
+            <th scope="col"><abbr title="Time to 200 °C over a full chimney of lump charcoal">Heats in</abbr> <span class="tcomp__unit">(min)</span></th>
+            <th scope="col">Lid</th>
+            <th scope="col">Price</th>
+            <th scope="col">Rating</th>
+          </tr>
+        </thead>
+        <tbody data-group="pans">
+          <tr class="tcomp__group">
+            <th scope="rowgroup" colspan="6">Pans</th>
+          </tr>
+          <tr>
+            <th scope="row" data-label="Pan"><a href="/products/ridge-skillet-10">Ridge Skillet 10"</a></th>
+            <td data-label="Weight">2.4 kg</td>
+            <td data-label="Heats in">7 min</td>
+            <td data-label="Lid"><span class="tcomp__no">No lid</span></td>
+            <td data-label="Price">$72</td>
+            <td data-label="Rating"><span class="tcomp__stars" aria-hidden="true">★★★★★</span> 4.7</td>
+          </tr>
+          <tr class="is-highlight">
+            <th scope="row" data-label="Pan"><a href="/products/ember-dutch-oven">Ember Dutch Oven 5.5qt</a></th>
+            <td data-label="Weight">6.2 kg<sup><a href="#tcomp-fn-1">1</a></sup></td>
+            <td data-label="Heats in">9 min</td>
+            <td data-label="Lid"><span class="tcomp__yes">Lid included</span></td>
+            <td data-label="Price">$165</td>
+            <td data-label="Rating"><span class="tcomp__stars" aria-hidden="true">★★★★★</span> 4.9</td>
+          </tr>
+          <tr>
+            <th scope="row" data-label="Pan">Carbon Steel Pan 10"</th>
+            <td data-label="Weight">1.5 kg</td>
+            <td data-label="Heats in">3 min</td>
+            <td data-label="Lid"><span class="tcomp__no">No lid</span></td>
+            <td data-label="Price">$75</td>
+            <td data-label="Rating"><span class="tcomp__stars" aria-hidden="true">★★★★★</span> 4.6</td>
+          </tr>
+        </tbody>
+        <tbody data-group="grates">
+          <tr class="tcomp__group">
+            <th scope="rowgroup" colspan="6">Grates</th>
+          </tr>
+          <tr>
+            <th scope="row" data-label="Pan"><a href="/products/cable-fold">Cable Fold Grill</a></th>
+            <td data-label="Weight">1.1 kg</td>
+            <td data-label="Heats in">Heats with the fire</td>
+            <td data-label="Lid"><span class="tcomp__no">No lid</span></td>
+            <td data-label="Price">$89</td>
+            <td data-label="Rating"><span class="tcomp__stars" aria-hidden="true">★★★★★</span> 4.8</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="tcomp__notes">
+      <p>Weights on a kitchen scale; heat-up over one full chimney of lump charcoal, 2025 season.</p>
+      <ol>
+        <li id="tcomp-fn-1">With the lid, which doubles as a skillet.</li>
+      </ol>
+    </div>
+  </div>
+
+  <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "name": "Caldera pans compared",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Ridge Skillet 10\"", "url": "/products/ridge-skillet-10" },
+        { "@type": "ListItem", "position": 2, "name": "Ember Dutch Oven 5.5qt", "url": "/products/ember-dutch-oven" },
+        { "@type": "ListItem", "position": 3, "name": "Carbon Steel Pan 10\"" },
+        { "@type": "ListItem", "position": 4, "name": "Cable Fold Grill", "url": "/products/cable-fold" }
+      ]
+    }
+  </script>
+</section>
+
+<style>
+  .tcomp__frame {
+    overflow-x: auto;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--bg);
+  }
+
+  .tcomp__table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9375rem;
+  }
+
+  .tcomp__table th,
+  .tcomp__table td {
+    padding: 0.875rem 1rem;
+    border-bottom: 1px solid var(--line);
+    text-align: left;
+  }
+
+  .tcomp__table thead th {
+    font-size: 0.8125rem;
+    font-weight: 700;
+    white-space: nowrap;
+    background: var(--surface-2);
+  }
+
+  .tcomp__table abbr {
+    text-decoration: underline dotted;
+    cursor: help;
+  }
+
+  .tcomp__unit {
+    font-weight: 500;
+    color: var(--ink-3);
+  }
+
+  .tcomp__group th {
+    padding-block: 0.5rem;
+    background: var(--surface);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+
+  .tcomp__table tbody th[scope="row"] a {
+    font-weight: 600;
+    color: var(--ink);
+    text-decoration-color: var(--line);
+  }
+
+  .is-highlight {
+    background: var(--brand-soft);
+  }
+
+  .tcomp__yes {
+    color: var(--success);
+    font-weight: 500;
+  }
+
+  .tcomp__no {
+    color: var(--ink-3);
+  }
+
+  .tcomp__stars {
+    color: #e0a526;
+    font-size: 0.8125rem;
+  }
+
+  sup a {
+    margin-left: 2px;
+    color: var(--brand);
+    text-decoration: none;
+    font-weight: 700;
+  }
+
+  .tcomp__notes {
+    margin-top: 1rem;
+    font-size: 0.875rem;
+    color: var(--ink-2);
+  }
+
+  .tcomp__notes ol {
+    margin: 0;
+    padding-left: 1.25rem;
+  }
+
+  @media (max-width: 720px) {
+    .tcomp__frame {
+      border: 0;
+      background: none;
+    }
+
+    .tcomp__table thead {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+    }
+
+    .tcomp__table,
+    .tcomp__table tbody,
+    .tcomp__table tr,
+    .tcomp__table th,
+    .tcomp__table td {
+      display: block;
+    }
+
+    .tcomp__table tbody tr:not(.tcomp__group) {
+      margin-bottom: 0.75rem;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--bg);
+      overflow: hidden;
+    }
+
+    .tcomp__table tbody tr.is-highlight {
+      background: var(--brand-soft);
+    }
+
+    .tcomp__group th {
+      background: none;
+      padding-inline: 0;
+    }
+
+    .tcomp__table td {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.55rem 1rem;
+    }
+
+    .tcomp__table td::before {
+      content: attr(data-label);
+      font-weight: 600;
+      color: var(--ink-2);
+    }
+
+    .tcomp__table tr > :last-child {
+      border-bottom: 0;
+    }
+  }
+</style>

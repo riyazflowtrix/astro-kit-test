@@ -1,0 +1,283 @@
+---
+// Timeline changelog: releases > changes > packages, with migration notes on breaking changes.
+---
+
+<section id="changelog-nested-validation" class="section changelog">
+  <!-- kit: changelog-nested-validation -->
+  <div class="container changelog__inner">
+    <div class="changelog__head">
+      <div>
+        <h2>Changelog</h2>
+        <p class="lead">Every release of the Northwind SDK and CLI. Breaking changes include migration notes.</p>
+      </div>
+      <a class="btn btn-secondary" href="/changelog/rss.xml">
+        <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M5 19a1 1 0 1 0 0-.01M4 11a9 9 0 0 1 9 9M4 4a16 16 0 0 1 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
+        RSS feed
+      </a>
+    </div>
+
+    <ol class="timeline">
+      <li class="release" id="v5-0-0">
+        <div class="release__meta">
+          <time datetime="2026-09-30">Sep 30, 2026</time>
+          <span class="channel channel--stable">Stable</span>
+        </div>
+        <div class="release__body">
+          <h3><a href="#v5-0-0">5.0.0</a></h3>
+          <p class="release__summary">Pagination moves to cursors and the SDK drops Node 18.</p>
+          <ul class="changes">
+            <li class="change">
+              <div class="change__line">
+                <span class="kind kind--changed">Changed</span>
+                <span class="kind kind--breaking">Breaking</span>
+                <span class="change__text">List methods return cursor pagination instead of page numbers</span>
+                <a class="issue" href="https://northwind.atlassian.net/browse/NW-1042">NW-1042</a>
+              </div>
+              <div class="migration">
+                <p class="migration__label">Migration</p>
+                <p>Replace <code>page</code> with the <code>cursor</code> from the previous response:</p>
+                <pre><code>const next = await nw.orders.list(&#123; cursor: res.nextCursor &#125;);</code></pre>
+              </div>
+              <ul class="packages">
+                <li><code>@northwind/sdk</code> 4.9.2 &rarr; 5.0.0</li>
+              </ul>
+            </li>
+            <li class="change">
+              <div class="change__line">
+                <span class="kind kind--removed">Removed</span>
+                <span class="kind kind--breaking">Breaking</span>
+                <span class="change__text">Support for Node 18, which reached end of life in April</span>
+                <a class="issue" href="https://northwind.atlassian.net/browse/NW-1051">NW-1051</a>
+              </div>
+              <div class="migration">
+                <p class="migration__label">Migration</p>
+                <p>Upgrade to Node 20 or newer. No code changes are needed.</p>
+              </div>
+              <ul class="packages">
+                <li><code>@northwind/sdk</code> 4.9.2 &rarr; 5.0.0</li>
+                <li><code>@northwind/cli</code> 2.6.0 &rarr; 3.0.0</li>
+              </ul>
+            </li>
+            <li class="change">
+              <div class="change__line">
+                <span class="kind kind--added">Added</span>
+                <span class="change__text"><code>nw.orders.stream()</code> for server-sent order events</span>
+                <a class="issue" href="https://northwind.atlassian.net/browse/NW-998">NW-998</a>
+              </div>
+              <ul class="packages">
+                <li><code>@northwind/sdk</code> new in 5.0.0</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="release" id="v4-9-2">
+        <div class="release__meta">
+          <time datetime="2026-08-14">Aug 14, 2026</time>
+          <span class="channel channel--lts">LTS</span>
+        </div>
+        <div class="release__body">
+          <h3><a href="#v4-9-2">4.9.2</a></h3>
+          <ul class="changes">
+            <li class="change">
+              <div class="change__line">
+                <span class="kind kind--security">Security</span>
+                <span class="change__text">Webhook signatures are compared in constant time</span>
+                <a class="issue" href="https://northwind.atlassian.net/browse/NW-1033">NW-1033</a>
+              </div>
+              <ul class="packages">
+                <li><code>@northwind/sdk</code> 4.9.1 &rarr; 4.9.2</li>
+              </ul>
+            </li>
+            <li class="change">
+              <div class="change__line">
+                <span class="kind kind--fixed">Fixed</span>
+                <span class="change__text">Retries no longer double-send idempotent POST requests</span>
+                <a class="issue" href="https://northwind.atlassian.net/browse/NW-1029">NW-1029</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<style>
+  .changelog__inner {
+    max-width: 960px;
+  }
+  .changelog__head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 1rem;
+    margin-bottom: 3rem;
+  }
+  .changelog__head .lead {
+    margin: 0;
+  }
+  .timeline {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .release {
+    display: grid;
+    grid-template-columns: 160px minmax(0, 1fr);
+    gap: 2rem;
+    padding-bottom: 3rem;
+  }
+  .release__meta {
+    display: grid;
+    align-content: start;
+    justify-items: start;
+    gap: 0.5rem;
+    padding-top: 0.375rem;
+    font-size: 0.875rem;
+    color: var(--ink-2);
+  }
+  .release__body {
+    position: relative;
+    min-width: 0;
+    padding-left: 2rem;
+    border-left: 2px solid var(--line);
+  }
+  .release__body::before {
+    content: "";
+    position: absolute;
+    left: -7px;
+    top: 0.65rem;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--brand);
+    box-shadow: 0 0 0 4px var(--bg);
+  }
+  .release__body h3 {
+    font-size: 1.5rem;
+    font-family: var(--font-mono);
+    letter-spacing: 0;
+  }
+  .release__body h3 a {
+    text-decoration: none;
+  }
+  .release__summary {
+    color: var(--ink-2);
+  }
+  .channel {
+    padding: 0.125rem 0.5rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+  .channel--stable { background: #e3f3e9; color: var(--success); }
+  .channel--lts { background: #e6ecfb; color: var(--accent); }
+  .changes {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .change {
+    padding: 1rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+  }
+  .change__line {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.5rem;
+  }
+  .change__text {
+    flex: 1 1 240px;
+    font-weight: 500;
+  }
+  .kind {
+    padding: 0.0625rem 0.5rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .kind--changed { background: #e6ecfb; color: var(--accent); }
+  .kind--removed { background: var(--surface-2); color: var(--ink-2); }
+  .kind--added { background: #e3f3e9; color: var(--success); }
+  .kind--security { background: #fbf0dc; color: var(--warning); }
+  .kind--fixed { background: #efe6fb; color: #6b3fc4; }
+  .kind--breaking { background: var(--brand); color: var(--brand-ink); }
+  .issue {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    color: var(--ink-3);
+  }
+  code {
+    font-family: var(--font-mono);
+    font-size: 0.875em;
+  }
+  .change__text code,
+  .migration p code {
+    padding: 0.0625rem 0.25rem;
+    border-radius: 4px;
+    background: var(--surface);
+  }
+  .migration {
+    margin-top: 0.75rem;
+    padding: 0.75rem 1rem;
+    border-left: 3px solid var(--brand);
+    background: var(--brand-soft);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    font-size: 0.9375rem;
+  }
+  .migration p {
+    margin: 0 0 0.5rem;
+  }
+  .migration p:last-child {
+    margin: 0;
+  }
+  .migration__label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--brand);
+  }
+  .migration pre {
+    margin: 0;
+    padding: 0.75rem 1rem;
+    overflow-x: auto;
+    border-radius: var(--radius-sm);
+    background: var(--dark);
+    color: var(--dark-ink);
+  }
+  .packages {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+    margin: 0.75rem 0 0;
+    padding: 0;
+    list-style: none;
+    font-size: 0.8125rem;
+    color: var(--ink-2);
+  }
+  @media (max-width: 640px) {
+    .release {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0.75rem;
+    }
+    .release__meta {
+      display: flex;
+      align-items: center;
+      padding-left: 2rem;
+    }
+    .release__body {
+      padding-left: 1.25rem;
+    }
+  }
+</style>

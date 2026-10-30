@@ -1,0 +1,3180 @@
+[
+ {
+  "id": "blog-index",
+  "name": "Blog index",
+  "category": "Listings & feeds",
+  "kind": "block",
+  "brand": "Caldera",
+  "previewLayout": "grid-3",
+  "proves": "A listing stores a query, not copies \u00b7 featured pick as a conditional reference \u00b7 pagination modes",
+  "schema": {
+   "name": "blogIndex",
+   "title": "Blog index",
+   "kind": "block",
+   "icon": "news",
+   "category": "Listings & feeds",
+   "description": "A featured story, then a paged grid of Journal posts",
+   "variants": [
+    {
+     "id": "featured-grid",
+     "name": "Featured + grid",
+     "description": "One large card, then a 3-column grid"
+    },
+    {
+     "id": "list",
+     "name": "List",
+     "description": "Rows with a thumbnail on the left"
+    },
+    {
+     "id": "magazine",
+     "name": "Magazine",
+     "description": "Two large cards, then a dense grid"
+    }
+   ],
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "icon": "file-text",
+     "default": true
+    },
+    {
+     "name": "query",
+     "title": "Items",
+     "icon": "database"
+    },
+    {
+     "name": "design",
+     "title": "Design",
+     "icon": "palette"
+    }
+   ],
+   "fieldsets": [
+    {
+     "name": "featured",
+     "title": "Featured story",
+     "description": "The large card above the grid."
+    },
+    {
+     "name": "empty",
+     "title": "When nothing matches",
+     "collapsed": true
+    }
+   ],
+   "preview": {
+    "title": "heading",
+    "subtitle": "intro",
+    "icon": "layout-grid"
+   },
+   "fields": [
+    {
+     "name": "eyebrow",
+     "title": "Eyebrow",
+     "type": "string",
+     "group": "content",
+     "validation": {
+      "max": 40
+     },
+     "placeholder": "The Journal"
+    },
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "group": "content",
+     "validation": {
+      "required": true,
+      "recommendedMax": 48
+     },
+     "ai": true,
+     "localized": true
+    },
+    {
+     "name": "intro",
+     "title": "Intro",
+     "type": "text",
+     "rows": 2,
+     "group": "content",
+     "validation": {
+      "recommendedMax": 200
+     },
+     "ai": true,
+     "localized": true
+    },
+    {
+     "name": "featuredMode",
+     "title": "Featured story",
+     "type": "select",
+     "group": "content",
+     "fieldset": "featured",
+     "layout": "segmented",
+     "initialValue": "latest",
+     "options": [
+      {
+       "value": "latest",
+       "label": "Newest featured",
+       "description": "The newest post marked Featured"
+      },
+      {
+       "value": "pick",
+       "label": "Pick one"
+      },
+      {
+       "value": "none",
+       "label": "None"
+      }
+     ],
+     "description": "Newest featured updates itself when a new featured post goes live."
+    },
+    {
+     "name": "featuredPost",
+     "title": "Post to feature",
+     "type": "reference",
+     "group": "content",
+     "fieldset": "featured",
+     "reference": {
+      "to": [
+       "col_journal"
+      ]
+     },
+     "hidden": {
+      "field": "featuredMode",
+      "equals": "pick"
+     },
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "posts",
+     "title": "Posts to list",
+     "type": "object",
+     "group": "query",
+     "icon": "database",
+     "description": "New posts that match appear on their own.",
+     "fields": [
+      {
+       "name": "collection",
+       "title": "Collection",
+       "type": "select",
+       "access": {
+        "edit": "schema.manage"
+       },
+       "lockReason": "The collection is wired to the page template in code.",
+       "initialValue": "col_journal",
+       "options": [
+        {
+         "value": "col_journal",
+         "label": "Journal"
+        }
+       ],
+       "description": ""
+      },
+      {
+       "name": "topics",
+       "title": "Only these topics",
+       "type": "array",
+       "validation": {
+        "max": 6
+       },
+       "description": "Leave empty for every post.",
+       "of": [
+        {
+         "name": "topic",
+         "title": "Topic",
+         "type": "reference",
+         "reference": {
+          "to": [
+           "col_topics"
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "name": "authors",
+       "title": "Only these authors",
+       "type": "array",
+       "validation": {
+        "max": 6
+       },
+       "description": "Leave empty for every author.",
+       "of": [
+        {
+         "name": "author",
+         "title": "Author",
+         "type": "reference",
+         "reference": {
+          "to": [
+           "col_authors"
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "name": "hideFeatured",
+       "title": "Skip the featured post",
+       "type": "boolean",
+       "initialValue": true
+      },
+      {
+       "name": "sort",
+       "title": "Order",
+       "type": "select",
+       "initialValue": "newest",
+       "options": [
+        {
+         "value": "newest",
+         "label": "Newest first"
+        },
+        {
+         "value": "oldest",
+         "label": "Oldest first"
+        },
+        {
+         "value": "updated",
+         "label": "Recently updated",
+         "description": "Uses the Updated date, then the publish date"
+        },
+        {
+         "value": "title",
+         "label": "A to Z"
+        }
+       ],
+       "description": ""
+      },
+      {
+       "name": "pageSize",
+       "title": "Posts per page",
+       "type": "number",
+       "layout": "slider",
+       "numeric": {
+        "min": 3,
+        "max": 24,
+        "step": 3
+       },
+       "initialValue": 9
+      }
+     ]
+    },
+    {
+     "name": "pagination",
+     "title": "More posts",
+     "type": "select",
+     "group": "query",
+     "layout": "radio",
+     "initialValue": "numbered",
+     "options": [
+      {
+       "value": "numbered",
+       "label": "Numbered pages",
+       "description": "Each page gets its own address, /journal/page/2"
+      },
+      {
+       "value": "loadMore",
+       "label": "Load more button"
+      },
+      {
+       "value": "infinite",
+       "label": "Infinite scroll"
+      },
+      {
+       "value": "none",
+       "label": "First page only"
+      }
+     ],
+     "description": ""
+    },
+    {
+     "name": "loadMoreLabel",
+     "title": "Button label",
+     "type": "string",
+     "group": "query",
+     "hidden": {
+      "field": "pagination",
+      "equals": "loadMore"
+     },
+     "initialValue": "Load more stories",
+     "validation": {
+      "max": 32
+     },
+     "description": ""
+    },
+    {
+     "name": "emptyHeading",
+     "title": "Empty heading",
+     "type": "string",
+     "group": "query",
+     "fieldset": "empty",
+     "initialValue": "Nothing here yet",
+     "validation": {
+      "max": 60
+     },
+     "description": "Shown when the filters match no posts."
+    },
+    {
+     "name": "emptyButton",
+     "title": "Empty button",
+     "type": "button",
+     "group": "query",
+     "fieldset": "empty"
+    },
+    {
+     "name": "columns",
+     "title": "Columns on desktop",
+     "type": "number",
+     "group": "design",
+     "layout": "slider",
+     "numeric": {
+      "min": 2,
+      "max": 4,
+      "step": 1
+     },
+     "initialValue": 3,
+     "description": ""
+    },
+    {
+     "name": "imageRatio",
+     "title": "Card image",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "4:3",
+     "options": [
+      {
+       "value": "16:9",
+       "label": "16:9"
+      },
+      {
+       "value": "4:3",
+       "label": "4:3"
+      },
+      {
+       "value": "1:1",
+       "label": "Square"
+      },
+      {
+       "value": "none",
+       "label": "No image"
+      }
+     ]
+    },
+    {
+     "name": "cardShows",
+     "title": "Card shows",
+     "type": "multiselect",
+     "group": "design",
+     "layout": "checkbox",
+     "initialValue": [
+      "excerpt",
+      "date",
+      "topic"
+     ],
+     "options": [
+      {
+       "value": "excerpt",
+       "label": "Excerpt"
+      },
+      {
+       "value": "date",
+       "label": "Date"
+      },
+      {
+       "value": "author",
+       "label": "Author"
+      },
+      {
+       "value": "readingTime",
+       "label": "Reading time"
+      },
+      {
+       "value": "topic",
+       "label": "First topic"
+      }
+     ],
+     "description": ""
+    },
+    {
+     "name": "anchor",
+     "title": "Anchor",
+     "type": "string",
+     "group": "design",
+     "advanced": true,
+     "validation": {
+      "pattern": "^[a-z0-9-]+$",
+      "patternMessage": "Use lowercase letters, numbers and hyphens, like our-story."
+     }
+    }
+   ]
+  },
+  "value": {
+   "_variant": "featured-grid",
+   "eyebrow": "The Journal",
+   "heading": "Notes from the fire",
+   "intro": "Field tests, recipes and the long way round to a well-seasoned pan. New stories every Thursday.",
+   "featuredMode": "pick",
+   "featuredPost": "en_1",
+   "posts": {
+    "collection": "col_journal",
+    "topics": [
+     "tp_cast-iron",
+     "tp_camp"
+    ],
+    "authors": [],
+    "hideFeatured": true,
+    "sort": "newest",
+    "pageSize": 9
+   },
+   "pagination": "numbered",
+   "loadMoreLabel": "Load more stories",
+   "emptyHeading": "No stories in this topic yet",
+   "emptyButton": {
+    "label": "Browse every story",
+    "href": "/journal",
+    "type": "page",
+    "title": "Journal",
+    "style": "secondary"
+   },
+   "columns": 3,
+   "imageRatio": "4:3",
+   "cardShows": [
+    "excerpt",
+    "date",
+    "topic",
+    "readingTime"
+   ],
+   "anchor": "stories"
+  }
+ },
+ {
+  "id": "category-filter-bar",
+  "name": "Category filter bar",
+  "category": "Listings & feeds",
+  "kind": "block",
+  "brand": "Caldera",
+  "previewLayout": "nav",
+  "proves": "Chips from a taxonomy collection (all or picked) \u00b7 filters a list on the page or navigates \u00b7 mobile behavior per breakpoint",
+  "schema": {
+   "name": "categoryFilter",
+   "title": "Category filter bar",
+   "kind": "block",
+   "icon": "filter",
+   "category": "Listings & feeds",
+   "description": "Topic chips that filter a list or link to topic pages",
+   "variants": [
+    {
+     "id": "pills",
+     "name": "Pills"
+    },
+    {
+     "id": "underline",
+     "name": "Underline tabs"
+    },
+    {
+     "id": "dropdown",
+     "name": "Dropdown",
+     "description": "One select, good for 10+ topics"
+    }
+   ],
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "icon": "file-text",
+     "default": true
+    },
+    {
+     "name": "design",
+     "title": "Design",
+     "icon": "palette"
+    }
+   ],
+   "preview": {
+    "title": "allLabel",
+    "subtitle": "targetList",
+    "icon": "filter"
+   },
+   "fields": [
+    {
+     "name": "source",
+     "title": "Chips",
+     "type": "select",
+     "layout": "segmented",
+     "group": "content",
+     "initialValue": "all",
+     "options": [
+      {
+       "value": "all",
+       "label": "Every topic"
+      },
+      {
+       "value": "pick",
+       "label": "Pick topics"
+      }
+     ],
+     "description": "Every topic, new ones included, A to Z."
+    },
+    {
+     "name": "topics",
+     "title": "Topics",
+     "type": "array",
+     "group": "content",
+     "hidden": {
+      "field": "source",
+      "equals": "pick"
+     },
+     "validation": {
+      "min": 2,
+      "max": 10
+     },
+     "of": [
+      {
+       "name": "topic",
+       "title": "Topic",
+       "type": "reference",
+       "reference": {
+        "to": [
+         "col_topics"
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "name": "allLabel",
+     "title": "First chip",
+     "type": "string",
+     "group": "content",
+     "initialValue": "All",
+     "validation": {
+      "max": 20
+     },
+     "localized": true,
+     "description": "Leave empty to drop the chip."
+    },
+    {
+     "name": "hideEmpty",
+     "title": "Hide empty topics",
+     "type": "boolean",
+     "group": "content",
+     "initialValue": true
+    },
+    {
+     "name": "showCounts",
+     "title": "Show counts",
+     "type": "boolean",
+     "group": "content"
+    },
+    {
+     "name": "action",
+     "title": "Clicking a chip",
+     "type": "select",
+     "layout": "radio",
+     "group": "content",
+     "initialValue": "filter",
+     "options": [
+      {
+       "value": "filter",
+       "label": "Filters the list on this page",
+       "description": "No page load; the URL keeps the choice"
+      },
+      {
+       "value": "navigate",
+       "label": "Opens the topic's page",
+       "description": "/journal/topic/camp"
+      }
+     ],
+     "description": ""
+    },
+    {
+     "name": "targetList",
+     "title": "List to filter",
+     "type": "string",
+     "group": "content",
+     "hidden": {
+      "field": "action",
+      "equals": "filter"
+     },
+     "validation": {
+      "required": true,
+      "pattern": "^[a-z0-9-]+$",
+      "patternMessage": "Use the list section's anchor, like stories."
+     },
+     "description": "The anchor of the list section below, e.g. stories."
+    },
+    {
+     "name": "param",
+     "title": "URL parameter",
+     "type": "string",
+     "group": "content",
+     "hidden": {
+      "field": "action",
+      "equals": "filter"
+     },
+     "access": {
+      "view": "schema.view",
+      "edit": "schema.manage"
+     },
+     "initialValue": "topic",
+     "advanced": true,
+     "description": "Keeps the filter in shared links, e.g. ?topic=camp."
+    },
+    {
+     "name": "ariaLabel",
+     "title": "Name for screen readers",
+     "type": "string",
+     "group": "content",
+     "initialValue": "Filter stories by topic",
+     "validation": {
+      "required": true,
+      "max": 60
+     },
+     "description": "Not shown. Read by screen readers before the chips."
+    },
+    {
+     "name": "mobile",
+     "title": "On phones",
+     "type": "select",
+     "layout": "segmented",
+     "group": "design",
+     "initialValue": "scroll",
+     "options": [
+      {
+       "value": "scroll",
+       "label": "Scroll sideways"
+      },
+      {
+       "value": "wrap",
+       "label": "Wrap"
+      },
+      {
+       "value": "dropdown",
+       "label": "Dropdown"
+      }
+     ]
+    },
+    {
+     "name": "isSticky",
+     "title": "Stick under the header",
+     "type": "boolean",
+     "group": "design"
+    },
+    {
+     "name": "alignment",
+     "title": "Alignment",
+     "type": "select",
+     "layout": "segmented",
+     "group": "design",
+     "initialValue": "start",
+     "options": [
+      {
+       "value": "start",
+       "label": "Left"
+      },
+      {
+       "value": "center",
+       "label": "Center"
+      }
+     ],
+     "description": ""
+    }
+   ]
+  },
+  "value": {
+   "_variant": "pills",
+   "source": "pick",
+   "topics": [
+    "tp_cast-iron",
+    "tp_camp",
+    "tp_recipes",
+    "tp_trips",
+    "tp_care"
+   ],
+   "allLabel": "All stories",
+   "hideEmpty": true,
+   "showCounts": false,
+   "action": "filter",
+   "targetList": "stories",
+   "param": "topic",
+   "ariaLabel": "Filter stories by topic",
+   "mobile": "scroll",
+   "isSticky": true,
+   "alignment": "start"
+  }
+ },
+ {
+  "id": "related-posts",
+  "name": "Related posts",
+  "category": "Listings & feeds",
+  "kind": "block",
+  "brand": "Caldera",
+  "previewLayout": "grid-3",
+  "proves": "Automatic, hand-picked or mixed (pins first, then auto) \u00b7 match rules \u00b7 fallback when nothing matches",
+  "schema": {
+   "name": "relatedPosts",
+   "title": "Related posts",
+   "kind": "block",
+   "icon": "arrows-shuffle",
+   "category": "Listings & feeds",
+   "description": "More stories at the end of a post, matched or picked",
+   "variants": [
+    {
+     "id": "cards",
+     "name": "Cards"
+    },
+    {
+     "id": "compact",
+     "name": "Compact list"
+    },
+    {
+     "id": "carousel",
+     "name": "Carousel"
+    }
+   ],
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "icon": "file-text",
+     "default": true
+    },
+    {
+     "name": "design",
+     "title": "Design",
+     "icon": "palette"
+    }
+   ],
+   "preview": {
+    "title": "heading",
+    "subtitle": "mode",
+    "icon": "arrows-shuffle"
+   },
+   "fields": [
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "group": "content",
+     "initialValue": "Keep reading",
+     "validation": {
+      "max": 48
+     },
+     "localized": true
+    },
+    {
+     "name": "mode",
+     "title": "Which posts",
+     "type": "select",
+     "layout": "radio",
+     "group": "content",
+     "initialValue": "auto",
+     "options": [
+      {
+       "value": "auto",
+       "label": "Automatic",
+       "description": "Shares topics with this post, newest first"
+      },
+      {
+       "value": "manual",
+       "label": "Pick them"
+      },
+      {
+       "value": "mixed",
+       "label": "Pick some, fill the rest",
+       "description": "Your picks first, then automatic"
+      }
+     ],
+     "description": ""
+    },
+    {
+     "name": "picks",
+     "title": "Posts",
+     "type": "array",
+     "group": "content",
+     "hidden": {
+      "field": "mode",
+      "equals": [
+       "manual",
+       "mixed"
+      ]
+     },
+     "validation": {
+      "min": 1,
+      "max": 4,
+      "unique": true
+     },
+     "description": "The current post is skipped.",
+     "of": [
+      {
+       "name": "post",
+       "title": "Post",
+       "type": "reference",
+       "reference": {
+        "to": [
+         "col_journal",
+         "col_recipes"
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "name": "matchOn",
+     "title": "Match on",
+     "type": "multiselect",
+     "layout": "checkbox",
+     "group": "content",
+     "hidden": {
+      "field": "mode",
+      "equals": [
+       "auto",
+       "mixed"
+      ]
+     },
+     "initialValue": [
+      "topics"
+     ],
+     "options": [
+      {
+       "value": "topics",
+       "label": "Topics"
+      },
+      {
+       "value": "authors",
+       "label": "Authors"
+      },
+      {
+       "value": "product",
+       "label": "Reviewed product"
+      }
+     ],
+     "description": "More shared values rank higher. Ties go to the newest."
+    },
+    {
+     "name": "showRecipes",
+     "title": "Include recipes",
+     "type": "boolean",
+     "group": "content",
+     "hidden": {
+      "field": "mode",
+      "equals": [
+       "auto",
+       "mixed"
+      ]
+     }
+    },
+    {
+     "name": "count",
+     "title": "How many",
+     "type": "number",
+     "group": "content",
+     "layout": "slider",
+     "numeric": {
+      "min": 2,
+      "max": 6,
+      "step": 1
+     },
+     "initialValue": 3,
+     "description": ""
+    },
+    {
+     "name": "fallback",
+     "title": "When nothing matches",
+     "type": "select",
+     "group": "content",
+     "hidden": {
+      "field": "mode",
+      "equals": [
+       "auto",
+       "mixed"
+      ]
+     },
+     "initialValue": "newest",
+     "options": [
+      {
+       "value": "newest",
+       "label": "Show the newest posts"
+      },
+      {
+       "value": "hide",
+       "label": "Hide the section"
+      }
+     ],
+     "description": ""
+    },
+    {
+     "name": "showImages",
+     "title": "Show images",
+     "type": "boolean",
+     "group": "design",
+     "initialValue": true,
+     "description": ""
+    },
+    {
+     "name": "showDivider",
+     "title": "Line above",
+     "type": "boolean",
+     "group": "design"
+    }
+   ]
+  },
+  "value": {
+   "_variant": "cards",
+   "heading": "Keep reading",
+   "mode": "mixed",
+   "picks": [
+    "en_2"
+   ],
+   "matchOn": [
+    "topics",
+    "product"
+   ],
+   "showRecipes": true,
+   "count": 3,
+   "fallback": "newest",
+   "showImages": true,
+   "showDivider": true
+  }
+ },
+ {
+  "id": "resource-library",
+  "name": "Resource library",
+  "category": "Listings & feeds",
+  "kind": "block",
+  "brand": "Ledgerline",
+  "previewLayout": "grid-3",
+  "proves": "Multi-facet filters defined as data (field \u00b7 control \u00b7 order) \u00b7 gated downloads by type \u00b7 pinned items above the query",
+  "schema": {
+   "name": "resourceLibrary",
+   "title": "Resource library",
+   "kind": "block",
+   "icon": "books",
+   "category": "Listings & feeds",
+   "description": "Guides, reports and templates with search and filters",
+   "variants": [
+    {
+     "id": "sidebar",
+     "name": "Filters on the left"
+    },
+    {
+     "id": "top",
+     "name": "Filters on top"
+    }
+   ],
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "icon": "file-text",
+     "default": true
+    },
+    {
+     "name": "query",
+     "title": "Items",
+     "icon": "database"
+    },
+    {
+     "name": "filters",
+     "title": "Filters",
+     "icon": "adjustments"
+    },
+    {
+     "name": "design",
+     "title": "Design",
+     "icon": "palette"
+    }
+   ],
+   "preview": {
+    "title": "heading",
+    "subtitle": "intro",
+    "icon": "books"
+   },
+   "fields": [
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "group": "content",
+     "validation": {
+      "required": true,
+      "recommendedMax": 48
+     },
+     "ai": true,
+     "localized": true
+    },
+    {
+     "name": "intro",
+     "title": "Intro",
+     "type": "text",
+     "rows": 2,
+     "group": "content",
+     "ai": true,
+     "localized": true,
+     "description": ""
+    },
+    {
+     "name": "pinned",
+     "title": "Pinned",
+     "type": "array",
+     "group": "content",
+     "validation": {
+      "max": 3,
+      "unique": true
+     },
+     "of": [
+      {
+       "name": "resource",
+       "title": "Resource",
+       "type": "reference",
+       "reference": {
+        "to": [
+         "col_resources"
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "name": "query",
+     "title": "Resources to list",
+     "type": "object",
+     "group": "query",
+     "fields": [
+      {
+       "name": "collection",
+       "title": "Collection",
+       "type": "select",
+       "access": {
+        "edit": "schema.manage"
+       },
+       "lockReason": "The collection is wired to the page template in code.",
+       "initialValue": "col_resources",
+       "options": [
+        {
+         "value": "col_resources",
+         "label": "Resources"
+        }
+       ],
+       "description": ""
+      },
+      {
+       "name": "types",
+       "title": "Only these types",
+       "type": "multiselect",
+       "options": [
+        {
+         "value": "guide",
+         "label": "Guides"
+        },
+        {
+         "value": "report",
+         "label": "Reports"
+        },
+        {
+         "value": "template",
+         "label": "Templates"
+        },
+        {
+         "value": "webinar",
+         "label": "Webinars"
+        },
+        {
+         "value": "case-study",
+         "label": "Case studies"
+        }
+       ],
+       "description": "Leave empty for every type."
+      },
+      {
+       "name": "sort",
+       "title": "Order",
+       "type": "select",
+       "initialValue": "newest",
+       "options": [
+        {
+         "value": "newest",
+         "label": "Newest first"
+        },
+        {
+         "value": "popular",
+         "label": "Most downloaded"
+        },
+        {
+         "value": "title",
+         "label": "A to Z"
+        }
+       ],
+       "description": "Most downloaded uses the last 90 days."
+      },
+      {
+       "name": "pageSize",
+       "title": "Per page",
+       "type": "number",
+       "layout": "slider",
+       "numeric": {
+        "min": 6,
+        "max": 36,
+        "step": 6
+       },
+       "initialValue": 12,
+       "description": ""
+      }
+     ]
+    },
+    {
+     "name": "showSearch",
+     "title": "Show search box",
+     "type": "boolean",
+     "group": "filters",
+     "initialValue": true
+    },
+    {
+     "name": "searchPlaceholder",
+     "title": "Search placeholder",
+     "type": "string",
+     "group": "filters",
+     "hidden": {
+      "field": "showSearch",
+      "equals": true
+     },
+     "initialValue": "Search guides, reports and templates",
+     "validation": {
+      "max": 48
+     },
+     "description": ""
+    },
+    {
+     "name": "facets",
+     "title": "Filters",
+     "type": "array",
+     "group": "filters",
+     "itemNoun": "filter",
+     "validation": {
+      "max": 5
+     },
+     "description": "Each filter reads one field of the Resources collection.",
+     "of": [
+      {
+       "name": "facet",
+       "title": "Filter",
+       "type": "object",
+       "icon": "adjustments",
+       "preview": {
+        "title": "label",
+        "subtitle": "field",
+        "fallback": "Untitled filter"
+       },
+       "fields": [
+        {
+         "name": "label",
+         "title": "Label",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 24
+         },
+         "localized": true
+        },
+        {
+         "name": "field",
+         "title": "Filters by",
+         "type": "select",
+         "access": {
+          "edit": "schema.manage"
+         },
+         "lockReason": "Facets map to indexed fields; the developer adds new ones.",
+         "options": [
+          {
+           "value": "type",
+           "label": "Type"
+          },
+          {
+           "value": "topics",
+           "label": "Topic"
+          },
+          {
+           "value": "industry",
+           "label": "Industry"
+          },
+          {
+           "value": "role",
+           "label": "Role"
+          },
+          {
+           "value": "format",
+           "label": "Format"
+          }
+         ],
+         "validation": {
+          "required": true
+         },
+         "description": ""
+        },
+        {
+         "name": "control",
+         "title": "Shown as",
+         "type": "select",
+         "layout": "segmented",
+         "initialValue": "checkbox",
+         "options": [
+          {
+           "value": "checkbox",
+           "label": "Checkboxes"
+          },
+          {
+           "value": "chips",
+           "label": "Chips"
+          },
+          {
+           "value": "dropdown",
+           "label": "Dropdown"
+          }
+         ],
+         "description": ""
+        },
+        {
+         "name": "allowMultiple",
+         "title": "Allow several",
+         "type": "boolean",
+         "initialValue": true,
+         "description": "Results match any of the ticked values."
+        },
+        {
+         "name": "order",
+         "title": "Value order",
+         "type": "select",
+         "initialValue": "count",
+         "options": [
+          {
+           "value": "count",
+           "label": "Most results first"
+          },
+          {
+           "value": "alpha",
+           "label": "A to Z"
+          }
+         ],
+         "description": ""
+        },
+        {
+         "name": "isCollapsed",
+         "title": "Start collapsed",
+         "type": "boolean"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "useUrlSync",
+     "title": "Keep filters in the URL",
+     "type": "boolean",
+     "group": "filters",
+     "initialValue": true
+    },
+    {
+     "name": "gate",
+     "title": "Downloads",
+     "type": "select",
+     "group": "content",
+     "layout": "radio",
+     "initialValue": "open",
+     "options": [
+      {
+       "value": "open",
+       "label": "Open to everyone"
+      },
+      {
+       "value": "form",
+       "label": "Ask for details first",
+       "description": "Shows a form before the file"
+      }
+     ],
+     "description": ""
+    },
+    {
+     "name": "gateForm",
+     "title": "Form",
+     "type": "reference",
+     "group": "content",
+     "reference": {
+      "to": [
+       "form"
+      ]
+     },
+     "hidden": {
+      "field": "gate",
+      "equals": "form"
+     },
+     "validation": {
+      "required": true
+     },
+     "description": "Visitors fill it once; later downloads skip it."
+    },
+    {
+     "name": "gateTypes",
+     "title": "Ask only for",
+     "type": "multiselect",
+     "group": "content",
+     "hidden": {
+      "field": "gate",
+      "equals": "form"
+     },
+     "options": [
+      {
+       "value": "guide",
+       "label": "Guides"
+      },
+      {
+       "value": "report",
+       "label": "Reports"
+      },
+      {
+       "value": "template",
+       "label": "Templates"
+      }
+     ],
+     "description": "Leave empty to gate every type."
+    },
+    {
+     "name": "columns",
+     "title": "Columns on desktop",
+     "type": "number",
+     "group": "design",
+     "layout": "slider",
+     "numeric": {
+      "min": 2,
+      "max": 4,
+      "step": 1
+     },
+     "initialValue": 3,
+     "description": ""
+    },
+    {
+     "name": "mobileFilters",
+     "title": "Filters on phones",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "sheet",
+     "options": [
+      {
+       "value": "sheet",
+       "label": "Bottom sheet"
+      },
+      {
+       "value": "inline",
+       "label": "Above results"
+      }
+     ]
+    }
+   ]
+  },
+  "value": {
+   "_variant": "sidebar",
+   "heading": "Guides for finance teams that close fast",
+   "intro": "Playbooks, benchmarks and templates from 1,400 finance teams on Ledgerline.",
+   "pinned": [
+    "en_res_close-benchmark-2026"
+   ],
+   "query": {
+    "collection": "col_resources",
+    "types": [],
+    "sort": "newest",
+    "pageSize": 12
+   },
+   "showSearch": true,
+   "searchPlaceholder": "Search guides, reports and templates",
+   "facets": [
+    {
+     "_key": "f1",
+     "label": "Type",
+     "field": "type",
+     "control": "checkbox",
+     "allowMultiple": true,
+     "order": "count",
+     "isCollapsed": false
+    },
+    {
+     "_key": "f2",
+     "label": "Topic",
+     "field": "topics",
+     "control": "chips",
+     "allowMultiple": true,
+     "order": "alpha",
+     "isCollapsed": false
+    },
+    {
+     "_key": "f3",
+     "label": "Industry",
+     "field": "industry",
+     "control": "dropdown",
+     "allowMultiple": false,
+     "order": "alpha",
+     "isCollapsed": true
+    }
+   ],
+   "useUrlSync": true,
+   "gate": "form",
+   "gateForm": "form_resource-download",
+   "gateTypes": [
+    "report",
+    "template"
+   ],
+   "columns": 3,
+   "mobileFilters": "sheet"
+  }
+ },
+ {
+  "id": "podcast-episode-list",
+  "name": "Podcast episode list",
+  "category": "Listings & feeds",
+  "kind": "block",
+  "brand": "Caldera",
+  "previewLayout": "list",
+  "proves": "Show-level details + platform links (repeater) \u00b7 episodes by query with season filter \u00b7 inline player vs episode page",
+  "schema": {
+   "name": "podcastEpisodes",
+   "title": "Podcast episodes",
+   "kind": "block",
+   "icon": "microphone",
+   "category": "Listings & feeds",
+   "description": "The show, where to listen, and its latest episodes",
+   "variants": [
+    {
+     "id": "list",
+     "name": "List with player"
+    },
+    {
+     "id": "cards",
+     "name": "Cards"
+    }
+   ],
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "icon": "file-text",
+     "default": true
+    },
+    {
+     "name": "query",
+     "title": "Items",
+     "icon": "database"
+    },
+    {
+     "name": "design",
+     "title": "Design",
+     "icon": "palette"
+    }
+   ],
+   "fieldsets": [
+    {
+     "name": "show",
+     "title": "The show",
+     "description": "Shown above the episode list."
+    }
+   ],
+   "preview": {
+    "title": "showTitle",
+    "subtitle": "showDescription",
+    "media": "showArt"
+   },
+   "fields": [
+    {
+     "name": "showTitle",
+     "title": "Show name",
+     "type": "string",
+     "group": "content",
+     "fieldset": "show",
+     "validation": {
+      "required": true,
+      "max": 60
+     }
+    },
+    {
+     "name": "showDescription",
+     "title": "About the show",
+     "type": "text",
+     "rows": 3,
+     "group": "content",
+     "fieldset": "show",
+     "validation": {
+      "recommendedMax": 280
+     },
+     "localized": true,
+     "description": "Podcast apps show the same text."
+    },
+    {
+     "name": "showArt",
+     "title": "Show art",
+     "type": "image",
+     "group": "content",
+     "fieldset": "show",
+     "validation": {
+      "required": true
+     },
+     "description": "Square, 3000 \u00d7 3000. Apps reject anything under 1400."
+    },
+    {
+     "name": "hosts",
+     "title": "Hosts",
+     "type": "array",
+     "group": "content",
+     "fieldset": "show",
+     "validation": {
+      "max": 3
+     },
+     "description": "",
+     "of": [
+      {
+       "name": "host",
+       "title": "Host",
+       "type": "reference",
+       "reference": {
+        "to": [
+         "col_authors"
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "name": "platforms",
+     "title": "Listen on",
+     "type": "array",
+     "group": "content",
+     "itemNoun": "platform",
+     "openMode": "inline",
+     "validation": {
+      "max": 7
+     },
+     "of": [
+      {
+       "name": "platform",
+       "title": "Platform",
+       "type": "object",
+       "icon": "headphones",
+       "preview": {
+        "title": "service",
+        "subtitle": "link.href"
+       },
+       "fields": [
+        {
+         "name": "service",
+         "title": "Service",
+         "type": "select",
+         "validation": {
+          "required": true
+         },
+         "options": [
+          {
+           "value": "apple",
+           "label": "Apple Podcasts"
+          },
+          {
+           "value": "spotify",
+           "label": "Spotify"
+          },
+          {
+           "value": "youtube",
+           "label": "YouTube"
+          },
+          {
+           "value": "overcast",
+           "label": "Overcast"
+          },
+          {
+           "value": "pocketcasts",
+           "label": "Pocket Casts"
+          },
+          {
+           "value": "rss",
+           "label": "RSS feed"
+          }
+         ],
+         "description": ""
+        },
+        {
+         "name": "link",
+         "title": "Link",
+         "type": "link",
+         "validation": {
+          "required": true
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "episodes",
+     "title": "Episodes to list",
+     "type": "object",
+     "group": "query",
+     "fields": [
+      {
+       "name": "collection",
+       "title": "Collection",
+       "type": "select",
+       "access": {
+        "edit": "schema.manage"
+       },
+       "lockReason": "The collection is wired to the page template in code.",
+       "initialValue": "col_episodes",
+       "options": [
+        {
+         "value": "col_episodes",
+         "label": "Podcast episodes"
+        }
+       ],
+       "description": ""
+      },
+      {
+       "name": "season",
+       "title": "Season",
+       "type": "number",
+       "numeric": {
+        "min": 1,
+        "step": 1
+       },
+       "description": "Leave empty for every season."
+      },
+      {
+       "name": "types",
+       "title": "Episode types",
+       "type": "multiselect",
+       "initialValue": [
+        "full",
+        "bonus"
+       ],
+       "options": [
+        {
+         "value": "full",
+         "label": "Full"
+        },
+        {
+         "value": "bonus",
+         "label": "Bonus"
+        },
+        {
+         "value": "trailer",
+         "label": "Trailer"
+        }
+       ],
+       "description": ""
+      },
+      {
+       "name": "sort",
+       "title": "Order",
+       "type": "select",
+       "initialValue": "newest",
+       "options": [
+        {
+         "value": "newest",
+         "label": "Newest first"
+        },
+        {
+         "value": "episode",
+         "label": "Episode number"
+        }
+       ]
+      },
+      {
+       "name": "limit",
+       "title": "How many",
+       "type": "number",
+       "layout": "slider",
+       "numeric": {
+        "min": 3,
+        "max": 30,
+        "step": 1
+       },
+       "initialValue": 10,
+       "description": ""
+      }
+     ]
+    },
+    {
+     "name": "highlight",
+     "title": "Highlight",
+     "type": "select",
+     "group": "query",
+     "layout": "segmented",
+     "initialValue": "latest",
+     "options": [
+      {
+       "value": "latest",
+       "label": "Latest episode"
+      },
+      {
+       "value": "pick",
+       "label": "Pick one"
+      },
+      {
+       "value": "none",
+       "label": "None"
+      }
+     ]
+    },
+    {
+     "name": "featuredEpisode",
+     "title": "Episode",
+     "type": "reference",
+     "group": "query",
+     "reference": {
+      "to": [
+       "col_episodes"
+      ]
+     },
+     "hidden": {
+      "field": "highlight",
+      "equals": "pick"
+     },
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "play",
+     "title": "Play button",
+     "type": "select",
+     "group": "design",
+     "layout": "radio",
+     "initialValue": "inline",
+     "options": [
+      {
+       "value": "inline",
+       "label": "Plays here",
+       "description": "A sticky mini player keeps playing across pages"
+      },
+      {
+       "value": "page",
+       "label": "Opens the episode page"
+      }
+     ],
+     "description": ""
+    },
+    {
+     "name": "showNotesPreview",
+     "title": "Show notes preview",
+     "type": "boolean",
+     "group": "design",
+     "initialValue": true
+    },
+    {
+     "name": "showDuration",
+     "title": "Show length",
+     "type": "boolean",
+     "group": "design",
+     "initialValue": true,
+     "description": ""
+    },
+    {
+     "name": "subscribeButton",
+     "title": "Subscribe button",
+     "type": "button",
+     "group": "content"
+    }
+   ]
+  },
+  "value": {
+   "_variant": "list",
+   "showTitle": "Low & Slow",
+   "showDescription": "Conversations with the people who cook outside for a living \u2014 guides, pitmasters, foragers and the occasional blacksmith. Every other Tuesday.",
+   "showArt": {
+    "url": "https://picsum.photos/seed/lowandslow-art/1500/1500",
+    "alt": "Low & Slow podcast cover: a skillet over embers with the show name in cream type",
+    "name": "lowandslow-art.jpg",
+    "width": 3000,
+    "height": 3000
+   },
+   "hosts": [
+    "au_mei",
+    "en_a1"
+   ],
+   "platforms": [
+    {
+     "_key": "p1",
+     "service": "apple",
+     "link": {
+      "type": "url",
+      "href": "https://podcasts.apple.com/us/podcast/low-slow/id1742210981",
+      "newTab": true
+     }
+    },
+    {
+     "_key": "p2",
+     "service": "spotify",
+     "link": {
+      "type": "url",
+      "href": "https://open.spotify.com/show/4kT9pQvZ2mRuLowSlow",
+      "newTab": true
+     }
+    },
+    {
+     "_key": "p3",
+     "service": "youtube",
+     "link": {
+      "type": "url",
+      "href": "https://www.youtube.com/@calderacooks/podcasts",
+      "newTab": true
+     }
+    },
+    {
+     "_key": "p4",
+     "service": "rss",
+     "link": {
+      "type": "url",
+      "href": "https://caldera.bettercms.site/podcast/feed.xml"
+     }
+    }
+   ],
+   "episodes": {
+    "collection": "col_episodes",
+    "types": [
+     "full",
+     "bonus"
+    ],
+    "sort": "newest",
+    "limit": 10
+   },
+   "highlight": "latest",
+   "play": "inline",
+   "showNotesPreview": true,
+   "showDuration": true,
+   "subscribeButton": {
+    "label": "Subscribe free",
+    "href": "https://podcasts.apple.com/us/podcast/low-slow/id1742210981",
+    "type": "url",
+    "style": "primary",
+    "newTab": true
+   }
+  }
+ },
+ {
+  "id": "changelog",
+  "name": "Changelog",
+  "category": "Listings & feeds",
+  "kind": "block",
+  "brand": "Ledgerline",
+  "previewLayout": "timeline",
+  "proves": "Releases \u2192 changes \u2192 type tags \u00b7 breaking/deprecated changes reveal a migration note \u00b7 collection or written-here source",
+  "schema": {
+   "name": "changelog",
+   "title": "Changelog",
+   "kind": "block",
+   "icon": "history",
+   "category": "Listings & feeds",
+   "description": "Versions and what changed in each",
+   "variants": [
+    {
+     "id": "timeline",
+     "name": "Timeline"
+    },
+    {
+     "id": "compact",
+     "name": "Compact"
+    }
+   ],
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "icon": "file-text",
+     "default": true
+    },
+    {
+     "name": "design",
+     "title": "Design",
+     "icon": "palette"
+    }
+   ],
+   "preview": {
+    "title": "heading",
+    "subtitle": "intro",
+    "icon": "history"
+   },
+   "fields": [
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "group": "content",
+     "validation": {
+      "required": true,
+      "max": 48
+     },
+     "localized": true
+    },
+    {
+     "name": "intro",
+     "title": "Intro",
+     "type": "text",
+     "rows": 2,
+     "group": "content",
+     "description": ""
+    },
+    {
+     "name": "source",
+     "title": "Releases come from",
+     "type": "select",
+     "group": "content",
+     "layout": "segmented",
+     "initialValue": "collection",
+     "options": [
+      {
+       "value": "collection",
+       "label": "Releases collection"
+      },
+      {
+       "value": "inline",
+       "label": "Written here"
+      }
+     ]
+    },
+    {
+     "name": "query",
+     "title": "Releases to list",
+     "type": "object",
+     "group": "content",
+     "openMode": "inline",
+     "hidden": {
+      "field": "source",
+      "equals": "collection"
+     },
+     "fields": [
+      {
+       "name": "collection",
+       "title": "Collection",
+       "type": "select",
+       "access": {
+        "edit": "schema.manage"
+       },
+       "lockReason": "The collection is wired to the page template in code.",
+       "initialValue": "col_releases",
+       "options": [
+        {
+         "value": "col_releases",
+         "label": "Releases"
+        }
+       ],
+       "description": ""
+      },
+      {
+       "name": "products",
+       "title": "Products",
+       "type": "multiselect",
+       "options": [
+        {
+         "value": "api",
+         "label": "API"
+        },
+        {
+         "value": "dashboard",
+         "label": "Dashboard"
+        },
+        {
+         "value": "sdk",
+         "label": "SDKs"
+        }
+       ],
+       "description": "Leave empty for every product."
+      },
+      {
+       "name": "limit",
+       "title": "How many",
+       "type": "number",
+       "layout": "slider",
+       "numeric": {
+        "min": 5,
+        "max": 50,
+        "step": 5
+       },
+       "initialValue": 10,
+       "description": ""
+      }
+     ]
+    },
+    {
+     "name": "releases",
+     "title": "Releases",
+     "type": "array",
+     "group": "content",
+     "itemNoun": "release",
+     "hidden": {
+      "field": "source",
+      "equals": "inline"
+     },
+     "validation": {
+      "max": 60
+     },
+     "of": [
+      {
+       "name": "release",
+       "title": "Release",
+       "type": "object",
+       "icon": "tag",
+       "preview": {
+        "title": "version",
+        "subtitle": "title",
+        "fallback": "Untitled release"
+       },
+       "fields": [
+        {
+         "name": "version",
+         "title": "Version",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "pattern": "^v?\\d+\\.\\d+(\\.\\d+)?(-[a-z0-9.]+)?$",
+          "patternMessage": "Use a version like 2.14.0 or v2.14.0-beta.1.",
+          "unique": true
+         },
+         "placeholder": "2.14.0",
+         "description": "Also becomes the anchor, e.g. #v2-14-0."
+        },
+        {
+         "name": "date",
+         "title": "Release date",
+         "type": "date",
+         "validation": {
+          "required": true
+         },
+         "description": ""
+        },
+        {
+         "name": "title",
+         "title": "Headline",
+         "type": "string",
+         "validation": {
+          "recommendedMax": 70
+         }
+        },
+        {
+         "name": "screenshot",
+         "title": "Screenshot",
+         "type": "image"
+        },
+        {
+         "name": "changes",
+         "title": "Changes",
+         "type": "array",
+         "itemNoun": "change",
+         "validation": {
+          "min": 1,
+          "max": 40
+         },
+         "of": [
+          {
+           "name": "change",
+           "title": "Change",
+           "type": "object",
+           "icon": "point",
+           "preview": {
+            "title": "title",
+            "subtitle": "type",
+            "fallback": "Untitled change"
+           },
+           "fields": [
+            {
+             "name": "type",
+             "title": "Type",
+             "type": "select",
+             "layout": "segmented",
+             "validation": {
+              "required": true
+             },
+             "options": [
+              {
+               "value": "new",
+               "label": "New"
+              },
+              {
+               "value": "improved",
+               "label": "Improved"
+              },
+              {
+               "value": "fixed",
+               "label": "Fixed"
+              },
+              {
+               "value": "deprecated",
+               "label": "Deprecated"
+              },
+              {
+               "value": "breaking",
+               "label": "Breaking"
+              },
+              {
+               "value": "security",
+               "label": "Security"
+              }
+             ],
+             "description": ""
+            },
+            {
+             "name": "title",
+             "title": "What changed",
+             "type": "string",
+             "validation": {
+              "required": true,
+              "recommendedMax": 90
+             }
+            },
+            {
+             "name": "details",
+             "title": "Details",
+             "type": "richtext"
+            },
+            {
+             "name": "areas",
+             "title": "Areas",
+             "type": "multiselect",
+             "options": [
+              {
+               "value": "payments",
+               "label": "Payments"
+              },
+              {
+               "value": "ledger",
+               "label": "Ledger"
+              },
+              {
+               "value": "reports",
+               "label": "Reports"
+              },
+              {
+               "value": "auth",
+               "label": "Auth"
+              },
+              {
+               "value": "webhooks",
+               "label": "Webhooks"
+              }
+             ],
+             "description": ""
+            },
+            {
+             "name": "migration",
+             "title": "How to migrate",
+             "type": "richtext",
+             "hidden": {
+              "field": "type",
+              "equals": [
+               "breaking",
+               "deprecated"
+              ]
+             },
+             "validation": {
+              "required": true
+             }
+            },
+            {
+             "name": "removalDate",
+             "title": "Removed on",
+             "type": "date",
+             "hidden": {
+              "field": "type",
+              "equals": "deprecated"
+             },
+             "description": "When the deprecated behavior stops working."
+            },
+            {
+             "name": "docs",
+             "title": "Docs link",
+             "type": "link"
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "hasRssFeed",
+     "title": "Publish an RSS feed",
+     "type": "boolean",
+     "group": "content",
+     "initialValue": true,
+     "description": "Publishes /changelog/feed.xml."
+    },
+    {
+     "name": "subscribeForm",
+     "title": "Email updates",
+     "type": "reference",
+     "group": "content",
+     "reference": {
+      "to": [
+       "form"
+      ]
+     }
+    },
+    {
+     "name": "showTypeFilter",
+     "title": "Show type filter",
+     "type": "boolean",
+     "group": "design",
+     "initialValue": true
+    },
+    {
+     "name": "groupBy",
+     "title": "Group by",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "release",
+     "options": [
+      {
+       "value": "release",
+       "label": "Release"
+      },
+      {
+       "value": "month",
+       "label": "Month"
+      }
+     ],
+     "description": ""
+    }
+   ]
+  },
+  "value": {
+   "_variant": "timeline",
+   "heading": "Changelog",
+   "intro": "Every change to the Ledgerline API, dashboard and SDKs. Breaking changes come with 90 days' notice.",
+   "source": "inline",
+   "query": {
+    "collection": "col_releases",
+    "products": [],
+    "limit": 10
+   },
+   "releases": [
+    {
+     "_key": "r1",
+     "version": "2.14.0",
+     "date": "2026-09-29",
+     "title": "Multi-entity close and faster ledger exports",
+     "screenshot": {
+      "url": "https://picsum.photos/seed/ledgerline-multientity/1600/1000",
+      "alt": "The close checklist showing three entities side by side",
+      "name": "ledgerline-multientity.jpg",
+      "width": 3200,
+      "height": 2000
+     },
+     "changes": [
+      {
+       "_key": "c1",
+       "type": "new",
+       "title": "Close several entities in one checklist",
+       "details": "<p>Group subsidiaries under a parent and close them together. Intercompany eliminations post automatically.</p>",
+       "areas": [
+        "ledger",
+        "reports"
+       ],
+       "docs": {
+        "type": "url",
+        "href": "https://docs.ledgerline.com/guides/multi-entity-close"
+       }
+      },
+      {
+       "_key": "c2",
+       "type": "improved",
+       "title": "Ledger CSV exports are 6\u00d7 faster on books over 1M lines",
+       "areas": [
+        "reports"
+       ]
+      },
+      {
+       "_key": "c3",
+       "type": "fixed",
+       "title": "Webhook retries no longer duplicate journal.posted events",
+       "areas": [
+        "webhooks"
+       ]
+      }
+     ]
+    },
+    {
+     "_key": "r2",
+     "version": "2.13.0",
+     "date": "2026-09-08",
+     "title": "API versioning by date",
+     "changes": [
+      {
+       "_key": "c4",
+       "type": "deprecated",
+       "title": "The /v1/transactions list endpoint",
+       "details": "<p>Replaced by <code>GET /v2/journal-lines</code>, which paginates with cursors.</p>",
+       "areas": [
+        "ledger"
+       ],
+       "migration": "<p>Switch to <code>GET /v2/journal-lines</code>. Replace <code>page</code> with the <code>cursor</code> from the previous response. Field names are unchanged.</p>",
+       "removalDate": "2026-12-08",
+       "docs": {
+        "type": "url",
+        "href": "https://docs.ledgerline.com/api/journal-lines"
+       }
+      },
+      {
+       "_key": "c5",
+       "type": "security",
+       "title": "API keys can now be scoped to read-only",
+       "areas": [
+        "auth"
+       ]
+      }
+     ]
+    }
+   ],
+   "hasRssFeed": true,
+   "subscribeForm": "form_changelog-updates",
+   "showTypeFilter": true,
+   "groupBy": "release"
+  }
+ },
+ {
+  "id": "public-roadmap",
+  "name": "Public roadmap",
+  "category": "Listings & feeds",
+  "kind": "block",
+  "brand": "Ledgerline",
+  "previewLayout": "grid-3",
+  "proves": "Columns \u2192 items with status, quarter and read-only vote counts \u00b7 shipped items link to a release \u00b7 voting + suggestion form",
+  "schema": {
+   "name": "roadmap",
+   "title": "Public roadmap",
+   "kind": "block",
+   "icon": "map-2",
+   "category": "Listings & feeds",
+   "description": "What's planned, in progress and shipped, with votes",
+   "variants": [
+    {
+     "id": "board",
+     "name": "Board"
+    },
+    {
+     "id": "list",
+     "name": "Grouped list"
+    }
+   ],
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "icon": "file-text",
+     "default": true
+    },
+    {
+     "name": "feedback",
+     "title": "Feedback",
+     "icon": "message-plus"
+    },
+    {
+     "name": "design",
+     "title": "Design",
+     "icon": "palette"
+    }
+   ],
+   "preview": {
+    "title": "heading",
+    "subtitle": "intro",
+    "icon": "map-2"
+   },
+   "fields": [
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "group": "content",
+     "validation": {
+      "required": true,
+      "max": 48
+     }
+    },
+    {
+     "name": "intro",
+     "title": "Intro",
+     "type": "text",
+     "rows": 2,
+     "group": "content",
+     "description": ""
+    },
+    {
+     "name": "columns",
+     "title": "Columns",
+     "type": "array",
+     "group": "content",
+     "itemNoun": "column",
+     "validation": {
+      "min": 2,
+      "max": 5
+     },
+     "of": [
+      {
+       "name": "column",
+       "title": "Column",
+       "type": "object",
+       "icon": "layout-columns",
+       "preview": {
+        "title": "title",
+        "subtitle": "stage"
+       },
+       "fields": [
+        {
+         "name": "title",
+         "title": "Title",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 24
+         }
+        },
+        {
+         "name": "stage",
+         "title": "Stage",
+         "type": "select",
+         "validation": {
+          "required": true
+         },
+         "options": [
+          {
+           "value": "considering",
+           "label": "Considering"
+          },
+          {
+           "value": "planned",
+           "label": "Planned"
+          },
+          {
+           "value": "building",
+           "label": "In progress"
+          },
+          {
+           "value": "beta",
+           "label": "In beta"
+          },
+          {
+           "value": "shipped",
+           "label": "Shipped"
+          }
+         ]
+        },
+        {
+         "name": "description",
+         "title": "Description",
+         "type": "string",
+         "validation": {
+          "max": 90
+         }
+        },
+        {
+         "name": "items",
+         "title": "Items",
+         "type": "array",
+         "itemNoun": "item",
+         "validation": {
+          "max": 25
+         },
+         "of": [
+          {
+           "name": "item",
+           "title": "Item",
+           "type": "object",
+           "icon": "point",
+           "preview": {
+            "title": "title",
+            "subtitle": "quarter",
+            "fallback": "Untitled item"
+           },
+           "fields": [
+            {
+             "name": "title",
+             "title": "Title",
+             "type": "string",
+             "validation": {
+              "required": true,
+              "recommendedMax": 60
+             }
+            },
+            {
+             "name": "summary",
+             "title": "Summary",
+             "type": "text",
+             "rows": 3,
+             "validation": {
+              "recommendedMax": 240
+             }
+            },
+            {
+             "name": "area",
+             "title": "Area",
+             "type": "select",
+             "options": [
+              {
+               "value": "payments",
+               "label": "Payments"
+              },
+              {
+               "value": "ledger",
+               "label": "Ledger"
+              },
+              {
+               "value": "reports",
+               "label": "Reports"
+              },
+              {
+               "value": "integrations",
+               "label": "Integrations"
+              }
+             ],
+             "description": ""
+            },
+            {
+             "name": "quarter",
+             "title": "Target",
+             "type": "string",
+             "validation": {
+              "pattern": "^(Q[1-4] 20\\d\\d|H[12] 20\\d\\d|Later)$",
+              "patternMessage": "Use a quarter or half, like Q3 2026, H1 2027 or Later."
+             },
+             "placeholder": "Q1 2027",
+             "description": "Shown as a rough target, never a promise."
+            },
+            {
+             "name": "isShipped",
+             "title": "Shipped",
+             "type": "boolean",
+             "description": "Links the card to its release notes."
+            },
+            {
+             "name": "release",
+             "title": "Release",
+             "type": "reference",
+             "reference": {
+              "to": [
+               "col_releases"
+              ]
+             },
+             "hidden": {
+              "field": "isShipped",
+              "equals": true
+             },
+             "validation": {
+              "required": true
+             }
+            },
+            {
+             "name": "votes",
+             "title": "Votes",
+             "type": "number",
+             "readOnly": true,
+             "description": "Counted from visitor votes. Not editable."
+            },
+            {
+             "name": "discussion",
+             "title": "Discussion link",
+             "type": "link"
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "allowVoting",
+     "title": "Let visitors vote",
+     "type": "boolean",
+     "group": "feedback",
+     "initialValue": true
+    },
+    {
+     "name": "useEmailToVote",
+     "title": "Ask for an email to vote",
+     "type": "boolean",
+     "group": "feedback",
+     "hidden": {
+      "field": "allowVoting",
+      "equals": true
+     },
+     "description": "One vote per email."
+    },
+    {
+     "name": "suggest",
+     "title": "Suggestion form",
+     "type": "reference",
+     "group": "feedback",
+     "reference": {
+      "to": [
+       "form"
+      ]
+     }
+    },
+    {
+     "name": "suggestButton",
+     "title": "Suggestion button",
+     "type": "button",
+     "group": "feedback",
+     "hidden": {
+      "field": "suggest",
+      "notEmpty": true
+     }
+    },
+    {
+     "name": "sortItems",
+     "title": "Sort items by",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "votes",
+     "options": [
+      {
+       "value": "votes",
+       "label": "Votes"
+      },
+      {
+       "value": "manual",
+       "label": "Your order"
+      }
+     ],
+     "description": ""
+    },
+    {
+     "name": "showVotes",
+     "title": "Show vote counts",
+     "type": "boolean",
+     "group": "design",
+     "initialValue": true,
+     "description": "Off still lets people vote; the number stays private."
+    }
+   ]
+  },
+  "value": {
+   "_variant": "board",
+   "heading": "Roadmap",
+   "intro": "What we're building next. Vote for what matters to your team \u2014 the top items shape every quarter.",
+   "columns": [
+    {
+     "_key": "col1",
+     "title": "Planned",
+     "stage": "planned",
+     "description": "Scoped and scheduled.",
+     "items": [
+      {
+       "_key": "i1",
+       "title": "NetSuite two-way sync",
+       "summary": "Push journal entries to NetSuite and pull back vendor bills without CSVs.",
+       "area": "integrations",
+       "quarter": "Q1 2027",
+       "isShipped": false,
+       "votes": 412,
+       "discussion": {
+        "type": "url",
+        "href": "https://community.ledgerline.com/t/netsuite-two-way/1882"
+       }
+      },
+      {
+       "_key": "i2",
+       "title": "Accrual schedules",
+       "summary": "Spread prepaid expenses and deferred revenue over months automatically.",
+       "area": "ledger",
+       "quarter": "Q1 2027",
+       "isShipped": false,
+       "votes": 287
+      }
+     ]
+    },
+    {
+     "_key": "col2",
+     "title": "In progress",
+     "stage": "building",
+     "items": [
+      {
+       "_key": "i3",
+       "title": "Bank rules with AI suggestions",
+       "summary": "Rules that learn from how you categorise and propose new ones.",
+       "area": "payments",
+       "quarter": "Q4 2026",
+       "isShipped": false,
+       "votes": 655
+      }
+     ]
+    },
+    {
+     "_key": "col3",
+     "title": "Shipped",
+     "stage": "shipped",
+     "items": [
+      {
+       "_key": "i4",
+       "title": "Multi-entity close",
+       "summary": "Close several entities in one checklist with automatic eliminations.",
+       "area": "ledger",
+       "quarter": "Q3 2026",
+       "isShipped": true,
+       "release": "en_rel_2-14-0",
+       "votes": 903
+      }
+     ]
+    }
+   ],
+   "allowVoting": true,
+   "useEmailToVote": true,
+   "suggest": "form_roadmap-idea",
+   "suggestButton": {
+    "label": "Suggest a feature",
+    "href": "#suggest",
+    "type": "section",
+    "style": "secondary"
+   },
+   "sortItems": "votes",
+   "showVotes": true
+  }
+ },
+ {
+  "id": "search-results-page",
+  "name": "Search results page",
+  "category": "Listings & feeds",
+  "kind": "block",
+  "brand": "Caldera",
+  "previewLayout": "list",
+  "proves": "Configure search, don't store results \u00b7 sources with weights \u00b7 pinned results per keyword \u00b7 empty states",
+  "schema": {
+   "name": "searchResults",
+   "title": "Search results",
+   "kind": "block",
+   "icon": "search",
+   "category": "Listings & feeds",
+   "description": "The /search page: what's searched, how results look, what shows when nothing matches",
+   "variants": [
+    {
+     "id": "tabs",
+     "name": "Tabs per type"
+    },
+    {
+     "id": "mixed",
+     "name": "One mixed list"
+    }
+   ],
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "icon": "file-text",
+     "default": true
+    },
+    {
+     "name": "ranking",
+     "title": "Ranking",
+     "icon": "sort-descending"
+    },
+    {
+     "name": "empty",
+     "title": "No results",
+     "icon": "mood-empty"
+    },
+    {
+     "name": "design",
+     "title": "Design",
+     "icon": "palette"
+    }
+   ],
+   "preview": {
+    "title": "placeholder",
+    "icon": "search"
+   },
+   "fields": [
+    {
+     "name": "placeholder",
+     "title": "Search placeholder",
+     "type": "string",
+     "group": "content",
+     "initialValue": "Search recipes, gear and stories",
+     "validation": {
+      "max": 48
+     },
+     "localized": true,
+     "description": ""
+    },
+    {
+     "name": "label",
+     "title": "Name for screen readers",
+     "type": "string",
+     "group": "content",
+     "initialValue": "Search Caldera",
+     "validation": {
+      "required": true,
+      "max": 40
+     },
+     "description": "Not shown. Read by screen readers."
+    },
+    {
+     "name": "popularSearches",
+     "title": "Popular searches",
+     "type": "array",
+     "itemNoun": "search",
+     "of": [
+      {
+       "name": "search",
+       "title": "Search",
+       "type": "string"
+      }
+     ],
+     "group": "content",
+     "validation": {
+      "max": 8
+     }
+    },
+    {
+     "name": "sources",
+     "title": "What's searched",
+     "type": "array",
+     "group": "ranking",
+     "itemNoun": "source",
+     "validation": {
+      "min": 1,
+      "max": 6
+     },
+     "of": [
+      {
+       "name": "source",
+       "title": "Source",
+       "type": "object",
+       "icon": "database",
+       "preview": {
+        "title": "tabLabel",
+        "subtitle": "collection"
+       },
+       "fields": [
+        {
+         "name": "collection",
+         "title": "Collection",
+         "type": "select",
+         "access": {
+          "edit": "schema.manage"
+         },
+         "lockReason": "Search indexes are built per collection in code.",
+         "options": [
+          {
+           "value": "shopify",
+           "label": "Products"
+          },
+          {
+           "value": "col_recipes",
+           "label": "Recipes"
+          },
+          {
+           "value": "col_journal",
+           "label": "Journal"
+          },
+          {
+           "value": "col_faq",
+           "label": "FAQs"
+          },
+          {
+           "value": "page",
+           "label": "Pages"
+          }
+         ],
+         "validation": {
+          "required": true
+         },
+         "description": ""
+        },
+        {
+         "name": "tabLabel",
+         "title": "Tab label",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 20
+         },
+         "localized": true
+        },
+        {
+         "name": "weight",
+         "title": "Boost",
+         "type": "number",
+         "layout": "slider",
+         "numeric": {
+          "min": 1,
+          "max": 5,
+          "step": 1
+         },
+         "initialValue": 3,
+         "description": "Higher ranks this source's matches first."
+        },
+        {
+         "name": "perPage",
+         "title": "Results per page",
+         "type": "number",
+         "numeric": {
+          "min": 4,
+          "max": 40,
+          "step": 4
+         },
+         "initialValue": 12,
+         "description": ""
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "pinned",
+     "title": "Pinned results",
+     "type": "array",
+     "group": "ranking",
+     "itemNoun": "pin",
+     "validation": {
+      "max": 20
+     },
+     "of": [
+      {
+       "name": "pin",
+       "title": "Pin",
+       "type": "object",
+       "icon": "pin",
+       "preview": {
+        "title": "keywords",
+        "subtitle": "result"
+       },
+       "fields": [
+        {
+         "name": "keywords",
+         "title": "When someone searches",
+         "type": "tags",
+         "validation": {
+          "required": true,
+          "min": 1,
+          "max": 10
+         },
+         "description": "Exact searches, any case. Add plurals and misspellings."
+        },
+        {
+         "name": "result",
+         "title": "Show first",
+         "type": "reference",
+         "reference": {
+          "to": [
+           "shopify",
+           "col_recipes",
+           "col_journal",
+           "page"
+          ]
+         },
+         "validation": {
+          "required": true
+         }
+        },
+        {
+         "name": "until",
+         "title": "Until",
+         "type": "date",
+         "description": "The pin stops after this date."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "typos",
+     "title": "Forgive typos",
+     "type": "select",
+     "group": "ranking",
+     "layout": "segmented",
+     "initialValue": "1",
+     "options": [
+      {
+       "value": "0",
+       "label": "Off"
+      },
+      {
+       "value": "1",
+       "label": "1 letter"
+      },
+      {
+       "value": "2",
+       "label": "2 letters"
+      }
+     ],
+     "description": "Lets \"skilet\" find skillet."
+    },
+    {
+     "name": "emptyHeading",
+     "title": "Heading",
+     "type": "string",
+     "group": "empty",
+     "initialValue": "Nothing for \u201c{query}\u201d",
+     "validation": {
+      "max": 60
+     },
+     "description": "{query} becomes what they typed."
+    },
+    {
+     "name": "emptyBody",
+     "title": "Text",
+     "type": "text",
+     "rows": 2,
+     "group": "empty",
+     "description": ""
+    },
+    {
+     "name": "emptyShow",
+     "title": "Suggest instead",
+     "type": "select",
+     "group": "empty",
+     "layout": "radio",
+     "initialValue": "popular",
+     "options": [
+      {
+       "value": "popular",
+       "label": "Popular searches"
+      },
+      {
+       "value": "links",
+       "label": "Links you choose"
+      },
+      {
+       "value": "none",
+       "label": "Nothing"
+      }
+     ],
+     "description": ""
+    },
+    {
+     "name": "emptyLinks",
+     "title": "Links",
+     "type": "array",
+     "group": "empty",
+     "hidden": {
+      "field": "emptyShow",
+      "equals": "links"
+     },
+     "validation": {
+      "max": 4
+     },
+     "of": [
+      {
+       "name": "link",
+       "title": "Link",
+       "type": "link"
+      }
+     ]
+    },
+    {
+     "name": "emptyButton",
+     "title": "Empty button",
+     "type": "button",
+     "group": "empty"
+    },
+    {
+     "name": "showMatchHighlights",
+     "title": "Highlight matches",
+     "type": "boolean",
+     "group": "design",
+     "initialValue": true
+    },
+    {
+     "name": "showCounts",
+     "title": "Count on tabs",
+     "type": "boolean",
+     "group": "design",
+     "initialValue": true,
+     "description": ""
+    }
+   ]
+  },
+  "value": {
+   "_variant": "tabs",
+   "placeholder": "Search recipes, gear and stories",
+   "label": "Search Caldera",
+   "popularSearches": [
+    "dutch oven",
+    "seasoning",
+    "cable fold",
+    "campfire paella",
+    "warranty"
+   ],
+   "sources": [
+    {
+     "_key": "s1",
+     "collection": "shopify",
+     "tabLabel": "Gear",
+     "weight": 5,
+     "perPage": 12
+    },
+    {
+     "_key": "s2",
+     "collection": "col_recipes",
+     "tabLabel": "Recipes",
+     "weight": 4,
+     "perPage": 12
+    },
+    {
+     "_key": "s3",
+     "collection": "col_journal",
+     "tabLabel": "Stories",
+     "weight": 3,
+     "perPage": 8
+    },
+    {
+     "_key": "s4",
+     "collection": "col_faq",
+     "tabLabel": "Help",
+     "weight": 2,
+     "perPage": 8
+    }
+   ],
+   "pinned": [
+    {
+     "_key": "pn1",
+     "keywords": [
+      "seasoning",
+      "season",
+      "how to season"
+     ],
+     "result": "en_1"
+    },
+    {
+     "_key": "pn2",
+     "keywords": [
+      "grill grate",
+      "grate",
+      "cable fold"
+     ],
+     "result": "gid://shopify/Product/8812"
+    },
+    {
+     "_key": "pn3",
+     "keywords": [
+      "spring sale",
+      "spring"
+     ],
+     "result": "pg_spring",
+     "until": "2027-05-31"
+    }
+   ],
+   "typos": "1",
+   "emptyHeading": "Nothing for \u201c{query}\u201d",
+   "emptyBody": "Check the spelling, or try a broader word like \u201cskillet\u201d or \u201cbread\u201d.",
+   "emptyShow": "popular",
+   "emptyLinks": [],
+   "emptyButton": {
+    "label": "Ask our cooks",
+    "href": "/contact",
+    "type": "page",
+    "pageId": "pg_contact",
+    "title": "Contact",
+    "style": "secondary"
+   },
+   "showMatchHighlights": true,
+   "showCounts": true
+  }
+ }
+]

@@ -1,0 +1,220 @@
+<header id="nav-locale-header" class="nlh">
+  <!-- kit: nav-locale-header -->
+  <div class="nlh__suggest" role="region" aria-label="Region suggestion">
+    <div class="container nlh__suggest-inner">
+      <p>Looks like you're in Germany. Shop in Deutsch · EUR?</p>
+      <div class="nlh__suggest-actions">
+        <button type="button" class="nlh__suggest-yes" data-locale="de-DE" data-currency="EUR">Switch</button>
+        <button type="button" class="nlh__suggest-no">Stay on English · USD</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container nlh__row">
+    <a class="nlh__logo" href="/">
+      <img src="https://picsum.photos/seed/caldera-mark/240/64" alt="Caldera" width="240" height="64" />
+      <span>Caldera</span>
+    </a>
+
+    <nav class="nlh__nav" aria-label="Main">
+      <ul>
+        <li><a href="/products">Shop</a></li>
+        <li><a href="/recipes">Recipes</a></li>
+        <li><a href="/retailers">Stockists</a></li>
+        <li><a href="/about">About</a></li>
+      </ul>
+    </nav>
+
+    <div class="nlh__switchers">
+      <div class="nlh__switch">
+        <label for="nav-locale-header-lang">
+          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/><path fill="none" stroke="currentColor" stroke-width="1.8" d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z"/></svg>
+          <span class="visually-hidden">Language</span>
+        </label>
+        <select id="nav-locale-header-lang" name="locale">
+          <option value="en-US" lang="en" selected>EN · English</option>
+          <option value="de-DE" lang="de">DE · Deutsch</option>
+          <option value="fr-FR" lang="fr">FR · Français</option>
+          <option value="ja-JP" lang="ja">JA · 日本語</option>
+        </select>
+      </div>
+      <div class="nlh__switch">
+        <label class="visually-hidden" for="nav-locale-header-currency">Currency</label>
+        <select id="nav-locale-header-currency" name="currency">
+          <option value="USD" selected>USD</option>
+          <option value="EUR">EUR</option>
+          <option value="GBP">GBP</option>
+          <option value="JPY">JPY</option>
+        </select>
+      </div>
+    </div>
+
+    <a class="btn btn-primary nlh__cta" href="/products/cable-fold">Shop the Fold</a>
+  </div>
+</header>
+
+<script is:inline>
+  (function () {
+    var root = document.getElementById("nav-locale-header");
+    if (!root) return;
+    var banner = root.querySelector(".nlh__suggest");
+    var lang = root.querySelector("#nav-locale-header-lang");
+    var currency = root.querySelector("#nav-locale-header-currency");
+    root.querySelector(".nlh__suggest-yes").addEventListener("click", function (e) {
+      lang.value = e.currentTarget.getAttribute("data-locale");
+      currency.value = e.currentTarget.getAttribute("data-currency");
+      banner.hidden = true;
+    });
+    root.querySelector(".nlh__suggest-no").addEventListener("click", function () {
+      banner.hidden = true;
+    });
+  })();
+</script>
+
+<style>
+  .nlh {
+    position: relative;
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .nlh__suggest {
+    background: var(--surface);
+    border-bottom: 1px solid var(--line);
+    font-size: 0.875rem;
+  }
+
+  .nlh__suggest[hidden] {
+    display: none;
+  }
+
+  .nlh__suggest-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem 1rem;
+    padding-block: 0.5rem;
+  }
+
+  .nlh__suggest p {
+    margin: 0;
+  }
+
+  .nlh__suggest-actions {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .nlh__suggest button {
+    min-height: 32px;
+    padding: 0 0.75rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    background: var(--bg);
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .nlh__suggest .nlh__suggest-yes {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--bg);
+  }
+
+  .nlh__row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.5rem;
+    min-height: 72px;
+    padding-block: 0.75rem;
+  }
+
+  .nlh__logo {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-weight: 700;
+    font-size: 1.125rem;
+    text-decoration: none;
+  }
+
+  .nlh__logo img {
+    width: auto;
+    height: 32px;
+    border-radius: 4px;
+  }
+
+  .nlh__nav {
+    margin-left: auto;
+  }
+
+  .nlh__nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .nlh__nav a {
+    color: var(--ink-2);
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  .nlh__nav a:hover {
+    color: var(--ink);
+  }
+
+  .nlh__switchers {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .nlh__switch {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding-left: 0.5rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+  }
+
+  .nlh__switch label {
+    display: inline-flex;
+    color: var(--ink-3);
+  }
+
+  .nlh__switch select {
+    min-height: 40px;
+    padding: 0 0.5rem;
+    border: 0;
+    background: transparent;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  @media (max-width: 960px) {
+    .nlh__nav {
+      order: 4;
+      flex-basis: 100%;
+      margin-left: 0;
+    }
+
+    .nlh__switchers {
+      margin-left: auto;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .nlh__cta {
+      flex-basis: 100%;
+      order: 5;
+    }
+  }
+</style>

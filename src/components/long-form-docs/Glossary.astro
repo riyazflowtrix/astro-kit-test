@@ -1,0 +1,265 @@
+---
+// Glossary A–Z (variant: list, inline terms, sticky letter nav, search) — Caldera fire cooking glossary.
+---
+
+<section id="glossary" class="section glossary" data-variant="list">
+  <!-- kit: glossary -->
+  <div class="container narrow">
+    <header class="section-head">
+      <h2>Fire cooking glossary</h2>
+      <p class="lead">The words our cooks use, explained without the jargon.</p>
+    </header>
+
+    <div class="tools">
+      <div class="search field">
+        <label for="glossary-search">Search terms</label>
+        <input id="glossary-search" type="search" placeholder="Try “stall” or “browning”" autocomplete="off" />
+      </div>
+      <nav class="letters" aria-label="Jump to letter">
+        <a href="#glossary-letter-b">B</a>
+        <a href="#glossary-letter-c">C</a>
+        <span aria-hidden="true">D</span>
+        <span aria-hidden="true">E</span>
+        <span aria-hidden="true">F</span>
+        <span aria-hidden="true">G</span>
+        <span aria-hidden="true">H</span>
+        <span aria-hidden="true">I</span>
+        <span aria-hidden="true">J</span>
+        <span aria-hidden="true">K</span>
+        <span aria-hidden="true">L</span>
+        <a href="#glossary-letter-m">M</a>
+        <span aria-hidden="true">N</span>
+        <span aria-hidden="true">O</span>
+        <a href="#glossary-letter-p">P</a>
+        <span aria-hidden="true">Q</span>
+        <span aria-hidden="true">R</span>
+        <a href="#glossary-letter-s">S</a>
+        <span aria-hidden="true">T</span>
+        <span aria-hidden="true">U</span>
+        <span aria-hidden="true">V</span>
+        <span aria-hidden="true">W</span>
+        <span aria-hidden="true">X</span>
+        <span aria-hidden="true">Y</span>
+        <span aria-hidden="true">Z</span>
+      </nav>
+    </div>
+
+    <p class="empty" hidden>No terms match your search.</p>
+
+    <div class="letter-group" id="glossary-letter-b">
+      <h3 class="letter">B</h3>
+      <dl>
+        <div class="term" id="bark" data-search="bark">
+          <dt><a href="#bark">Bark</a></dt>
+          <dd>
+            <p>The dark, crusty outer layer that forms on smoked meat as rub, smoke and rendered fat dry on the surface.</p>
+            <p class="see">See also: <a href="#maillard">Maillard reaction</a>, <a href="#stall">Stall</a></p>
+          </dd>
+        </div>
+      </dl>
+    </div>
+
+    <div class="letter-group" id="glossary-letter-c">
+      <h3 class="letter">C</h3>
+      <dl>
+        <div class="term" id="carryover" data-search="carryover cooking carry-over">
+          <dt><a href="#carryover">Carryover cooking</a></dt>
+          <dd>
+            <p>The few degrees food keeps rising after it leaves the heat. Pull a steak 3–5°C before your target.</p>
+            <p class="aliases">Also called: carry-over</p>
+          </dd>
+        </div>
+      </dl>
+    </div>
+
+    <div class="letter-group" id="glossary-letter-m">
+      <h3 class="letter">M</h3>
+      <dl>
+        <div class="term" id="maillard" data-search="maillard reaction browning maillard">
+          <dt><a href="#maillard">Maillard reaction</a></dt>
+          <dd>
+            <p>The browning of proteins and sugars above about 140°C that gives seared food its flavour.</p>
+            <p class="aliases">Also called: browning, maillard</p>
+            <p class="see">See also: <a href="#bark">Bark</a></p>
+            <a class="read" href="/journal/why-dry-meat-sears-better">Read: Why dry meat sears better →</a>
+          </dd>
+        </div>
+      </dl>
+    </div>
+
+    <div class="letter-group" id="glossary-letter-p">
+      <h3 class="letter">P</h3>
+      <dl>
+        <div class="term" id="polymerisation" data-search="polymerisation seasoning layer polymerization">
+          <dt><a href="#polymerisation">Polymerisation</a></dt>
+          <dd>
+            <p>What happens when a thin coat of oil is heated past its smoke point and bonds into the hard, slick layer we call seasoning.</p>
+            <p class="aliases">Also called: seasoning layer, polymerization</p>
+            <a class="read" href="/journal/seasoning-cast-iron-open-fire">Read: Seasoning cast iron over an open fire →</a>
+          </dd>
+        </div>
+      </dl>
+    </div>
+
+    <div class="letter-group" id="glossary-letter-s">
+      <h3 class="letter">S</h3>
+      <dl>
+        <div class="term" id="stall" data-search="stall the stall plateau">
+          <dt><a href="#stall">Stall</a></dt>
+          <dd>
+            <p>The long plateau around 65–75°C when a large cut stops rising because evaporation cools its surface.</p>
+            <p class="aliases">Also called: the stall, plateau</p>
+            <p class="see">See also: <a href="#bark">Bark</a></p>
+          </dd>
+        </div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<style>
+  .narrow {
+    max-width: 860px;
+  }
+  .tools {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    display: grid;
+    gap: 0.75rem;
+    padding: 1rem 0;
+    margin-bottom: 1rem;
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+  }
+  .letters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+  }
+  .letters a,
+  .letters span {
+    display: grid;
+    place-items: center;
+    min-width: 30px;
+    height: 30px;
+    border-radius: var(--radius-sm);
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+  .letters a {
+    color: var(--brand);
+    background: var(--brand-soft);
+    text-decoration: none;
+  }
+  .letters a:hover {
+    background: var(--brand);
+    color: #fff;
+  }
+  .letters span {
+    color: var(--ink-3);
+    opacity: 0.5;
+  }
+  .letter-group {
+    display: grid;
+    grid-template-columns: 56px minmax(0, 1fr);
+    gap: 1rem;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--line);
+    scroll-margin-top: 140px;
+  }
+  .letter-group[hidden] {
+    display: none;
+  }
+  .letter {
+    margin: 0;
+    font-size: 2rem;
+    color: var(--brand);
+  }
+  dl {
+    margin: 0;
+  }
+  .term {
+    scroll-margin-top: 140px;
+  }
+  .term[hidden] {
+    display: none;
+  }
+  .term + .term {
+    margin-top: 1.5rem;
+  }
+  .term:target {
+    padding: 0.75rem;
+    margin: -0.75rem;
+    border-radius: var(--radius-sm);
+    background: var(--brand-soft);
+  }
+  dt {
+    font-size: 1.1875rem;
+    font-weight: 700;
+  }
+  dt a {
+    text-decoration: none;
+  }
+  dt a:hover {
+    text-decoration: underline;
+  }
+  dd {
+    margin: 0.25rem 0 0;
+    color: var(--ink-2);
+  }
+  dd p {
+    margin-bottom: 0.375rem;
+  }
+  .aliases,
+  .see {
+    font-size: 0.875rem;
+    color: var(--ink-3);
+  }
+  .see a {
+    color: var(--accent);
+  }
+  .read {
+    display: inline-block;
+    margin-top: 0.25rem;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--brand);
+    text-decoration: none;
+  }
+  .empty {
+    color: var(--ink-3);
+  }
+  @media (max-width: 520px) {
+    .letter-group {
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+    }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    var root = document.getElementById("glossary");
+    if (!root) return;
+    var input = root.querySelector("#glossary-search");
+    var groups = Array.prototype.slice.call(root.querySelectorAll(".letter-group"));
+    var empty = root.querySelector(".empty");
+    input.addEventListener("input", function () {
+      var q = input.value.trim().toLowerCase();
+      var any = false;
+      groups.forEach(function (g) {
+        var shown = 0;
+        g.querySelectorAll(".term").forEach(function (t) {
+          var text = (t.getAttribute("data-search") + " " + t.textContent).toLowerCase();
+          var match = !q || text.indexOf(q) !== -1;
+          t.hidden = !match;
+          if (match) shown++;
+        });
+        g.hidden = shown === 0;
+        if (shown) any = true;
+      });
+      empty.hidden = any;
+    });
+  })();
+</script>

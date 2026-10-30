@@ -1,0 +1,44 @@
+---
+import Base from "../../layouts/Base.astro";
+import DataTableSpecs from "../../components/data-interactive/DataTableSpecs.astro";
+import TableComparison from "../../components/data-interactive/TableComparison.astro";
+import ChartAttrition from "../../components/data-interactive/ChartAttrition.astro";
+import RoiCalculator from "../../components/data-interactive/RoiCalculator.astro";
+import ProductConfigurator from "../../components/data-interactive/ProductConfigurator.astro";
+import StockistMap from "../../components/data-interactive/StockistMap.astro";
+import ProductCompareSlider from "../../components/data-interactive/ProductCompareSlider.astro";
+import CountdownLiveCounter from "../../components/data-interactive/CountdownLiveCounter.astro";
+import ReaderPoll from "../../components/data-interactive/ReaderPoll.astro";
+import SafeEmbed from "../../components/data-interactive/SafeEmbed.astro";
+import CodeSnippetTabs from "../../components/data-interactive/CodeSnippetTabs.astro";
+---
+
+<Base title="Data & interactive" description="Tables, charts, calculators, configurators, maps, comparison sliders, countdowns, polls, embeds and code tabs.">
+  <section class="section category-intro">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Kit library</span>
+        <h1>Data &amp; interactive</h1>
+        <p class="lead">Sections that hold numbers, respond to input or run something live in the page.</p>
+      </div>
+    </div>
+  </section>
+
+  <DataTableSpecs />
+  <TableComparison />
+  <ChartAttrition />
+  <RoiCalculator />
+  <ProductConfigurator />
+  <StockistMap />
+  <ProductCompareSlider />
+  <CountdownLiveCounter />
+  <ReaderPoll />
+  <SafeEmbed />
+  <CodeSnippetTabs />
+</Base>
+
+<style>
+  .category-intro {
+    padding-bottom: 0;
+  }
+</style>

@@ -1,0 +1,365 @@
+---
+---
+
+<section id="stockist-map" class="section section--muted stockists" data-variant="list-left" data-provider="maplibre" data-map-style="outdoors" data-zoom="6" data-clustering="true">
+  <!-- kit: stockist-map -->
+  <div class="container">
+    <div class="section-head">
+      <h2>Hold one before you buy one.</h2>
+      <p class="lead">Our pans are in 40 shops across the West. Find the nearest, or visit the workshop in Bend.</p>
+    </div>
+
+    <div class="stockists__layout">
+      <div class="stockists__side">
+        <div class="stockists__filters" role="group" aria-label="Filter by type">
+          <button type="button" class="stockists__chip" aria-pressed="true" data-filter="all">All</button>
+          <button type="button" class="stockists__chip" aria-pressed="false" data-filter="workshop"><span class="stockists__key" style="background:#E0663B"></span>Workshop</button>
+          <button type="button" class="stockists__chip" aria-pressed="false" data-filter="retailer"><span class="stockists__key" style="background:#1E1B18"></span>Retailers</button>
+          <button type="button" class="stockists__chip" aria-pressed="false" data-filter="restaurant"><span class="stockists__key" style="background:#4F6B4A"></span>Restaurants</button>
+        </div>
+        <button type="button" class="btn btn-secondary stockists__near">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="3" /><path d="M12 2v3M12 19v3M2 12h3M19 12h3" /></svg>
+          Near me
+        </button>
+
+        <ul class="stockists__list">
+          <li data-category="workshop" data-marker="mk1" data-lat="44.0582" data-lng="-121.3153">
+            <button type="button" class="stockists__item" aria-controls="stockist-popup-mk1">
+              <span class="stockists__key" style="background:#E0663B"></span>
+              <span>
+                <strong>Caldera Workshop</strong>
+                <span class="stockists__meta">Bend, Oregon · Workshop</span>
+              </span>
+            </button>
+          </li>
+          <li data-category="retailer" data-marker="mk2" data-lat="45.5191" data-lng="-122.6627">
+            <button type="button" class="stockists__item" aria-controls="stockist-popup-mk2">
+              <span class="stockists__key" style="background:#1E1B18"></span>
+              <span>
+                <strong>Next Adventure</strong>
+                <span class="stockists__meta">Portland, Oregon · Retailer</span>
+              </span>
+            </button>
+          </li>
+          <li data-category="retailer" data-marker="mk3" data-lat="39.9865" data-lng="-105.2509">
+            <button type="button" class="stockists__item" aria-controls="stockist-popup-mk3">
+              <span class="stockists__key" style="background:#1E1B18"></span>
+              <span>
+                <strong>Neptune Mountaineering</strong>
+                <span class="stockists__meta">Boulder, Colorado · Retailer</span>
+              </span>
+            </button>
+          </li>
+          <li data-category="restaurant" data-marker="mk4" data-lat="45.5231" data-lng="-122.6765">
+            <button type="button" class="stockists__item" aria-controls="stockist-popup-mk4">
+              <span class="stockists__key" style="background:#4F6B4A"></span>
+              <span>
+                <strong>Hearth &amp; Ash</strong>
+                <span class="stockists__meta">Portland, Oregon · Restaurant</span>
+              </span>
+            </button>
+          </li>
+        </ul>
+      </div>
+
+      <div class="stockists__map" role="region" aria-label="Map of Caldera stockists">
+        <div class="stockists__canvas" aria-hidden="true">
+          <span class="stockists__region" style="left:6%;top:6%">Oregon</span>
+          <span class="stockists__region" style="left:44%;top:40%">Utah</span>
+          <span class="stockists__region" style="left:80%;top:62%">Colorado</span>
+        </div>
+        <button type="button" class="stockists__pin" data-category="workshop" data-marker="mk1" style="left:15.2%;top:32.7%;--pin:#E0663B" aria-label="Caldera Workshop, Bend"></button>
+        <button type="button" class="stockists__pin" data-category="retailer" data-marker="mk2" style="left:8.7%;top:16.5%;--pin:#1E1B18" aria-label="Next Adventure, Portland"></button>
+        <button type="button" class="stockists__pin" data-category="retailer" data-marker="mk3" style="left:91.7%;top:77.9%;--pin:#1E1B18" aria-label="Neptune Mountaineering, Boulder"></button>
+        <button type="button" class="stockists__pin" data-category="restaurant" data-marker="mk4" style="left:10.4%;top:14.8%;--pin:#4F6B4A" aria-label="Hearth and Ash, Portland"></button>
+
+        <article class="stockists__popup card" id="stockist-popup-mk1" data-marker="mk1">
+          <img src="https://picsum.photos/seed/bend-workshop/1600/1000" alt="The Caldera workshop floor with skillets cooling on racks" width="3200" height="2000" loading="lazy" />
+          <div class="stockists__popup-body">
+            <h3>Caldera Workshop</h3>
+            <address>61 NW Oregon Ave<br />Bend, OR 97703</address>
+            <p><a href="tel:+15415550182">+1 541 555 0182</a></p>
+            <dl class="stockists__hours">
+              <dt>Tue–Sat</dt><dd>10:00–18:00</dd>
+              <dt>Sun–Mon</dt><dd>Closed</dd>
+            </dl>
+            <p>Watch a pour on Saturdays at 11. Seconds sale on the first weekend of each month.</p>
+            <a class="btn btn-primary" href="https://maps.google.com/?q=61+NW+Oregon+Ave+Bend" target="_blank" rel="noopener">Get directions</a>
+          </div>
+        </article>
+        <article class="stockists__popup card" id="stockist-popup-mk2" data-marker="mk2" hidden>
+          <div class="stockists__popup-body">
+            <h3>Next Adventure</h3>
+            <address>426 SE Grand Ave<br />Portland, OR 97214</address>
+            <p><a href="tel:+15035550144">+1 503 555 0144</a></p>
+            <dl class="stockists__hours">
+              <dt>Daily</dt><dd>10:00–19:00</dd>
+            </dl>
+            <p>Full cookware range and the Cable Fold on display.</p>
+            <a class="btn btn-secondary" href="https://www.nextadventure.net" target="_blank" rel="noopener">Visit store site</a>
+          </div>
+        </article>
+        <article class="stockists__popup card" id="stockist-popup-mk3" data-marker="mk3" hidden>
+          <div class="stockists__popup-body">
+            <h3>Neptune Mountaineering</h3>
+            <address>633 S Broadway<br />Boulder, CO 80305</address>
+            <dl class="stockists__hours">
+              <dt>Daily</dt><dd>09:00–20:00</dd>
+            </dl>
+            <p>Skillets and kettles. Ask for the camp kitchen wall.</p>
+          </div>
+        </article>
+        <article class="stockists__popup card" id="stockist-popup-mk4" data-marker="mk4" hidden>
+          <img src="https://picsum.photos/seed/hearth-ash/1600/1000" alt="Four Ember Dutch ovens over the live fire at Hearth & Ash" width="3200" height="2000" loading="lazy" />
+          <div class="stockists__popup-body">
+            <h3>Hearth &amp; Ash</h3>
+            <address>1120 SW Morrison St<br />Portland, OR 97205</address>
+            <p>Chef Amara Osei cooks over four Ember ovens every night.</p>
+            <a class="stockists__link" href="/journal/hearth-and-ash" title="Cooking for 90 over live fire">Read the story →</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .stockists [hidden] {
+    display: none !important;
+  }
+
+  .stockists__layout {
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    gap: 1.5rem;
+    align-items: stretch;
+  }
+
+  .stockists__filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .stockists__chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    min-height: 36px;
+    padding: 0 0.8rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--bg);
+    font: inherit;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .stockists__chip[aria-pressed="true"] {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: #fff;
+  }
+
+  .stockists__key {
+    flex: none;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+
+  .stockists__near {
+    width: 100%;
+    margin-bottom: 0.75rem;
+    background: var(--bg);
+  }
+
+  .stockists__list {
+    display: grid;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .stockists__item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
+    padding: 0.875rem 1rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--bg);
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .stockists__item[aria-current="true"] {
+    border-color: var(--brand);
+    box-shadow: 0 0 0 3px var(--brand-soft);
+  }
+
+  .stockists__item strong {
+    display: block;
+  }
+
+  .stockists__meta {
+    font-size: 0.8125rem;
+    color: var(--ink-3);
+  }
+
+  .stockists__map {
+    position: relative;
+    min-height: 520px;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 1px solid var(--line);
+  }
+
+  .stockists__canvas {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 30%, #dfe8d6 0 30%, transparent 60%),
+      radial-gradient(ellipse at 75% 70%, #e9e1cf 0 25%, transparent 60%),
+      linear-gradient(0deg, rgb(0 0 0 / 0.04) 1px, transparent 1px) 0 0 / 48px 48px,
+      linear-gradient(90deg, rgb(0 0 0 / 0.04) 1px, transparent 1px) 0 0 / 48px 48px,
+      #eef0e8;
+  }
+
+  .stockists__region {
+    position: absolute;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgb(0 0 0 / 0.25);
+  }
+
+  .stockists__pin {
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    margin: -28px 0 0 -14px;
+    padding: 0;
+    border: 3px solid #fff;
+    border-radius: 50% 50% 50% 0;
+    background: var(--pin);
+    transform: rotate(-45deg);
+    box-shadow: 0 3px 8px rgb(0 0 0 / 0.3);
+    cursor: pointer;
+  }
+
+  .stockists__pin.is-active {
+    outline: 3px solid var(--brand);
+    outline-offset: 2px;
+  }
+
+  .stockists__popup {
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+    width: min(320px, calc(100% - 2rem));
+    box-shadow: 0 12px 30px rgb(0 0 0 / 0.18);
+  }
+
+  .stockists__popup img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
+
+  .stockists__popup-body {
+    padding: 1rem;
+    font-size: 0.875rem;
+  }
+
+  .stockists__popup-body h3 {
+    margin-bottom: 0.25rem;
+    font-size: 1.0625rem;
+  }
+
+  .stockists__popup-body address {
+    font-style: normal;
+    color: var(--ink-2);
+    margin-bottom: 0.5rem;
+  }
+
+  .stockists__popup-body p {
+    margin-bottom: 0.5rem;
+    color: var(--ink-2);
+  }
+
+  .stockists__hours {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.1rem 1rem;
+    margin: 0 0 0.5rem;
+  }
+
+  .stockists__hours dt {
+    font-weight: 600;
+  }
+
+  .stockists__hours dd {
+    margin: 0;
+  }
+
+  .stockists__link {
+    font-weight: 600;
+    color: var(--brand);
+  }
+
+  @media (max-width: 900px) {
+    .stockists__layout {
+      grid-template-columns: 1fr;
+    }
+
+    .stockists__map {
+      min-height: 460px;
+    }
+  }
+</style>
+
+<script is:inline>
+  (() => {
+    const root = document.getElementById("stockist-map");
+    if (!root) return;
+    const items = [...root.querySelectorAll(".stockists__list li")];
+    const pins = [...root.querySelectorAll(".stockists__pin")];
+    const popups = [...root.querySelectorAll(".stockists__popup")];
+    const select = (id) => {
+      popups.forEach((p) => (p.hidden = p.dataset.marker !== id));
+      pins.forEach((p) => p.classList.toggle("is-active", p.dataset.marker === id));
+      items.forEach((li) => li.querySelector("button").setAttribute("aria-current", String(li.dataset.marker === id)));
+    };
+    items.forEach((li) => li.querySelector("button").addEventListener("click", () => select(li.dataset.marker)));
+    pins.forEach((p) => p.addEventListener("click", () => select(p.dataset.marker)));
+    select("mk1");
+
+    root.querySelectorAll(".stockists__chip").forEach((chip) => {
+      chip.addEventListener("click", () => {
+        const f = chip.dataset.filter;
+        root.querySelectorAll(".stockists__chip").forEach((c) => c.setAttribute("aria-pressed", String(c === chip)));
+        [...items, ...pins].forEach((el) => (el.hidden = f !== "all" && el.dataset.category !== f));
+      });
+    });
+
+    root.querySelector(".stockists__near").addEventListener("click", () => {
+      if (!navigator.geolocation) return;
+      navigator.geolocation.getCurrentPosition((pos) => {
+        const { latitude, longitude } = pos.coords;
+        const list = root.querySelector(".stockists__list");
+        items
+          .map((li) => ({ li, d: Math.hypot(Number(li.dataset.lat) - latitude, Number(li.dataset.lng) - longitude) }))
+          .sort((a, b) => a.d - b.d)
+          .forEach(({ li }) => list.appendChild(li));
+        select(list.firstElementChild.dataset.marker);
+      });
+    });
+  })();
+</script>

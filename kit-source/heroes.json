@@ -1,0 +1,4295 @@
+[
+ {
+  "id": "hero-split-media",
+  "name": "Split hero with media switch",
+  "category": "Heroes",
+  "kind": "block",
+  "brand": "Caldera",
+  "previewLayout": "split",
+  "proves": "One media slot that can be an image, a video or a small gallery \u00b7 a phone crop \u00b7 benefit list as plain strings",
+  "schema": {
+   "name": "mediaHero",
+   "title": "Media hero",
+   "kind": "block",
+   "icon": "layout-columns",
+   "category": "Heroes",
+   "description": "Copy on one side, an image, video or gallery on the other.",
+   "variants": [
+    {
+     "id": "media-right",
+     "name": "Media right"
+    },
+    {
+     "id": "media-left",
+     "name": "Media left"
+    },
+    {
+     "id": "overlap",
+     "name": "Overlapping card",
+     "description": "Copy sits on a card over the media edge"
+    }
+   ],
+   "preview": {
+    "title": "heading",
+    "subtitle": "eyebrow",
+    "media": "image"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "media",
+     "title": "Media"
+    },
+    {
+     "name": "design",
+     "title": "Design"
+    }
+   ],
+   "fields": [
+    {
+     "name": "eyebrow",
+     "title": "Eyebrow",
+     "type": "string",
+     "validation": {
+      "max": 40
+     }
+    },
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "validation": {
+      "required": true,
+      "max": 100,
+      "recommendedMax": 60
+     },
+     "ai": true,
+     "localized": true
+    },
+    {
+     "name": "body",
+     "title": "Body",
+     "type": "text",
+     "rows": 3,
+     "validation": {
+      "recommendedMax": 180
+     },
+     "ai": true,
+     "localized": true
+    },
+    {
+     "name": "points",
+     "title": "Key points",
+     "type": "array",
+     "itemNoun": "point",
+     "validation": {
+      "max": 3
+     },
+     "of": [
+      {
+       "name": "point",
+       "title": "Point",
+       "type": "string",
+       "validation": {
+        "max": 48
+       }
+      }
+     ]
+    },
+    {
+     "name": "primaryButton",
+     "title": "Primary button",
+     "type": "button"
+    },
+    {
+     "name": "secondaryButton",
+     "title": "Secondary button",
+     "type": "button"
+    },
+    {
+     "name": "mediaType",
+     "title": "Media",
+     "type": "select",
+     "group": "media",
+     "layout": "segmented",
+     "initialValue": "image",
+     "options": [
+      {
+       "value": "image",
+       "label": "Image"
+      },
+      {
+       "value": "video",
+       "label": "Video"
+      },
+      {
+       "value": "gallery",
+       "label": "Gallery"
+      }
+     ]
+    },
+    {
+     "name": "image",
+     "title": "Image",
+     "type": "image",
+     "group": "media",
+     "hidden": {
+      "field": "mediaType",
+      "equals": "image"
+     },
+     "validation": {
+      "required": true
+     },
+     "description": "At least 1600px wide."
+    },
+    {
+     "name": "video",
+     "title": "Video",
+     "type": "video",
+     "group": "media",
+     "hidden": {
+      "field": "mediaType",
+      "equals": "video"
+     },
+     "validation": {
+      "required": true
+     },
+     "description": "Plays muted and loops."
+    },
+    {
+     "name": "poster",
+     "title": "Poster",
+     "type": "image",
+     "group": "media",
+     "hidden": {
+      "field": "mediaType",
+      "equals": "video"
+     },
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "gallery",
+     "title": "Gallery",
+     "type": "array",
+     "group": "media",
+     "arrayLayout": "grid",
+     "itemNoun": "image",
+     "hidden": {
+      "field": "mediaType",
+      "equals": "gallery"
+     },
+     "validation": {
+      "min": 2,
+      "max": 4
+     },
+     "of": [
+      {
+       "name": "image",
+       "title": "Image",
+       "type": "image"
+      }
+     ]
+    },
+    {
+     "name": "mobileImage",
+     "title": "Phone image",
+     "type": "image",
+     "group": "media",
+     "description": "Leave empty to reuse the main image."
+    },
+    {
+     "name": "fit",
+     "title": "Image fit",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "cover",
+     "options": [
+      {
+       "value": "cover",
+       "label": "Fill"
+      },
+      {
+       "value": "contain",
+       "label": "Fit",
+       "description": "For product cut-outs on a plain background"
+      }
+     ]
+    },
+    {
+     "name": "theme",
+     "title": "Theme",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "light",
+     "options": [
+      {
+       "value": "light",
+       "label": "Light"
+      },
+      {
+       "value": "dark",
+       "label": "Dark"
+      },
+      {
+       "value": "brand",
+       "label": "Brand"
+      }
+     ]
+    },
+    {
+     "name": "spacing",
+     "title": "Spacing",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "default",
+     "options": [
+      {
+       "value": "compact",
+       "label": "Compact"
+      },
+      {
+       "value": "default",
+       "label": "Default"
+      },
+      {
+       "value": "spacious",
+       "label": "Spacious"
+      }
+     ]
+    }
+   ]
+  },
+  "value": {
+   "_variant": "media-right",
+   "eyebrow": "The Ridge Skillet",
+   "heading": "Sears like a steakhouse. Weighs a third less.",
+   "body": "Spun carbon steel, pre-seasoned with flaxseed in Bend and ready for coals, gas or induction on day one.",
+   "points": [
+    "Ready for induction and open fire",
+    "Pre-seasoned three times",
+    "Lifetime warranty"
+   ],
+   "primaryButton": {
+    "label": "Shop the skillet",
+    "href": "/products/ridge-skillet-10",
+    "type": "page",
+    "style": "primary",
+    "arrow": true
+   },
+   "secondaryButton": {
+    "label": "How we season it",
+    "href": "/journal/seasoning",
+    "type": "page",
+    "style": "link"
+   },
+   "mediaType": "image",
+   "image": {
+    "url": "https://picsum.photos/seed/caldera-ridge-skillet/1600/2000",
+    "alt": "Ridge skillet searing two steaks over a bed of coals",
+    "name": "caldera-ridge-skillet.jpg",
+    "width": 1600,
+    "height": 2000
+   },
+   "mobileImage": {
+    "url": "https://picsum.photos/seed/caldera-ridge-mobile/1080/1350",
+    "alt": "Ridge skillet searing two steaks, close crop",
+    "name": "caldera-ridge-mobile.jpg",
+    "width": 1080,
+    "height": 1350
+   },
+   "fit": "cover",
+   "theme": "light",
+   "spacing": "default"
+  }
+ },
+ {
+  "id": "hero-centered-gradient",
+  "name": "Centered hero with gradient + screenshot",
+  "category": "Heroes",
+  "kind": "block",
+  "brand": "Tideline",
+  "previewLayout": "centered",
+  "proves": "Announcement chip as a link unit \u00b7 highlighted phrase in a plain string \u00b7 gradient as design data, not CSS in content",
+  "schema": {
+   "name": "launchHero",
+   "title": "Launch hero",
+   "kind": "block",
+   "icon": "layout-align-center",
+   "category": "Heroes",
+   "description": "A centered headline over a gradient, with an optional product screenshot below.",
+   "variants": [
+    {
+     "id": "screenshot",
+     "name": "With screenshot",
+     "description": "Product UI rises out of the bottom edge"
+    },
+    {
+     "id": "text",
+     "name": "Text only"
+    }
+   ],
+   "preview": {
+    "title": "heading",
+    "subtitle": "chip.label",
+    "media": "screenshot"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "media",
+     "title": "Media"
+    },
+    {
+     "name": "design",
+     "title": "Design"
+    }
+   ],
+   "fields": [
+    {
+     "name": "chip",
+     "title": "Announcement chip",
+     "type": "object",
+     "icon": "sparkles",
+     "openMode": "inline",
+     "fields": [
+      {
+       "name": "label",
+       "title": "Label",
+       "type": "string",
+       "validation": {
+        "max": 48
+       },
+       "placeholder": "New: Traces for Kubernetes"
+      },
+      {
+       "name": "link",
+       "title": "Links to",
+       "type": "link"
+      }
+     ]
+    },
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "validation": {
+      "required": true,
+      "max": 100,
+      "recommendedMax": 56
+     },
+     "ai": true,
+     "localized": true
+    },
+    {
+     "name": "highlightedWords",
+     "title": "Highlighted words",
+     "type": "string",
+     "validation": {
+      "max": 32
+     },
+     "description": "Must match words in the headline exactly. Leave empty for none."
+    },
+    {
+     "name": "subheading",
+     "title": "Subheading",
+     "type": "text",
+     "rows": 2,
+     "validation": {
+      "recommendedMax": 160
+     },
+     "ai": true,
+     "localized": true
+    },
+    {
+     "name": "primaryButton",
+     "title": "Primary button",
+     "type": "button"
+    },
+    {
+     "name": "secondaryButton",
+     "title": "Secondary button",
+     "type": "button"
+    },
+    {
+     "name": "note",
+     "title": "Small print",
+     "type": "string",
+     "validation": {
+      "max": 64
+     },
+     "placeholder": "No credit card required"
+    },
+    {
+     "name": "screenshot",
+     "title": "Screenshot",
+     "type": "image",
+     "group": "media",
+     "description": "At least 2400px wide."
+    },
+    {
+     "name": "background",
+     "title": "Background",
+     "type": "object",
+     "group": "design",
+     "icon": "palette",
+     "openMode": "drill",
+     "fields": [
+      {
+       "name": "style",
+       "title": "Style",
+       "type": "select",
+       "layout": "cards",
+       "initialValue": "radial",
+       "options": [
+        {
+         "value": "none",
+         "label": "Plain",
+         "icon": "square"
+        },
+        {
+         "value": "linear",
+         "label": "Linear",
+         "icon": "arrows-diagonal"
+        },
+        {
+         "value": "radial",
+         "label": "Glow",
+         "icon": "circle-dot",
+         "description": "A soft light from the top"
+        },
+        {
+         "value": "mesh",
+         "label": "Mesh",
+         "icon": "grid-dots",
+         "description": "Blended color blobs"
+        }
+       ]
+      },
+      {
+       "name": "from",
+       "title": "Color 1",
+       "type": "color",
+       "hidden": {
+        "field": "style",
+        "equals": [
+         "linear",
+         "radial",
+         "mesh"
+        ]
+       }
+      },
+      {
+       "name": "to",
+       "title": "Color 2",
+       "type": "color",
+       "hidden": {
+        "field": "style",
+        "equals": [
+         "linear",
+         "radial",
+         "mesh"
+        ]
+       }
+      },
+      {
+       "name": "via",
+       "title": "Color 3",
+       "type": "color",
+       "hidden": {
+        "field": "style",
+        "equals": "mesh"
+       }
+      },
+      {
+       "name": "angle",
+       "title": "Angle",
+       "type": "number",
+       "layout": "slider",
+       "hidden": {
+        "field": "style",
+        "equals": "linear"
+       },
+       "numeric": {
+        "min": 0,
+        "max": 360,
+        "step": 15,
+        "unit": "\u00b0"
+       },
+       "initialValue": 180
+      }
+     ]
+    },
+    {
+     "name": "theme",
+     "title": "Theme",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "dark",
+     "options": [
+      {
+       "value": "light",
+       "label": "Light"
+      },
+      {
+       "value": "dark",
+       "label": "Dark"
+      },
+      {
+       "value": "brand",
+       "label": "Brand"
+      }
+     ]
+    },
+    {
+     "name": "width",
+     "title": "Text width",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "narrow",
+     "options": [
+      {
+       "value": "narrow",
+       "label": "Narrow"
+      },
+      {
+       "value": "wide",
+       "label": "Wide"
+      }
+     ]
+    }
+   ]
+  },
+  "value": {
+   "_variant": "screenshot",
+   "chip": {
+    "label": "New: Traces for Kubernetes",
+    "link": {
+     "type": "page",
+     "href": "/changelog/kubernetes-traces",
+     "title": "Kubernetes traces"
+    }
+   },
+   "heading": "Find the slow service before your customers do.",
+   "highlightedWords": "slow service",
+   "subheading": "Tideline links every trace, log and deploy so on-call engineers see the cause in one view \u2014 not twelve tabs.",
+   "primaryButton": {
+    "label": "Start free",
+    "href": "https://app.tideline.dev/signup",
+    "type": "url",
+    "style": "primary"
+   },
+   "secondaryButton": {
+    "label": "Book a demo",
+    "href": "/demo",
+    "type": "page",
+    "style": "outline"
+   },
+   "note": "Free for 3 engineers \u00b7 No credit card required",
+   "screenshot": {
+    "url": "https://picsum.photos/seed/tideline-service-map/2400/1500",
+    "alt": "Tideline service map with the checkout service highlighted in red at 1.8 seconds",
+    "name": "tideline-service-map.jpg",
+    "width": 2400,
+    "height": 1500
+   },
+   "background": {
+    "style": "radial",
+    "from": "#1B2A4A",
+    "to": "#0B1020",
+    "angle": 180
+   },
+   "theme": "dark",
+   "width": "narrow"
+  }
+ },
+ {
+  "id": "hero-video-fullbleed",
+  "name": "Full-bleed video hero with captions",
+  "category": "Heroes",
+  "kind": "block",
+  "brand": "Open Water Trust",
+  "previewLayout": "media",
+  "proves": "An Accessibility tab: caption tracks, transcript, text alternative \u00b7 poster required \u00b7 pause control locked on",
+  "schema": {
+   "name": "videoHero",
+   "title": "Video hero",
+   "kind": "block",
+   "icon": "movie",
+   "category": "Heroes",
+   "description": "A muted background film behind a headline, with captions and a transcript.",
+   "preview": {
+    "title": "heading",
+    "subtitle": "eyebrow",
+    "media": "poster"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "media",
+     "title": "Media"
+    },
+    {
+     "name": "a11y",
+     "title": "Accessibility"
+    },
+    {
+     "name": "design",
+     "title": "Design"
+    }
+   ],
+   "fields": [
+    {
+     "name": "eyebrow",
+     "title": "Eyebrow",
+     "type": "string",
+     "validation": {
+      "max": 40
+     }
+    },
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "validation": {
+      "required": true,
+      "max": 100,
+      "recommendedMax": 56
+     },
+     "ai": true,
+     "localized": true
+    },
+    {
+     "name": "body",
+     "title": "Body",
+     "type": "text",
+     "rows": 3,
+     "validation": {
+      "recommendedMax": 140
+     },
+     "ai": true,
+     "localized": true
+    },
+    {
+     "name": "primaryButton",
+     "title": "Primary button",
+     "type": "button"
+    },
+    {
+     "name": "secondaryButton",
+     "title": "Secondary button",
+     "type": "button",
+     "description": "Often links to the full film with sound, e.g. Watch the 4-minute film."
+    },
+    {
+     "name": "video",
+     "title": "Background video",
+     "type": "video",
+     "group": "media",
+     "validation": {
+      "required": true
+     },
+     "description": "MP4 or a Vimeo link, under 10 MB."
+    },
+    {
+     "name": "mobileVideo",
+     "title": "Phone video",
+     "type": "video",
+     "group": "media",
+     "description": "Leave empty to show the poster on phones."
+    },
+    {
+     "name": "poster",
+     "title": "Poster",
+     "type": "image",
+     "group": "media",
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "captions",
+     "title": "Caption tracks",
+     "type": "array",
+     "group": "a11y",
+     "itemNoun": "track",
+     "validation": {
+      "max": 6
+     },
+     "description": "Required when the video has speech.",
+     "of": [
+      {
+       "name": "track",
+       "title": "Track",
+       "type": "object",
+       "icon": "subtask",
+       "openMode": "inline",
+       "preview": {
+        "title": "label",
+        "subtitle": "language",
+        "fallback": "Untitled track"
+       },
+       "fields": [
+        {
+         "name": "language",
+         "title": "Language",
+         "type": "select",
+         "validation": {
+          "required": true,
+          "unique": true
+         },
+         "options": [
+          {
+           "value": "en",
+           "label": "English"
+          },
+          {
+           "value": "es",
+           "label": "Spanish"
+          },
+          {
+           "value": "fr",
+           "label": "French"
+          }
+         ]
+        },
+        {
+         "name": "label",
+         "title": "Menu label",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 24
+         },
+         "placeholder": "English (CC)"
+        },
+        {
+         "name": "file",
+         "title": "Caption file",
+         "type": "file",
+         "validation": {
+          "required": true
+         },
+         "description": "A .vtt file."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "textAlternative",
+     "title": "What the video shows",
+     "type": "text",
+     "group": "a11y",
+     "rows": 2,
+     "validation": {
+      "required": true,
+      "recommendedMax": 200
+     },
+     "description": "Not shown. Read by screen readers instead of the video."
+    },
+    {
+     "name": "transcript",
+     "title": "Transcript",
+     "type": "link",
+     "group": "a11y"
+    },
+    {
+     "name": "showPauseButton",
+     "title": "Show pause button",
+     "type": "boolean",
+     "group": "a11y",
+     "initialValue": true,
+     "access": {
+      "edit": "schema.manage"
+     },
+     "lockReason": "Moving video over 5 seconds must be pausable (WCAG 2.2.2)."
+    },
+    {
+     "name": "autoplay",
+     "title": "Play automatically",
+     "type": "boolean",
+     "group": "design",
+     "initialValue": true
+    },
+    {
+     "name": "loop",
+     "title": "Loop the video",
+     "type": "boolean",
+     "group": "design",
+     "hidden": {
+      "field": "autoplay",
+      "equals": true
+     },
+     "initialValue": true
+    },
+    {
+     "name": "overlay",
+     "title": "Image overlay",
+     "type": "number",
+     "group": "design",
+     "layout": "slider",
+     "numeric": {
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "%"
+     },
+     "initialValue": 35
+    },
+    {
+     "name": "height",
+     "title": "Height",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "screen",
+     "options": [
+      {
+       "value": "screen",
+       "label": "Full screen"
+      },
+      {
+       "value": "large",
+       "label": "Large"
+      },
+      {
+       "value": "medium",
+       "label": "Medium"
+      }
+     ]
+    },
+    {
+     "name": "theme",
+     "title": "Theme",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "dark",
+     "options": [
+      {
+       "value": "light",
+       "label": "Light"
+      },
+      {
+       "value": "dark",
+       "label": "Dark"
+      },
+      {
+       "value": "brand",
+       "label": "Brand"
+      }
+     ]
+    }
+   ]
+  },
+  "value": {
+   "eyebrow": "Klamath River \u00b7 2026",
+   "heading": "The dams came down. The salmon came back.",
+   "body": "Four dams removed, 400 river miles reopened. Your gift keeps the Klamath running free.",
+   "primaryButton": {
+    "label": "Donate",
+    "href": "/donate",
+    "type": "page",
+    "style": "primary"
+   },
+   "secondaryButton": {
+    "label": "Watch the 4-minute film",
+    "href": "/stories/klamath-film",
+    "type": "page",
+    "style": "outline",
+    "icon": "player-play"
+   },
+   "video": {
+    "url": "https://vimeo.com/883441207",
+    "poster": "https://picsum.photos/seed/owt-klamath-poster/1920/1080"
+   },
+   "poster": {
+    "url": "https://picsum.photos/seed/owt-klamath-poster/1920/1080",
+    "alt": "Chinook salmon swimming upstream through clear water over red gravel",
+    "name": "owt-klamath-poster.jpg",
+    "width": 1920,
+    "height": 1080
+   },
+   "captions": [
+    {
+     "_key": "t1",
+     "language": "en",
+     "label": "English (CC)",
+     "file": {
+      "name": "klamath-hero-en.vtt",
+      "size": 2140,
+      "url": "https://cdn.bettercms.site/owt/klamath-hero-en.vtt"
+     }
+    },
+    {
+     "_key": "t2",
+     "language": "es",
+     "label": "Espa\u00f1ol",
+     "file": {
+      "name": "klamath-hero-es.vtt",
+      "size": 2296,
+      "url": "https://cdn.bettercms.site/owt/klamath-hero-es.vtt"
+     }
+    }
+   ],
+   "textAlternative": "Salmon swim upstream past the old Iron Gate dam site, now a free-flowing river lined with new willows.",
+   "transcript": {
+    "type": "page",
+    "href": "/stories/klamath-film/transcript",
+    "title": "Klamath film transcript"
+   },
+   "showPauseButton": true,
+   "autoplay": true,
+   "loop": true,
+   "overlay": 45,
+   "height": "screen",
+   "theme": "dark"
+  }
+ },
+ {
+  "id": "hero-slider",
+  "name": "Slider hero",
+  "category": "Heroes",
+  "kind": "block",
+  "brand": "Caldera",
+  "previewLayout": "carousel",
+  "proves": "Slides array with per-slide schedule and art direction \u00b7 autoplay settings only when autoplay is on \u00b7 carousel a11y name",
+  "schema": {
+   "name": "heroCarousel",
+   "title": "Hero carousel",
+   "kind": "block",
+   "icon": "slideshow",
+   "category": "Heroes",
+   "description": "Two to five full-width slides, each with its own message and button.",
+   "preview": {
+    "title": "slides.0.heading",
+    "subtitle": "label",
+    "media": "slides.0.image"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Slides",
+     "default": true
+    },
+    {
+     "name": "behavior",
+     "title": "Behavior"
+    },
+    {
+     "name": "design",
+     "title": "Design"
+    }
+   ],
+   "fields": [
+    {
+     "name": "slides",
+     "title": "Slides",
+     "type": "array",
+     "itemNoun": "slide",
+     "validation": {
+      "min": 2,
+      "max": 5
+     },
+     "of": [
+      {
+       "name": "slide",
+       "title": "Slide",
+       "type": "object",
+       "icon": "photo",
+       "preview": {
+        "title": "heading",
+        "subtitle": "eyebrow",
+        "media": "image",
+        "fallback": "Untitled slide"
+       },
+       "fields": [
+        {
+         "name": "eyebrow",
+         "title": "Eyebrow",
+         "type": "string",
+         "validation": {
+          "max": 40
+         }
+        },
+        {
+         "name": "heading",
+         "title": "Heading",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 80,
+          "recommendedMax": 50
+         },
+         "ai": true,
+         "localized": true
+        },
+        {
+         "name": "body",
+         "title": "Body",
+         "type": "text",
+         "rows": 2,
+         "validation": {
+          "recommendedMax": 120
+         },
+         "localized": true
+        },
+        {
+         "name": "button",
+         "title": "Button",
+         "type": "button",
+         "validation": {
+          "required": true
+         }
+        },
+        {
+         "name": "image",
+         "title": "Image",
+         "type": "image",
+         "validation": {
+          "required": true
+         },
+         "description": "At least 2400 \u00d7 1200."
+        },
+        {
+         "name": "mobileImage",
+         "title": "Phone image",
+         "type": "image",
+         "description": "Leave empty to reuse the main image."
+        },
+        {
+         "name": "textPosition",
+         "title": "Text position",
+         "type": "select",
+         "layout": "segmented",
+         "initialValue": "left",
+         "options": [
+          {
+           "value": "left",
+           "label": "Left"
+          },
+          {
+           "value": "center",
+           "label": "Center"
+          },
+          {
+           "value": "right",
+           "label": "Right"
+          }
+         ]
+        },
+        {
+         "name": "tone",
+         "title": "Text color",
+         "type": "select",
+         "layout": "segmented",
+         "initialValue": "light",
+         "options": [
+          {
+           "value": "light",
+           "label": "Light text"
+          },
+          {
+           "value": "dark",
+           "label": "Dark text"
+          }
+         ]
+        },
+        {
+         "name": "showFrom",
+         "title": "Show from",
+         "type": "datetime",
+         "fieldset": "Schedule"
+        },
+        {
+         "name": "hideAfter",
+         "title": "Hide after",
+         "type": "datetime",
+         "fieldset": "Schedule"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "label",
+     "title": "Carousel name",
+     "type": "string",
+     "validation": {
+      "required": true,
+      "max": 40
+     },
+     "description": "Not shown. Read by screen readers."
+    },
+    {
+     "name": "autoplay",
+     "title": "Play automatically",
+     "type": "boolean",
+     "group": "behavior",
+     "initialValue": true
+    },
+    {
+     "name": "interval",
+     "title": "Each slide shows for",
+     "type": "number",
+     "group": "behavior",
+     "hidden": {
+      "field": "autoplay",
+      "equals": true
+     },
+     "numeric": {
+      "min": 4,
+      "max": 12,
+      "step": 1,
+      "unit": "s"
+     },
+     "initialValue": 6
+    },
+    {
+     "name": "transition",
+     "title": "Transition",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "fade",
+     "options": [
+      {
+       "value": "fade",
+       "label": "Fade"
+      },
+      {
+       "value": "slide",
+       "label": "Slide"
+      }
+     ]
+    },
+    {
+     "name": "controls",
+     "title": "Controls",
+     "type": "multiselect",
+     "group": "design",
+     "initialValue": [
+      "dots",
+      "arrows"
+     ],
+     "options": [
+      {
+       "value": "dots",
+       "label": "Dots"
+      },
+      {
+       "value": "arrows",
+       "label": "Arrows"
+      },
+      {
+       "value": "progress",
+       "label": "Progress bar"
+      }
+     ]
+    },
+    {
+     "name": "height",
+     "title": "Height",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "large",
+     "options": [
+      {
+       "value": "screen",
+       "label": "Full screen"
+      },
+      {
+       "value": "large",
+       "label": "Large"
+      },
+      {
+       "value": "medium",
+       "label": "Medium"
+      }
+     ]
+    }
+   ]
+  },
+  "value": {
+   "label": "This season at Caldera",
+   "slides": [
+    {
+     "_key": "s1",
+     "eyebrow": "New",
+     "heading": "The Cable Fold Grill folds to 2 cm.",
+     "body": "A full grill grate that rides in a backpack and holds a 25 kg Dutch oven.",
+     "button": {
+      "label": "Shop the Fold",
+      "href": "/products/cable-fold",
+      "type": "page",
+      "style": "primary",
+      "arrow": true
+     },
+     "image": {
+      "url": "https://picsum.photos/seed/caldera-slide-fold/2400/1200",
+      "alt": "Cable Fold Grill over a riverside fire at dusk",
+      "name": "caldera-slide-fold.jpg",
+      "width": 2400,
+      "height": 1200
+     },
+     "mobileImage": {
+      "url": "https://picsum.photos/seed/caldera-slide-fold-m/1080/1350",
+      "alt": "Cable Fold Grill over coals, close crop",
+      "name": "caldera-slide-fold-m.jpg",
+      "width": 1080,
+      "height": 1350
+     },
+     "textPosition": "left",
+     "tone": "light"
+    },
+    {
+     "_key": "s2",
+     "eyebrow": "Black Friday",
+     "heading": "25% off every Dutch oven.",
+     "button": {
+      "label": "Shop the sale",
+      "href": "/collections/sale",
+      "type": "page",
+      "style": "primary"
+     },
+     "image": {
+      "url": "https://picsum.photos/seed/caldera-slide-sale/2400/1200",
+      "alt": "Three enamelled Dutch ovens in rust, sage and slate",
+      "name": "caldera-slide-sale.jpg",
+      "width": 2400,
+      "height": 1200
+     },
+     "textPosition": "center",
+     "tone": "dark",
+     "showFrom": "2026-11-26T00:00:00-08:00[America/Los_Angeles]",
+     "hideAfter": "2026-11-30T23:59:00-08:00[America/Los_Angeles]"
+    },
+    {
+     "_key": "s3",
+     "eyebrow": "Recipes",
+     "heading": "Skillet cornbread, over coals.",
+     "body": "Twenty minutes, one pan, and a crust you only get from cast iron.",
+     "button": {
+      "label": "Get the recipe",
+      "href": "/recipes/skillet-cornbread",
+      "type": "page",
+      "style": "outline"
+     },
+     "image": {
+      "url": "https://picsum.photos/seed/caldera-slide-cornbread/2400/1200",
+      "alt": "Golden cornbread in a cast iron skillet on a camp table",
+      "name": "caldera-slide-cornbread.jpg",
+      "width": 2400,
+      "height": 1200
+     },
+     "textPosition": "right",
+     "tone": "light"
+    }
+   ],
+   "autoplay": true,
+   "interval": 6,
+   "transition": "fade",
+   "controls": [
+    "dots",
+    "arrows"
+   ],
+   "height": "large"
+  }
+ },
+ {
+  "id": "hero-product",
+  "name": "Product hero with variant picker",
+  "category": "Heroes",
+  "kind": "block",
+  "brand": "Caldera",
+  "previewLayout": "split",
+  "proves": "Live commerce data through a reference \u00b7 overrides that fall back to the product \u00b7 Add to cart is an action label",
+  "schema": {
+   "name": "productHero",
+   "title": "Product hero",
+   "kind": "block",
+   "icon": "shopping-bag",
+   "category": "Heroes",
+   "description": "One product with its gallery, options, live price and an add-to-cart button.",
+   "variants": [
+    {
+     "id": "gallery-left",
+     "name": "Gallery left"
+    },
+    {
+     "id": "gallery-right",
+     "name": "Gallery right"
+    },
+    {
+     "id": "stacked",
+     "name": "Stacked",
+     "description": "Large image on top, buy box below"
+    }
+   ],
+   "preview": {
+    "title": "heading",
+    "subtitle": "badge",
+    "media": "gallery.0"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "buy",
+     "title": "Buy box"
+    },
+    {
+     "name": "media",
+     "title": "Media"
+    },
+    {
+     "name": "design",
+     "title": "Design"
+    }
+   ],
+   "fields": [
+    {
+     "name": "product",
+     "title": "Product",
+     "type": "reference",
+     "reference": {
+      "to": [
+       "shopify"
+      ]
+     },
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "validation": {
+      "max": 80
+     },
+     "ai": true,
+     "description": "Leave empty to use the product name."
+    },
+    {
+     "name": "tagline",
+     "title": "Tagline",
+     "type": "text",
+     "rows": 2,
+     "validation": {
+      "recommendedMax": 140
+     },
+     "ai": true
+    },
+    {
+     "name": "badge",
+     "title": "Badge",
+     "type": "string",
+     "validation": {
+      "max": 16
+     },
+     "placeholder": "New color"
+    },
+    {
+     "name": "highlights",
+     "title": "Highlights",
+     "type": "array",
+     "itemNoun": "highlight",
+     "openMode": "inline",
+     "validation": {
+      "max": 4
+     },
+     "of": [
+      {
+       "name": "highlight",
+       "title": "Highlight",
+       "type": "object",
+       "icon": "circle-check",
+       "preview": {
+        "title": "label",
+        "fallback": "Untitled highlight"
+       },
+       "fields": [
+        {
+         "name": "icon",
+         "title": "Icon",
+         "type": "icon"
+        },
+        {
+         "name": "label",
+         "title": "Label",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 40
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "pickers",
+     "title": "Option pickers",
+     "type": "multiselect",
+     "group": "buy",
+     "description": "Options left out use their default.",
+     "options": [
+      {
+       "value": "color",
+       "label": "Color"
+      },
+      {
+       "value": "size",
+       "label": "Size"
+      },
+      {
+       "value": "finish",
+       "label": "Finish"
+      }
+     ]
+    },
+    {
+     "name": "swatchStyle",
+     "title": "Color picker",
+     "type": "select",
+     "group": "buy",
+     "layout": "segmented",
+     "initialValue": "swatch",
+     "options": [
+      {
+       "value": "swatch",
+       "label": "Swatches"
+      },
+      {
+       "value": "dropdown",
+       "label": "Dropdown"
+      }
+     ]
+    },
+    {
+     "name": "price",
+     "title": "Price",
+     "type": "select",
+     "group": "buy",
+     "layout": "segmented",
+     "initialValue": "full",
+     "options": [
+      {
+       "value": "full",
+       "label": "Show price"
+      },
+      {
+       "value": "from",
+       "label": "From $\u2026"
+      },
+      {
+       "value": "hidden",
+       "label": "Hide"
+      }
+     ]
+    },
+    {
+     "name": "showCompareAtPrice",
+     "title": "Show compare-at price",
+     "type": "boolean",
+     "group": "buy",
+     "hidden": {
+      "field": "price",
+      "equals": "full"
+     }
+    },
+    {
+     "name": "showInstallments",
+     "title": "Show pay-later line",
+     "type": "boolean",
+     "group": "buy",
+     "hidden": {
+      "field": "price",
+      "equals": "full"
+     }
+    },
+    {
+     "name": "addLabel",
+     "title": "Add to cart label",
+     "type": "string",
+     "group": "buy",
+     "initialValue": "Add to cart",
+     "validation": {
+      "required": true,
+      "max": 24
+     }
+    },
+    {
+     "name": "soldOutLabel",
+     "title": "Sold out label",
+     "type": "string",
+     "group": "buy",
+     "initialValue": "Notify me",
+     "validation": {
+      "max": 24
+     }
+    },
+    {
+     "name": "detailsButton",
+     "title": "Details button",
+     "type": "button",
+     "group": "buy"
+    },
+    {
+     "name": "showRating",
+     "title": "Show rating",
+     "type": "boolean",
+     "group": "buy",
+     "initialValue": true
+    },
+    {
+     "name": "gallery",
+     "title": "Gallery",
+     "type": "array",
+     "group": "media",
+     "arrayLayout": "grid",
+     "itemNoun": "image",
+     "validation": {
+      "max": 8
+     },
+     "description": "Leave empty to use the product's photos.",
+     "of": [
+      {
+       "name": "image",
+       "title": "Image",
+       "type": "image"
+      }
+     ]
+    },
+    {
+     "name": "video",
+     "title": "Video",
+     "type": "video",
+     "group": "media"
+    },
+    {
+     "name": "isBuyBoxSticky",
+     "title": "Keep the buy box in view",
+     "type": "boolean",
+     "group": "design",
+     "initialValue": true
+    },
+    {
+     "name": "theme",
+     "title": "Theme",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "light",
+     "options": [
+      {
+       "value": "light",
+       "label": "Light"
+      },
+      {
+       "value": "dark",
+       "label": "Dark"
+      },
+      {
+       "value": "brand",
+       "label": "Brand"
+      }
+     ]
+    }
+   ]
+  },
+  "value": {
+   "_variant": "gallery-left",
+   "product": "gid://shopify/Product/8813",
+   "heading": "",
+   "tagline": "Enamelled cast iron that goes from coals to table. Holds heat for an hour after it leaves the fire.",
+   "badge": "New colour",
+   "highlights": [
+    {
+     "_key": "h1",
+     "icon": "flame",
+     "label": "Safe to 500\u00b0F, lid knob included"
+    },
+    {
+     "_key": "h2",
+     "icon": "scale",
+     "label": "5.5 quarts \u00b7 feeds 6"
+    },
+    {
+     "_key": "h3",
+     "icon": "shield-check",
+     "label": "Lifetime warranty"
+    }
+   ],
+   "pickers": [
+    "color",
+    "size"
+   ],
+   "swatchStyle": "swatch",
+   "price": "full",
+   "showCompareAtPrice": true,
+   "showInstallments": true,
+   "addLabel": "Add to cart",
+   "soldOutLabel": "Notify me",
+   "detailsButton": {
+    "label": "See full details",
+    "href": "/products/ember-dutch-oven",
+    "type": "page",
+    "style": "link",
+    "arrow": true
+   },
+   "showRating": true,
+   "gallery": [
+    {
+     "url": "https://picsum.photos/seed/caldera-ember-rust/1600/1600",
+     "alt": "Ember Dutch Oven in rust enamel, lid on",
+     "name": "caldera-ember-rust.jpg",
+     "width": 1600,
+     "height": 1600
+    },
+    {
+     "url": "https://picsum.photos/seed/caldera-ember-coals/1600/1600",
+     "alt": "Ember Dutch Oven sitting in campfire coals with stew bubbling",
+     "name": "caldera-ember-coals.jpg",
+     "width": 1600,
+     "height": 1600
+    },
+    {
+     "url": "https://picsum.photos/seed/caldera-ember-sage/1600/1600",
+     "alt": "Ember Dutch Oven in sage enamel on a wooden table",
+     "name": "caldera-ember-sage.jpg",
+     "width": 1600,
+     "height": 1600
+    }
+   ],
+   "isBuyBoxSticky": true,
+   "theme": "light"
+  }
+ },
+ {
+  "id": "hero-search",
+  "name": "Search hero",
+  "category": "Heroes",
+  "kind": "block",
+  "brand": "Caldera",
+  "previewLayout": "centered",
+  "proves": "Search box config \u00b7 manual vs automatic suggestions \u00b7 topic chips as references \u00b7 scope and results page",
+  "schema": {
+   "name": "searchHero",
+   "title": "Search hero",
+   "kind": "block",
+   "icon": "input-search",
+   "category": "Heroes",
+   "description": "A headline with a big search box, suggested searches and topic chips.",
+   "preview": {
+    "title": "heading",
+    "subtitle": "placeholder",
+    "media": "backgroundImage"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "search",
+     "title": "Search"
+    },
+    {
+     "name": "media",
+     "title": "Media"
+    },
+    {
+     "name": "design",
+     "title": "Design"
+    }
+   ],
+   "fields": [
+    {
+     "name": "eyebrow",
+     "title": "Eyebrow",
+     "type": "string",
+     "validation": {
+      "max": 40
+     }
+    },
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "validation": {
+      "required": true,
+      "max": 100,
+      "recommendedMax": 48
+     },
+     "ai": true,
+     "localized": true
+    },
+    {
+     "name": "subheading",
+     "title": "Subheading",
+     "type": "text",
+     "rows": 2,
+     "validation": {
+      "recommendedMax": 120
+     },
+     "localized": true
+    },
+    {
+     "name": "placeholder",
+     "title": "Placeholder",
+     "type": "string",
+     "group": "search",
+     "validation": {
+      "required": true,
+      "max": 60
+     },
+     "localized": true,
+     "placeholder": "Try dutch oven bread"
+    },
+    {
+     "name": "buttonLabel",
+     "title": "Search button label",
+     "type": "string",
+     "group": "search",
+     "initialValue": "Search",
+     "validation": {
+      "max": 16
+     },
+     "description": "Read by screen readers when the button shows only an icon."
+    },
+    {
+     "name": "scope",
+     "title": "Searches",
+     "type": "select",
+     "group": "search",
+     "layout": "radio",
+     "initialValue": "recipes",
+     "options": [
+      {
+       "value": "recipes",
+       "label": "Recipes"
+      },
+      {
+       "value": "journal",
+       "label": "Journal stories"
+      },
+      {
+       "value": "products",
+       "label": "Products"
+      },
+      {
+       "value": "all",
+       "label": "The whole site"
+      }
+     ]
+    },
+    {
+     "name": "suggestionSource",
+     "title": "Suggested searches",
+     "type": "select",
+     "group": "search",
+     "layout": "segmented",
+     "initialValue": "manual",
+     "options": [
+      {
+       "value": "manual",
+       "label": "Written here"
+      },
+      {
+       "value": "popular",
+       "label": "Most searched"
+      },
+      {
+       "value": "none",
+       "label": "None"
+      }
+     ]
+    },
+    {
+     "name": "suggestions",
+     "title": "Suggestions",
+     "type": "array",
+     "itemNoun": "suggestion",
+     "of": [
+      {
+       "name": "suggestion",
+       "title": "Suggestion",
+       "type": "string"
+      }
+     ],
+     "group": "search",
+     "hidden": {
+      "field": "suggestionSource",
+      "equals": "manual"
+     },
+     "validation": {
+      "max": 6
+     }
+    },
+    {
+     "name": "popularDays",
+     "title": "Count searches from the last",
+     "type": "number",
+     "group": "search",
+     "hidden": {
+      "field": "suggestionSource",
+      "equals": "popular"
+     },
+     "numeric": {
+      "min": 7,
+      "max": 90,
+      "step": 1,
+      "unit": "days"
+     },
+     "initialValue": 30
+    },
+    {
+     "name": "topics",
+     "title": "Topic chips",
+     "type": "array",
+     "itemNoun": "topic",
+     "validation": {
+      "max": 6
+     },
+     "of": [
+      {
+       "name": "topic",
+       "title": "Topic",
+       "type": "reference",
+       "reference": {
+        "to": [
+         "col_topics"
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "name": "backgroundImage",
+     "title": "Background image",
+     "type": "image",
+     "group": "media"
+    },
+    {
+     "name": "overlay",
+     "title": "Image overlay",
+     "type": "number",
+     "group": "design",
+     "layout": "slider",
+     "numeric": {
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "%"
+     },
+     "initialValue": 35
+    },
+    {
+     "name": "alignment",
+     "title": "Alignment",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "center",
+     "options": [
+      {
+       "value": "left",
+       "label": "Left"
+      },
+      {
+       "value": "center",
+       "label": "Centered"
+      }
+     ]
+    },
+    {
+     "name": "theme",
+     "title": "Theme",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "light",
+     "options": [
+      {
+       "value": "light",
+       "label": "Light"
+      },
+      {
+       "value": "dark",
+       "label": "Dark"
+      },
+      {
+       "value": "brand",
+       "label": "Brand"
+      }
+     ]
+    }
+   ]
+  },
+  "value": {
+   "eyebrow": "400+ tested recipes",
+   "heading": "What are you cooking tonight?",
+   "subheading": "Every recipe is tested over coals and on a stovetop, with notes for both.",
+   "placeholder": "Try \u201cdutch oven bread\u201d",
+   "buttonLabel": "Search",
+   "scope": "recipes",
+   "suggestionSource": "manual",
+   "suggestions": [
+    "dutch oven bread",
+    "skillet cornbread",
+    "one-pot chili",
+    "campfire breakfast"
+   ],
+   "popularDays": 30,
+   "topics": [
+    "tp_camp",
+    "tp_recipes",
+    "tp_cast-iron",
+    "tp_care"
+   ],
+   "backgroundImage": {
+    "url": "https://picsum.photos/seed/caldera-recipes-hero/2400/1200",
+    "alt": "Overhead view of a camp table with chili, cornbread and a cast iron pan",
+    "name": "caldera-recipes-hero.jpg",
+    "width": 2400,
+    "height": 1200
+   },
+   "overlay": 50,
+   "alignment": "center",
+   "theme": "dark"
+  }
+ },
+ {
+  "id": "hero-lead-form",
+  "name": "Lead-form hero",
+  "category": "Heroes",
+  "kind": "block",
+  "brand": "Northbound Studio",
+  "previewLayout": "form",
+  "proves": "A form REFERENCE plus per-placement settings: hidden source fields, label override, message vs redirect",
+  "schema": {
+   "name": "leadFormHero",
+   "title": "Lead form hero",
+   "kind": "block",
+   "icon": "clipboard-text",
+   "category": "Heroes",
+   "description": "A pitch on one side and a short form on the other.",
+   "variants": [
+    {
+     "id": "form-right",
+     "name": "Form right"
+    },
+    {
+     "id": "form-left",
+     "name": "Form left"
+    },
+    {
+     "id": "form-below",
+     "name": "Form below",
+     "description": "Centered pitch with the form underneath"
+    }
+   ],
+   "preview": {
+    "title": "heading",
+    "subtitle": "formHeading",
+    "media": "image"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Pitch",
+     "default": true
+    },
+    {
+     "name": "form",
+     "title": "Form"
+    },
+    {
+     "name": "design",
+     "title": "Design"
+    }
+   ],
+   "fields": [
+    {
+     "name": "eyebrow",
+     "title": "Eyebrow",
+     "type": "string",
+     "validation": {
+      "max": 40
+     }
+    },
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "validation": {
+      "required": true,
+      "max": 100,
+      "recommendedMax": 64
+     },
+     "ai": true,
+     "localized": true
+    },
+    {
+     "name": "body",
+     "title": "Body",
+     "type": "text",
+     "rows": 3,
+     "validation": {
+      "recommendedMax": 200
+     },
+     "ai": true,
+     "localized": true
+    },
+    {
+     "name": "points",
+     "title": "What they get",
+     "type": "array",
+     "itemNoun": "point",
+     "validation": {
+      "max": 4
+     },
+     "of": [
+      {
+       "name": "point",
+       "title": "Point",
+       "type": "string",
+       "validation": {
+        "max": 60
+       }
+      }
+     ]
+    },
+    {
+     "name": "trustLine",
+     "title": "Trust line",
+     "type": "string",
+     "validation": {
+      "max": 90
+     }
+    },
+    {
+     "name": "image",
+     "title": "Image",
+     "type": "image"
+    },
+    {
+     "name": "form",
+     "title": "Form",
+     "type": "reference",
+     "group": "form",
+     "reference": {
+      "to": [
+       "form"
+      ]
+     },
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "formHeading",
+     "title": "Form heading",
+     "type": "string",
+     "group": "form",
+     "validation": {
+      "max": 48
+     }
+    },
+    {
+     "name": "submitLabel",
+     "title": "Submit label",
+     "type": "string",
+     "group": "form",
+     "validation": {
+      "max": 24
+     },
+     "description": "Leave empty to use the label set on the form."
+    },
+    {
+     "name": "afterSubmit",
+     "title": "After sending",
+     "type": "select",
+     "group": "form",
+     "layout": "radio",
+     "initialValue": "message",
+     "options": [
+      {
+       "value": "message",
+       "label": "Show a message",
+       "description": "The form is replaced by your thank-you note"
+      },
+      {
+       "value": "redirect",
+       "label": "Go to a page",
+       "description": "Best when you track conversions on a thank-you page"
+      }
+     ]
+    },
+    {
+     "name": "successMessage",
+     "title": "Thank-you message",
+     "type": "text",
+     "group": "form",
+     "rows": 2,
+     "hidden": {
+      "field": "afterSubmit",
+      "equals": "message"
+     },
+     "validation": {
+      "required": true,
+      "max": 240
+     }
+    },
+    {
+     "name": "redirect",
+     "title": "Thank-you page",
+     "type": "link",
+     "group": "form",
+     "hidden": {
+      "field": "afterSubmit",
+      "equals": "redirect"
+     },
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "hiddenFields",
+     "title": "Hidden values",
+     "type": "array",
+     "group": "form",
+     "itemNoun": "value",
+     "validation": {
+      "max": 6
+     },
+     "description": "Not shown. Sent with every submission from this section.",
+     "of": [
+      {
+       "name": "hiddenField",
+       "title": "Hidden value",
+       "type": "object",
+       "icon": "eye-off",
+       "openMode": "inline",
+       "preview": {
+        "title": "key",
+        "subtitle": "value",
+        "fallback": "Untitled value"
+       },
+       "fields": [
+        {
+         "name": "key",
+         "title": "Key",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "unique": true,
+          "pattern": "^[a-z][a-z0-9_]*$",
+          "patternMessage": "Use lowercase letters, numbers and underscores, like page_view."
+         },
+         "placeholder": "source"
+        },
+        {
+         "name": "value",
+         "title": "Value",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 80
+         },
+         "placeholder": "homepage-hero"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "privacyNote",
+     "title": "Privacy note",
+     "type": "string",
+     "group": "form",
+     "validation": {
+      "max": 120
+     }
+    },
+    {
+     "name": "theme",
+     "title": "Theme",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "light",
+     "options": [
+      {
+       "value": "light",
+       "label": "Light"
+      },
+      {
+       "value": "dark",
+       "label": "Dark"
+      },
+      {
+       "value": "brand",
+       "label": "Brand"
+      }
+     ]
+    }
+   ]
+  },
+  "value": {
+   "_variant": "form-right",
+   "eyebrow": "Brand & web for outdoor companies",
+   "heading": "Your next site should sell as hard as your product works.",
+   "body": "We design and build brand-led commerce sites for outdoor and food companies \u2014 strategy, identity and a CMS your team actually enjoys.",
+   "points": [
+    "A 30-minute call with a founder, not a salesperson",
+    "A written plan within three working days",
+    "Fixed quotes, no hourly surprises"
+   ],
+   "trustLine": "Trusted by teams at Caldera, Tideline and Open Water Trust.",
+   "image": {
+    "url": "https://picsum.photos/seed/northbound-studio-desk/1600/1200",
+    "alt": "Two designers reviewing printed brand boards on a studio wall",
+    "name": "northbound-studio-desk.jpg",
+    "width": 1600,
+    "height": 1200
+   },
+   "form": "form_contact",
+   "formHeading": "Book a strategy call",
+   "submitLabel": "Request a call",
+   "afterSubmit": "redirect",
+   "successMessage": "Thanks \u2014 we'll reply within one working day with a few times to talk.",
+   "redirect": {
+    "type": "page",
+    "href": "/thanks",
+    "title": "Thanks"
+   },
+   "hiddenFields": [
+    {
+     "_key": "k1",
+     "key": "source",
+     "value": "homepage-hero"
+    },
+    {
+     "_key": "k2",
+     "key": "service",
+     "value": "brand-and-web"
+    }
+   ],
+   "privacyNote": "We'll only use your details to reply. No newsletters unless you ask.",
+   "theme": "light"
+  }
+ },
+ {
+  "id": "hero-app-download",
+  "name": "App download hero",
+  "category": "Heroes",
+  "kind": "block",
+  "brand": "Hearth & Ash",
+  "previewLayout": "split",
+  "proves": "A field synced from a global (store links) inside a normal block \u00b7 QR code derived from a link \u00b7 device screens",
+  "schema": {
+   "name": "appDownloadHero",
+   "title": "App download hero",
+   "kind": "block",
+   "icon": "device-mobile",
+   "category": "Heroes",
+   "description": "Pitch the app with store badges, a QR code for desktop visitors and phone screenshots.",
+   "preview": {
+    "title": "heading",
+    "subtitle": "eyebrow",
+    "media": "screens.0"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "media",
+     "title": "Media"
+    },
+    {
+     "name": "design",
+     "title": "Design"
+    }
+   ],
+   "fields": [
+    {
+     "name": "eyebrow",
+     "title": "Eyebrow",
+     "type": "string",
+     "validation": {
+      "max": 40
+     }
+    },
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "validation": {
+      "required": true,
+      "max": 100,
+      "recommendedMax": 56
+     },
+     "ai": true,
+     "localized": true
+    },
+    {
+     "name": "body",
+     "title": "Body",
+     "type": "text",
+     "rows": 3,
+     "validation": {
+      "recommendedMax": 160
+     },
+     "ai": true,
+     "localized": true
+    },
+    {
+     "name": "badges",
+     "title": "Store links",
+     "type": "array",
+     "itemNoun": "store",
+     "synced": {
+      "from": "App links"
+     },
+     "validation": {
+      "min": 1,
+      "max": 2
+     },
+     "description": "Shared: changes apply to every badge on the site.",
+     "of": [
+      {
+       "name": "storeLink",
+       "title": "Store",
+       "type": "object",
+       "icon": "device-mobile",
+       "openMode": "inline",
+       "preview": {
+        "title": "store",
+        "subtitle": "url"
+       },
+       "fields": [
+        {
+         "name": "store",
+         "title": "Store",
+         "type": "select",
+         "validation": {
+          "required": true,
+          "unique": true
+         },
+         "options": [
+          {
+           "value": "app-store",
+           "label": "App Store"
+          },
+          {
+           "value": "google-play",
+           "label": "Google Play"
+          }
+         ]
+        },
+        {
+         "name": "url",
+         "title": "Store address",
+         "type": "url",
+         "validation": {
+          "required": true,
+          "pattern": "^https://(apps\\.apple\\.com|play\\.google\\.com)/",
+          "patternMessage": "Use an apps.apple.com or play.google.com address, like https://apps.apple.com/app/id123."
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "qr",
+     "title": "QR code",
+     "type": "object",
+     "icon": "qrcode",
+     "openMode": "drill",
+     "fields": [
+      {
+       "name": "showQrCode",
+       "title": "Show a QR code",
+       "type": "boolean",
+       "initialValue": true,
+       "description": "Desktop only. Phones see the badges."
+      },
+      {
+       "name": "target",
+       "title": "QR opens",
+       "type": "url",
+       "hidden": {
+        "field": "showQrCode",
+        "equals": true
+       },
+       "validation": {
+        "required": true
+       },
+       "description": "One link that sends iPhones and Androids to the right store."
+      },
+      {
+       "name": "caption",
+       "title": "Caption",
+       "type": "string",
+       "hidden": {
+        "field": "showQrCode",
+        "equals": true
+       },
+       "validation": {
+        "max": 32
+       },
+       "placeholder": "Scan to download"
+      }
+     ]
+    },
+    {
+     "name": "rating",
+     "title": "Store rating",
+     "type": "object",
+     "icon": "star",
+     "fields": [
+      {
+       "name": "value",
+       "title": "Rating",
+       "type": "number",
+       "numeric": {
+        "min": 0,
+        "max": 5,
+        "step": 0.1
+       }
+      },
+      {
+       "name": "label",
+       "title": "Label",
+       "type": "string",
+       "validation": {
+        "max": 32
+       },
+       "placeholder": "12,400 ratings"
+      }
+     ]
+    },
+    {
+     "name": "screens",
+     "title": "Screenshots",
+     "type": "array",
+     "group": "media",
+     "arrayLayout": "grid",
+     "itemNoun": "screenshot",
+     "validation": {
+      "min": 1,
+      "max": 3
+     },
+     "description": "Phone screens at 1170 \u00d7 2532.",
+     "of": [
+      {
+       "name": "screen",
+       "title": "Screenshot",
+       "type": "image"
+      }
+     ]
+    },
+    {
+     "name": "device",
+     "title": "Device frame",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "iphone",
+     "options": [
+      {
+       "value": "iphone",
+       "label": "iPhone"
+      },
+      {
+       "value": "android",
+       "label": "Android"
+      },
+      {
+       "value": "none",
+       "label": "No frame"
+      }
+     ]
+    },
+    {
+     "name": "background",
+     "title": "Background color",
+     "type": "color",
+     "group": "design"
+    },
+    {
+     "name": "theme",
+     "title": "Theme",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "light",
+     "options": [
+      {
+       "value": "light",
+       "label": "Light"
+      },
+      {
+       "value": "dark",
+       "label": "Dark"
+      },
+      {
+       "value": "brand",
+       "label": "Brand"
+      }
+     ]
+    }
+   ]
+  },
+  "value": {
+   "eyebrow": "The Hearth & Ash app",
+   "heading": "Skip the line. Your table is waiting.",
+   "body": "Book in two taps, order from the bar while you wait, and pay at the table without hunting down the check.",
+   "badges": [
+    {
+     "_key": "b1",
+     "store": "app-store",
+     "url": "https://apps.apple.com/us/app/hearth-ash/id6450012345"
+    },
+    {
+     "_key": "b2",
+     "store": "google-play",
+     "url": "https://play.google.com/store/apps/details?id=com.hearthandash.order"
+    }
+   ],
+   "qr": {
+    "showQrCode": true,
+    "target": "https://hearthandash.com/app",
+    "caption": "Scan to download"
+   },
+   "rating": {
+    "value": 4.8,
+    "label": "2,140 ratings"
+   },
+   "screens": [
+    {
+     "url": "https://picsum.photos/seed/hearth-app-book/1170/2532",
+     "alt": "App screen: choose a time for a table for four at Pearl District",
+     "name": "hearth-app-book.jpg",
+     "width": 1170,
+     "height": 2532
+    },
+    {
+     "url": "https://picsum.photos/seed/hearth-app-order/1170/2532",
+     "alt": "App screen: ordering two cocktails from the bar menu",
+     "name": "hearth-app-order.jpg",
+     "width": 1170,
+     "height": 2532
+    }
+   ],
+   "device": "iphone",
+   "background": "#2A1A14",
+   "theme": "dark"
+  }
+ },
+ {
+  "id": "hero-stats",
+  "name": "Stats hero",
+  "category": "Heroes",
+  "kind": "block",
+  "brand": "Open Water Trust",
+  "previewLayout": "stats",
+  "proves": "Numbers stored as numbers with prefix/suffix (count-up safe) \u00b7 footnoted sources \u00b7 an 'as of' date",
+  "schema": {
+   "name": "statsHero",
+   "title": "Stats hero",
+   "kind": "block",
+   "icon": "chart-arrows",
+   "category": "Heroes",
+   "description": "A headline backed by a row of two to four numbers.",
+   "variants": [
+    {
+     "id": "below",
+     "name": "Stats below",
+     "description": "A row of numbers under the buttons"
+    },
+    {
+     "id": "side",
+     "name": "Stats beside",
+     "description": "Copy left, a stacked column of numbers right"
+    }
+   ],
+   "preview": {
+    "title": "heading",
+    "subtitle": "eyebrow",
+    "media": "image"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "media",
+     "title": "Media"
+    },
+    {
+     "name": "design",
+     "title": "Design"
+    }
+   ],
+   "fields": [
+    {
+     "name": "eyebrow",
+     "title": "Eyebrow",
+     "type": "string",
+     "validation": {
+      "max": 40
+     }
+    },
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "validation": {
+      "required": true,
+      "max": 100,
+      "recommendedMax": 64
+     },
+     "ai": true,
+     "localized": true
+    },
+    {
+     "name": "body",
+     "title": "Body",
+     "type": "text",
+     "rows": 3,
+     "validation": {
+      "recommendedMax": 180
+     },
+     "ai": true,
+     "localized": true
+    },
+    {
+     "name": "primaryButton",
+     "title": "Primary button",
+     "type": "button"
+    },
+    {
+     "name": "secondaryButton",
+     "title": "Secondary button",
+     "type": "button"
+    },
+    {
+     "name": "stats",
+     "title": "Stats",
+     "type": "array",
+     "itemNoun": "stat",
+     "validation": {
+      "min": 2,
+      "max": 4
+     },
+     "of": [
+      {
+       "name": "stat",
+       "title": "Stat",
+       "type": "object",
+       "icon": "chart-bar",
+       "preview": {
+        "title": "label",
+        "subtitle": "value",
+        "fallback": "Untitled stat"
+       },
+       "fields": [
+        {
+         "name": "prefix",
+         "title": "Before",
+         "type": "string",
+         "fieldset": "Number",
+         "validation": {
+          "max": 3
+         },
+         "placeholder": "$"
+        },
+        {
+         "name": "value",
+         "title": "Number",
+         "type": "number",
+         "fieldset": "Number",
+         "validation": {
+          "required": true
+         },
+         "numeric": {
+          "min": 0,
+          "step": 0.1
+         }
+        },
+        {
+         "name": "suffix",
+         "title": "After",
+         "type": "string",
+         "fieldset": "Number",
+         "validation": {
+          "max": 6
+         },
+         "placeholder": "M, %, +"
+        },
+        {
+         "name": "decimals",
+         "title": "Decimals",
+         "type": "number",
+         "fieldset": "Number",
+         "numeric": {
+          "min": 0,
+          "max": 2,
+          "step": 1
+         },
+         "initialValue": 0
+        },
+        {
+         "name": "label",
+         "title": "Label",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 40
+         },
+         "placeholder": "river miles reopened"
+        },
+        {
+         "name": "source",
+         "title": "Source",
+         "type": "string",
+         "validation": {
+          "max": 120
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "asOf",
+     "title": "Figures as of",
+     "type": "date"
+    },
+    {
+     "name": "image",
+     "title": "Image",
+     "type": "image",
+     "group": "media"
+    },
+    {
+     "name": "useCountUp",
+     "title": "Count up on scroll",
+     "type": "boolean",
+     "group": "design",
+     "initialValue": true
+    },
+    {
+     "name": "theme",
+     "title": "Theme",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "light",
+     "options": [
+      {
+       "value": "light",
+       "label": "Light"
+      },
+      {
+       "value": "dark",
+       "label": "Dark"
+      },
+      {
+       "value": "brand",
+       "label": "Brand"
+      }
+     ]
+    },
+    {
+     "name": "spacing",
+     "title": "Spacing",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "default",
+     "options": [
+      {
+       "value": "compact",
+       "label": "Compact"
+      },
+      {
+       "value": "default",
+       "label": "Default"
+      },
+      {
+       "value": "spacious",
+       "label": "Spacious"
+      }
+     ]
+    }
+   ]
+  },
+  "value": {
+   "_variant": "below",
+   "eyebrow": "2025 impact",
+   "heading": "Rivers recover fast when we get out of their way.",
+   "body": "Since 2009 we've removed dams, replanted banks and bought back water rights so rivers can run the way they used to.",
+   "primaryButton": {
+    "label": "Give monthly",
+    "href": "/donate?frequency=monthly",
+    "type": "page",
+    "style": "primary"
+   },
+   "secondaryButton": {
+    "label": "Read the 2025 report",
+    "href": "https://cdn.bettercms.site/owt/impact-report-2025.pdf",
+    "type": "file",
+    "style": "outline",
+    "newTab": true
+   },
+   "stats": [
+    {
+     "_key": "s1",
+     "value": 1240,
+     "suffix": "",
+     "decimals": 0,
+     "label": "river miles reopened",
+     "source": "OWT field surveys, 2009\u20132025"
+    },
+    {
+     "_key": "s2",
+     "value": 38,
+     "decimals": 0,
+     "label": "dams removed"
+    },
+    {
+     "_key": "s3",
+     "prefix": "$",
+     "value": 4.2,
+     "suffix": "M",
+     "decimals": 1,
+     "label": "raised from 31,000 donors",
+     "source": "Audited accounts, FY2025"
+    },
+    {
+     "_key": "s4",
+     "value": 96,
+     "suffix": "%",
+     "decimals": 0,
+     "label": "of returning salmon runs monitored"
+    }
+   ],
+   "asOf": "2026-03-31",
+   "image": {
+    "url": "https://picsum.photos/seed/owt-river-restored/2400/1400",
+    "alt": "A braided river winding through a green valley where a reservoir used to be",
+    "name": "owt-river-restored.jpg",
+    "width": 2400,
+    "height": 1400
+   },
+   "useCountUp": true,
+   "theme": "light",
+   "spacing": "spacious"
+  }
+ },
+ {
+  "id": "hero-logo-wall",
+  "name": "Hero with logo wall",
+  "category": "Heroes",
+  "kind": "block",
+  "brand": "Tideline",
+  "previewLayout": "logos",
+  "proves": "Logos as a grid array with the company name as the accessible text \u00b7 monochrome treatment and marquee as design",
+  "schema": {
+   "name": "logoWallHero",
+   "title": "Logo wall hero",
+   "kind": "block",
+   "icon": "badges",
+   "category": "Heroes",
+   "description": "A headline with a strip of customer logos under it.",
+   "variants": [
+    {
+     "id": "strip",
+     "name": "Single strip"
+    },
+    {
+     "id": "grid",
+     "name": "Grid",
+     "description": "Two or three rows of logos"
+    }
+   ],
+   "preview": {
+    "title": "heading",
+    "subtitle": "logosLabel"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "media",
+     "title": "Media"
+    },
+    {
+     "name": "design",
+     "title": "Design"
+    }
+   ],
+   "fields": [
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "validation": {
+      "required": true,
+      "max": 100,
+      "recommendedMax": 56
+     },
+     "ai": true,
+     "localized": true
+    },
+    {
+     "name": "subheading",
+     "title": "Subheading",
+     "type": "text",
+     "rows": 2,
+     "validation": {
+      "recommendedMax": 160
+     },
+     "ai": true,
+     "localized": true
+    },
+    {
+     "name": "primaryButton",
+     "title": "Primary button",
+     "type": "button"
+    },
+    {
+     "name": "secondaryButton",
+     "title": "Secondary button",
+     "type": "button"
+    },
+    {
+     "name": "logosLabel",
+     "title": "Logo row label",
+     "type": "string",
+     "validation": {
+      "max": 60
+     },
+     "placeholder": "Trusted by 4,000 engineering teams"
+    },
+    {
+     "name": "logos",
+     "title": "Logos",
+     "type": "array",
+     "group": "media",
+     "itemNoun": "logo",
+     "arrayLayout": "grid",
+     "validation": {
+      "min": 4,
+      "max": 18
+     },
+     "of": [
+      {
+       "name": "customerLogo",
+       "title": "Logo",
+       "type": "object",
+       "icon": "building",
+       "preview": {
+        "title": "name",
+        "media": "logo",
+        "fallback": "Untitled logo"
+       },
+       "fields": [
+        {
+         "name": "name",
+         "title": "Company",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 40
+         },
+         "description": "Not shown. Read by screen readers in place of the logo."
+        },
+        {
+         "name": "logo",
+         "title": "Logo",
+         "type": "image",
+         "validation": {
+          "required": true
+         },
+         "description": ""
+        },
+        {
+         "name": "link",
+         "title": "Case study",
+         "type": "link"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "treatment",
+     "title": "Logo color",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "mono",
+     "options": [
+      {
+       "value": "mono",
+       "label": "One color"
+      },
+      {
+       "value": "original",
+       "label": "Original"
+      }
+     ]
+    },
+    {
+     "name": "motion",
+     "title": "Motion",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "static",
+     "options": [
+      {
+       "value": "static",
+       "label": "Still"
+      },
+      {
+       "value": "marquee",
+       "label": "Scrolling"
+      }
+     ]
+    },
+    {
+     "name": "speed",
+     "title": "Scroll speed",
+     "type": "number",
+     "group": "design",
+     "layout": "slider",
+     "hidden": {
+      "field": "motion",
+      "equals": "marquee"
+     },
+     "numeric": {
+      "min": 10,
+      "max": 60,
+      "step": 5,
+      "unit": "s per loop"
+     },
+     "initialValue": 30
+    },
+    {
+     "name": "theme",
+     "title": "Theme",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "dark",
+     "options": [
+      {
+       "value": "light",
+       "label": "Light"
+      },
+      {
+       "value": "dark",
+       "label": "Dark"
+      },
+      {
+       "value": "brand",
+       "label": "Brand"
+      }
+     ]
+    }
+   ]
+  },
+  "value": {
+   "_variant": "strip",
+   "heading": "Observability your on-call rotation will thank you for.",
+   "subheading": "Traces, logs and deploys in one timeline, with alerts that say what broke \u2014 not just that something did.",
+   "primaryButton": {
+    "label": "Start free",
+    "href": "https://app.tideline.dev/signup",
+    "type": "url",
+    "style": "primary"
+   },
+   "secondaryButton": {
+    "label": "See pricing",
+    "href": "/pricing",
+    "type": "page",
+    "style": "link",
+    "arrow": true
+   },
+   "logosLabel": "Trusted by 4,000 engineering teams",
+   "logos": [
+    {
+     "_key": "l1",
+     "name": "Caldera",
+     "logo": {
+      "url": "https://picsum.photos/seed/logo-caldera/320/120",
+      "alt": "Caldera",
+      "name": "logo-caldera.jpg",
+      "width": 320,
+      "height": 120
+     },
+     "link": {
+      "type": "page",
+      "href": "/customers/caldera",
+      "title": "Caldera case study"
+     }
+    },
+    {
+     "_key": "l2",
+     "name": "Hearth & Ash",
+     "logo": {
+      "url": "https://picsum.photos/seed/logo-hearth/320/120",
+      "alt": "Hearth & Ash",
+      "name": "logo-hearth.jpg",
+      "width": 320,
+      "height": 120
+     }
+    },
+    {
+     "_key": "l3",
+     "name": "Open Water Trust",
+     "logo": {
+      "url": "https://picsum.photos/seed/logo-owt/320/120",
+      "alt": "Open Water Trust",
+      "name": "logo-owt.jpg",
+      "width": 320,
+      "height": 120
+     }
+    },
+    {
+     "_key": "l4",
+     "name": "Northbound Studio",
+     "logo": {
+      "url": "https://picsum.photos/seed/logo-northbound/320/120",
+      "alt": "Northbound Studio",
+      "name": "logo-northbound.jpg",
+      "width": 320,
+      "height": 120
+     }
+    },
+    {
+     "_key": "l5",
+     "name": "Ferrous Labs",
+     "logo": {
+      "url": "https://picsum.photos/seed/logo-ferrous/320/120",
+      "alt": "Ferrous Labs",
+      "name": "logo-ferrous.jpg",
+      "width": 320,
+      "height": 120
+     }
+    },
+    {
+     "_key": "l6",
+     "name": "Kestrel Freight",
+     "logo": {
+      "url": "https://picsum.photos/seed/logo-kestrel/320/120",
+      "alt": "Kestrel Freight",
+      "name": "logo-kestrel.jpg",
+      "width": 320,
+      "height": 120
+     },
+     "link": {
+      "type": "page",
+      "href": "/customers/kestrel",
+      "title": "Kestrel Freight case study"
+     }
+    }
+   ],
+   "treatment": "mono",
+   "motion": "marquee",
+   "speed": 30,
+   "theme": "dark"
+  }
+ },
+ {
+  "id": "hero-split-testimonial",
+  "name": "Split hero with testimonial card",
+  "category": "Heroes",
+  "kind": "block",
+  "brand": "Caldera",
+  "previewLayout": "split",
+  "proves": "Pick from the Testimonials collection OR write one here \u2014 a conditional reference/inline pair inside an object",
+  "schema": {
+   "name": "testimonialHero",
+   "title": "Testimonial hero",
+   "kind": "block",
+   "icon": "message-circle-2",
+   "category": "Heroes",
+   "description": "Copy and buttons beside a photo, with a customer quote card overlapping it.",
+   "variants": [
+    {
+     "id": "overlap",
+     "name": "Card over photo"
+    },
+    {
+     "id": "under-copy",
+     "name": "Card under the copy"
+    }
+   ],
+   "preview": {
+    "title": "heading",
+    "subtitle": "eyebrow",
+    "media": "image"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "media",
+     "title": "Media"
+    },
+    {
+     "name": "design",
+     "title": "Design"
+    }
+   ],
+   "fields": [
+    {
+     "name": "eyebrow",
+     "title": "Eyebrow",
+     "type": "string",
+     "validation": {
+      "max": 40
+     }
+    },
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "validation": {
+      "required": true,
+      "max": 100,
+      "recommendedMax": 60
+     },
+     "ai": true,
+     "localized": true
+    },
+    {
+     "name": "body",
+     "title": "Body",
+     "type": "text",
+     "rows": 3,
+     "validation": {
+      "recommendedMax": 180
+     },
+     "ai": true,
+     "localized": true
+    },
+    {
+     "name": "primaryButton",
+     "title": "Primary button",
+     "type": "button"
+    },
+    {
+     "name": "secondaryButton",
+     "title": "Secondary button",
+     "type": "button"
+    },
+    {
+     "name": "testimonial",
+     "title": "Testimonial",
+     "type": "object",
+     "icon": "quote",
+     "openMode": "drill",
+     "fields": [
+      {
+       "name": "source",
+       "title": "Quote from",
+       "type": "select",
+       "layout": "segmented",
+       "initialValue": "collection",
+       "options": [
+        {
+         "value": "collection",
+         "label": "Testimonials"
+        },
+        {
+         "value": "custom",
+         "label": "Write one here"
+        }
+       ]
+      },
+      {
+       "name": "entry",
+       "title": "Testimonial",
+       "type": "reference",
+       "reference": {
+        "to": [
+         "col_testimonials"
+        ]
+       },
+       "hidden": {
+        "field": "source",
+        "equals": "collection"
+       },
+       "validation": {
+        "required": true
+       }
+      },
+      {
+       "name": "quote",
+       "title": "Quote",
+       "type": "text",
+       "rows": 3,
+       "hidden": {
+        "field": "source",
+        "equals": "custom"
+       },
+       "validation": {
+        "required": true,
+        "recommendedMax": 160
+       }
+      },
+      {
+       "name": "name",
+       "title": "Name",
+       "type": "string",
+       "hidden": {
+        "field": "source",
+        "equals": "custom"
+       },
+       "validation": {
+        "required": true,
+        "max": 40
+       }
+      },
+      {
+       "name": "role",
+       "title": "Role",
+       "type": "string",
+       "hidden": {
+        "field": "source",
+        "equals": "custom"
+       },
+       "validation": {
+        "max": 60
+       },
+       "placeholder": "Backcountry guide, Montana"
+      },
+      {
+       "name": "photo",
+       "title": "Photo",
+       "type": "image",
+       "hidden": {
+        "field": "source",
+        "equals": "custom"
+       }
+      },
+      {
+       "name": "rating",
+       "title": "Rating",
+       "type": "rating",
+       "hidden": {
+        "field": "source",
+        "equals": "custom"
+       }
+      }
+     ]
+    },
+    {
+     "name": "image",
+     "title": "Image",
+     "type": "image",
+     "group": "media",
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "theme",
+     "title": "Theme",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "light",
+     "options": [
+      {
+       "value": "light",
+       "label": "Light"
+      },
+      {
+       "value": "dark",
+       "label": "Dark"
+      },
+      {
+       "value": "brand",
+       "label": "Brand"
+      }
+     ]
+    }
+   ]
+  },
+  "value": {
+   "_variant": "overlap",
+   "eyebrow": "Made in Bend, Oregon",
+   "heading": "Cookware that gets better every time it meets a fire.",
+   "body": "Every Caldera pan is cast, machined and seasoned by twelve people in one workshop \u2014 and guaranteed for life.",
+   "primaryButton": {
+    "label": "Shop cookware",
+    "href": "/products",
+    "type": "page",
+    "style": "primary",
+    "arrow": true
+   },
+   "secondaryButton": {
+    "label": "Visit the workshop",
+    "href": "/about#workshop",
+    "type": "page",
+    "style": "link"
+   },
+   "testimonial": {
+    "source": "collection",
+    "entry": "ts_maya"
+   },
+   "image": {
+    "url": "https://picsum.photos/seed/caldera-workshop/1600/2000",
+    "alt": "A worker pouring molten iron into a skillet mould in the Bend workshop",
+    "name": "caldera-workshop.jpg",
+    "width": 1600,
+    "height": 2000
+   },
+   "theme": "light"
+  }
+ },
+ {
+  "id": "hero-event",
+  "name": "Event hero",
+  "category": "Heroes",
+  "kind": "block",
+  "brand": "Open Water Trust",
+  "previewLayout": "split",
+  "proves": "Date/time with zone \u00b7 in-person/online/hybrid venue with conditional map or stream \u00b7 sold-out swap \u00b7 Event data from content",
+  "schema": {
+   "name": "eventHero",
+   "title": "Event hero",
+   "kind": "block",
+   "icon": "calendar-event",
+   "category": "Heroes",
+   "description": "Event name, date, place, a countdown and the register button.",
+   "preview": {
+    "title": "heading",
+    "subtitle": "startsAt",
+    "media": "image"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "when",
+     "title": "When & where"
+    },
+    {
+     "name": "tickets",
+     "title": "Tickets"
+    },
+    {
+     "name": "design",
+     "title": "Design"
+    }
+   ],
+   "fields": [
+    {
+     "name": "eyebrow",
+     "title": "Eyebrow",
+     "type": "string",
+     "validation": {
+      "max": 40
+     }
+    },
+    {
+     "name": "heading",
+     "title": "Event name",
+     "type": "string",
+     "validation": {
+      "required": true,
+      "max": 100,
+      "recommendedMax": 48
+     },
+     "ai": true,
+     "localized": true
+    },
+    {
+     "name": "body",
+     "title": "Body",
+     "type": "text",
+     "rows": 3,
+     "validation": {
+      "recommendedMax": 160
+     },
+     "ai": true,
+     "localized": true
+    },
+    {
+     "name": "image",
+     "title": "Image",
+     "type": "image",
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "startsAt",
+     "title": "Starts",
+     "type": "datetime",
+     "group": "when",
+     "validation": {
+      "required": true
+     },
+     "description": "In the event's own time zone. Visitors see it converted."
+    },
+    {
+     "name": "endsAt",
+     "title": "Ends",
+     "type": "datetime",
+     "group": "when"
+    },
+    {
+     "name": "format",
+     "title": "Format",
+     "type": "select",
+     "group": "when",
+     "layout": "segmented",
+     "initialValue": "in-person",
+     "options": [
+      {
+       "value": "in-person",
+       "label": "In person"
+      },
+      {
+       "value": "online",
+       "label": "Online"
+      },
+      {
+       "value": "hybrid",
+       "label": "Hybrid"
+      }
+     ]
+    },
+    {
+     "name": "venue",
+     "title": "Venue",
+     "type": "string",
+     "group": "when",
+     "hidden": {
+      "field": "format",
+      "equals": [
+       "in-person",
+       "hybrid"
+      ]
+     },
+     "validation": {
+      "required": true,
+      "max": 60
+     }
+    },
+    {
+     "name": "address",
+     "title": "Address",
+     "type": "text",
+     "group": "when",
+     "rows": 2,
+     "hidden": {
+      "field": "format",
+      "equals": [
+       "in-person",
+       "hybrid"
+      ]
+     }
+    },
+    {
+     "name": "location",
+     "title": "Map pin",
+     "type": "geopoint",
+     "group": "when",
+     "hidden": {
+      "field": "format",
+      "equals": [
+       "in-person",
+       "hybrid"
+      ]
+     }
+    },
+    {
+     "name": "stream",
+     "title": "Stream link",
+     "type": "link",
+     "group": "when",
+     "hidden": {
+      "field": "format",
+      "equals": [
+       "online",
+       "hybrid"
+      ]
+     },
+     "description": "Shown on the page only once the event starts."
+    },
+    {
+     "name": "showCountdown",
+     "title": "Show a countdown",
+     "type": "boolean",
+     "group": "when",
+     "initialValue": true
+    },
+    {
+     "name": "status",
+     "title": "Ticket status",
+     "type": "select",
+     "group": "tickets",
+     "layout": "radio",
+     "initialValue": "on-sale",
+     "options": [
+      {
+       "value": "on-sale",
+       "label": "On sale"
+      },
+      {
+       "value": "few-left",
+       "label": "Few left",
+       "description": "Adds a \u2018Few tickets left\u2019 note"
+      },
+      {
+       "value": "sold-out",
+       "label": "Sold out",
+       "description": "Swaps the button for a waitlist"
+      },
+      {
+       "value": "cancelled",
+       "label": "Cancelled"
+      }
+     ]
+    },
+    {
+     "name": "registerButton",
+     "title": "Register button",
+     "type": "button",
+     "group": "tickets",
+     "hidden": {
+      "field": "status",
+      "equals": [
+       "on-sale",
+       "few-left"
+      ]
+     },
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "price",
+     "title": "Price line",
+     "type": "string",
+     "group": "tickets",
+     "hidden": {
+      "field": "status",
+      "equals": [
+       "on-sale",
+       "few-left"
+      ]
+     },
+     "validation": {
+      "max": 48
+     },
+     "placeholder": "From $150 \u00b7 Tables of 8 available"
+    },
+    {
+     "name": "waitlistButton",
+     "title": "Waitlist button",
+     "type": "button",
+     "group": "tickets",
+     "hidden": {
+      "field": "status",
+      "equals": "sold-out"
+     },
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "cancelNote",
+     "title": "Cancellation note",
+     "type": "text",
+     "group": "tickets",
+     "rows": 2,
+     "hidden": {
+      "field": "status",
+      "equals": "cancelled"
+     },
+     "validation": {
+      "required": true,
+      "max": 200
+     }
+    },
+    {
+     "name": "overlay",
+     "title": "Image overlay",
+     "type": "number",
+     "group": "design",
+     "layout": "slider",
+     "numeric": {
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "%"
+     },
+     "initialValue": 35
+    },
+    {
+     "name": "theme",
+     "title": "Theme",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "dark",
+     "options": [
+      {
+       "value": "light",
+       "label": "Light"
+      },
+      {
+       "value": "dark",
+       "label": "Dark"
+      },
+      {
+       "value": "brand",
+       "label": "Brand"
+      }
+     ]
+    }
+   ]
+  },
+  "value": {
+   "eyebrow": "Annual benefit",
+   "heading": "Headwaters Gala 2026",
+   "body": "An evening on the river for the people who keep it running \u2014 dinner by Hearth & Ash, a film premiere and a live auction.",
+   "image": {
+    "url": "https://picsum.photos/seed/owt-gala/2400/1400",
+    "alt": "Long tables set on a riverbank at sunset with lanterns",
+    "name": "owt-gala.jpg",
+    "width": 2400,
+    "height": 1400
+   },
+   "startsAt": "2026-11-14T18:00:00-08:00[America/Los_Angeles]",
+   "endsAt": "2026-11-14T22:30:00-08:00[America/Los_Angeles]",
+   "format": "hybrid",
+   "venue": "The Old Mill at Iron Gate",
+   "address": "5000 Copco Rd\nHornbrook, CA 96044",
+   "location": {
+    "label": "The Old Mill at Iron Gate",
+    "address": "5000 Copco Rd, Hornbrook, CA 96044",
+    "lat": 41.931,
+    "lng": -122.437
+   },
+   "stream": {
+    "type": "url",
+    "href": "https://live.openwatertrust.org/gala-2026",
+    "newTab": true
+   },
+   "showCountdown": true,
+   "status": "few-left",
+   "registerButton": {
+    "label": "Get tickets",
+    "href": "https://openwatertrust.org/gala/tickets",
+    "type": "url",
+    "style": "primary"
+   },
+   "price": "From $150 \u00b7 Tables of 8 available",
+   "waitlistButton": {
+    "label": "Join the waitlist",
+    "href": "/gala/waitlist",
+    "type": "page",
+    "style": "outline"
+   },
+   "overlay": 50,
+   "theme": "dark"
+  }
+ },
+ {
+  "id": "hero-personalized",
+  "name": "Personalized hero (audiences + A/B)",
+  "category": "Heroes",
+  "kind": "block",
+  "brand": "Tideline",
+  "previewLayout": "split",
+  "proves": "Default content + audience versions that override only what they set \u00b7 rule types with conditional inputs \u00b7 an experiment split",
+  "schema": {
+   "name": "audienceHero",
+   "title": "Audience hero",
+   "kind": "block",
+   "icon": "target",
+   "category": "Heroes",
+   "description": "One hero with versions for different audiences, and an optional A/B test.",
+   "preview": {
+    "title": "heading",
+    "subtitle": "eyebrow",
+    "media": "image"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Everyone",
+     "default": true
+    },
+    {
+     "name": "audiences",
+     "title": "Audiences"
+    },
+    {
+     "name": "experiment",
+     "title": "Experiment"
+    },
+    {
+     "name": "design",
+     "title": "Design"
+    }
+   ],
+   "fields": [
+    {
+     "name": "eyebrow",
+     "title": "Eyebrow",
+     "type": "string",
+     "validation": {
+      "max": 40
+     }
+    },
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "validation": {
+      "required": true,
+      "max": 100,
+      "recommendedMax": 60
+     },
+     "ai": true,
+     "localized": true
+    },
+    {
+     "name": "body",
+     "title": "Body",
+     "type": "text",
+     "rows": 3,
+     "validation": {
+      "recommendedMax": 180
+     },
+     "ai": true,
+     "localized": true
+    },
+    {
+     "name": "primaryButton",
+     "title": "Primary button",
+     "type": "button"
+    },
+    {
+     "name": "image",
+     "title": "Image",
+     "type": "image",
+     "group": "content"
+    },
+    {
+     "name": "audiences",
+     "title": "Audience versions",
+     "type": "array",
+     "group": "audiences",
+     "itemNoun": "audience",
+     "validation": {
+      "max": 5
+     },
+     "description": "Checked top to bottom; the first match wins.",
+     "of": [
+      {
+       "name": "audience",
+       "title": "Audience",
+       "type": "object",
+       "icon": "user-search",
+       "preview": {
+        "title": "name",
+        "subtitle": "rule.type",
+        "fallback": "Untitled audience"
+       },
+       "fields": [
+        {
+         "name": "name",
+         "title": "Name",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 40
+         },
+         "description": "Only editors see this."
+        },
+        {
+         "name": "rule",
+         "title": "Who sees it",
+         "type": "object",
+         "icon": "filter",
+         "openMode": "drill",
+         "fields": [
+          {
+           "name": "type",
+           "title": "Match by",
+           "type": "select",
+           "validation": {
+            "required": true
+           },
+           "options": [
+            {
+             "value": "utm_campaign",
+             "label": "Ad campaign (utm_campaign)"
+            },
+            {
+             "value": "referrer",
+             "label": "Came from a site"
+            },
+            {
+             "value": "country",
+             "label": "Country"
+            },
+            {
+             "value": "returning",
+             "label": "Returning visitor",
+             "description": "Visited in the last 30 days"
+            },
+            {
+             "value": "segment",
+             "label": "CRM segment"
+            }
+           ]
+          },
+          {
+           "name": "match",
+           "title": "Contains",
+           "type": "string",
+           "hidden": {
+            "field": "type",
+            "equals": [
+             "utm_campaign",
+             "referrer"
+            ]
+           },
+           "validation": {
+            "required": true,
+            "max": 80
+           },
+           "placeholder": "k8s-launch"
+          },
+          {
+           "name": "countries",
+           "title": "Countries",
+           "type": "multiselect",
+           "hidden": {
+            "field": "type",
+            "equals": "country"
+           },
+           "validation": {
+            "min": 1
+           },
+           "options": [
+            {
+             "value": "US",
+             "label": "United States"
+            },
+            {
+             "value": "GB",
+             "label": "United Kingdom"
+            },
+            {
+             "value": "DE",
+             "label": "Germany"
+            },
+            {
+             "value": "IN",
+             "label": "India"
+            },
+            {
+             "value": "JP",
+             "label": "Japan"
+            }
+           ]
+          },
+          {
+           "name": "segment",
+           "title": "Segment",
+           "type": "select",
+           "hidden": {
+            "field": "type",
+            "equals": "segment"
+           },
+           "validation": {
+            "required": true
+           },
+           "options": [
+            {
+             "value": "enterprise",
+             "label": "Enterprise accounts (1,000+ staff)"
+            },
+            {
+             "value": "trial",
+             "label": "Active trials"
+            },
+            {
+             "value": "churned",
+             "label": "Cancelled in the last 90 days"
+            }
+           ]
+          }
+         ]
+        },
+        {
+         "name": "eyebrow",
+         "title": "Eyebrow",
+         "type": "string",
+         "validation": {
+          "max": 40
+         },
+         "description": "Leave empty to keep the Everyone version."
+        },
+        {
+         "name": "heading",
+         "title": "Heading",
+         "type": "string",
+         "validation": {
+          "max": 100,
+          "recommendedMax": 60
+         },
+         "ai": true,
+         "description": "Leave empty to keep the Everyone version."
+        },
+        {
+         "name": "body",
+         "title": "Body",
+         "type": "text",
+         "rows": 3,
+         "validation": {
+          "recommendedMax": 180
+         },
+         "ai": true,
+         "description": "Leave empty to keep the Everyone version."
+        },
+        {
+         "name": "primaryButton",
+         "title": "Primary button",
+         "type": "button",
+         "description": "Leave empty to keep the Everyone version."
+        },
+        {
+         "name": "image",
+         "title": "Image",
+         "type": "image",
+         "description": "Leave empty to keep the Everyone version."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "test",
+     "title": "A/B test",
+     "type": "object",
+     "group": "experiment",
+     "icon": "flask",
+     "openMode": "drill",
+     "fields": [
+      {
+       "name": "isRunning",
+       "title": "Run a test",
+       "type": "boolean"
+      },
+      {
+       "name": "share",
+       "title": "Share seeing the new version",
+       "type": "number",
+       "layout": "slider",
+       "hidden": {
+        "field": "isRunning",
+        "equals": true
+       },
+       "numeric": {
+        "min": 10,
+        "max": 90,
+        "step": 5,
+        "unit": "%"
+       },
+       "initialValue": 50
+      },
+      {
+       "name": "goal",
+       "title": "Success means",
+       "type": "select",
+       "hidden": {
+        "field": "isRunning",
+        "equals": true
+       },
+       "validation": {
+        "required": true
+       },
+       "options": [
+        {
+         "value": "primary-click",
+         "label": "Clicked the primary button"
+        },
+        {
+         "value": "signup",
+         "label": "Started a trial"
+        },
+        {
+         "value": "demo",
+         "label": "Booked a demo"
+        }
+       ]
+      },
+      {
+       "name": "endsOn",
+       "title": "Stop on",
+       "type": "date",
+       "hidden": {
+        "field": "isRunning",
+        "equals": true
+       }
+      }
+     ]
+    },
+    {
+     "name": "theme",
+     "title": "Theme",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "light",
+     "options": [
+      {
+       "value": "light",
+       "label": "Light"
+      },
+      {
+       "value": "dark",
+       "label": "Dark"
+      },
+      {
+       "value": "brand",
+       "label": "Brand"
+      }
+     ]
+    }
+   ]
+  },
+  "value": {
+   "eyebrow": "Observability for on-call teams",
+   "heading": "See why production is slow in one view, not twelve tabs.",
+   "body": "Tideline links traces, logs and deploys so the person holding the pager finds the cause in minutes.",
+   "primaryButton": {
+    "label": "Start free",
+    "href": "https://app.tideline.dev/signup",
+    "type": "url",
+    "style": "primary"
+   },
+   "image": {
+    "url": "https://picsum.photos/seed/tideline-timeline/2400/1500",
+    "alt": "Tideline timeline showing a latency spike right after a deploy",
+    "name": "tideline-timeline.jpg",
+    "width": 2400,
+    "height": 1500
+   },
+   "audiences": [
+    {
+     "_key": "a1",
+     "name": "Kubernetes ad campaign",
+     "rule": {
+      "type": "utm_campaign",
+      "match": "k8s-launch"
+     },
+     "eyebrow": "New: Kubernetes traces",
+     "heading": "Every pod, every span, one timeline.",
+     "primaryButton": {
+      "label": "Try it on your cluster",
+      "href": "https://app.tideline.dev/signup?template=k8s",
+      "type": "url",
+      "style": "primary"
+     }
+    },
+    {
+     "_key": "a2",
+     "name": "Enterprise visitors",
+     "rule": {
+      "type": "segment",
+      "segment": "enterprise"
+     },
+     "heading": "Observability that passes your security review.",
+     "body": "SOC 2 Type II, SSO and SCIM, EU data residency and a named engineer from day one.",
+     "primaryButton": {
+      "label": "Talk to sales",
+      "href": "/contact-sales",
+      "type": "page",
+      "style": "primary"
+     }
+    },
+    {
+     "_key": "a3",
+     "name": "Returning visitors",
+     "rule": {
+      "type": "returning"
+     },
+     "eyebrow": "Welcome back",
+     "primaryButton": {
+      "label": "Pick up your trial",
+      "href": "https://app.tideline.dev/login",
+      "type": "url",
+      "style": "primary"
+     }
+    }
+   ],
+   "test": {
+    "isRunning": true,
+    "share": 50,
+    "goal": "signup",
+    "endsOn": "2026-11-01"
+   },
+   "theme": "dark"
+  }
+ }
+]

@@ -1,0 +1,244 @@
+---
+---
+
+<section id="product-compare-slider" class="section compare" data-variant="slider" data-mobile="swipe" data-sticky-header="true">
+  <!-- kit: product-compare-slider -->
+  <div class="container">
+    <div class="compare__head">
+      <div>
+        <h2>Which one comes camping?</h2>
+        <p class="lead">Three pieces, three kinds of trip. Here's how they stack up.</p>
+      </div>
+      <div class="compare__arrows">
+        <button type="button" class="compare__arrow" data-dir="-1" aria-label="Previous product">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6" /></svg>
+        </button>
+        <button type="button" class="compare__arrow" data-dir="1" aria-label="Next product">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6" /></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="compare__track" tabindex="0" aria-label="Product comparison, scroll sideways for more">
+      <article class="compare__card card is-recommended" data-product="en_p1">
+        <div class="compare__top">
+          <span class="badge">Recommended</span>
+          <img src="https://picsum.photos/seed/caldera-cable-fold-grill/800/600" alt="The Cable Fold Grill opened over a fire ring" width="800" height="600" loading="lazy" />
+          <h3><a href="/products/cable-fold">Cable Fold Grill</a></h3>
+        </div>
+        <dl class="compare__attrs">
+          <div class="is-diff"><dt>Weight</dt><dd>1.1 kg</dd></div>
+          <div><dt><abbr title="Measured folded or nested, without the sleeve.">Packed</abbr></dt><dd>40 × 40 × 2 cm</dd></div>
+          <div class="is-diff"><dt>Heat rating</dt><dd>Open fire, up to 900°F</dd></div>
+          <div><dt>Induction</dt><dd>No</dd></div>
+          <div><dt>Best for</dt><dd>Group trips, car camping</dd></div>
+          <div><dt>Warranty</dt><dd>Lifetime</dd></div>
+          <div><dt>Price</dt><dd class="compare__price">$89</dd></div>
+        </dl>
+        <form action="/cart" method="post" class="compare__cart">
+          <input type="hidden" name="product" value="en_p1" />
+          <button class="btn btn-primary" type="submit">Add to cart</button>
+        </form>
+      </article>
+
+      <article class="compare__card card" data-product="en_p2">
+        <div class="compare__top">
+          <img src="https://picsum.photos/seed/caldera-ember-dutch-oven/800/600" alt="The Ember Dutch Oven on a bed of coals" width="800" height="600" loading="lazy" />
+          <h3><a href="/products/ember-dutch-oven">Ember Dutch Oven 5.5qt</a></h3>
+        </div>
+        <dl class="compare__attrs">
+          <div class="is-diff"><dt>Weight</dt><dd>6.2 kg</dd></div>
+          <div><dt><abbr title="Measured folded or nested, without the sleeve.">Packed</abbr></dt><dd>32 × 28 × 17 cm</dd></div>
+          <div class="is-diff"><dt>Heat rating</dt><dd>Coals, fire and oven, up to 700°F</dd></div>
+          <div><dt>Induction</dt><dd>Yes</dd></div>
+          <div><dt>Best for</dt><dd>Stews, bread, base camp</dd></div>
+          <div><dt>Warranty</dt><dd>Lifetime</dd></div>
+          <div><dt>Price</dt><dd class="compare__price">$165</dd></div>
+        </dl>
+        <form action="/cart" method="post" class="compare__cart">
+          <input type="hidden" name="product" value="en_p2" />
+          <button class="btn btn-secondary" type="submit">Add to cart</button>
+        </form>
+      </article>
+
+      <article class="compare__card card" data-product="en_p3">
+        <div class="compare__top">
+          <img src="https://picsum.photos/seed/caldera-ridge-skillet/800/600" alt="The Ridge Skillet with a seared steak" width="800" height="600" loading="lazy" />
+          <h3><a href="/products/ridge-skillet-10">Ridge Skillet 10"</a></h3>
+        </div>
+        <dl class="compare__attrs">
+          <div class="is-diff"><dt>Weight</dt><dd>2.4 kg</dd></div>
+          <div><dt><abbr title="Measured folded or nested, without the sleeve.">Packed</abbr></dt><dd>41 × 27 × 5 cm</dd></div>
+          <div class="is-diff"><dt>Heat rating</dt><dd>Stove, oven and fire, up to 650°F</dd></div>
+          <div><dt>Induction</dt><dd>Yes</dd></div>
+          <div><dt>Best for</dt><dd>Everyday, stove to fire</dd></div>
+          <div><dt>Warranty</dt><dd>Lifetime</dd></div>
+          <div><dt>Price</dt><dd class="compare__price">$72</dd></div>
+        </dl>
+        <form action="/cart" method="post" class="compare__cart">
+          <input type="hidden" name="product" value="en_p3" />
+          <button class="btn btn-secondary" type="submit">Add to cart</button>
+        </form>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+  .compare__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .compare__arrows {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .compare__arrow {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    background: var(--bg);
+    color: var(--ink);
+    cursor: pointer;
+  }
+
+  .compare__track {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: calc((100% - 3rem) / 3);
+    gap: 1.5rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 0.5rem;
+    scrollbar-width: thin;
+  }
+
+  .compare__card {
+    display: flex;
+    flex-direction: column;
+    scroll-snap-align: start;
+  }
+
+  .compare__card.is-recommended {
+    border-color: var(--brand);
+    box-shadow: 0 0 0 2px var(--brand-soft);
+  }
+
+  .compare__top {
+    position: relative;
+    padding: 1rem 1rem 0;
+  }
+
+  .compare__top .badge {
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+    z-index: 1;
+    background: var(--brand);
+    color: #fff;
+  }
+
+  .compare__top img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+  }
+
+  .compare__top h3 {
+    margin: 1rem 0 0.5rem;
+  }
+
+  .compare__top h3 a {
+    text-decoration: none;
+  }
+
+  .compare__attrs {
+    flex: 1;
+    margin: 0;
+    padding: 0 1rem;
+  }
+
+  .compare__attrs > div {
+    display: grid;
+    gap: 0.1rem;
+    padding: 0.7rem 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .compare__attrs dt {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+
+  .compare__attrs abbr {
+    text-decoration: underline dotted;
+    cursor: help;
+  }
+
+  .compare__attrs dd {
+    margin: 0;
+    font-weight: 500;
+  }
+
+  .compare__attrs .is-diff dd {
+    color: var(--accent);
+  }
+
+  .compare__price {
+    font-size: 1.25rem;
+    font-weight: 700 !important;
+  }
+
+  .compare__cart {
+    padding: 1rem;
+  }
+
+  .compare__cart .btn {
+    width: 100%;
+  }
+
+  @media (max-width: 900px) {
+    .compare__track {
+      grid-auto-columns: 46%;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .compare__track {
+      grid-auto-columns: 84%;
+    }
+
+    .compare__head {
+      flex-direction: column;
+      align-items: start;
+    }
+  }
+</style>
+
+<script is:inline>
+  (() => {
+    const root = document.getElementById("product-compare-slider");
+    if (!root) return;
+    const track = root.querySelector(".compare__track");
+    root.querySelectorAll(".compare__arrow").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const card = track.querySelector(".compare__card");
+        const step = card ? card.getBoundingClientRect().width + 24 : 300;
+        track.scrollBy({ left: Number(btn.dataset.dir) * step, behavior: "smooth" });
+      });
+    });
+    root.querySelectorAll(".compare__cart").forEach((f) => f.addEventListener("submit", (e) => e.preventDefault()));
+  })();
+</script>

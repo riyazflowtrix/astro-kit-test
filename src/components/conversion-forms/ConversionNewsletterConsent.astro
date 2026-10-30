@@ -1,0 +1,178 @@
+---
+---
+
+<section id="conversion-newsletter-consent" class="section section--muted newsletter" data-variant="inline">
+  <!-- kit: conversion-newsletter-consent -->
+  <div class="container">
+    <div class="newsletter__card card">
+      <figure class="newsletter__media">
+        <img
+          src="https://picsum.photos/seed/caldera-newsletter-paella/1200/900"
+          alt="A paella pan over a fire with friends reaching in with spoons"
+          width="1200"
+          height="900"
+          loading="lazy"
+        />
+      </figure>
+      <div class="newsletter__body">
+        <h2>Recipes from the fire, once a month</h2>
+        <p class="lead">One campfire recipe, one care tip and first word on new gear. No daily emails, ever.</p>
+
+        <form class="newsletter__form" action="#" method="post" data-form="form_newsletter" data-consent="checkbox">
+          <div class="newsletter__row">
+            <div class="field newsletter__email">
+              <label for="nl-email">Email address</label>
+              <input id="nl-email" name="email" type="email" placeholder="you@example.com" autocomplete="email" required />
+            </div>
+            <button class="btn btn-primary" type="submit">Subscribe</button>
+          </div>
+
+          <fieldset class="newsletter__interests">
+            <legend>I'd like to hear about</legend>
+            <label class="chip"><input type="checkbox" name="tags" value="recipes" /> <span>Recipes</span></label>
+            <label class="chip"><input type="checkbox" name="tags" value="launches" /> <span>New gear</span></label>
+            <label class="chip"><input type="checkbox" name="tags" value="restocks" /> <span>Restocks</span></label>
+          </fieldset>
+
+          <label class="newsletter__consent">
+            <input type="checkbox" name="consent" required />
+            <span>Yes, email me the monthly letter. Unsubscribe in one click. See our <a href="/privacy">privacy policy</a>.</span>
+          </label>
+        </form>
+
+        <div class="newsletter__success" role="status" hidden>
+          <p class="newsletter__success-msg">You're in. Check your inbox to confirm your email.</p>
+          <p class="newsletter__code">Your welcome code: <strong>FIRSTFIRE10</strong></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  #conversion-newsletter-consent [hidden] {
+    display: none !important;
+  }
+
+  .newsletter__card {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    box-shadow: var(--shadow);
+  }
+
+  .newsletter__media {
+    margin: 0;
+    min-height: 100%;
+  }
+
+  .newsletter__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .newsletter__body {
+    padding: clamp(1.5rem, 4vw, 3rem);
+  }
+
+  .newsletter__row {
+    display: flex;
+    gap: 0.75rem;
+    align-items: end;
+    flex-wrap: wrap;
+  }
+
+  .newsletter__email {
+    flex: 1 1 220px;
+  }
+
+  .newsletter__interests {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1.25rem 0;
+    padding: 0;
+    border: 0;
+  }
+
+  .newsletter__interests legend {
+    width: 100%;
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.8rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-size: 0.875rem;
+    cursor: pointer;
+  }
+
+  .chip:has(input:checked) {
+    border-color: var(--brand);
+    background: var(--brand-soft);
+  }
+
+  .newsletter__consent {
+    display: flex;
+    gap: 0.6rem;
+    align-items: flex-start;
+    font-size: 0.875rem;
+    color: var(--ink-2);
+  }
+
+  .newsletter__consent input {
+    margin-top: 0.3rem;
+  }
+
+  .newsletter__success {
+    padding: 1.25rem;
+    border-radius: var(--radius);
+    background: #e8f4ec;
+    color: var(--success);
+  }
+
+  .newsletter__success p {
+    margin: 0;
+  }
+
+  .newsletter__code {
+    margin-top: 0.5rem !important;
+    color: var(--ink);
+  }
+
+  .newsletter__code strong {
+    font-family: var(--font-mono);
+    letter-spacing: 0.05em;
+  }
+
+  @media (max-width: 760px) {
+    .newsletter__card {
+      grid-template-columns: 1fr;
+    }
+
+    .newsletter__media img {
+      aspect-ratio: 16 / 9;
+    }
+  }
+</style>
+
+<script is:inline>
+  (() => {
+    const root = document.getElementById("conversion-newsletter-consent");
+    if (!root) return;
+    const form = root.querySelector("form");
+    const success = root.querySelector(".newsletter__success");
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (!form.reportValidity()) return;
+      form.hidden = true;
+      success.hidden = false;
+    });
+  })();
+</script>

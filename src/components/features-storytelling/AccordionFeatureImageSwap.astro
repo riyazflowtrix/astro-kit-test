@@ -1,0 +1,159 @@
+---
+---
+
+<section id="accordion-feature-image-swap" class="section accordion-feature-image-swap">
+  <!-- kit: accordion-feature-image-swap -->
+  <div class="container afs">
+    <div class="afs-copy">
+      <header class="afs-head">
+        <span class="eyebrow">The Ember Dutch Oven</span>
+        <h2>One pot for bread, braises and the whole weekend.</h2>
+      </header>
+
+      <div class="afs-items">
+        <div class="afs-item is-open">
+          <h3 class="afs-q">
+            <button type="button" id="afs-btn-1" aria-expanded="true" aria-controls="afs-panel-1" data-index="0">
+              <span>A lid that doubles as a skillet</span>
+              <span class="afs-chevron" aria-hidden="true"></span>
+            </button>
+          </h3>
+          <div class="afs-a" id="afs-panel-1" role="region" aria-labelledby="afs-btn-1">
+            <p>Flip the lid and it's a 10" shallow pan with its own handles. Bake bread underneath, fry eggs on top.</p>
+          </div>
+        </div>
+        <div class="afs-item">
+          <h3 class="afs-q">
+            <button type="button" id="afs-btn-2" aria-expanded="false" aria-controls="afs-panel-2" data-index="1">
+              <span>Legs for coals, flat for the stove</span>
+              <span class="afs-chevron" aria-hidden="true"></span>
+            </button>
+          </h3>
+          <div class="afs-a" id="afs-panel-2" role="region" aria-labelledby="afs-btn-2" hidden>
+            <p>Removable feet lift the pot over coals and screw off for induction and gas.</p>
+            <a class="afs-link" href="/journal/coal-cooking" title="Coal cooking">Coal cooking guide <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+        <div class="afs-item">
+          <h3 class="afs-q">
+            <button type="button" id="afs-btn-3" aria-expanded="false" aria-controls="afs-panel-3" data-index="2">
+              <span>A rim that holds 18 briquettes</span>
+              <span class="afs-chevron" aria-hidden="true"></span>
+            </button>
+          </h3>
+          <div class="afs-a" id="afs-panel-3" role="region" aria-labelledby="afs-btn-3" hidden>
+            <p>The raised lid rim keeps coals on top for even, oven-like heat — the way chuckwagon cooks did it.</p>
+          </div>
+        </div>
+        <div class="afs-item">
+          <h3 class="afs-q">
+            <button type="button" id="afs-btn-4" aria-expanded="false" aria-controls="afs-panel-4" data-index="3">
+              <span>5.5 quarts, sized for six</span>
+              <span class="afs-chevron" aria-hidden="true"></span>
+            </button>
+          </h3>
+          <div class="afs-a" id="afs-panel-4" role="region" aria-labelledby="afs-btn-4" hidden>
+            <p>Big enough for a whole chicken, small enough to carry from the car.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="afs-media">
+      <img class="is-active" data-index="0" src="https://picsum.photos/seed/ember-lid-skillet/1200/1200" alt="Eggs frying in the inverted Dutch oven lid over coals" width="1800" height="1800" loading="lazy" />
+      <img data-index="1" src="https://picsum.photos/seed/ember-legs/1200/1200" alt="Dutch oven standing on its feet over a bed of coals" width="1800" height="1800" loading="lazy" />
+      <img data-index="2" src="https://picsum.photos/seed/ember-briquettes/1200/1200" alt="Briquettes arranged on the Dutch oven lid rim" width="1800" height="1800" loading="lazy" />
+      <img data-index="3" src="https://picsum.photos/seed/ember-chicken/1200/1200" alt="A whole roast chicken in the Dutch oven" width="1800" height="1800" loading="lazy" />
+    </div>
+  </div>
+</section>
+
+<style>
+  .afs {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(2rem, 5vw, 4.5rem);
+    align-items: center;
+  }
+  .afs-head { margin-bottom: 1.5rem; }
+  .afs-items { border-top: 1px solid var(--line); }
+  .afs-item { border-bottom: 1px solid var(--line); }
+  .afs-q { margin: 0; font-size: 1.125rem; }
+  .afs-q button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    width: 100%;
+    min-height: 56px;
+    padding: 1rem 0;
+    border: 0;
+    background: none;
+    font: inherit;
+    font-weight: 600;
+    color: var(--ink-2);
+    text-align: left;
+    cursor: pointer;
+  }
+  .afs-item.is-open .afs-q button { color: var(--ink); }
+  .afs-chevron {
+    flex: none;
+    width: 10px;
+    height: 10px;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(45deg) translateY(-3px);
+    transition: transform 200ms ease;
+  }
+  .afs-item.is-open .afs-chevron { transform: rotate(-135deg) translateY(-3px); }
+  .afs-a { padding-bottom: 1.25rem; color: var(--ink-2); }
+  .afs-a p { margin-bottom: 0.5rem; }
+  .afs-item.is-open { box-shadow: inset 3px 0 0 var(--brand); padding-left: 1rem; transition: padding 200ms ease; }
+  .afs-link { font-weight: 600; color: var(--brand); text-decoration: none; }
+  .afs-media {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--surface-2);
+  }
+  .afs-media img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 300ms ease;
+  }
+  .afs-media img.is-active { opacity: 1; }
+  @media (max-width: 800px) {
+    .afs { grid-template-columns: 1fr; }
+    .afs-media { order: -1; aspect-ratio: 4 / 3; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .afs-media img { transition: none; }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    var root = document.getElementById("accordion-feature-image-swap");
+    if (!root) return;
+    var buttons = Array.prototype.slice.call(root.querySelectorAll(".afs-q button"));
+    var images = Array.prototype.slice.call(root.querySelectorAll(".afs-media img"));
+    function open(index) {
+      buttons.forEach(function (btn, i) {
+        var on = i === index;
+        btn.setAttribute("aria-expanded", on ? "true" : "false");
+        var panel = root.querySelector("#" + btn.getAttribute("aria-controls"));
+        if (panel) panel.hidden = !on;
+        btn.closest(".afs-item").classList.toggle("is-open", on);
+      });
+      images.forEach(function (img, i) { img.classList.toggle("is-active", i === index); });
+    }
+    buttons.forEach(function (btn, i) {
+      btn.addEventListener("click", function () { open(i); });
+    });
+  })();
+</script>

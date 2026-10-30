@@ -1,0 +1,282 @@
+<section id="hero-slider" class="section hsl" aria-roledescription="carousel" aria-label="This season at Caldera" data-autoplay="true" data-interval="6" data-transition="fade" data-height="large">
+  <!-- kit: hero-slider -->
+  <div class="hsl__track" aria-live="off">
+    <div class="hsl__slide is-active" role="group" aria-roledescription="slide" aria-label="1 of 3" data-position="left" data-tone="light" id="hero-slider-s1">
+      <picture>
+        <source media="(max-width: 640px)" srcset="https://picsum.photos/seed/caldera-slide-fold-m/1080/1350" width="1080" height="1350" />
+        <img src="https://picsum.photos/seed/caldera-slide-fold/2400/1200" alt="Cable Fold Grill over a riverside fire at dusk" width="2400" height="1200" />
+      </picture>
+      <div class="container hsl__content">
+        <div class="hsl__copy">
+          <span class="eyebrow">New</span>
+          <h2 class="hsl__title">The Cable Fold Grill folds to 2 cm.</h2>
+          <p class="hsl__body">A full grill grate that rides in a backpack and holds a 25 kg Dutch oven.</p>
+          <a class="btn btn-primary" href="/products/cable-fold">Shop the Fold <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="hsl__slide" role="group" aria-roledescription="slide" aria-label="2 of 3" data-position="center" data-tone="dark" data-show-from="2026-11-26T00:00:00-08:00" data-hide-after="2026-11-30T23:59:00-08:00" id="hero-slider-s2" aria-hidden="true">
+      <img src="https://picsum.photos/seed/caldera-slide-sale/2400/1200" alt="Three enamelled Dutch ovens in rust, sage and slate" width="2400" height="1200" />
+      <div class="container hsl__content">
+        <div class="hsl__copy">
+          <span class="eyebrow">Black Friday</span>
+          <h2 class="hsl__title">25% off every Dutch oven.</h2>
+          <a class="btn btn-primary" href="/collections/sale" tabindex="-1">Shop the sale</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="hsl__slide" role="group" aria-roledescription="slide" aria-label="3 of 3" data-position="right" data-tone="light" id="hero-slider-s3" aria-hidden="true">
+      <img src="https://picsum.photos/seed/caldera-slide-cornbread/2400/1200" alt="Golden cornbread in a cast iron skillet on a camp table" width="2400" height="1200" />
+      <div class="container hsl__content">
+        <div class="hsl__copy">
+          <span class="eyebrow">Recipes</span>
+          <h2 class="hsl__title">Skillet cornbread, over coals.</h2>
+          <p class="hsl__body">Twenty minutes, one pan, and a crust you only get from cast iron.</p>
+          <a class="btn btn-secondary hsl__outline" href="/recipes/skillet-cornbread" tabindex="-1">Get the recipe</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container hsl__controls">
+    <button class="hsl__play" type="button" aria-label="Pause slideshow">
+      <svg class="hsl__icon-pause" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z" fill="currentColor"/></svg>
+      <svg class="hsl__icon-play" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
+    </button>
+    <div class="hsl__dots" role="group" aria-label="Choose slide">
+      <button type="button" aria-label="Slide 1" aria-controls="hero-slider-s1" aria-current="true"></button>
+      <button type="button" aria-label="Slide 2" aria-controls="hero-slider-s2"></button>
+      <button type="button" aria-label="Slide 3" aria-controls="hero-slider-s3"></button>
+    </div>
+    <div class="hsl__arrows">
+      <button type="button" class="hsl__prev" aria-label="Previous slide">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <button type="button" class="hsl__next" aria-label="Next slide">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  (function () {
+    var root = document.getElementById("hero-slider");
+    if (!root) return;
+    var slides = Array.prototype.slice.call(root.querySelectorAll(".hsl__slide"));
+    var dots = Array.prototype.slice.call(root.querySelectorAll(".hsl__dots button"));
+    var playBtn = root.querySelector(".hsl__play");
+    var current = 0;
+    var interval = (Number(root.getAttribute("data-interval")) || 6) * 1000;
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var playing = !reduce;
+    var hovering = false;
+    var timer = null;
+
+    function go(i) {
+      current = (i + slides.length) % slides.length;
+      slides.forEach(function (s, n) {
+        var on = n === current;
+        s.classList.toggle("is-active", on);
+        s.setAttribute("aria-hidden", String(!on));
+        s.querySelectorAll("a").forEach(function (a) {
+          if (on) a.removeAttribute("tabindex"); else a.setAttribute("tabindex", "-1");
+        });
+      });
+      dots.forEach(function (d, n) {
+        if (n === current) d.setAttribute("aria-current", "true"); else d.removeAttribute("aria-current");
+      });
+    }
+    function schedule() {
+      clearInterval(timer);
+      if (playing) timer = setInterval(function () { if (!hovering) go(current + 1); }, interval);
+    }
+    function setPlaying(on) {
+      playing = on;
+      root.classList.toggle("is-paused", !on);
+      playBtn.setAttribute("aria-label", on ? "Pause slideshow" : "Play slideshow");
+      schedule();
+    }
+    dots.forEach(function (d, n) { d.addEventListener("click", function () { go(n); schedule(); }); });
+    root.querySelector(".hsl__prev").addEventListener("click", function () { go(current - 1); schedule(); });
+    root.querySelector(".hsl__next").addEventListener("click", function () { go(current + 1); schedule(); });
+    playBtn.addEventListener("click", function () { setPlaying(!playing); });
+    root.addEventListener("mouseenter", function () { hovering = true; });
+    root.addEventListener("mouseleave", function () { hovering = false; });
+    root.addEventListener("focusin", function () { hovering = true; });
+    root.addEventListener("focusout", function () { hovering = false; });
+    setPlaying(playing);
+  })();
+</script>
+
+<style>
+  .hsl {
+    position: relative;
+    padding: 0;
+    background: var(--dark);
+    color: #fff;
+    overflow: hidden;
+  }
+
+  .hsl__track {
+    display: grid;
+  }
+
+  .hsl__slide {
+    grid-area: 1 / 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: clamp(520px, 75vh, 720px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 600ms ease, visibility 600ms;
+  }
+
+  .hsl__slide.is-active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .hsl__slide > img,
+  .hsl__slide picture,
+  .hsl__slide picture img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hsl__slide::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgb(0 0 0 / 0.6), rgb(0 0 0 / 0.1));
+  }
+
+  .hsl__slide[data-position="center"]::after {
+    background: radial-gradient(circle at center, rgb(255 255 255 / 0.8), rgb(255 255 255 / 0.35));
+  }
+
+  .hsl__slide[data-position="right"]::after {
+    background: linear-gradient(270deg, rgb(0 0 0 / 0.6), rgb(0 0 0 / 0.1));
+  }
+
+  .hsl__content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    padding-block: 4rem 6rem;
+  }
+
+  .hsl__slide[data-position="center"] .hsl__content {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .hsl__slide[data-position="right"] .hsl__content {
+    justify-content: flex-end;
+  }
+
+  .hsl__copy {
+    max-width: 520px;
+  }
+
+  .hsl__slide[data-tone="dark"] .hsl__copy {
+    color: var(--ink);
+  }
+
+  .hsl__slide[data-tone="light"] .eyebrow {
+    color: #ffc9a8;
+  }
+
+  .hsl__title {
+    font-size: clamp(2.25rem, 5.5vw, 4rem);
+  }
+
+  .hsl__body {
+    font-size: 1.125rem;
+    opacity: 0.9;
+    margin-bottom: 1.75rem;
+  }
+
+  .hsl__outline {
+    border-color: rgb(255 255 255 / 0.6);
+    color: #fff;
+  }
+
+  .hsl__controls {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 1.5rem;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .hsl__play,
+  .hsl__arrows button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border: 1px solid rgb(255 255 255 / 0.4);
+    border-radius: 50%;
+    background: rgb(0 0 0 / 0.35);
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .hsl__icon-play,
+  .is-paused .hsl__icon-pause {
+    display: none;
+  }
+
+  .is-paused .hsl__icon-play {
+    display: block;
+  }
+
+  .hsl__dots {
+    display: flex;
+    gap: 0.25rem;
+  }
+
+  .hsl__dots button {
+    width: 28px;
+    height: 44px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .hsl__dots button::before {
+    content: "";
+    display: block;
+    height: 4px;
+    border-radius: 2px;
+    background: rgb(255 255 255 / 0.45);
+  }
+
+  .hsl__dots button[aria-current="true"]::before {
+    background: #fff;
+  }
+
+  .hsl__arrows {
+    display: flex;
+    gap: 0.5rem;
+    margin-left: auto;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hsl__slide {
+      transition: none;
+    }
+  }
+</style>

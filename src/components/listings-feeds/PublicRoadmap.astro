@@ -1,0 +1,159 @@
+<section id="public-roadmap" class="section section--muted roadmap">
+  <!-- kit: public-roadmap -->
+  <div class="container">
+    <div class="roadmap__head">
+      <div class="section-head">
+        <h2>Roadmap</h2>
+        <p class="lead">What we're building next. Vote for what matters to your team &mdash; the top items shape every quarter.</p>
+      </div>
+      <a class="btn btn-secondary" href="#suggest">Suggest a feature</a>
+    </div>
+
+    <div class="roadmap__board">
+      <section class="roadmap__col" aria-labelledby="roadmap-col-planned">
+        <header class="roadmap__col-head">
+          <h3 id="roadmap-col-planned"><span class="roadmap__dot roadmap__dot--planned" aria-hidden="true"></span>Planned <span class="roadmap__count">2</span></h3>
+          <p>Scoped and scheduled.</p>
+        </header>
+        <ul role="list">
+          <li class="roadmap__item">
+            <button type="button" class="roadmap__vote" aria-pressed="false" data-votes="412" aria-label="Vote for NetSuite two-way sync, 412 votes"><span aria-hidden="true">&#9650;</span><strong>412</strong></button>
+            <div>
+              <h4>NetSuite two-way sync</h4>
+              <p>Push journal entries to NetSuite and pull back vendor bills without CSVs.</p>
+              <p class="roadmap__meta"><span>integrations</span> Q1 2027 &middot; <a href="https://community.ledgerline.com/t/netsuite-two-way/1882">Discuss</a></p>
+            </div>
+          </li>
+          <li class="roadmap__item">
+            <button type="button" class="roadmap__vote" aria-pressed="false" data-votes="287" aria-label="Vote for Accrual schedules, 287 votes"><span aria-hidden="true">&#9650;</span><strong>287</strong></button>
+            <div>
+              <h4>Accrual schedules</h4>
+              <p>Spread prepaid expenses and deferred revenue over months automatically.</p>
+              <p class="roadmap__meta"><span>ledger</span> Q1 2027</p>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <section class="roadmap__col" aria-labelledby="roadmap-col-building">
+        <header class="roadmap__col-head">
+          <h3 id="roadmap-col-building"><span class="roadmap__dot roadmap__dot--building" aria-hidden="true"></span>In progress <span class="roadmap__count">1</span></h3>
+        </header>
+        <ul role="list">
+          <li class="roadmap__item">
+            <button type="button" class="roadmap__vote" aria-pressed="false" data-votes="655" aria-label="Vote for Bank rules with AI suggestions, 655 votes"><span aria-hidden="true">&#9650;</span><strong>655</strong></button>
+            <div>
+              <h4>Bank rules with AI suggestions</h4>
+              <p>Rules that learn from how you categorise and propose new ones.</p>
+              <p class="roadmap__meta"><span>payments</span> Q4 2026</p>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <section class="roadmap__col" aria-labelledby="roadmap-col-shipped">
+        <header class="roadmap__col-head">
+          <h3 id="roadmap-col-shipped"><span class="roadmap__dot roadmap__dot--shipped" aria-hidden="true"></span>Shipped <span class="roadmap__count">1</span></h3>
+        </header>
+        <ul role="list">
+          <li class="roadmap__item roadmap__item--shipped">
+            <span class="roadmap__vote roadmap__vote--static"><span aria-hidden="true">&#9650;</span><strong>903</strong><span class="visually-hidden">votes</span></span>
+            <div>
+              <h4>Multi-entity close</h4>
+              <p>Close several entities in one checklist with automatic eliminations.</p>
+              <p class="roadmap__meta"><span>ledger</span> Q3 2026 &middot; <a href="/changelog#v2-14-0">Shipped in v2.14.0</a></p>
+            </div>
+          </li>
+        </ul>
+      </section>
+    </div>
+
+    <form id="suggest" class="roadmap__suggest" action="#" method="post">
+      <h3>Suggest a feature</h3>
+      <div class="roadmap__suggest-fields">
+        <div class="field">
+          <label for="roadmap-idea">Your idea</label>
+          <input id="roadmap-idea" name="idea" type="text" required placeholder="e.g. Xero bank feed import" />
+        </div>
+        <div class="field">
+          <label for="roadmap-email">Work email</label>
+          <input id="roadmap-email" name="email" type="email" autocomplete="email" required />
+        </div>
+        <button class="btn btn-primary" type="submit">Send idea</button>
+      </div>
+    </form>
+
+    <dialog class="roadmap__dialog" aria-labelledby="roadmap-dialog-title">
+      <form method="dialog">
+        <h3 id="roadmap-dialog-title">Confirm your vote</h3>
+        <p>Enter your work email so we can tell you when it ships. One vote per person.</p>
+        <div class="field">
+          <label for="roadmap-vote-email">Work email</label>
+          <input id="roadmap-vote-email" name="email" type="email" autocomplete="email" />
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-primary" value="confirm">Vote</button>
+          <button class="btn btn-secondary" value="cancel">Cancel</button>
+        </div>
+      </form>
+    </dialog>
+  </div>
+</section>
+
+<script>
+  const root = document.getElementById("public-roadmap");
+  if (root) {
+    const dialog = root.querySelector<HTMLDialogElement>(".roadmap__dialog");
+    let pending: HTMLButtonElement | null = null;
+    root.querySelectorAll<HTMLButtonElement>("button.roadmap__vote").forEach((btn) => btn.addEventListener("click", () => {
+      if (btn.getAttribute("aria-pressed") === "true") return;
+      pending = btn;
+      if (dialog && typeof dialog.showModal === "function") dialog.showModal();
+    }));
+    dialog?.addEventListener("close", () => {
+      if (dialog.returnValue === "confirm" && pending) {
+        const n = Number(pending.dataset.votes) + 1;
+        pending.dataset.votes = String(n);
+        pending.setAttribute("aria-pressed", "true");
+        const strong = pending.querySelector("strong");
+        if (strong) strong.textContent = String(n);
+      }
+      pending = null;
+    });
+    root.querySelector("#suggest")?.addEventListener("submit", (e) => e.preventDefault());
+  }
+</script>
+
+<style>
+  .roadmap__head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 1rem 2rem; margin-bottom: 2.5rem; }
+  .roadmap__head .section-head { margin: 0; }
+  .roadmap__board { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); align-items: start; }
+  .roadmap__col { padding: 1rem; border-radius: var(--radius-lg); background: var(--surface-2); }
+  .roadmap__col-head { padding: 0.25rem 0.25rem 0.75rem; }
+  .roadmap__col-head h3 { display: flex; align-items: center; gap: 0.5rem; font-size: 1rem; margin: 0; }
+  .roadmap__col-head p { margin: 0.25rem 0 0; font-size: 0.8125rem; color: var(--ink-3); }
+  .roadmap__count { font-size: 0.75rem; color: var(--ink-3); font-weight: 600; padding: 0 0.375rem; border-radius: 999px; background: var(--bg); }
+  .roadmap__dot { width: 10px; height: 10px; border-radius: 50%; }
+  .roadmap__dot--planned { background: var(--ink-3); }
+  .roadmap__dot--building { background: var(--accent); }
+  .roadmap__dot--shipped { background: var(--success); }
+  .roadmap__col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.625rem; }
+  .roadmap__item { display: grid; grid-template-columns: 52px 1fr; gap: 0.875rem; padding: 1rem; background: var(--bg); border-radius: var(--radius); border: 1px solid var(--line); }
+  .roadmap__item h4 { margin: 0 0 0.25rem; font-size: 1rem; line-height: 1.3; }
+  .roadmap__item p { margin: 0 0 0.375rem; font-size: 0.875rem; color: var(--ink-2); }
+  .roadmap__meta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.375rem; font-size: 0.8125rem !important; color: var(--ink-3) !important; }
+  .roadmap__meta span { font-family: var(--font-mono); padding: 0 0.375rem; border: 1px solid var(--line); border-radius: 4px; }
+  .roadmap__meta a { color: var(--accent); }
+  .roadmap__vote { display: grid; justify-items: center; align-content: center; gap: 0; height: 56px; border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--bg); font: inherit; font-size: 0.75rem; color: var(--ink-2); cursor: pointer; }
+  .roadmap__vote strong { font-size: 0.9375rem; color: var(--ink); }
+  .roadmap__vote[aria-pressed="true"] { border-color: var(--brand); color: var(--brand); background: var(--brand-soft); }
+  .roadmap__vote--static { cursor: default; background: var(--surface); }
+  .roadmap__suggest { margin-top: 2.5rem; padding: 1.5rem; border-radius: var(--radius-lg); background: var(--bg); border: 1px solid var(--line); scroll-margin-top: 80px; }
+  .roadmap__suggest h3 { margin-bottom: 1rem; }
+  .roadmap__suggest-fields { display: grid; gap: 1rem; align-items: end; }
+  @media (min-width: 760px) { .roadmap__suggest-fields { grid-template-columns: 2fr 1.2fr auto; } }
+  .roadmap__dialog { width: min(420px, calc(100vw - 32px)); padding: 1.5rem; border: 0; border-radius: var(--radius-lg); box-shadow: var(--shadow); }
+  .roadmap__dialog::backdrop { background: rgb(0 0 0 / 0.45); }
+  .roadmap__dialog p { color: var(--ink-2); font-size: 0.9375rem; }
+  .roadmap__dialog .field { margin-bottom: 1.25rem; }
+</style>

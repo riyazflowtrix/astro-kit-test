@@ -1,0 +1,406 @@
+---
+---
+
+<section id="conversion-quiz-product-finder" class="section section--muted quiz" data-show-top="2" data-fallback="en_p3">
+  <!-- kit: conversion-quiz-product-finder -->
+  <div class="container quiz__wrap">
+    <div class="quiz__panel card" data-panel="intro">
+      <img class="quiz__hero" src="https://picsum.photos/seed/caldera-quiz-cooks/1600/1000" alt="Three Caldera pans laid out on a picnic table beside a lake" width="1600" height="1000" loading="lazy" />
+      <div class="quiz__intro">
+        <h2>Find your first pan</h2>
+        <p class="lead">Four quick questions about how you cook. We'll match you with one piece of Caldera that will earn its place.</p>
+        <button class="btn btn-primary" type="button" data-action="start">Find my pan</button>
+      </div>
+    </div>
+
+    <form class="quiz__form" action="#" hidden>
+      <p class="quiz__count" aria-live="polite">Question <span class="quiz__num">1</span></p>
+
+      <fieldset class="quiz__q card" data-key="where" data-style="images">
+        <legend>Where do you cook most?</legend>
+        <div class="quiz__answers quiz__answers--images">
+          <label class="quiz__answer quiz__answer--image" data-scores="en_p3:2,en_p2:2">
+            <input type="radio" name="where" value="home" />
+            <img src="https://picsum.photos/seed/caldera-quiz-home/600/600" alt="A kitchen stove" width="600" height="600" loading="lazy" />
+            <span>At home</span>
+          </label>
+          <label class="quiz__answer quiz__answer--image" data-scores="en_p2:2,en_p1:1">
+            <input type="radio" name="where" value="campsite" />
+            <img src="https://picsum.photos/seed/caldera-quiz-camp/600/600" alt="A fire ring at a campsite" width="600" height="600" loading="lazy" />
+            <span>At the campsite</span>
+          </label>
+          <label class="quiz__answer quiz__answer--image" data-scores="en_p1:3,en_p4:2,en_p2:-5">
+            <input type="radio" name="where" value="backcountry" />
+            <img src="https://picsum.photos/seed/caldera-quiz-trail/600/600" alt="A backpack on a mountain trail" width="600" height="600" loading="lazy" />
+            <span>Miles from the car</span>
+          </label>
+        </div>
+      </fieldset>
+
+      <fieldset class="quiz__q card" data-key="carry" data-style="buttons" data-show-if="where" data-show-op="not" data-show-value="home" hidden>
+        <legend>How far do you carry your kit?</legend>
+        <p class="quiz__help">Cast iron is heavy. Be honest.</p>
+        <div class="quiz__answers">
+          <label class="quiz__answer" data-scores="en_p2:1"><input type="radio" name="carry" value="car" /> <span>From the car to the fire</span></label>
+          <label class="quiz__answer" data-scores="en_p1:2,en_p3:-2"><input type="radio" name="carry" value="pack" /> <span>In my backpack</span></label>
+        </div>
+      </fieldset>
+
+      <fieldset class="quiz__q card" data-key="cook" data-style="buttons" data-multiple="true" hidden>
+        <legend>What do you want to cook?</legend>
+        <p class="quiz__help">Pick as many as you like.</p>
+        <div class="quiz__answers">
+          <label class="quiz__answer" data-scores="en_p3:2,en_p1:1"><input type="checkbox" name="cook" value="sear" /> <span>Steaks and smash burgers</span></label>
+          <label class="quiz__answer" data-scores="en_p2:3"><input type="checkbox" name="cook" value="bake" /> <span>Bread and cobblers</span></label>
+          <label class="quiz__answer" data-scores="en_p4:3"><input type="checkbox" name="cook" value="brew" /> <span>Coffee and noodles</span></label>
+        </div>
+      </fieldset>
+
+      <div class="quiz__nav">
+        <button type="button" class="btn btn-secondary" data-action="prev">Back</button>
+        <button type="button" class="btn btn-primary" data-action="next" disabled>Next</button>
+      </div>
+    </form>
+
+    <div class="quiz__results" hidden>
+      <h2>Your match</h2>
+      <div class="quiz__result-grid">
+        <article class="quiz__result card" data-product="en_p2" hidden>
+          <img src="https://picsum.photos/seed/caldera-ember-dutch-oven/800/600" alt="The Ember Dutch Oven on a bed of coals" width="800" height="600" loading="lazy" />
+          <div class="quiz__result-body">
+            <p class="quiz__product">Ember Dutch Oven 5.5qt · $165</p>
+            <h3>The Ember does it all at camp</h3>
+            <p>Bake bread on coals, braise for eight, and flip the lid into a skillet for breakfast. Worth every pound of the carry from the car.</p>
+            <a class="btn btn-primary" href="/products/ember-dutch-oven">See the Ember</a>
+          </div>
+        </article>
+        <article class="quiz__result card" data-product="en_p1" hidden>
+          <img src="https://picsum.photos/seed/caldera-cable-fold-grill/800/600" alt="The Cable Fold Grill opened over a fire ring" width="800" height="600" loading="lazy" />
+          <div class="quiz__result-body">
+            <p class="quiz__product">Cable Fold Grill · $89</p>
+            <h3>Light enough for the long trail</h3>
+            <p>The Cable Fold weighs 1.1 kg and turns any fire ring into a grill. Pair it with the Trail Kettle.</p>
+            <a class="btn btn-primary" href="/products/cable-fold">See the Cable Fold</a>
+          </div>
+        </article>
+        <article class="quiz__result card" data-product="en_p3" hidden>
+          <img src="https://picsum.photos/seed/caldera-ridge-skillet/800/600" alt="The Ridge Skillet with a seared steak" width="800" height="600" loading="lazy" />
+          <div class="quiz__result-body">
+            <p class="quiz__product">Ridge Skillet 10" · $72</p>
+            <h3>The skillet that goes everywhere</h3>
+            <p>From the stove to the oven to the fire ring, the Ridge Skillet is the one pan most cooks reach for every day.</p>
+            <a class="btn btn-primary" href="/products/ridge-skillet-10">See the Ridge Skillet</a>
+          </div>
+        </article>
+        <article class="quiz__result card" data-product="en_p4" hidden>
+          <img src="https://picsum.photos/seed/caldera-trail-kettle/800/600" alt="The Trail Kettle steaming on a camp grate" width="800" height="600" loading="lazy" />
+          <div class="quiz__result-body">
+            <p class="quiz__product">Trail Kettle 1L · $39</p>
+            <h3>Morning coffee, anywhere</h3>
+            <p>A one-litre kettle that boils in four minutes over a small fire and nests inside the Cable Fold sleeve.</p>
+            <a class="btn btn-primary" href="/products/trail-kettle">See the Trail Kettle</a>
+          </div>
+        </article>
+      </div>
+
+      <form class="quiz__email card" action="#" method="post" data-form="form_newsletter">
+        <label for="quiz-email">Want your results and a care guide by email?</label>
+        <div class="quiz__email-row">
+          <input id="quiz-email" name="email" type="email" placeholder="you@example.com" autocomplete="email" required />
+          <button class="btn btn-primary" type="submit">Email my results</button>
+        </div>
+        <p class="quiz__email-done" role="status" hidden>Sent. Check your inbox for your match and the care guide.</p>
+      </form>
+
+      <button class="btn btn-secondary" type="button" data-action="retake">Start over</button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .quiz__wrap {
+    max-width: 960px;
+  }
+
+  .quiz__panel {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    box-shadow: var(--shadow);
+  }
+
+  .quiz [hidden] {
+    display: none !important;
+  }
+
+  .quiz__hero {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .quiz__intro {
+    padding: clamp(1.5rem, 4vw, 3rem);
+    align-self: center;
+  }
+
+  .quiz__count {
+    margin-bottom: 0.75rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--ink-3);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .quiz__q {
+    margin: 0;
+    padding: clamp(1.25rem, 4vw, 2.5rem);
+    border: 1px solid var(--line);
+  }
+
+  .quiz__q legend {
+    float: left;
+    width: 100%;
+    margin-bottom: 1rem;
+    font-size: clamp(1.25rem, 3vw, 1.75rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  .quiz__help {
+    clear: both;
+    margin-top: -0.5rem;
+    color: var(--ink-2);
+  }
+
+  .quiz__answers {
+    clear: both;
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .quiz__answers--images {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .quiz__answer {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    min-height: 52px;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .quiz__answer--image {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0.5rem;
+    text-align: center;
+  }
+
+  .quiz__answer--image input {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+  }
+
+  .quiz__answer--image img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+  }
+
+  .quiz__answer:has(input:checked) {
+    border-color: var(--brand);
+    background: var(--brand-soft);
+  }
+
+  .quiz__nav {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1.25rem;
+  }
+
+  .quiz__nav .btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+
+  .quiz__result-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .quiz__result img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+
+  .quiz__result-body {
+    padding: 1.25rem;
+  }
+
+  .quiz__product {
+    margin-bottom: 0.25rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--brand);
+  }
+
+  .quiz__result-body p:not(.quiz__product) {
+    color: var(--ink-2);
+  }
+
+  .quiz__email {
+    display: grid;
+    gap: 0.625rem;
+    margin-bottom: 1.5rem;
+    padding: 1.25rem;
+  }
+
+  .quiz__email label {
+    font-weight: 600;
+  }
+
+  .quiz__email-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .quiz__email-row input {
+    flex: 1 1 220px;
+    min-height: 44px;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+  }
+
+  .quiz__email-done {
+    margin: 0;
+    color: var(--success);
+  }
+
+  @media (max-width: 720px) {
+    .quiz__panel {
+      grid-template-columns: 1fr;
+    }
+
+    .quiz__hero {
+      aspect-ratio: 16 / 10;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .quiz__answers--images {
+      grid-template-columns: 1fr;
+    }
+
+    .quiz__answer--image {
+      flex-direction: row;
+      align-items: center;
+      text-align: left;
+      padding-left: 2.5rem;
+    }
+
+    .quiz__answer--image input {
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .quiz__answer--image img {
+      width: 64px;
+    }
+  }
+</style>
+
+<script is:inline>
+  (() => {
+    const root = document.getElementById("conversion-quiz-product-finder");
+    if (!root) return;
+    const intro = root.querySelector('[data-panel="intro"]');
+    const form = root.querySelector(".quiz__form");
+    const results = root.querySelector(".quiz__results");
+    const qs = [...root.querySelectorAll(".quiz__q")];
+    const prev = root.querySelector('[data-action="prev"]');
+    const next = root.querySelector('[data-action="next"]');
+    const num = root.querySelector(".quiz__num");
+    let path = [0];
+
+    const answered = (q) => !!q.querySelector("input:checked");
+    const visible = (q) => {
+      if (!q.dataset.showIf) return true;
+      const picked = form.querySelector('input[name="' + q.dataset.showIf + '"]:checked');
+      const v = picked ? picked.value : "";
+      return q.dataset.showOp === "not" ? v !== q.dataset.showValue : v === q.dataset.showValue;
+    };
+    const render = () => {
+      const i = path[path.length - 1];
+      qs.forEach((q, n) => (q.hidden = n !== i));
+      num.textContent = String(path.length);
+      prev.hidden = path.length === 1;
+      next.disabled = !answered(qs[i]);
+      next.textContent = qs.slice(i + 1).some(visible) ? "Next" : "See my match";
+    };
+
+    form.addEventListener("change", render);
+    root.querySelector('[data-action="start"]').addEventListener("click", () => {
+      intro.hidden = true;
+      form.hidden = false;
+      render();
+    });
+    prev.addEventListener("click", () => {
+      path.pop();
+      render();
+    });
+    next.addEventListener("click", () => {
+      const i = path[path.length - 1];
+      const nextIndex = qs.findIndex((q, n) => n > i && visible(q));
+      if (nextIndex === -1) return showResults();
+      path.push(nextIndex);
+      render();
+    });
+
+    const showResults = () => {
+      const scores = {};
+      path.forEach((i) => {
+        qs[i].querySelectorAll("input:checked").forEach((input) => {
+          (input.closest(".quiz__answer").dataset.scores || "").split(",").forEach((pair) => {
+            const [p, pts] = pair.split(":");
+            scores[p] = (scores[p] || 0) + Number(pts);
+          });
+        });
+      });
+      let ranked = Object.entries(scores).filter(([, s]) => s > 0).sort((a, b) => b[1] - a[1]).map(([p]) => p);
+      if (!ranked.length) ranked = [root.dataset.fallback];
+      const top = ranked.slice(0, Number(root.dataset.showTop));
+      root.querySelectorAll(".quiz__result").forEach((card) => (card.hidden = !top.includes(card.dataset.product)));
+      form.hidden = true;
+      results.hidden = false;
+    };
+
+    root.querySelector('[data-action="retake"]').addEventListener("click", () => {
+      form.reset();
+      path = [0];
+      results.hidden = true;
+      intro.hidden = false;
+    });
+
+    const email = root.querySelector(".quiz__email");
+    email.addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (!email.reportValidity()) return;
+      email.querySelector(".quiz__email-row").hidden = true;
+      email.querySelector(".quiz__email-done").hidden = false;
+    });
+  })();
+</script>

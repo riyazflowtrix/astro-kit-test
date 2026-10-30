@@ -1,0 +1,112 @@
+---
+import Base from "../../layouts/Base.astro";
+import NavSimpleCta from "../../components/navigation-chrome/NavSimpleCta.astro";
+import NavAnnouncementUtility from "../../components/navigation-chrome/NavAnnouncementUtility.astro";
+import NavMegaFeaturedPromo from "../../components/navigation-chrome/NavMegaFeaturedPromo.astro";
+import NavDocsSidebar from "../../components/navigation-chrome/NavDocsSidebar.astro";
+import NavEcommerceHeader from "../../components/navigation-chrome/NavEcommerceHeader.astro";
+import NavLocaleHeader from "../../components/navigation-chrome/NavLocaleHeader.astro";
+import StickyMobileCtaBar from "../../components/navigation-chrome/StickyMobileCtaBar.astro";
+import AnnouncementCountdown from "../../components/navigation-chrome/AnnouncementCountdown.astro";
+import CookieConsent from "../../components/navigation-chrome/CookieConsent.astro";
+import BreadcrumbConfig from "../../components/navigation-chrome/BreadcrumbConfig.astro";
+import FooterMultiColumn from "../../components/navigation-chrome/FooterMultiColumn.astro";
+import FooterMinimal from "../../components/navigation-chrome/FooterMinimal.astro";
+import FooterMegaLocations from "../../components/navigation-chrome/FooterMegaLocations.astro";
+---
+
+<Base title="Navigation & chrome" description="Headers, mega menus, docs sidebar, announcement and cookie bars, breadcrumbs and footers from the BetterCMS Kit.">
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Kit library</span>
+        <h1>Navigation &amp; chrome</h1>
+        <p class="lead">Headers, menus, bars, breadcrumbs and footers: the parts that frame every page.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="nc-stack">
+    <NavSimpleCta />
+    <NavAnnouncementUtility />
+    <NavMegaFeaturedPromo />
+    <div class="section section--muted">
+      <div class="container nc-docs">
+        <NavDocsSidebar />
+        <article class="nc-docs__content">
+          <span class="eyebrow">Get started</span>
+          <h2>Quickstart</h2>
+          <p class="lead">Send your first trace to Tideline in under five minutes.</p>
+          <nav class="nc-docs__pager" aria-label="Previous and next page">
+            <a href="/docs"><small>Previous</small>Overview</a>
+            <a href="/docs/install"><small>Next</small>Install the agent</a>
+          </nav>
+        </article>
+      </div>
+    </div>
+    <NavEcommerceHeader />
+    <NavLocaleHeader />
+    <StickyMobileCtaBar />
+    <AnnouncementCountdown />
+    <CookieConsent />
+    <BreadcrumbConfig />
+    <FooterMultiColumn />
+    <FooterMinimal />
+    <FooterMegaLocations />
+  </div>
+</Base>
+
+<style>
+  .nc-stack {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2.5rem;
+    padding-bottom: 2.5rem;
+  }
+
+  .nc-docs {
+    display: grid;
+    grid-template-columns: 280px minmax(0, 1fr);
+    gap: 3rem;
+    align-items: start;
+  }
+
+  .nc-docs__content {
+    padding: 2rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    background: var(--bg);
+  }
+
+  .nc-docs__pager {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .nc-docs__pager a {
+    display: grid;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .nc-docs__pager small {
+    font-weight: 400;
+    color: var(--ink-3);
+  }
+
+  @media (max-width: 760px) {
+    .nc-docs {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .nc-docs__content {
+      padding: 1.25rem;
+    }
+  }
+</style>

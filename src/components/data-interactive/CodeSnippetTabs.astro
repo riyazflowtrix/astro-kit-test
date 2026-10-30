@@ -1,0 +1,235 @@
+---
+---
+
+<section id="code-snippet-tabs" class="section code" data-variant="dark" data-sync-group="package-manager" data-line-numbers="true" data-line-wrap="false">
+  <!-- kit: code-snippet-tabs -->
+  <div class="container code__wrap">
+    <div class="section-head">
+      <h2>Install the SDK</h2>
+      <p class="lead">Node 20 or newer. The SDK has no runtime dependencies.</p>
+    </div>
+
+    <div class="code__window">
+      <div class="code__top">
+        <div class="code__tabs" role="tablist" aria-label="Install commands">
+          <button type="button" role="tab" id="code-tab-npm" aria-controls="code-panel-npm" aria-selected="true" data-label="npm">npm</button>
+          <button type="button" role="tab" id="code-tab-pnpm" aria-controls="code-panel-pnpm" aria-selected="false" tabindex="-1" data-label="pnpm">pnpm</button>
+          <button type="button" role="tab" id="code-tab-bun" aria-controls="code-panel-bun" aria-selected="false" tabindex="-1" data-label="bun">bun</button>
+          <button type="button" role="tab" id="code-tab-first" aria-controls="code-panel-first" aria-selected="false" tabindex="-1" data-label="First call">First call</button>
+        </div>
+        <button type="button" class="code__copy" aria-label="Copy code">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2" /><path d="M5 15V5a2 2 0 0 1 2-2h10" /></svg>
+          <span>Copy</span>
+        </button>
+      </div>
+
+      <div class="code__panel" role="tabpanel" id="code-panel-npm" aria-labelledby="code-tab-npm" tabindex="0">
+        <pre data-language="bash"><code><span class="line"><span class="tok-cmd">npm</span> install @northwind/sdk</span></code></pre>
+      </div>
+      <div class="code__panel" role="tabpanel" id="code-panel-pnpm" aria-labelledby="code-tab-pnpm" tabindex="0" hidden>
+        <pre data-language="bash"><code><span class="line"><span class="tok-cmd">pnpm</span> add @northwind/sdk</span></code></pre>
+      </div>
+      <div class="code__panel" role="tabpanel" id="code-panel-bun" aria-labelledby="code-tab-bun" tabindex="0" hidden>
+        <pre data-language="bash"><code><span class="line"><span class="tok-cmd">bun</span> add @northwind/sdk</span></code></pre>
+      </div>
+      <div class="code__panel" role="tabpanel" id="code-panel-first" aria-labelledby="code-tab-first" tabindex="0" hidden>
+        <p class="code__file">src/index.ts</p>
+        <pre data-language="ts" data-highlight="3, 5"><code><span class="line"><span class="tok-kw">import</span> &#123; Northwind &#125; <span class="tok-kw">from</span> <span class="tok-str">"@northwind/sdk"</span>;</span><span class="line"></span><span class="line is-hl"><span class="tok-kw">const</span> nw = <span class="tok-kw">new</span> Northwind(&#123; apiKey: process.env.NORTHWIND_KEY &#125;);</span><span class="line"></span><span class="line is-hl"><span class="tok-kw">const</span> orders = <span class="tok-kw">await</span> nw.orders.list(&#123; status: <span class="tok-str">"open"</span>, limit: <span class="tok-num">20</span> &#125;);</span><span class="line"><span class="tok-kw">for</span> (<span class="tok-kw">const</span> order <span class="tok-kw">of</span> orders.data) &#123;</span><span class="line">&#32;&#32;console.log(order.id, order.total);</span><span class="line">&#125;</span></code></pre>
+        <a class="code__run" href="https://stackblitz.com/fork/node?file=src%2Findex.ts" target="_blank" rel="noopener" data-provider="stackblitz" data-template="node" data-dependencies="@northwind/sdk">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4v16l13-8z" /></svg>
+          Run in StackBlitz
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .code [hidden] {
+    display: none !important;
+  }
+
+  .code__wrap {
+    max-width: 880px;
+  }
+
+  .code__window {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: #0f1117;
+    color: #e6e6eb;
+    box-shadow: 0 20px 50px rgb(0 0 0 / 0.18);
+  }
+
+  .code__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0 0.5rem 0 0;
+    border-bottom: 1px solid rgb(255 255 255 / 0.08);
+    background: #161922;
+  }
+
+  .code__tabs {
+    display: flex;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .code__tabs button {
+    flex: none;
+    padding: 0.85rem 1rem;
+    border: 0;
+    border-bottom: 2px solid transparent;
+    background: none;
+    color: rgb(255 255 255 / 0.6);
+    font: inherit;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .code__tabs button[aria-selected="true"] {
+    color: #fff;
+    border-bottom-color: var(--brand);
+  }
+
+  .code__copy {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    flex: none;
+    padding: 0.4rem 0.7rem;
+    border: 1px solid rgb(255 255 255 / 0.15);
+    border-radius: var(--radius-sm);
+    background: none;
+    color: rgb(255 255 255 / 0.8);
+    font: inherit;
+    font-size: 0.8125rem;
+    cursor: pointer;
+  }
+
+  .code__panel {
+    position: relative;
+  }
+
+  .code__file {
+    margin: 0;
+    padding: 0.6rem 1.25rem 0;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: rgb(255 255 255 / 0.45);
+  }
+
+  .code__panel pre {
+    margin: 0;
+    padding: 1rem 0;
+    overflow-x: auto;
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    line-height: 1.7;
+    counter-reset: line;
+  }
+
+  .code__panel code {
+    display: block;
+    min-width: max-content;
+  }
+
+  .line {
+    display: block;
+    min-height: 1.7em;
+    padding: 0 1.25rem 0 0;
+    white-space: pre;
+  }
+
+  .line::before {
+    counter-increment: line;
+    content: counter(line);
+    display: inline-block;
+    width: 3rem;
+    padding-right: 1rem;
+    text-align: right;
+    color: rgb(255 255 255 / 0.28);
+    user-select: none;
+  }
+
+  .line.is-hl {
+    background: rgb(212 72 59 / 0.16);
+    box-shadow: inset 3px 0 0 var(--brand);
+  }
+
+  .tok-kw {
+    color: #c792ea;
+  }
+
+  .tok-str {
+    color: #c3e88d;
+  }
+
+  .tok-num {
+    color: #f78c6c;
+  }
+
+  .tok-cmd {
+    color: #82aaff;
+  }
+
+  .code__run {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin: 0 1.25rem 1rem;
+    padding: 0.45rem 0.85rem;
+    border-radius: var(--radius-sm);
+    background: rgb(255 255 255 / 0.08);
+    color: #fff;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    text-decoration: none;
+  }
+</style>
+
+<script is:inline>
+  (() => {
+    const root = document.getElementById("code-snippet-tabs");
+    if (!root) return;
+    const tabs = [...root.querySelectorAll('[role="tab"]')];
+    const KEY = "code-sync-" + root.dataset.syncGroup;
+    const activate = (tab, focus) => {
+      tabs.forEach((t) => {
+        const on = t === tab;
+        t.setAttribute("aria-selected", String(on));
+        t.tabIndex = on ? 0 : -1;
+        root.querySelector("#" + t.getAttribute("aria-controls")).hidden = !on;
+      });
+      if (focus) tab.focus();
+      try {
+        localStorage.setItem(KEY, tab.dataset.label);
+      } catch (e) {}
+    };
+    tabs.forEach((tab, i) => {
+      tab.addEventListener("click", () => activate(tab, false));
+      tab.addEventListener("keydown", (e) => {
+        if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+        const n = (i + (e.key === "ArrowRight" ? 1 : -1) + tabs.length) % tabs.length;
+        activate(tabs[n], true);
+      });
+    });
+    try {
+      const saved = localStorage.getItem(KEY);
+      const match = tabs.find((t) => t.dataset.label === saved);
+      if (match) activate(match, false);
+    } catch (e) {}
+
+    const copy = root.querySelector(".code__copy");
+    copy.addEventListener("click", () => {
+      const panel = root.querySelector('[role="tabpanel"]:not([hidden])');
+      const text = [...panel.querySelectorAll(".line")].map((l) => l.textContent).join("\n");
+      if (navigator.clipboard) navigator.clipboard.writeText(text).catch(() => {});
+      copy.querySelector("span").textContent = "Copied";
+      setTimeout(() => (copy.querySelector("span").textContent = "Copy"), 1600);
+    });
+  })();
+</script>

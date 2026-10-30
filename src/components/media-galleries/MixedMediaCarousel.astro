@@ -1,0 +1,311 @@
+---
+// Mixed-media carousel (variant: peek, 2.5 per view desktop / 1.15 mobile, arrows + progress, loop) — Caldera field notes.
+---
+
+<section id="mixed-media-carousel" class="section carousel" data-variant="peek" aria-roledescription="carousel" aria-label="A weekend on the Deschutes">
+  <!-- kit: mixed-media-carousel -->
+  <div class="container">
+    <div class="head">
+      <div class="section-head">
+        <span class="eyebrow">Field notes</span>
+        <h2>A weekend on the Deschutes.</h2>
+      </div>
+      <div class="arrows">
+        <button type="button" class="arrow prev" aria-label="Previous slide">←</button>
+        <button type="button" class="arrow next" aria-label="Next slide">→</button>
+      </div>
+    </div>
+  </div>
+
+  <ul class="track" role="list">
+    <li class="slide slide--image" aria-roledescription="slide" aria-label="1 of 5">
+      <figure>
+        <img src="https://picsum.photos/seed/deschutes-camp-dawn/1600/1067" alt="Tent and campfire on a riverbank at dawn" width="3200" height="2134" loading="lazy" style="object-position: 40% 55%" />
+        <figcaption>Dawn at Mile 12 camp.</figcaption>
+      </figure>
+    </li>
+    <li class="slide slide--video" aria-roledescription="slide" aria-label="2 of 5">
+      <figure>
+        <div class="video-wrap">
+          <video muted loop playsinline preload="none" poster="https://picsum.photos/seed/deschutes-sear-poster/1600/1067" width="3200" height="2134" aria-label="Trout searing in a skillet over coals">
+            <source src="https://cdn.caldera.co/film/deschutes-sear-loop.mp4" type="video/mp4" />
+          </video>
+          <button type="button" class="play" aria-label="Play video" aria-pressed="false">
+            <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor" /></svg>
+          </button>
+        </div>
+        <figcaption>Trout, butter, coals. That's the recipe.</figcaption>
+      </figure>
+    </li>
+    <li class="slide slide--quote" aria-roledescription="slide" aria-label="3 of 5">
+      <img class="quote-bg" src="https://picsum.photos/seed/deschutes-river-dusk/1600/1067" alt="River canyon at dusk" width="3200" height="2134" loading="lazy" />
+      <blockquote>
+        <p>“We packed one skillet for four people and three days. It was the only pan we needed.”</p>
+        <footer>
+          <img src="https://i.pravatar.cc/192?img=47" alt="" width="48" height="48" loading="lazy" />
+          <span><strong>Maya Reyes</strong><br />Backcountry guide, Montana</span>
+        </footer>
+      </blockquote>
+    </li>
+    <li class="slide slide--product" aria-roledescription="slide" aria-label="4 of 5">
+      <a class="product" href="/products/ridge-skillet">
+        <span class="badge">In this trip</span>
+        <img src="https://picsum.photos/seed/deschutes-skillet-rock/1600/1067" alt="Ridge Skillet resting on a river stone" width="3200" height="2134" loading="lazy" />
+        <span class="product-info">
+          <strong>Ridge Skillet 10"</strong>
+          <span>$95 · Shop now →</span>
+        </span>
+      </a>
+    </li>
+    <li class="slide slide--image" aria-roledescription="slide" aria-label="5 of 5">
+      <figure>
+        <a href="/journal/deschutes-float">
+          <img src="https://picsum.photos/seed/deschutes-raft/1600/1067" alt="Two rafts pulled up on a gravel bar" width="3200" height="2134" loading="lazy" />
+        </a>
+        <figcaption>Lunch stop at Whitehorse Rapids. <a href="/journal/deschutes-float">Read the trip →</a></figcaption>
+      </figure>
+    </li>
+  </ul>
+
+  <div class="container">
+    <div class="progress" aria-hidden="true"><span class="bar"></span></div>
+  </div>
+</section>
+
+<style>
+  .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 1rem;
+  }
+  .head .section-head {
+    margin-bottom: 2rem;
+  }
+  .arrows {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+  }
+  .arrow {
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    background: var(--bg);
+    font-size: 1.125rem;
+    cursor: pointer;
+  }
+  .arrow:hover {
+    border-color: var(--ink-3);
+  }
+  .track {
+    --peek-pad: max(var(--gutter), calc((100vw - var(--container)) / 2 + var(--gutter)));
+    list-style: none;
+    margin: 0;
+    padding: 0 var(--peek-pad);
+    scroll-padding-inline: var(--peek-pad);
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+  .track::-webkit-scrollbar {
+    display: none;
+  }
+  .slide {
+    position: relative;
+    flex: 0 0 calc((min(100vw, var(--container)) - 2 * var(--gutter) - 2 * 16px) / 2.5);
+    scroll-snap-align: start;
+  }
+  .slide figure {
+    margin: 0;
+  }
+  .slide img,
+  .video-wrap,
+  .slide--quote,
+  .product {
+    border-radius: var(--radius);
+  }
+  .slide figure img,
+  .video-wrap video {
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+  }
+  .slide figcaption {
+    margin-top: 0.625rem;
+    font-size: 0.9375rem;
+    color: var(--ink-2);
+  }
+  .slide figcaption a {
+    color: var(--brand);
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .video-wrap {
+    position: relative;
+    overflow: hidden;
+    background: #000;
+  }
+  .play {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    display: grid;
+    place-items: center;
+    width: 56px;
+    height: 56px;
+    border: 0;
+    border-radius: 50%;
+    background: rgb(255 255 255 / 0.92);
+    color: var(--ink);
+    cursor: pointer;
+  }
+  .play[aria-pressed="true"] {
+    opacity: 0;
+  }
+  .video-wrap:hover .play[aria-pressed="true"] {
+    opacity: 0.8;
+  }
+  .slide--quote {
+    overflow: hidden;
+    aspect-ratio: 3 / 2;
+    display: flex;
+    align-items: flex-end;
+    color: #fff;
+  }
+  .quote-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.45);
+  }
+  .slide--quote blockquote {
+    position: relative;
+    margin: 0;
+    padding: clamp(1rem, 3vw, 1.75rem);
+  }
+  .slide--quote p {
+    font-size: clamp(1rem, 1.6vw, 1.25rem);
+    font-weight: 600;
+    line-height: 1.4;
+  }
+  .slide--quote footer {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.875rem;
+    line-height: 1.35;
+  }
+  .slide--quote footer img {
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+  }
+  .product {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    text-decoration: none;
+    color: #fff;
+  }
+  .product img {
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    border-radius: 0;
+  }
+  .product .badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    z-index: 1;
+  }
+  .product-info {
+    position: absolute;
+    inset: auto 0 0 0;
+    display: grid;
+    padding: 2.5rem 1rem 1rem;
+    background: linear-gradient(to top, rgb(0 0 0 / 0.7), transparent);
+  }
+  .product-info strong {
+    font-size: 1.125rem;
+  }
+  .progress {
+    height: 3px;
+    margin-top: 1.5rem;
+    border-radius: 3px;
+    background: var(--line);
+    overflow: hidden;
+  }
+  .bar {
+    display: block;
+    height: 100%;
+    width: 40%;
+    background: var(--ink);
+    transform-origin: left;
+    transition: width 200ms ease;
+  }
+  @media (max-width: 720px) {
+    .slide {
+      flex-basis: calc((100vw - 2 * var(--gutter)) / 1.15);
+    }
+    .arrows {
+      display: none;
+    }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    var root = document.getElementById("mixed-media-carousel");
+    if (!root) return;
+    var track = root.querySelector(".track");
+    var slides = Array.prototype.slice.call(track.children);
+    var bar = root.querySelector(".bar");
+    function step() {
+      return slides[0].getBoundingClientRect().width + 16;
+    }
+    function atEnd() {
+      return track.scrollLeft + track.clientWidth >= track.scrollWidth - 4;
+    }
+    root.querySelector(".next").addEventListener("click", function () {
+      if (atEnd()) track.scrollTo({ left: 0, behavior: "smooth" });
+      else track.scrollBy({ left: step(), behavior: "smooth" });
+    });
+    root.querySelector(".prev").addEventListener("click", function () {
+      if (track.scrollLeft <= 4) track.scrollTo({ left: track.scrollWidth, behavior: "smooth" });
+      else track.scrollBy({ left: -step(), behavior: "smooth" });
+    });
+    function update() {
+      var max = track.scrollWidth - track.clientWidth;
+      var visible = track.clientWidth / track.scrollWidth;
+      var progress = max > 0 ? track.scrollLeft / max : 1;
+      bar.style.width = Math.min(100, (visible + (1 - visible) * progress) * 100) + "%";
+    }
+    track.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    update();
+
+    root.querySelectorAll(".video-wrap").forEach(function (wrap) {
+      var video = wrap.querySelector("video");
+      var btn = wrap.querySelector(".play");
+      btn.addEventListener("click", function () {
+        if (video.paused) {
+          var p = video.play();
+          if (p && p.catch) p.catch(function () {});
+          btn.setAttribute("aria-pressed", "true");
+          btn.setAttribute("aria-label", "Pause video");
+        } else {
+          video.pause();
+          btn.setAttribute("aria-pressed", "false");
+          btn.setAttribute("aria-label", "Play video");
+        }
+      });
+    });
+  })();
+</script>

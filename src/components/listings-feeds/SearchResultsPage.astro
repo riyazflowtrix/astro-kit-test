@@ -1,0 +1,160 @@
+<section id="search-results-page" class="section search-page">
+  <!-- kit: search-results-page -->
+  <div class="container search-page__wrap">
+    <form class="search-page__form" role="search" action="#" method="get">
+      <label for="search-page-q" class="search-page__label">Search Caldera</label>
+      <div class="search-page__bar">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2" /><path d="M20 20l-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
+        <input id="search-page-q" name="q" type="search" value="seasoning" placeholder="Search recipes, gear and stories" />
+        <button class="btn btn-primary" type="submit">Search</button>
+      </div>
+      <div class="search-page__popular">
+        <span>Popular:</span>
+        <button type="button" data-q="dutch oven">dutch oven</button>
+        <button type="button" data-q="seasoning">seasoning</button>
+        <button type="button" data-q="cable fold">cable fold</button>
+        <button type="button" data-q="campfire paella">campfire paella</button>
+        <button type="button" data-q="warranty">warranty</button>
+      </div>
+    </form>
+
+    <div class="search-page__results" data-results>
+      <p class="search-page__summary" aria-live="polite">11 results for <strong>&ldquo;seasoning&rdquo;</strong></p>
+
+      <div class="search-page__tabs" role="tablist" aria-label="Result types">
+        <button type="button" role="tab" id="sr-tab-gear" aria-controls="sr-panel-gear" aria-selected="true">Gear <span>3</span></button>
+        <button type="button" role="tab" id="sr-tab-recipes" aria-controls="sr-panel-recipes" aria-selected="false" tabindex="-1">Recipes <span>2</span></button>
+        <button type="button" role="tab" id="sr-tab-stories" aria-controls="sr-panel-stories" aria-selected="false" tabindex="-1">Stories <span>4</span></button>
+        <button type="button" role="tab" id="sr-tab-help" aria-controls="sr-panel-help" aria-selected="false" tabindex="-1">Help <span>2</span></button>
+      </div>
+
+      <article class="search-page__pinned">
+        <span class="badge">Top result</span>
+        <h3><a href="/journal/how-to-season-cast-iron">How we season cast iron, and why it's flaxseed</a></h3>
+        <p>Three thin coats, three hours at 500&deg;F. The process we use in the foundry and the shortcut that works at home for <mark>seasoning</mark> any pan.</p>
+      </article>
+
+      <div role="tabpanel" id="sr-panel-gear" aria-labelledby="sr-tab-gear" class="search-page__panel">
+        <ul role="list" class="search-page__list">
+          <li class="hit hit--product">
+            <img src="https://picsum.photos/seed/caldera-seasoning-oil/200/200" alt="A bottle of Caldera flaxseed seasoning oil" width="200" height="200" loading="lazy" />
+            <div><h4><a href="/products/seasoning-oil">Flaxseed <mark>Seasoning</mark> Oil</a></h4><p>The same oil we use in the foundry, in a 250 ml tin.</p></div>
+            <strong>$14</strong>
+          </li>
+          <li class="hit hit--product">
+            <img src="https://picsum.photos/seed/caldera-dutch-coals/200/200" alt="Ember Dutch Oven in coals" width="200" height="200" loading="lazy" />
+            <div><h4><a href="/products/ember-dutch-oven">Ember Dutch Oven 5.5qt</a></h4><p>Pre-<mark>seasoned</mark> three times with flaxseed oil.</p></div>
+            <strong>$165</strong>
+          </li>
+          <li class="hit hit--product">
+            <img src="https://picsum.photos/seed/caldera-chainmail-pad/200/200" alt="A chainmail scrubber on a skillet" width="200" height="200" loading="lazy" />
+            <div><h4><a href="/products/chainmail-scrubber">Chainmail Scrubber</a></h4><p>Lifts stuck food without stripping your <mark>seasoning</mark>.</p></div>
+            <strong>$18</strong>
+          </li>
+        </ul>
+      </div>
+      <div role="tabpanel" id="sr-panel-recipes" aria-labelledby="sr-tab-recipes" class="search-page__panel" hidden>
+        <ul role="list" class="search-page__list">
+          <li class="hit"><div><h4><a href="/recipes/cornbread-first-cook">Skillet cornbread (the best first cook)</a></h4><p>Lots of butter, high heat: a good way to build <mark>seasoning</mark> on a new pan.</p></div></li>
+          <li class="hit"><div><h4><a href="/recipes/smash-burgers">Smash burgers on the Ridge</a></h4><p>Fat renders into the iron and keeps your <mark>seasoning</mark> slick.</p></div></li>
+        </ul>
+      </div>
+      <div role="tabpanel" id="sr-panel-stories" aria-labelledby="sr-tab-stories" class="search-page__panel" hidden>
+        <ul role="list" class="search-page__list">
+          <li class="hit"><div><h4><a href="/journal/how-to-season-cast-iron">How we season cast iron, and why it's flaxseed</a></h4><p>Three coats, three hours, and a lot of failed batches.</p></div></li>
+          <li class="hit"><div><h4><a href="/journal/rescue-a-rusty-skillet">How to rescue a rusty skillet</a></h4><p>Strip, scrub and re-<mark>season</mark> in twenty minutes.</p></div></li>
+          <li class="hit"><div><h4><a href="/journal/why-pans-warp">Why some pans warp and ours don't</a></h4><p>Wall thickness, cooling time and <mark>seasoning</mark> temperature.</p></div></li>
+          <li class="hit"><div><h4><a href="/podcast/bonus-reader-questions">Your seasoning questions, answered</a></h4><p>Low &amp; Slow bonus episode on sticky pans and flaking.</p></div></li>
+        </ul>
+      </div>
+      <div role="tabpanel" id="sr-panel-help" aria-labelledby="sr-tab-help" class="search-page__panel" hidden>
+        <ul role="list" class="search-page__list">
+          <li class="hit"><div><h4><a href="/help/seasoning-flaking">My <mark>seasoning</mark> is flaking. Is that covered?</a></h4><p>Yes. Bring it to a store or send it in and we'll re-<mark>season</mark> it free.</p></div></li>
+          <li class="hit"><div><h4><a href="/help/re-seasoning-service">Do you offer a re-<mark>seasoning</mark> service?</a></h4><p>At Caldera Bend and Portland, while you wait or by mail.</p></div></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="search-page__empty" data-empty hidden>
+      <h3>Nothing for &ldquo;<span data-empty-q></span>&rdquo;</h3>
+      <p>Check the spelling, or try a broader word like &ldquo;skillet&rdquo; or &ldquo;bread&rdquo;.</p>
+      <p class="search-page__empty-popular">Popular searches: dutch oven, seasoning, cable fold, campfire paella, warranty</p>
+      <a class="btn btn-secondary" href="/contact">Ask our cooks</a>
+    </div>
+  </div>
+</section>
+
+<script>
+  const root = document.getElementById("search-results-page");
+  if (root) {
+    const tabs = Array.from(root.querySelectorAll<HTMLButtonElement>('[role="tab"]'));
+    const select = (tab: HTMLButtonElement) => {
+      tabs.forEach((t) => {
+        const on = t === tab;
+        t.setAttribute("aria-selected", String(on));
+        t.tabIndex = on ? 0 : -1;
+        const panel = root.querySelector<HTMLElement>(`#${t.getAttribute("aria-controls")}`);
+        if (panel) panel.hidden = !on;
+      });
+    };
+    tabs.forEach((t, i) => {
+      t.addEventListener("click", () => select(t));
+      t.addEventListener("keydown", (e) => {
+        const dir = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
+        if (!dir) return;
+        const next = tabs[(i + dir + tabs.length) % tabs.length];
+        select(next);
+        next.focus();
+      });
+    });
+    const input = root.querySelector<HTMLInputElement>("#search-page-q");
+    const results = root.querySelector<HTMLElement>("[data-results]");
+    const empty = root.querySelector<HTMLElement>("[data-empty]");
+    const run = (q: string) => {
+      const term = q.trim().toLowerCase();
+      const known = ["seasoning", "season", "dutch oven", "cable fold", "campfire paella", "warranty", "skillet", "bread"];
+      const hit = term === "" || known.some((k) => term.includes(k) || k.includes(term));
+      if (results) results.hidden = !hit;
+      if (empty) empty.hidden = hit;
+      const span = root.querySelector<HTMLElement>("[data-empty-q]");
+      if (span) span.textContent = q;
+    };
+    root.querySelector("form")?.addEventListener("submit", (e) => { e.preventDefault(); run(input?.value ?? ""); });
+    root.querySelectorAll<HTMLButtonElement>("[data-q]").forEach((b) => b.addEventListener("click", () => {
+      if (input) input.value = b.dataset.q ?? "";
+      run(b.dataset.q ?? "");
+    }));
+  }
+</script>
+
+<style>
+  .search-page__wrap { max-width: 860px; }
+  .search-page__label { display: block; font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 1rem; }
+  .search-page__bar { display: flex; align-items: center; gap: 0.5rem; padding: 0.375rem 0.375rem 0.375rem 1rem; border: 1px solid var(--line); border-radius: var(--radius); background: var(--bg); box-shadow: var(--shadow); }
+  .search-page__bar:focus-within { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .search-page__bar svg { flex: none; color: var(--ink-3); }
+  .search-page__bar input { flex: 1; min-width: 0; min-height: 44px; border: 0; background: transparent; font-size: 1.0625rem; outline: none; }
+  .search-page__popular { display: flex; flex-wrap: wrap; align-items: center; gap: 0.375rem; margin-top: 0.875rem; font-size: 0.875rem; color: var(--ink-3); }
+  .search-page__popular button { min-height: 32px; padding: 0 0.75rem; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); font: inherit; font-size: 0.8125rem; color: var(--ink); cursor: pointer; }
+  .search-page__results { margin-top: 2.5rem; }
+  .search-page__summary { color: var(--ink-2); }
+  .search-page__tabs { display: flex; gap: 0.25rem; overflow-x: auto; border-bottom: 1px solid var(--line); margin-bottom: 1.5rem; scrollbar-width: none; }
+  .search-page__tabs button { flex: none; display: inline-flex; align-items: center; gap: 0.375rem; min-height: 44px; padding: 0 1rem; border: 0; border-bottom: 2px solid transparent; background: none; font: inherit; font-weight: 600; color: var(--ink-2); cursor: pointer; margin-bottom: -1px; }
+  .search-page__tabs button span { font-size: 0.75rem; padding: 0 0.375rem; border-radius: 999px; background: var(--surface-2); }
+  .search-page__tabs button[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--brand); }
+  .search-page__pinned { padding: 1.25rem; margin-bottom: 1.5rem; border-radius: var(--radius); background: var(--brand-soft); }
+  .search-page__pinned h3 { font-size: 1.125rem; margin: 0.5rem 0 0.375rem; }
+  .search-page__pinned p { margin: 0; color: var(--ink-2); font-size: 0.9375rem; }
+  .search-page a { text-decoration: none; }
+  .search-page h3 a:hover, .search-page h4 a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .search-page mark { background: color-mix(in srgb, var(--warning) 22%, transparent); color: inherit; padding: 0 2px; border-radius: 2px; }
+  .search-page__list { list-style: none; margin: 0; padding: 0; }
+  .hit { display: flex; gap: 1rem; align-items: center; padding: 1rem 0; border-bottom: 1px solid var(--line); }
+  .hit > div { flex: 1; min-width: 0; }
+  .hit h4 { margin: 0 0 0.25rem; font-size: 1rem; }
+  .hit p { margin: 0; font-size: 0.9375rem; color: var(--ink-2); }
+  .hit img { width: 64px; height: 64px; object-fit: cover; border-radius: var(--radius-sm); flex: none; }
+  .search-page__empty { margin-top: 2.5rem; padding: 2.5rem 1.5rem; text-align: center; border: 1px dashed var(--line); border-radius: var(--radius-lg); }
+  .search-page__empty p { color: var(--ink-2); }
+  .search-page__empty-popular { font-size: 0.875rem; }
+</style>

@@ -1,0 +1,113 @@
+---
+// Full-bleed parallax image with overlay text (variant: parallax, bottom-left, gradient 45%, tall) — Tidewater Hotel.
+---
+
+<section id="parallax-image-overlay" class="section parallax" data-variant="parallax" data-intensity="20">
+  <!-- kit: parallax-image-overlay -->
+  <div class="media" aria-hidden="false">
+    <picture>
+      <source media="(max-width: 700px)" srcset="https://picsum.photos/seed/tidewater-coast-portrait/1080/1600" width="2160" height="3200" />
+      <img class="bg" src="https://picsum.photos/seed/tidewater-coast-aerial/2400/1200" alt="Aerial view of the hotel above a long empty beach at low tide" width="4800" height="2400" loading="lazy" />
+    </picture>
+  </div>
+  <div class="overlay" aria-hidden="true"></div>
+  <div class="container content">
+    <div class="copy">
+      <span class="eyebrow">The coast</span>
+      <h2>Where the tide sets the schedule.</h2>
+      <p>Ninety rooms on a quiet stretch of the Oregon coast. No resort fee, no wristbands.</p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="/book">Check availability <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </div>
+  <p class="credit">Photo: Jonah Reyes</p>
+</section>
+
+<style>
+  .parallax {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    min-height: clamp(520px, 85vh, 820px);
+    padding-block: 0;
+    overflow: hidden;
+    color: #fff;
+    background: var(--dark);
+  }
+  .media {
+    position: absolute;
+    inset: -12% 0;
+    will-change: transform;
+  }
+  .media picture,
+  .bg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  .bg {
+    object-fit: cover;
+    object-position: 62% 48%;
+  }
+  .overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top right, rgb(0 0 0 / 0.72) 0%, rgb(0 0 0 / 0.45) 40%, rgb(0 0 0 / 0) 80%);
+  }
+  .content {
+    position: relative;
+    padding-block: var(--section-y);
+  }
+  .copy {
+    max-width: 560px;
+  }
+  .eyebrow {
+    color: #fff;
+    opacity: 0.85;
+  }
+  .copy h2 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+  }
+  .copy p {
+    font-size: 1.125rem;
+    color: rgb(255 255 255 / 0.88);
+    margin-bottom: 1.75rem;
+  }
+  .credit {
+    position: absolute;
+    right: var(--gutter);
+    bottom: 0.75rem;
+    margin: 0;
+    font-size: 0.75rem;
+    color: rgb(255 255 255 / 0.7);
+  }
+  @media (max-width: 700px) {
+    .bg {
+      object-position: 50% 60%;
+    }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    var root = document.getElementById("parallax-image-overlay");
+    if (!root) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    var media = root.querySelector(".media");
+    var intensity = (Number(root.dataset.intensity) || 20) / 100;
+    var ticking = false;
+    function update() {
+      ticking = false;
+      var r = root.getBoundingClientRect();
+      var vh = window.innerHeight;
+      if (r.bottom < 0 || r.top > vh) return;
+      var progress = (r.top + r.height / 2 - vh / 2) / (vh + r.height);
+      media.style.transform = "translate3d(0," + (progress * r.height * intensity) + "px,0)";
+    }
+    window.addEventListener("scroll", function () {
+      if (!ticking) { ticking = true; requestAnimationFrame(update); }
+    }, { passive: true });
+    update();
+  })();
+</script>

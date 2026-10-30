@@ -1,0 +1,486 @@
+---
+---
+
+<section id="location-page" class="section place" data-booking-provider="resy" data-venue-id="58231" data-price-range="$$$">
+  <!-- kit: location-page -->
+  <header class="place__hero">
+    <img class="place__cover" src="https://picsum.photos/seed/fiamma-mission-oven/1600/1000" alt="The dining room at Fiamma Mission, a tiled wood oven glowing at the back" width="3200" height="2000" />
+    <div class="place__shade"></div>
+    <div class="container place__hero-inner">
+      <p class="place__crumbs"><a href="/locations">Locations</a> / Mission</p>
+      <h1>Fiamma Mission</h1>
+      <p class="place__tagline">Wood-fired pizza and Ligurian seafood on Valencia Street.</p>
+      <ul class="place__chips">
+        <li>$$$</li>
+        <li>Dine-in</li>
+        <li>Takeout</li>
+        <li>Bar</li>
+        <li>Private dining</li>
+      </ul>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="#place-book">Book a table</a>
+        <a class="btn btn-secondary place__hero-btn" href="/menus/dinner">See the menu</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="container place__main">
+    <div class="place__content">
+      <section class="place__block">
+        <h2>About</h2>
+        <div class="place__prose">
+          <p>Our first restaurant, opened in 2016 around a 4-ton oven built by hand in Naples. Chef Giulia Ferraro cooks almost everything over oak.</p>
+        </div>
+        <div class="place__chef">
+          <img src="https://picsum.photos/seed/fiamma-giulia-ferraro/240/240" alt="Portrait of Chef Giulia Ferraro" width="240" height="240" loading="lazy" />
+          <div><strong>Giulia Ferraro</strong><span>Head chef</span></div>
+        </div>
+      </section>
+
+      <section class="place__block">
+        <h2>Menus</h2>
+        <div class="place__menus">
+          <a class="card" href="/menus/dinner"><strong>Dinner</strong><span>17:00–22:00</span></a>
+          <a class="card" href="/menus/wine"><strong>Wine</strong><span>12:00–23:00</span></a>
+        </div>
+      </section>
+
+      <section class="place__block place__gallery" aria-label="Photos">
+        <img src="https://picsum.photos/seed/fiamma-mission-bar/900/900" alt="The marble bar at Fiamma Mission" width="900" height="900" loading="lazy" />
+        <img src="https://picsum.photos/seed/fiamma-mission-pizza/900/900" alt="A blistered pizza coming out of the wood oven" width="900" height="900" loading="lazy" />
+        <img src="https://picsum.photos/seed/fiamma-mission-terrace/900/900" alt="The back terrace strung with lights" width="900" height="900" loading="lazy" />
+      </section>
+
+      <section class="place__block" id="place-book">
+        <h2>Book a table</h2>
+        <form class="place__booking card" action="#" method="get" data-provider="resy" data-venue-id="58231">
+          <div class="place__booking-row">
+            <div class="field">
+              <label for="pl-date">Date</label>
+              <input id="pl-date" name="date" type="date" required />
+            </div>
+            <div class="field">
+              <label for="pl-party">Guests</label>
+              <select id="pl-party" name="party">
+                <option>1</option>
+                <option selected>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="pl-time">Time</label>
+              <select id="pl-time" name="time">
+                <option>17:30</option>
+                <option>18:30</option>
+                <option selected>19:30</option>
+                <option>20:30</option>
+                <option>21:30</option>
+              </select>
+            </div>
+          </div>
+          <button class="btn btn-primary" type="submit">Find a table</button>
+          <p class="place__fine">Reservations by Resy. The bar and the counter by the oven are always kept for walk-ins.</p>
+        </form>
+      </section>
+
+      <section class="place__block place__private card">
+        <div>
+          <span class="eyebrow">Private dining</span>
+          <h2>The back room seats 24</h2>
+          <p>Birthdays, rehearsal dinners and team suppers, with a set menu cooked over the oak fire.</p>
+          <a class="btn btn-secondary" href="https://fiamma.co/media/private-dining-mission.pdf" download="private-dining-mission.pdf">Download the brochure (PDF, 2.4 MB)</a>
+        </div>
+        <form class="place__private-form" action="#" method="post" data-form="form_private-dining-mission">
+          <div class="field">
+            <label for="pd-name">Name</label>
+            <input id="pd-name" name="name" type="text" autocomplete="name" required />
+          </div>
+          <div class="field">
+            <label for="pd-email">Email</label>
+            <input id="pd-email" name="email" type="email" autocomplete="email" required />
+          </div>
+          <div class="field">
+            <label for="pd-guests">Number of guests</label>
+            <input id="pd-guests" name="guests" type="number" min="8" max="24" />
+          </div>
+          <div class="field">
+            <label for="pd-date">Preferred date</label>
+            <input id="pd-date" name="date" type="date" />
+          </div>
+          <button class="btn btn-primary" type="submit">Send enquiry</button>
+          <p class="place__sent" role="status" hidden>Thanks — our events team will reply within a day.</p>
+        </form>
+      </section>
+    </div>
+
+    <aside class="place__side">
+      <div class="place__card card">
+        <h2 class="place__h3">Visit</h2>
+        <address>
+          742 Valencia St<br />
+          San Francisco, CA 94110<br />
+          United States
+        </address>
+        <p><a href="tel:+14155550173">+1 415 555 0173</a><br /><a href="mailto:mission@fiamma.co">mission@fiamma.co</a></p>
+        <iframe
+          title="Map showing Fiamma Mission, 742 Valencia St"
+          src="https://www.openstreetmap.org/export/embed.html?bbox=-122.4266%2C37.7579%2C-122.4166%2C37.7639&layer=mapnik&marker=37.7609%2C-122.4216"
+          loading="lazy"
+          width="400"
+          height="200"></iframe>
+        <a class="place__directions" href="https://maps.google.com/?q=742+Valencia+St+San+Francisco" target="_blank" rel="noopener">Get directions →</a>
+      </div>
+
+      <div class="place__card card">
+        <h2 class="place__h3">Hours</h2>
+        <table class="place__hours">
+          <caption class="visually-hidden">Opening hours, Fiamma Mission</caption>
+          <tbody>
+            <tr><th scope="row">Monday</th><td>Closed</td></tr>
+            <tr><th scope="row">Tuesday</th><td>Dinner 17:00–22:00</td></tr>
+            <tr><th scope="row">Wednesday</th><td>Dinner 17:00–22:00</td></tr>
+            <tr><th scope="row">Thursday</th><td>Dinner 17:00–22:00</td></tr>
+            <tr><th scope="row">Friday</th><td>Lunch 11:30–14:30<br />Dinner 17:00–23:00</td></tr>
+            <tr><th scope="row">Saturday</th><td>Lunch 11:30–14:30<br />Dinner 17:00–23:00</td></tr>
+            <tr><th scope="row">Sunday</th><td>All day 12:00–21:00</td></tr>
+          </tbody>
+        </table>
+        <h3 class="place__special-h">Holiday hours</h3>
+        <ul class="place__special">
+          <li><time datetime="2026-11-26">26 Nov</time> · Thanksgiving · <strong>Closed</strong></li>
+          <li><time datetime="2026-12-31">31 Dec</time> · New Year's Eve · 17:00–01:00</li>
+        </ul>
+      </div>
+
+      <div class="place__card card">
+        <h2 class="place__h3">Getting here</h2>
+        <h3 class="place__special-h">Accessibility</h3>
+        <p>Step-free entrance on Valencia St, accessible restroom at the back of the dining room, high chairs on request.</p>
+        <h3 class="place__special-h">Parking &amp; transit</h3>
+        <p>Street parking is tight after 6pm. 16th St BART is a 6-minute walk; bike racks out front.</p>
+      </div>
+    </aside>
+  </div>
+
+  <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "Restaurant",
+      "name": "Fiamma Mission",
+      "description": "Wood-fired pizza and Ligurian seafood on Valencia Street.",
+      "image": "https://picsum.photos/seed/fiamma-mission-oven/1600/1000",
+      "telephone": "+1 415 555 0173",
+      "email": "mission@fiamma.co",
+      "priceRange": "$$$",
+      "servesCuisine": "Italian",
+      "acceptsReservations": true,
+      "address": { "@type": "PostalAddress", "streetAddress": "742 Valencia St", "addressLocality": "San Francisco", "addressRegion": "CA", "postalCode": "94110", "addressCountry": "US" },
+      "geo": { "@type": "GeoCoordinates", "latitude": 37.7609, "longitude": -122.4216 },
+      "openingHoursSpecification": [
+        { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Tuesday", "Wednesday", "Thursday"], "opens": "17:00", "closes": "22:00" },
+        { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Friday", "Saturday"], "opens": "11:30", "closes": "14:30" },
+        { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Friday", "Saturday"], "opens": "17:00", "closes": "23:00" },
+        { "@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "12:00", "closes": "21:00" },
+        { "@type": "OpeningHoursSpecification", "validFrom": "2026-11-26", "validThrough": "2026-11-26", "opens": "00:00", "closes": "00:00" },
+        { "@type": "OpeningHoursSpecification", "validFrom": "2026-12-31", "validThrough": "2026-12-31", "opens": "17:00", "closes": "01:00" }
+      ]
+    }
+  </script>
+</section>
+
+<style>
+  .place [hidden] {
+    display: none !important;
+  }
+
+  .place.section {
+    padding-top: 0;
+  }
+
+  .place__hero {
+    position: relative;
+    isolation: isolate;
+    padding-block: clamp(96px, 14vw, 180px) clamp(40px, 6vw, 72px);
+    color: #fff;
+    overflow: hidden;
+  }
+
+  .place__cover {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .place__shade {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(180deg, rgb(20 10 5 / 0.2), rgb(20 10 5 / 0.82));
+  }
+
+  .place__crumbs {
+    font-size: 0.875rem;
+    opacity: 0.8;
+  }
+
+  .place__crumbs a {
+    color: #fff;
+  }
+
+  .place__tagline {
+    font-size: clamp(1.125rem, 2.5vw, 1.375rem);
+    max-width: 40ch;
+    opacity: 0.9;
+  }
+
+  .place__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 0 0 1.5rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  .place__chips li {
+    padding: 0.2rem 0.7rem;
+    border: 1px solid rgb(255 255 255 / 0.35);
+    border-radius: 999px;
+    font-size: 0.8125rem;
+    font-weight: 600;
+  }
+
+  .place__hero-btn {
+    color: #fff;
+    border-color: rgb(255 255 255 / 0.5);
+  }
+
+  .place__main {
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: clamp(2rem, 5vw, 4rem);
+    margin-top: clamp(2.5rem, 6vw, 4rem);
+    align-items: start;
+  }
+
+  .place__block {
+    margin-bottom: 3rem;
+  }
+
+  .place__prose {
+    font-size: 1.125rem;
+    color: var(--ink-2);
+  }
+
+  .place__chef {
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+  }
+
+  .place__chef img {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .place__chef strong {
+    display: block;
+  }
+
+  .place__chef span {
+    font-size: 0.875rem;
+    color: var(--ink-3);
+  }
+
+  .place__menus {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+  }
+
+  .place__menus a {
+    display: grid;
+    gap: 0.2rem;
+    padding: 1.25rem;
+    text-decoration: none;
+  }
+
+  .place__menus a:hover {
+    border-color: var(--ink-3);
+  }
+
+  .place__menus span {
+    font-size: 0.875rem;
+    color: var(--ink-3);
+  }
+
+  .place__gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+  }
+
+  .place__gallery img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: var(--radius);
+  }
+
+  .place__booking {
+    display: grid;
+    gap: 1rem;
+    padding: 1.5rem;
+  }
+
+  .place__booking-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 0.75rem;
+  }
+
+  .place__fine {
+    margin: 0;
+    font-size: 0.8125rem;
+    color: var(--ink-3);
+  }
+
+  .place__private {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    padding: clamp(1.25rem, 3vw, 2rem);
+    background: var(--surface);
+  }
+
+  .place__private p {
+    color: var(--ink-2);
+  }
+
+  .place__private-form {
+    display: grid;
+    gap: 0.875rem;
+  }
+
+  .place__sent {
+    margin: 0;
+    color: var(--success);
+  }
+
+  .place__side {
+    display: grid;
+    gap: 1rem;
+    position: sticky;
+    top: 1rem;
+  }
+
+  .place__card {
+    padding: 1.5rem;
+    font-size: 0.9375rem;
+  }
+
+  .place__h3 {
+    font-size: 1.125rem;
+  }
+
+  .place__card address {
+    font-style: normal;
+    margin-bottom: 0.75rem;
+  }
+
+  .place__card a {
+    color: var(--brand);
+    font-weight: 600;
+  }
+
+  .place__card iframe {
+    width: 100%;
+    height: 180px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+  }
+
+  .place__directions {
+    display: inline-block;
+    margin-top: 0.75rem;
+  }
+
+  .place__hours {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .place__hours th,
+  .place__hours td {
+    padding: 0.4rem 0;
+    border-bottom: 1px solid var(--line);
+    text-align: left;
+    vertical-align: top;
+  }
+
+  .place__hours td {
+    text-align: right;
+  }
+
+  .place__special-h {
+    margin: 1.25rem 0 0.4rem;
+    font-size: 0.875rem;
+  }
+
+  .place__special {
+    margin: 0;
+    padding-left: 1.1rem;
+    color: var(--ink-2);
+  }
+
+  .place__card p {
+    color: var(--ink-2);
+  }
+
+  @media (max-width: 960px) {
+    .place__main {
+      grid-template-columns: 1fr;
+    }
+
+    .place__side {
+      position: static;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .place__private {
+      grid-template-columns: 1fr;
+    }
+
+    .place__gallery {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .place__gallery img:last-child {
+      grid-column: 1 / -1;
+      aspect-ratio: 2 / 1;
+    }
+  }
+</style>
+
+<script is:inline>
+  (() => {
+    const root = document.getElementById("location-page");
+    if (!root) return;
+    root.querySelector(".place__booking").addEventListener("submit", (e) => e.preventDefault());
+    const pf = root.querySelector(".place__private-form");
+    pf.addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (!pf.reportValidity()) return;
+      pf.querySelector(".place__sent").hidden = false;
+    });
+  })();
+</script>

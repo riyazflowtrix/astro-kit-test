@@ -1,0 +1,154 @@
+<section id="pricing-single-plan-addons" class="section addons">
+  <!-- kit: pricing-single-plan-addons -->
+  <div class="container">
+    <div class="section-head">
+      <h2>The Recovery Membership</h2>
+      <p class="lead">Steady, one-to-one care for runners, climbers and anyone coming back from an injury. Book online, cancel any time after three months.</p>
+    </div>
+
+    <form class="addons__layout" action="#" method="post">
+      <div class="addons__plan">
+        <h3>Recovery Membership</h3>
+        <p class="addons__price"><strong>$189</strong><span>/ month</span></p>
+        <p class="addons__commit">3 months, then month to month</p>
+        <ul class="addons__includes" role="list">
+          <li>Two 45-minute sessions a month</li>
+          <li>A home program in the Juniper app</li>
+          <li>Message your physio between visits</li>
+          <li>10% off retail and taping</li>
+        </ul>
+      </div>
+
+      <fieldset class="addons__list">
+        <legend>Add to your membership</legend>
+
+        <div class="addon" data-price="95" data-unit="month">
+          <div class="addon__text">
+            <p class="addon__name">Extra session <span class="addon__hsa">HSA/FSA eligible</span></p>
+            <p class="addon__desc">Another 45-minute visit in the same month.</p>
+            <p class="addon__unit">$95 per session</p>
+          </div>
+          <div class="addon__qty">
+            <label for="addon-extra" class="visually-hidden">Extra sessions</label>
+            <button type="button" data-step="-1" aria-label="Fewer extra sessions">&minus;</button>
+            <input id="addon-extra" name="extraSession" type="number" min="0" max="4" value="0" inputmode="numeric" />
+            <button type="button" data-step="1" aria-label="More extra sessions">+</button>
+          </div>
+        </div>
+
+        <div class="addon" data-price="40" data-unit="month">
+          <div class="addon__text">
+            <p class="addon__name">Dry needling <span class="addon__hsa">HSA/FSA eligible</span></p>
+            <p class="addon__desc">Added to a session for stubborn muscle tension.</p>
+            <p class="addon__unit">$40 per session</p>
+          </div>
+          <div class="addon__qty">
+            <label for="addon-needling" class="visually-hidden">Dry needling sessions</label>
+            <button type="button" data-step="-1" aria-label="Fewer dry needling sessions">&minus;</button>
+            <input id="addon-needling" name="dryNeedling" type="number" min="0" max="6" value="0" inputmode="numeric" />
+            <button type="button" data-step="1" aria-label="More dry needling sessions">+</button>
+          </div>
+        </div>
+
+        <label class="addon addon--check" data-price="105" data-unit="month">
+          <span class="addon__text">
+            <span class="addon__name">Sports massage, 60 min</span>
+            <span class="addon__desc">With one of our licensed massage therapists.</span>
+            <span class="addon__unit">$105 per session</span>
+          </span>
+          <input type="checkbox" name="sportsMassage" value="1" />
+        </label>
+
+        <label class="addon addon--check" data-price="150" data-unit="once">
+          <span class="addon__text">
+            <span class="addon__name">Running gait analysis <span class="addon__hsa">HSA/FSA eligible</span></span>
+            <span class="addon__desc">Treadmill video analysis and a written report.</span>
+            <span class="addon__unit">$150 one time</span>
+          </span>
+          <input type="checkbox" name="gaitAnalysis" value="1" />
+        </label>
+      </fieldset>
+
+      <div class="addons__summary" aria-live="polite">
+        <p class="addons__total-label">Your monthly total</p>
+        <p class="addons__total"><strong data-total>$189</strong><span>/ month</span></p>
+        <p class="addons__once" data-once hidden></p>
+        <button class="btn btn-primary" type="submit">Book your first visit <span aria-hidden="true">&rarr;</span></button>
+        <div class="addons__fine">
+          <p>Unused sessions roll over for one month. We'll give you a superbill for out-of-network insurance claims. Cancel with 30 days' notice after the first three months &mdash; <a href="/membership-terms">read the terms</a>.</p>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
+
+<script>
+  const root = document.getElementById("pricing-single-plan-addons");
+  if (root) {
+    const form = root.querySelector("form");
+    const update = () => {
+      let monthly = 189;
+      let once = 0;
+      root.querySelectorAll<HTMLElement>(".addon").forEach((a) => {
+        const price = Number(a.dataset.price);
+        const num = a.querySelector<HTMLInputElement>('input[type="number"]');
+        const box = a.querySelector<HTMLInputElement>('input[type="checkbox"]');
+        const qty = num ? Math.max(0, Math.min(Number(num.max), Number(num.value) || 0)) : box?.checked ? 1 : 0;
+        if (a.dataset.unit === "once") once += price * qty;
+        else monthly += price * qty;
+      });
+      const total = root.querySelector<HTMLElement>("[data-total]");
+      const onceEl = root.querySelector<HTMLElement>("[data-once]");
+      if (total) total.textContent = `$${monthly}`;
+      if (onceEl) { onceEl.hidden = once === 0; onceEl.textContent = `Plus $${once} one time`; }
+    };
+    root.querySelectorAll<HTMLButtonElement>("[data-step]").forEach((b) => b.addEventListener("click", () => {
+      const input = b.parentElement?.querySelector<HTMLInputElement>("input");
+      if (!input) return;
+      const next = Number(input.value) + Number(b.dataset.step);
+      input.value = String(Math.max(Number(input.min), Math.min(Number(input.max), next)));
+      update();
+    }));
+    form?.addEventListener("input", update);
+    form?.addEventListener("submit", (e) => e.preventDefault());
+  }
+</script>
+
+<style>
+  .addons__layout { display: grid; gap: 1.5rem; }
+  @media (min-width: 980px) { .addons__layout { grid-template-columns: 1fr 1.3fr 1fr; align-items: start; } }
+  .addons__plan, .addons__summary { padding: 1.75rem; border-radius: var(--radius-lg); }
+  .addons__plan { background: var(--dark); color: var(--dark-ink); }
+  .addons__price { display: flex; align-items: baseline; gap: 0.375rem; margin: 0.5rem 0 0; }
+  .addons__price strong { font-size: 2.75rem; letter-spacing: -0.03em; line-height: 1; }
+  .addons__price span, .addons__commit { color: color-mix(in srgb, var(--dark-ink) 70%, transparent); }
+  .addons__commit { font-size: 0.875rem; }
+  .addons__includes { list-style: none; margin: 1.25rem 0 0; padding: 1.25rem 0 0; border-top: 1px solid rgb(255 255 255 / 0.15); display: grid; gap: 0.625rem; }
+  .addons__includes li { padding-left: 1.5rem; position: relative; }
+  .addons__includes li::before { content: ""; position: absolute; left: 0.125rem; top: 0.45em; width: 6px; height: 11px; border: solid var(--brand); border-width: 0 2px 2px 0; rotate: 45deg; }
+  .addons__list { border: 0; margin: 0; padding: 0; min-width: 0; display: grid; gap: 0.75rem; }
+  .addons__list legend { font-weight: 700; font-size: 1.125rem; margin-bottom: 0.75rem; }
+  .addon { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 1rem 1.125rem; border: 1px solid var(--line); border-radius: var(--radius); }
+  .addon--check { cursor: pointer; }
+  .addon--check:has(input:checked) { border-color: var(--brand); box-shadow: 0 0 0 1px var(--brand); }
+  .addon--check input { width: 22px; height: 22px; accent-color: var(--brand); flex: none; }
+  .addon__text p { margin: 0; }
+  .addon__text > span { display: block; }
+  .addon__name { font-weight: 600; }
+  .addon__hsa { display: inline-block; margin-left: 0.25rem; font-size: 0.6875rem; font-weight: 600; padding: 0 0.375rem; border-radius: 999px; background: var(--surface-2); color: var(--ink-2); vertical-align: middle; }
+  .addon__desc { font-size: 0.875rem; color: var(--ink-2); }
+  .addon__unit { font-size: 0.875rem; font-weight: 600; margin-top: 0.25rem !important; }
+  .addon__qty { display: flex; align-items: center; border: 1px solid var(--line); border-radius: var(--radius-sm); flex: none; }
+  .addon__qty button { width: 36px; height: 40px; border: 0; background: none; font-size: 1.125rem; cursor: pointer; color: var(--ink); }
+  .addon__qty input { width: 40px; height: 40px; border: 0; text-align: center; -moz-appearance: textfield; appearance: textfield; background: transparent; }
+  .addon__qty input::-webkit-inner-spin-button, .addon__qty input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+  .addons__summary { background: var(--surface); display: grid; gap: 0.75rem; }
+  .addons__summary p { margin: 0; }
+  .addons__total-label { font-weight: 600; color: var(--ink-2); font-size: 0.875rem; }
+  .addons__total { display: flex; align-items: baseline; gap: 0.375rem; }
+  .addons__total strong { font-size: 2.5rem; letter-spacing: -0.03em; line-height: 1; font-variant-numeric: tabular-nums; }
+  .addons__total span { color: var(--ink-3); }
+  .addons__once { font-size: 0.9375rem; font-weight: 600; }
+  .addons__fine p { font-size: 0.8125rem; color: var(--ink-3); }
+  .addons__fine a { color: var(--ink-2); }
+</style>

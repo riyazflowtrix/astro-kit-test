@@ -1,0 +1,58 @@
+---
+import Base from "../../layouts/Base.astro";
+import CommerceProductGridQuery from "../../components/commerce/CommerceProductGridQuery.astro";
+import CommerceFeaturedProduct from "../../components/commerce/CommerceFeaturedProduct.astro";
+import CommerceCollectionHeaderFacets from "../../components/commerce/CommerceCollectionHeaderFacets.astro";
+import CommerceBundleBuilder from "../../components/commerce/CommerceBundleBuilder.astro";
+import CommerceCartCrossSell from "../../components/commerce/CommerceCartCrossSell.astro";
+import CommercePromoCountdown from "../../components/commerce/CommercePromoCountdown.astro";
+import CommerceShopTheLook from "../../components/commerce/CommerceShopTheLook.astro";
+import CommerceSizeGuide from "../../components/commerce/CommerceSizeGuide.astro";
+import CommerceStoreLocator from "../../components/commerce/CommerceStoreLocator.astro";
+import CommerceProductComparison from "../../components/commerce/CommerceProductComparison.astro";
+---
+
+<Base title="Commerce" description="Product grids, product pages, bundles, promos and store tools from the BetterCMS Kit.">
+  <section class="section kit-intro">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Kit library</span>
+        <h1>Commerce</h1>
+        <p class="lead">Product grids, collection filters, bundles, promos and store tools for a shop built on BetterCMS.</p>
+      </div>
+    </div>
+  </section>
+
+  <CommerceProductGridQuery />
+  <CommerceFeaturedProduct />
+  <CommerceCollectionHeaderFacets />
+  <CommerceBundleBuilder />
+  <CommerceCartCrossSell />
+  <CommercePromoCountdown />
+  <CommerceShopTheLook />
+  <CommerceSizeGuide />
+  <CommerceStoreLocator />
+  <CommerceProductComparison />
+
+  <section class="section section--muted kit-entries">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Entry pages</span>
+        <h2>Standalone templates</h2>
+      </div>
+      <div class="grid grid-3">
+        <a class="card kit-entry" href="/commerce/commerce-product-detail/">
+          <h3>Product detail page</h3>
+          <p>Ember Dutch Oven 5.5qt: gallery with video, size and finish options, specs, care and policies.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .kit-intro { padding-bottom: 0; }
+  .kit-entry { display: block; padding: 1.5rem; text-decoration: none; transition: border-color 150ms ease; }
+  .kit-entry:hover { border-color: var(--ink-3); }
+  .kit-entry p { margin: 0; color: var(--ink-2); }
+</style>

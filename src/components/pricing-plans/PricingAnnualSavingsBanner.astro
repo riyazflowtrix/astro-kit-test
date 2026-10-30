@@ -1,0 +1,38 @@
+<section id="pricing-annual-savings-banner" class="section savings">
+  <!-- kit: pricing-annual-savings-banner -->
+  <div class="container">
+    <div class="savings__banner" role="region" aria-label="Yearly billing offer">
+      <span class="savings__icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="24" height="24"><path d="M4 7h16v13H4z M4 11h16 M8 3v4 M16 3v4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" /></svg>
+      </span>
+      <div class="savings__text">
+        <p class="savings__message">Pay yearly and get <strong>2 months</strong> of membership free.</p>
+        <p class="savings__sub">That's $378 back on the Recovery Membership. Offer ends December 31, 2026.</p>
+      </div>
+      <a class="btn btn-primary" href="/portal/billing?cycle=yearly">Switch to yearly</a>
+      <button type="button" class="savings__close" aria-label="Dismiss offer" data-dismiss>
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<script>
+  const root = document.getElementById("pricing-annual-savings-banner");
+  const banner = root?.querySelector<HTMLElement>(".savings__banner");
+  root?.querySelector("[data-dismiss]")?.addEventListener("click", () => { if (banner) banner.hidden = true; });
+</script>
+
+<style>
+  .savings { padding-block: 2.5rem; }
+  .savings__banner { position: relative; display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.5rem; padding: 1.25rem 3.5rem 1.25rem 1.5rem; border-radius: var(--radius-lg); background: var(--brand-soft); border: 1px solid color-mix(in srgb, var(--brand) 25%, transparent); }
+  .savings__banner[hidden] { display: none; }
+  .savings__icon { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; background: var(--brand); color: var(--brand-ink); flex: none; }
+  .savings__text { flex: 1 1 260px; min-width: 0; }
+  .savings__text p { margin: 0; }
+  .savings__message { font-size: 1.125rem; font-weight: 600; }
+  .savings__message strong { color: var(--brand); }
+  .savings__sub { font-size: 0.875rem; color: var(--ink-2); }
+  .savings__close { position: absolute; top: 0.625rem; right: 0.625rem; display: grid; place-items: center; width: 36px; height: 36px; border: 0; border-radius: 50%; background: transparent; color: var(--ink-2); cursor: pointer; }
+  .savings__close:hover { background: rgb(0 0 0 / 0.06); }
+</style>

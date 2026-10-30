@@ -1,0 +1,171 @@
+<section id="hero-stats" class="section hst" data-variant="below" data-count-up="true" data-spacing="spacious">
+  <!-- kit: hero-stats -->
+  <div class="container">
+    <div class="hst__head">
+      <div>
+        <span class="eyebrow">2025 impact</span>
+        <h2 class="hst__title">Rivers recover fast when we get out of their way.</h2>
+      </div>
+      <div>
+        <p class="lead">Since 2009 we've removed dams, replanted banks and bought back water rights so rivers can run the way they used to.</p>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="/donate?frequency=monthly">Give monthly</a>
+          <a class="btn btn-secondary" href="https://cdn.bettercms.site/owt/impact-report-2025.pdf" target="_blank" rel="noopener">Read the 2025 report</a>
+        </div>
+      </div>
+    </div>
+
+    <img class="hst__image" src="https://picsum.photos/seed/owt-river-restored/2400/1400" alt="A braided river winding through a green valley where a reservoir used to be" width="2400" height="1400" />
+
+    <dl class="hst__stats">
+      <div class="hst__stat">
+        <dt>river miles reopened<sup><a href="#hero-stats-src-1" aria-label="Source 1">1</a></sup></dt>
+        <dd data-value="1240" data-decimals="0" data-prefix="" data-suffix="">1,240</dd>
+      </div>
+      <div class="hst__stat">
+        <dt>dams removed</dt>
+        <dd data-value="38" data-decimals="0" data-prefix="" data-suffix="">38</dd>
+      </div>
+      <div class="hst__stat">
+        <dt>raised from 31,000 donors<sup><a href="#hero-stats-src-2" aria-label="Source 2">2</a></sup></dt>
+        <dd data-value="4.2" data-decimals="1" data-prefix="$" data-suffix="M">$4.2M</dd>
+      </div>
+      <div class="hst__stat">
+        <dt>of returning salmon runs monitored</dt>
+        <dd data-value="96" data-decimals="0" data-prefix="" data-suffix="%">96%</dd>
+      </div>
+    </dl>
+
+    <div class="hst__notes">
+      <p>Figures as of <time datetime="2026-03-31">March 31, 2026</time>.</p>
+      <ol>
+        <li id="hero-stats-src-1">OWT field surveys, 2009–2025</li>
+        <li id="hero-stats-src-2">Audited accounts, FY2025</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  (function () {
+    var root = document.getElementById("hero-stats");
+    if (!root || !("IntersectionObserver" in window)) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    var nums = Array.prototype.slice.call(root.querySelectorAll("dd[data-value]"));
+    function format(el, v) {
+      var d = Number(el.getAttribute("data-decimals")) || 0;
+      var text = v.toLocaleString("en-US", { minimumFractionDigits: d, maximumFractionDigits: d });
+      el.textContent = (el.getAttribute("data-prefix") || "") + text + (el.getAttribute("data-suffix") || "");
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        io.unobserve(entry.target);
+        var el = entry.target;
+        var target = Number(el.getAttribute("data-value"));
+        var start = performance.now();
+        function step(now) {
+          var t = Math.min(1, (now - start) / 1400);
+          var eased = 1 - Math.pow(1 - t, 3);
+          format(el, target * eased);
+          if (t < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      });
+    }, { threshold: 0.6 });
+    nums.forEach(function (n) { io.observe(n); });
+  })();
+</script>
+
+<style>
+  .hst {
+    padding-block: clamp(72px, 10vw, 136px);
+  }
+
+  .hst__head {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: 1.5rem clamp(2rem, 5vw, 4rem);
+    align-items: end;
+    margin-bottom: clamp(2rem, 5vw, 3.5rem);
+  }
+
+  .hst__title {
+    margin: 0;
+    font-size: clamp(2.25rem, 5vw, 3.75rem);
+  }
+
+  .hst__image {
+    width: 100%;
+    aspect-ratio: 12 / 7;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+  }
+
+  .hst__stats {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.5rem;
+    margin: clamp(2rem, 5vw, 3.5rem) 0 0;
+  }
+
+  .hst__stat {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+    gap: 0.25rem;
+    padding-top: 1.25rem;
+    border-top: 2px solid var(--ink);
+  }
+
+  .hst__stat dd {
+    margin: 0;
+    font-size: clamp(2.25rem, 4.5vw, 3.5rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .hst__stat dt {
+    color: var(--ink-2);
+  }
+
+  .hst__stat sup a {
+    margin-left: 0.15em;
+    font-size: 0.75rem;
+    color: var(--brand);
+    text-decoration: none;
+  }
+
+  .hst__notes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 2rem;
+    margin-top: 2rem;
+    font-size: 0.8125rem;
+    color: var(--ink-3);
+  }
+
+  .hst__notes p {
+    margin: 0;
+  }
+
+  .hst__notes ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 2rem;
+    margin: 0;
+    padding-left: 1.1rem;
+  }
+
+  @media (max-width: 860px) {
+    .hst__head {
+      grid-template-columns: 1fr;
+    }
+
+    .hst__stats {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>

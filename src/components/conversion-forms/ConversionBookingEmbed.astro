@@ -1,0 +1,227 @@
+---
+---
+
+<section id="conversion-booking-embed" class="section booking" data-provider="resy" data-resy-venue-id="58421" data-display="inline">
+  <!-- kit: conversion-booking-embed -->
+  <div class="container">
+    <div class="section-head">
+      <h2>Reserve a table</h2>
+      <p class="lead">Bookings open 30 days ahead at 10am. A few seats at the counter are always kept for walk-ins.</p>
+    </div>
+
+    <div class="booking__grid">
+      <article class="booking__exp card" data-booking-type="resy-dining">
+        <img src="https://picsum.photos/seed/hearthash-dining-room/1200/900" alt="A candlelit dining room with an open wood fire at the back" width="1200" height="900" loading="lazy" />
+        <div class="booking__exp-body">
+          <h3>Dining room</h3>
+          <p>The full à la carte menu from the wood-fired hearth.</p>
+          <ul class="booking__facts">
+            <li>2 hours</li>
+            <li>1–6 guests</li>
+            <li>No deposit</li>
+          </ul>
+        </div>
+      </article>
+      <article class="booking__exp card" data-booking-type="resy-counter">
+        <img src="https://picsum.photos/seed/hearthash-chefs-counter/1200/900" alt="Chef plating a course at a counter facing the hearth" width="1200" height="900" loading="lazy" />
+        <div class="booking__exp-body">
+          <h3>Chef's counter</h3>
+          <p>Nine courses cooked in front of you by Chef Amara Osei and the team.</p>
+          <ul class="booking__facts">
+            <li>3 hours</li>
+            <li>1–4 guests</li>
+            <li>$165 per person</li>
+            <li>Deposit required</li>
+          </ul>
+        </div>
+      </article>
+
+      <div class="booking__widget card">
+        <form class="booking__form" action="#" method="get">
+          <h3>Find a table</h3>
+          <div class="field">
+            <label for="bk-exp">Experience</label>
+            <select id="bk-exp" name="experience">
+              <option value="resy-dining">Dining room</option>
+              <option value="resy-counter">Chef's counter</option>
+            </select>
+          </div>
+          <div class="booking__row">
+            <div class="field">
+              <label for="bk-date">Date</label>
+              <input id="bk-date" name="date" type="date" required />
+            </div>
+            <div class="field">
+              <label for="bk-party">Guests</label>
+              <select id="bk-party" name="party">
+                <option>1</option>
+                <option selected>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option value="7">7 or more</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label for="bk-time">Time</label>
+            <select id="bk-time" name="time">
+              <option>5:30 pm</option>
+              <option>6:00 pm</option>
+              <option selected>7:00 pm</option>
+              <option>8:15 pm</option>
+              <option>9:00 pm</option>
+            </select>
+          </div>
+          <button class="btn btn-primary" type="submit">Check availability</button>
+          <p class="booking__large" hidden>For 7 or more guests, plan a private dinner with our events team.</p>
+          <p class="booking__powered">Reservations by Resy</p>
+        </form>
+        <div class="booking__private">
+          <p>Seven or more?</p>
+          <a class="btn btn-secondary" href="/private-dining">Plan a private dinner</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="booking__foot">
+      <div class="booking__policy">
+        <p>Cancel up to 24 hours ahead at no charge. Chef's counter bookings take a $50 per person deposit, credited to your bill. Tell us about allergies when you book — the kitchen cooks without nuts on request.</p>
+      </div>
+      <p class="booking__phone">Prefer to call? <a href="tel:+15035550199">(503) 555-0199</a></p>
+    </div>
+  </div>
+</section>
+
+<style>
+  #conversion-booking-embed [hidden] {
+    display: none !important;
+  }
+
+  .booking__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.1fr;
+    gap: 1.5rem;
+    align-items: start;
+  }
+
+  .booking__exp img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+
+  .booking__exp-body {
+    padding: 1.25rem;
+  }
+
+  .booking__exp-body p {
+    color: var(--ink-2);
+  }
+
+  .booking__facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .booking__facts li {
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    background: var(--surface);
+    font-size: 0.8125rem;
+    font-weight: 500;
+  }
+
+  .booking__widget {
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+  }
+
+  .booking__form {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .booking__row {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 0.75rem;
+  }
+
+  .booking__large {
+    margin: 0;
+    color: var(--brand);
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+
+  .booking__powered {
+    margin: 0;
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--ink-3);
+  }
+
+  .booking__private {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.25rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .booking__private p {
+    margin: 0;
+    font-weight: 600;
+  }
+
+  .booking__foot {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 1.5rem;
+    margin-top: 2rem;
+    font-size: 0.9375rem;
+    color: var(--ink-2);
+  }
+
+  .booking__phone a {
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  @media (max-width: 960px) {
+    .booking__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .booking__widget {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (max-width: 620px) {
+    .booking__grid,
+    .booking__foot {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script is:inline>
+  (() => {
+    const root = document.getElementById("conversion-booking-embed");
+    if (!root) return;
+    const party = root.querySelector("#bk-party");
+    const note = root.querySelector(".booking__large");
+    party.addEventListener("change", () => (note.hidden = Number(party.value) < 7));
+    root.querySelector("form").addEventListener("submit", (e) => e.preventDefault());
+  })();
+</script>

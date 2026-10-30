@@ -1,0 +1,147 @@
+---
+---
+
+<section id="comparison-vs-competitors" class="section comparison-vs-competitors">
+  <!-- kit: comparison-vs-competitors -->
+  <div class="container">
+    <header class="section-head section-head--center">
+      <span class="eyebrow">Compare</span>
+      <h2>Built for small teams, priced like it.</h2>
+      <p class="lead">How Ledgerly stacks up against the two tools most of our customers switched from.</p>
+    </header>
+
+    <div class="cvc-scroll" role="region" aria-labelledby="cvc-caption" tabindex="0">
+      <table class="cvc-table" id="tbl_ledgerly_compare">
+        <caption id="cvc-caption" class="visually-hidden">Ledgerly, Tallybook and Sumwise compared on bookkeeping and team features</caption>
+        <thead>
+          <tr>
+            <th scope="col" class="cvc-cap-col">Capability</th>
+            <th scope="col" class="cvc-brand is-highlighted">
+              <span class="badge">Best value</span>
+              <img src="https://cdn.ledgerly.com/brand/ledgerly-mark.svg" alt="Ledgerly" width="96" height="96" loading="lazy" />
+              <span class="cvc-name">Ledgerly</span>
+              <span class="cvc-price">$29 / month</span>
+              <a class="btn btn-primary cvc-btn" href="/signup" title="Sign up">Start free trial</a>
+            </th>
+            <th scope="col" class="cvc-brand">
+              <span class="cvc-name">Tallybook</span>
+              <span class="cvc-price">$45 / month</span>
+            </th>
+            <th scope="col" class="cvc-brand">
+              <span class="cvc-name">Sumwise</span>
+              <span class="cvc-price">$38 / month</span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="cvc-group"><th scope="rowgroup" colspan="4">Bookkeeping</th></tr>
+          <tr>
+            <th scope="row">Automatic bank reconciliation<sup><a href="#cvc-note-1" aria-label="Note 1">1</a></sup></th>
+            <td class="is-highlighted"><span class="cvc-yes" aria-hidden="true">✓</span><span class="visually-hidden">Yes</span></td>
+            <td><span class="cvc-text">Partly: rules written by hand</span></td>
+            <td><span class="cvc-yes" aria-hidden="true">✓</span><span class="visually-hidden">Yes</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Receipt capture by email</th>
+            <td class="is-highlighted"><span class="cvc-yes" aria-hidden="true">✓</span><span class="visually-hidden">Yes</span></td>
+            <td><span class="cvc-yes" aria-hidden="true">✓</span><span class="visually-hidden">Yes</span></td>
+            <td><span class="cvc-no" aria-hidden="true">—</span><span class="visually-hidden">No</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Multi-currency</th>
+            <td class="is-highlighted"><span class="cvc-text">160 currencies</span></td>
+            <td><span class="cvc-text">Premium plan only</span></td>
+            <td><span class="cvc-text">12 currencies</span></td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr class="cvc-group"><th scope="rowgroup" colspan="4">Team</th></tr>
+          <tr>
+            <th scope="row">Users included</th>
+            <td class="is-highlighted"><span class="cvc-text">Unlimited</span></td>
+            <td><span class="cvc-text">3</span></td>
+            <td><span class="cvc-text">5</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Bookkeeper access<sup><a href="#cvc-note-2" aria-label="Note 2">2</a></sup></th>
+            <td class="is-highlighted"><span class="cvc-yes" aria-hidden="true">✓</span><span class="visually-hidden">Yes</span></td>
+            <td><span class="cvc-no" aria-hidden="true">—</span><span class="visually-hidden">No</span></td>
+            <td><span class="cvc-text">Read-only</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <footer class="cvc-foot">
+      <ol class="cvc-notes">
+        <li id="cvc-note-1">Matches bank lines to invoices and bills without manual rules.</li>
+        <li id="cvc-note-2">Invite an outside bookkeeper without paying for a seat.</li>
+      </ol>
+      <p>Based on each vendor's public pricing and help pages on 1 September 2026. Tallybook and Sumwise are trademarks of their owners.</p>
+      <p>Last checked <time datetime="2026-09-01">1 September 2026</time>.</p>
+    </footer>
+  </div>
+</section>
+
+<style>
+  .cvc-scroll {
+    position: relative;
+    overflow-x: auto;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    background: var(--bg);
+  }
+  .cvc-table {
+    width: 100%;
+    min-width: 640px;
+    border-collapse: collapse;
+    font-size: 0.9375rem;
+  }
+  .cvc-table th,
+  .cvc-table td {
+    padding: 0.875rem 1rem;
+    border-bottom: 1px solid var(--line);
+    text-align: center;
+    vertical-align: middle;
+  }
+  .cvc-table th[scope="row"],
+  .cvc-cap-col {
+    text-align: left;
+    font-weight: 500;
+    position: sticky;
+    left: 0;
+    background: var(--bg);
+    z-index: 1;
+    min-width: 200px;
+  }
+  .cvc-cap-col { font-weight: 600; color: var(--ink-3); vertical-align: bottom; }
+  .cvc-brand {
+    vertical-align: bottom;
+    min-width: 140px;
+  }
+  .cvc-brand > * { display: block; margin-inline: auto; }
+  .cvc-brand .badge { display: inline-flex; margin-bottom: 0.5rem; }
+  .cvc-brand img { width: 40px; height: 40px; margin-bottom: 0.375rem; }
+  .cvc-name { font-weight: 700; font-size: 1rem; }
+  .cvc-price { font-weight: 400; color: var(--ink-2); font-size: 0.875rem; }
+  .cvc-btn { display: inline-flex; margin-top: 0.75rem; min-height: 38px; font-size: 0.875rem; }
+  .is-highlighted { background: var(--brand-soft); }
+  thead .is-highlighted { border-top: 3px solid var(--brand); }
+  .cvc-group th {
+    text-align: left;
+    background: var(--surface);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-3);
+    padding-block: 0.5rem;
+  }
+  .cvc-yes { color: var(--success); font-weight: 700; font-size: 1.125rem; }
+  .cvc-no { color: var(--ink-3); }
+  .cvc-text { color: var(--ink-2); }
+  .cvc-table sup a { color: var(--brand); text-decoration: none; margin-left: 2px; }
+  .cvc-table tbody:last-child tr:last-child > * { border-bottom: 0; }
+  .cvc-foot { margin-top: 1.25rem; font-size: 0.8125rem; color: var(--ink-3); }
+  .cvc-foot p { margin-bottom: 0.25rem; }
+  .cvc-notes { margin: 0 0 0.75rem; padding-left: 1.25rem; }
+</style>

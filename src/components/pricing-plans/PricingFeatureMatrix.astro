@@ -1,0 +1,152 @@
+<section id="pricing-feature-matrix" class="section matrix">
+  <!-- kit: pricing-feature-matrix -->
+  <div class="container">
+    <div class="section-head section-head--center">
+      <h2>Compare every feature</h2>
+    </div>
+
+    <div class="field matrix__picker">
+      <label for="matrix-plan">Show plan</label>
+      <select id="matrix-plan">
+        <option value="hobby">Hobby</option>
+        <option value="pro" selected>Pro</option>
+        <option value="team">Team</option>
+        <option value="enterprise">Enterprise</option>
+      </select>
+    </div>
+
+    <div class="matrix__scroll" role="region" aria-labelledby="tbl_northwind_plans-caption" tabindex="0" data-show="pro">
+      <table id="tbl_northwind_plans">
+        <caption id="tbl_northwind_plans-caption">Northwind plans compared: delivery limits, retries, static IPs, SSO and compliance by plan</caption>
+        <thead>
+          <tr>
+            <th scope="col" class="matrix__corner">Feature</th>
+            <th scope="col" data-col="hobby">
+              <span class="matrix__plan">Hobby</span>
+              <span class="matrix__price">$0</span>
+              <a class="btn btn-secondary" href="https://app.northwind.dev/signup">Start free</a>
+            </th>
+            <th scope="col" data-col="pro" class="is-highlight">
+              <span class="matrix__plan">Pro</span>
+              <span class="matrix__price">$39/mo</span>
+              <a class="btn btn-primary" href="https://app.northwind.dev/signup?plan=pro">Start trial</a>
+            </th>
+            <th scope="col" data-col="team">
+              <span class="matrix__plan">Team</span>
+              <span class="matrix__price">$20/seat</span>
+              <a class="btn btn-secondary" href="https://app.northwind.dev/signup?plan=team">Start trial</a>
+            </th>
+            <th scope="col" data-col="enterprise">
+              <span class="matrix__plan">Enterprise</span>
+              <span class="matrix__price">Custom</span>
+              <a class="btn btn-secondary" href="/contact-sales">Talk to sales</a>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="matrix__group"><th scope="rowgroup" colspan="5">Price</th></tr>
+          <tr>
+            <th scope="row">Price a month</th>
+            <td data-col="hobby">$0</td>
+            <td data-col="pro" class="is-highlight">$39</td>
+            <td data-col="team">$20<sup><a href="#matrix-fn-2" aria-label="Footnote 2">2</a></sup></td>
+            <td data-col="enterprise">Custom</td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr class="matrix__group"><th scope="rowgroup" colspan="5">Delivery</th></tr>
+          <tr>
+            <th scope="row">Events a month<sup><a href="#matrix-fn-1" aria-label="Footnote 1">1</a></sup></th>
+            <td data-col="hobby">100k</td>
+            <td data-col="pro" class="is-highlight">2M</td>
+            <td data-col="team">10M</td>
+            <td data-col="enterprise">Unlimited</td>
+          </tr>
+          <tr>
+            <th scope="row"><a href="https://docs.northwind.dev/delivery/retries">Automatic retries</a></th>
+            <td data-col="hobby">3 attempts</td>
+            <td data-col="pro" class="is-highlight"><span class="yes" aria-hidden="true">&#10003;</span><span class="visually-hidden">Included</span></td>
+            <td data-col="team"><span class="yes" aria-hidden="true">&#10003;</span><span class="visually-hidden">Included</span></td>
+            <td data-col="enterprise"><span class="yes" aria-hidden="true">&#10003;</span><span class="visually-hidden">Included</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Static IPs</th>
+            <td data-col="hobby"><span class="no" aria-hidden="true">&mdash;</span><span class="visually-hidden">Not included</span></td>
+            <td data-col="pro" class="is-highlight">Add-on, $29/mo</td>
+            <td data-col="team"><span class="yes" aria-hidden="true">&#10003;</span><span class="visually-hidden">Included</span></td>
+            <td data-col="enterprise"><span class="yes" aria-hidden="true">&#10003;</span><span class="visually-hidden">Included</span></td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr class="matrix__group"><th scope="rowgroup" colspan="5">Security &amp; compliance</th></tr>
+          <tr>
+            <th scope="row">SAML SSO</th>
+            <td data-col="hobby"><span class="no" aria-hidden="true">&mdash;</span><span class="visually-hidden">Not included</span></td>
+            <td data-col="pro" class="is-highlight"><span class="no" aria-hidden="true">&mdash;</span><span class="visually-hidden">Not included</span></td>
+            <td data-col="team">Google, Okta</td>
+            <td data-col="enterprise"><span class="yes" aria-hidden="true">&#10003;</span><span class="visually-hidden">Included</span></td>
+          </tr>
+          <tr>
+            <th scope="row">HIPAA BAA<sup><a href="#matrix-fn-3" aria-label="Footnote 3">3</a></sup></th>
+            <td data-col="hobby"><span class="no" aria-hidden="true">&mdash;</span><span class="visually-hidden">Not included</span></td>
+            <td data-col="pro" class="is-highlight"><span class="no" aria-hidden="true">&mdash;</span><span class="visually-hidden">Not included</span></td>
+            <td data-col="team"><span class="no" aria-hidden="true">&mdash;</span><span class="visually-hidden">Not included</span></td>
+            <td data-col="enterprise"><span class="yes" aria-hidden="true">&#10003;</span><span class="visually-hidden">Included</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Customer-managed keys</th>
+            <td data-col="hobby"><span class="no" aria-hidden="true">&mdash;</span><span class="visually-hidden">Not included</span></td>
+            <td data-col="pro" class="is-highlight"><span class="no" aria-hidden="true">&mdash;</span><span class="visually-hidden">Not included</span></td>
+            <td data-col="team"><span class="no" aria-hidden="true">&mdash;</span><span class="visually-hidden">Not included</span></td>
+            <td data-col="enterprise"><span class="badge">Coming soon</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <ol class="matrix__footnotes">
+      <li id="matrix-fn-1">Every delivery attempt counts, retries included.</li>
+      <li id="matrix-fn-2">Per seat, billed monthly.</li>
+      <li id="matrix-fn-3">A Business Associate Agreement for teams handling health data.</li>
+    </ol>
+  </div>
+</section>
+
+<script>
+  const root = document.getElementById("pricing-feature-matrix");
+  if (root) {
+    const select = root.querySelector<HTMLSelectElement>("#matrix-plan");
+    const scroll = root.querySelector<HTMLElement>(".matrix__scroll");
+    select?.addEventListener("change", () => { if (scroll) scroll.dataset.show = select.value; });
+  }
+</script>
+
+<style>
+  .matrix__picker { display: none; max-width: 240px; margin-bottom: 1rem; }
+  .matrix__scroll { overflow: auto; max-height: 85vh; border: 1px solid var(--line); border-radius: var(--radius); }
+  .matrix table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 0.9375rem; }
+  .matrix caption { text-align: left; padding: 1rem; font-size: 0.875rem; color: var(--ink-2); }
+  .matrix th, .matrix td { padding: 0.875rem 1rem; border-top: 1px solid var(--line); text-align: center; }
+  .matrix thead th { position: sticky; top: 0; z-index: 2; background: var(--bg); vertical-align: bottom; }
+  .matrix thead th > * { display: block; }
+  .matrix thead .btn { display: inline-flex; min-height: 36px; font-size: 0.875rem; margin-top: 0.5rem; }
+  .matrix__plan { font-size: 1.0625rem; font-weight: 700; }
+  .matrix__price { font-weight: 500; color: var(--ink-2); }
+  .matrix__corner { text-align: left !important; color: var(--ink-3); font-size: 0.8125rem; text-transform: uppercase; letter-spacing: 0.06em; }
+  .matrix tbody th[scope="row"] { text-align: left; font-weight: 500; }
+  .matrix tbody th a { color: var(--accent); }
+  .matrix sup a { color: var(--ink-3); text-decoration: none; margin-left: 2px; }
+  .matrix .is-highlight { background: color-mix(in srgb, var(--brand-soft) 55%, var(--bg)); }
+  .matrix thead th.is-highlight { box-shadow: inset 0 3px 0 var(--brand); }
+  .matrix__group th { text-align: left !important; background: var(--surface); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-3); padding-block: 0.5rem; }
+  .yes { color: var(--success); font-weight: 700; font-size: 1.125rem; }
+  .no { color: var(--ink-3); }
+  .matrix__footnotes { margin: 1rem 0 0; padding-left: 1.25rem; font-size: 0.8125rem; color: var(--ink-3); display: grid; gap: 0.25rem; }
+  @media (max-width: 699px) {
+    .matrix__picker { display: grid; }
+    .matrix__scroll[data-show="hobby"] [data-col]:not([data-col="hobby"]),
+    .matrix__scroll[data-show="pro"] [data-col]:not([data-col="pro"]),
+    .matrix__scroll[data-show="team"] [data-col]:not([data-col="team"]),
+    .matrix__scroll[data-show="enterprise"] [data-col]:not([data-col="enterprise"]) { display: none; }
+  }
+</style>

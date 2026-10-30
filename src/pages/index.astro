@@ -1,0 +1,60 @@
+---
+import Base from "../layouts/Base.astro";
+import categories from "../data/categories.json";
+
+const total = categories.reduce((n, c) => n + c.sections.length, 0);
+---
+
+<Base title="All sections">
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Kit library</span>
+        <h1>{total} sections in {categories.length} categories</h1>
+        <p class="lead">Every section from the BetterCMS Kit, built as plain Astro with sample content. Open a category to see its sections.</p>
+      </div>
+      <div class="grid grid-3">
+        {categories.map((c) => (
+          <a class="card category" href={`/${c.slug}/`}>
+            <h2>{c.name}</h2>
+            <p>{c.sections.length} sections</p>
+            <ul>
+              {c.sections.slice(0, 5).map((s) => <li>{s.name}</li>)}
+              {c.sections.length > 5 && <li>and {c.sections.length - 5} more</li>}
+            </ul>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .category {
+    display: block;
+    padding: 1.5rem;
+    text-decoration: none;
+    transition: border-color 150ms ease;
+  }
+
+  .category:hover {
+    border-color: var(--ink-3);
+  }
+
+  .category h2 {
+    font-size: 1.25rem;
+  }
+
+  .category p {
+    color: var(--brand);
+    font-weight: 600;
+    font-size: 0.875rem;
+  }
+
+  .category ul {
+    margin: 0;
+    padding-left: 1.1rem;
+    color: var(--ink-2);
+    font-size: 0.875rem;
+  }
+</style>

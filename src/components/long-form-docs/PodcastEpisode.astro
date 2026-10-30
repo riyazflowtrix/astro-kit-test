@@ -1,0 +1,262 @@
+---
+// Podcast episode (entry) — Caldera's Low & Slow podcast, S3 E42: Cooking at 3,000 metres.
+---
+
+<section id="podcast-episode" class="section podcast-episode">
+  <!-- kit: podcast-episode -->
+  <article class="container narrow">
+    <header class="ep-head">
+      <div class="art" aria-hidden="true">
+        <span>Low<br />&amp; Slow</span>
+      </div>
+      <div class="ep-copy">
+        <p class="ep-meta"><span class="badge">Season 3 · Episode 42</span> <time datetime="2026-09-29T05:00:00-07:00">29 September 2026</time> · 48 min</p>
+        <h1>Cooking at 3,000 metres</h1>
+        <p class="lead">Mountain guide Inés Calderón on why water boils at 90°C up high, the one pan she carries up Aconcagua, and dinner for twelve in a snowstorm.</p>
+        <ul class="people" role="list">
+          <li><span>Host</span> Mei Chen</li>
+          <li><span>Guest</span> <a href="/people/ines-calderon">Inés Calderón</a></li>
+        </ul>
+      </div>
+    </header>
+
+    <div class="player">
+      <audio controls preload="none" aria-label="Listen to Cooking at 3,000 metres">
+        <source src="https://media.caldera.co/podcast/low-slow-s3e42.mp3" type="audio/mpeg" />
+        <a href="https://media.caldera.co/podcast/low-slow-s3e42.mp3">Download the episode (MP3, 61 MB)</a>
+      </audio>
+      <div class="player-links">
+        <a href="https://media.caldera.co/podcast/low-slow-s3e42.mp3" download>Download MP3 · 61 MB</a>
+        <a href="/podcast/feed.xml">RSS feed</a>
+      </div>
+    </div>
+
+    <div class="ep-grid">
+      <div class="notes">
+        <h2>Show notes</h2>
+        <p>Inés guides on Aconcagua and in the Cordillera Blanca. We talk altitude, fuel and feeding a team at the end of a 14-hour day.</p>
+        <h3>Mentioned</h3>
+        <ul>
+          <li><a href="/products/carbon-pan-8">Carbon Steel Pan 8"</a></li>
+          <li><a href="/recipes/one-pot-lentils">One-pot lentils with chorizo</a></li>
+          <li><a href="https://www.ineshighaltitude.com" rel="nofollow">Inés's guiding company</a></li>
+        </ul>
+      </div>
+      <aside class="chapters" aria-label="Chapters">
+        <h2>Chapters</h2>
+        <ol>
+          <li><button type="button" data-start="0"><span class="time">0:00</span> Intro</button></li>
+          <li><button type="button" data-start="192"><span class="time">3:12</span> Why water boils at 90°C</button></li>
+          <li><button type="button" data-start="1065"><span class="time">17:45</span> The one-pan kit list</button></li>
+          <li><button type="button" data-start="2060"><span class="time">34:20</span> Dinner for twelve in a storm</button></li>
+        </ol>
+      </aside>
+    </div>
+
+    <div class="video">
+      <iframe src="https://www.youtube-nocookie.com/embed/Fq3J2xQm8Hk" title="Cooking at 3,000 metres (YouTube video)" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+
+    <details class="transcript">
+      <summary>Transcript</summary>
+      <div class="transcript-body">
+        <p><strong>Mei:</strong> Inés, you've cooked on more summits than anyone I know. What surprises people first?</p>
+        <p><strong>Inés:</strong> That pasta never cooks. Water boils at about ninety degrees up there, so everything takes twice as long and you burn twice the fuel.</p>
+      </div>
+    </details>
+  </article>
+
+  <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "PodcastEpisode",
+      "name": "Cooking at 3,000 metres",
+      "description": "Mountain guide Inés Calderón on why water boils at 90°C up high, the one pan she carries up Aconcagua, and dinner for twelve in a snowstorm.",
+      "datePublished": "2026-09-29",
+      "episodeNumber": 42,
+      "timeRequired": "PT48M54S",
+      "partOfSeason": { "@type": "PodcastSeason", "seasonNumber": 3 },
+      "partOfSeries": { "@type": "PodcastSeries", "name": "Low & Slow" },
+      "associatedMedia": { "@type": "MediaObject", "contentUrl": "https://media.caldera.co/podcast/low-slow-s3e42.mp3" },
+      "actor": [{ "@type": "Person", "name": "Mei Chen" }, { "@type": "Person", "name": "Inés Calderón" }]
+    }
+  </script>
+</section>
+
+<style>
+  .narrow {
+    max-width: 900px;
+  }
+  .ep-head {
+    display: grid;
+    grid-template-columns: 200px minmax(0, 1fr);
+    gap: 2rem;
+    align-items: center;
+  }
+  .art {
+    aspect-ratio: 1;
+    display: grid;
+    place-items: center;
+    border-radius: var(--radius-lg);
+    background: radial-gradient(circle at 30% 25%, #f07a4f, var(--brand) 45%, #5a1610);
+    color: #fff;
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1;
+    text-align: center;
+    letter-spacing: -0.03em;
+  }
+  .ep-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--ink-3);
+  }
+  .ep-copy h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+  }
+  .people {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-weight: 600;
+  }
+  .people span {
+    margin-right: 0.25rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--ink-3);
+  }
+  .people a {
+    color: var(--accent);
+  }
+  .player {
+    margin: 2rem 0;
+    padding: 1rem 1.25rem;
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+  .player audio {
+    width: 100%;
+  }
+  .player-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+  }
+  .player-links a {
+    color: var(--ink-2);
+  }
+  .ep-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 300px;
+    gap: 2.5rem;
+    align-items: start;
+  }
+  .ep-grid h2 {
+    font-size: 1.375rem;
+  }
+  .notes ul {
+    padding-left: 1.25rem;
+  }
+  .notes a {
+    color: var(--accent);
+  }
+  .chapters ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--line);
+  }
+  .chapters li {
+    border-bottom: 1px solid var(--line);
+  }
+  .chapters button {
+    display: flex;
+    gap: 0.875rem;
+    width: 100%;
+    min-height: 44px;
+    padding: 0.5rem 0;
+    border: 0;
+    background: none;
+    font: inherit;
+    font-size: 0.9375rem;
+    text-align: left;
+    cursor: pointer;
+  }
+  .chapters button:hover {
+    color: var(--brand);
+  }
+  .time {
+    min-width: 3rem;
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    color: var(--brand);
+    padding-top: 0.15rem;
+  }
+  .video {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    margin: 2.5rem 0;
+    overflow: hidden;
+    border-radius: var(--radius);
+    background: #000;
+  }
+  .video iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+  .transcript {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 0 1.25rem;
+  }
+  .transcript summary {
+    min-height: 52px;
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .transcript-body {
+    padding-bottom: 0.75rem;
+    color: var(--ink-2);
+  }
+  @media (max-width: 760px) {
+    .ep-head,
+    .ep-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .art {
+      width: 140px;
+      font-size: 1.5rem;
+    }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    var root = document.getElementById("podcast-episode");
+    if (!root) return;
+    var audio = root.querySelector("audio");
+    root.querySelectorAll("[data-start]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        audio.currentTime = Number(btn.getAttribute("data-start")) || 0;
+        var p = audio.play();
+        if (p && p.catch) p.catch(function () {});
+      });
+    });
+  })();
+</script>

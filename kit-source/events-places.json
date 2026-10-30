@@ -1,0 +1,3713 @@
+[
+ {
+  "id": "events-list",
+  "name": "Events list",
+  "category": "Events & places",
+  "kind": "block",
+  "brand": "Caldera",
+  "previewLayout": "list",
+  "proves": "Upcoming / past split from one query \u00b7 past events offer recordings \u00b7 time-zone display rule \u00b7 list, cards, calendar or map",
+  "schema": {
+   "name": "eventsList",
+   "title": "Events list",
+   "kind": "block",
+   "icon": "calendar-event",
+   "category": "Events & places",
+   "description": "Upcoming and past events with filters",
+   "variants": [
+    {
+     "id": "list",
+     "name": "Date list"
+    },
+    {
+     "id": "cards",
+     "name": "Cards"
+    },
+    {
+     "id": "calendar",
+     "name": "Month calendar"
+    },
+    {
+     "id": "map",
+     "name": "Map + list"
+    }
+   ],
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "icon": "file-text",
+     "default": true
+    },
+    {
+     "name": "query",
+     "title": "Events",
+     "icon": "database"
+    },
+    {
+     "name": "design",
+     "title": "Design",
+     "icon": "palette"
+    }
+   ],
+   "fieldsets": [
+    {
+     "name": "empty",
+     "title": "When nothing is scheduled",
+     "collapsed": true
+    }
+   ],
+   "preview": {
+    "title": "heading",
+    "subtitle": "show",
+    "icon": "calendar-event"
+   },
+   "fields": [
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "group": "content",
+     "validation": {
+      "required": true,
+      "max": 48
+     },
+     "localized": true
+    },
+    {
+     "name": "intro",
+     "title": "Intro",
+     "type": "text",
+     "rows": 2,
+     "group": "content",
+     "description": ""
+    },
+    {
+     "name": "query",
+     "title": "Which events",
+     "type": "object",
+     "group": "query",
+     "fields": [
+      {
+       "name": "collection",
+       "title": "Collection",
+       "type": "select",
+       "access": {
+        "edit": "schema.manage"
+       },
+       "lockReason": "The collection is wired to the card template in code.",
+       "initialValue": "col_events",
+       "options": [
+        {
+         "value": "col_events",
+         "label": "Events"
+        }
+       ],
+       "description": ""
+      },
+      {
+       "name": "types",
+       "title": "Types",
+       "type": "multiselect",
+       "options": [
+        {
+         "value": "workshop",
+         "label": "Workshops"
+        },
+        {
+         "value": "cookout",
+         "label": "Cookouts"
+        },
+        {
+         "value": "popup",
+         "label": "Pop-ups"
+        },
+        {
+         "value": "talk",
+         "label": "Talks"
+        }
+       ],
+       "description": "Leave empty for every type."
+      },
+      {
+       "name": "locations",
+       "title": "Locations",
+       "type": "array",
+       "description": "Leave empty for everywhere.",
+       "of": [
+        {
+         "name": "location",
+         "title": "Location",
+         "type": "reference",
+         "reference": {
+          "to": [
+           "col_locations"
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "name": "showOnlineEvents",
+       "title": "Include online events",
+       "type": "boolean",
+       "initialValue": true,
+       "description": ""
+      }
+     ]
+    },
+    {
+     "name": "show",
+     "title": "Show",
+     "type": "select",
+     "group": "query",
+     "layout": "radio",
+     "initialValue": "both",
+     "options": [
+      {
+       "value": "upcoming",
+       "label": "Upcoming only"
+      },
+      {
+       "value": "both",
+       "label": "Upcoming, with a Past tab"
+      },
+      {
+       "value": "past",
+       "label": "Past only",
+       "description": "For an archive page"
+      }
+     ]
+    },
+    {
+     "name": "upcomingLimit",
+     "title": "Upcoming to show",
+     "type": "number",
+     "group": "query",
+     "layout": "slider",
+     "hidden": {
+      "field": "show",
+      "equals": [
+       "upcoming",
+       "both"
+      ]
+     },
+     "numeric": {
+      "min": 3,
+      "max": 24,
+      "step": 1
+     },
+     "initialValue": 12,
+     "description": ""
+    },
+    {
+     "name": "pastLimit",
+     "title": "Past to show",
+     "type": "number",
+     "group": "query",
+     "layout": "slider",
+     "hidden": {
+      "field": "show",
+      "equals": [
+       "both",
+       "past"
+      ]
+     },
+     "numeric": {
+      "min": 3,
+      "max": 48,
+      "step": 3
+     },
+     "initialValue": 12
+    },
+    {
+     "name": "hasRecordings",
+     "title": "Offer recordings",
+     "type": "boolean",
+     "group": "query",
+     "hidden": {
+      "field": "show",
+      "equals": [
+       "both",
+       "past"
+      ]
+     },
+     "initialValue": true,
+     "description": "Past events with a recording get a Watch button."
+    },
+    {
+     "name": "filters",
+     "title": "Filters",
+     "type": "multiselect",
+     "group": "content",
+     "layout": "checkbox",
+     "initialValue": [
+      "type",
+      "location"
+     ],
+     "options": [
+      {
+       "value": "type",
+       "label": "Type"
+      },
+      {
+       "value": "location",
+       "label": "Location"
+      },
+      {
+       "value": "month",
+       "label": "Month"
+      },
+      {
+       "value": "format",
+       "label": "In person / online"
+      }
+     ],
+     "description": ""
+    },
+    {
+     "name": "timeDisplay",
+     "title": "Show times in",
+     "type": "select",
+     "group": "content",
+     "layout": "radio",
+     "initialValue": "event",
+     "options": [
+      {
+       "value": "event",
+       "label": "The event's local time",
+       "description": "Best for in-person events"
+      },
+      {
+       "value": "visitor",
+       "label": "The visitor's time zone",
+       "description": "Best for online events"
+      }
+     ],
+     "description": ""
+    },
+    {
+     "name": "emptyHeading",
+     "title": "Heading",
+     "type": "string",
+     "group": "content",
+     "fieldset": "empty",
+     "initialValue": "Nothing on the calendar yet",
+     "validation": {
+      "max": 48
+     },
+     "description": ""
+    },
+    {
+     "name": "emptyButton",
+     "title": "Empty button",
+     "type": "button",
+     "group": "content",
+     "fieldset": "empty"
+    },
+    {
+     "name": "showDateBadge",
+     "title": "Show date badge",
+     "type": "boolean",
+     "group": "design",
+     "initialValue": true
+    }
+   ]
+  },
+  "value": {
+   "_variant": "list",
+   "heading": "Workshops & cookouts",
+   "intro": "Learn to cook over fire with the people who make the pans. Small groups, all gear provided.",
+   "query": {
+    "collection": "col_events",
+    "types": [],
+    "locations": [],
+    "showOnlineEvents": true
+   },
+   "show": "both",
+   "upcomingLimit": 12,
+   "pastLimit": 12,
+   "hasRecordings": true,
+   "filters": [
+    "type",
+    "location"
+   ],
+   "timeDisplay": "event",
+   "emptyHeading": "Nothing on the calendar yet",
+   "emptyButton": {
+    "label": "Get event emails",
+    "href": "/newsletter",
+    "type": "page",
+    "title": "Newsletter",
+    "style": "secondary"
+   },
+   "showDateBadge": true
+  }
+ },
+ {
+  "id": "event-detail",
+  "name": "Event detail (conference)",
+  "category": "Events & places",
+  "kind": "entry",
+  "brand": "Signal Summit",
+  "previewLayout": "table",
+  "proves": "Days \u2192 sessions \u2192 speakers (references) \u00b7 attendance mode reveals venue or stream \u00b7 ticket tiers with sale windows \u00b7 status maps to Event JSON-LD",
+  "schema": {
+   "name": "event",
+   "title": "Event",
+   "kind": "entry",
+   "icon": "calendar-star",
+   "category": "Events & places",
+   "description": "A conference or event with agenda, venue and tickets",
+   "preview": {
+    "title": "title",
+    "subtitle": "startDate",
+    "media": "coverImage"
+   },
+   "groups": [
+    {
+     "name": "overview",
+     "title": "Overview",
+     "icon": "file-text",
+     "default": true
+    },
+    {
+     "name": "agenda",
+     "title": "Agenda",
+     "icon": "list-details"
+    },
+    {
+     "name": "place",
+     "title": "Venue",
+     "icon": "map-pin"
+    },
+    {
+     "name": "tickets",
+     "title": "Tickets",
+     "icon": "ticket"
+    }
+   ],
+   "fieldsets": [
+    {
+     "name": "when",
+     "title": "When"
+    }
+   ],
+   "fields": [
+    {
+     "name": "title",
+     "title": "Title",
+     "type": "string",
+     "group": "overview",
+     "validation": {
+      "required": true,
+      "max": 70
+     }
+    },
+    {
+     "name": "slug",
+     "title": "Slug",
+     "type": "slug",
+     "group": "overview",
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "tagline",
+     "title": "Tagline",
+     "type": "string",
+     "group": "overview",
+     "validation": {
+      "recommendedMax": 90
+     }
+    },
+    {
+     "name": "startDate",
+     "title": "Starts",
+     "type": "datetime",
+     "group": "overview",
+     "fieldset": "when",
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "endDate",
+     "title": "Ends",
+     "type": "datetime",
+     "group": "overview",
+     "fieldset": "when",
+     "validation": {
+      "required": true
+     },
+     "description": "Must be after the start."
+    },
+    {
+     "name": "timezone",
+     "title": "Time zone",
+     "type": "select",
+     "group": "overview",
+     "fieldset": "when",
+     "options": [
+      {
+       "value": "America/Los_Angeles",
+       "label": "Pacific (Los Angeles)"
+      },
+      {
+       "value": "America/Denver",
+       "label": "Mountain (Denver)"
+      },
+      {
+       "value": "America/Chicago",
+       "label": "Central (Chicago)"
+      },
+      {
+       "value": "America/New_York",
+       "label": "Eastern (New York)"
+      },
+      {
+       "value": "Europe/London",
+       "label": "London"
+      },
+      {
+       "value": "Europe/Berlin",
+       "label": "Berlin"
+      }
+     ],
+     "validation": {
+      "required": true
+     },
+     "description": "Agenda times and calendar files use this zone."
+    },
+    {
+     "name": "status",
+     "title": "Status",
+     "type": "select",
+     "group": "overview",
+     "initialValue": "scheduled",
+     "options": [
+      {
+       "value": "scheduled",
+       "label": "Scheduled"
+      },
+      {
+       "value": "postponed",
+       "label": "Postponed",
+       "description": "New date not known yet"
+      },
+      {
+       "value": "rescheduled",
+       "label": "Rescheduled"
+      },
+      {
+       "value": "moved-online",
+       "label": "Moved online"
+      },
+      {
+       "value": "cancelled",
+       "label": "Cancelled"
+      }
+     ],
+     "description": "Anything but Scheduled shows a banner and tells Google."
+    },
+    {
+     "name": "statusNote",
+     "title": "Banner text",
+     "type": "text",
+     "rows": 2,
+     "group": "overview",
+     "hidden": {
+      "field": "status",
+      "equals": [
+       "postponed",
+       "rescheduled",
+       "moved-online",
+       "cancelled"
+      ]
+     },
+     "validation": {
+      "required": true,
+      "max": 240
+     }
+    },
+    {
+     "name": "coverImage",
+     "title": "Cover image",
+     "type": "image",
+     "group": "overview",
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "about",
+     "title": "About",
+     "type": "richtext",
+     "group": "overview",
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "featuredSpeakers",
+     "title": "Featured speakers",
+     "type": "array",
+     "group": "overview",
+     "validation": {
+      "max": 8,
+      "unique": true
+     },
+     "of": [
+      {
+       "name": "speaker",
+       "title": "Speaker",
+       "type": "reference",
+       "reference": {
+        "to": [
+         "col_speakers"
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "name": "days",
+     "title": "Days",
+     "type": "array",
+     "group": "agenda",
+     "itemNoun": "day",
+     "validation": {
+      "max": 7
+     },
+     "of": [
+      {
+       "name": "agendaDay",
+       "title": "Day",
+       "type": "object",
+       "icon": "calendar",
+       "preview": {
+        "title": "label",
+        "subtitle": "date",
+        "fallback": "Untitled day"
+       },
+       "fields": [
+        {
+         "name": "date",
+         "title": "Date",
+         "type": "date",
+         "validation": {
+          "required": true
+         }
+        },
+        {
+         "name": "label",
+         "title": "Label",
+         "type": "string",
+         "validation": {
+          "max": 32
+         },
+         "placeholder": "Day 1 \u00b7 Build",
+         "description": ""
+        },
+        {
+         "name": "sessions",
+         "title": "Sessions",
+         "type": "array",
+         "itemNoun": "session",
+         "validation": {
+          "min": 1,
+          "max": 40
+         },
+         "of": [
+          {
+           "name": "session",
+           "title": "Session",
+           "type": "object",
+           "icon": "microphone",
+           "preview": {
+            "title": "title",
+            "subtitle": "start",
+            "fallback": "Untitled session"
+           },
+           "fields": [
+            {
+             "name": "start",
+             "title": "Starts",
+             "type": "string",
+             "validation": {
+              "required": true,
+              "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$",
+              "patternMessage": "Use 24-hour time, like 09:00 or 17:30."
+             },
+             "placeholder": "09:30",
+             "description": ""
+            },
+            {
+             "name": "end",
+             "title": "Ends",
+             "type": "string",
+             "validation": {
+              "required": true,
+              "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$",
+              "patternMessage": "Use 24-hour time, like 09:00 or 17:30."
+             },
+             "placeholder": "10:15",
+             "description": ""
+            },
+            {
+             "name": "title",
+             "title": "Title",
+             "type": "string",
+             "validation": {
+              "required": true,
+              "max": 100
+             }
+            },
+            {
+             "name": "format",
+             "title": "Format",
+             "type": "select",
+             "validation": {
+              "required": true
+             },
+             "initialValue": "talk",
+             "options": [
+              {
+               "value": "keynote",
+               "label": "Keynote"
+              },
+              {
+               "value": "talk",
+               "label": "Talk"
+              },
+              {
+               "value": "panel",
+               "label": "Panel"
+              },
+              {
+               "value": "workshop",
+               "label": "Workshop"
+              },
+              {
+               "value": "break",
+               "label": "Break"
+              },
+              {
+               "value": "meal",
+               "label": "Meal"
+              }
+             ],
+             "description": "Breaks and meals span every track and have no speakers."
+            },
+            {
+             "name": "speakers",
+             "title": "Speakers",
+             "type": "array",
+             "hidden": {
+              "field": "format",
+              "equals": [
+               "keynote",
+               "talk",
+               "panel",
+               "workshop"
+              ]
+             },
+             "validation": {
+              "min": 1,
+              "max": 6,
+              "unique": true
+             },
+             "of": [
+              {
+               "name": "speaker",
+               "title": "Speaker",
+               "type": "reference",
+               "reference": {
+                "to": [
+                 "col_speakers"
+                ]
+               }
+              }
+             ]
+            },
+            {
+             "name": "track",
+             "title": "Track",
+             "type": "select",
+             "hidden": {
+              "field": "format",
+              "equals": [
+               "talk",
+               "panel",
+               "workshop"
+              ]
+             },
+             "options": [
+              {
+               "value": "main",
+               "label": "Main stage"
+              },
+              {
+               "value": "build",
+               "label": "Build"
+              },
+              {
+               "value": "scale",
+               "label": "Scale"
+              }
+             ],
+             "description": ""
+            },
+            {
+             "name": "room",
+             "title": "Room",
+             "type": "string",
+             "validation": {
+              "max": 32
+             }
+            },
+            {
+             "name": "abstract",
+             "title": "Abstract",
+             "type": "richtext",
+             "hidden": {
+              "field": "format",
+              "equals": [
+               "keynote",
+               "talk",
+               "panel",
+               "workshop"
+              ]
+             }
+            },
+            {
+             "name": "level",
+             "title": "Level",
+             "type": "select",
+             "hidden": {
+              "field": "format",
+              "equals": [
+               "talk",
+               "workshop"
+              ]
+             },
+             "options": [
+              {
+               "value": "intro",
+               "label": "Introductory"
+              },
+              {
+               "value": "intermediate",
+               "label": "Intermediate"
+              },
+              {
+               "value": "advanced",
+               "label": "Advanced"
+              }
+             ],
+             "description": ""
+            },
+            {
+             "name": "capacity",
+             "title": "Seats",
+             "type": "number",
+             "hidden": {
+              "field": "format",
+              "equals": "workshop"
+             },
+             "numeric": {
+              "min": 1,
+              "step": 1
+             },
+             "description": "Caps workshop bookings."
+            },
+            {
+             "name": "recording",
+             "title": "Recording",
+             "type": "video"
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "attendance",
+     "title": "Attendance",
+     "type": "select",
+     "group": "place",
+     "layout": "segmented",
+     "validation": {
+      "required": true
+     },
+     "initialValue": "in-person",
+     "options": [
+      {
+       "value": "in-person",
+       "label": "In person"
+      },
+      {
+       "value": "online",
+       "label": "Online"
+      },
+      {
+       "value": "hybrid",
+       "label": "Hybrid"
+      }
+     ],
+     "description": ""
+    },
+    {
+     "name": "venue",
+     "title": "Venue",
+     "type": "reference",
+     "group": "place",
+     "reference": {
+      "to": [
+       "col_venues"
+      ]
+     },
+     "hidden": {
+      "field": "attendance",
+      "equals": [
+       "in-person",
+       "hybrid"
+      ]
+     },
+     "validation": {
+      "required": true
+     },
+     "description": "Address, map pin and directions come from the venue."
+    },
+    {
+     "name": "gettingThere",
+     "title": "Getting there",
+     "type": "richtext",
+     "group": "place",
+     "hidden": {
+      "field": "attendance",
+      "equals": [
+       "in-person",
+       "hybrid"
+      ]
+     }
+    },
+    {
+     "name": "streamPlatform",
+     "title": "Stream on",
+     "type": "select",
+     "group": "place",
+     "hidden": {
+      "field": "attendance",
+      "equals": [
+       "online",
+       "hybrid"
+      ]
+     },
+     "options": [
+      {
+       "value": "youtube",
+       "label": "YouTube Live"
+      },
+      {
+       "value": "zoom",
+       "label": "Zoom Webinar"
+      },
+      {
+       "value": "hopin",
+       "label": "RingCentral Events"
+      },
+      {
+       "value": "custom",
+       "label": "Our own player"
+      }
+     ],
+     "description": ""
+    },
+    {
+     "name": "streamUrl",
+     "title": "Stream link",
+     "type": "url",
+     "group": "place",
+     "hidden": {
+      "field": "attendance",
+      "equals": [
+       "online",
+       "hybrid"
+      ]
+     },
+     "description": "Shown to ticket holders on the day."
+    },
+    {
+     "name": "currency",
+     "title": "Currency",
+     "type": "select",
+     "group": "tickets",
+     "initialValue": "USD",
+     "options": [
+      {
+       "value": "USD",
+       "label": "USD"
+      },
+      {
+       "value": "EUR",
+       "label": "EUR"
+      },
+      {
+       "value": "GBP",
+       "label": "GBP"
+      }
+     ],
+     "description": ""
+    },
+    {
+     "name": "tiers",
+     "title": "Ticket tiers",
+     "type": "array",
+     "group": "tickets",
+     "itemNoun": "tier",
+     "validation": {
+      "max": 6
+     },
+     "of": [
+      {
+       "name": "tier",
+       "title": "Tier",
+       "type": "object",
+       "icon": "ticket",
+       "preview": {
+        "title": "name",
+        "subtitle": "price",
+        "fallback": "Untitled tier"
+       },
+       "fields": [
+        {
+         "name": "name",
+         "title": "Name",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 32
+         }
+        },
+        {
+         "name": "price",
+         "title": "Price",
+         "type": "number",
+         "numeric": {
+          "min": 0,
+          "step": 1
+         },
+         "validation": {
+          "required": true
+         },
+         "description": "0 shows as Free."
+        },
+        {
+         "name": "salesStart",
+         "title": "On sale from",
+         "type": "datetime"
+        },
+        {
+         "name": "salesEnd",
+         "title": "On sale until",
+         "type": "datetime",
+         "description": "Early-bird tiers switch off on their own at this time."
+        },
+        {
+         "name": "availability",
+         "title": "Availability",
+         "type": "select",
+         "layout": "segmented",
+         "initialValue": "on-sale",
+         "options": [
+          {
+           "value": "on-sale",
+           "label": "On sale"
+          },
+          {
+           "value": "sold-out",
+           "label": "Sold out"
+          },
+          {
+           "value": "soon",
+           "label": "Coming soon"
+          }
+         ],
+         "description": ""
+        },
+        {
+         "name": "includes",
+         "title": "Includes",
+         "type": "array",
+         "itemNoun": "perk",
+         "validation": {
+          "max": 8
+         },
+         "of": [
+          {
+           "name": "perk",
+           "title": "Perk",
+           "type": "string",
+           "validation": {
+            "max": 60
+           }
+          }
+         ]
+        },
+        {
+         "name": "button",
+         "title": "Button",
+         "type": "button",
+         "hidden": {
+          "field": "availability",
+          "equals": "on-sale"
+         },
+         "validation": {
+          "required": true
+         }
+        },
+        {
+         "name": "isHighlighted",
+         "title": "Most popular",
+         "type": "boolean"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  "value": {
+   "title": "Signal Summit 2027",
+   "slug": "2027",
+   "tagline": "Two days on building and scaling real-time products.",
+   "startDate": "2027-04-14T09:00:00-07:00[America/Los_Angeles]",
+   "endDate": "2027-04-15T18:00:00-07:00[America/Los_Angeles]",
+   "timezone": "America/Los_Angeles",
+   "status": "scheduled",
+   "coverImage": {
+    "url": "https://picsum.photos/seed/signal-summit-stage/1600/1000",
+    "alt": "A packed auditorium facing a stage lit in teal, a speaker mid-talk",
+    "name": "signal-summit-stage.jpg",
+    "width": 3200,
+    "height": 2000
+   },
+   "about": "<p>Signal Summit brings 1,200 engineers and product leaders to San Francisco for two days of talks, workshops and hallway conversations about real-time systems.</p>",
+   "featuredSpeakers": [
+    "en_spk_kelsey-hightower",
+    "en_spk_mira-tanaka",
+    "en_spk_dev-patel"
+   ],
+   "days": [
+    {
+     "_key": "d1",
+     "date": "2027-04-14",
+     "label": "Day 1 \u00b7 Build",
+     "sessions": [
+      {
+       "_key": "s1",
+       "start": "08:00",
+       "end": "09:00",
+       "title": "Registration & breakfast",
+       "format": "meal",
+       "room": "Lobby"
+      },
+      {
+       "_key": "s2",
+       "start": "09:00",
+       "end": "09:45",
+       "title": "The latency budget nobody wrote down",
+       "format": "keynote",
+       "speakers": [
+        "en_spk_mira-tanaka"
+       ],
+       "room": "Main stage",
+       "abstract": "<p>Every real-time product has a latency budget. Most teams discover theirs in an incident review.</p>"
+      },
+      {
+       "_key": "s3",
+       "start": "10:00",
+       "end": "10:40",
+       "title": "CRDTs in production: three years in",
+       "format": "talk",
+       "speakers": [
+        "en_spk_dev-patel"
+       ],
+       "track": "build",
+       "room": "Hall B",
+       "level": "advanced",
+       "abstract": "<p>What we got wrong about merge semantics, and what we'd do again.</p>"
+      },
+      {
+       "_key": "s4",
+       "start": "10:00",
+       "end": "12:00",
+       "title": "Hands-on: a presence layer in 90 minutes",
+       "format": "workshop",
+       "speakers": [
+        "en_spk_ana-silva",
+        "en_spk_tom-ruiz"
+       ],
+       "track": "build",
+       "room": "Workshop 1",
+       "level": "intermediate",
+       "capacity": 60
+      },
+      {
+       "_key": "s5",
+       "start": "12:00",
+       "end": "13:00",
+       "title": "Lunch",
+       "format": "meal",
+       "room": "Terrace"
+      }
+     ]
+    },
+    {
+     "_key": "d2",
+     "date": "2027-04-15",
+     "label": "Day 2 \u00b7 Scale",
+     "sessions": [
+      {
+       "_key": "s6",
+       "start": "09:30",
+       "end": "10:15",
+       "title": "Panel: When to stop self-hosting",
+       "format": "panel",
+       "speakers": [
+        "en_spk_kelsey-hightower",
+        "en_spk_mira-tanaka",
+        "en_spk_lena-fischer"
+       ],
+       "track": "main",
+       "room": "Main stage"
+      }
+     ]
+    }
+   ],
+   "attendance": "hybrid",
+   "venue": "en_venue_sf-masonic",
+   "gettingThere": "<p>Enter on California Street. BART to Montgomery, then the 1 bus. A hotel block at the Fairmont holds rates until March 15.</p>",
+   "streamPlatform": "youtube",
+   "streamUrl": "https://www.youtube.com/live/signalsummit2027",
+   "currency": "USD",
+   "tiers": [
+    {
+     "_key": "t1",
+     "name": "Early bird",
+     "price": 499,
+     "salesEnd": "2027-01-31T23:59:00-08:00[America/Los_Angeles]",
+     "availability": "sold-out",
+     "includes": [
+      "Both days",
+      "Workshops (first come)",
+      "Recordings"
+     ]
+    },
+    {
+     "_key": "t2",
+     "name": "General",
+     "price": 749,
+     "salesStart": "2027-02-01T00:00:00-08:00[America/Los_Angeles]",
+     "availability": "on-sale",
+     "includes": [
+      "Both days",
+      "Workshops (first come)",
+      "Recordings"
+     ],
+     "button": {
+      "label": "Get tickets",
+      "href": "https://tickets.signalsummit.com/2027/general",
+      "type": "url",
+      "style": "primary"
+     },
+     "isHighlighted": true
+    },
+    {
+     "_key": "t3",
+     "name": "Online",
+     "price": 0,
+     "availability": "on-sale",
+     "includes": [
+      "Live stream",
+      "Recordings"
+     ],
+     "button": {
+      "label": "Register free",
+      "href": "/2027/register-online",
+      "type": "page",
+      "style": "secondary"
+     }
+    }
+   ]
+  }
+ },
+ {
+  "id": "webinar-registration",
+  "name": "Webinar registration",
+  "category": "Events & places",
+  "kind": "block",
+  "brand": "Ledgerline",
+  "previewLayout": "form",
+  "proves": "One section across the lifecycle: upcoming (form) \u2192 live (stream) \u2192 on demand (recording, optionally gated) \u00b7 CRM campaign locked",
+  "schema": {
+   "name": "webinarRegistration",
+   "title": "Webinar registration",
+   "kind": "block",
+   "icon": "presentation",
+   "category": "Events & places",
+   "description": "Register before, watch live, or watch the recording",
+   "variants": [
+    {
+     "id": "split",
+     "name": "Details + form"
+    },
+    {
+     "id": "centered",
+     "name": "Centered"
+    }
+   ],
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "icon": "file-text",
+     "default": true
+    },
+    {
+     "name": "stage",
+     "title": "Before \u00b7 live \u00b7 after",
+     "icon": "broadcast"
+    },
+    {
+     "name": "design",
+     "title": "Design",
+     "icon": "palette"
+    }
+   ],
+   "fieldsets": [
+    {
+     "name": "confirm",
+     "title": "After registering",
+     "collapsed": true
+    }
+   ],
+   "preview": {
+    "title": "heading",
+    "subtitle": "stage",
+    "icon": "presentation"
+   },
+   "fields": [
+    {
+     "name": "eyebrow",
+     "title": "Eyebrow",
+     "type": "string",
+     "group": "content",
+     "initialValue": "Live webinar",
+     "validation": {
+      "max": 32
+     }
+    },
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "group": "content",
+     "validation": {
+      "required": true,
+      "recommendedMax": 60
+     },
+     "ai": true
+    },
+    {
+     "name": "summary",
+     "title": "Summary",
+     "type": "text",
+     "rows": 3,
+     "group": "content",
+     "validation": {
+      "recommendedMax": 280
+     }
+    },
+    {
+     "name": "takeaways",
+     "title": "You'll learn",
+     "type": "array",
+     "group": "content",
+     "itemNoun": "point",
+     "validation": {
+      "max": 6
+     },
+     "of": [
+      {
+       "name": "point",
+       "title": "Point",
+       "type": "string",
+       "validation": {
+        "max": 100
+       }
+      }
+     ]
+    },
+    {
+     "name": "speakers",
+     "title": "Speakers",
+     "type": "array",
+     "group": "content",
+     "validation": {
+      "min": 1,
+      "max": 4
+     },
+     "of": [
+      {
+       "name": "speaker",
+       "title": "Speaker",
+       "type": "reference",
+       "reference": {
+        "to": [
+         "col_people"
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "name": "stage",
+     "title": "Stage",
+     "type": "select",
+     "group": "stage",
+     "layout": "segmented",
+     "initialValue": "upcoming",
+     "options": [
+      {
+       "value": "upcoming",
+       "label": "Upcoming"
+      },
+      {
+       "value": "live",
+       "label": "Live now"
+      },
+      {
+       "value": "on-demand",
+       "label": "On demand"
+      }
+     ]
+    },
+    {
+     "name": "startsAt",
+     "title": "Starts",
+     "type": "datetime",
+     "group": "stage",
+     "hidden": {
+      "field": "stage",
+      "equals": [
+       "upcoming",
+       "live"
+      ]
+     },
+     "validation": {
+      "required": true
+     },
+     "description": "Shown in each visitor's time zone."
+    },
+    {
+     "name": "minutes",
+     "title": "Length",
+     "type": "number",
+     "group": "stage",
+     "hidden": {
+      "field": "stage",
+      "equals": [
+       "upcoming",
+       "live"
+      ]
+     },
+     "numeric": {
+      "unit": "min",
+      "min": 15,
+      "max": 180,
+      "step": 15
+     },
+     "initialValue": 45,
+     "description": ""
+    },
+    {
+     "name": "form",
+     "title": "Registration form",
+     "type": "reference",
+     "group": "stage",
+     "reference": {
+      "to": [
+       "form"
+      ]
+     },
+     "hidden": {
+      "field": "stage",
+      "equals": "upcoming"
+     },
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "showCalendarLinks",
+     "title": "Show add-to-calendar links",
+     "type": "boolean",
+     "group": "stage",
+     "hidden": {
+      "field": "stage",
+      "equals": "upcoming"
+     },
+     "initialValue": true
+    },
+    {
+     "name": "streamUrl",
+     "title": "Stream",
+     "type": "url",
+     "group": "stage",
+     "hidden": {
+      "field": "stage",
+      "equals": "live"
+     },
+     "validation": {
+      "required": true
+     },
+     "description": "A YouTube Live, Vimeo or Zoom webinar link."
+    },
+    {
+     "name": "recording",
+     "title": "Recording",
+     "type": "video",
+     "group": "stage",
+     "hidden": {
+      "field": "stage",
+      "equals": "on-demand"
+     },
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "isGated",
+     "title": "Ask for details first",
+     "type": "boolean",
+     "group": "stage",
+     "hidden": {
+      "field": "stage",
+      "equals": "on-demand"
+     }
+    },
+    {
+     "name": "slides",
+     "title": "Slides",
+     "type": "file",
+     "group": "stage",
+     "hidden": {
+      "field": "stage",
+      "equals": "on-demand"
+     }
+    },
+    {
+     "name": "confirmHeading",
+     "title": "Heading",
+     "type": "string",
+     "group": "stage",
+     "fieldset": "confirm",
+     "initialValue": "You're in",
+     "validation": {
+      "max": 40
+     },
+     "description": ""
+    },
+    {
+     "name": "confirmBody",
+     "title": "Text",
+     "type": "text",
+     "rows": 2,
+     "group": "stage",
+     "fieldset": "confirm"
+    },
+    {
+     "name": "campaign",
+     "title": "CRM campaign",
+     "type": "string",
+     "group": "stage",
+     "access": {
+      "edit": "schema.manage"
+     },
+     "advanced": true,
+     "lockReason": "Set by marketing ops; registrations sync to it.",
+     "description": "Registrations sync to this campaign."
+    }
+   ]
+  },
+  "value": {
+   "_variant": "split",
+   "eyebrow": "Live webinar",
+   "heading": "Closing the books in 3 days, without the overtime",
+   "summary": "Northbeam's controller walks through the exact checklist, bank rules and review cadence that cut their close from 11 days to 3.",
+   "takeaways": [
+    "The 40-item close checklist, trimmed to 18",
+    "Bank rules that match 92% of transactions",
+    "How to run review without a war room",
+    "Live Q&A"
+   ],
+   "speakers": [
+    "en_p_dana-whitfield",
+    "en_p_priya-raman"
+   ],
+   "stage": "upcoming",
+   "startsAt": "2026-10-22T13:00:00-04:00[America/New_York]",
+   "minutes": 45,
+   "form": "form_webinar-registration",
+   "showCalendarLinks": true,
+   "isGated": false,
+   "confirmHeading": "You're in",
+   "confirmBody": "We've emailed your join link. We'll send the recording to the same address, even if you can't make it live.",
+   "campaign": "701Hp00000ClOse3D"
+  }
+ },
+ {
+  "id": "locations-directory",
+  "name": "Locations directory",
+  "category": "Events & places",
+  "kind": "block",
+  "brand": "Caldera",
+  "previewLayout": "media",
+  "proves": "Map + list from a Locations query or written here \u00b7 per-day hours array (isClosed reveals nothing) \u00b7 services filter \u00b7 near-me search",
+  "schema": {
+   "name": "locationsDirectory",
+   "title": "Locations directory",
+   "kind": "block",
+   "icon": "map-pins",
+   "category": "Events & places",
+   "description": "Every store or workshop on a map and in a list",
+   "variants": [
+    {
+     "id": "map-left",
+     "name": "Map beside list"
+    },
+    {
+     "id": "map-top",
+     "name": "Map above list"
+    },
+    {
+     "id": "list",
+     "name": "List only"
+    }
+   ],
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "icon": "file-text",
+     "default": true
+    },
+    {
+     "name": "map",
+     "title": "Map",
+     "icon": "map"
+    },
+    {
+     "name": "design",
+     "title": "Design",
+     "icon": "palette"
+    }
+   ],
+   "preview": {
+    "title": "heading",
+    "subtitle": "source",
+    "icon": "map-pins"
+   },
+   "fields": [
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "group": "content",
+     "validation": {
+      "required": true,
+      "max": 48
+     },
+     "localized": true
+    },
+    {
+     "name": "intro",
+     "title": "Intro",
+     "type": "text",
+     "rows": 2,
+     "group": "content",
+     "description": ""
+    },
+    {
+     "name": "source",
+     "title": "Locations come from",
+     "type": "select",
+     "group": "content",
+     "layout": "segmented",
+     "initialValue": "collection",
+     "options": [
+      {
+       "value": "collection",
+       "label": "Locations collection"
+      },
+      {
+       "value": "inline",
+       "label": "Written here"
+      }
+     ]
+    },
+    {
+     "name": "query",
+     "title": "Which locations",
+     "type": "object",
+     "group": "content",
+     "openMode": "inline",
+     "hidden": {
+      "field": "source",
+      "equals": "collection"
+     },
+     "fields": [
+      {
+       "name": "collection",
+       "title": "Collection",
+       "type": "select",
+       "access": {
+        "edit": "schema.manage"
+       },
+       "lockReason": "The collection is wired to the card template in code.",
+       "initialValue": "col_locations",
+       "options": [
+        {
+         "value": "col_locations",
+         "label": "Locations"
+        }
+       ],
+       "description": ""
+      },
+      {
+       "name": "types",
+       "title": "Types",
+       "type": "multiselect",
+       "options": [
+        {
+         "value": "flagship",
+         "label": "Flagship stores"
+        },
+        {
+         "value": "workshop",
+         "label": "Workshops"
+        },
+        {
+         "value": "stockist",
+         "label": "Stockists"
+        }
+       ],
+       "description": "Leave empty for every type."
+      },
+      {
+       "name": "regions",
+       "title": "Regions",
+       "type": "multiselect",
+       "options": [
+        {
+         "value": "pnw",
+         "label": "Pacific Northwest"
+        },
+        {
+         "value": "mountain",
+         "label": "Mountain"
+        },
+        {
+         "value": "northeast",
+         "label": "Northeast"
+        }
+       ],
+       "description": ""
+      }
+     ]
+    },
+    {
+     "name": "locations",
+     "title": "Locations",
+     "type": "array",
+     "group": "content",
+     "itemNoun": "location",
+     "hidden": {
+      "field": "source",
+      "equals": "inline"
+     },
+     "validation": {
+      "min": 1,
+      "max": 30
+     },
+     "of": [
+      {
+       "name": "location",
+       "title": "Location",
+       "type": "object",
+       "icon": "map-pin",
+       "preview": {
+        "title": "name",
+        "subtitle": "address",
+        "media": "image",
+        "fallback": "Untitled location"
+       },
+       "fields": [
+        {
+         "name": "name",
+         "title": "Name",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 48
+         }
+        },
+        {
+         "name": "type",
+         "title": "Type",
+         "type": "select",
+         "options": [
+          {
+           "value": "flagship",
+           "label": "Flagship store"
+          },
+          {
+           "value": "workshop",
+           "label": "Workshop"
+          },
+          {
+           "value": "stockist",
+           "label": "Stockist"
+          }
+         ],
+         "description": ""
+        },
+        {
+         "name": "address",
+         "title": "Address",
+         "type": "text",
+         "rows": 3,
+         "validation": {
+          "required": true
+         },
+         "description": "As it should appear, one line per row."
+        },
+        {
+         "name": "pin",
+         "title": "Map pin",
+         "type": "geopoint",
+         "validation": {
+          "required": true
+         },
+         "description": "Drop it on the entrance."
+        },
+        {
+         "name": "phone",
+         "title": "Phone",
+         "type": "string",
+         "validation": {
+          "pattern": "^\\+?[0-9 ()-]{7,20}$",
+          "patternMessage": "Use digits, spaces and + ( ) -, like +1 (541) 555-0182."
+         }
+        },
+        {
+         "name": "hours",
+         "title": "Opening hours",
+         "type": "array",
+         "itemNoun": "day",
+         "openMode": "inline",
+         "validation": {
+          "max": 7
+         },
+         "description": "Days left out show as closed.",
+         "of": [
+          {
+           "name": "day",
+           "title": "Day",
+           "type": "object",
+           "icon": "clock",
+           "preview": {
+            "title": "day",
+            "subtitle": "opens"
+           },
+           "fields": [
+            {
+             "name": "day",
+             "title": "Day",
+             "type": "select",
+             "options": [
+              {
+               "value": "mon",
+               "label": "Monday"
+              },
+              {
+               "value": "tue",
+               "label": "Tuesday"
+              },
+              {
+               "value": "wed",
+               "label": "Wednesday"
+              },
+              {
+               "value": "thu",
+               "label": "Thursday"
+              },
+              {
+               "value": "fri",
+               "label": "Friday"
+              },
+              {
+               "value": "sat",
+               "label": "Saturday"
+              },
+              {
+               "value": "sun",
+               "label": "Sunday"
+              }
+             ],
+             "validation": {
+              "required": true
+             },
+             "description": ""
+            },
+            {
+             "name": "isClosed",
+             "title": "Closed",
+             "type": "boolean",
+             "initialValue": false,
+             "description": ""
+            },
+            {
+             "name": "opens",
+             "title": "Opens",
+             "type": "string",
+             "hidden": {
+              "field": "isClosed",
+              "equals": false
+             },
+             "validation": {
+              "required": true,
+              "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$",
+              "patternMessage": "Use 24-hour time, like 09:00 or 17:30."
+             },
+             "placeholder": "10:00",
+             "description": ""
+            },
+            {
+             "name": "closes",
+             "title": "Closes",
+             "type": "string",
+             "hidden": {
+              "field": "isClosed",
+              "equals": false
+             },
+             "validation": {
+              "required": true,
+              "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$",
+              "patternMessage": "Use 24-hour time, like 09:00 or 17:30."
+             },
+             "placeholder": "18:00",
+             "description": "After midnight? Use the next morning's time, e.g. 01:00."
+            }
+           ]
+          }
+         ]
+        },
+        {
+         "name": "services",
+         "title": "Services",
+         "type": "multiselect",
+         "options": [
+          {
+           "value": "workshops",
+           "label": "Workshops"
+          },
+          {
+           "value": "reseasoning",
+           "label": "Re-seasoning"
+          },
+          {
+           "value": "engraving",
+           "label": "Engraving"
+          },
+          {
+           "value": "pickup",
+           "label": "Click & collect"
+          },
+          {
+           "value": "repairs",
+           "label": "Warranty repairs"
+          }
+         ]
+        },
+        {
+         "name": "image",
+         "title": "Image",
+         "type": "image"
+        },
+        {
+         "name": "page",
+         "title": "Location page",
+         "type": "link"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "searchPlaceholder",
+     "title": "Search placeholder",
+     "type": "string",
+     "group": "content",
+     "initialValue": "City or ZIP code",
+     "validation": {
+      "max": 32
+     },
+     "description": ""
+    },
+    {
+     "name": "showNearMe",
+     "title": "Show Near me button",
+     "type": "boolean",
+     "group": "content",
+     "initialValue": true
+    },
+    {
+     "name": "showServiceFilter",
+     "title": "Show services filter",
+     "type": "boolean",
+     "group": "content",
+     "initialValue": true,
+     "description": ""
+    },
+    {
+     "name": "center",
+     "title": "Starting view",
+     "type": "geopoint",
+     "group": "map",
+     "description": "Leave empty to fit all pins."
+    },
+    {
+     "name": "zoom",
+     "title": "Starting zoom",
+     "type": "number",
+     "group": "map",
+     "layout": "slider",
+     "numeric": {
+      "min": 3,
+      "max": 15,
+      "step": 1
+     },
+     "initialValue": 5,
+     "description": "3 shows a continent, 15 a few streets."
+    },
+    {
+     "name": "useClustering",
+     "title": "Group nearby pins",
+     "type": "boolean",
+     "group": "map",
+     "initialValue": true
+    },
+    {
+     "name": "mobileView",
+     "title": "On phones show",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "list",
+     "options": [
+      {
+       "value": "list",
+       "label": "List first"
+      },
+      {
+       "value": "map",
+       "label": "Map first"
+      }
+     ]
+    }
+   ]
+  },
+  "value": {
+   "_variant": "map-left",
+   "heading": "Stores & workshops",
+   "intro": "Pick up a pan, get yours re-seasoned, or book a fire-cooking class.",
+   "source": "inline",
+   "query": {
+    "collection": "col_locations",
+    "types": [],
+    "regions": []
+   },
+   "locations": [
+    {
+     "_key": "l1",
+     "name": "Caldera Bend \u2014 Foundry Store",
+     "type": "flagship",
+     "address": "1180 SE Centennial Ct\nBend, OR 97702",
+     "pin": {
+      "label": "Caldera Foundry Store, Bend",
+      "lat": 44.0471,
+      "lng": -121.2831
+     },
+     "phone": "+1 541 555 0142",
+     "hours": [
+      {
+       "_key": "h1",
+       "day": "mon",
+       "isClosed": true
+      },
+      {
+       "_key": "h2",
+       "day": "tue",
+       "isClosed": false,
+       "opens": "10:00",
+       "closes": "18:00"
+      },
+      {
+       "_key": "h3",
+       "day": "wed",
+       "isClosed": false,
+       "opens": "10:00",
+       "closes": "18:00"
+      },
+      {
+       "_key": "h4",
+       "day": "thu",
+       "isClosed": false,
+       "opens": "10:00",
+       "closes": "19:00"
+      },
+      {
+       "_key": "h5",
+       "day": "fri",
+       "isClosed": false,
+       "opens": "10:00",
+       "closes": "19:00"
+      },
+      {
+       "_key": "h6",
+       "day": "sat",
+       "isClosed": false,
+       "opens": "09:00",
+       "closes": "17:00"
+      },
+      {
+       "_key": "h7",
+       "day": "sun",
+       "isClosed": false,
+       "opens": "11:00",
+       "closes": "16:00"
+      }
+     ],
+     "services": [
+      "workshops",
+      "reseasoning",
+      "engraving",
+      "repairs"
+     ],
+     "image": {
+      "url": "https://picsum.photos/seed/caldera-bend-store/1200/800",
+      "alt": "The Caldera Foundry Store: skillets on a long timber wall, the foundry visible through glass",
+      "name": "caldera-bend-store.jpg",
+      "width": 2400,
+      "height": 1600
+     },
+     "page": {
+      "type": "page",
+      "href": "/stores/bend",
+      "title": "Bend store"
+     }
+    },
+    {
+     "_key": "l2",
+     "name": "Caldera Portland",
+     "type": "flagship",
+     "address": "2235 NW Thurman St\nPortland, OR 97210",
+     "pin": {
+      "label": "Caldera Portland",
+      "lat": 45.5354,
+      "lng": -122.6982
+     },
+     "phone": "+1 503 555 0198",
+     "hours": [
+      {
+       "_key": "h8",
+       "day": "tue",
+       "isClosed": false,
+       "opens": "11:00",
+       "closes": "19:00"
+      },
+      {
+       "_key": "h9",
+       "day": "wed",
+       "isClosed": false,
+       "opens": "11:00",
+       "closes": "19:00"
+      },
+      {
+       "_key": "h10",
+       "day": "sat",
+       "isClosed": false,
+       "opens": "10:00",
+       "closes": "18:00"
+      }
+     ],
+     "services": [
+      "reseasoning",
+      "pickup"
+     ]
+    },
+    {
+     "_key": "l3",
+     "name": "Basecamp Outfitters (stockist)",
+     "type": "stockist",
+     "address": "1420 Pearl St\nBoulder, CO 80302",
+     "pin": {
+      "label": "Basecamp Outfitters, Boulder",
+      "lat": 40.0189,
+      "lng": -105.2747
+     },
+     "services": [
+      "pickup"
+     ]
+    }
+   ],
+   "searchPlaceholder": "City or ZIP code",
+   "showNearMe": true,
+   "showServiceFilter": true,
+   "zoom": 5,
+   "useClustering": true,
+   "mobileView": "list"
+  }
+ },
+ {
+  "id": "restaurant-menu",
+  "name": "Restaurant menu",
+  "category": "Events & places",
+  "kind": "block",
+  "brand": "Fiamma",
+  "previewLayout": "tabs",
+  "proves": "Menus \u2192 sections \u2192 items \u2192 price variants (4 levels) \u00b7 fixed, variant or market price \u00b7 dietary and allergen tags \u00b7 86'd items gray out",
+  "schema": {
+   "name": "restaurantMenu",
+   "title": "Restaurant menu",
+   "kind": "block",
+   "icon": "tools-kitchen-2",
+   "category": "Events & places",
+   "description": "Lunch, dinner and drinks with prices and dietary tags",
+   "variants": [
+    {
+     "id": "tabs",
+     "name": "Menus as tabs"
+    },
+    {
+     "id": "stacked",
+     "name": "All menus stacked"
+    },
+    {
+     "id": "two-column",
+     "name": "Two columns"
+    }
+   ],
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "icon": "file-text",
+     "default": true
+    },
+    {
+     "name": "design",
+     "title": "Design",
+     "icon": "palette"
+    }
+   ],
+   "fieldsets": [
+    {
+     "name": "small",
+     "title": "Small print"
+    }
+   ],
+   "preview": {
+    "title": "heading",
+    "icon": "tools-kitchen-2"
+   },
+   "fields": [
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "group": "content",
+     "validation": {
+      "max": 48
+     },
+     "localized": true
+    },
+    {
+     "name": "locations",
+     "title": "Served at",
+     "type": "array",
+     "group": "content",
+     "description": "Leave empty if every restaurant serves this menu.",
+     "of": [
+      {
+       "name": "location",
+       "title": "Restaurant",
+       "type": "reference",
+       "reference": {
+        "to": [
+         "col_locations"
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "name": "currency",
+     "title": "Currency",
+     "type": "select",
+     "group": "content",
+     "initialValue": "USD",
+     "options": [
+      {
+       "value": "USD",
+       "label": "$ USD"
+      },
+      {
+       "value": "EUR",
+       "label": "\u20ac EUR"
+      },
+      {
+       "value": "GBP",
+       "label": "\u00a3 GBP"
+      }
+     ],
+     "description": ""
+    },
+    {
+     "name": "menus",
+     "title": "Menus",
+     "type": "array",
+     "group": "content",
+     "itemNoun": "menu",
+     "validation": {
+      "min": 1,
+      "max": 6
+     },
+     "of": [
+      {
+       "name": "menu",
+       "title": "Menu",
+       "type": "object",
+       "icon": "book-2",
+       "preview": {
+        "title": "name",
+        "subtitle": "servedFrom",
+        "fallback": "Untitled menu"
+       },
+       "fields": [
+        {
+         "name": "name",
+         "title": "Name",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 24
+         },
+         "localized": true,
+         "placeholder": "Dinner"
+        },
+        {
+         "name": "servedFrom",
+         "title": "From",
+         "type": "string",
+         "validation": {
+          "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$",
+          "patternMessage": "Use 24-hour time, like 09:00 or 17:30."
+         },
+         "placeholder": "17:00",
+         "description": ""
+        },
+        {
+         "name": "servedUntil",
+         "title": "Until",
+         "type": "string",
+         "validation": {
+          "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$",
+          "patternMessage": "Use 24-hour time, like 09:00 or 17:30."
+         },
+         "placeholder": "22:00",
+         "description": ""
+        },
+        {
+         "name": "days",
+         "title": "Days",
+         "type": "multiselect",
+         "options": [
+          {
+           "value": "mon",
+           "label": "Monday"
+          },
+          {
+           "value": "tue",
+           "label": "Tuesday"
+          },
+          {
+           "value": "wed",
+           "label": "Wednesday"
+          },
+          {
+           "value": "thu",
+           "label": "Thursday"
+          },
+          {
+           "value": "fri",
+           "label": "Friday"
+          },
+          {
+           "value": "sat",
+           "label": "Saturday"
+          },
+          {
+           "value": "sun",
+           "label": "Sunday"
+          }
+         ],
+         "description": "Leave empty for every day we're open."
+        },
+        {
+         "name": "note",
+         "title": "Note",
+         "type": "string",
+         "validation": {
+          "max": 120
+         },
+         "localized": true,
+         "placeholder": "Kitchen closes 30 minutes before the restaurant"
+        },
+        {
+         "name": "sections",
+         "title": "Sections",
+         "type": "array",
+         "itemNoun": "section",
+         "validation": {
+          "min": 1,
+          "max": 12
+         },
+         "of": [
+          {
+           "name": "menuSection",
+           "title": "Section",
+           "type": "object",
+           "icon": "list",
+           "preview": {
+            "title": "title",
+            "subtitle": "description",
+            "fallback": "Untitled section"
+           },
+           "fields": [
+            {
+             "name": "title",
+             "title": "Title",
+             "type": "string",
+             "validation": {
+              "required": true,
+              "max": 32
+             },
+             "localized": true,
+             "placeholder": "Antipasti"
+            },
+            {
+             "name": "description",
+             "title": "Description",
+             "type": "string",
+             "validation": {
+              "max": 120
+             },
+             "localized": true
+            },
+            {
+             "name": "items",
+             "title": "Dishes",
+             "type": "array",
+             "itemNoun": "dish",
+             "validation": {
+              "min": 1,
+              "max": 30
+             },
+             "of": [
+              {
+               "name": "menuItem",
+               "title": "Dish",
+               "type": "object",
+               "icon": "salad",
+               "preview": {
+                "title": "name",
+                "subtitle": "description",
+                "media": "image",
+                "fallback": "Untitled dish"
+               },
+               "fields": [
+                {
+                 "name": "name",
+                 "title": "Name",
+                 "type": "string",
+                 "validation": {
+                  "required": true,
+                  "max": 60
+                 },
+                 "localized": true
+                },
+                {
+                 "name": "description",
+                 "title": "Description",
+                 "type": "text",
+                 "rows": 2,
+                 "validation": {
+                  "recommendedMax": 140
+                 },
+                 "localized": true,
+                 "description": "Ingredients, lowercase, comma-separated."
+                },
+                {
+                 "name": "priceType",
+                 "title": "Price",
+                 "type": "select",
+                 "layout": "segmented",
+                 "initialValue": "fixed",
+                 "options": [
+                  {
+                   "value": "fixed",
+                   "label": "One price"
+                  },
+                  {
+                   "value": "variants",
+                   "label": "Sizes"
+                  },
+                  {
+                   "value": "market",
+                   "label": "Market price"
+                  }
+                 ],
+                 "description": ""
+                },
+                {
+                 "name": "price",
+                 "title": "Price",
+                 "type": "number",
+                 "hidden": {
+                  "field": "priceType",
+                  "equals": "fixed"
+                 },
+                 "numeric": {
+                  "min": 0,
+                  "step": 0.5
+                 },
+                 "validation": {
+                  "required": true
+                 }
+                },
+                {
+                 "name": "variants",
+                 "title": "Sizes",
+                 "type": "array",
+                 "itemNoun": "size",
+                 "openMode": "inline",
+                 "hidden": {
+                  "field": "priceType",
+                  "equals": "variants"
+                 },
+                 "validation": {
+                  "min": 2,
+                  "max": 4
+                 },
+                 "of": [
+                  {
+                   "name": "variant",
+                   "title": "Size",
+                   "type": "object",
+                   "icon": "ruler",
+                   "preview": {
+                    "title": "label",
+                    "subtitle": "price"
+                   },
+                   "fields": [
+                    {
+                     "name": "label",
+                     "title": "Label",
+                     "type": "string",
+                     "validation": {
+                      "required": true,
+                      "max": 16
+                     },
+                     "placeholder": "Glass"
+                    },
+                    {
+                     "name": "price",
+                     "title": "Price",
+                     "type": "number",
+                     "numeric": {
+                      "min": 0,
+                      "step": 0.5
+                     },
+                     "validation": {
+                      "required": true
+                     }
+                    }
+                   ]
+                  }
+                 ]
+                },
+                {
+                 "name": "dietary",
+                 "title": "Dietary",
+                 "type": "multiselect",
+                 "options": [
+                  {
+                   "value": "v",
+                   "label": "Vegetarian"
+                  },
+                  {
+                   "value": "vg",
+                   "label": "Vegan"
+                  },
+                  {
+                   "value": "gf",
+                   "label": "Gluten-free"
+                  },
+                  {
+                   "value": "df",
+                   "label": "Dairy-free"
+                  }
+                 ],
+                 "description": "Shown as letters after the name, with a key at the bottom."
+                },
+                {
+                 "name": "allergens",
+                 "title": "Contains",
+                 "type": "multiselect",
+                 "options": [
+                  {
+                   "value": "gluten",
+                   "label": "Gluten"
+                  },
+                  {
+                   "value": "dairy",
+                   "label": "Milk"
+                  },
+                  {
+                   "value": "egg",
+                   "label": "Egg"
+                  },
+                  {
+                   "value": "nuts",
+                   "label": "Tree nuts"
+                  },
+                  {
+                   "value": "peanut",
+                   "label": "Peanut"
+                  },
+                  {
+                   "value": "fish",
+                   "label": "Fish"
+                  },
+                  {
+                   "value": "shellfish",
+                   "label": "Shellfish"
+                  },
+                  {
+                   "value": "sesame",
+                   "label": "Sesame"
+                  },
+                  {
+                   "value": "soy",
+                   "label": "Soy"
+                  }
+                 ]
+                },
+                {
+                 "name": "spice",
+                 "title": "Heat",
+                 "type": "number",
+                 "layout": "slider",
+                 "numeric": {
+                  "min": 0,
+                  "max": 3,
+                  "step": 1
+                 },
+                 "initialValue": 0,
+                 "description": "0 is none. Shown as chilli icons."
+                },
+                {
+                 "name": "image",
+                 "title": "Image",
+                 "type": "image"
+                },
+                {
+                 "name": "isSignature",
+                 "title": "House favorite",
+                 "type": "boolean"
+                },
+                {
+                 "name": "isAvailable",
+                 "title": "Available today",
+                 "type": "boolean",
+                 "initialValue": true,
+                 "description": "Off shows it grayed out as \"Sold out\"."
+                }
+               ]
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "showLegend",
+     "title": "Show dietary key",
+     "type": "boolean",
+     "group": "content",
+     "fieldset": "small",
+     "initialValue": true
+    },
+    {
+     "name": "footnote",
+     "title": "Footnote",
+     "type": "text",
+     "rows": 2,
+     "group": "content",
+     "fieldset": "small",
+     "localized": true
+    },
+    {
+     "name": "showPhotos",
+     "title": "Dish photos",
+     "type": "boolean",
+     "group": "design"
+    },
+    {
+     "name": "pdf",
+     "title": "Printable PDF",
+     "type": "file",
+     "group": "design",
+     "description": "Adds a \"Download menu\" link."
+    }
+   ]
+  },
+  "value": {
+   "_variant": "tabs",
+   "heading": "Menu",
+   "locations": [
+    "en_loc_fiamma-mission"
+   ],
+   "currency": "USD",
+   "menus": [
+    {
+     "_key": "m1",
+     "name": "Dinner",
+     "servedFrom": "17:00",
+     "servedUntil": "22:00",
+     "days": [],
+     "note": "Kitchen closes 30 minutes before the restaurant.",
+     "sections": [
+      {
+       "_key": "s1",
+       "title": "Antipasti",
+       "items": [
+        {
+         "_key": "i1",
+         "name": "Burrata",
+         "description": "charred stone fruit, basil, aged balsamic, wood-fired bread",
+         "priceType": "fixed",
+         "price": 19,
+         "dietary": [
+          "v"
+         ],
+         "allergens": [
+          "dairy",
+          "gluten"
+         ],
+         "spice": 0,
+         "isSignature": true,
+         "isAvailable": true,
+         "image": {
+          "url": "https://picsum.photos/seed/fiamma-burrata/1200/900",
+          "alt": "Burrata torn open over grilled peaches on a speckled plate",
+          "name": "fiamma-burrata.jpg",
+          "width": 2400,
+          "height": 1800
+         }
+        },
+        {
+         "_key": "i2",
+         "name": "Calamari alla griglia",
+         "description": "Calabrian chilli, lemon, parsley",
+         "priceType": "fixed",
+         "price": 18,
+         "dietary": [
+          "gf",
+          "df"
+         ],
+         "allergens": [
+          "shellfish"
+         ],
+         "spice": 2,
+         "isAvailable": true
+        }
+       ]
+      },
+      {
+       "_key": "s2",
+       "title": "Pizze",
+       "description": "48-hour dough, baked at 480\u00b0C in our wood oven.",
+       "items": [
+        {
+         "_key": "i3",
+         "name": "Margherita",
+         "description": "San Marzano, fior di latte, basil, olive oil",
+         "priceType": "fixed",
+         "price": 17,
+         "dietary": [
+          "v"
+         ],
+         "allergens": [
+          "gluten",
+          "dairy"
+         ],
+         "spice": 0,
+         "isAvailable": true
+        },
+        {
+         "_key": "i4",
+         "name": "Diavola",
+         "description": "spicy salami, fior di latte, hot honey",
+         "priceType": "fixed",
+         "price": 21,
+         "dietary": [],
+         "allergens": [
+          "gluten",
+          "dairy"
+         ],
+         "spice": 2,
+         "isAvailable": false
+        }
+       ]
+      },
+      {
+       "_key": "s3",
+       "title": "Pesce",
+       "items": [
+        {
+         "_key": "i5",
+         "name": "Whole branzino",
+         "description": "salsa verde, roasted fennel",
+         "priceType": "market",
+         "dietary": [
+          "gf",
+          "df"
+         ],
+         "allergens": [
+          "fish"
+         ],
+         "spice": 0,
+         "isAvailable": true
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "_key": "m2",
+     "name": "Wine",
+     "servedFrom": "12:00",
+     "servedUntil": "23:00",
+     "sections": [
+      {
+       "_key": "s4",
+       "title": "Rosso",
+       "items": [
+        {
+         "_key": "i6",
+         "name": "Nebbiolo, G.D. Vajra 2022",
+         "description": "Piedmont \u00b7 rose petal, red cherry, fine tannin",
+         "priceType": "variants",
+         "variants": [
+          {
+           "_key": "v1",
+           "label": "Glass",
+           "price": 17
+          },
+          {
+           "_key": "v2",
+           "label": "Bottle",
+           "price": 68
+          }
+         ],
+         "dietary": [
+          "vg"
+         ],
+         "allergens": [],
+         "spice": 0,
+         "isAvailable": true
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "showLegend": true,
+   "footnote": "Please tell your server about any allergies. A 20% service charge is added to parties of 6 or more and goes entirely to our staff.",
+   "showPhotos": false,
+   "pdf": {
+    "url": "https://fiamma.co/media/menus/fiamma-mission-dinner-oct-2026.pdf",
+    "name": "fiamma-mission-dinner-oct-2026.pdf",
+    "size": 412000
+   }
+  }
+ },
+ {
+  "id": "location-page",
+  "name": "Single location page",
+  "category": "Events & places",
+  "kind": "entry",
+  "brand": "Fiamma",
+  "previewLayout": "split",
+  "proves": "Address object + pin \u00b7 per-day hours with split shifts \u00b7 holiday overrides \u00b7 booking provider reveals its own fields \u00b7 Restaurant JSON-LD",
+  "schema": {
+   "name": "restaurantLocation",
+   "title": "Restaurant location",
+   "kind": "entry",
+   "icon": "building-store",
+   "category": "Events & places",
+   "description": "One restaurant: where, when, how to book",
+   "preview": {
+    "title": "name",
+    "subtitle": "city",
+    "media": "coverImage"
+   },
+   "groups": [
+    {
+     "name": "overview",
+     "title": "Overview",
+     "icon": "file-text",
+     "default": true
+    },
+    {
+     "name": "hours",
+     "title": "Hours",
+     "icon": "clock"
+    },
+    {
+     "name": "booking",
+     "title": "Booking",
+     "icon": "calendar-plus"
+    },
+    {
+     "name": "media",
+     "title": "Media",
+     "icon": "photo"
+    }
+   ],
+   "fieldsets": [
+    {
+     "name": "address",
+     "title": "Address"
+    },
+    {
+     "name": "contact",
+     "title": "Contact"
+    },
+    {
+     "name": "private",
+     "title": "Private dining",
+     "collapsed": true
+    }
+   ],
+   "fields": [
+    {
+     "name": "name",
+     "title": "Name",
+     "type": "string",
+     "group": "overview",
+     "validation": {
+      "required": true,
+      "max": 48
+     }
+    },
+    {
+     "name": "slug",
+     "title": "Slug",
+     "type": "slug",
+     "group": "overview",
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "tagline",
+     "title": "Tagline",
+     "type": "string",
+     "group": "overview",
+     "validation": {
+      "recommendedMax": 90
+     },
+     "localized": true
+    },
+    {
+     "name": "about",
+     "title": "About",
+     "type": "richtext",
+     "group": "overview",
+     "localized": true
+    },
+    {
+     "name": "street",
+     "title": "Street",
+     "type": "string",
+     "group": "overview",
+     "fieldset": "address",
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "city",
+     "title": "City",
+     "type": "string",
+     "group": "overview",
+     "fieldset": "address",
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "region",
+     "title": "State / region",
+     "type": "string",
+     "group": "overview",
+     "fieldset": "address"
+    },
+    {
+     "name": "postalCode",
+     "title": "Postal code",
+     "type": "string",
+     "group": "overview",
+     "fieldset": "address",
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "country",
+     "title": "Country",
+     "type": "select",
+     "group": "overview",
+     "fieldset": "address",
+     "initialValue": "US",
+     "options": [
+      {
+       "value": "US",
+       "label": "United States"
+      },
+      {
+       "value": "CA",
+       "label": "Canada"
+      },
+      {
+       "value": "GB",
+       "label": "United Kingdom"
+      },
+      {
+       "value": "IT",
+       "label": "Italy"
+      }
+     ],
+     "description": ""
+    },
+    {
+     "name": "pin",
+     "title": "Map pin",
+     "type": "geopoint",
+     "group": "overview",
+     "validation": {
+      "required": true
+     },
+     "description": "Drop it on the entrance."
+    },
+    {
+     "name": "phone",
+     "title": "Phone",
+     "type": "string",
+     "group": "overview",
+     "fieldset": "contact",
+     "validation": {
+      "required": true,
+      "pattern": "^\\+?[0-9 ()-]{7,20}$",
+      "patternMessage": "Use digits, spaces and + ( ) -, like +1 (541) 555-0182."
+     }
+    },
+    {
+     "name": "email",
+     "title": "Email",
+     "type": "email",
+     "group": "overview",
+     "fieldset": "contact"
+    },
+    {
+     "name": "services",
+     "title": "Services",
+     "type": "multiselect",
+     "group": "overview",
+     "options": [
+      {
+       "value": "dine-in",
+       "label": "Dine-in"
+      },
+      {
+       "value": "takeout",
+       "label": "Takeout"
+      },
+      {
+       "value": "delivery",
+       "label": "Delivery"
+      },
+      {
+       "value": "outdoor",
+       "label": "Outdoor seating"
+      },
+      {
+       "value": "bar",
+       "label": "Bar seating"
+      },
+      {
+       "value": "private",
+       "label": "Private dining"
+      }
+     ],
+     "description": ""
+    },
+    {
+     "name": "priceRange",
+     "title": "Price range",
+     "type": "select",
+     "group": "overview",
+     "layout": "segmented",
+     "options": [
+      {
+       "value": "$",
+       "label": "$"
+      },
+      {
+       "value": "$$",
+       "label": "$$"
+      },
+      {
+       "value": "$$$",
+       "label": "$$$"
+      },
+      {
+       "value": "$$$$",
+       "label": "$$$$"
+      }
+     ],
+     "description": "Per person with a drink, roughly. Shown in search results."
+    },
+    {
+     "name": "menus",
+     "title": "Menus",
+     "type": "array",
+     "group": "overview",
+     "validation": {
+      "max": 6
+     },
+     "of": [
+      {
+       "name": "menu",
+       "title": "Menu",
+       "type": "reference",
+       "reference": {
+        "to": [
+         "col_menus"
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "name": "chef",
+     "title": "Head chef",
+     "type": "reference",
+     "group": "overview",
+     "reference": {
+      "to": [
+       "col_people"
+      ]
+     }
+    },
+    {
+     "name": "accessibility",
+     "title": "Accessibility",
+     "type": "text",
+     "rows": 2,
+     "group": "overview"
+    },
+    {
+     "name": "parking",
+     "title": "Getting here",
+     "type": "text",
+     "rows": 2,
+     "group": "overview"
+    },
+    {
+     "name": "hours",
+     "title": "Weekly hours",
+     "type": "array",
+     "group": "hours",
+     "itemNoun": "day",
+     "validation": {
+      "min": 1,
+      "max": 7
+     },
+     "description": "One row per day. Lunch and dinner are two shifts on the same day.",
+     "of": [
+      {
+       "name": "day",
+       "title": "Day",
+       "type": "object",
+       "icon": "clock",
+       "preview": {
+        "title": "day",
+        "fallback": "Untitled day"
+       },
+       "fields": [
+        {
+         "name": "day",
+         "title": "Day",
+         "type": "select",
+         "options": [
+          {
+           "value": "mon",
+           "label": "Monday"
+          },
+          {
+           "value": "tue",
+           "label": "Tuesday"
+          },
+          {
+           "value": "wed",
+           "label": "Wednesday"
+          },
+          {
+           "value": "thu",
+           "label": "Thursday"
+          },
+          {
+           "value": "fri",
+           "label": "Friday"
+          },
+          {
+           "value": "sat",
+           "label": "Saturday"
+          },
+          {
+           "value": "sun",
+           "label": "Sunday"
+          }
+         ],
+         "validation": {
+          "required": true,
+          "unique": true
+         },
+         "description": ""
+        },
+        {
+         "name": "isClosed",
+         "title": "Closed",
+         "type": "boolean",
+         "initialValue": false
+        },
+        {
+         "name": "shifts",
+         "title": "Open",
+         "type": "array",
+         "itemNoun": "shift",
+         "openMode": "inline",
+         "hidden": {
+          "field": "isClosed",
+          "equals": false
+         },
+         "validation": {
+          "min": 1,
+          "max": 3
+         },
+         "of": [
+          {
+           "name": "shift",
+           "title": "Shift",
+           "type": "object",
+           "icon": "clock-hour-4",
+           "preview": {
+            "title": "opens",
+            "subtitle": "closes"
+           },
+           "fields": [
+            {
+             "name": "label",
+             "title": "Label",
+             "type": "string",
+             "validation": {
+              "max": 16
+             },
+             "placeholder": "Dinner",
+             "description": ""
+            },
+            {
+             "name": "opens",
+             "title": "Opens",
+             "type": "string",
+             "validation": {
+              "required": true,
+              "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$",
+              "patternMessage": "Use 24-hour time, like 09:00 or 17:30."
+             },
+             "placeholder": "17:00",
+             "description": ""
+            },
+            {
+             "name": "closes",
+             "title": "Closes",
+             "type": "string",
+             "validation": {
+              "required": true,
+              "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$",
+              "patternMessage": "Use 24-hour time, like 09:00 or 17:30."
+             },
+             "placeholder": "22:00",
+             "description": ""
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "specialHours",
+     "title": "Holidays & special hours",
+     "type": "array",
+     "group": "hours",
+     "itemNoun": "date",
+     "validation": {
+      "max": 30
+     },
+     "description": "Overrides the weekly hours on these dates.",
+     "of": [
+      {
+       "name": "special",
+       "title": "Date",
+       "type": "object",
+       "icon": "calendar-exclamation",
+       "preview": {
+        "title": "label",
+        "subtitle": "date"
+       },
+       "fields": [
+        {
+         "name": "date",
+         "title": "Date",
+         "type": "date",
+         "validation": {
+          "required": true
+         }
+        },
+        {
+         "name": "label",
+         "title": "Label",
+         "type": "string",
+         "validation": {
+          "max": 32
+         },
+         "placeholder": "Thanksgiving"
+        },
+        {
+         "name": "isClosed",
+         "title": "Closed all day",
+         "type": "boolean",
+         "initialValue": false
+        },
+        {
+         "name": "opens",
+         "title": "Opens",
+         "type": "string",
+         "hidden": {
+          "field": "isClosed",
+          "equals": false
+         },
+         "validation": {
+          "required": true,
+          "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$",
+          "patternMessage": "Use 24-hour time, like 09:00 or 17:30."
+         },
+         "description": ""
+        },
+        {
+         "name": "closes",
+         "title": "Closes",
+         "type": "string",
+         "hidden": {
+          "field": "isClosed",
+          "equals": false
+         },
+         "validation": {
+          "required": true,
+          "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$",
+          "patternMessage": "Use 24-hour time, like 09:00 or 17:30."
+         },
+         "description": ""
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "bookingProvider",
+     "title": "Reservations",
+     "type": "select",
+     "group": "booking",
+     "layout": "radio",
+     "initialValue": "resy",
+     "options": [
+      {
+       "value": "resy",
+       "label": "Resy"
+      },
+      {
+       "value": "opentable",
+       "label": "OpenTable"
+      },
+      {
+       "value": "tock",
+       "label": "Tock"
+      },
+      {
+       "value": "phone",
+       "label": "By phone"
+      },
+      {
+       "value": "none",
+       "label": "Walk-ins only"
+      }
+     ],
+     "description": ""
+    },
+    {
+     "name": "venueId",
+     "title": "Venue ID",
+     "type": "string",
+     "group": "booking",
+     "hidden": {
+      "field": "bookingProvider",
+      "equals": [
+       "resy",
+       "opentable",
+       "tock"
+      ]
+     },
+     "validation": {
+      "required": true
+     },
+     "description": "From the provider's widget code."
+    },
+    {
+     "name": "bookButton",
+     "title": "Book button",
+     "type": "button",
+     "group": "booking",
+     "hidden": {
+      "field": "bookingProvider",
+      "equals": [
+       "resy",
+       "opentable",
+       "tock",
+       "phone"
+      ]
+     },
+     "description": "Phone bookings use a tel: link."
+    },
+    {
+     "name": "walkInNote",
+     "title": "Walk-in note",
+     "type": "string",
+     "group": "booking",
+     "validation": {
+      "max": 100
+     },
+     "placeholder": "The bar is always kept for walk-ins"
+    },
+    {
+     "name": "hasPrivateDining",
+     "title": "Offers private dining",
+     "type": "boolean",
+     "group": "booking",
+     "fieldset": "private"
+    },
+    {
+     "name": "privateCapacity",
+     "title": "Seats up to",
+     "type": "number",
+     "group": "booking",
+     "fieldset": "private",
+     "hidden": {
+      "field": "hasPrivateDining",
+      "equals": true
+     },
+     "numeric": {
+      "unit": "guests",
+      "min": 2,
+      "step": 1
+     },
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "privateForm",
+     "title": "Enquiry form",
+     "type": "reference",
+     "group": "booking",
+     "fieldset": "private",
+     "hidden": {
+      "field": "hasPrivateDining",
+      "equals": true
+     },
+     "reference": {
+      "to": [
+       "form"
+      ]
+     },
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "privateBrochure",
+     "title": "Brochure",
+     "type": "file",
+     "group": "booking",
+     "fieldset": "private",
+     "hidden": {
+      "field": "hasPrivateDining",
+      "equals": true
+     }
+    },
+    {
+     "name": "coverImage",
+     "title": "Cover image",
+     "type": "image",
+     "group": "media",
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "gallery",
+     "title": "Gallery",
+     "type": "array",
+     "group": "media",
+     "arrayLayout": "grid",
+     "validation": {
+      "max": 12
+     },
+     "of": [
+      {
+       "name": "photo",
+       "title": "Photo",
+       "type": "image"
+      }
+     ]
+    }
+   ]
+  },
+  "value": {
+   "name": "Fiamma Mission",
+   "slug": "mission",
+   "tagline": "Wood-fired pizza and Ligurian seafood on Valencia Street.",
+   "about": "<p>Our first restaurant, opened in 2016 around a 4-ton oven built by hand in Naples. Chef Giulia Ferraro cooks almost everything over oak.</p>",
+   "street": "742 Valencia St",
+   "city": "San Francisco",
+   "region": "CA",
+   "postalCode": "94110",
+   "country": "US",
+   "pin": {
+    "label": "Fiamma Mission, 742 Valencia St",
+    "lat": 37.7609,
+    "lng": -122.4216
+   },
+   "phone": "+1 415 555 0173",
+   "email": "mission@fiamma.co",
+   "services": [
+    "dine-in",
+    "takeout",
+    "bar",
+    "private"
+   ],
+   "priceRange": "$$$",
+   "menus": [
+    "en_menu_dinner",
+    "en_menu_wine"
+   ],
+   "chef": "en_p_giulia-ferraro",
+   "accessibility": "Step-free entrance on Valencia St, accessible restroom at the back of the dining room, high chairs on request.",
+   "parking": "Street parking is tight after 6pm. 16th St BART is a 6-minute walk; bike racks out front.",
+   "hours": [
+    {
+     "_key": "h1",
+     "day": "mon",
+     "isClosed": true
+    },
+    {
+     "_key": "h2",
+     "day": "tue",
+     "isClosed": false,
+     "shifts": [
+      {
+       "_key": "a",
+       "label": "Dinner",
+       "opens": "17:00",
+       "closes": "22:00"
+      }
+     ]
+    },
+    {
+     "_key": "h3",
+     "day": "wed",
+     "isClosed": false,
+     "shifts": [
+      {
+       "_key": "a",
+       "label": "Dinner",
+       "opens": "17:00",
+       "closes": "22:00"
+      }
+     ]
+    },
+    {
+     "_key": "h4",
+     "day": "thu",
+     "isClosed": false,
+     "shifts": [
+      {
+       "_key": "a",
+       "label": "Dinner",
+       "opens": "17:00",
+       "closes": "22:00"
+      }
+     ]
+    },
+    {
+     "_key": "h5",
+     "day": "fri",
+     "isClosed": false,
+     "shifts": [
+      {
+       "_key": "a",
+       "label": "Lunch",
+       "opens": "11:30",
+       "closes": "14:30"
+      },
+      {
+       "_key": "b",
+       "label": "Dinner",
+       "opens": "17:00",
+       "closes": "23:00"
+      }
+     ]
+    },
+    {
+     "_key": "h6",
+     "day": "sat",
+     "isClosed": false,
+     "shifts": [
+      {
+       "_key": "a",
+       "label": "Lunch",
+       "opens": "11:30",
+       "closes": "14:30"
+      },
+      {
+       "_key": "b",
+       "label": "Dinner",
+       "opens": "17:00",
+       "closes": "23:00"
+      }
+     ]
+    },
+    {
+     "_key": "h7",
+     "day": "sun",
+     "isClosed": false,
+     "shifts": [
+      {
+       "_key": "a",
+       "label": "All day",
+       "opens": "12:00",
+       "closes": "21:00"
+      }
+     ]
+    }
+   ],
+   "specialHours": [
+    {
+     "_key": "sp1",
+     "date": "2026-11-26",
+     "label": "Thanksgiving",
+     "isClosed": true
+    },
+    {
+     "_key": "sp2",
+     "date": "2026-12-31",
+     "label": "New Year's Eve",
+     "isClosed": false,
+     "opens": "17:00",
+     "closes": "01:00"
+    }
+   ],
+   "bookingProvider": "resy",
+   "venueId": "58231",
+   "walkInNote": "The bar and the counter by the oven are always kept for walk-ins.",
+   "hasPrivateDining": true,
+   "privateCapacity": 24,
+   "privateForm": "form_private-dining-mission",
+   "privateBrochure": {
+    "url": "https://fiamma.co/media/private-dining-mission.pdf",
+    "name": "private-dining-mission.pdf",
+    "size": 2400000
+   },
+   "coverImage": {
+    "url": "https://picsum.photos/seed/fiamma-mission-oven/1600/1000",
+    "alt": "The dining room at Fiamma Mission, a tiled wood oven glowing at the back",
+    "name": "fiamma-mission-oven.jpg",
+    "width": 3200,
+    "height": 2000
+   },
+   "gallery": [
+    "https://picsum.photos/seed/fiamma-mission-bar/900/900",
+    "https://picsum.photos/seed/fiamma-mission-pizza/900/900",
+    "https://picsum.photos/seed/fiamma-mission-terrace/900/900"
+   ]
+  }
+ }
+]

@@ -1,0 +1,242 @@
+---
+// Query-driven story listing (climate + energy, last 90 days, featured first). Lead layout, 7 per page, numbered pagination.
+---
+
+<section id="dynamic-query-listing" class="section listing">
+  <!-- kit: dynamic-query-listing -->
+  <div class="container">
+    <div class="listing__head">
+      <h2>Latest from the climate desk</h2>
+      <a class="listing__all" href="/topics/climate">All climate stories <span aria-hidden="true">&rarr;</span></a>
+    </div>
+
+    <div class="listing__grid">
+      <article class="story story--lead">
+        <a class="story__link" href="/stories/paraty-tide-gauges">
+          <img src="https://picsum.photos/seed/paraty-tide/1600/1000" alt="A tide gauge on a stone quay in Paraty at low water" width="1600" height="1000" loading="lazy" />
+          <div class="story__body">
+            <span class="story__topic">Climate</span>
+            <h3>Paraty is measuring its own sea level</h3>
+            <p>Fishermen built the tide gauges the federal survey never installed. Their data now feeds the state's flood maps.</p>
+            <p class="story__meta">Marina Teixeira · <time datetime="2026-10-21">Oct 21, 2026</time></p>
+          </div>
+        </a>
+      </article>
+
+      <article class="story">
+        <a class="story__link" href="/stories/heat-dome-northwest">
+          <img src="https://picsum.photos/seed/heat-dome-map/800/500" alt="A weather map with a red high-pressure dome over Oregon and Washington" width="800" height="500" loading="lazy" />
+          <div class="story__body">
+            <span class="story__topic">Climate</span>
+            <h3>Why the heat dome stalled over the Pacific Northwest</h3>
+            <p>Nine days under a ridge the jet stream couldn't move.</p>
+            <p class="story__meta">Ana Ruiz · <time datetime="2026-10-16">Oct 16, 2026</time></p>
+          </div>
+        </a>
+      </article>
+
+      <article class="story">
+        <a class="story__link" href="/stories/offshore-wind-ports">
+          <img src="https://picsum.photos/seed/offshore-wind-port/800/500" alt="Turbine blades stacked on a quay waiting for shipment" width="800" height="500" loading="lazy" />
+          <div class="story__body">
+            <span class="story__topic">Energy</span>
+            <h3>The ports that decide offshore wind</h3>
+            <p>Turbines are ready. The quays strong enough to load them are not.</p>
+            <p class="story__meta">Tom Okafor · <time datetime="2026-10-09">Oct 9, 2026</time></p>
+          </div>
+        </a>
+      </article>
+
+      <article class="story">
+        <a class="story__link" href="/stories/rooftop-solar-lagos">
+          <img src="https://picsum.photos/seed/lagos-rooftop-solar/800/500" alt="Solar panels on corrugated rooftops in Lagos" width="800" height="500" loading="lazy" />
+          <div class="story__body">
+            <span class="story__topic">Energy</span>
+            <h3>Lagos stopped waiting for the grid</h3>
+            <p>Small shops are now the city's fastest-growing power producers.</p>
+            <p class="story__meta">Adaeze Nwosu · <time datetime="2026-09-30">Sep 30, 2026</time></p>
+          </div>
+        </a>
+      </article>
+
+      <article class="story">
+        <a class="story__link" href="/stories/glacier-hydropower">
+          <img src="https://picsum.photos/seed/glacier-reservoir/800/500" alt="A turquoise reservoir below a retreating glacier" width="800" height="500" loading="lazy" />
+          <div class="story__body">
+            <span class="story__topic">Climate</span>
+            <h3>Hydropower's glacier problem</h3>
+            <p>Swiss dams are filling earlier every spring, and emptying sooner.</p>
+            <p class="story__meta">Lena Brunner · <time datetime="2026-09-18">Sep 18, 2026</time></p>
+          </div>
+        </a>
+      </article>
+
+      <article class="story">
+        <a class="story__link" href="/stories/heat-pumps-winter">
+          <img src="https://picsum.photos/seed/heat-pump-snow/800/500" alt="An outdoor heat pump unit in fresh snow" width="800" height="500" loading="lazy" />
+          <div class="story__body">
+            <span class="story__topic">Energy</span>
+            <h3>Heat pumps passed their coldest test yet</h3>
+            <p>Data from 1,200 homes through a minus-30 week in Maine.</p>
+            <p class="story__meta">Chris Lindqvist · <time datetime="2026-08-27">Aug 27, 2026</time></p>
+          </div>
+        </a>
+      </article>
+
+      <article class="story">
+        <a class="story__link" href="/stories/mangrove-credits">
+          <img src="https://picsum.photos/seed/mangrove-planting/800/500" alt="Volunteers planting mangrove seedlings in tidal mud" width="800" height="500" loading="lazy" />
+          <div class="story__body">
+            <span class="story__topic">Climate</span>
+            <h3>Who gets paid for a mangrove?</h3>
+            <p>Carbon credits from replanted coastlines, and the villages left out.</p>
+            <p class="story__meta">Priya Raman · <time datetime="2026-08-12">Aug 12, 2026</time></p>
+          </div>
+        </a>
+      </article>
+    </div>
+
+    <div class="listing__empty" hidden>
+      <h3>No new climate stories this quarter</h3>
+      <p>Our reporters are in the field. Read the archive while you wait.</p>
+      <a class="btn btn-secondary" href="/archive?topic=climate">Browse the archive</a>
+    </div>
+
+    <nav class="pager" aria-label="Climate stories pages">
+      <a class="pager__step" href="#dynamic-query-listing" aria-disabled="true">Previous</a>
+      <ol>
+        <li><a href="#dynamic-query-listing" aria-current="page">1</a></li>
+        <li><a href="/topics/climate?page=2">2</a></li>
+        <li><a href="/topics/climate?page=3">3</a></li>
+      </ol>
+      <a class="pager__step" href="/topics/climate?page=2">Next</a>
+    </nav>
+  </div>
+</section>
+
+<style>
+  .listing__head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.75rem 1.5rem;
+    margin-bottom: 2rem;
+  }
+  .listing__head h2 {
+    margin: 0;
+  }
+  .listing__all {
+    font-weight: 600;
+    color: var(--brand);
+    text-decoration: none;
+  }
+  .listing__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2rem 1.5rem;
+  }
+  .story__link {
+    display: grid;
+    gap: 0.875rem;
+    text-decoration: none;
+  }
+  .story__link img {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    border-radius: var(--radius);
+  }
+  .story__link:hover h3 {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .story__topic {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--brand);
+  }
+  .story__body h3 {
+    margin: 0.25rem 0 0.375rem;
+    font-size: 1.125rem;
+  }
+  .story__body p {
+    margin: 0 0 0.5rem;
+    font-size: 0.9375rem;
+    color: var(--ink-2);
+  }
+  .story__body .story__meta {
+    font-size: 0.8125rem;
+    color: var(--ink-3);
+  }
+  .story--lead {
+    grid-column: 1 / -1;
+  }
+  @media (min-width: 860px) {
+    .story--lead .story__link {
+      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+      gap: 2rem;
+      align-items: center;
+    }
+  }
+  .story--lead h3 {
+    font-size: clamp(1.5rem, 3vw, 2.125rem);
+  }
+  .story--lead .story__body p {
+    font-size: 1.0625rem;
+  }
+  @media (max-width: 860px) {
+    .listing__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (max-width: 560px) {
+    .listing__grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+  .listing__empty {
+    padding: 3rem 1.5rem;
+    text-align: center;
+    border: 1px dashed var(--line);
+    border-radius: var(--radius);
+  }
+  .pager {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 3rem;
+  }
+  .pager ol {
+    display: flex;
+    gap: 0.25rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .pager a {
+    display: inline-grid;
+    place-items: center;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0 0.75rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9375rem;
+  }
+  .pager a[aria-current="page"] {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--bg);
+  }
+  .pager a[aria-disabled="true"] {
+    color: var(--ink-3);
+    pointer-events: none;
+  }
+</style>

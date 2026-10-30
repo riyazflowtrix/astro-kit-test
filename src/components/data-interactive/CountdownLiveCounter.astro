@@ -1,0 +1,199 @@
+---
+---
+
+<section
+  id="countdown-live-counter"
+  class="section section--dark countdown"
+  data-variant="banner"
+  data-target="2026-10-16T09:00:00-07:00"
+  data-timezone="America/Los_Angeles"
+  data-after-end="message"
+>
+  <!-- kit: countdown-live-counter -->
+  <div class="container countdown__inner">
+    <div class="countdown__live" data-state="live">
+      <div class="countdown__copy">
+        <span class="eyebrow">Fall drop</span>
+        <h2>The Ember 7qt lands Friday.</h2>
+        <p class="lead">Our biggest Dutch oven, enamelled in Ash Grey. The first run is 600 pieces.</p>
+      </div>
+      <div class="countdown__side">
+        <div class="countdown__timer" role="timer" aria-live="off" aria-label="Time until launch">
+          <div class="countdown__unit"><span class="countdown__num" data-unit="days">00</span><span class="countdown__label">days</span></div>
+          <div class="countdown__unit"><span class="countdown__num" data-unit="hours">00</span><span class="countdown__label">hrs</span></div>
+          <div class="countdown__unit"><span class="countdown__num" data-unit="minutes">00</span><span class="countdown__label">min</span></div>
+          <div class="countdown__unit"><span class="countdown__num" data-unit="seconds">00</span><span class="countdown__label">sec</span></div>
+        </div>
+        <p class="countdown__when">Friday 16 October, 9:00am Pacific</p>
+        <a class="btn btn-secondary countdown__btn" href="#reminder">Get a launch reminder</a>
+      </div>
+    </div>
+
+    <div class="countdown__ended" data-state="ended" hidden>
+      <div class="countdown__copy">
+        <span class="eyebrow">Fall drop</span>
+        <h2>The Ember 7qt is here.</h2>
+        <p class="lead">Our biggest Dutch oven, enamelled in Ash Grey. The first run is 600 pieces.</p>
+      </div>
+      <a class="btn btn-primary" href="/products/ember-dutch-oven-7qt">
+        Shop the Ember 7qt
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+      </a>
+    </div>
+
+    <p class="countdown__counter" data-source="api" data-endpoint="https://api.caldera.com/v1/launch/ember-7qt/subscribers" data-refresh-seconds="60">
+      <span class="countdown__pulse" aria-hidden="true"></span>
+      <strong>2,417</strong> people on the reminder list
+    </p>
+  </div>
+</section>
+
+<style>
+  .countdown [hidden] {
+    display: none !important;
+  }
+
+  .countdown {
+    background: linear-gradient(120deg, #1d1a17, #2a2420);
+  }
+
+  .countdown__live,
+  .countdown__ended {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+
+  .countdown__copy {
+    flex: 1 1 360px;
+  }
+
+  .countdown__copy .lead {
+    margin-bottom: 0;
+  }
+
+  .countdown__side {
+    display: grid;
+    gap: 0.75rem;
+    justify-items: start;
+  }
+
+  .countdown__timer {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .countdown__unit {
+    display: grid;
+    justify-items: center;
+    min-width: 72px;
+    padding: 0.75rem 0.5rem;
+    border-radius: var(--radius);
+    background: rgb(255 255 255 / 0.07);
+    border: 1px solid rgb(255 255 255 / 0.1);
+  }
+
+  .countdown__num {
+    font-size: clamp(1.75rem, 5vw, 2.5rem);
+    font-weight: 700;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .countdown__label {
+    margin-top: 0.35rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.65;
+  }
+
+  .countdown__when {
+    margin: 0;
+    font-size: 0.875rem;
+    opacity: 0.7;
+  }
+
+  .countdown__btn {
+    color: #fff;
+    border-color: rgb(255 255 255 / 0.4);
+  }
+
+  .countdown__counter {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin: 2rem 0 0;
+    padding-top: 1.25rem;
+    border-top: 1px solid rgb(255 255 255 / 0.12);
+    font-size: 0.9375rem;
+    opacity: 0.85;
+  }
+
+  .countdown__pulse {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #3ecf7a;
+    box-shadow: 0 0 0 0 rgb(62 207 122 / 0.6);
+    animation: countdown-pulse 2s infinite;
+  }
+
+  @keyframes countdown-pulse {
+    70% {
+      box-shadow: 0 0 0 8px rgb(62 207 122 / 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgb(62 207 122 / 0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .countdown__pulse {
+      animation: none;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .countdown__timer {
+      gap: 0.35rem;
+    }
+
+    .countdown__unit {
+      min-width: 0;
+      flex: 1;
+    }
+  }
+</style>
+
+<script is:inline>
+  (() => {
+    const root = document.getElementById("countdown-live-counter");
+    if (!root) return;
+    const target = new Date(root.dataset.target).getTime();
+    const live = root.querySelector('[data-state="live"]');
+    const ended = root.querySelector('[data-state="ended"]');
+    const units = {};
+    root.querySelectorAll("[data-unit]").forEach((el) => (units[el.dataset.unit] = el));
+    const pad = (n) => String(n).padStart(2, "0");
+    let timer = 0;
+    const tick = () => {
+      const diff = target - Date.now();
+      if (diff <= 0) {
+        live.hidden = true;
+        ended.hidden = false;
+        clearInterval(timer);
+        return;
+      }
+      const s = Math.floor(diff / 1000);
+      units.days.textContent = pad(Math.floor(s / 86400));
+      units.hours.textContent = pad(Math.floor((s % 86400) / 3600));
+      units.minutes.textContent = pad(Math.floor((s % 3600) / 60));
+      units.seconds.textContent = pad(s % 60);
+    };
+    tick();
+    timer = setInterval(tick, 1000);
+  })();
+</script>

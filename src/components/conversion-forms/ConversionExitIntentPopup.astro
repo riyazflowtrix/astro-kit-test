@@ -1,0 +1,195 @@
+---
+---
+
+<aside
+  id="conversion-exit-intent-popup"
+  class="exit-popup"
+  aria-labelledby="exit-popup-title"
+  data-name="First-order 10% exit popup"
+  data-trigger="exit"
+  data-delay-seconds="30"
+  data-included-pages="/products/*, /collections/*"
+  data-excluded-pages="/cart, /checkout/*, /account/*"
+  data-audience="not-subscribed"
+  data-devices="desktop, tablet"
+  data-frequency="days"
+  data-every-days="14"
+  data-size="medium"
+  data-theme="light"
+>
+  <!-- kit: conversion-exit-intent-popup -->
+  <div class="container">
+    <p class="exit-popup__note">Showcase: this popup normally opens when a visitor moves to leave a product page. It is shown in place here.</p>
+    <div class="exit-popup__dialog" role="dialog" aria-modal="false" aria-labelledby="exit-popup-title">
+      <button class="exit-popup__close" type="button" aria-label="Close">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
+      </button>
+      <img class="exit-popup__img" src="https://picsum.photos/seed/caldera-popup-skillet/800/1000" alt="A cast iron skillet with cornbread fresh from the fire" width="800" height="1000" loading="lazy" />
+      <div class="exit-popup__body">
+        <h2 id="exit-popup-title">Before you go — 10% off</h2>
+        <p>Join the monthly letter and get 10% off your first order. One email a month, unsubscribe any time.</p>
+        <form class="exit-popup__form" action="#" method="post" data-form="form_newsletter">
+          <div class="field">
+            <label for="exit-email">Email address</label>
+            <input id="exit-email" name="email" type="email" placeholder="you@example.com" autocomplete="email" required />
+          </div>
+          <button class="btn btn-primary" type="submit">Get my 10% code</button>
+        </form>
+        <div class="exit-popup__code" role="status" hidden>
+          <p>Here's your code for 10% off your first order:</p>
+          <strong>FIRSTFIRE10</strong>
+        </div>
+        <button class="exit-popup__decline" type="button">No thanks</button>
+      </div>
+    </div>
+    <button class="btn btn-secondary exit-popup__reopen" type="button" hidden>Show the popup again</button>
+  </div>
+</aside>
+
+<style>
+  .exit-popup {
+    position: relative;
+    padding-block: var(--section-y);
+    background: rgb(22 21 26 / 0.72);
+  }
+
+  .exit-popup [hidden] {
+    display: none !important;
+  }
+
+  .exit-popup__note {
+    max-width: 640px;
+    margin: 0 auto 1.25rem;
+    color: rgb(255 255 255 / 0.75);
+    font-size: 0.8125rem;
+    text-align: center;
+  }
+
+  .exit-popup__dialog {
+    position: relative;
+    display: grid;
+    grid-template-columns: 0.85fr 1fr;
+    max-width: 720px;
+    margin-inline: auto;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--bg);
+    box-shadow: 0 24px 70px rgb(0 0 0 / 0.4);
+  }
+
+  .exit-popup__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .exit-popup__body {
+    display: grid;
+    gap: 0.75rem;
+    align-content: center;
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+  }
+
+  .exit-popup__body h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    margin: 0;
+  }
+
+  .exit-popup__body p {
+    margin: 0;
+    color: var(--ink-2);
+  }
+
+  .exit-popup__form {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .exit-popup__code {
+    padding: 1rem;
+    border: 1px dashed var(--brand);
+    border-radius: var(--radius);
+    text-align: center;
+  }
+
+  .exit-popup__code strong {
+    display: block;
+    margin-top: 0.25rem;
+    font-family: var(--font-mono);
+    font-size: 1.375rem;
+    letter-spacing: 0.08em;
+    color: var(--brand);
+  }
+
+  .exit-popup__decline {
+    justify-self: center;
+    padding: 0.5rem;
+    border: 0;
+    background: none;
+    color: var(--ink-3);
+    font: inherit;
+    font-size: 0.875rem;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  .exit-popup__close {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border: 0;
+    border-radius: 50%;
+    background: rgb(255 255 255 / 0.9);
+    color: var(--ink);
+    cursor: pointer;
+  }
+
+  .exit-popup__reopen {
+    display: flex;
+    margin-inline: auto;
+    color: #fff;
+    border-color: rgb(255 255 255 / 0.4);
+  }
+
+  @media (max-width: 620px) {
+    .exit-popup__dialog {
+      grid-template-columns: 1fr;
+    }
+
+    .exit-popup__img {
+      aspect-ratio: 16 / 9;
+      height: auto;
+    }
+  }
+</style>
+
+<script is:inline>
+  (() => {
+    const root = document.getElementById("conversion-exit-intent-popup");
+    if (!root) return;
+    const dialog = root.querySelector(".exit-popup__dialog");
+    const reopen = root.querySelector(".exit-popup__reopen");
+    const form = root.querySelector("form");
+    const close = () => {
+      dialog.hidden = true;
+      reopen.hidden = false;
+    };
+    root.querySelector(".exit-popup__close").addEventListener("click", close);
+    root.querySelector(".exit-popup__decline").addEventListener("click", close);
+    reopen.addEventListener("click", () => {
+      dialog.hidden = false;
+      reopen.hidden = true;
+    });
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (!form.reportValidity()) return;
+      form.hidden = true;
+      root.querySelector(".exit-popup__code").hidden = false;
+    });
+  })();
+</script>

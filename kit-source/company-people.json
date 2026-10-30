@@ -1,0 +1,2955 @@
+[
+ {
+  "id": "team-grid",
+  "name": "Team grid",
+  "category": "Company & people",
+  "kind": "block",
+  "brand": "Caldera",
+  "previewLayout": "grid-4",
+  "proves": "Everyone by query or hand-picked people \u00b7 department filter tabs \u00b7 card fields as toggles \u00b7 optional 'We're hiring' card",
+  "schema": {
+   "name": "teamGrid",
+   "title": "Team grid",
+   "kind": "block",
+   "icon": "users",
+   "category": "Company & people",
+   "description": "Faces and roles, filterable by department",
+   "variants": [
+    {
+     "id": "cards",
+     "name": "Cards"
+    },
+    {
+     "id": "portraits",
+     "name": "Tall portraits"
+    },
+    {
+     "id": "compact",
+     "name": "Compact list"
+    }
+   ],
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "icon": "file-text",
+     "default": true
+    },
+    {
+     "name": "design",
+     "title": "Design",
+     "icon": "palette"
+    }
+   ],
+   "fieldsets": [
+    {
+     "name": "hiring",
+     "title": "Hiring card",
+     "description": "An extra card at the end of the grid.",
+     "collapsed": true
+    }
+   ],
+   "preview": {
+    "title": "heading",
+    "subtitle": "source",
+    "icon": "users"
+   },
+   "fields": [
+    {
+     "name": "eyebrow",
+     "title": "Eyebrow",
+     "type": "string",
+     "group": "content",
+     "validation": {
+      "max": 40
+     }
+    },
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "group": "content",
+     "validation": {
+      "required": true,
+      "recommendedMax": 48
+     },
+     "localized": true
+    },
+    {
+     "name": "intro",
+     "title": "Intro",
+     "type": "text",
+     "rows": 2,
+     "group": "content",
+     "localized": true,
+     "description": ""
+    },
+    {
+     "name": "source",
+     "title": "People",
+     "type": "select",
+     "group": "content",
+     "layout": "segmented",
+     "initialValue": "query",
+     "options": [
+      {
+       "value": "query",
+       "label": "Everyone"
+      },
+      {
+       "value": "pick",
+       "label": "Pick people"
+      }
+     ],
+     "description": "Everyone adds new starters when their profile is published."
+    },
+    {
+     "name": "query",
+     "title": "Who to show",
+     "type": "object",
+     "group": "content",
+     "hidden": {
+      "field": "source",
+      "equals": "query"
+     },
+     "fields": [
+      {
+       "name": "collection",
+       "title": "Collection",
+       "type": "select",
+       "access": {
+        "edit": "schema.manage"
+       },
+       "lockReason": "The collection is wired to the card template in code.",
+       "initialValue": "col_people",
+       "options": [
+        {
+         "value": "col_people",
+         "label": "People"
+        }
+       ],
+       "description": ""
+      },
+      {
+       "name": "departments",
+       "title": "Departments",
+       "type": "multiselect",
+       "options": [
+        {
+         "value": "workshop",
+         "label": "Workshop"
+        },
+        {
+         "value": "design",
+         "label": "Design"
+        },
+        {
+         "value": "care",
+         "label": "Customer care"
+        },
+        {
+         "value": "ops",
+         "label": "Operations"
+        },
+        {
+         "value": "marketing",
+         "label": "Marketing"
+        },
+        {
+         "value": "leadership",
+         "label": "Leadership"
+        }
+       ],
+       "description": "Leave empty for every department."
+      },
+      {
+       "name": "hideAlumni",
+       "title": "Hide people who've left",
+       "type": "boolean",
+       "initialValue": true,
+       "description": "Uses the end date on each person."
+      },
+      {
+       "name": "sort",
+       "title": "Order",
+       "type": "select",
+       "initialValue": "department",
+       "options": [
+        {
+         "value": "department",
+         "label": "By department, then name"
+        },
+        {
+         "value": "name",
+         "label": "A to Z"
+        },
+        {
+         "value": "start",
+         "label": "Longest-serving first"
+        }
+       ],
+       "description": ""
+      }
+     ]
+    },
+    {
+     "name": "people",
+     "title": "People",
+     "type": "array",
+     "group": "content",
+     "hidden": {
+      "field": "source",
+      "equals": "pick"
+     },
+     "validation": {
+      "min": 1,
+      "max": 48,
+      "unique": true
+     },
+     "of": [
+      {
+       "name": "person",
+       "title": "Person",
+       "type": "reference",
+       "reference": {
+        "to": [
+         "col_people"
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "name": "showDepartmentTabs",
+     "title": "Show department tabs",
+     "type": "boolean",
+     "group": "content",
+     "initialValue": true
+    },
+    {
+     "name": "showHiringCard",
+     "title": "Show a hiring card",
+     "type": "boolean",
+     "group": "content",
+     "fieldset": "hiring"
+    },
+    {
+     "name": "hiringHeading",
+     "title": "Card heading",
+     "type": "string",
+     "group": "content",
+     "fieldset": "hiring",
+     "hidden": {
+      "field": "showHiringCard",
+      "equals": true
+     },
+     "initialValue": "This could be you",
+     "validation": {
+      "max": 40
+     },
+     "description": ""
+    },
+    {
+     "name": "hiringButton",
+     "title": "Hiring card button",
+     "type": "button",
+     "group": "content",
+     "fieldset": "hiring",
+     "hidden": {
+      "field": "showHiringCard",
+      "equals": true
+     }
+    },
+    {
+     "name": "cardShows",
+     "title": "Card shows",
+     "type": "multiselect",
+     "group": "design",
+     "layout": "checkbox",
+     "initialValue": [
+      "role"
+     ],
+     "options": [
+      {
+       "value": "role",
+       "label": "Role"
+      },
+      {
+       "value": "location",
+       "label": "Location"
+      },
+      {
+       "value": "pronouns",
+       "label": "Pronouns"
+      },
+      {
+       "value": "social",
+       "label": "Social links"
+      },
+      {
+       "value": "funFact",
+       "label": "Fun fact on hover"
+      }
+     ],
+     "description": ""
+    },
+    {
+     "name": "photoTreatment",
+     "title": "Photos",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "color",
+     "options": [
+      {
+       "value": "color",
+       "label": "Color"
+      },
+      {
+       "value": "mono",
+       "label": "Black & white"
+      },
+      {
+       "value": "duotone",
+       "label": "Brand duotone"
+      }
+     ]
+    },
+    {
+     "name": "columns",
+     "title": "Columns on desktop",
+     "type": "number",
+     "group": "design",
+     "layout": "slider",
+     "numeric": {
+      "min": 2,
+      "max": 6,
+      "step": 1
+     },
+     "initialValue": 4,
+     "description": ""
+    }
+   ]
+  },
+  "value": {
+   "_variant": "cards",
+   "eyebrow": "The crew",
+   "heading": "Forty people, one foundry",
+   "intro": "We cast, finish and ship every pan from Bend, Oregon \u2014 and answer your emails from the same building.",
+   "source": "query",
+   "query": {
+    "collection": "col_people",
+    "departments": [],
+    "hideAlumni": true,
+    "sort": "department"
+   },
+   "people": [],
+   "showDepartmentTabs": true,
+   "showHiringCard": true,
+   "hiringHeading": "This could be you",
+   "hiringButton": {
+    "label": "See open roles",
+    "href": "/careers",
+    "type": "page",
+    "title": "Careers",
+    "style": "secondary",
+    "arrow": true
+   },
+   "cardShows": [
+    "role",
+    "location",
+    "funFact"
+   ],
+   "photoTreatment": "mono",
+   "columns": 4
+  }
+ },
+ {
+  "id": "leadership-bios",
+  "name": "Leadership with bios",
+  "category": "Company & people",
+  "kind": "block",
+  "brand": "Ledgerline",
+  "previewLayout": "grid-3",
+  "proves": "Groups (Leadership, Board, Advisors) \u2192 person references with per-placement title and bio overrides \u00b7 bio in modal, drawer or inline",
+  "schema": {
+   "name": "leadership",
+   "title": "Leadership",
+   "kind": "block",
+   "icon": "user-star",
+   "category": "Company & people",
+   "description": "Leaders, board and advisors with full bios",
+   "variants": [
+    {
+     "id": "grid",
+     "name": "Grid"
+    },
+    {
+     "id": "rows",
+     "name": "Rows with bio"
+    }
+   ],
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "icon": "file-text",
+     "default": true
+    },
+    {
+     "name": "design",
+     "title": "Design",
+     "icon": "palette"
+    }
+   ],
+   "preview": {
+    "title": "heading",
+    "icon": "user-star"
+   },
+   "fields": [
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "group": "content",
+     "validation": {
+      "required": true,
+      "max": 48
+     },
+     "localized": true
+    },
+    {
+     "name": "intro",
+     "title": "Intro",
+     "type": "text",
+     "rows": 2,
+     "group": "content",
+     "description": ""
+    },
+    {
+     "name": "groups",
+     "title": "Groups",
+     "type": "array",
+     "group": "content",
+     "itemNoun": "group",
+     "validation": {
+      "min": 1,
+      "max": 4
+     },
+     "of": [
+      {
+       "name": "peopleGroup",
+       "title": "Group",
+       "type": "object",
+       "icon": "users-group",
+       "preview": {
+        "title": "title",
+        "fallback": "Untitled group"
+       },
+       "fields": [
+        {
+         "name": "title",
+         "title": "Group name",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 32
+         },
+         "localized": true,
+         "placeholder": "Board of directors"
+        },
+        {
+         "name": "members",
+         "title": "People",
+         "type": "array",
+         "itemNoun": "person",
+         "validation": {
+          "min": 1,
+          "max": 16
+         },
+         "of": [
+          {
+           "name": "member",
+           "title": "Person",
+           "type": "object",
+           "icon": "user",
+           "preview": {
+            "title": "person",
+            "subtitle": "titleOverride",
+            "fallback": "Untitled person"
+           },
+           "fields": [
+            {
+             "name": "person",
+             "title": "Person",
+             "type": "reference",
+             "reference": {
+              "to": [
+               "col_people"
+              ]
+             },
+             "validation": {
+              "required": true
+             }
+            },
+            {
+             "name": "titleOverride",
+             "title": "Title here",
+             "type": "string",
+             "validation": {
+              "max": 48
+             },
+             "description": "Only if it differs from their job title."
+            },
+            {
+             "name": "affiliation",
+             "title": "Affiliation",
+             "type": "string",
+             "validation": {
+              "max": 48
+             }
+            },
+            {
+             "name": "useOwnBio",
+             "title": "Write a bio for this page",
+             "type": "boolean",
+             "description": "Otherwise their profile bio is used."
+            },
+            {
+             "name": "bio",
+             "title": "Bio",
+             "type": "richtext",
+             "hidden": {
+              "field": "useOwnBio",
+              "equals": true
+             },
+             "validation": {
+              "required": true,
+              "recommendedMax": 900
+             },
+             "localized": true
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "bioOpens",
+     "title": "Full bio opens in",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "dialog",
+     "options": [
+      {
+       "value": "dialog",
+       "label": "Dialog"
+      },
+      {
+       "value": "drawer",
+       "label": "Side drawer"
+      },
+      {
+       "value": "inline",
+       "label": "Expands in place"
+      },
+      {
+       "value": "page",
+       "label": "Their page"
+      }
+     ]
+    },
+    {
+     "name": "showLinkedIn",
+     "title": "LinkedIn link",
+     "type": "boolean",
+     "group": "design",
+     "initialValue": true
+    },
+    {
+     "name": "columns",
+     "title": "Columns on desktop",
+     "type": "number",
+     "group": "design",
+     "layout": "slider",
+     "numeric": {
+      "min": 2,
+      "max": 4,
+      "step": 1
+     },
+     "initialValue": 3,
+     "description": ""
+    }
+   ]
+  },
+  "value": {
+   "_variant": "grid",
+   "heading": "The people behind Ledgerline",
+   "intro": "Former controllers, auditors and engineers who got tired of closing the books in spreadsheets.",
+   "groups": [
+    {
+     "_key": "g1",
+     "title": "Leadership",
+     "members": [
+      {
+       "_key": "p1",
+       "person": "en_p_amara-osei",
+       "useOwnBio": false
+      },
+      {
+       "_key": "p2",
+       "person": "en_p_jonas-lindqvist",
+       "useOwnBio": false
+      },
+      {
+       "_key": "p3",
+       "person": "en_p_priya-raman",
+       "titleOverride": "Chief Accounting Officer",
+       "useOwnBio": true,
+       "bio": "<p>Priya spent nine years at Deloitte auditing high-growth software companies before running finance at Plaid through its Series D. At Ledgerline she owns the accounting logic every customer's close depends on.</p>"
+      }
+     ]
+    },
+    {
+     "_key": "g2",
+     "title": "Board of directors",
+     "members": [
+      {
+       "_key": "p4",
+       "person": "en_p_amara-osei",
+       "titleOverride": "Board chair",
+       "useOwnBio": false
+      },
+      {
+       "_key": "p5",
+       "person": "en_p_helen-park",
+       "affiliation": "General Partner, Foundry Ventures",
+       "useOwnBio": false
+      }
+     ]
+    }
+   ],
+   "bioOpens": "dialog",
+   "showLinkedIn": true,
+   "columns": 3
+  }
+ },
+ {
+  "id": "values-culture",
+  "name": "Values & culture",
+  "category": "Company & people",
+  "kind": "block",
+  "brand": "Caldera",
+  "previewLayout": "grid-3",
+  "proves": "Values with a real example each \u00b7 perks as a light repeater \u00b7 culture photo wall with required alt",
+  "schema": {
+   "name": "values",
+   "title": "Values and culture",
+   "kind": "block",
+   "icon": "heart-handshake",
+   "category": "Company & people",
+   "description": "What we believe, how it shows up, and what it's like to work here",
+   "variants": [
+    {
+     "id": "grid",
+     "name": "Grid"
+    },
+    {
+     "id": "numbered",
+     "name": "Numbered list"
+    },
+    {
+     "id": "alternating",
+     "name": "Alternating with photos"
+    }
+   ],
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "icon": "file-text",
+     "default": true
+    },
+    {
+     "name": "culture",
+     "title": "Culture",
+     "icon": "photo"
+    },
+    {
+     "name": "design",
+     "title": "Design",
+     "icon": "palette"
+    }
+   ],
+   "preview": {
+    "title": "heading",
+    "subtitle": "intro",
+    "icon": "heart-handshake"
+   },
+   "fields": [
+    {
+     "name": "eyebrow",
+     "title": "Eyebrow",
+     "type": "string",
+     "group": "content",
+     "validation": {
+      "max": 40
+     }
+    },
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "group": "content",
+     "validation": {
+      "required": true,
+      "recommendedMax": 48
+     },
+     "ai": true,
+     "localized": true
+    },
+    {
+     "name": "intro",
+     "title": "Intro",
+     "type": "text",
+     "rows": 2,
+     "group": "content",
+     "localized": true,
+     "description": ""
+    },
+    {
+     "name": "values",
+     "title": "Values",
+     "type": "array",
+     "group": "content",
+     "itemNoun": "value",
+     "validation": {
+      "min": 3,
+      "max": 8
+     },
+     "of": [
+      {
+       "name": "value",
+       "title": "Value",
+       "type": "object",
+       "icon": "heart",
+       "preview": {
+        "title": "title",
+        "subtitle": "body",
+        "media": "image",
+        "fallback": "Untitled value"
+       },
+       "fields": [
+        {
+         "name": "icon",
+         "title": "Icon",
+         "type": "icon"
+        },
+        {
+         "name": "title",
+         "title": "Value",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 40
+         },
+         "localized": true
+        },
+        {
+         "name": "body",
+         "title": "Body",
+         "type": "text",
+         "rows": 3,
+         "validation": {
+          "required": true,
+          "recommendedMax": 200
+         },
+         "localized": true
+        },
+        {
+         "name": "example",
+         "title": "In practice",
+         "type": "text",
+         "rows": 2,
+         "validation": {
+          "recommendedMax": 160
+         },
+         "localized": true
+        },
+        {
+         "name": "image",
+         "title": "Image",
+         "type": "image",
+         "description": "Alternating layout only."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "perks",
+     "title": "Perks",
+     "type": "array",
+     "group": "culture",
+     "itemNoun": "perk",
+     "openMode": "inline",
+     "validation": {
+      "max": 12
+     },
+     "of": [
+      {
+       "name": "perk",
+       "title": "Perk",
+       "type": "object",
+       "icon": "gift",
+       "preview": {
+        "title": "label",
+        "subtitle": "detail"
+       },
+       "fields": [
+        {
+         "name": "icon",
+         "title": "Icon",
+         "type": "icon"
+        },
+        {
+         "name": "label",
+         "title": "Perk",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 32
+         }
+        },
+        {
+         "name": "detail",
+         "title": "Detail",
+         "type": "string",
+         "validation": {
+          "max": 80
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "photos",
+     "title": "Photo wall",
+     "type": "array",
+     "group": "culture",
+     "arrayLayout": "grid",
+     "validation": {
+      "max": 9
+     },
+     "of": [
+      {
+       "name": "photo",
+       "title": "Photo",
+       "type": "image",
+       "validation": {
+        "required": true
+       }
+      }
+     ]
+    },
+    {
+     "name": "button",
+     "title": "Button",
+     "type": "button",
+     "group": "content"
+    },
+    {
+     "name": "theme",
+     "title": "Background",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "light",
+     "options": [
+      {
+       "value": "light",
+       "label": "Light"
+      },
+      {
+       "value": "dark",
+       "label": "Dark"
+      },
+      {
+       "value": "brand",
+       "label": "Brand"
+      }
+     ],
+     "description": ""
+    }
+   ]
+  },
+  "value": {
+   "_variant": "numbered",
+   "eyebrow": "How we work",
+   "heading": "Made to be handed down",
+   "intro": "Five ideas we hire for, argue about and come back to when a decision is hard.",
+   "values": [
+    {
+     "_key": "v1",
+     "icon": "hammer",
+     "title": "Fix it, don't replace it",
+     "body": "We design for repair first. A pan that can be re-seasoned beats one that can't be scratched.",
+     "example": "In 2025 we re-seasoned 3,100 customer pans for free instead of selling replacements."
+    },
+    {
+     "_key": "v2",
+     "icon": "flame",
+     "title": "Cook with it first",
+     "body": "Nothing ships until the team has cooked with it for a month, outdoors and at home.",
+     "example": "The Cable Fold grate went through eleven prototypes and two camping trips."
+    },
+    {
+     "_key": "v3",
+     "icon": "message-circle",
+     "title": "Answer like a neighbour",
+     "body": "Customer care replies within a day, in plain words, from someone who's used the pan.",
+     "example": ""
+    },
+    {
+     "_key": "v4",
+     "icon": "leaf",
+     "title": "Waste less than we did last year",
+     "body": "Every year we cut scrap iron, packaging and shipping miles \u2014 and publish the numbers.",
+     "example": "Our 2025 scrap rate was 2.1%, down from 4.8%."
+    }
+   ],
+   "perks": [
+    {
+     "_key": "k1",
+     "icon": "chef-hat",
+     "label": "Gear allowance",
+     "detail": "$600 a year on Caldera gear for you or your family"
+    },
+    {
+     "_key": "k2",
+     "icon": "calendar",
+     "label": "Four-day weeks in summer",
+     "detail": "June through August, foundry included"
+    },
+    {
+     "_key": "k3",
+     "icon": "heart",
+     "label": "Fully paid health cover",
+     "detail": "For you and dependants"
+    },
+    {
+     "_key": "k4",
+     "icon": "tent",
+     "label": "Two paid camping trips",
+     "detail": "Product testing counts as work"
+    }
+   ],
+   "photos": [
+    {
+     "url": "https://picsum.photos/seed/caldera-foundry-pour/1200/1200",
+     "alt": "Two workers in leather aprons pouring molten iron into sand moulds",
+     "name": "caldera-foundry-pour.jpg",
+     "width": 2400,
+     "height": 2400
+    },
+    {
+     "url": "https://picsum.photos/seed/caldera-team-campfire/1200/1200",
+     "alt": "The Caldera team around a campfire testing skillets at dusk",
+     "name": "caldera-team-campfire.jpg",
+     "width": 2400,
+     "height": 2400
+    },
+    {
+     "url": "https://picsum.photos/seed/caldera-care-desk/1200/1200",
+     "alt": "A customer care rep on the phone at a desk stacked with skillets",
+     "name": "caldera-care-desk.jpg",
+     "width": 2400,
+     "height": 2400
+    }
+   ],
+   "button": {
+    "label": "See open roles",
+    "href": "/careers",
+    "type": "page",
+    "title": "Careers",
+    "style": "primary"
+   },
+   "theme": "light"
+  }
+ },
+ {
+  "id": "careers-list",
+  "name": "Careers list",
+  "category": "Company & people",
+  "kind": "block",
+  "brand": "Caldera",
+  "previewLayout": "list",
+  "proves": "Open roles from the Jobs collection or a hiring system (Greenhouse, Lever, Ashby) \u00b7 grouped by department or location \u00b7 filters",
+  "schema": {
+   "name": "careersList",
+   "title": "Careers list",
+   "kind": "block",
+   "icon": "id-badge-2",
+   "category": "Company & people",
+   "description": "Open roles, grouped and filterable",
+   "variants": [
+    {
+     "id": "rows",
+     "name": "Rows"
+    },
+    {
+     "id": "cards",
+     "name": "Cards"
+    }
+   ],
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "icon": "file-text",
+     "default": true
+    },
+    {
+     "name": "source",
+     "title": "Roles",
+     "icon": "database"
+    },
+    {
+     "name": "design",
+     "title": "Design",
+     "icon": "palette"
+    }
+   ],
+   "fieldsets": [
+    {
+     "name": "empty",
+     "title": "When there are no roles",
+     "collapsed": true
+    }
+   ],
+   "preview": {
+    "title": "heading",
+    "subtitle": "source",
+    "icon": "briefcase"
+   },
+   "fields": [
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "group": "content",
+     "validation": {
+      "required": true,
+      "max": 48
+     },
+     "localized": true
+    },
+    {
+     "name": "intro",
+     "title": "Intro",
+     "type": "text",
+     "rows": 2,
+     "group": "content",
+     "description": ""
+    },
+    {
+     "name": "source",
+     "title": "Roles come from",
+     "type": "select",
+     "group": "source",
+     "layout": "radio",
+     "initialValue": "cms",
+     "options": [
+      {
+       "value": "cms",
+       "label": "Jobs collection",
+       "description": "Written in BetterCMS, each with its own page"
+      },
+      {
+       "value": "ats",
+       "label": "Hiring system",
+       "description": "Synced from Greenhouse, Lever or Ashby"
+      }
+     ],
+     "description": ""
+    },
+    {
+     "name": "query",
+     "title": "Which roles",
+     "type": "object",
+     "group": "source",
+     "hidden": {
+      "field": "source",
+      "equals": "cms"
+     },
+     "fields": [
+      {
+       "name": "collection",
+       "title": "Collection",
+       "type": "select",
+       "access": {
+        "edit": "schema.manage"
+       },
+       "lockReason": "The collection is wired to the card template in code.",
+       "initialValue": "col_jobs",
+       "options": [
+        {
+         "value": "col_jobs",
+         "label": "Jobs"
+        }
+       ],
+       "description": ""
+      },
+      {
+       "name": "departments",
+       "title": "Departments",
+       "type": "array",
+       "description": "Leave empty for every department.",
+       "of": [
+        {
+         "name": "department",
+         "title": "Department",
+         "type": "reference",
+         "reference": {
+          "to": [
+           "col_departments"
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "name": "locations",
+       "title": "Locations",
+       "type": "array",
+       "description": "Leave empty for every location.",
+       "of": [
+        {
+         "name": "location",
+         "title": "Location",
+         "type": "reference",
+         "reference": {
+          "to": [
+           "col_locations"
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "name": "showOpenOnly",
+       "title": "Only open roles",
+       "type": "boolean",
+       "initialValue": true,
+       "readOnly": true
+      }
+     ]
+    },
+    {
+     "name": "ats",
+     "title": "Hiring system",
+     "type": "object",
+     "group": "source",
+     "openMode": "inline",
+     "hidden": {
+      "field": "source",
+      "equals": "ats"
+     },
+     "fields": [
+      {
+       "name": "provider",
+       "title": "Provider",
+       "type": "select",
+       "access": {
+        "edit": "schema.manage"
+       },
+       "lockReason": "Set by the developer when the job board is connected.",
+       "options": [
+        {
+         "value": "greenhouse",
+         "label": "Greenhouse"
+        },
+        {
+         "value": "lever",
+         "label": "Lever"
+        },
+        {
+         "value": "ashby",
+         "label": "Ashby"
+        },
+        {
+         "value": "workable",
+         "label": "Workable"
+        }
+       ],
+       "validation": {
+        "required": true
+       },
+       "description": ""
+      },
+      {
+       "name": "board",
+       "title": "Job board name",
+       "type": "string",
+       "access": {
+        "edit": "schema.manage"
+       },
+       "lockReason": "From the provider's public board URL.",
+       "validation": {
+        "required": true
+       },
+       "description": "The name in the board URL, e.g. boards.greenhouse.io/caldera."
+      },
+      {
+       "name": "applyOn",
+       "title": "Apply button opens",
+       "type": "select",
+       "layout": "segmented",
+       "initialValue": "site",
+       "options": [
+        {
+         "value": "site",
+         "label": "Our job page"
+        },
+        {
+         "value": "ats",
+         "label": "Their hosted page"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "groupBy",
+     "title": "Group by",
+     "type": "select",
+     "group": "content",
+     "layout": "segmented",
+     "initialValue": "department",
+     "options": [
+      {
+       "value": "department",
+       "label": "Department"
+      },
+      {
+       "value": "location",
+       "label": "Location"
+      },
+      {
+       "value": "none",
+       "label": "No groups"
+      }
+     ],
+     "description": ""
+    },
+    {
+     "name": "filters",
+     "title": "Filters",
+     "type": "multiselect",
+     "group": "content",
+     "layout": "checkbox",
+     "initialValue": [
+      "department",
+      "location"
+     ],
+     "options": [
+      {
+       "value": "department",
+       "label": "Department"
+      },
+      {
+       "value": "location",
+       "label": "Location"
+      },
+      {
+       "value": "workplace",
+       "label": "Remote / hybrid / on-site"
+      },
+      {
+       "value": "type",
+       "label": "Full-time / part-time"
+      }
+     ],
+     "description": "Hidden when there are fewer than 6 roles."
+    },
+    {
+     "name": "emptyHeading",
+     "title": "Heading",
+     "type": "string",
+     "group": "content",
+     "fieldset": "empty",
+     "initialValue": "No open roles right now",
+     "validation": {
+      "max": 48
+     },
+     "description": ""
+    },
+    {
+     "name": "emptyBody",
+     "title": "Text",
+     "type": "text",
+     "rows": 2,
+     "group": "content",
+     "fieldset": "empty",
+     "description": ""
+    },
+    {
+     "name": "emptyButton",
+     "title": "Empty button",
+     "type": "button",
+     "group": "content",
+     "fieldset": "empty"
+    },
+    {
+     "name": "rowShows",
+     "title": "Each role shows",
+     "type": "multiselect",
+     "group": "design",
+     "layout": "checkbox",
+     "initialValue": [
+      "location",
+      "workplace"
+     ],
+     "options": [
+      {
+       "value": "location",
+       "label": "Location"
+      },
+      {
+       "value": "workplace",
+       "label": "Workplace"
+      },
+      {
+       "value": "type",
+       "label": "Employment type"
+      },
+      {
+       "value": "salary",
+       "label": "Salary range"
+      },
+      {
+       "value": "posted",
+       "label": "Posted date"
+      }
+     ],
+     "description": ""
+    }
+   ]
+  },
+  "value": {
+   "_variant": "rows",
+   "heading": "Open roles",
+   "intro": "We hire slowly and keep people for a long time. Every role below is open today.",
+   "source": "cms",
+   "query": {
+    "collection": "col_jobs",
+    "departments": [],
+    "locations": [],
+    "showOpenOnly": true
+   },
+   "ats": {
+    "provider": "greenhouse",
+    "board": "caldera",
+    "applyOn": "site"
+   },
+   "groupBy": "department",
+   "filters": [
+    "department",
+    "location",
+    "workplace"
+   ],
+   "emptyHeading": "No open roles right now",
+   "emptyBody": "We open roles a few times a year. Join the talent list and we'll email you first.",
+   "emptyButton": {
+    "label": "Join the talent list",
+    "href": "/careers/talent-list",
+    "type": "page",
+    "title": "Talent list",
+    "style": "secondary"
+   },
+   "rowShows": [
+    "location",
+    "workplace",
+    "salary"
+   ]
+  }
+ },
+ {
+  "id": "job-posting",
+  "name": "Job posting",
+  "category": "Company & people",
+  "kind": "entry",
+  "brand": "Caldera",
+  "previewLayout": "article",
+  "proves": "Workplace reveals remote regions or office days \u00b7 salary range with currency and period \u00b7 apply by form, link or email \u00b7 JobPosting JSON-LD",
+  "schema": {
+   "name": "job",
+   "title": "Job",
+   "kind": "entry",
+   "icon": "id-badge-2",
+   "category": "Company & people",
+   "description": "One open role with its own page",
+   "preview": {
+    "title": "title",
+    "subtitle": "department",
+    "icon": "briefcase"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "icon": "file-text",
+     "default": true
+    },
+    {
+     "name": "details",
+     "title": "Details",
+     "icon": "list-details"
+    },
+    {
+     "name": "apply",
+     "title": "Applying",
+     "icon": "send"
+    }
+   ],
+   "fieldsets": [
+    {
+     "name": "pay",
+     "title": "Pay",
+     "description": "Shown when the range is on. Several states require it.",
+     "columns": 2
+    },
+    {
+     "name": "where",
+     "title": "Where"
+    }
+   ],
+   "fields": [
+    {
+     "name": "title",
+     "title": "Job title",
+     "type": "string",
+     "group": "content",
+     "validation": {
+      "required": true,
+      "max": 70
+     }
+    },
+    {
+     "name": "slug",
+     "title": "Slug",
+     "type": "slug",
+     "group": "content",
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "status",
+     "title": "Status",
+     "type": "select",
+     "group": "content",
+     "layout": "segmented",
+     "initialValue": "open",
+     "options": [
+      {
+       "value": "open",
+       "label": "Open"
+      },
+      {
+       "value": "paused",
+       "label": "Paused"
+      },
+      {
+       "value": "closed",
+       "label": "Closed"
+      }
+     ],
+     "description": "Paused and closed roles leave the list."
+    },
+    {
+     "name": "summary",
+     "title": "Summary",
+     "type": "text",
+     "rows": 3,
+     "group": "content",
+     "validation": {
+      "required": true,
+      "recommendedMax": 300
+     }
+    },
+    {
+     "name": "about",
+     "title": "About the role",
+     "type": "richtext",
+     "group": "content",
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "responsibilities",
+     "title": "You'll",
+     "type": "array",
+     "group": "content",
+     "itemNoun": "responsibility",
+     "validation": {
+      "min": 3,
+      "max": 10
+     },
+     "of": [
+      {
+       "name": "item",
+       "title": "Responsibility",
+       "type": "string",
+       "validation": {
+        "required": true,
+        "max": 140
+       }
+      }
+     ]
+    },
+    {
+     "name": "requirements",
+     "title": "You have",
+     "type": "array",
+     "group": "content",
+     "itemNoun": "requirement",
+     "validation": {
+      "min": 2,
+      "max": 8
+     },
+     "of": [
+      {
+       "name": "item",
+       "title": "Requirement",
+       "type": "string",
+       "validation": {
+        "required": true,
+        "max": 140
+       }
+      }
+     ]
+    },
+    {
+     "name": "bonusPoints",
+     "title": "Bonus points",
+     "type": "array",
+     "group": "content",
+     "itemNoun": "bonus point",
+     "validation": {
+      "max": 6
+     },
+     "of": [
+      {
+       "name": "bonusPoint",
+       "title": "Bonus point",
+       "type": "string",
+       "validation": {
+        "max": 140
+       }
+      }
+     ]
+    },
+    {
+     "name": "showBenefits",
+     "title": "Show company benefits",
+     "type": "boolean",
+     "group": "content",
+     "initialValue": true,
+     "description": "The shared Benefits block, edited once in Blocks \u203a Global."
+    },
+    {
+     "name": "department",
+     "title": "Department",
+     "type": "reference",
+     "group": "details",
+     "reference": {
+      "to": [
+       "col_departments"
+      ]
+     },
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "hiringManager",
+     "title": "Hiring manager",
+     "type": "reference",
+     "group": "details",
+     "reference": {
+      "to": [
+       "col_people"
+      ]
+     }
+    },
+    {
+     "name": "employmentType",
+     "title": "Type",
+     "type": "select",
+     "group": "details",
+     "validation": {
+      "required": true
+     },
+     "options": [
+      {
+       "value": "FULL_TIME",
+       "label": "Full-time"
+      },
+      {
+       "value": "PART_TIME",
+       "label": "Part-time"
+      },
+      {
+       "value": "CONTRACTOR",
+       "label": "Contract"
+      },
+      {
+       "value": "TEMPORARY",
+       "label": "Temporary"
+      },
+      {
+       "value": "INTERN",
+       "label": "Internship"
+      }
+     ],
+     "description": ""
+    },
+    {
+     "name": "workplace",
+     "title": "Workplace",
+     "type": "select",
+     "group": "details",
+     "fieldset": "where",
+     "layout": "segmented",
+     "validation": {
+      "required": true
+     },
+     "initialValue": "onsite",
+     "options": [
+      {
+       "value": "onsite",
+       "label": "On-site"
+      },
+      {
+       "value": "hybrid",
+       "label": "Hybrid"
+      },
+      {
+       "value": "remote",
+       "label": "Remote"
+      }
+     ],
+     "description": ""
+    },
+    {
+     "name": "locations",
+     "title": "Locations",
+     "type": "array",
+     "group": "details",
+     "fieldset": "where",
+     "hidden": {
+      "field": "workplace",
+      "equals": [
+       "onsite",
+       "hybrid"
+      ]
+     },
+     "validation": {
+      "min": 1,
+      "max": 5
+     },
+     "of": [
+      {
+       "name": "location",
+       "title": "Location",
+       "type": "reference",
+       "reference": {
+        "to": [
+         "col_locations"
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "name": "officeDays",
+     "title": "Days in the office",
+     "type": "number",
+     "group": "details",
+     "fieldset": "where",
+     "hidden": {
+      "field": "workplace",
+      "equals": "hybrid"
+     },
+     "numeric": {
+      "unit": "days / week",
+      "min": 1,
+      "max": 4,
+      "step": 1
+     },
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "remoteRegions",
+     "title": "Can work from",
+     "type": "multiselect",
+     "group": "details",
+     "fieldset": "where",
+     "hidden": {
+      "field": "workplace",
+      "equals": "remote"
+     },
+     "validation": {
+      "required": true
+     },
+     "options": [
+      {
+       "value": "US",
+       "label": "United States"
+      },
+      {
+       "value": "CA",
+       "label": "Canada"
+      },
+      {
+       "value": "MX",
+       "label": "Mexico"
+      },
+      {
+       "value": "GB",
+       "label": "United Kingdom"
+      }
+     ]
+    },
+    {
+     "name": "showSalary",
+     "title": "Show the pay range",
+     "type": "boolean",
+     "group": "details",
+     "fieldset": "pay",
+     "initialValue": true
+    },
+    {
+     "name": "salaryMin",
+     "title": "From",
+     "type": "number",
+     "group": "details",
+     "fieldset": "pay",
+     "hidden": {
+      "field": "showSalary",
+      "equals": true
+     },
+     "numeric": {
+      "min": 0,
+      "step": 1000
+     },
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "salaryMax",
+     "title": "To",
+     "type": "number",
+     "group": "details",
+     "fieldset": "pay",
+     "hidden": {
+      "field": "showSalary",
+      "equals": true
+     },
+     "numeric": {
+      "min": 0,
+      "step": 1000
+     },
+     "validation": {
+      "required": true
+     },
+     "description": "Must be at least the From amount."
+    },
+    {
+     "name": "currency",
+     "title": "Currency",
+     "type": "select",
+     "group": "details",
+     "fieldset": "pay",
+     "hidden": {
+      "field": "showSalary",
+      "equals": true
+     },
+     "initialValue": "USD",
+     "options": [
+      {
+       "value": "USD",
+       "label": "USD"
+      },
+      {
+       "value": "CAD",
+       "label": "CAD"
+      },
+      {
+       "value": "GBP",
+       "label": "GBP"
+      },
+      {
+       "value": "EUR",
+       "label": "EUR"
+      }
+     ],
+     "description": ""
+    },
+    {
+     "name": "period",
+     "title": "Per",
+     "type": "select",
+     "group": "details",
+     "fieldset": "pay",
+     "hidden": {
+      "field": "showSalary",
+      "equals": true
+     },
+     "initialValue": "YEAR",
+     "options": [
+      {
+       "value": "HOUR",
+       "label": "Hour"
+      },
+      {
+       "value": "MONTH",
+       "label": "Month"
+      },
+      {
+       "value": "YEAR",
+       "label": "Year"
+      }
+     ],
+     "description": ""
+    },
+    {
+     "name": "validThrough",
+     "title": "Apply by",
+     "type": "date",
+     "group": "apply",
+     "description": "Google stops showing the job after this date. Leave empty if open-ended."
+    },
+    {
+     "name": "applyMethod",
+     "title": "People apply",
+     "type": "select",
+     "group": "apply",
+     "layout": "radio",
+     "initialValue": "form",
+     "options": [
+      {
+       "value": "form",
+       "label": "With a form on this page"
+      },
+      {
+       "value": "url",
+       "label": "On another site",
+       "description": "Greenhouse, Lever, Workable\u2026"
+      },
+      {
+       "value": "email",
+       "label": "By email"
+      }
+     ],
+     "description": ""
+    },
+    {
+     "name": "applyForm",
+     "title": "Application form",
+     "type": "reference",
+     "group": "apply",
+     "reference": {
+      "to": [
+       "form"
+      ]
+     },
+     "hidden": {
+      "field": "applyMethod",
+      "equals": "form"
+     },
+     "validation": {
+      "required": true
+     },
+     "description": "Submissions arrive in Growth \u203a Forms, tagged with this job."
+    },
+    {
+     "name": "applyUrl",
+     "title": "Application link",
+     "type": "url",
+     "group": "apply",
+     "hidden": {
+      "field": "applyMethod",
+      "equals": "url"
+     },
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "applyEmail",
+     "title": "Send applications to",
+     "type": "email",
+     "group": "apply",
+     "hidden": {
+      "field": "applyMethod",
+      "equals": "email"
+     },
+     "validation": {
+      "required": true
+     },
+     "description": "Opens an email with the job title filled in."
+    },
+    {
+     "name": "applyLabel",
+     "title": "Button label",
+     "type": "string",
+     "group": "apply",
+     "initialValue": "Apply for this role",
+     "validation": {
+      "max": 28
+     },
+     "description": ""
+    }
+   ]
+  },
+  "value": {
+   "title": "Foundry Technician (Finishing)",
+   "slug": "foundry-technician-finishing",
+   "status": "open",
+   "summary": "Turn rough castings into pans people keep for fifty years. You'll own grinding, machining and the first seasoning coat, and within a year you'll train the next technician.",
+   "about": "<p>Every Caldera pan passes through finishing: grinding the cooking surface smooth, machining the base flat and baking on the first coat of seasoning. It's skilled, physical work in a small team that cares about every pan.</p>",
+   "responsibilities": [
+    "Grind and polish cooking surfaces to a 0.2 mm tolerance",
+    "Run the CNC lathe for base flattening",
+    "Apply and bake the first seasoning coat",
+    "Inspect every pan and log defects",
+    "Keep the finishing bay safe and clean"
+   ],
+   "requirements": [
+    "Two years in a machine shop, foundry or fabrication",
+    "Comfortable lifting 25 kg repeatedly",
+    "Able to work 7am\u20133:30pm, Monday to Friday"
+   ],
+   "bonusPoints": [
+    "CNC lathe experience",
+    "You cook with cast iron at home"
+   ],
+   "showBenefits": true,
+   "department": "en_dep_workshop",
+   "hiringManager": "en_p_luis-ortega",
+   "employmentType": "FULL_TIME",
+   "workplace": "onsite",
+   "locations": [
+    "en_loc_bend-foundry"
+   ],
+   "showSalary": true,
+   "salaryMin": 52000,
+   "salaryMax": 61000,
+   "currency": "USD",
+   "period": "YEAR",
+   "validThrough": "2026-11-30",
+   "applyMethod": "form",
+   "applyForm": "form_job-application",
+   "applyLabel": "Apply for this role"
+  }
+ },
+ {
+  "id": "about-timeline",
+  "name": "About & mission with timeline",
+  "category": "Company & people",
+  "kind": "block",
+  "brand": "Caldera",
+  "previewLayout": "timeline",
+  "proves": "Mission + story (rich text) \u00b7 founders by reference \u00b7 stats \u00b7 dated milestones with optional photo and link \u00b7 order and orientation as design",
+  "schema": {
+   "name": "aboutStory",
+   "title": "Story and timeline",
+   "kind": "block",
+   "icon": "timeline",
+   "category": "Company & people",
+   "description": "Why we exist and how we got here",
+   "variants": [
+    {
+     "id": "vertical",
+     "name": "Vertical timeline"
+    },
+    {
+     "id": "scroller",
+     "name": "Horizontal scroller"
+    },
+    {
+     "id": "alternating",
+     "name": "Alternating"
+    }
+   ],
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "icon": "file-text",
+     "default": true
+    },
+    {
+     "name": "timeline",
+     "title": "Timeline",
+     "icon": "timeline"
+    },
+    {
+     "name": "design",
+     "title": "Design",
+     "icon": "palette"
+    }
+   ],
+   "preview": {
+    "title": "heading",
+    "subtitle": "mission",
+    "icon": "timeline"
+   },
+   "fields": [
+    {
+     "name": "eyebrow",
+     "title": "Eyebrow",
+     "type": "string",
+     "group": "content",
+     "validation": {
+      "max": 40
+     }
+    },
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "group": "content",
+     "validation": {
+      "required": true,
+      "recommendedMax": 56
+     },
+     "ai": true,
+     "localized": true
+    },
+    {
+     "name": "mission",
+     "title": "Mission",
+     "type": "text",
+     "rows": 2,
+     "group": "content",
+     "validation": {
+      "required": true,
+      "recommendedMax": 160
+     },
+     "localized": true
+    },
+    {
+     "name": "story",
+     "title": "Story",
+     "type": "richtext",
+     "group": "content",
+     "localized": true
+    },
+    {
+     "name": "founders",
+     "title": "Founders",
+     "type": "array",
+     "group": "content",
+     "validation": {
+      "max": 4
+     },
+     "description": "Photos and names come from their profiles.",
+     "of": [
+      {
+       "name": "founder",
+       "title": "Founder",
+       "type": "reference",
+       "reference": {
+        "to": [
+         "col_people"
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "name": "stats",
+     "title": "Numbers",
+     "type": "array",
+     "group": "content",
+     "itemNoun": "number",
+     "openMode": "inline",
+     "validation": {
+      "max": 4
+     },
+     "of": [
+      {
+       "name": "stat",
+       "title": "Number",
+       "type": "object",
+       "icon": "chart-bar",
+       "preview": {
+        "title": "value",
+        "subtitle": "label"
+       },
+       "fields": [
+        {
+         "name": "value",
+         "title": "Number",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 10
+         },
+         "placeholder": "212k"
+        },
+        {
+         "name": "label",
+         "title": "Label",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 40
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "milestones",
+     "title": "Milestones",
+     "type": "array",
+     "group": "timeline",
+     "itemNoun": "milestone",
+     "validation": {
+      "min": 2,
+      "max": 30
+     },
+     "description": "Sorted by date on the page.",
+     "of": [
+      {
+       "name": "milestone",
+       "title": "Milestone",
+       "type": "object",
+       "icon": "flag",
+       "preview": {
+        "title": "title",
+        "subtitle": "year",
+        "media": "image",
+        "fallback": "Untitled milestone"
+       },
+       "fields": [
+        {
+         "name": "year",
+         "title": "Year",
+         "type": "number",
+         "numeric": {
+          "min": 1900,
+          "max": 2100,
+          "step": 1
+         },
+         "validation": {
+          "required": true
+         }
+        },
+        {
+         "name": "month",
+         "title": "Month",
+         "type": "select",
+         "options": [
+          {
+           "value": "1",
+           "label": "Jan"
+          },
+          {
+           "value": "2",
+           "label": "Feb"
+          },
+          {
+           "value": "3",
+           "label": "Mar"
+          },
+          {
+           "value": "4",
+           "label": "Apr"
+          },
+          {
+           "value": "5",
+           "label": "May"
+          },
+          {
+           "value": "6",
+           "label": "Jun"
+          },
+          {
+           "value": "7",
+           "label": "Jul"
+          },
+          {
+           "value": "8",
+           "label": "Aug"
+          },
+          {
+           "value": "9",
+           "label": "Sep"
+          },
+          {
+           "value": "10",
+           "label": "Oct"
+          },
+          {
+           "value": "11",
+           "label": "Nov"
+          },
+          {
+           "value": "12",
+           "label": "Dec"
+          }
+         ],
+         "description": "Orders milestones within a year."
+        },
+        {
+         "name": "title",
+         "title": "What happened",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 60
+         },
+         "localized": true
+        },
+        {
+         "name": "body",
+         "title": "Body",
+         "type": "text",
+         "rows": 2,
+         "validation": {
+          "recommendedMax": 200
+         },
+         "localized": true
+        },
+        {
+         "name": "image",
+         "title": "Image",
+         "type": "image"
+        },
+        {
+         "name": "link",
+         "title": "Link",
+         "type": "link"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "order",
+     "title": "Order",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "oldest",
+     "options": [
+      {
+       "value": "oldest",
+       "label": "Oldest first"
+      },
+      {
+       "value": "newest",
+       "label": "Newest first"
+      }
+     ],
+     "description": ""
+    },
+    {
+     "name": "theme",
+     "title": "Background",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "light",
+     "options": [
+      {
+       "value": "light",
+       "label": "Light"
+      },
+      {
+       "value": "dark",
+       "label": "Dark"
+      }
+     ],
+     "description": ""
+    }
+   ]
+  },
+  "value": {
+   "_variant": "vertical",
+   "eyebrow": "Our story",
+   "heading": "One skillet, a borrowed foundry and a lot of burnt eggs",
+   "mission": "We make cookware for people who cook outside, built to be repaired, re-seasoned and handed down.",
+   "story": "<p>Caldera started in 2017 with one skillet, cast on weekends in a borrowed foundry in Bend. Ana and Luis wanted a pan light enough to carry to camp and tough enough to sit in coals.</p><blockquote><p>We burned four hundred eggs getting the cooking surface right.</p><cite>Ana Vidal, co-founder</cite></blockquote><p>Nine years later we cast every piece in our own foundry, two miles from where the first one was poured.</p>",
+   "founders": [
+    "en_p_ana-vidal",
+    "en_p_luis-ortega"
+   ],
+   "stats": [
+    {
+     "_key": "st1",
+     "value": "212k",
+     "label": "Pans in kitchens and camps"
+    },
+    {
+     "_key": "st2",
+     "value": "40",
+     "label": "People in Bend, Oregon"
+    },
+    {
+     "_key": "st3",
+     "value": "2.1%",
+     "label": "Scrap rate in 2025"
+    }
+   ],
+   "milestones": [
+    {
+     "_key": "m1",
+     "year": 2017,
+     "month": "4",
+     "title": "The first skillet",
+     "body": "Poured on a Saturday in a borrowed foundry. It cracked. The second one didn't.",
+     "image": {
+      "url": "https://picsum.photos/seed/caldera-first-skillet/1200/900",
+      "alt": "A rough, unfinished cast iron skillet on a workbench",
+      "name": "caldera-first-skillet.jpg",
+      "width": 2400,
+      "height": 1800
+     }
+    },
+    {
+     "_key": "m2",
+     "year": 2019,
+     "month": "10",
+     "title": "Our own foundry",
+     "body": "A 6,000 sq ft building on Empire Avenue and our first four hires."
+    },
+    {
+     "_key": "m3",
+     "year": 2022,
+     "month": "6",
+     "title": "Lifetime warranty",
+     "body": "Every pan, forever. We replaced 31 in the first year.",
+     "link": {
+      "type": "url",
+      "href": "/legal/warranty-returns"
+     }
+    },
+    {
+     "_key": "m4",
+     "year": 2026,
+     "month": "3",
+     "title": "The Cable Fold Grill",
+     "body": "Eleven prototypes later, our first piece built for the fire itself.",
+     "image": {
+      "url": "https://picsum.photos/seed/cable-fold-launch/1200/900",
+      "alt": "The Cable Fold grate unfolded over a campfire",
+      "name": "cable-fold-launch.jpg",
+      "width": 2400,
+      "height": 1800
+     },
+     "link": {
+      "type": "entry",
+      "href": "/products/cable-fold",
+      "entryId": "en_p1",
+      "title": "Cable Fold Grill"
+     }
+    }
+   ],
+   "order": "oldest",
+   "theme": "light"
+  }
+ },
+ {
+  "id": "press-kit",
+  "name": "Press & brand kit",
+  "category": "Company & people",
+  "kind": "block",
+  "brand": "Caldera",
+  "previewLayout": "gallery",
+  "proves": "Asset groups \u2192 assets \u2192 formats \u2192 file (4 levels) \u00b7 kind reveals photo credit or logo background \u00b7 boilerplate, facts, contact and coverage",
+  "schema": {
+   "name": "pressKit",
+   "title": "Press kit",
+   "kind": "block",
+   "icon": "download",
+   "category": "Company & people",
+   "description": "Logos, photos, facts and a press contact",
+   "variants": [
+    {
+     "id": "grid",
+     "name": "Grid"
+    },
+    {
+     "id": "sidebar",
+     "name": "Facts on the side"
+    }
+   ],
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "icon": "file-text",
+     "default": true
+    },
+    {
+     "name": "assets",
+     "title": "Assets",
+     "icon": "photo"
+    },
+    {
+     "name": "coverage",
+     "title": "Coverage",
+     "icon": "news"
+    },
+    {
+     "name": "design",
+     "title": "Design",
+     "icon": "palette"
+    }
+   ],
+   "fieldsets": [
+    {
+     "name": "contact",
+     "title": "Press contact"
+    }
+   ],
+   "preview": {
+    "title": "heading",
+    "icon": "download"
+   },
+   "fields": [
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "group": "content",
+     "validation": {
+      "required": true,
+      "max": 48
+     }
+    },
+    {
+     "name": "boilerplate",
+     "title": "About Caldera",
+     "type": "text",
+     "rows": 4,
+     "group": "content",
+     "validation": {
+      "required": true,
+      "max": 700
+     },
+     "localized": true,
+     "description": "Gets a Copy button."
+    },
+    {
+     "name": "facts",
+     "title": "Fast facts",
+     "type": "array",
+     "group": "content",
+     "itemNoun": "fact",
+     "openMode": "inline",
+     "validation": {
+      "max": 8
+     },
+     "of": [
+      {
+       "name": "fact",
+       "title": "Fact",
+       "type": "object",
+       "icon": "info-circle",
+       "preview": {
+        "title": "label",
+        "subtitle": "value"
+       },
+       "fields": [
+        {
+         "name": "label",
+         "title": "Label",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 24
+         },
+         "placeholder": "Founded"
+        },
+        {
+         "name": "value",
+         "title": "Value",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 60
+         },
+         "placeholder": "2017, Bend, Oregon"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "contactName",
+     "title": "Name",
+     "type": "string",
+     "group": "content",
+     "fieldset": "contact"
+    },
+    {
+     "name": "contactEmail",
+     "title": "Email",
+     "type": "email",
+     "group": "content",
+     "fieldset": "contact",
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "assetGroups",
+     "title": "Asset groups",
+     "type": "array",
+     "group": "assets",
+     "itemNoun": "group",
+     "validation": {
+      "min": 1,
+      "max": 6
+     },
+     "of": [
+      {
+       "name": "assetGroup",
+       "title": "Group",
+       "type": "object",
+       "icon": "folder",
+       "preview": {
+        "title": "title",
+        "subtitle": "description",
+        "fallback": "Untitled group"
+       },
+       "fields": [
+        {
+         "name": "title",
+         "title": "Group name",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 32
+         },
+         "placeholder": "Logos"
+        },
+        {
+         "name": "description",
+         "title": "Usage notes",
+         "type": "text",
+         "rows": 2,
+         "validation": {
+          "recommendedMax": 200
+         }
+        },
+        {
+         "name": "assets",
+         "title": "Assets",
+         "type": "array",
+         "itemNoun": "asset",
+         "arrayLayout": "grid",
+         "validation": {
+          "min": 1,
+          "max": 24
+         },
+         "of": [
+          {
+           "name": "asset",
+           "title": "Asset",
+           "type": "object",
+           "icon": "photo",
+           "preview": {
+            "title": "name",
+            "subtitle": "kind",
+            "media": "preview"
+           },
+           "fields": [
+            {
+             "name": "name",
+             "title": "Name",
+             "type": "string",
+             "validation": {
+              "required": true,
+              "max": 48
+             }
+            },
+            {
+             "name": "kind",
+             "title": "Kind",
+             "type": "select",
+             "layout": "segmented",
+             "validation": {
+              "required": true
+             },
+             "initialValue": "logo",
+             "options": [
+              {
+               "value": "logo",
+               "label": "Logo"
+              },
+              {
+               "value": "photo",
+               "label": "Photo"
+              },
+              {
+               "value": "document",
+               "label": "Document"
+              }
+             ],
+             "description": ""
+            },
+            {
+             "name": "preview",
+             "title": "Preview",
+             "type": "image",
+             "validation": {
+              "required": true
+             }
+            },
+            {
+             "name": "background",
+             "title": "Made for",
+             "type": "select",
+             "hidden": {
+              "field": "kind",
+              "equals": "logo"
+             },
+             "layout": "segmented",
+             "initialValue": "light",
+             "options": [
+              {
+               "value": "light",
+               "label": "Light backgrounds"
+              },
+              {
+               "value": "dark",
+               "label": "Dark backgrounds"
+              }
+             ]
+            },
+            {
+             "name": "credit",
+             "title": "Photo credit",
+             "type": "string",
+             "hidden": {
+              "field": "kind",
+              "equals": "photo"
+             },
+             "validation": {
+              "required": true,
+              "max": 60
+             },
+             "description": "Journalists must print it."
+            },
+            {
+             "name": "formats",
+             "title": "Downloads",
+             "type": "array",
+             "itemNoun": "format",
+             "openMode": "inline",
+             "validation": {
+              "min": 1,
+              "max": 5
+             },
+             "of": [
+              {
+               "name": "format",
+               "title": "Format",
+               "type": "object",
+               "icon": "file-download",
+               "preview": {
+                "title": "format",
+                "subtitle": "file.name"
+               },
+               "fields": [
+                {
+                 "name": "format",
+                 "title": "Format",
+                 "type": "select",
+                 "validation": {
+                  "required": true
+                 },
+                 "options": [
+                  {
+                   "value": "svg",
+                   "label": "SVG"
+                  },
+                  {
+                   "value": "png",
+                   "label": "PNG"
+                  },
+                  {
+                   "value": "eps",
+                   "label": "EPS"
+                  },
+                  {
+                   "value": "jpg",
+                   "label": "JPG"
+                  },
+                  {
+                   "value": "pdf",
+                   "label": "PDF"
+                  }
+                 ],
+                 "description": ""
+                },
+                {
+                 "name": "file",
+                 "title": "File",
+                 "type": "file",
+                 "validation": {
+                  "required": true
+                 }
+                }
+               ]
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "downloadAll",
+     "title": "Download everything",
+     "type": "file",
+     "group": "assets",
+     "description": "One .zip of every asset."
+    },
+    {
+     "name": "mentions",
+     "title": "Press mentions",
+     "type": "array",
+     "group": "coverage",
+     "itemNoun": "article",
+     "validation": {
+      "max": 12
+     },
+     "of": [
+      {
+       "name": "mention",
+       "title": "Article",
+       "type": "object",
+       "icon": "news",
+       "preview": {
+        "title": "title",
+        "subtitle": "outlet"
+       },
+       "fields": [
+        {
+         "name": "outlet",
+         "title": "Publication",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 40
+         }
+        },
+        {
+         "name": "title",
+         "title": "Article title",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 120
+         }
+        },
+        {
+         "name": "date",
+         "title": "Date",
+         "type": "date"
+        },
+        {
+         "name": "link",
+         "title": "Link",
+         "type": "link",
+         "validation": {
+          "required": true
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  "value": {
+   "_variant": "sidebar",
+   "heading": "Press & brand assets",
+   "boilerplate": "Caldera makes cast iron and carbon steel cookware for cooking outdoors, designed to be repaired and handed down. Founded in 2017 in Bend, Oregon, the company casts and finishes every piece in its own foundry and backs it with a lifetime warranty.",
+   "facts": [
+    {
+     "_key": "f1",
+     "label": "Founded",
+     "value": "2017, Bend, Oregon"
+    },
+    {
+     "_key": "f2",
+     "label": "Founders",
+     "value": "Ana Vidal and Luis Ortega"
+    },
+    {
+     "_key": "f3",
+     "label": "Team",
+     "value": "40 people"
+    },
+    {
+     "_key": "f4",
+     "label": "Made in",
+     "value": "Our own foundry, Bend, Oregon"
+    }
+   ],
+   "contactName": "Rosa Lindgren",
+   "contactEmail": "press@caldera.co",
+   "assetGroups": [
+    {
+     "_key": "ag1",
+     "title": "Logos",
+     "description": "Leave clear space equal to the height of the flame mark. Don't recolour, stretch or add effects.",
+     "assets": [
+      {
+       "_key": "a1",
+       "name": "Wordmark, ember",
+       "kind": "logo",
+       "preview": {
+        "url": "https://picsum.photos/seed/caldera-wordmark/800/400",
+        "alt": "Caldera wordmark in ember orange",
+        "name": "caldera-wordmark-ember.png",
+        "width": 800,
+        "height": 400
+       },
+       "background": "light",
+       "formats": [
+        {
+         "_key": "fm1",
+         "format": "svg",
+         "file": {
+          "url": "https://caldera.bettercms.site/media/press/caldera-wordmark-ember.svg",
+          "name": "caldera-wordmark-ember.svg",
+          "size": 4200
+         }
+        },
+        {
+         "_key": "fm2",
+         "format": "png",
+         "file": {
+          "url": "https://caldera.bettercms.site/media/press/caldera-wordmark-ember.png",
+          "name": "caldera-wordmark-ember.png",
+          "size": 48200
+         }
+        }
+       ]
+      },
+      {
+       "_key": "a2",
+       "name": "Wordmark, cream",
+       "kind": "logo",
+       "preview": {
+        "url": "https://picsum.photos/seed/caldera-wordmark-dark/800/400",
+        "alt": "Caldera wordmark in cream on charcoal",
+        "name": "caldera-wordmark-cream.png",
+        "width": 800,
+        "height": 400
+       },
+       "background": "dark",
+       "formats": [
+        {
+         "_key": "fm3",
+         "format": "svg",
+         "file": {
+          "url": "https://caldera.bettercms.site/media/press/caldera-wordmark-cream.svg",
+          "name": "caldera-wordmark-cream.svg",
+          "size": 4100
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "_key": "ag2",
+     "title": "Product photos",
+     "description": "Free for editorial use with credit.",
+     "assets": [
+      {
+       "_key": "a3",
+       "name": "Ridge Skillet over coals",
+       "kind": "photo",
+       "preview": {
+        "url": "https://picsum.photos/seed/press-ridge-coals/1200/800",
+        "alt": "The Ridge Skillet searing steaks over a bed of coals",
+        "name": "press-ridge-coals.jpg",
+        "width": 2400,
+        "height": 1600
+       },
+       "credit": "Photo: Tom Okafor for Caldera",
+       "formats": [
+        {
+         "_key": "fm4",
+         "format": "jpg",
+         "file": {
+          "url": "https://caldera.bettercms.site/media/press/ridge-skillet-coals-6000px.jpg",
+          "name": "ridge-skillet-coals-6000px.jpg",
+          "size": 14800000
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "downloadAll": {
+    "url": "https://caldera.bettercms.site/media/press/caldera-press-kit-2026.zip",
+    "name": "caldera-press-kit-2026.zip",
+    "size": 96000000
+   },
+   "mentions": [
+    {
+     "_key": "cv1",
+     "outlet": "Outside",
+     "title": "The best camp cookware of 2026",
+     "date": "2026-05-12",
+     "link": {
+      "type": "url",
+      "href": "https://www.outsideonline.com/outdoor-gear/camping/best-camp-cookware-2026/",
+      "newTab": true,
+      "rel": "follow"
+     }
+    },
+    {
+     "_key": "cv2",
+     "outlet": "Bon App\u00e9tit",
+     "title": "This foundry in Oregon wants you to fix your skillet, not replace it",
+     "date": "2025-11-03",
+     "link": {
+      "type": "url",
+      "href": "https://www.bonappetit.com/story/caldera-cast-iron-repair",
+      "newTab": true
+     }
+    }
+   ]
+  }
+ }
+]

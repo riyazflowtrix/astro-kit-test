@@ -1,0 +1,136 @@
+---
+---
+
+<section id="feature-alternating-rows" class="section feature-alternating-rows">
+  <!-- kit: feature-alternating-rows -->
+  <div class="container">
+    <header class="section-head section-head--center">
+      <h2>Engineered at the foundry, proven at the fire.</h2>
+    </header>
+
+    <div class="far-rows">
+      <article class="far-row far-row--media-right">
+        <div class="far-copy">
+          <span class="eyebrow">The pour</span>
+          <h3>Thin walls that still hold heat like a brick.</h3>
+          <div class="far-body">
+            <p>We pour at 2,600°F into <strong>sand moulds we make by hand</strong>, then machine the cooking surface smooth. The result is a pan that heats evenly in four minutes and stays hot when the steak goes in.</p>
+          </div>
+          <ul class="far-points">
+            <li>3.8 lb for a 10" skillet</li>
+            <li>Machined, glass-smooth surface</li>
+            <li>Poured and finished in Bend, OR</li>
+          </ul>
+          <a class="far-link" href="/products/ridge-skillet" title='Ridge Skillet 10"'>See the Ridge Skillet <span aria-hidden="true">→</span></a>
+        </div>
+        <figure class="far-media">
+          <img src="https://picsum.photos/seed/caldera-foundry-pour/1200/900" alt="Molten iron pouring into a sand mould at the Bend foundry" width="1800" height="1350" loading="lazy" style="object-position: 52% 40%;" />
+        </figure>
+      </article>
+
+      <article class="far-row far-row--media-left">
+        <div class="far-copy">
+          <span class="eyebrow">The fold</span>
+          <h3>A grill that folds to the size of a laptop.</h3>
+          <div class="far-body">
+            <p>The Cable Fold collapses along two stainless hinges and slides into its own canvas sleeve. Unfolded, it holds four steaks over a fire ring.</p>
+          </div>
+          <ul class="far-points">
+            <li>Folds to 14 × 10 × 1.5 in</li>
+            <li>Stainless hinges rated for 10,000 cycles</li>
+          </ul>
+          <a class="far-link" href="/products/cable-fold" title="Cable Fold Grill">Shop the Cable Fold <span aria-hidden="true">→</span></a>
+        </div>
+        <figure class="far-media">
+          <video src="https://cdn.caldera.co/film/cable-fold-unfold-loop.mp4" poster="https://picsum.photos/seed/cable-fold-loop/1200/900" width="1200" height="900" muted loop playsinline controls preload="none" aria-label="The Cable Fold grill unfolding"></video>
+        </figure>
+      </article>
+
+      <article class="far-row far-row--media-right">
+        <div class="far-copy">
+          <span class="eyebrow">The seasoning</span>
+          <h3>Non-stick from the first egg.</h3>
+          <div class="far-body">
+            <p>Three coats of flaxseed and grapeseed oil, each baked at 500°F. No PFAS, no coatings, nothing to flake off.</p>
+          </div>
+        </div>
+        <figure class="far-media">
+          <img src="https://picsum.photos/seed/caldera-seasoning-egg/1200/900" alt="A fried egg sliding off a freshly seasoned skillet" width="1800" height="1350" loading="lazy" />
+        </figure>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+  .far-rows {
+    display: grid;
+    gap: clamp(3rem, 7vw, 6rem);
+  }
+  .far-row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(2rem, 5vw, 4.5rem);
+    align-items: center;
+  }
+  .far-row--media-left .far-media {
+    order: -1;
+  }
+  .far-copy h3 {
+    font-size: clamp(1.5rem, 2.6vw, 2rem);
+  }
+  .far-body {
+    color: var(--ink-2);
+  }
+  .far-points {
+    margin: 0 0 1.25rem;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.5rem;
+  }
+  .far-points li {
+    position: relative;
+    padding-left: 1.75rem;
+  }
+  .far-points li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.45em;
+    width: 1rem;
+    height: 0.55rem;
+    border-left: 2px solid var(--brand);
+    border-bottom: 2px solid var(--brand);
+    transform: rotate(-45deg);
+  }
+  .far-link {
+    font-weight: 600;
+    color: var(--brand);
+    text-decoration: none;
+  }
+  .far-link:hover {
+    text-decoration: underline;
+  }
+  .far-media {
+    margin: 0;
+    aspect-ratio: 4 / 3;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--surface-2);
+  }
+  .far-media img,
+  .far-media video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  @media (max-width: 800px) {
+    .far-row {
+      grid-template-columns: 1fr;
+    }
+    .far-row .far-media {
+      order: -1;
+    }
+  }
+</style>

@@ -1,0 +1,149 @@
+---
+// Split section with translations (pt-PT approved, ar-AE right-to-left in review, fr-FR falls back to English).
+---
+
+<section id="localized-section" class="section loc">
+  <!-- kit: localized-section -->
+  <div class="container">
+    <div class="loc__switch" role="group" aria-label="Language">
+      <button type="button" class="loc__opt" data-locale="en" aria-pressed="true">English</button>
+      <button type="button" class="loc__opt" data-locale="pt-PT" aria-pressed="false">Português <span class="loc__status loc__status--approved">Approved</span></button>
+      <button type="button" class="loc__opt" data-locale="ar-AE" aria-pressed="false">العربية <span class="loc__status loc__status--review">In review</span></button>
+      <button type="button" class="loc__opt" data-locale="fr-FR" aria-pressed="false">Français <span class="loc__status loc__status--missing">Missing</span></button>
+    </div>
+
+    <div class="loc__split">
+      <div class="loc__media">
+        <img src="https://picsum.photos/seed/lumen-courtyard/1600/1000" alt="A whitewashed courtyard with a deep shadow line across the floor" width="3200" height="2000" loading="lazy" data-alt-en="A whitewashed courtyard with a deep shadow line across the floor" data-alt-pt-PT="Um pátio caiado com uma linha de sombra profunda no chão" />
+      </div>
+
+      <div class="loc__copy">
+        <div class="loc__variant" data-locale="en" lang="en" dir="ltr">
+          <h2>Buildings that keep the light.</h2>
+          <p class="lead">Lumen Studio designs homes and small civic buildings in Lisbon and Dubai. We start with where the sun falls, then draw the walls.</p>
+          <a class="btn btn-primary" href="/projects" title="Projects">See our projects <span aria-hidden="true" class="arrow">&rarr;</span></a>
+        </div>
+
+        <div class="loc__variant" data-locale="pt-PT" lang="pt-PT" dir="ltr" hidden>
+          <h2>Edifícios que guardam a luz.</h2>
+          <p class="lead">O Lumen Studio projeta casas e pequenos edifícios públicos em Lisboa e no Dubai. Começamos por onde o sol bate, depois desenhamos as paredes.</p>
+          <a class="btn btn-primary" href="/pt/projects" title="Projetos">Ver projetos <span aria-hidden="true" class="arrow">&rarr;</span></a>
+        </div>
+
+        <div class="loc__variant" data-locale="ar-AE" lang="ar-AE" dir="rtl" hidden>
+          <h2>مبانٍ تحتفظ بالضوء.</h2>
+          <p class="lead">يصمّم استوديو لومن منازل ومباني مدنية صغيرة في لشبونة ودبي. نبدأ من حيث تسقط الشمس، ثم نرسم الجدران.</p>
+          <a class="btn btn-primary" href="/ar/projects">شاهد مشاريعنا <span aria-hidden="true" class="arrow">&larr;</span></a>
+        </div>
+
+        <div class="loc__variant" data-locale="fr-FR" lang="en" dir="ltr" hidden>
+          <p class="loc__fallback" role="status">Pas encore traduit : affichage de la version anglaise.</p>
+          <h2>Buildings that keep the light.</h2>
+          <p class="lead">Lumen Studio designs homes and small civic buildings in Lisbon and Dubai. We start with where the sun falls, then draw the walls.</p>
+          <a class="btn btn-primary" href="/projects" title="Projects">See our projects <span aria-hidden="true" class="arrow">&rarr;</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  {
+    const root = document.getElementById("localized-section");
+    if (root) {
+      const opts = Array.from(root.querySelectorAll<HTMLButtonElement>(".loc__opt"));
+      const variants = Array.from(root.querySelectorAll<HTMLElement>(".loc__variant"));
+      const img = root.querySelector<HTMLImageElement>(".loc__media img");
+      opts.forEach((opt) => {
+        opt.addEventListener("click", () => {
+          const locale = opt.dataset.locale || "en";
+          opts.forEach((o) => o.setAttribute("aria-pressed", String(o === opt)));
+          variants.forEach((v) => (v.hidden = v.dataset.locale !== locale));
+          if (img) img.alt = img.getAttribute("data-alt-" + locale) || img.dataset.altEn || "";
+        });
+      });
+    }
+  }
+</script>
+
+<style>
+  .loc__switch {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+  }
+  .loc__opt {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 40px;
+    padding: 0 0.875rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--bg);
+    font: inherit;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .loc__opt[aria-pressed="true"] {
+    border-color: var(--ink);
+    background: var(--ink);
+    color: var(--bg);
+  }
+  .loc__status {
+    padding: 0.0625rem 0.4rem;
+    border-radius: 999px;
+    font-size: 0.6875rem;
+    font-weight: 600;
+  }
+  .loc__status--approved {
+    background: #e3f3e9;
+    color: var(--success);
+  }
+  .loc__status--review {
+    background: #fbf0dc;
+    color: var(--warning);
+  }
+  .loc__status--missing {
+    background: var(--surface-2);
+    color: var(--ink-3);
+  }
+  .loc__split {
+    display: grid;
+    gap: clamp(1.5rem, 5vw, 4rem);
+    align-items: center;
+    grid-template-columns: minmax(0, 1fr);
+  }
+  @media (min-width: 860px) {
+    .loc__split {
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    }
+  }
+  .loc__media img {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+  }
+  .loc__variant[dir="rtl"] {
+    text-align: right;
+    font-family: "Noto Sans Arabic", "Geeza Pro", Tahoma, var(--font-sans);
+  }
+  .loc__variant[dir="rtl"] h2 {
+    letter-spacing: 0;
+    line-height: 1.35;
+  }
+  .loc__fallback {
+    display: inline-block;
+    padding: 0.375rem 0.75rem;
+    border-radius: var(--radius-sm);
+    background: var(--surface);
+    font-size: 0.8125rem;
+    color: var(--ink-2);
+  }
+  .loc__variant .lead {
+    margin-bottom: 1.5rem;
+  }
+</style>

@@ -1,0 +1,272 @@
+---
+// Knowledge-base article (entry) — Ledgerline help centre, Bank feeds. Feedback: "No" shows quick reasons.
+---
+
+<section id="kb-article" class="section kb-article">
+  <!-- kit: kb-article -->
+  <div class="container kb-layout">
+    <article class="kb-main">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="/help">Help centre</a></li>
+          <li><a href="/help/bank-feeds">Bank feeds</a></li>
+          <li aria-current="page">Missing transactions</li>
+        </ol>
+      </nav>
+
+      <h1>Why is my bank feed missing transactions?</h1>
+      <p class="lead">Most gaps are a pending sync or an expired bank login. Reconnect the account and run a 90-day backfill.</p>
+      <p class="meta">Reviewed by <strong>Rina Das</strong>, Support lead · <time datetime="2026-08-18">18 August 2026</time></p>
+
+      <div class="prose">
+        <ol class="steps">
+          <li>Open <strong>Banking › Connections</strong> and look for a yellow <em>Reconnect</em> badge.</li>
+          <li>Click <strong>Reconnect</strong> and sign in to your bank again.</li>
+          <li>Choose <strong>Backfill 90 days</strong>. New lines appear within 15 minutes.</li>
+        </ol>
+
+        <figure class="shot">
+          <img src="https://picsum.photos/seed/ledgerline-reconnect/1600/1000" alt="The Connections list with a yellow Reconnect badge on the Chase operating account" width="1600" height="1000" loading="lazy" />
+          <figcaption>An expired connection shows Reconnect.</figcaption>
+        </figure>
+
+        <div class="callout">
+          <p class="callout-title">Pending transactions</p>
+          <p>Banks send pending card charges only once they settle, usually 1–3 business days later.</p>
+        </div>
+      </div>
+
+      <div class="feedback" aria-live="polite">
+        <div class="fb-ask">
+          <p class="fb-q" id="kb-feedback-q">Was this article helpful?</p>
+          <div class="btn-row" role="group" aria-labelledby="kb-feedback-q">
+            <button type="button" class="btn btn-secondary" data-answer="yes">Yes</button>
+            <button type="button" class="btn btn-secondary" data-answer="no" aria-expanded="false" aria-controls="kb-feedback-reasons">No</button>
+          </div>
+        </div>
+        <p class="fb-thanks" hidden>Thanks — glad it helped.</p>
+        <form class="fb-reasons" id="kb-feedback-reasons" action="#" method="post" hidden>
+          <fieldset>
+            <legend>What went wrong?</legend>
+            <label><input type="radio" name="reason" value="steps-didnt-work" /> Steps didn't work</label>
+            <label><input type="radio" name="reason" value="bank-not-listed" /> My bank isn't listed</label>
+            <label><input type="radio" name="reason" value="hard-to-follow" /> Hard to follow</label>
+            <label><input type="radio" name="reason" value="not-what-i-wanted" /> Not what I was looking for</label>
+          </fieldset>
+          <button type="submit" class="btn btn-primary">Send feedback</button>
+        </form>
+      </div>
+    </article>
+
+    <aside class="kb-side" aria-label="Related articles">
+      <p class="side-title">Related articles</p>
+      <ul>
+        <li><a href="/help/bank-feeds/reconnect-bank">How to reconnect a bank account</a></li>
+        <li><a href="/help/bank-feeds/duplicate-lines">Why do I see duplicate lines?</a></li>
+      </ul>
+      <div class="side-help">
+        <p><strong>Still stuck?</strong></p>
+        <p>Our support team replies within one business day.</p>
+        <a class="btn btn-secondary" href="/help/contact">Contact support</a>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<style>
+  .kb-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 720px) 260px;
+    justify-content: center;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: start;
+  }
+  .crumbs ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+    list-style: none;
+    margin: 0 0 1rem;
+    padding: 0;
+    font-size: 0.875rem;
+    color: var(--ink-3);
+  }
+  .crumbs li + li::before {
+    content: "›";
+    margin-right: 0.375rem;
+  }
+  .crumbs a {
+    text-decoration: none;
+  }
+  h1 {
+    font-size: clamp(1.875rem, 4vw, 2.5rem);
+  }
+  .meta {
+    font-size: 0.875rem;
+    color: var(--ink-3);
+  }
+  .prose {
+    margin-top: 2rem;
+    font-size: 1.0625rem;
+  }
+  .steps {
+    padding-left: 1.5rem;
+  }
+  .steps li {
+    padding-left: 0.25rem;
+  }
+  .steps li + li {
+    margin-top: 0.625rem;
+  }
+  .shot {
+    margin: 2rem auto;
+    max-width: 560px;
+  }
+  .shot img {
+    width: 100%;
+    border-radius: var(--radius);
+    border: 1px solid var(--line);
+  }
+  .shot figcaption {
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--ink-3);
+    text-align: center;
+  }
+  .callout {
+    padding: 1rem 1.25rem;
+    border-left: 4px solid var(--accent);
+    border-radius: var(--radius-sm);
+    background: color-mix(in srgb, var(--accent) 7%, var(--bg));
+  }
+  .callout p {
+    margin: 0;
+  }
+  .callout-title {
+    font-weight: 700;
+    margin-bottom: 0.25rem !important;
+  }
+  .feedback {
+    margin-top: 3rem;
+    padding: 1.5rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+  .fb-ask {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .fb-ask[hidden] {
+    display: none;
+  }
+  .fb-q,
+  .fb-thanks {
+    margin: 0;
+    font-weight: 600;
+  }
+  .fb-ask .btn {
+    min-width: 80px;
+    background: var(--bg);
+  }
+  .fb-ask .btn[aria-pressed="true"] {
+    border-color: var(--ink);
+  }
+  .fb-reasons {
+    margin-top: 1.25rem;
+  }
+  fieldset {
+    margin: 0 0 1rem;
+    padding: 0;
+    border: 0;
+    display: grid;
+    gap: 0.5rem;
+  }
+  legend {
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+  }
+  fieldset label {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    min-height: 40px;
+    padding: 0 0.875rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    background: var(--bg);
+    cursor: pointer;
+  }
+  .kb-side {
+    position: sticky;
+    top: 1.5rem;
+    font-size: 0.9375rem;
+  }
+  .side-title {
+    margin-bottom: 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .kb-side ul {
+    list-style: none;
+    margin: 0 0 2rem;
+    padding: 0;
+  }
+  .kb-side li a {
+    display: block;
+    padding: 0.625rem 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--accent);
+    text-decoration: none;
+  }
+  .side-help {
+    padding: 1.25rem;
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+  .side-help p {
+    margin-bottom: 0.5rem;
+  }
+  @media (max-width: 900px) {
+    .kb-layout {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .kb-side {
+      position: static;
+    }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    var root = document.getElementById("kb-article");
+    if (!root) return;
+    var ask = root.querySelector(".fb-ask");
+    var thanks = root.querySelector(".fb-thanks");
+    var form = root.querySelector(".fb-reasons");
+    var no = root.querySelector('[data-answer="no"]');
+    root.querySelector('[data-answer="yes"]').addEventListener("click", function () {
+      ask.hidden = true;
+      form.hidden = true;
+      thanks.hidden = false;
+    });
+    no.addEventListener("click", function () {
+      no.setAttribute("aria-pressed", "true");
+      no.setAttribute("aria-expanded", "true");
+      form.hidden = false;
+    });
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      form.hidden = true;
+      ask.hidden = true;
+      thanks.textContent = "Thanks — we'll use this to improve the article.";
+      thanks.hidden = false;
+    });
+  })();
+</script>

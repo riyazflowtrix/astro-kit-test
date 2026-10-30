@@ -1,0 +1,233 @@
+<header id="nav-announcement-utility" class="nau">
+  <!-- kit: nav-announcement-utility -->
+  <div class="nau__announcement" data-tone="brand">
+    <div class="container nau__announcement-inner">
+      <p>Free shipping over $80 · Lifetime warranty on all cast iron</p>
+      <a href="/shipping">Shipping &amp; returns</a>
+    </div>
+  </div>
+
+  <div class="nau__utility">
+    <div class="container">
+      <ul class="nau__utility-links">
+        <li>
+          <a href="/orders/track">
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M3 6h11v10H3zM14 10h4l3 3v3h-7M7 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM17 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></svg>
+            Track an order
+          </a>
+        </li>
+        <li>
+          <a href="/help">
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6M12 17h.01"/></svg>
+            Help centre
+          </a>
+        </li>
+        <li>
+          <a href="/retailers">
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>
+            Find a retailer
+          </a>
+        </li>
+        <li>
+          <a href="/wholesale">
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M3 21h18M5 21V10M19 21V10M3 10l2-6h14l2 6zM9 21v-6h6v6"/></svg>
+            Wholesale
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="nau__main">
+    <div class="container nau__main-inner">
+      <a class="nau__logo" href="/">
+        <img src="https://picsum.photos/seed/caldera-mark/240/64" alt="Caldera" width="240" height="64" />
+        <span>Caldera</span>
+      </a>
+      <button class="nau__toggle" type="button" aria-expanded="false" aria-controls="nav-announcement-utility-nav">
+        <span class="visually-hidden">Menu</span>
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+      <nav class="nau__nav" id="nav-announcement-utility-nav" aria-label="Main">
+        <ul>
+          <li><a href="/products">Shop</a></li>
+          <li><a href="/shop/bundles">Bundles</a></li>
+          <li><a href="/recipes">Recipes</a></li>
+          <li><a href="/journal">Journal</a></li>
+          <li><a href="/about">About</a></li>
+        </ul>
+        <a class="btn btn-primary" href="/products/cable-fold">Shop the Fold</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<script is:inline>
+  (function () {
+    var root = document.getElementById("nav-announcement-utility");
+    if (!root) return;
+    var toggle = root.querySelector(".nau__toggle");
+    var nav = root.querySelector(".nau__nav");
+    toggle.addEventListener("click", function () {
+      var open = toggle.getAttribute("aria-expanded") !== "true";
+      toggle.setAttribute("aria-expanded", String(open));
+      nav.classList.toggle("is-open", open);
+    });
+  })();
+</script>
+
+<style>
+  .nau {
+    position: relative;
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .nau__announcement {
+    background: var(--brand);
+    color: var(--brand-ink);
+    font-size: 0.875rem;
+  }
+
+  .nau__announcement-inner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.25rem 0.75rem;
+    padding-block: 0.5rem;
+    text-align: center;
+  }
+
+  .nau__announcement p {
+    margin: 0;
+  }
+
+  .nau__announcement a {
+    font-weight: 600;
+    text-underline-offset: 3px;
+  }
+
+  .nau__utility {
+    background: var(--surface);
+    border-bottom: 1px solid var(--line);
+    font-size: 0.8125rem;
+  }
+
+  .nau__utility-links {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.25rem;
+    margin: 0;
+    padding: 0.4rem 0;
+    list-style: none;
+  }
+
+  .nau__utility-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    color: var(--ink-2);
+    text-decoration: none;
+  }
+
+  .nau__utility-links a:hover {
+    color: var(--ink);
+  }
+
+  .nau__main-inner {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    min-height: 72px;
+  }
+
+  .nau__logo {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-weight: 700;
+    font-size: 1.125rem;
+    text-decoration: none;
+  }
+
+  .nau__logo img {
+    width: auto;
+    height: 32px;
+    border-radius: 4px;
+  }
+
+  .nau__nav {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-left: auto;
+  }
+
+  .nau__nav ul {
+    display: flex;
+    gap: 1.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .nau__nav ul a {
+    text-decoration: none;
+    font-weight: 500;
+    color: var(--ink-2);
+  }
+
+  .nau__nav ul a:hover {
+    color: var(--ink);
+  }
+
+  .nau__toggle {
+    display: none;
+    margin-left: auto;
+    width: 44px;
+    height: 44px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    background: var(--bg);
+    cursor: pointer;
+  }
+
+  @media (max-width: 860px) {
+    .nau__utility-links {
+      justify-content: center;
+    }
+
+    .nau__toggle {
+      display: inline-flex;
+    }
+
+    .nau__nav {
+      display: none;
+      flex-basis: 100%;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 1rem;
+      padding-bottom: 1.25rem;
+    }
+
+    .nau__nav.is-open {
+      display: flex;
+    }
+
+    .nau__nav ul {
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .nau__nav ul a {
+      display: block;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--line);
+    }
+  }
+</style>

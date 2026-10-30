@@ -1,0 +1,221 @@
+---
+// Image with hotspots (variant: sidebar, numbered pins with pulse) — Caldera camp kitchen.
+---
+
+<section id="image-hotspots" class="section hotspots" data-variant="sidebar">
+  <!-- kit: image-hotspots -->
+  <div class="container">
+    <header class="section-head">
+      <span class="eyebrow">Shop the camp kitchen</span>
+      <h2>Everything on the tailgate, ready by sundown.</h2>
+    </header>
+
+    <div class="layout">
+      <div class="scene">
+        <img src="https://picsum.photos/seed/caldera-camp-kitchen/2000/1250" alt="A tailgate camp kitchen with a Dutch oven, folding grill, skillet and kettle" width="4000" height="2500" loading="lazy" style="object-position: 50% 55%" />
+        <button type="button" class="pin" style="left: 24%; top: 58%" aria-controls="hs-item-1" aria-expanded="false" aria-label="1: Ember Dutch Oven">1</button>
+        <button type="button" class="pin" style="left: 52.5%; top: 66%" aria-controls="hs-item-2" aria-expanded="false" aria-label="2: Cable Fold Grill">2</button>
+        <button type="button" class="pin" style="left: 71%; top: 49%" aria-controls="hs-item-3" aria-expanded="false" aria-label="3: Ridge Skillet 10 inch">3</button>
+        <button type="button" class="pin" style="left: 88%; top: 30%" aria-controls="hs-item-4" aria-expanded="false" aria-label="4: Why the tailgate height matters">4</button>
+      </div>
+
+      <ol class="items">
+        <li id="hs-item-1" class="item">
+          <span class="num" aria-hidden="true">1</span>
+          <img src="https://picsum.photos/seed/caldera-ember-dutch-oven/240/240" alt="Ember Dutch Oven" width="240" height="240" loading="lazy" />
+          <div>
+            <h3><a href="/products/ember-dutch-oven">Ember Dutch Oven</a></h3>
+            <p class="price">$189</p>
+          </div>
+        </li>
+        <li id="hs-item-2" class="item">
+          <span class="num" aria-hidden="true">2</span>
+          <img src="https://picsum.photos/seed/caldera-cable-fold-grill/240/240" alt="Cable Fold Grill" width="240" height="240" loading="lazy" />
+          <div>
+            <h3><a href="/products/cable-fold-grill">Cable Fold Grill</a></h3>
+            <p class="price">$149</p>
+          </div>
+        </li>
+        <li id="hs-item-3" class="item">
+          <span class="num" aria-hidden="true">3</span>
+          <img src="https://picsum.photos/seed/caldera-ridge-skillet/240/240" alt="Ridge Skillet 10 inch" width="240" height="240" loading="lazy" />
+          <div>
+            <h3><a href="/products/ridge-skillet">Ridge Skillet 10 inch</a></h3>
+            <p class="price">$95</p>
+          </div>
+        </li>
+        <li id="hs-item-4" class="item item--note">
+          <span class="num" aria-hidden="true">4</span>
+          <div>
+            <h3>Cook at hip height</h3>
+            <p>A tailgate puts the grate at 34 inches — the same as a kitchen counter. Your back will thank you on day three.</p>
+            <a class="note-link" href="/journal/tailgate-kitchen">Set up a tailgate kitchen →</a>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<style>
+  .layout {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    gap: 2rem;
+    align-items: start;
+  }
+  .scene {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius);
+    background: var(--surface-2);
+  }
+  .scene img {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+  }
+  .pin {
+    position: absolute;
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    transform: translate(-50%, -50%);
+    border: 2px solid #fff;
+    border-radius: 50%;
+    background: var(--brand);
+    color: #fff;
+    font: inherit;
+    font-size: 0.875rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgb(0 0 0 / 0.3);
+  }
+  .pin::after {
+    content: "";
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    border: 2px solid var(--brand);
+    animation: pulse 2s ease-out infinite;
+  }
+  .pin[aria-expanded="true"] {
+    background: var(--ink);
+  }
+  @keyframes pulse {
+    from { opacity: 0.8; transform: scale(0.8); }
+    to { opacity: 0; transform: scale(1.6); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .pin::after { animation: none; }
+  }
+  .items {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.75rem;
+  }
+  .item {
+    position: relative;
+    display: flex;
+    gap: 0.875rem;
+    align-items: center;
+    padding: 0.75rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--bg);
+    transition: border-color 150ms ease, box-shadow 150ms ease;
+  }
+  .item.is-active {
+    border-color: var(--brand);
+    box-shadow: var(--shadow);
+  }
+  .item--note {
+    align-items: flex-start;
+    background: var(--surface);
+  }
+  .num {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--brand);
+    color: #fff;
+    font-size: 0.8125rem;
+    font-weight: 700;
+  }
+  .item img {
+    flex: none;
+    width: 64px;
+    height: 64px;
+    border-radius: var(--radius-sm);
+    object-fit: cover;
+  }
+  .item h3 {
+    margin: 0 0 0.125rem;
+    font-size: 1rem;
+  }
+  .item h3 a {
+    text-decoration: none;
+  }
+  .item h3 a:hover {
+    text-decoration: underline;
+  }
+  .item p {
+    margin: 0;
+    font-size: 0.9375rem;
+    color: var(--ink-2);
+  }
+  .price {
+    font-weight: 600;
+  }
+  .note-link {
+    display: inline-block;
+    margin-top: 0.5rem;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--brand);
+    text-decoration: none;
+  }
+  @media (max-width: 860px) {
+    .layout {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 480px) {
+    .pin {
+      width: 30px;
+      height: 30px;
+    }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    var root = document.getElementById("image-hotspots");
+    if (!root) return;
+    var pins = Array.prototype.slice.call(root.querySelectorAll(".pin"));
+    pins.forEach(function (pin) {
+      pin.addEventListener("click", function () {
+        var open = pin.getAttribute("aria-expanded") !== "true";
+        pins.forEach(function (p) {
+          p.setAttribute("aria-expanded", "false");
+          var it = document.getElementById(p.getAttribute("aria-controls"));
+          if (it) it.classList.remove("is-active");
+        });
+        if (open) {
+          pin.setAttribute("aria-expanded", "true");
+          var item = document.getElementById(pin.getAttribute("aria-controls"));
+          if (item) {
+            item.classList.add("is-active");
+            if (window.matchMedia("(max-width: 860px)").matches) item.scrollIntoView({ behavior: "smooth", block: "nearest" });
+          }
+        }
+      });
+    });
+  })();
+</script>

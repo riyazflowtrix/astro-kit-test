@@ -1,0 +1,6919 @@
+[
+ {
+  "id": "page-builder-six-deep",
+  "name": "Page builder, six levels deep",
+  "category": "Advanced patterns",
+  "kind": "block",
+  "brand": "Caldera",
+  "previewLayout": "tabs",
+  "blocks": [
+   {
+    "name": "layoutColumns",
+    "title": "Columns",
+    "kind": "block",
+    "icon": "columns-3",
+    "category": "Layout",
+    "description": "Two to four columns, each holding its own blocks",
+    "variants": [
+     {
+      "id": "even",
+      "name": "Even"
+     },
+     {
+      "id": "wide-left",
+      "name": "Wide left",
+      "description": "2/3 + 1/3"
+     },
+     {
+      "id": "wide-right",
+      "name": "Wide right",
+      "description": "1/3 + 2/3"
+     }
+    ],
+    "preview": {
+     "title": "label",
+     "fallback": "Untitled columns"
+    },
+    "fields": [
+     {
+      "name": "label",
+      "title": "Name",
+      "type": "string",
+      "validation": {
+       "max": 40
+      },
+      "description": "Only editors see this."
+     },
+     {
+      "name": "columns",
+      "title": "Columns",
+      "type": "array",
+      "itemNoun": "column",
+      "validation": {
+       "min": 1,
+       "max": 4
+      },
+      "of": [
+       {
+        "name": "column",
+        "title": "Column",
+        "type": "object",
+        "icon": "layout-columns",
+        "preview": {
+         "title": "label",
+         "fallback": "Untitled column"
+        },
+        "fields": [
+         {
+          "name": "label",
+          "title": "Name",
+          "type": "string",
+          "validation": {
+           "max": 32
+          },
+          "description": "Only editors see this."
+         },
+         {
+          "name": "alignment",
+          "title": "Alignment",
+          "type": "select",
+          "layout": "segmented",
+          "initialValue": "top",
+          "options": [
+           {
+            "value": "top",
+            "label": "Top"
+           },
+           {
+            "value": "center",
+            "label": "Middle"
+           },
+           {
+            "value": "bottom",
+            "label": "Bottom"
+           }
+          ]
+         },
+         {
+          "name": "content",
+          "title": "Content",
+          "type": "slot",
+          "validation": {
+           "max": 6
+          },
+          "of": {
+           "type": "block",
+           "allow": [
+            "accordionBlock",
+            "textBlock",
+            "imageBlock",
+            "statBlock",
+            "featureBlock",
+            "quoteBlock",
+            "ctaCard",
+            "videoBlock"
+           ]
+          }
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "name": "gap",
+      "title": "Gap",
+      "type": "select",
+      "layout": "segmented",
+      "initialValue": "md",
+      "options": [
+       {
+        "value": "sm",
+        "label": "S"
+       },
+       {
+        "value": "md",
+        "label": "M"
+       },
+       {
+        "value": "lg",
+        "label": "L"
+       }
+      ]
+     },
+     {
+      "name": "useTabletStack",
+      "title": "Stack on tablets",
+      "type": "boolean",
+      "description": "Columns stack below 1024px instead of 768px."
+     }
+    ]
+   },
+   {
+    "name": "accordionBlock",
+    "title": "Accordion",
+    "kind": "block",
+    "icon": "layout-rows",
+    "category": "Layout",
+    "description": "Expandable items, each opening to a card",
+    "variants": [
+     {
+      "id": "lined",
+      "name": "Lined"
+     },
+     {
+      "id": "boxed",
+      "name": "Boxed"
+     }
+    ],
+    "preview": {
+     "title": "heading",
+     "fallback": "Untitled accordion"
+    },
+    "fields": [
+     {
+      "name": "heading",
+      "title": "Heading",
+      "type": "string",
+      "validation": {
+       "recommendedMax": 60
+      }
+     },
+     {
+      "name": "allowMultiple",
+      "title": "Allow several open at once",
+      "type": "boolean"
+     },
+     {
+      "name": "items",
+      "title": "Items",
+      "type": "array",
+      "itemNoun": "item",
+      "validation": {
+       "min": 1,
+       "max": 10
+      },
+      "of": [
+       {
+        "name": "accordionItem",
+        "title": "Item",
+        "type": "object",
+        "icon": "chevron-down",
+        "preview": {
+         "title": "title",
+         "subtitle": "summary",
+         "fallback": "Untitled item"
+        },
+        "fields": [
+         {
+          "name": "title",
+          "title": "Item title",
+          "type": "string",
+          "validation": {
+           "required": true,
+           "max": 60
+          }
+         },
+         {
+          "name": "summary",
+          "title": "Summary",
+          "type": "string",
+          "validation": {
+           "max": 90
+          }
+         },
+         {
+          "name": "icon",
+          "title": "Icon",
+          "type": "icon"
+         },
+         {
+          "name": "isOpen",
+          "title": "Open by default",
+          "type": "boolean"
+         },
+         {
+          "name": "card",
+          "title": "Card",
+          "type": "object",
+          "icon": "layout-cards",
+          "openMode": "drill",
+          "fields": [
+           {
+            "name": "image",
+            "title": "Image",
+            "type": "image"
+           },
+           {
+            "name": "eyebrow",
+            "title": "Eyebrow",
+            "type": "string",
+            "validation": {
+             "max": 24
+            }
+           },
+           {
+            "name": "title",
+            "title": "Card title",
+            "type": "string",
+            "validation": {
+             "required": true,
+             "recommendedMax": 48
+            },
+            "ai": true
+           },
+           {
+            "name": "body",
+            "title": "Body",
+            "type": "text",
+            "rows": 3,
+            "validation": {
+             "recommendedMax": 220
+            },
+            "ai": true
+           },
+           {
+            "name": "button",
+            "title": "Button",
+            "type": "button"
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "initialValue": {
+     "heading": "",
+     "allowMultiple": false,
+     "items": []
+    }
+   }
+  ],
+  "proves": "Guide \u203a Tab \u203a Columns \u203a Column \u203a Accordion \u203a Item \u203a Card \u203a Button \u2014 slots inside arrays inside slots \u00b7 breadcrumb folding + Pathway",
+  "schema": {
+   "name": "guideSection",
+   "title": "Guide",
+   "kind": "block",
+   "icon": "book-2",
+   "category": "Long-form & docs",
+   "description": "Tabbed guide: each tab holds columns, accordions and cards",
+   "variants": [
+    {
+     "id": "underline",
+     "name": "Underline tabs"
+    },
+    {
+     "id": "side",
+     "name": "Side tabs"
+    }
+   ],
+   "preview": {
+    "title": "heading",
+    "subtitle": "eyebrow"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "design",
+     "title": "Design"
+    }
+   ],
+   "fields": [
+    {
+     "name": "eyebrow",
+     "title": "Eyebrow",
+     "type": "string",
+     "group": "content",
+     "validation": {
+      "max": 32
+     }
+    },
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "group": "content",
+     "validation": {
+      "required": true,
+      "recommendedMax": 60
+     },
+     "ai": true
+    },
+    {
+     "name": "intro",
+     "title": "Intro",
+     "type": "text",
+     "rows": 2,
+     "group": "content",
+     "validation": {
+      "recommendedMax": 180
+     }
+    },
+    {
+     "name": "tabs",
+     "title": "Tabs",
+     "type": "array",
+     "group": "content",
+     "itemNoun": "tab",
+     "validation": {
+      "min": 2,
+      "max": 6
+     },
+     "of": [
+      {
+       "name": "guideTab",
+       "title": "Tab",
+       "type": "object",
+       "icon": "layout-list",
+       "preview": {
+        "title": "label",
+        "fallback": "Untitled tab"
+       },
+       "fields": [
+        {
+         "name": "label",
+         "title": "Tab label",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 24
+         }
+        },
+        {
+         "name": "icon",
+         "title": "Icon",
+         "type": "icon"
+        },
+        {
+         "name": "content",
+         "title": "Content",
+         "type": "slot",
+         "validation": {
+          "min": 1,
+          "max": 6
+         },
+         "of": {
+          "type": "block",
+          "allow": [
+           "layoutColumns",
+           "accordionBlock",
+           "textBlock",
+           "imageBlock",
+           "videoBlock",
+           "ctaCard"
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "theme",
+     "title": "Theme",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "light",
+     "options": [
+      {
+       "value": "light",
+       "label": "Light"
+      },
+      {
+       "value": "warm",
+       "label": "Warm"
+      },
+      {
+       "value": "dark",
+       "label": "Dark"
+      }
+     ]
+    },
+    {
+     "name": "anchor",
+     "title": "Anchor",
+     "type": "string",
+     "group": "design",
+     "advanced": true,
+     "validation": {
+      "pattern": "^[a-z][a-z0-9-]*$",
+      "patternMessage": "Use lowercase letters, numbers and hyphens, starting with a letter, like grate-xl."
+     }
+    }
+   ]
+  },
+  "value": {
+   "_variant": "underline",
+   "eyebrow": "Care guide",
+   "heading": "Cast iron, start to finish.",
+   "intro": "Season it once over fire, cook in it every day, bring it back from anything. Everything we teach in the workshop, in three tabs.",
+   "tabs": [
+    {
+     "_key": "tb1",
+     "label": "Seasoning",
+     "icon": "flame",
+     "content": [
+      {
+       "_key": "cl1",
+       "_type": "layoutColumns",
+       "_variant": "wide-left",
+       "label": "Steps and kit",
+       "gap": "lg",
+       "columns": [
+        {
+         "_key": "co1",
+         "label": "Steps",
+         "alignment": "top",
+         "content": [
+          {
+           "_key": "ac1",
+           "_type": "accordionBlock",
+           "_variant": "lined",
+           "heading": "Season over fire in four steps",
+           "allowMultiple": false,
+           "items": [
+            {
+             "_key": "it1",
+             "title": "Scrub it back",
+             "summary": "Hot water and a chainmail scrubber. No soap needed.",
+             "icon": "droplet",
+             "isOpen": true,
+             "card": {
+              "image": {
+               "url": "https://picsum.photos/seed/chainmail-scrub/1600/1000",
+               "alt": "A chainmail scrubber working over a wet skillet",
+               "name": "chainmail-scrub.jpg",
+               "width": 3200,
+               "height": 2000
+              },
+              "eyebrow": "Step 1",
+              "title": "Start with a bare, dry pan",
+              "body": "Scrub under hot water until the surface feels even, then dry it over the flame for two minutes so no water hides in the pores.",
+              "button": {
+               "label": "Shop the scrubber",
+               "href": "/products/chainmail-scrubber",
+               "type": "page",
+               "title": "Chainmail scrubber",
+               "style": "link",
+               "arrow": true
+              }
+             }
+            },
+            {
+             "_key": "it2",
+             "title": "Oil, then wipe it off",
+             "summary": "The thinnest coat of flaxseed oil you can manage.",
+             "icon": "droplet-half",
+             "card": {
+              "image": {
+               "url": "https://picsum.photos/seed/flax-wipe/1600/1000",
+               "alt": "A lint-free cloth wiping oil from a warm skillet",
+               "name": "flax-wipe.jpg",
+               "width": 3200,
+               "height": 2000
+              },
+              "eyebrow": "Step 2",
+              "title": "Thin coats, every time",
+              "body": "Rub in half a teaspoon, then wipe as if you made a mistake. Thick oil turns sticky instead of hard.",
+              "button": {
+               "label": "Why flaxseed",
+               "href": "/journal/seasoning-cast-iron-open-fire",
+               "type": "page",
+               "title": "Seasoning cast iron over an open fire",
+               "style": "link",
+               "arrow": true
+              }
+             }
+            },
+            {
+             "_key": "it3",
+             "title": "Heat it upside down",
+             "summary": "45 minutes over medium coals.",
+             "icon": "campfire",
+             "card": {
+              "image": {
+               "url": "https://picsum.photos/seed/upside-down-coals/1600/1000",
+               "alt": "A skillet upside down on the Cable Fold grate above glowing coals",
+               "name": "upside-down-coals.jpg",
+               "width": 3200,
+               "height": 2000
+              },
+              "eyebrow": "Step 3",
+              "title": "Let the fire do the work",
+              "body": "Set the pan face down on the grate over medium coals. Smoke means it's working; keep going until it stops, about 45 minutes.",
+              "button": {
+               "label": "Shop the Cable Fold",
+               "href": "/products/cable-fold",
+               "type": "page",
+               "title": "Cable Fold Grill",
+               "style": "primary",
+               "arrow": true
+              }
+             }
+            },
+            {
+             "_key": "it4",
+             "title": "Repeat three times",
+             "summary": "Then fry eggs for a week.",
+             "icon": "repeat",
+             "card": {
+              "eyebrow": "Step 4",
+              "title": "Three coats, then cook",
+              "body": "Three rounds builds a surface that releases an egg on the first try. Daily cooking does the rest.",
+              "button": {
+               "label": "Watch the full method",
+               "href": "/journal/seasoning-cast-iron-open-fire#film",
+               "type": "page",
+               "style": "outline",
+               "arrow": false
+              }
+             }
+            }
+           ]
+          }
+         ]
+        },
+        {
+         "_key": "co2",
+         "label": "Kit",
+         "alignment": "top",
+         "content": [
+          {
+           "_key": "im1",
+           "_type": "imageBlock",
+           "_variant": "cover",
+           "image": {
+            "url": "https://picsum.photos/seed/seasoning-kit/900/1100",
+            "alt": "Flaxseed oil, a cloth and a scrubber laid out on a wooden board",
+            "name": "seasoning-kit.jpg",
+            "width": 1800,
+            "height": 2200
+           },
+           "caption": "The seasoning kit, $24"
+          },
+          {
+           "_key": "ct1",
+           "_type": "ctaCard",
+           "_variant": "solid",
+           "heading": "Everything for step one",
+           "body": "Oil, cloth and a scrubber in one tin.",
+           "button": {
+            "label": "Shop the kit",
+            "href": "/products/seasoning-kit",
+            "type": "page",
+            "title": "Seasoning kit",
+            "style": "primary",
+            "arrow": true
+           },
+           "tone": "#F6F1EA"
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "_key": "tx1",
+       "_type": "textBlock",
+       "heading": "Already seasoned?",
+       "body": "<p>Every Caldera pan ships with three coats. You can skip straight to the Cooking tab.</p>"
+      }
+     ]
+    },
+    {
+     "_key": "tb2",
+     "label": "Cooking",
+     "icon": "chef-hat",
+     "content": [
+      {
+       "_key": "cl2",
+       "_type": "layoutColumns",
+       "_variant": "even",
+       "label": "First week",
+       "gap": "md",
+       "columns": [
+        {
+         "_key": "co3",
+         "label": "First cooks",
+         "content": [
+          {
+           "_key": "ac2",
+           "_type": "accordionBlock",
+           "_variant": "boxed",
+           "heading": "Your first week",
+           "allowMultiple": true,
+           "items": [
+            {
+             "_key": "it5",
+             "title": "Day 1: fried eggs",
+             "icon": "egg",
+             "card": {
+              "title": "Butter, medium heat, patience",
+              "body": "Preheat for five minutes. If the butter browns at once, it's too hot.",
+              "button": {
+               "label": "Get the recipe",
+               "href": "/recipes/campfire-eggs",
+               "type": "page",
+               "style": "link",
+               "arrow": true
+              }
+             }
+            },
+            {
+             "_key": "it6",
+             "title": "Day 3: smash burgers",
+             "icon": "meat",
+             "card": {
+              "title": "Ripping hot, no oil",
+              "body": "The fat renders and seasons the pan for you.",
+              "button": {
+               "label": "Get the recipe",
+               "href": "/recipes/smash-burgers",
+               "type": "page",
+               "style": "link",
+               "arrow": true
+              }
+             }
+            }
+           ]
+          }
+         ]
+        },
+        {
+         "_key": "co4",
+         "label": "Proof",
+         "alignment": "center",
+         "content": [
+          {
+           "_key": "st1",
+           "_type": "statBlock",
+           "value": "900\u00b0F",
+           "label": "Safe up to",
+           "icon": "flame"
+          },
+          {
+           "_key": "qt1",
+           "_type": "quoteBlock",
+           "quote": "By day five my eggs slid like they were on Teflon.",
+           "author": "Maya Reyes",
+           "role": "Backcountry guide, Montana",
+           "rating": 5
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "_key": "tb3",
+     "label": "Restoring",
+     "icon": "tool",
+     "content": [
+      {
+       "_key": "vd1",
+       "_type": "videoBlock",
+       "title": "Bringing back a rusted skillet",
+       "video": {
+        "url": "https://www.youtube.com/watch?v=aqz-KE-bpKQ"
+       },
+       "poster": {
+        "url": "https://picsum.photos/seed/rust-restore/1600/1000",
+        "alt": "A rusted skillet beside the same skillet restored",
+        "name": "rust-restore.jpg",
+        "width": 3200,
+        "height": 2000
+       },
+       "autoplay": false
+      },
+      {
+       "_key": "ac3",
+       "_type": "accordionBlock",
+       "_variant": "lined",
+       "heading": "Fix it yourself",
+       "items": [
+        {
+         "_key": "it7",
+         "title": "Orange rust spots",
+         "icon": "alert-triangle",
+         "card": {
+          "title": "Steel wool, then season",
+          "body": "Scrub to grey metal, rinse, dry over the fire and give it one coat.",
+          "button": {
+           "label": "Care kit",
+           "href": "/products/seasoning-kit",
+           "type": "page",
+           "style": "link",
+           "arrow": true
+          }
+         }
+        },
+        {
+         "_key": "it8",
+         "title": "Sticky surface",
+         "icon": "droplet",
+         "card": {
+          "title": "Too much oil",
+          "body": "Bake it off: 45 minutes upside down over high coals, then one thin coat."
+         }
+        },
+        {
+         "_key": "it9",
+         "title": "A crack",
+         "icon": "bolt",
+         "card": {
+          "title": "That's on us",
+          "body": "Cracks are covered for life. Send a photo and we'll ship a new one.",
+          "button": {
+           "label": "Start a warranty claim",
+           "href": "/warranty",
+           "type": "page",
+           "title": "Warranty",
+           "style": "primary",
+           "arrow": true
+          }
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "theme": "warm",
+   "anchor": "care-guide"
+  }
+ },
+ {
+  "id": "polymorphic-modules",
+  "name": "Any-block module list",
+  "category": "Advanced patterns",
+  "kind": "entry",
+  "brand": "Atlas Journal",
+  "previewLayout": "article",
+  "proves": "One array mixing 8 item types (_type per item) \u00b7 type picker on add \u00b7 references and media inside items",
+  "schema": {
+   "name": "featureStory",
+   "title": "Feature",
+   "kind": "entry",
+   "icon": "news",
+   "category": "Long-form & docs",
+   "description": "A long read assembled from modules",
+   "preview": {
+    "title": "title",
+    "subtitle": "dek",
+    "media": "coverImage"
+   },
+   "groups": [
+    {
+     "name": "story",
+     "title": "Story",
+     "default": true
+    },
+    {
+     "name": "modules",
+     "title": "Modules",
+     "icon": "stack-2"
+    }
+   ],
+   "fields": [
+    {
+     "name": "title",
+     "title": "Title",
+     "type": "string",
+     "group": "story",
+     "validation": {
+      "required": true,
+      "max": 100,
+      "recommendedMax": 80
+     },
+     "ai": true
+    },
+    {
+     "name": "dek",
+     "title": "Dek",
+     "type": "text",
+     "rows": 2,
+     "group": "story",
+     "validation": {
+      "recommendedMax": 180
+     }
+    },
+    {
+     "name": "coverImage",
+     "title": "Cover image",
+     "type": "image",
+     "group": "story",
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "authors",
+     "title": "Authors",
+     "type": "array",
+     "group": "story",
+     "validation": {
+      "min": 1,
+      "max": 3
+     },
+     "of": [
+      {
+       "name": "writer",
+       "title": "Writer",
+       "type": "reference",
+       "reference": {
+        "to": [
+         "col_authors"
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "name": "modules",
+     "title": "Modules",
+     "type": "array",
+     "group": "modules",
+     "itemNoun": "module",
+     "validation": {
+      "min": 1,
+      "max": 40
+     },
+     "of": [
+      {
+       "name": "textModule",
+       "title": "Text",
+       "type": "object",
+       "icon": "typography",
+       "preview": {
+        "title": "heading",
+        "subtitle": "body",
+        "fallback": "Untitled text"
+       },
+       "fields": [
+        {
+         "name": "heading",
+         "title": "Heading",
+         "type": "string",
+         "validation": {
+          "recommendedMax": 70
+         }
+        },
+        {
+         "name": "body",
+         "title": "Body",
+         "type": "richtext",
+         "validation": {
+          "required": true
+         }
+        }
+       ]
+      },
+      {
+       "name": "imageModule",
+       "title": "Image",
+       "type": "object",
+       "icon": "photo",
+       "preview": {
+        "title": "caption",
+        "media": "image",
+        "fallback": "Untitled image"
+       },
+       "fields": [
+        {
+         "name": "image",
+         "title": "Image",
+         "type": "image",
+         "validation": {
+          "required": true
+         }
+        },
+        {
+         "name": "caption",
+         "title": "Caption",
+         "type": "string",
+         "validation": {
+          "max": 160
+         }
+        },
+        {
+         "name": "credit",
+         "title": "Credit",
+         "type": "string",
+         "validation": {
+          "max": 60
+         }
+        },
+        {
+         "name": "width",
+         "title": "Width",
+         "type": "select",
+         "layout": "segmented",
+         "initialValue": "column",
+         "options": [
+          {
+           "value": "column",
+           "label": "Text column"
+          },
+          {
+           "value": "wide",
+           "label": "Wide"
+          },
+          {
+           "value": "full",
+           "label": "Full bleed"
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "name": "quoteModule",
+       "title": "Pull quote",
+       "type": "object",
+       "icon": "quote",
+       "preview": {
+        "title": "quote",
+        "subtitle": "attribution",
+        "fallback": "Untitled quote"
+       },
+       "fields": [
+        {
+         "name": "quote",
+         "title": "Quote",
+         "type": "text",
+         "rows": 3,
+         "validation": {
+          "required": true,
+          "recommendedMax": 160
+         }
+        },
+        {
+         "name": "attribution",
+         "title": "Who said it",
+         "type": "string",
+         "validation": {
+          "max": 60
+         }
+        },
+        {
+         "name": "role",
+         "title": "Role",
+         "type": "string",
+         "validation": {
+          "max": 60
+         }
+        }
+       ]
+      },
+      {
+       "name": "statModule",
+       "title": "Big number",
+       "type": "object",
+       "icon": "chart-bar",
+       "preview": {
+        "title": "value",
+        "subtitle": "label",
+        "fallback": "Untitled number"
+       },
+       "fields": [
+        {
+         "name": "value",
+         "title": "Number",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 12
+         }
+        },
+        {
+         "name": "label",
+         "title": "What it counts",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 80
+         }
+        },
+        {
+         "name": "source",
+         "title": "Source",
+         "type": "link"
+        }
+       ]
+      },
+      {
+       "name": "videoModule",
+       "title": "Video",
+       "type": "object",
+       "icon": "player-play",
+       "preview": {
+        "title": "title",
+        "media": "poster",
+        "fallback": "Untitled video"
+       },
+       "fields": [
+        {
+         "name": "title",
+         "title": "Title",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 80
+         }
+        },
+        {
+         "name": "video",
+         "title": "Video",
+         "type": "video",
+         "validation": {
+          "required": true
+         }
+        },
+        {
+         "name": "poster",
+         "title": "Poster",
+         "type": "image"
+        },
+        {
+         "name": "transcript",
+         "title": "Transcript",
+         "type": "richtext",
+         "description": "Required for interviews."
+        }
+       ]
+      },
+      {
+       "name": "galleryModule",
+       "title": "Gallery",
+       "type": "object",
+       "icon": "layout-grid",
+       "preview": {
+        "title": "caption",
+        "fallback": "Untitled gallery"
+       },
+       "fields": [
+        {
+         "name": "images",
+         "title": "Images",
+         "type": "array",
+         "arrayLayout": "grid",
+         "validation": {
+          "min": 2,
+          "max": 12
+         },
+         "of": [
+          {
+           "name": "photo",
+           "title": "Photo",
+           "type": "image"
+          }
+         ]
+        },
+        {
+         "name": "layout",
+         "title": "Layout",
+         "type": "select",
+         "layout": "segmented",
+         "initialValue": "grid",
+         "options": [
+          {
+           "value": "grid",
+           "label": "Grid"
+          },
+          {
+           "value": "carousel",
+           "label": "Carousel"
+          }
+         ]
+        },
+        {
+         "name": "caption",
+         "title": "Caption",
+         "type": "string",
+         "validation": {
+          "max": 160
+         }
+        }
+       ]
+      },
+      {
+       "name": "calloutModule",
+       "title": "Callout",
+       "type": "object",
+       "icon": "info-square-rounded",
+       "preview": {
+        "title": "title",
+        "subtitle": "tone",
+        "fallback": "Untitled callout"
+       },
+       "fields": [
+        {
+         "name": "tone",
+         "title": "Tone",
+         "type": "select",
+         "layout": "segmented",
+         "initialValue": "note",
+         "options": [
+          {
+           "value": "note",
+           "label": "Note"
+          },
+          {
+           "value": "correction",
+           "label": "Correction"
+          },
+          {
+           "value": "context",
+           "label": "Context"
+          }
+         ]
+        },
+        {
+         "name": "title",
+         "title": "Title",
+         "type": "string",
+         "validation": {
+          "max": 60
+         }
+        },
+        {
+         "name": "body",
+         "title": "Body",
+         "type": "text",
+         "rows": 3,
+         "validation": {
+          "required": true,
+          "max": 400
+         }
+        }
+       ]
+      },
+      {
+       "name": "relatedModule",
+       "title": "Related story",
+       "type": "object",
+       "icon": "news",
+       "preview": {
+        "title": "label",
+        "fallback": "Untitled related story"
+       },
+       "fields": [
+        {
+         "name": "story",
+         "title": "Story",
+         "type": "reference",
+         "reference": {
+          "to": [
+           "col_journal"
+          ]
+         },
+         "validation": {
+          "required": true
+         }
+        },
+        {
+         "name": "label",
+         "title": "Label",
+         "type": "string",
+         "validation": {
+          "max": 24
+         },
+         "placeholder": "Read next"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  "value": {
+   "title": "The last ferry to Ilha Grande",
+   "dek": "The island banned cars in 1994. Now a single diesel ferry decides who lives there, and the state wants to replace it.",
+   "coverImage": {
+    "url": "https://picsum.photos/seed/ilha-grande-ferry/1600/1000",
+    "alt": "The ferry Atl\u00e2ntica crossing at dusk with the island behind it",
+    "name": "ilha-grande-ferry.jpg",
+    "width": 3200,
+    "height": 2000
+   },
+   "authors": [
+    "en_a2"
+   ],
+   "modules": [
+    {
+     "_key": "m1",
+     "_type": "textModule",
+     "body": "<p>At 5:40 every morning the <em>Atl\u00e2ntica</em> sounds once, and Abra\u00e3o empties toward the pier. Teachers, two nurses, the man who fixes every outboard on the island. Miss it and the next way off is a water taxi that costs half a day's wage.</p>"
+    },
+    {
+     "_key": "m2",
+     "_type": "imageModule",
+     "image": {
+      "url": "https://picsum.photos/seed/abraao-pier/1600/1067",
+      "alt": "Commuters with bicycles waiting on the Abra\u00e3o pier before dawn",
+      "name": "abraao-pier.jpg",
+      "width": 3200,
+      "height": 2134
+     },
+     "caption": "The 5:40 queue at Abra\u00e3o pier.",
+     "credit": "Photo: Luiza Prado for Atlas",
+     "width": "wide"
+    },
+    {
+     "_key": "m3",
+     "_type": "statModule",
+     "value": "1 boat",
+     "label": "carries 3,800 residents and every school run",
+     "source": {
+      "type": "url",
+      "href": "https://www.rj.gov.br/transportes",
+      "newTab": true
+     }
+    },
+    {
+     "_key": "m4",
+     "_type": "quoteModule",
+     "quote": "They call it a tourist boat. For us it's the road.",
+     "attribution": "Dona C\u00e9lia Marques",
+     "role": "Runs the bakery on Rua da Praia"
+    },
+    {
+     "_key": "m5",
+     "_type": "videoModule",
+     "title": "Crossing with the night shift",
+     "video": {
+      "url": "https://vimeo.com/76979871"
+     },
+     "poster": {
+      "url": "https://picsum.photos/seed/night-crossing/1600/1000",
+      "alt": "Deckhand coiling rope under deck lights",
+      "name": "night-crossing.jpg",
+      "width": 3200,
+      "height": 2000
+     },
+     "transcript": "<p><strong>Captain Rui Alves:</strong> Forty-one years on this water. The boat is older than most of my crew.</p>"
+    },
+    {
+     "_key": "m6",
+     "_type": "galleryModule",
+     "images": [
+      {
+       "url": "https://picsum.photos/seed/ilha-trail/1200/1200",
+       "alt": "A trail through Atlantic forest above Abra\u00e3o",
+       "name": "ilha-trail.jpg",
+       "width": 2400,
+       "height": 2400
+      },
+      {
+       "url": "https://picsum.photos/seed/ilha-school/1200/1200",
+       "alt": "Children in uniforms boarding with backpacks",
+       "name": "ilha-school.jpg",
+       "width": 2400,
+       "height": 2400
+      },
+      {
+       "url": "https://picsum.photos/seed/ilha-engine/1200/1200",
+       "alt": "The ferry's diesel engine room",
+       "name": "ilha-engine.jpg",
+       "width": 2400,
+       "height": 2400
+      }
+     ],
+     "layout": "carousel",
+     "caption": "A day of crossings, 5:40 to 21:15."
+    },
+    {
+     "_key": "m7",
+     "_type": "calloutModule",
+     "tone": "correction",
+     "title": "Correction",
+     "body": "An earlier version said the ferry was built in 1971. It was launched in 1979."
+    },
+    {
+     "_key": "m8",
+     "_type": "relatedModule",
+     "story": "en_3",
+     "label": "Read next"
+    }
+   ]
+  }
+ },
+ {
+  "id": "conditional-source-matrix",
+  "name": "Conditional source matrix",
+  "category": "Advanced patterns",
+  "kind": "block",
+  "brand": "Caldera",
+  "previewLayout": "grid-4",
+  "proves": "Manual / collection / query / external branches \u00b7 nested conditionals two levels down \u00b7 empty-state fallback",
+  "schema": {
+   "name": "productFeed",
+   "title": "Product row",
+   "kind": "block",
+   "icon": "shopping-cart",
+   "category": "Commerce",
+   "description": "Products picked by hand, from a collection, by rules or from a recommendations API",
+   "variants": [
+    {
+     "id": "grid",
+     "name": "Grid"
+    },
+    {
+     "id": "carousel",
+     "name": "Carousel"
+    }
+   ],
+   "preview": {
+    "title": "heading",
+    "subtitle": "source"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "source",
+     "title": "Products",
+     "icon": "filter"
+    }
+   ],
+   "fields": [
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "group": "content",
+     "validation": {
+      "required": true,
+      "recommendedMax": 50
+     },
+     "ai": true
+    },
+    {
+     "name": "viewAllButton",
+     "title": "View all button",
+     "type": "button",
+     "group": "content"
+    },
+    {
+     "name": "source",
+     "title": "Products come from",
+     "type": "select",
+     "group": "source",
+     "layout": "cards",
+     "initialValue": "manual",
+     "options": [
+      {
+       "value": "manual",
+       "label": "Picked by hand",
+       "icon": "hand-finger"
+      },
+      {
+       "value": "collection",
+       "label": "A collection",
+       "icon": "folder"
+      },
+      {
+       "value": "query",
+       "label": "Rules",
+       "icon": "filter",
+       "description": "Tags, price, stock"
+      },
+      {
+       "value": "external",
+       "label": "Recommendations",
+       "icon": "sparkles",
+       "description": "Shopify or a custom API"
+      }
+     ]
+    },
+    {
+     "name": "products",
+     "title": "Products",
+     "type": "array",
+     "group": "source",
+     "hidden": {
+      "field": "source",
+      "equals": "manual"
+     },
+     "validation": {
+      "min": 1,
+      "max": 12,
+      "unique": true
+     },
+     "of": [
+      {
+       "name": "product",
+       "title": "Product",
+       "type": "reference",
+       "reference": {
+        "to": [
+         "shopify"
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "name": "collectionHandle",
+     "title": "Shopify collection handle",
+     "type": "string",
+     "group": "source",
+     "hidden": {
+      "field": "source",
+      "equals": "collection"
+     },
+     "validation": {
+      "required": true,
+      "pattern": "^[a-z0-9-]+$",
+      "patternMessage": "Use the handle from the collection's URL, like camp-kitchen."
+     }
+    },
+    {
+     "name": "query",
+     "title": "Rules",
+     "type": "object",
+     "group": "source",
+     "icon": "filter",
+     "openMode": "drill",
+     "hidden": {
+      "field": "source",
+      "equals": "query"
+     },
+     "fields": [
+      {
+       "name": "tags",
+       "title": "Has any of these tags",
+       "type": "tags"
+      },
+      {
+       "name": "price",
+       "title": "Price",
+       "type": "select",
+       "layout": "segmented",
+       "initialValue": "any",
+       "options": [
+        {
+         "value": "any",
+         "label": "Any"
+        },
+        {
+         "value": "under",
+         "label": "Under"
+        },
+        {
+         "value": "between",
+         "label": "Between"
+        }
+       ]
+      },
+      {
+       "name": "minPrice",
+       "title": "From",
+       "type": "number",
+       "hidden": {
+        "field": "price",
+        "equals": "between"
+       },
+       "numeric": {
+        "unit": "USD",
+        "min": 0
+       }
+      },
+      {
+       "name": "maxPrice",
+       "title": "Up to",
+       "type": "number",
+       "hidden": {
+        "field": "price",
+        "equals": [
+         "under",
+         "between"
+        ]
+       },
+       "numeric": {
+        "unit": "USD",
+        "min": 0
+       },
+       "validation": {
+        "required": true
+       }
+      },
+      {
+       "name": "showInStockOnly",
+       "title": "In stock only",
+       "type": "boolean",
+       "initialValue": true
+      },
+      {
+       "name": "sort",
+       "title": "Sort by",
+       "type": "select",
+       "initialValue": "bestselling",
+       "options": [
+        {
+         "value": "bestselling",
+         "label": "Bestselling"
+        },
+        {
+         "value": "newest",
+         "label": "Newest"
+        },
+        {
+         "value": "priceAsc",
+         "label": "Price, low to high"
+        },
+        {
+         "value": "metafield",
+         "label": "A metafield",
+         "description": "e.g. custom.rank"
+        }
+       ]
+      },
+      {
+       "name": "metafield",
+       "title": "Metafield",
+       "type": "string",
+       "hidden": {
+        "field": "sort",
+        "equals": "metafield"
+       },
+       "validation": {
+        "required": true,
+        "pattern": "^[a-z_]+\\.[a-z_]+$",
+        "patternMessage": "Use namespace.key, like custom.rank."
+       }
+      },
+      {
+       "name": "limit",
+       "title": "How many",
+       "type": "number",
+       "numeric": {
+        "min": 1,
+        "max": 24,
+        "step": 1
+       },
+       "initialValue": 8
+      }
+     ]
+    },
+    {
+     "name": "external",
+     "title": "Recommendations",
+     "type": "object",
+     "group": "source",
+     "icon": "sparkles",
+     "openMode": "drill",
+     "hidden": {
+      "field": "source",
+      "equals": "external"
+     },
+     "fields": [
+      {
+       "name": "provider",
+       "title": "Provider",
+       "type": "select",
+       "layout": "segmented",
+       "initialValue": "shopify",
+       "options": [
+        {
+         "value": "shopify",
+         "label": "Shopify"
+        },
+        {
+         "value": "custom",
+         "label": "Custom API"
+        }
+       ]
+      },
+      {
+       "name": "intent",
+       "title": "Recommend",
+       "type": "select",
+       "hidden": {
+        "field": "provider",
+        "equals": "shopify"
+       },
+       "initialValue": "related",
+       "options": [
+        {
+         "value": "related",
+         "label": "Similar products"
+        },
+        {
+         "value": "complementary",
+         "label": "Goes well with"
+        }
+       ]
+      },
+      {
+       "name": "seed",
+       "title": "Based on",
+       "type": "reference",
+       "reference": {
+        "to": [
+         "shopify"
+        ]
+       },
+       "hidden": {
+        "field": "provider",
+        "equals": "shopify"
+       },
+       "description": "Leave empty on product pages to use the page's product."
+      },
+      {
+       "name": "endpoint",
+       "title": "Endpoint",
+       "type": "url",
+       "hidden": {
+        "field": "provider",
+        "equals": "custom"
+       },
+       "validation": {
+        "required": true,
+        "pattern": "^https://",
+        "patternMessage": "Use an https:// address, like https://your-site.com."
+       },
+       "access": {
+        "view": "schema.view",
+        "edit": "schema.manage"
+       }
+      },
+      {
+       "name": "mapping",
+       "title": "Response mapping",
+       "type": "object",
+       "icon": "arrows-exchange",
+       "openMode": "drill",
+       "hidden": {
+        "field": "provider",
+        "equals": "custom"
+       },
+       "access": {
+        "view": "schema.view",
+        "edit": "schema.manage"
+       },
+       "description": "Where each product field lives in the API's JSON.",
+       "fields": [
+        {
+         "name": "list",
+         "title": "List path",
+         "type": "string",
+         "placeholder": "data.items"
+        },
+        {
+         "name": "id",
+         "title": "Shopify id path",
+         "type": "string",
+         "placeholder": "product_gid"
+        },
+        {
+         "name": "reason",
+         "title": "Reason path",
+         "type": "string",
+         "placeholder": "explanation"
+        }
+       ]
+      },
+      {
+       "name": "limit",
+       "title": "How many",
+       "type": "number",
+       "numeric": {
+        "min": 1,
+        "max": 12,
+        "step": 1
+       },
+       "initialValue": 4
+      }
+     ]
+    },
+    {
+     "name": "whenEmpty",
+     "title": "If nothing matches",
+     "type": "select",
+     "group": "source",
+     "layout": "radio",
+     "initialValue": "bestsellers",
+     "options": [
+      {
+       "value": "hide",
+       "label": "Hide the section"
+      },
+      {
+       "value": "bestsellers",
+       "label": "Show bestsellers instead"
+      },
+      {
+       "value": "message",
+       "label": "Show a message"
+      }
+     ]
+    },
+    {
+     "name": "emptyMessage",
+     "title": "Message",
+     "type": "string",
+     "group": "source",
+     "hidden": {
+      "field": "whenEmpty",
+      "equals": "message"
+     },
+     "validation": {
+      "required": true,
+      "max": 90
+     }
+    }
+   ]
+  },
+  "value": {
+   "_variant": "carousel",
+   "heading": "Goes well with your skillet",
+   "viewAllButton": {
+    "label": "Shop camp kitchen",
+    "href": "/collections/camp-kitchen",
+    "type": "page",
+    "style": "link",
+    "arrow": true
+   },
+   "source": "external",
+   "products": [
+    "gid://shopify/Product/8812",
+    "gid://shopify/Product/8814"
+   ],
+   "query": {
+    "tags": [
+     "camp",
+     "cast-iron"
+    ],
+    "price": "under",
+    "maxPrice": 120,
+    "showInStockOnly": true,
+    "sort": "metafield",
+    "metafield": "custom.rank",
+    "limit": 8
+   },
+   "external": {
+    "provider": "custom",
+    "endpoint": "https://recs.caldera.com/v2/complementary",
+    "mapping": {
+     "list": "data.items",
+     "id": "product_gid",
+     "reason": "explanation"
+    },
+    "limit": 4
+   },
+   "whenEmpty": "bestsellers"
+  }
+ },
+ {
+  "id": "global-announcement-overrides",
+  "name": "Global block with per-page overrides",
+  "category": "Advanced patterns",
+  "kind": "global",
+  "brand": "Caldera",
+  "previewLayout": "banner",
+  "proves": "Synced fields from a global \u00b7 locked vs overridable fields \u00b7 instance-only settings \u00b7 override map in the value",
+  "schema": {
+   "name": "announcementBar",
+   "title": "Announcement bar",
+   "kind": "global",
+   "icon": "speakerphone",
+   "category": "Navigation & chrome",
+   "description": "One message across the site. Pages may override the wording, never the legal line or schedule",
+   "variants": [
+    {
+     "id": "solid",
+     "name": "Solid"
+    },
+    {
+     "id": "marquee",
+     "name": "Scrolling"
+    }
+   ],
+   "preview": {
+    "title": "message",
+    "subtitle": "tone"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "global",
+     "title": "Set in the global",
+     "icon": "world"
+    },
+    {
+     "name": "page",
+     "title": "This page",
+     "icon": "file"
+    }
+   ],
+   "fields": [
+    {
+     "name": "message",
+     "title": "Message",
+     "type": "string",
+     "group": "content",
+     "synced": {
+      "from": "Announcement bar"
+     },
+     "validation": {
+      "required": true,
+      "max": 90,
+      "recommendedMax": 70
+     },
+     "ai": true,
+     "localized": true
+    },
+    {
+     "name": "link",
+     "title": "Link",
+     "type": "link",
+     "group": "content",
+     "synced": {
+      "from": "Announcement bar"
+     }
+    },
+    {
+     "name": "tone",
+     "title": "Tone",
+     "type": "select",
+     "group": "content",
+     "layout": "segmented",
+     "synced": {
+      "from": "Announcement bar"
+     },
+     "initialValue": "brand",
+     "options": [
+      {
+       "value": "brand",
+       "label": "Brand"
+      },
+      {
+       "value": "dark",
+       "label": "Dark"
+      },
+      {
+       "value": "warning",
+       "label": "Warning"
+      }
+     ]
+    },
+    {
+     "name": "legal",
+     "title": "Offer terms",
+     "type": "string",
+     "group": "global",
+     "access": {
+      "edit": "schema.manage"
+     },
+     "lockReason": "Set in the global block. Pages can't override offer terms.",
+     "validation": {
+      "max": 120
+     }
+    },
+    {
+     "name": "startsAt",
+     "title": "Show from",
+     "type": "datetime",
+     "group": "global",
+     "access": {
+      "edit": "schema.manage"
+     },
+     "lockReason": "The schedule is the same on every page."
+    },
+    {
+     "name": "endsAt",
+     "title": "Hide after",
+     "type": "datetime",
+     "group": "global",
+     "access": {
+      "edit": "schema.manage"
+     },
+     "lockReason": "The schedule is the same on every page."
+    },
+    {
+     "name": "isDismissible",
+     "title": "Visitors can close it",
+     "type": "boolean",
+     "group": "global",
+     "access": {
+      "edit": "schema.manage"
+     },
+     "lockReason": "Set in the global block.",
+     "description": "Remembers the close for 7 days."
+    },
+    {
+     "name": "visibility",
+     "title": "On this page",
+     "type": "select",
+     "group": "page",
+     "layout": "radio",
+     "initialValue": "show",
+     "description": "This page only. The global keeps showing elsewhere.",
+     "options": [
+      {
+       "value": "show",
+       "label": "Show"
+      },
+      {
+       "value": "hide",
+       "label": "Hide on this page"
+      }
+     ]
+    },
+    {
+     "name": "hideReason",
+     "title": "Why it's hidden",
+     "type": "string",
+     "group": "page",
+     "hidden": {
+      "field": "visibility",
+      "equals": "hide"
+     },
+     "validation": {
+      "required": true,
+      "max": 80
+     },
+     "description": "Only editors see this."
+    }
+   ]
+  },
+  "value": {
+   "_variant": "solid",
+   "_ref": "gb_announcement",
+   "_overrides": {
+    "message": "Cable Fold owners: free shipping on every grate accessory this week."
+   },
+   "message": "Cable Fold owners: free shipping on every grate accessory this week.",
+   "link": {
+    "type": "page",
+    "href": "/products/cable-fold#accessories",
+    "title": "Cable Fold Grill"
+   },
+   "tone": "brand",
+   "legal": "US orders only. Ends Oct 12, 11:59 pm PT.",
+   "startsAt": "2026-10-05T00:00:00-07:00[America/Los_Angeles]",
+   "endsAt": "2026-10-12T23:59:00-07:00[America/Los_Angeles]",
+   "isDismissible": true,
+   "visibility": "show"
+  }
+ },
+ {
+  "id": "localized-section",
+  "name": "Localized section with RTL",
+  "category": "Advanced patterns",
+  "kind": "block",
+  "brand": "Lumen Studio",
+  "previewLayout": "centered",
+  "proves": "Localized fields \u00b7 per-locale and per-field translation status \u00b7 fallback chain \u00b7 Arabic right-to-left sample",
+  "schema": {
+   "name": "studioIntro",
+   "title": "Studio intro",
+   "kind": "block",
+   "icon": "language",
+   "category": "Company & people",
+   "description": "Statement, body and a button, translated per locale",
+   "variants": [
+    {
+     "id": "centered",
+     "name": "Centered"
+    },
+    {
+     "id": "split",
+     "name": "Split with image"
+    }
+   ],
+   "preview": {
+    "title": "heading",
+    "subtitle": "body",
+    "media": "image"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "translations",
+     "title": "Translations",
+     "icon": "language"
+    }
+   ],
+   "fields": [
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "group": "content",
+     "validation": {
+      "required": true,
+      "recommendedMax": 60
+     },
+     "localized": true,
+     "ai": true
+    },
+    {
+     "name": "body",
+     "title": "Body",
+     "type": "text",
+     "rows": 3,
+     "group": "content",
+     "validation": {
+      "recommendedMax": 280
+     },
+     "localized": true,
+     "ai": true
+    },
+    {
+     "name": "button",
+     "title": "Button",
+     "type": "button",
+     "group": "content",
+     "localized": true
+    },
+    {
+     "name": "image",
+     "title": "Image",
+     "type": "image",
+     "group": "content",
+     "description": "Shared by every language. Alt text is translated with the copy."
+    },
+    {
+     "name": "baseLocale",
+     "title": "Written in",
+     "type": "select",
+     "group": "translations",
+     "access": {
+      "edit": "schema.manage"
+     },
+     "lockReason": "The site's default locale.",
+     "initialValue": "en",
+     "options": [
+      {
+       "value": "en",
+       "label": "English"
+      }
+     ]
+    },
+    {
+     "name": "fallback",
+     "title": "When a translation is missing",
+     "type": "select",
+     "group": "translations",
+     "layout": "radio",
+     "initialValue": "chain",
+     "options": [
+      {
+       "value": "base",
+       "label": "Show English"
+      },
+      {
+       "value": "chain",
+       "label": "Try a related locale first",
+       "description": "e.g. pt-BR before English for pt-PT"
+      },
+      {
+       "value": "hide",
+       "label": "Hide the section"
+      }
+     ]
+    },
+    {
+     "name": "translations",
+     "title": "Locales",
+     "type": "array",
+     "group": "translations",
+     "itemNoun": "locale",
+     "validation": {
+      "max": 12
+     },
+     "of": [
+      {
+       "name": "translation",
+       "title": "Locale",
+       "type": "object",
+       "icon": "language",
+       "preview": {
+        "title": "locale",
+        "subtitle": "status",
+        "fallback": "Untitled locale"
+       },
+       "fields": [
+        {
+         "name": "locale",
+         "title": "Locale",
+         "type": "select",
+         "validation": {
+          "required": true,
+          "unique": true
+         },
+         "options": [
+          {
+           "value": "pt-PT",
+           "label": "Portuguese (Portugal)"
+          },
+          {
+           "value": "pt-BR",
+           "label": "Portuguese (Brazil)"
+          },
+          {
+           "value": "ar-AE",
+           "label": "Arabic (UAE)"
+          },
+          {
+           "value": "fr-FR",
+           "label": "French"
+          },
+          {
+           "value": "de-DE",
+           "label": "German"
+          }
+         ]
+        },
+        {
+         "name": "status",
+         "title": "Status",
+         "type": "select",
+         "layout": "segmented",
+         "initialValue": "missing",
+         "options": [
+          {
+           "value": "missing",
+           "label": "Missing"
+          },
+          {
+           "value": "machine",
+           "label": "Machine"
+          },
+          {
+           "value": "review",
+           "label": "In review"
+          },
+          {
+           "value": "approved",
+           "label": "Approved"
+          }
+         ]
+        },
+        {
+         "name": "dir",
+         "title": "Direction",
+         "type": "select",
+         "layout": "segmented",
+         "initialValue": "auto",
+         "options": [
+          {
+           "value": "auto",
+           "label": "Auto"
+          },
+          {
+           "value": "ltr",
+           "label": "Left to right"
+          },
+          {
+           "value": "rtl",
+           "label": "Right to left"
+          }
+         ],
+         "description": "Auto reads it from the language."
+        },
+        {
+         "name": "fallbackTo",
+         "title": "Fall back to",
+         "type": "string",
+         "validation": {
+          "pattern": "^[a-z]{2}(-[A-Z]{2})?$",
+          "patternMessage": "Use a locale code, like pt-BR or en."
+         },
+         "description": "Used when the section's fallback is \"related locale\"."
+        },
+        {
+         "name": "heading",
+         "title": "Heading",
+         "type": "string",
+         "validation": {
+          "recommendedMax": 60
+         }
+        },
+        {
+         "name": "body",
+         "title": "Body",
+         "type": "text",
+         "rows": 3,
+         "validation": {
+          "recommendedMax": 280
+         }
+        },
+        {
+         "name": "buttonLabel",
+         "title": "Button label",
+         "type": "string",
+         "validation": {
+          "max": 32
+         }
+        },
+        {
+         "name": "imageAlt",
+         "title": "Image alt text",
+         "type": "string",
+         "validation": {
+          "max": 140
+         }
+        },
+        {
+         "name": "fields",
+         "title": "Field status",
+         "type": "array",
+         "itemNoun": "field",
+         "openMode": "inline",
+         "of": [
+          {
+           "name": "fieldStatus",
+           "title": "Field",
+           "type": "object",
+           "icon": "check",
+           "preview": {
+            "title": "field",
+            "subtitle": "status",
+            "fallback": "Untitled field"
+           },
+           "fields": [
+            {
+             "name": "field",
+             "title": "Field",
+             "type": "select",
+             "options": [
+              {
+               "value": "heading",
+               "label": "Heading"
+              },
+              {
+               "value": "body",
+               "label": "Body"
+              },
+              {
+               "value": "ctaLabel",
+               "label": "Button label"
+              },
+              {
+               "value": "imageAlt",
+               "label": "Alt text"
+              }
+             ]
+            },
+            {
+             "name": "status",
+             "title": "Status",
+             "type": "select",
+             "options": [
+              {
+               "value": "missing",
+               "label": "Missing"
+              },
+              {
+               "value": "machine",
+               "label": "Machine"
+              },
+              {
+               "value": "review",
+               "label": "In review"
+              },
+              {
+               "value": "approved",
+               "label": "Approved"
+              }
+             ]
+            },
+            {
+             "name": "by",
+             "title": "By",
+             "type": "string",
+             "validation": {
+              "max": 40
+             }
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  "value": {
+   "_variant": "split",
+   "heading": "Buildings that keep the light.",
+   "body": "Lumen Studio designs homes and small civic buildings in Lisbon and Dubai. We start with where the sun falls, then draw the walls.",
+   "button": {
+    "label": "See our projects",
+    "href": "/projects",
+    "type": "page",
+    "title": "Projects",
+    "style": "primary",
+    "arrow": true
+   },
+   "image": {
+    "url": "https://picsum.photos/seed/lumen-courtyard/1600/1000",
+    "alt": "A whitewashed courtyard with a deep shadow line across the floor",
+    "name": "lumen-courtyard.jpg",
+    "width": 3200,
+    "height": 2000
+   },
+   "baseLocale": "en",
+   "fallback": "chain",
+   "translations": [
+    {
+     "_key": "l1",
+     "locale": "pt-PT",
+     "status": "approved",
+     "dir": "ltr",
+     "fallbackTo": "pt-BR",
+     "heading": "Edif\u00edcios que guardam a luz.",
+     "body": "O Lumen Studio projeta casas e pequenos edif\u00edcios p\u00fablicos em Lisboa e no Dubai. Come\u00e7amos por onde o sol bate, depois desenhamos as paredes.",
+     "buttonLabel": "Ver projetos",
+     "imageAlt": "Um p\u00e1tio caiado com uma linha de sombra profunda no ch\u00e3o",
+     "fields": [
+      {
+       "_key": "f1",
+       "field": "heading",
+       "status": "approved",
+       "by": "In\u00eas Carvalho"
+      },
+      {
+       "_key": "f2",
+       "field": "body",
+       "status": "approved",
+       "by": "In\u00eas Carvalho"
+      },
+      {
+       "_key": "f3",
+       "field": "ctaLabel",
+       "status": "approved",
+       "by": "In\u00eas Carvalho"
+      },
+      {
+       "_key": "f4",
+       "field": "imageAlt",
+       "status": "approved",
+       "by": "In\u00eas Carvalho"
+      }
+     ]
+    },
+    {
+     "_key": "l2",
+     "locale": "ar-AE",
+     "status": "review",
+     "dir": "rtl",
+     "heading": "\u0645\u0628\u0627\u0646\u064d \u062a\u062d\u062a\u0641\u0638 \u0628\u0627\u0644\u0636\u0648\u0621.",
+     "body": "\u064a\u0635\u0645\u0651\u0645 \u0627\u0633\u062a\u0648\u062f\u064a\u0648 \u0644\u0648\u0645\u0646 \u0645\u0646\u0627\u0632\u0644 \u0648\u0645\u0628\u0627\u0646\u064a \u0645\u062f\u0646\u064a\u0629 \u0635\u063a\u064a\u0631\u0629 \u0641\u064a \u0644\u0634\u0628\u0648\u0646\u0629 \u0648\u062f\u0628\u064a. \u0646\u0628\u062f\u0623 \u0645\u0646 \u062d\u064a\u062b \u062a\u0633\u0642\u0637 \u0627\u0644\u0634\u0645\u0633\u060c \u062b\u0645 \u0646\u0631\u0633\u0645 \u0627\u0644\u062c\u062f\u0631\u0627\u0646.",
+     "buttonLabel": "\u0634\u0627\u0647\u062f \u0645\u0634\u0627\u0631\u064a\u0639\u0646\u0627",
+     "fields": [
+      {
+       "_key": "f5",
+       "field": "heading",
+       "status": "approved",
+       "by": "Layla Haddad"
+      },
+      {
+       "_key": "f6",
+       "field": "body",
+       "status": "review",
+       "by": "Layla Haddad"
+      },
+      {
+       "_key": "f7",
+       "field": "ctaLabel",
+       "status": "machine"
+      },
+      {
+       "_key": "f8",
+       "field": "imageAlt",
+       "status": "missing"
+      }
+     ]
+    },
+    {
+     "_key": "l3",
+     "locale": "fr-FR",
+     "status": "missing",
+     "dir": "auto"
+    }
+   ]
+  }
+ },
+ {
+  "id": "personalized-hero",
+  "name": "Personalized hero with A/B test",
+  "category": "Advanced patterns",
+  "kind": "block",
+  "brand": "Betterwork",
+  "previewLayout": "split",
+  "proves": "Default fallback \u00b7 audience segments with rules \u00b7 priority \u00b7 experiment variants with split weights \u00b7 5 levels deep",
+  "schema": {
+   "name": "personalizedHero",
+   "title": "Personalized hero",
+   "kind": "block",
+   "icon": "users-group",
+   "category": "Heroes",
+   "description": "One hero, different words for different visitors",
+   "variants": [
+    {
+     "id": "split",
+     "name": "Split"
+    },
+    {
+     "id": "centered",
+     "name": "Centered"
+    }
+   ],
+   "preview": {
+    "title": "default.heading",
+    "subtitle": "experiment.name"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Everyone",
+     "default": true
+    },
+    {
+     "name": "audiences",
+     "title": "Audiences",
+     "icon": "users"
+    },
+    {
+     "name": "experiment",
+     "title": "A/B test",
+     "icon": "flask"
+    }
+   ],
+   "fields": [
+    {
+     "name": "default",
+     "title": "Default",
+     "type": "object",
+     "group": "content",
+     "icon": "user",
+     "openMode": "drill",
+     "description": "Shown when no audience matches.",
+     "fields": [
+      {
+       "name": "eyebrow",
+       "title": "Eyebrow",
+       "type": "string",
+       "validation": {
+        "max": 40
+       }
+      },
+      {
+       "name": "heading",
+       "title": "Heading",
+       "type": "string",
+       "validation": {
+        "required": true,
+        "recommendedMax": 60
+       },
+       "ai": true
+      },
+      {
+       "name": "body",
+       "title": "Body",
+       "type": "text",
+       "rows": 2,
+       "validation": {
+        "recommendedMax": 160
+       },
+       "ai": true
+      },
+      {
+       "name": "primaryButton",
+       "title": "Primary button",
+       "type": "button",
+       "validation": {
+        "required": true
+       }
+      },
+      {
+       "name": "image",
+       "title": "Image",
+       "type": "image",
+       "validation": {
+        "required": true
+       }
+      }
+     ]
+    },
+    {
+     "name": "segments",
+     "title": "Audiences",
+     "type": "array",
+     "group": "audiences",
+     "itemNoun": "audience",
+     "validation": {
+      "max": 6
+     },
+     "description": "Checked top to bottom. The first match wins.",
+     "of": [
+      {
+       "name": "segment",
+       "title": "Audience",
+       "type": "object",
+       "icon": "users",
+       "preview": {
+        "title": "name",
+        "subtitle": "match",
+        "fallback": "Untitled audience"
+       },
+       "fields": [
+        {
+         "name": "name",
+         "title": "Name",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 40
+         }
+        },
+        {
+         "name": "match",
+         "title": "Match",
+         "type": "select",
+         "layout": "segmented",
+         "initialValue": "all",
+         "options": [
+          {
+           "value": "all",
+           "label": "All rules"
+          },
+          {
+           "value": "any",
+           "label": "Any rule"
+          }
+         ]
+        },
+        {
+         "name": "rules",
+         "title": "Rules",
+         "type": "array",
+         "itemNoun": "rule",
+         "validation": {
+          "min": 1,
+          "max": 5
+         },
+         "of": [
+          {
+           "name": "rule",
+           "title": "Rule",
+           "type": "object",
+           "icon": "filter",
+           "preview": {
+            "title": "attribute",
+            "subtitle": "value",
+            "fallback": "Untitled rule"
+           },
+           "fields": [
+            {
+             "name": "attribute",
+             "title": "When",
+             "type": "select",
+             "validation": {
+              "required": true
+             },
+             "options": [
+              {
+               "value": "industry",
+               "label": "Industry (from IP)"
+              },
+              {
+               "value": "companySize",
+               "label": "Company size (from IP)"
+              },
+              {
+               "value": "country",
+               "label": "Country"
+              },
+              {
+               "value": "utmCampaign",
+               "label": "UTM campaign"
+              },
+              {
+               "value": "returning",
+               "label": "Returning visitor"
+              },
+              {
+               "value": "lifecycle",
+               "label": "CRM lifecycle stage"
+              }
+             ]
+            },
+            {
+             "name": "operator",
+             "title": "Condition",
+             "type": "select",
+             "layout": "segmented",
+             "initialValue": "is",
+             "options": [
+              {
+               "value": "is",
+               "label": "Is"
+              },
+              {
+               "value": "isNot",
+               "label": "Is not"
+              },
+              {
+               "value": "contains",
+               "label": "Contains"
+              }
+             ]
+            },
+            {
+             "name": "value",
+             "title": "Value",
+             "type": "string",
+             "validation": {
+              "required": true,
+              "max": 60
+             }
+            }
+           ]
+          }
+         ]
+        },
+        {
+         "name": "content",
+         "title": "What they see",
+         "type": "object",
+         "icon": "layout",
+         "openMode": "drill",
+         "description": "Empty fields fall back to the default.",
+         "fields": [
+          {
+           "name": "heading",
+           "title": "Heading",
+           "type": "string",
+           "validation": {
+            "recommendedMax": 60
+           },
+           "ai": true
+          },
+          {
+           "name": "body",
+           "title": "Body",
+           "type": "text",
+           "rows": 2,
+           "validation": {
+            "recommendedMax": 160
+           }
+          },
+          {
+           "name": "primaryButton",
+           "title": "Primary button",
+           "type": "button"
+          },
+          {
+           "name": "image",
+           "title": "Image",
+           "type": "image"
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "experiment",
+     "title": "A/B test",
+     "type": "object",
+     "group": "experiment",
+     "icon": "flask",
+     "openMode": "drill",
+     "description": "Splits visitors who match no audience between versions.",
+     "fields": [
+      {
+       "name": "isRunning",
+       "title": "Run a test",
+       "type": "boolean"
+      },
+      {
+       "name": "name",
+       "title": "Test name",
+       "type": "string",
+       "hidden": {
+        "field": "isRunning",
+        "equals": true
+       },
+       "validation": {
+        "required": true,
+        "max": 60
+       }
+      },
+      {
+       "name": "goal",
+       "title": "Winning means more",
+       "type": "select",
+       "hidden": {
+        "field": "isRunning",
+        "equals": true
+       },
+       "initialValue": "demo",
+       "options": [
+        {
+         "value": "demo",
+         "label": "Demos booked"
+        },
+        {
+         "value": "signup",
+         "label": "Trials started"
+        },
+        {
+         "value": "click",
+         "label": "Button clicks"
+        }
+       ]
+      },
+      {
+       "name": "variants",
+       "title": "Versions",
+       "type": "array",
+       "itemNoun": "version",
+       "hidden": {
+        "field": "isRunning",
+        "equals": true
+       },
+       "validation": {
+        "min": 2,
+        "max": 4
+       },
+       "description": "Weights must add up to 100%.",
+       "of": [
+        {
+         "name": "testVariant",
+         "title": "Version",
+         "type": "object",
+         "icon": "flask",
+         "preview": {
+          "title": "name",
+          "subtitle": "weight",
+          "fallback": "Untitled version"
+         },
+         "fields": [
+          {
+           "name": "name",
+           "title": "Name",
+           "type": "string",
+           "validation": {
+            "required": true,
+            "max": 24
+           },
+           "placeholder": "B: outcome headline"
+          },
+          {
+           "name": "weight",
+           "title": "Traffic",
+           "type": "number",
+           "layout": "slider",
+           "numeric": {
+            "min": 0,
+            "max": 100,
+            "step": 5,
+            "unit": "%"
+           },
+           "validation": {
+            "required": true
+           }
+          },
+          {
+           "name": "isControl",
+           "title": "This is the control",
+           "type": "boolean",
+           "initialValue": false,
+           "description": "Uses the default content unchanged."
+          },
+          {
+           "name": "content",
+           "title": "Content",
+           "type": "object",
+           "icon": "layout",
+           "openMode": "drill",
+           "hidden": {
+            "field": "isControl",
+            "equals": false
+           },
+           "fields": [
+            {
+             "name": "heading",
+             "title": "Heading",
+             "type": "string",
+             "validation": {
+              "recommendedMax": 60
+             },
+             "ai": true
+            },
+            {
+             "name": "body",
+             "title": "Body",
+             "type": "text",
+             "rows": 2
+            },
+            {
+             "name": "primaryButton",
+             "title": "Primary button",
+             "type": "button"
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "name": "endsAt",
+       "title": "Stop on",
+       "type": "date",
+       "hidden": {
+        "field": "isRunning",
+        "equals": true
+       }
+      }
+     ]
+    }
+   ]
+  },
+  "value": {
+   "_variant": "split",
+   "default": {
+    "eyebrow": "HR, payroll and benefits",
+    "heading": "Run your people ops from one place.",
+    "body": "Hiring, payroll, benefits and reviews in one system your team will actually open.",
+    "primaryButton": {
+     "label": "Book a demo",
+     "href": "/demo",
+     "type": "page",
+     "title": "Book a demo",
+     "style": "primary",
+     "arrow": true
+    },
+    "image": {
+     "url": "https://picsum.photos/seed/betterwork-dashboard/1600/1000",
+     "alt": "Betterwork's people dashboard showing headcount and upcoming payroll",
+     "name": "betterwork-dashboard.jpg",
+     "width": 3200,
+     "height": 2000
+    }
+   },
+   "segments": [
+    {
+     "_key": "sg1",
+     "name": "Healthcare, 200+ people",
+     "match": "all",
+     "rules": [
+      {
+       "_key": "r1",
+       "attribute": "industry",
+       "operator": "is",
+       "value": "Healthcare"
+      },
+      {
+       "_key": "r2",
+       "attribute": "companySize",
+       "operator": "is",
+       "value": "200-1000"
+      }
+     ],
+     "content": {
+      "heading": "Shift-based payroll without the spreadsheet.",
+      "body": "Overtime, differentials and multi-state rules handled for clinics and care teams.",
+      "primaryButton": {
+       "label": "See healthcare payroll",
+       "href": "/industries/healthcare",
+       "type": "page",
+       "style": "primary",
+       "arrow": true
+      },
+      "image": {
+       "url": "https://picsum.photos/seed/betterwork-shifts/1600/1000",
+       "alt": "A shift schedule with overtime highlighted for a clinic team",
+       "name": "betterwork-shifts.jpg",
+       "width": 3200,
+       "height": 2000
+      }
+     }
+    },
+    {
+     "_key": "sg2",
+     "name": "Came from the payroll campaign",
+     "match": "any",
+     "rules": [
+      {
+       "_key": "r3",
+       "attribute": "utmCampaign",
+       "operator": "contains",
+       "value": "payroll-q4"
+      }
+     ],
+     "content": {
+      "heading": "Close payroll in 20 minutes, not two days."
+     }
+    }
+   ],
+   "experiment": {
+    "isRunning": true,
+    "name": "Q4 hero: outcome vs product headline",
+    "goal": "demo",
+    "variants": [
+     {
+      "_key": "v1",
+      "name": "A: control",
+      "weight": 50,
+      "isControl": true
+     },
+     {
+      "_key": "v2",
+      "name": "B: outcome headline",
+      "weight": 50,
+      "isControl": false,
+      "content": {
+       "heading": "Give your HR team back a day every week.",
+       "body": "Teams on Betterwork spend 72% less time on payroll and benefits admin.",
+       "primaryButton": {
+        "label": "Book a 20-minute demo",
+        "href": "/demo?v=b",
+        "type": "page",
+        "style": "primary",
+        "arrow": true
+       }
+      }
+     }
+    ],
+    "endsAt": "2026-11-15"
+   }
+  }
+ },
+ {
+  "id": "responsive-layout-settings",
+  "name": "Responsive layout settings",
+  "category": "Advanced patterns",
+  "kind": "block",
+  "brand": "Lumen Studio",
+  "previewLayout": "grid-3",
+  "proves": "Columns, gap and spacing per breakpoint \u00b7 inherit from the larger screen \u00b7 per-item visibility and mobile order",
+  "schema": {
+   "name": "servicesGrid",
+   "title": "Services grid",
+   "kind": "block",
+   "icon": "apps",
+   "category": "Features & storytelling",
+   "description": "Services as cards, laid out separately for desktop, tablet and phone",
+   "variants": [
+    {
+     "id": "cards",
+     "name": "Cards"
+    },
+    {
+     "id": "plain",
+     "name": "Plain"
+    }
+   ],
+   "preview": {
+    "title": "heading",
+    "subtitle": "intro"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "layout",
+     "title": "Layout",
+     "icon": "devices"
+    }
+   ],
+   "fields": [
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "group": "content",
+     "validation": {
+      "required": true,
+      "recommendedMax": 50
+     }
+    },
+    {
+     "name": "intro",
+     "title": "Intro",
+     "type": "text",
+     "rows": 2,
+     "group": "content"
+    },
+    {
+     "name": "items",
+     "title": "Services",
+     "type": "array",
+     "group": "content",
+     "itemNoun": "service",
+     "validation": {
+      "min": 2,
+      "max": 9
+     },
+     "of": [
+      {
+       "name": "service",
+       "title": "Service",
+       "type": "object",
+       "icon": "briefcase",
+       "preview": {
+        "title": "title",
+        "subtitle": "body",
+        "media": "image",
+        "fallback": "Untitled service"
+       },
+       "fields": [
+        {
+         "name": "title",
+         "title": "Title",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 40
+         }
+        },
+        {
+         "name": "body",
+         "title": "Body",
+         "type": "text",
+         "rows": 2,
+         "validation": {
+          "recommendedMax": 140
+         }
+        },
+        {
+         "name": "image",
+         "title": "Image",
+         "type": "image"
+        },
+        {
+         "name": "link",
+         "title": "Link",
+         "type": "link"
+        },
+        {
+         "name": "showOn",
+         "title": "Show on",
+         "type": "multiselect",
+         "initialValue": [
+          "desktop",
+          "tablet",
+          "mobile"
+         ],
+         "options": [
+          {
+           "value": "desktop",
+           "label": "Desktop"
+          },
+          {
+           "value": "tablet",
+           "label": "Tablet"
+          },
+          {
+           "value": "mobile",
+           "label": "Phone"
+          }
+         ]
+        },
+        {
+         "name": "mobileOrder",
+         "title": "Order on phones",
+         "type": "number",
+         "numeric": {
+          "min": 1,
+          "max": 9,
+          "step": 1
+         },
+         "description": "Leave empty to keep the desktop order."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "desktop",
+     "title": "Desktop",
+     "type": "object",
+     "group": "layout",
+     "icon": "device-desktop",
+     "openMode": "drill",
+     "description": "1280px and wider.",
+     "fields": [
+      {
+       "name": "columns",
+       "title": "Columns",
+       "type": "number",
+       "layout": "slider",
+       "numeric": {
+        "min": 1,
+        "max": 4,
+        "step": 1
+       },
+       "initialValue": 3
+      },
+      {
+       "name": "gap",
+       "title": "Gap",
+       "type": "select",
+       "layout": "segmented",
+       "initialValue": "lg",
+       "options": [
+        {
+         "value": "sm",
+         "label": "S"
+        },
+        {
+         "value": "md",
+         "label": "M"
+        },
+        {
+         "value": "lg",
+         "label": "L"
+        }
+       ]
+      },
+      {
+       "name": "paddingY",
+       "title": "Space above and below",
+       "type": "select",
+       "layout": "segmented",
+       "initialValue": "xl",
+       "options": [
+        {
+         "value": "md",
+         "label": "M"
+        },
+        {
+         "value": "lg",
+         "label": "L"
+        },
+        {
+         "value": "xl",
+         "label": "XL"
+        }
+       ]
+      },
+      {
+       "name": "alignment",
+       "title": "Alignment",
+       "type": "select",
+       "layout": "segmented",
+       "initialValue": "left",
+       "options": [
+        {
+         "value": "left",
+         "label": "Left"
+        },
+        {
+         "value": "center",
+         "label": "Center"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "tablet",
+     "title": "Tablet",
+     "type": "object",
+     "group": "layout",
+     "icon": "device-tablet",
+     "openMode": "drill",
+     "description": "768 to 1279px.",
+     "fields": [
+      {
+       "name": "useDesktopLayout",
+       "title": "Same as desktop",
+       "type": "boolean",
+       "initialValue": true
+      },
+      {
+       "name": "columns",
+       "title": "Columns",
+       "type": "number",
+       "layout": "slider",
+       "hidden": {
+        "field": "useDesktopLayout",
+        "equals": false
+       },
+       "numeric": {
+        "min": 1,
+        "max": 3,
+        "step": 1
+       }
+      },
+      {
+       "name": "gap",
+       "title": "Gap",
+       "type": "select",
+       "layout": "segmented",
+       "hidden": {
+        "field": "useDesktopLayout",
+        "equals": false
+       },
+       "options": [
+        {
+         "value": "sm",
+         "label": "S"
+        },
+        {
+         "value": "md",
+         "label": "M"
+        },
+        {
+         "value": "lg",
+         "label": "L"
+        }
+       ]
+      },
+      {
+       "name": "paddingY",
+       "title": "Space above and below",
+       "type": "select",
+       "layout": "segmented",
+       "hidden": {
+        "field": "useDesktopLayout",
+        "equals": false
+       },
+       "options": [
+        {
+         "value": "md",
+         "label": "M"
+        },
+        {
+         "value": "lg",
+         "label": "L"
+        },
+        {
+         "value": "xl",
+         "label": "XL"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "mobile",
+     "title": "Phone",
+     "type": "object",
+     "group": "layout",
+     "icon": "device-mobile",
+     "openMode": "drill",
+     "description": "Under 768px.",
+     "fields": [
+      {
+       "name": "arrangement",
+       "title": "Arrange as",
+       "type": "select",
+       "layout": "cards",
+       "initialValue": "stack",
+       "options": [
+        {
+         "value": "stack",
+         "label": "Stack",
+         "icon": "layout-rows",
+         "description": "One card per row"
+        },
+        {
+         "value": "carousel",
+         "label": "Swipe",
+         "icon": "carousel-horizontal",
+         "description": "Cards scroll sideways"
+        },
+        {
+         "value": "grid",
+         "label": "Two columns",
+         "icon": "layout-grid",
+         "description": "Small cards, short text only"
+        }
+       ]
+      },
+      {
+       "name": "showPeek",
+       "title": "Show the next card's edge",
+       "type": "boolean",
+       "hidden": {
+        "field": "arrangement",
+        "equals": "carousel"
+       },
+       "initialValue": true
+      },
+      {
+       "name": "paddingY",
+       "title": "Space above and below",
+       "type": "select",
+       "layout": "segmented",
+       "initialValue": "md",
+       "options": [
+        {
+         "value": "sm",
+         "label": "S"
+        },
+        {
+         "value": "md",
+         "label": "M"
+        },
+        {
+         "value": "lg",
+         "label": "L"
+        }
+       ]
+      },
+      {
+       "name": "hideImages",
+       "title": "Hide card images",
+       "type": "boolean"
+      }
+     ]
+    }
+   ]
+  },
+  "value": {
+   "_variant": "cards",
+   "heading": "What we do",
+   "intro": "Four services, one team from first sketch to handover.",
+   "items": [
+    {
+     "_key": "s1",
+     "title": "Residential",
+     "body": "Houses and apartment renovations shaped around light and air.",
+     "image": {
+      "url": "https://picsum.photos/seed/lumen-residential/1600/1000",
+      "alt": "A living room lit by a tall slit window",
+      "name": "lumen-residential.jpg",
+      "width": 3200,
+      "height": 2000
+     },
+     "link": {
+      "type": "page",
+      "href": "/services/residential"
+     },
+     "showOn": [
+      "desktop",
+      "tablet",
+      "mobile"
+     ],
+     "mobileOrder": 1
+    },
+    {
+     "_key": "s2",
+     "title": "Civic & cultural",
+     "body": "Libraries, schools and small museums for municipalities.",
+     "image": {
+      "url": "https://picsum.photos/seed/lumen-library/1600/1000",
+      "alt": "A library reading room under a sawtooth roof",
+      "name": "lumen-library.jpg",
+      "width": 3200,
+      "height": 2000
+     },
+     "link": {
+      "type": "page",
+      "href": "/services/civic"
+     },
+     "showOn": [
+      "desktop",
+      "tablet",
+      "mobile"
+     ],
+     "mobileOrder": 2
+    },
+    {
+     "_key": "s3",
+     "title": "Interiors",
+     "body": "Joinery, lighting and material palettes, specified to the millimetre.",
+     "image": {
+      "url": "https://picsum.photos/seed/lumen-joinery/1600/1000",
+      "alt": "Oak joinery with integrated lighting",
+      "name": "lumen-joinery.jpg",
+      "width": 3200,
+      "height": 2000
+     },
+     "link": {
+      "type": "page",
+      "href": "/services/interiors"
+     },
+     "showOn": [
+      "desktop",
+      "tablet"
+     ]
+    },
+    {
+     "_key": "s4",
+     "title": "Daylight studies",
+     "body": "Sun-path and glare modelling for other architects' projects.",
+     "image": {
+      "url": "https://picsum.photos/seed/lumen-daylight/1600/1000",
+      "alt": "A sun-path diagram over a site plan",
+      "name": "lumen-daylight.jpg",
+      "width": 3200,
+      "height": 2000
+     },
+     "link": {
+      "type": "page",
+      "href": "/services/daylight"
+     },
+     "showOn": [
+      "desktop",
+      "tablet",
+      "mobile"
+     ],
+     "mobileOrder": 3
+    }
+   ],
+   "desktop": {
+    "columns": 4,
+    "gap": "lg",
+    "paddingY": "xl",
+    "alignment": "left"
+   },
+   "tablet": {
+    "useDesktopLayout": false,
+    "columns": 2,
+    "gap": "md",
+    "paddingY": "lg"
+   },
+   "mobile": {
+    "arrangement": "carousel",
+    "showPeek": true,
+    "paddingY": "md",
+    "hideImages": false
+   }
+  }
+ },
+ {
+  "id": "grid-cell-layout",
+  "name": "Grid with per-cell layout",
+  "category": "Advanced patterns",
+  "kind": "block",
+  "brand": "Caldera",
+  "previewLayout": "bento",
+  "proves": "Slot cells with column span, row span, surface and alignment settings \u00b7 mixed block types per cell",
+  "schema": {
+   "name": "layoutGrid",
+   "title": "Layout grid",
+   "kind": "block",
+   "icon": "layout-board-split",
+   "category": "Features & storytelling",
+   "description": "A grid where every cell sets its own size, surface and alignment",
+   "variants": [
+    {
+     "id": "four",
+     "name": "4 columns"
+    },
+    {
+     "id": "six",
+     "name": "6 columns"
+    }
+   ],
+   "preview": {
+    "title": "heading",
+    "subtitle": "eyebrow"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "grid",
+     "title": "Grid"
+    }
+   ],
+   "fields": [
+    {
+     "name": "eyebrow",
+     "title": "Eyebrow",
+     "type": "string",
+     "group": "content",
+     "validation": {
+      "max": 32
+     }
+    },
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "group": "content",
+     "validation": {
+      "recommendedMax": 56
+     },
+     "ai": true
+    },
+    {
+     "name": "cells",
+     "title": "Cells",
+     "type": "slot",
+     "group": "content",
+     "validation": {
+      "min": 2,
+      "max": 12
+     },
+     "of": {
+      "type": "block",
+      "allow": [
+       "imageBlock",
+       "productCard",
+       "quoteBlock",
+       "textBlock",
+       "ctaCard",
+       "statBlock",
+       "videoBlock",
+       "featureBlock"
+      ]
+     },
+     "slotSettings": [
+      {
+       "name": "colSpan",
+       "title": "Width",
+       "type": "number",
+       "layout": "slider",
+       "numeric": {
+        "min": 1,
+        "max": 4,
+        "step": 1
+       },
+       "initialValue": 1,
+       "description": "In columns, on desktop."
+      },
+      {
+       "name": "rowSpan",
+       "title": "Height",
+       "type": "number",
+       "layout": "slider",
+       "numeric": {
+        "min": 1,
+        "max": 3,
+        "step": 1
+       },
+       "initialValue": 1,
+       "description": "In rows, on desktop."
+      },
+      {
+       "name": "surface",
+       "title": "Surface",
+       "type": "select",
+       "layout": "segmented",
+       "initialValue": "light",
+       "options": [
+        {
+         "value": "light",
+         "label": "Light"
+        },
+        {
+         "value": "warm",
+         "label": "Warm"
+        },
+        {
+         "value": "dark",
+         "label": "Dark"
+        },
+        {
+         "value": "brand",
+         "label": "Brand"
+        }
+       ]
+      },
+      {
+       "name": "alignX",
+       "title": "Horizontal",
+       "type": "select",
+       "layout": "segmented",
+       "initialValue": "start",
+       "options": [
+        {
+         "value": "start",
+         "label": "Start"
+        },
+        {
+         "value": "center",
+         "label": "Center"
+        },
+        {
+         "value": "end",
+         "label": "End"
+        }
+       ]
+      },
+      {
+       "name": "alignY",
+       "title": "Vertical",
+       "type": "select",
+       "layout": "segmented",
+       "initialValue": "end",
+       "options": [
+        {
+         "value": "start",
+         "label": "Top"
+        },
+        {
+         "value": "center",
+         "label": "Middle"
+        },
+        {
+         "value": "end",
+         "label": "Bottom"
+        }
+       ]
+      },
+      {
+       "name": "padding",
+       "title": "Padding",
+       "type": "select",
+       "layout": "segmented",
+       "initialValue": "md",
+       "options": [
+        {
+         "value": "none",
+         "label": "None"
+        },
+        {
+         "value": "md",
+         "label": "M"
+        },
+        {
+         "value": "lg",
+         "label": "L"
+        }
+       ]
+      },
+      {
+       "name": "hideOnMobile",
+       "title": "Hide on phones",
+       "type": "boolean"
+      }
+     ]
+    },
+    {
+     "name": "rowHeight",
+     "title": "Row height",
+     "type": "select",
+     "group": "grid",
+     "layout": "segmented",
+     "initialValue": "md",
+     "options": [
+      {
+       "value": "sm",
+       "label": "220px"
+      },
+      {
+       "value": "md",
+       "label": "300px"
+      },
+      {
+       "value": "lg",
+       "label": "380px"
+      }
+     ]
+    },
+    {
+     "name": "gap",
+     "title": "Gap",
+     "type": "select",
+     "group": "grid",
+     "layout": "segmented",
+     "initialValue": "md",
+     "options": [
+      {
+       "value": "sm",
+       "label": "S"
+      },
+      {
+       "value": "md",
+       "label": "M"
+      },
+      {
+       "value": "lg",
+       "label": "L"
+      }
+     ]
+    },
+    {
+     "name": "useDenseFill",
+     "title": "Fill gaps",
+     "type": "boolean",
+     "group": "grid",
+     "description": "Changes the visual order, not the reading order."
+    }
+   ]
+  },
+  "value": {
+   "_variant": "four",
+   "eyebrow": "Gift guide",
+   "heading": "Gifts for people who cook outside.",
+   "cells": [
+    {
+     "_key": "g1",
+     "_type": "imageBlock",
+     "_variant": "cover",
+     "_settings": {
+      "colSpan": 2,
+      "rowSpan": 2,
+      "surface": "dark",
+      "alignX": "start",
+      "alignY": "end",
+      "padding": "none"
+     },
+     "image": {
+      "url": "https://picsum.photos/seed/gift-campfire/1200/1200",
+      "alt": "A wrapped Ember Dutch oven beside a campfire in the snow",
+      "name": "gift-campfire.jpg",
+      "width": 2400,
+      "height": 2400
+     },
+     "caption": "The Ember, wrapped for the solstice",
+     "link": {
+      "type": "page",
+      "href": "/products/ember-dutch-oven"
+     }
+    },
+    {
+     "_key": "g2",
+     "_type": "productCard",
+     "_settings": {
+      "colSpan": 1,
+      "rowSpan": 1,
+      "surface": "light",
+      "alignX": "center",
+      "alignY": "center",
+      "padding": "md"
+     },
+     "product": "gid://shopify/Product/8814",
+     "badge": "Under $70"
+    },
+    {
+     "_key": "g3",
+     "_type": "statBlock",
+     "_settings": {
+      "colSpan": 1,
+      "rowSpan": 1,
+      "surface": "brand",
+      "alignX": "start",
+      "alignY": "end",
+      "padding": "lg"
+     },
+     "value": "Free",
+     "label": "Gift wrap on every order till Dec 20",
+     "icon": "gift"
+    },
+    {
+     "_key": "g4",
+     "_type": "quoteBlock",
+     "_settings": {
+      "colSpan": 2,
+      "rowSpan": 1,
+      "surface": "warm",
+      "alignX": "start",
+      "alignY": "center",
+      "padding": "lg"
+     },
+     "quote": "My dad has used his Ridge every Sunday since I gave it to him. It's the only gift he's ever mentioned twice.",
+     "author": "Sam Whitaker",
+     "role": "Customer, Missoula",
+     "rating": 5
+    },
+    {
+     "_key": "g5",
+     "_type": "productCard",
+     "_settings": {
+      "colSpan": 1,
+      "rowSpan": 2,
+      "surface": "light",
+      "alignX": "center",
+      "alignY": "start",
+      "padding": "md",
+      "hideOnMobile": true
+     },
+     "product": "gid://shopify/Product/8815",
+     "badge": "Stocking stuffer"
+    },
+    {
+     "_key": "g6",
+     "_type": "ctaCard",
+     "_variant": "solid",
+     "_settings": {
+      "colSpan": 3,
+      "rowSpan": 1,
+      "surface": "dark",
+      "alignX": "start",
+      "alignY": "center",
+      "padding": "lg"
+     },
+     "heading": "Not sure? Send a gift card.",
+     "body": "Delivered by email on the day you choose.",
+     "button": {
+      "label": "Buy a gift card",
+      "href": "/gift-cards",
+      "type": "page",
+      "style": "primary",
+      "arrow": true
+     },
+     "tone": "#1E1B18"
+    }
+   ],
+   "rowHeight": "md",
+   "gap": "md",
+   "useDenseFill": true
+  }
+ },
+ {
+  "id": "references-web",
+  "name": "References web",
+  "category": "Advanced patterns",
+  "kind": "block",
+  "brand": "Caldera",
+  "previewLayout": "grid-3",
+  "proves": "Products, authors, recipes and pages referenced manually, by filter, or pinned + auto-filled \u00b7 reverse 'used in' as a gap",
+  "schema": {
+   "name": "storyFooter",
+   "title": "Story footer",
+   "kind": "block",
+   "icon": "link",
+   "category": "Listings & feeds",
+   "description": "Shop the story, meet the writer, read next",
+   "preview": {
+    "title": "heading"
+   },
+   "groups": [
+    {
+     "name": "shop",
+     "title": "Shop",
+     "default": true,
+     "icon": "shopping-bag"
+    },
+    {
+     "name": "people",
+     "title": "People",
+     "icon": "user"
+    },
+    {
+     "name": "next",
+     "title": "Read next",
+     "icon": "news"
+    }
+   ],
+   "fields": [
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "group": "shop",
+     "validation": {
+      "recommendedMax": 40
+     },
+     "placeholder": "Cook along"
+    },
+    {
+     "name": "products",
+     "title": "Products in this story",
+     "type": "array",
+     "group": "shop",
+     "validation": {
+      "max": 4,
+      "unique": true
+     },
+     "of": [
+      {
+       "name": "product",
+       "title": "Product",
+       "type": "reference",
+       "reference": {
+        "to": [
+         "shopify"
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "name": "recipe",
+     "title": "Recipe",
+     "type": "reference",
+     "group": "shop",
+     "reference": {
+      "to": [
+       "col_recipes"
+      ]
+     }
+    },
+    {
+     "name": "authors",
+     "title": "Writers",
+     "type": "array",
+     "group": "people",
+     "validation": {
+      "max": 2
+     },
+     "of": [
+      {
+       "name": "author",
+       "title": "Writer",
+       "type": "reference",
+       "reference": {
+        "to": [
+         "col_authors"
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "name": "guidePage",
+     "title": "Product page",
+     "type": "reference",
+     "group": "people",
+     "reference": {
+      "to": [
+       "page"
+      ]
+     }
+    },
+    {
+     "name": "mode",
+     "title": "Stories come from",
+     "type": "select",
+     "group": "next",
+     "layout": "segmented",
+     "initialValue": "mixed",
+     "options": [
+      {
+       "value": "manual",
+       "label": "Picked"
+      },
+      {
+       "value": "auto",
+       "label": "Automatic"
+      },
+      {
+       "value": "mixed",
+       "label": "Pinned + automatic"
+      }
+     ]
+    },
+    {
+     "name": "pinned",
+     "title": "Pinned stories",
+     "type": "array",
+     "group": "next",
+     "hidden": {
+      "field": "mode",
+      "equals": [
+       "manual",
+       "mixed"
+      ]
+     },
+     "validation": {
+      "min": 1,
+      "max": 3,
+      "unique": true
+     },
+     "of": [
+      {
+       "name": "story",
+       "title": "Story",
+       "type": "reference",
+       "reference": {
+        "to": [
+         "col_journal"
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "name": "auto",
+     "title": "Fill the rest with",
+     "type": "object",
+     "group": "next",
+     "icon": "filter",
+     "openMode": "drill",
+     "hidden": {
+      "field": "mode",
+      "equals": [
+       "auto",
+       "mixed"
+      ]
+     },
+     "fields": [
+      {
+       "name": "topics",
+       "title": "Topics",
+       "type": "array",
+       "validation": {
+        "max": 3
+       },
+       "of": [
+        {
+         "name": "topic",
+         "title": "Topic",
+         "type": "reference",
+         "reference": {
+          "to": [
+           "col_topics"
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "name": "useSameAuthor",
+       "title": "Prefer the same writer",
+       "type": "boolean"
+      },
+      {
+       "name": "excludeCurrent",
+       "title": "Leave out this page",
+       "type": "boolean",
+       "initialValue": true
+      },
+      {
+       "name": "total",
+       "title": "Total stories",
+       "type": "number",
+       "numeric": {
+        "min": 1,
+        "max": 6,
+        "step": 1
+       },
+       "initialValue": 3,
+       "description": "Pinned stories count toward the total."
+      }
+     ]
+    }
+   ]
+  },
+  "value": {
+   "heading": "Cook along",
+   "products": [
+    "gid://shopify/Product/8813",
+    "gid://shopify/Product/8812"
+   ],
+   "authors": [
+    "en_a1"
+   ],
+   "guidePage": "pg_cablefold",
+   "mode": "mixed",
+   "pinned": [
+    "en_5"
+   ],
+   "auto": {
+    "topics": [
+     "tp_recipes",
+     "tp_camp"
+    ],
+    "useSameAuthor": false,
+    "excludeCurrent": true,
+    "total": 3
+   }
+  }
+ },
+ {
+  "id": "changelog-nested-validation",
+  "name": "Changelog with nested validation",
+  "category": "Advanced patterns",
+  "kind": "block",
+  "brand": "Northwind",
+  "previewLayout": "timeline",
+  "proves": "Releases \u2192 changes \u2192 packages \u00b7 semver and issue-key patterns \u00b7 min/max at every level \u00b7 required-if breaking",
+  "schema": {
+   "name": "releaseNotes",
+   "title": "Release notes",
+   "kind": "block",
+   "icon": "notes",
+   "category": "Listings & feeds",
+   "description": "Releases with typed changes and migration notes",
+   "variants": [
+    {
+     "id": "timeline",
+     "name": "Timeline"
+    },
+    {
+     "id": "compact",
+     "name": "Compact"
+    }
+   ],
+   "preview": {
+    "title": "heading",
+    "subtitle": "intro"
+   },
+   "fields": [
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "validation": {
+      "required": true,
+      "max": 60
+     }
+    },
+    {
+     "name": "intro",
+     "title": "Intro",
+     "type": "text",
+     "rows": 2
+    },
+    {
+     "name": "releases",
+     "title": "Releases",
+     "type": "array",
+     "itemNoun": "release",
+     "validation": {
+      "min": 1,
+      "max": 30
+     },
+     "of": [
+      {
+       "name": "release",
+       "title": "Release",
+       "type": "object",
+       "icon": "tag",
+       "preview": {
+        "title": "version",
+        "subtitle": "date",
+        "fallback": "Untitled release"
+       },
+       "fields": [
+        {
+         "name": "version",
+         "title": "Version",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "unique": true,
+          "pattern": "^\\d+\\.\\d+\\.\\d+(-(alpha|beta|rc)\\.\\d+)?$",
+          "patternMessage": "Use semantic versioning, like 4.2.0 or 5.0.0-beta.1."
+         }
+        },
+        {
+         "name": "date",
+         "title": "Released",
+         "type": "date",
+         "validation": {
+          "required": true
+         }
+        },
+        {
+         "name": "channel",
+         "title": "Channel",
+         "type": "select",
+         "layout": "segmented",
+         "initialValue": "stable",
+         "options": [
+          {
+           "value": "stable",
+           "label": "Stable"
+          },
+          {
+           "value": "beta",
+           "label": "Beta"
+          },
+          {
+           "value": "lts",
+           "label": "LTS"
+          }
+         ]
+        },
+        {
+         "name": "summary",
+         "title": "Summary",
+         "type": "text",
+         "rows": 2,
+         "validation": {
+          "max": 240
+         }
+        },
+        {
+         "name": "changes",
+         "title": "Changes",
+         "type": "array",
+         "itemNoun": "change",
+         "validation": {
+          "min": 1,
+          "max": 20
+         },
+         "of": [
+          {
+           "name": "change",
+           "title": "Change",
+           "type": "object",
+           "icon": "point",
+           "preview": {
+            "title": "summary",
+            "subtitle": "kind",
+            "fallback": "Untitled change"
+           },
+           "fields": [
+            {
+             "name": "kind",
+             "title": "Kind",
+             "type": "select",
+             "validation": {
+              "required": true
+             },
+             "options": [
+              {
+               "value": "added",
+               "label": "Added"
+              },
+              {
+               "value": "changed",
+               "label": "Changed"
+              },
+              {
+               "value": "fixed",
+               "label": "Fixed"
+              },
+              {
+               "value": "deprecated",
+               "label": "Deprecated"
+              },
+              {
+               "value": "removed",
+               "label": "Removed"
+              },
+              {
+               "value": "security",
+               "label": "Security"
+              }
+             ]
+            },
+            {
+             "name": "summary",
+             "title": "Summary",
+             "type": "string",
+             "validation": {
+              "required": true,
+              "min": 10,
+              "max": 120
+             }
+            },
+            {
+             "name": "issue",
+             "title": "Issue",
+             "type": "string",
+             "validation": {
+              "pattern": "^NW-\\d{1,6}$",
+              "patternMessage": "Use the tracker key, like NW-1042."
+             }
+            },
+            {
+             "name": "isBreaking",
+             "title": "Breaking change",
+             "type": "boolean",
+             "description": "Requires migration notes."
+            },
+            {
+             "name": "migration",
+             "title": "Migration notes",
+             "type": "richtext",
+             "hidden": {
+              "field": "isBreaking",
+              "equals": true
+             },
+             "validation": {
+              "required": true
+             }
+            },
+            {
+             "name": "packages",
+             "title": "Packages",
+             "type": "array",
+             "itemNoun": "package",
+             "openMode": "inline",
+             "validation": {
+              "max": 6
+             },
+             "of": [
+              {
+               "name": "package",
+               "title": "Package",
+               "type": "object",
+               "icon": "package",
+               "preview": {
+                "title": "name",
+                "subtitle": "to",
+                "fallback": "Untitled package"
+               },
+               "fields": [
+                {
+                 "name": "name",
+                 "title": "Package",
+                 "type": "string",
+                 "validation": {
+                  "required": true,
+                  "pattern": "^@northwind/[a-z0-9-]+$",
+                  "patternMessage": "Use a Northwind package name, like @northwind/sdk."
+                 }
+                },
+                {
+                 "name": "from",
+                 "title": "From",
+                 "type": "string",
+                 "validation": {
+                  "pattern": "^\\d+\\.\\d+\\.\\d+$",
+                  "patternMessage": "Use semantic versioning, like 4.1.3."
+                 }
+                },
+                {
+                 "name": "to",
+                 "title": "To",
+                 "type": "string",
+                 "validation": {
+                  "required": true,
+                  "pattern": "^\\d+\\.\\d+\\.\\d+(-[a-z]+\\.\\d+)?$",
+                  "patternMessage": "Use semantic versioning, like 4.2.0."
+                 }
+                }
+               ]
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "hasRssFeed",
+     "title": "Publish an RSS feed",
+     "type": "boolean",
+     "initialValue": true,
+     "description": "Publishes /changelog.xml."
+    }
+   ]
+  },
+  "value": {
+   "_variant": "timeline",
+   "heading": "Changelog",
+   "intro": "Every release of the Northwind SDK and CLI. Breaking changes include migration notes.",
+   "releases": [
+    {
+     "_key": "rl1",
+     "version": "5.0.0",
+     "date": "2026-09-30",
+     "channel": "stable",
+     "summary": "Pagination moves to cursors and the SDK drops Node 18.",
+     "changes": [
+      {
+       "_key": "ch1",
+       "kind": "changed",
+       "summary": "List methods return cursor pagination instead of page numbers",
+       "issue": "NW-1042",
+       "isBreaking": true,
+       "migration": "<p>Replace <code>page</code> with the <code>cursor</code> from the previous response:</p><pre><code>const next = await nw.orders.list({ cursor: res.nextCursor });</code></pre>",
+       "packages": [
+        {
+         "_key": "pk1",
+         "name": "@northwind/sdk",
+         "from": "4.9.2",
+         "to": "5.0.0"
+        }
+       ]
+      },
+      {
+       "_key": "ch2",
+       "kind": "removed",
+       "summary": "Support for Node 18, which reached end of life in April",
+       "issue": "NW-1051",
+       "isBreaking": true,
+       "migration": "<p>Upgrade to Node 20 or newer. No code changes are needed.</p>",
+       "packages": [
+        {
+         "_key": "pk2",
+         "name": "@northwind/sdk",
+         "from": "4.9.2",
+         "to": "5.0.0"
+        },
+        {
+         "_key": "pk3",
+         "name": "@northwind/cli",
+         "from": "2.6.0",
+         "to": "3.0.0"
+        }
+       ]
+      },
+      {
+       "_key": "ch3",
+       "kind": "added",
+       "summary": "nw.orders.stream() for server-sent order events",
+       "issue": "NW-998",
+       "packages": [
+        {
+         "_key": "pk4",
+         "name": "@northwind/sdk",
+         "to": "5.0.0"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "_key": "rl2",
+     "version": "4.9.2",
+     "date": "2026-08-14",
+     "channel": "lts",
+     "changes": [
+      {
+       "_key": "ch4",
+       "kind": "security",
+       "summary": "Webhook signatures are compared in constant time",
+       "issue": "NW-1033",
+       "packages": [
+        {
+         "_key": "pk5",
+         "name": "@northwind/sdk",
+         "from": "4.9.1",
+         "to": "4.9.2"
+        }
+       ]
+      },
+      {
+       "_key": "ch5",
+       "kind": "fixed",
+       "summary": "Retries no longer double-send idempotent POST requests",
+       "issue": "NW-1029"
+      }
+     ]
+    }
+   ],
+   "hasRssFeed": true
+  }
+ },
+ {
+  "id": "rich-text-embedded-components",
+  "name": "Rich text with components and annotations",
+  "category": "Advanced patterns",
+  "kind": "entry",
+  "brand": "Caldera",
+  "previewLayout": "article",
+  "proves": "Body with linked component instances (D28), inline entry links, footnote and glossary annotations, image and table islands",
+  "schema": {
+   "name": "recipeStory",
+   "title": "Recipe story",
+   "kind": "entry",
+   "icon": "chef-hat",
+   "category": "Long-form & docs",
+   "description": "A Journal story with a recipe, product cards and footnotes inside the text",
+   "preview": {
+    "title": "title",
+    "subtitle": "dek",
+    "media": "coverImage"
+   },
+   "groups": [
+    {
+     "name": "story",
+     "title": "Story",
+     "default": true
+    },
+    {
+     "name": "notes",
+     "title": "Notes & terms",
+     "icon": "notes"
+    }
+   ],
+   "fields": [
+    {
+     "name": "title",
+     "title": "Title",
+     "type": "string",
+     "group": "story",
+     "validation": {
+      "required": true,
+      "max": 90,
+      "recommendedMax": 70
+     },
+     "ai": true
+    },
+    {
+     "name": "dek",
+     "title": "Dek",
+     "type": "text",
+     "rows": 2,
+     "group": "story",
+     "validation": {
+      "recommendedMax": 160
+     }
+    },
+    {
+     "name": "coverImage",
+     "title": "Cover image",
+     "type": "image",
+     "group": "story",
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "body",
+     "title": "Body",
+     "type": "richtext",
+     "group": "story",
+     "validation": {
+      "required": true
+     },
+     "ai": true,
+     "description": "Type / for components, images and tables.",
+     "helpMore": "Components are linked copies: edit the original in Content \u203a Blocks and every story updates, except the fields you override here."
+    },
+    {
+     "name": "footnotes",
+     "title": "Footnotes",
+     "type": "array",
+     "group": "notes",
+     "itemNoun": "footnote",
+     "openMode": "inline",
+     "description": "Numbered in the order they appear in the body.",
+     "of": [
+      {
+       "name": "footnote",
+       "title": "Footnote",
+       "type": "object",
+       "icon": "superscript",
+       "preview": {
+        "title": "text",
+        "subtitle": "key",
+        "fallback": "Untitled footnote"
+       },
+       "fields": [
+        {
+         "name": "key",
+         "title": "Key",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "unique": true,
+          "pattern": "^fn-[a-z0-9-]+$",
+          "patternMessage": "Use lowercase letters, numbers and hyphens, like fn-saffron."
+         }
+        },
+        {
+         "name": "text",
+         "title": "Note",
+         "type": "text",
+         "rows": 2,
+         "validation": {
+          "required": true,
+          "max": 300
+         }
+        },
+        {
+         "name": "source",
+         "title": "Source",
+         "type": "link"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "terms",
+     "title": "Terms",
+     "type": "array",
+     "group": "notes",
+     "itemNoun": "term",
+     "openMode": "inline",
+     "of": [
+      {
+       "name": "term",
+       "title": "Term",
+       "type": "object",
+       "icon": "vocabulary",
+       "preview": {
+        "title": "word",
+        "subtitle": "definition",
+        "fallback": "Untitled term"
+       },
+       "fields": [
+        {
+         "name": "word",
+         "title": "Word",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 32
+         }
+        },
+        {
+         "name": "definition",
+         "title": "Definition",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 140
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  "value": {
+   "title": "Campfire paella for eight",
+   "dek": "One pan, one fire, and the crust everybody fights over.",
+   "coverImage": {
+    "url": "https://picsum.photos/seed/campfire-paella/1600/1000",
+    "alt": "A wide paella pan over a wood fire with lemons on the rim",
+    "name": "campfire-paella.jpg",
+    "width": 3200,
+    "height": 2000
+   },
+   "body": "<p>Paella was always outdoor food. In Valencia it's still cooked over orange-wood fires on Sundays, and the <abbr data-term=\"socarrat\" title=\"The toasted crust of rice on the bottom of the pan\">socarrat</abbr> is the point of the whole exercise.<sup data-footnote=\"fn-valencia\">1</sup></p><p>We cook it on the <a href=\"/products/cable-fold\" data-link-type=\"entry\" data-entry-id=\"en_p1\">Cable Fold Grill</a> so the pan sits level over an even bed of coals.</p><div data-rt=\"component\" data-block=\"productCard\" data-ref=\"productCard\" data-id=\"ci_paella_grill\" data-name=\"Product card\" data-overrides=\"{&quot;badge&quot;:&quot;Used in this recipe&quot;}\" data-v=\"3\">\u29c9&nbsp;Product card \u00b7 component</div><h2>What you need</h2><table data-rt=\"table\" data-header=\"true\"><caption>Ingredients for eight</caption><thead><tr><th scope=\"col\">Ingredient</th><th scope=\"col\">Amount</th></tr></thead><tbody><tr><td>Bomba rice</td><td>600 g</td></tr><tr><td>Chicken thighs</td><td>1 kg</td></tr><tr><td>Saffron</td><td>0.5 g<sup data-footnote=\"fn-saffron\">2</sup></td></tr><tr><td>Stock</td><td>2.4 L</td></tr></tbody></table><figure data-rt=\"image\" data-align=\"wide\" data-size=\"full\"><img src=\"https://picsum.photos/seed/paella-crust/1600/1000\" alt=\"A spoon lifting rice to show a dark, crisp crust underneath\"><figcaption>Listen for the crackle: that's the socarrat forming.</figcaption></figure><div data-rt=\"callout\" data-callout=\"warning\"><p data-title=\"true\">Don't stir</p><div data-body=\"true\"><p>Once the rice is in, leave it. Stirring releases starch and you'll get risotto.</p></div></div><div data-rt=\"component\" data-block=\"ctaCard\" data-ref=\"ctaCard\" data-id=\"ci_newsletter\" data-name=\"Newsletter card\" data-variant=\"outline\">\u29c9&nbsp;Newsletter card \u00b7 component</div>",
+   "footnotes": [
+    {
+     "_key": "fn1",
+     "key": "fn-valencia",
+     "text": "The Valencian regional government registered paella valenciana as a protected cultural asset in 2021.",
+     "source": {
+      "type": "url",
+      "href": "https://www.gva.es",
+      "newTab": true
+     }
+    },
+    {
+     "_key": "fn2",
+     "key": "fn-saffron",
+     "text": "About 30 threads. Toast them in a dry spoon over the fire before crumbling them in."
+    }
+   ],
+   "terms": [
+    {
+     "_key": "gl1",
+     "word": "socarrat",
+     "definition": "The toasted crust of rice on the bottom of the pan."
+    }
+   ]
+  }
+ },
+ {
+  "id": "dynamic-query-listing",
+  "name": "Dynamic query listing",
+  "category": "Advanced patterns",
+  "kind": "block",
+  "brand": "Atlas Journal",
+  "previewLayout": "grid-3",
+  "proves": "Collection + filter rows (field \u00b7 operator \u00b7 value) + sort + limit + pagination + pinned + empty state",
+  "schema": {
+   "name": "queryListing",
+   "title": "Query listing",
+   "kind": "block",
+   "icon": "database-search",
+   "category": "Listings & feeds",
+   "description": "Entries from a collection, filtered, sorted and paged",
+   "variants": [
+    {
+     "id": "cards",
+     "name": "Cards"
+    },
+    {
+     "id": "list",
+     "name": "List"
+    },
+    {
+     "id": "lead",
+     "name": "One big, rest small"
+    }
+   ],
+   "preview": {
+    "title": "heading",
+    "subtitle": "collection"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "query",
+     "title": "Query",
+     "icon": "filter"
+    },
+    {
+     "name": "display",
+     "title": "Display"
+    }
+   ],
+   "fields": [
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "group": "content",
+     "validation": {
+      "recommendedMax": 50
+     }
+    },
+    {
+     "name": "viewAllButton",
+     "title": "View all button",
+     "type": "button",
+     "group": "content"
+    },
+    {
+     "name": "collection",
+     "title": "Collection",
+     "type": "reference",
+     "group": "query",
+     "reference": {
+      "to": [
+       "collection"
+      ]
+     },
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "match",
+     "title": "Show entries matching",
+     "type": "select",
+     "group": "query",
+     "layout": "segmented",
+     "initialValue": "all",
+     "options": [
+      {
+       "value": "all",
+       "label": "All filters"
+      },
+      {
+       "value": "any",
+       "label": "Any filter"
+      }
+     ]
+    },
+    {
+     "name": "filters",
+     "title": "Filters",
+     "type": "array",
+     "group": "query",
+     "itemNoun": "filter",
+     "validation": {
+      "max": 6
+     },
+     "of": [
+      {
+       "name": "filter",
+       "title": "Filter",
+       "type": "object",
+       "icon": "filter",
+       "preview": {
+        "title": "field",
+        "subtitle": "value",
+        "fallback": "Untitled filter"
+       },
+       "fields": [
+        {
+         "name": "field",
+         "title": "Field",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "pattern": "^[a-zA-Z][a-zA-Z0-9.]*$",
+          "patternMessage": "Use a field id from the collection, like topics or author.slug."
+         }
+        },
+        {
+         "name": "operator",
+         "title": "Condition",
+         "type": "select",
+         "validation": {
+          "required": true
+         },
+         "initialValue": "eq",
+         "options": [
+          {
+           "value": "eq",
+           "label": "Is"
+          },
+          {
+           "value": "neq",
+           "label": "Is not"
+          },
+          {
+           "value": "in",
+           "label": "Is any of"
+          },
+          {
+           "value": "contains",
+           "label": "Contains"
+          },
+          {
+           "value": "gt",
+           "label": "After or more than"
+          },
+          {
+           "value": "lt",
+           "label": "Before or less than"
+          },
+          {
+           "value": "withinDays",
+           "label": "In the last N days"
+          },
+          {
+           "value": "exists",
+           "label": "Is filled in"
+          }
+         ]
+        },
+        {
+         "name": "value",
+         "title": "Value",
+         "type": "string",
+         "hidden": {
+          "field": "operator",
+          "equals": [
+           "eq",
+           "neq",
+           "contains",
+           "gt",
+           "lt"
+          ]
+         },
+         "validation": {
+          "required": true,
+          "max": 80
+         }
+        },
+        {
+         "name": "values",
+         "title": "Values",
+         "type": "tags",
+         "hidden": {
+          "field": "operator",
+          "equals": "in"
+         },
+         "validation": {
+          "min": 1,
+          "max": 10
+         }
+        },
+        {
+         "name": "days",
+         "title": "Days",
+         "type": "number",
+         "hidden": {
+          "field": "operator",
+          "equals": "withinDays"
+         },
+         "numeric": {
+          "min": 1,
+          "max": 365,
+          "step": 1
+         },
+         "validation": {
+          "required": true
+         }
+        },
+        {
+         "name": "useCurrentPage",
+         "title": "Match this page",
+         "type": "boolean",
+         "hidden": {
+          "field": "operator",
+          "equals": [
+           "eq",
+           "in"
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "sort",
+     "title": "Sort",
+     "type": "array",
+     "group": "query",
+     "itemNoun": "sort rule",
+     "openMode": "inline",
+     "validation": {
+      "min": 1,
+      "max": 3
+     },
+     "of": [
+      {
+       "name": "sortRule",
+       "title": "Sort rule",
+       "type": "object",
+       "icon": "arrows-sort",
+       "preview": {
+        "title": "field",
+        "subtitle": "direction",
+        "fallback": "Untitled sort"
+       },
+       "fields": [
+        {
+         "name": "field",
+         "title": "Field",
+         "type": "string",
+         "validation": {
+          "required": true
+         },
+         "placeholder": "publishedAt"
+        },
+        {
+         "name": "direction",
+         "title": "Direction",
+         "type": "select",
+         "layout": "segmented",
+         "initialValue": "desc",
+         "options": [
+          {
+           "value": "desc",
+           "label": "Newest / high"
+          },
+          {
+           "value": "asc",
+           "label": "Oldest / low"
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "pinned",
+     "title": "Pinned",
+     "type": "array",
+     "group": "query",
+     "validation": {
+      "max": 3,
+      "unique": true
+     },
+     "of": [
+      {
+       "name": "entry",
+       "title": "Entry",
+       "type": "reference",
+       "reference": {
+        "to": [
+         "col_journal"
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "name": "excludeCurrent",
+     "title": "Leave out this page",
+     "type": "boolean",
+     "group": "query",
+     "initialValue": true
+    },
+    {
+     "name": "limit",
+     "title": "How many",
+     "type": "number",
+     "group": "display",
+     "numeric": {
+      "min": 1,
+      "max": 24,
+      "step": 1,
+      "unit": "entries"
+     },
+     "initialValue": 6,
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "pagination",
+     "title": "More entries",
+     "type": "select",
+     "group": "display",
+     "layout": "radio",
+     "initialValue": "loadMore",
+     "options": [
+      {
+       "value": "none",
+       "label": "None",
+       "description": "The first batch, plus the View all button"
+      },
+      {
+       "value": "loadMore",
+       "label": "Load more button"
+      },
+      {
+       "value": "numbered",
+       "label": "Numbered pages",
+       "description": "Crawlable ?page=2 links"
+      }
+     ]
+    },
+    {
+     "name": "cardFields",
+     "title": "On each card",
+     "type": "multiselect",
+     "group": "display",
+     "initialValue": [
+      "image",
+      "excerpt",
+      "date"
+     ],
+     "options": [
+      {
+       "value": "image",
+       "label": "Image"
+      },
+      {
+       "value": "excerpt",
+       "label": "Excerpt"
+      },
+      {
+       "value": "author",
+       "label": "Author"
+      },
+      {
+       "value": "date",
+       "label": "Date"
+      },
+      {
+       "value": "readingTime",
+       "label": "Reading time"
+      },
+      {
+       "value": "topic",
+       "label": "Topic"
+      }
+     ]
+    },
+    {
+     "name": "empty",
+     "title": "When nothing matches",
+     "type": "object",
+     "group": "display",
+     "icon": "mood-empty",
+     "openMode": "drill",
+     "fields": [
+      {
+       "name": "mode",
+       "title": "Show",
+       "type": "select",
+       "layout": "segmented",
+       "initialValue": "message",
+       "options": [
+        {
+         "value": "hide",
+         "label": "Nothing"
+        },
+        {
+         "value": "message",
+         "label": "A message"
+        }
+       ]
+      },
+      {
+       "name": "heading",
+       "title": "Heading",
+       "type": "string",
+       "hidden": {
+        "field": "mode",
+        "equals": "message"
+       },
+       "validation": {
+        "required": true,
+        "max": 60
+       }
+      },
+      {
+       "name": "body",
+       "title": "Body",
+       "type": "text",
+       "rows": 2,
+       "hidden": {
+        "field": "mode",
+        "equals": "message"
+       }
+      },
+      {
+       "name": "button",
+       "title": "Button",
+       "type": "button",
+       "hidden": {
+        "field": "mode",
+        "equals": "message"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  "value": {
+   "_variant": "lead",
+   "heading": "Latest from the climate desk",
+   "viewAllButton": {
+    "label": "All climate stories",
+    "href": "/topics/climate",
+    "type": "page",
+    "style": "link",
+    "arrow": true
+   },
+   "collection": "col_journal",
+   "match": "all",
+   "filters": [
+    {
+     "_key": "f1",
+     "field": "topics",
+     "operator": "in",
+     "values": [
+      "climate",
+      "energy"
+     ]
+    },
+    {
+     "_key": "f2",
+     "field": "publishedAt",
+     "operator": "withinDays",
+     "days": 90
+    },
+    {
+     "_key": "f3",
+     "field": "cover",
+     "operator": "exists"
+    }
+   ],
+   "sort": [
+    {
+     "_key": "s1",
+     "field": "featured",
+     "direction": "desc"
+    },
+    {
+     "_key": "s2",
+     "field": "publishedAt",
+     "direction": "desc"
+    }
+   ],
+   "pinned": [
+    "en_3"
+   ],
+   "excludeCurrent": true,
+   "limit": 7,
+   "pagination": "numbered",
+   "cardFields": [
+    "image",
+    "excerpt",
+    "author",
+    "date"
+   ],
+   "empty": {
+    "mode": "message",
+    "heading": "No new climate stories this quarter",
+    "body": "Our reporters are in the field. Read the archive while you wait.",
+    "button": {
+     "label": "Browse the archive",
+     "href": "/archive?topic=climate",
+     "type": "page",
+     "style": "outline"
+    }
+   }
+  }
+ },
+ {
+  "id": "overlays-with-triggers",
+  "name": "Modal, drawer and popover",
+  "category": "Advanced patterns",
+  "kind": "block",
+  "brand": "Betterwork",
+  "previewLayout": "centered",
+  "proves": "Overlays with their own slot content, opened by triggers on other blocks (click, delay, scroll, exit) \u00b7 focus and dismiss rules",
+  "schema": {
+   "name": "overlays",
+   "title": "Overlays",
+   "kind": "block",
+   "icon": "app-window",
+   "category": "Conversion & forms",
+   "description": "Modals, drawers and popovers for this page, opened by buttons elsewhere",
+   "preview": {
+    "title": "label"
+   },
+   "fields": [
+    {
+     "name": "label",
+     "title": "Name",
+     "type": "string",
+     "validation": {
+      "max": 40
+     },
+     "description": "Only editors see this."
+    },
+    {
+     "name": "items",
+     "title": "Overlays",
+     "type": "array",
+     "itemNoun": "overlay",
+     "validation": {
+      "max": 6
+     },
+     "of": [
+      {
+       "name": "overlay",
+       "title": "Overlay",
+       "type": "object",
+       "icon": "app-window",
+       "preview": {
+        "title": "title",
+        "subtitle": "kind",
+        "fallback": "Untitled overlay"
+       },
+       "fields": [
+        {
+         "name": "title",
+         "title": "Title",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 60
+         }
+        },
+        {
+         "name": "id",
+         "title": "Opens from",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "unique": true,
+          "pattern": "^[a-z][a-z0-9-]*$",
+          "patternMessage": "Use lowercase letters, numbers and hyphens, starting with a letter, like grate-xl."
+         },
+         "description": "Link any button to #id to open it, e.g. #book-demo."
+        },
+        {
+         "name": "kind",
+         "title": "Type",
+         "type": "select",
+         "layout": "cards",
+         "initialValue": "modal",
+         "options": [
+          {
+           "value": "modal",
+           "label": "Modal",
+           "icon": "app-window",
+           "description": "Centered, page dimmed"
+          },
+          {
+           "value": "drawer",
+           "label": "Drawer",
+           "icon": "layout-sidebar-right",
+           "description": "Slides in from the side"
+          },
+          {
+           "value": "popover",
+           "label": "Popover",
+           "icon": "message-2",
+           "description": "Small, next to the button"
+          }
+         ]
+        },
+        {
+         "name": "side",
+         "title": "Side",
+         "type": "select",
+         "layout": "segmented",
+         "hidden": {
+          "field": "kind",
+          "equals": "drawer"
+         },
+         "initialValue": "right",
+         "options": [
+          {
+           "value": "right",
+           "label": "Right"
+          },
+          {
+           "value": "left",
+           "label": "Left"
+          },
+          {
+           "value": "bottom",
+           "label": "Bottom"
+          }
+         ]
+        },
+        {
+         "name": "size",
+         "title": "Size",
+         "type": "select",
+         "layout": "segmented",
+         "hidden": {
+          "field": "kind",
+          "equals": [
+           "modal",
+           "drawer"
+          ]
+         },
+         "initialValue": "md",
+         "options": [
+          {
+           "value": "sm",
+           "label": "S"
+          },
+          {
+           "value": "md",
+           "label": "M"
+          },
+          {
+           "value": "lg",
+           "label": "L"
+          }
+         ]
+        },
+        {
+         "name": "content",
+         "title": "Content",
+         "type": "slot",
+         "validation": {
+          "min": 1,
+          "max": 4
+         },
+         "of": {
+          "type": "block",
+          "allow": [
+           "textBlock",
+           "imageBlock",
+           "videoBlock",
+           "ctaCard",
+           "quoteBlock",
+           "featureBlock"
+          ]
+         }
+        },
+        {
+         "name": "form",
+         "title": "Form",
+         "type": "reference",
+         "reference": {
+          "to": [
+           "form"
+          ]
+         }
+        },
+        {
+         "name": "triggers",
+         "title": "Also opens",
+         "type": "array",
+         "itemNoun": "trigger",
+         "openMode": "inline",
+         "validation": {
+          "max": 3
+         },
+         "of": [
+          {
+           "name": "trigger",
+           "title": "Trigger",
+           "type": "object",
+           "icon": "bolt",
+           "preview": {
+            "title": "type",
+            "fallback": "Untitled trigger"
+           },
+           "fields": [
+            {
+             "name": "type",
+             "title": "When",
+             "type": "select",
+             "options": [
+              {
+               "value": "delay",
+               "label": "After a delay"
+              },
+              {
+               "value": "scroll",
+               "label": "After scrolling"
+              },
+              {
+               "value": "exit",
+               "label": "On leaving (desktop)"
+              }
+             ]
+            },
+            {
+             "name": "seconds",
+             "title": "Seconds",
+             "type": "number",
+             "hidden": {
+              "field": "type",
+              "equals": "delay"
+             },
+             "numeric": {
+              "min": 5,
+              "max": 120,
+              "step": 5
+             }
+            },
+            {
+             "name": "percent",
+             "title": "Scrolled",
+             "type": "number",
+             "hidden": {
+              "field": "type",
+              "equals": "scroll"
+             },
+             "numeric": {
+              "min": 25,
+              "max": 90,
+              "step": 5,
+              "unit": "%"
+             }
+            }
+           ]
+          }
+         ]
+        },
+        {
+         "name": "frequency",
+         "title": "Show automatic triggers",
+         "type": "select",
+         "initialValue": "once",
+         "options": [
+          {
+           "value": "session",
+           "label": "Once per visit"
+          },
+          {
+           "value": "once",
+           "label": "Once per visitor"
+          },
+          {
+           "value": "week",
+           "label": "Once a week"
+          }
+         ]
+        },
+        {
+         "name": "allowBackdropClose",
+         "title": "Close when clicking outside",
+         "type": "boolean",
+         "initialValue": true,
+         "hidden": {
+          "field": "kind",
+          "equals": [
+           "modal",
+           "drawer"
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  "value": {
+   "label": "Pricing page overlays",
+   "items": [
+    {
+     "_key": "ov1",
+     "title": "Book a 20-minute demo",
+     "id": "book-demo",
+     "kind": "modal",
+     "size": "md",
+     "content": [
+      {
+       "_key": "c1",
+       "_type": "textBlock",
+       "heading": "See Betterwork with your own data",
+       "body": "<p>A product specialist walks through payroll, benefits and reviews for a company your size. No slides.</p>"
+      },
+      {
+       "_key": "c2",
+       "_type": "quoteBlock",
+       "quote": "The demo was the first one where they used our actual org chart.",
+       "author": "Dana Whitfield",
+       "role": "Head of People, Larkspur Health",
+       "rating": 5
+      }
+     ],
+     "form": "form_contact",
+     "triggers": [],
+     "frequency": "once",
+     "allowBackdropClose": false
+    },
+    {
+     "_key": "ov2",
+     "title": "What's included in Growth",
+     "id": "growth-details",
+     "kind": "drawer",
+     "side": "right",
+     "content": [
+      {
+       "_key": "c3",
+       "_type": "featureBlock",
+       "icon": "cash",
+       "title": "Payroll in 50 states",
+       "body": "Automatic tax filings, garnishments and year-end forms."
+      },
+      {
+       "_key": "c4",
+       "_type": "featureBlock",
+       "icon": "heart-handshake",
+       "title": "Benefits administration",
+       "body": "Open enrolment, carrier connections and COBRA."
+      },
+      {
+       "_key": "c5",
+       "_type": "ctaCard",
+       "_variant": "solid",
+       "heading": "Ready to compare plans?",
+       "body": "See every feature side by side.",
+       "button": {
+        "label": "Compare plans",
+        "href": "#compare",
+        "type": "section",
+        "style": "primary"
+       },
+       "tone": "#EEF2FF"
+      }
+     ],
+     "frequency": "session"
+    },
+    {
+     "_key": "ov3",
+     "title": "Leaving already?",
+     "id": "exit-guide",
+     "kind": "modal",
+     "size": "sm",
+     "content": [
+      {
+       "_key": "c6",
+       "_type": "ctaCard",
+       "_variant": "outline",
+       "heading": "Take the 2026 payroll compliance guide",
+       "body": "38 pages, every state change this year.",
+       "button": {
+        "label": "Get the guide",
+        "href": "/guides/payroll-compliance-2026",
+        "type": "page",
+        "style": "primary",
+        "arrow": true
+       }
+      }
+     ],
+     "triggers": [
+      {
+       "_key": "tr1",
+       "type": "exit"
+      },
+      {
+       "_key": "tr2",
+       "type": "scroll",
+       "percent": 70
+      }
+     ],
+     "frequency": "week",
+     "allowBackdropClose": true
+    }
+   ]
+  }
+ },
+ {
+  "id": "scrollytelling",
+  "name": "Sticky scroll story",
+  "category": "Advanced patterns",
+  "kind": "block",
+  "brand": "Caldera",
+  "previewLayout": "split",
+  "proves": "Steps synced to scroll with media swaps (image / video / stat) \u00b7 trigger offset \u00b7 reduced-motion and phone fallbacks",
+  "schema": {
+   "name": "scrollStory",
+   "title": "Scroll story",
+   "kind": "block",
+   "icon": "arrows-down",
+   "category": "Features & storytelling",
+   "description": "Text scrolls past while the media beside it stays put and changes",
+   "variants": [
+    {
+     "id": "media-right",
+     "name": "Media right"
+    },
+    {
+     "id": "media-left",
+     "name": "Media left"
+    },
+    {
+     "id": "fullscreen",
+     "name": "Full-screen media, text over it"
+    }
+   ],
+   "preview": {
+    "title": "heading",
+    "subtitle": "intro"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "motion",
+     "title": "Motion",
+     "icon": "player-track-next"
+    }
+   ],
+   "fields": [
+    {
+     "name": "eyebrow",
+     "title": "Eyebrow",
+     "type": "string",
+     "group": "content",
+     "validation": {
+      "max": 32
+     }
+    },
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "group": "content",
+     "validation": {
+      "required": true,
+      "recommendedMax": 60
+     },
+     "ai": true
+    },
+    {
+     "name": "intro",
+     "title": "Intro",
+     "type": "text",
+     "rows": 2,
+     "group": "content"
+    },
+    {
+     "name": "steps",
+     "title": "Steps",
+     "type": "array",
+     "group": "content",
+     "itemNoun": "step",
+     "validation": {
+      "min": 2,
+      "max": 8
+     },
+     "of": [
+      {
+       "name": "scrollStep",
+       "title": "Step",
+       "type": "object",
+       "icon": "list-numbers",
+       "preview": {
+        "title": "heading",
+        "subtitle": "body",
+        "media": "media.image",
+        "fallback": "Untitled step"
+       },
+       "fields": [
+        {
+         "name": "heading",
+         "title": "Heading",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 60
+         }
+        },
+        {
+         "name": "body",
+         "title": "Body",
+         "type": "text",
+         "rows": 3,
+         "validation": {
+          "recommendedMax": 240
+         }
+        },
+        {
+         "name": "media",
+         "title": "Media",
+         "type": "object",
+         "icon": "photo",
+         "openMode": "drill",
+         "fields": [
+          {
+           "name": "kind",
+           "title": "Show",
+           "type": "select",
+           "layout": "segmented",
+           "initialValue": "image",
+           "options": [
+            {
+             "value": "image",
+             "label": "Image"
+            },
+            {
+             "value": "video",
+             "label": "Video"
+            },
+            {
+             "value": "stat",
+             "label": "Big number"
+            },
+            {
+             "value": "same",
+             "label": "Keep previous"
+            }
+           ]
+          },
+          {
+           "name": "image",
+           "title": "Image",
+           "type": "image",
+           "hidden": {
+            "field": "kind",
+            "equals": "image"
+           },
+           "validation": {
+            "required": true
+           }
+          },
+          {
+           "name": "video",
+           "title": "Video",
+           "type": "video",
+           "hidden": {
+            "field": "kind",
+            "equals": "video"
+           },
+           "validation": {
+            "required": true
+           }
+          },
+          {
+           "name": "poster",
+           "title": "Poster",
+           "type": "image",
+           "hidden": {
+            "field": "kind",
+            "equals": "video"
+           }
+          },
+          {
+           "name": "stat",
+           "title": "Number",
+           "type": "string",
+           "hidden": {
+            "field": "kind",
+            "equals": "stat"
+           },
+           "validation": {
+            "required": true,
+            "max": 10
+           }
+          },
+          {
+           "name": "statLabel",
+           "title": "Number label",
+           "type": "string",
+           "hidden": {
+            "field": "kind",
+            "equals": "stat"
+           },
+           "validation": {
+            "max": 40
+           }
+          },
+          {
+           "name": "transition",
+           "title": "Change with",
+           "type": "select",
+           "layout": "segmented",
+           "initialValue": "fade",
+           "options": [
+            {
+             "value": "fade",
+             "label": "Fade"
+            },
+            {
+             "value": "slide",
+             "label": "Slide"
+            },
+            {
+             "value": "zoom",
+             "label": "Zoom"
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "triggerAt",
+     "title": "Switch when the step reaches",
+     "type": "number",
+     "group": "motion",
+     "layout": "slider",
+     "initialValue": 50,
+     "numeric": {
+      "min": 20,
+      "max": 80,
+      "step": 5,
+      "unit": "% of screen"
+     }
+    },
+    {
+     "name": "progress",
+     "title": "Progress",
+     "type": "select",
+     "group": "motion",
+     "layout": "segmented",
+     "initialValue": "dots",
+     "options": [
+      {
+       "value": "none",
+       "label": "None"
+      },
+      {
+       "value": "dots",
+       "label": "Dots"
+      },
+      {
+       "value": "bar",
+       "label": "Bar"
+      }
+     ]
+    },
+    {
+     "name": "reducedMotion",
+     "title": "When motion is reduced",
+     "type": "select",
+     "group": "motion",
+     "layout": "radio",
+     "initialValue": "stack",
+     "options": [
+      {
+       "value": "stack",
+       "label": "Stack each step with its media",
+       "description": "No sticky panel, no transitions"
+      },
+      {
+       "value": "cut",
+       "label": "Keep sticky, switch without animation"
+      }
+     ]
+    },
+    {
+     "name": "phone",
+     "title": "On phones",
+     "type": "select",
+     "group": "motion",
+     "layout": "radio",
+     "initialValue": "stack",
+     "options": [
+      {
+       "value": "stack",
+       "label": "Stack steps with their media"
+      },
+      {
+       "value": "sticky",
+       "label": "Sticky media on top, text scrolls under"
+      }
+     ]
+    }
+   ]
+  },
+  "value": {
+   "_variant": "media-right",
+   "eyebrow": "How it's made",
+   "heading": "From scrap iron to your skillet.",
+   "intro": "Every Ridge Skillet takes nine days and passes through six pairs of hands in Bend.",
+   "steps": [
+    {
+     "_key": "sp1",
+     "heading": "We melt down old radiators",
+     "body": "Recycled iron from Oregon demolition yards, melted at 2,600\u00b0F with a little carbon steel for strength.",
+     "media": {
+      "kind": "video",
+      "video": {
+       "url": "https://www.youtube.com/watch?v=aqz-KE-bpKQ"
+      },
+      "poster": {
+       "url": "https://picsum.photos/seed/foundry-pour/1600/1000",
+       "alt": "Molten iron pouring from a ladle in a dark foundry",
+       "name": "foundry-pour.jpg",
+       "width": 3200,
+       "height": 2000
+      },
+      "transition": "fade"
+     }
+    },
+    {
+     "_key": "sp2",
+     "heading": "Poured into sand",
+     "body": "Each mould is packed by hand and used once. That's why no two handles are quite the same.",
+     "media": {
+      "kind": "image",
+      "image": {
+       "url": "https://picsum.photos/seed/sand-moulds/1600/1000",
+       "alt": "Rows of sand moulds with skillet shapes pressed into them",
+       "name": "sand-moulds.jpg",
+       "width": 3200,
+       "height": 2000
+      },
+      "transition": "fade"
+     }
+    },
+    {
+     "_key": "sp3",
+     "heading": "Milled smooth",
+     "body": "A CNC pass takes the cooking surface flat to within 0.1 mm, then we polish it by hand.",
+     "media": {
+      "kind": "stat",
+      "stat": "0.1 mm",
+      "statLabel": "Flatness of every cooking surface",
+      "transition": "zoom"
+     }
+    },
+    {
+     "_key": "sp4",
+     "heading": "Seasoned three times",
+     "body": "Flaxseed oil, baked on at 480\u00b0F, three coats. It arrives ready for eggs.",
+     "media": {
+      "kind": "image",
+      "image": {
+       "url": "https://picsum.photos/seed/seasoned-rack/1600/1000",
+       "alt": "Seasoned skillets cooling on a rack, black and glossy",
+       "name": "seasoned-rack.jpg",
+       "width": 3200,
+       "height": 2000
+      },
+      "transition": "slide"
+     }
+    }
+   ],
+   "triggerAt": 50,
+   "progress": "dots",
+   "reducedMotion": "stack",
+   "phone": "stack"
+  }
+ },
+ {
+  "id": "a11y-critical-media-form",
+  "name": "Accessibility-critical media and form",
+  "category": "Advanced patterns",
+  "kind": "block",
+  "brand": "Atlas Journal",
+  "previewLayout": "media",
+  "proves": "Captions per language, transcript, audio-described version \u00b7 decorative vs informative images \u00b7 labels, hints and error messages",
+  "schema": {
+   "name": "explainer",
+   "title": "Video explainer",
+   "kind": "block",
+   "icon": "player-play",
+   "category": "Media & galleries",
+   "description": "A video with captions and a transcript, supporting images, and a sign-up form",
+   "preview": {
+    "title": "heading",
+    "media": "video.poster"
+   },
+   "groups": [
+    {
+     "name": "video",
+     "title": "Video",
+     "default": true,
+     "icon": "player-play"
+    },
+    {
+     "name": "images",
+     "title": "Images",
+     "icon": "photo"
+    },
+    {
+     "name": "form",
+     "title": "Sign-up",
+     "icon": "forms"
+    }
+   ],
+   "fields": [
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "group": "video",
+     "validation": {
+      "required": true,
+      "recommendedMax": 70
+     }
+    },
+    {
+     "name": "video",
+     "title": "Video",
+     "type": "object",
+     "group": "video",
+     "icon": "player-play",
+     "openMode": "drill",
+     "fields": [
+      {
+       "name": "file",
+       "title": "Video",
+       "type": "video",
+       "validation": {
+        "required": true
+       }
+      },
+      {
+       "name": "title",
+       "title": "Accessible name",
+       "type": "string",
+       "validation": {
+        "required": true,
+        "max": 100
+       },
+       "description": "Not shown. Read by screen readers."
+      },
+      {
+       "name": "poster",
+       "title": "Poster",
+       "type": "image"
+      },
+      {
+       "name": "tracks",
+       "title": "Captions and subtitles",
+       "type": "array",
+       "itemNoun": "track",
+       "validation": {
+        "min": 1,
+        "max": 8
+       },
+       "description": ".vtt files. At least captions in the video's own language.",
+       "of": [
+        {
+         "name": "track",
+         "title": "Track",
+         "type": "object",
+         "icon": "badge-cc",
+         "preview": {
+          "title": "label",
+          "subtitle": "kind",
+          "fallback": "Untitled track"
+         },
+         "fields": [
+          {
+           "name": "kind",
+           "title": "Kind",
+           "type": "select",
+           "layout": "segmented",
+           "initialValue": "captions",
+           "options": [
+            {
+             "value": "captions",
+             "label": "Captions",
+             "description": "Dialogue plus sounds, for deaf viewers"
+            },
+            {
+             "value": "subtitles",
+             "label": "Subtitles",
+             "description": "Dialogue translated"
+            },
+            {
+             "value": "descriptions",
+             "label": "Descriptions",
+             "description": "Text descriptions of what's on screen"
+            }
+           ]
+          },
+          {
+           "name": "language",
+           "title": "Language",
+           "type": "select",
+           "validation": {
+            "required": true
+           },
+           "options": [
+            {
+             "value": "en",
+             "label": "English"
+            },
+            {
+             "value": "es",
+             "label": "Spanish"
+            },
+            {
+             "value": "pt",
+             "label": "Portuguese"
+            },
+            {
+             "value": "fr",
+             "label": "French"
+            }
+           ]
+          },
+          {
+           "name": "label",
+           "title": "Menu label",
+           "type": "string",
+           "validation": {
+            "required": true,
+            "max": 32
+           },
+           "placeholder": "English (CC)"
+          },
+          {
+           "name": "file",
+           "title": "WebVTT file",
+           "type": "file",
+           "validation": {
+            "required": true
+           }
+          },
+          {
+           "name": "isOnByDefault",
+           "title": "On by default",
+           "type": "boolean"
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "name": "transcript",
+       "title": "Transcript",
+       "type": "richtext",
+       "validation": {
+        "required": true
+       }
+      },
+      {
+       "name": "described",
+       "title": "Audio-described version",
+       "type": "video"
+      },
+      {
+       "name": "autoplay",
+       "title": "Play automatically",
+       "type": "boolean"
+      }
+     ]
+    },
+    {
+     "name": "figures",
+     "title": "Images",
+     "type": "array",
+     "group": "images",
+     "itemNoun": "image",
+     "validation": {
+      "max": 6
+     },
+     "of": [
+      {
+       "name": "figure",
+       "title": "Image",
+       "type": "object",
+       "icon": "photo",
+       "preview": {
+        "title": "caption",
+        "subtitle": "role",
+        "media": "image",
+        "fallback": "Untitled image"
+       },
+       "fields": [
+        {
+         "name": "image",
+         "title": "Image",
+         "type": "image",
+         "validation": {
+          "required": true
+         },
+         "description": "Leave alt text empty only if the image is decorative."
+        },
+        {
+         "name": "role",
+         "title": "This image",
+         "type": "select",
+         "layout": "radio",
+         "initialValue": "informative",
+         "options": [
+          {
+           "value": "informative",
+           "label": "Carries information",
+           "description": "Needs alt text"
+          },
+          {
+           "value": "complex",
+           "label": "Is a chart or diagram",
+           "description": "Needs alt text and a long description"
+          },
+          {
+           "value": "decorative",
+           "label": "Is decoration only",
+           "description": "Hidden from screen readers"
+          }
+         ]
+        },
+        {
+         "name": "longDescription",
+         "title": "Long description",
+         "type": "text",
+         "rows": 4,
+         "hidden": {
+          "field": "role",
+          "equals": "complex"
+         },
+         "validation": {
+          "required": true,
+          "max": 1200
+         },
+         "description": "Linked under the image."
+        },
+        {
+         "name": "caption",
+         "title": "Caption",
+         "type": "string",
+         "validation": {
+          "max": 160
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "signup",
+     "title": "Sign-up form",
+     "type": "object",
+     "group": "form",
+     "icon": "forms",
+     "openMode": "drill",
+     "fields": [
+      {
+       "name": "heading",
+       "title": "Heading",
+       "type": "string",
+       "validation": {
+        "required": true,
+        "max": 60
+       }
+      },
+      {
+       "name": "fields",
+       "title": "Fields",
+       "type": "array",
+       "itemNoun": "field",
+       "validation": {
+        "min": 1,
+        "max": 5
+       },
+       "of": [
+        {
+         "name": "formField",
+         "title": "Field",
+         "type": "object",
+         "icon": "forms",
+         "preview": {
+          "title": "label",
+          "subtitle": "type",
+          "fallback": "Untitled field"
+         },
+         "fields": [
+          {
+           "name": "label",
+           "title": "Label",
+           "type": "string",
+           "validation": {
+            "required": true,
+            "max": 40
+           }
+          },
+          {
+           "name": "name",
+           "title": "Field name",
+           "type": "string",
+           "validation": {
+            "required": true,
+            "pattern": "^[a-z][a-zA-Z0-9]*$",
+            "patternMessage": "Use a field key, like email or firstName."
+           }
+          },
+          {
+           "name": "type",
+           "title": "Type",
+           "type": "select",
+           "initialValue": "text",
+           "options": [
+            {
+             "value": "text",
+             "label": "Text"
+            },
+            {
+             "value": "email",
+             "label": "Email"
+            },
+            {
+             "value": "select",
+             "label": "Dropdown"
+            },
+            {
+             "value": "checkbox",
+             "label": "Checkbox"
+            }
+           ]
+          },
+          {
+           "name": "autocomplete",
+           "title": "Autofill as",
+           "type": "select",
+           "description": "Lets browsers fill it in. Required for personal details.",
+           "options": [
+            {
+             "value": "off",
+             "label": "Nothing"
+            },
+            {
+             "value": "email",
+             "label": "Email"
+            },
+            {
+             "value": "given-name",
+             "label": "First name"
+            },
+            {
+             "value": "family-name",
+             "label": "Last name"
+            },
+            {
+             "value": "postal-code",
+             "label": "Postcode"
+            }
+           ]
+          },
+          {
+           "name": "hint",
+           "title": "Hint",
+           "type": "string",
+           "validation": {
+            "max": 90
+           },
+           "description": "Read out with the label."
+          },
+          {
+           "name": "isRequired",
+           "title": "Required",
+           "type": "boolean"
+          },
+          {
+           "name": "errorMessage",
+           "title": "Error message",
+           "type": "string",
+           "hidden": {
+            "field": "isRequired",
+            "equals": true
+           },
+           "validation": {
+            "required": true,
+            "max": 90
+           }
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "name": "submitButton",
+       "title": "Submit button",
+       "type": "button"
+      },
+      {
+       "name": "privacy",
+       "title": "Privacy note",
+       "type": "string",
+       "validation": {
+        "max": 140
+       }
+      },
+      {
+       "name": "form",
+       "title": "Send to form",
+       "type": "reference",
+       "reference": {
+        "to": [
+         "form"
+        ]
+       },
+       "validation": {
+        "required": true
+       }
+      }
+     ]
+    }
+   ]
+  },
+  "value": {
+   "heading": "Why the heat dome stalled over the Pacific Northwest",
+   "video": {
+    "file": {
+     "url": "https://vimeo.com/76979871"
+    },
+    "title": "Explainer: how a heat dome forms and why it stays put, 3 minutes",
+    "poster": {
+     "url": "https://picsum.photos/seed/heat-dome-map/1600/1000",
+     "alt": "A weather map with a red high-pressure dome over Oregon and Washington",
+     "name": "heat-dome-map.jpg",
+     "width": 3200,
+     "height": 2000
+    },
+    "tracks": [
+     {
+      "_key": "tk1",
+      "kind": "captions",
+      "language": "en",
+      "label": "English (CC)",
+      "file": {
+       "url": "https://cdn.atlasjournal.com/video/heat-dome/en.vtt",
+       "name": "heat-dome-en.vtt"
+      },
+      "isOnByDefault": true
+     },
+     {
+      "_key": "tk2",
+      "kind": "subtitles",
+      "language": "es",
+      "label": "Espa\u00f1ol",
+      "file": {
+       "url": "https://cdn.atlasjournal.com/video/heat-dome/es.vtt",
+       "name": "heat-dome-es.vtt"
+      }
+     },
+     {
+      "_key": "tk3",
+      "kind": "descriptions",
+      "language": "en",
+      "label": "English descriptions",
+      "file": {
+       "url": "https://cdn.atlasjournal.com/video/heat-dome/en-desc.vtt",
+       "name": "heat-dome-en-desc.vtt"
+      }
+     }
+    ],
+    "transcript": "<p><strong>Ana Ruiz (climate reporter):</strong> In late June, a ridge of high pressure parked over the Northwest. [Wind sounds] Air sinking under that ridge heats up as it's compressed, like a bicycle pump.</p><p><strong>Dr. Owen Park (University of Washington):</strong> The jet stream bent around it and couldn't push it out for nine days.</p>",
+    "described": {
+     "url": "https://vimeo.com/76979872"
+    },
+    "autoplay": false
+   },
+   "figures": [
+    {
+     "_key": "fg1",
+     "image": {
+      "url": "https://picsum.photos/seed/heat-dome-chart/1600/1000",
+      "alt": "Line chart of Portland daily highs, June 20 to July 5, peaking at 116\u00b0F on June 28",
+      "name": "heat-dome-chart.jpg",
+      "width": 3200,
+      "height": 2000
+     },
+     "role": "complex",
+     "longDescription": "Daily high temperatures in Portland from June 20 to July 5. Highs sat near 80\u00b0F until June 25, climbed each day to a record 116\u00b0F on June 28, then fell back below 90\u00b0F by July 2. The previous record, 107\u00b0F, is marked as a dashed line.",
+     "caption": "Portland's daily highs, June 20 \u2013 July 5."
+    },
+    {
+     "_key": "fg2",
+     "image": {
+      "url": "https://picsum.photos/seed/heat-texture/1600/400",
+      "alt": "",
+      "name": "heat-texture.jpg",
+      "width": 3200,
+      "height": 800
+     },
+     "role": "decorative"
+    }
+   ],
+   "signup": {
+    "heading": "Get the climate desk newsletter",
+    "fields": [
+     {
+      "_key": "ff1",
+      "label": "Email address",
+      "name": "email",
+      "type": "email",
+      "autocomplete": "email",
+      "hint": "One email a week, every Thursday.",
+      "isRequired": true,
+      "errorMessage": "Enter an email address like name@example.com"
+     },
+     {
+      "_key": "ff2",
+      "label": "First name",
+      "name": "firstName",
+      "type": "text",
+      "autocomplete": "given-name",
+      "isRequired": false
+     }
+    ],
+    "submitButton": {
+     "label": "Sign up",
+     "href": "#",
+     "type": "section",
+     "style": "primary"
+    },
+    "privacy": "We never share your address. Unsubscribe from any email.",
+    "form": "form_newsletter"
+   }
+  }
+ },
+ {
+  "id": "section-theme-tokens",
+  "name": "Section theme tokens",
+  "category": "Advanced patterns",
+  "kind": "block",
+  "brand": "Caldera",
+  "previewLayout": "centered",
+  "proves": "Dark section inside a light page \u00b7 surface + accent override from brand tokens \u00b7 spacing tokens \u00b7 all in the Design group",
+  "schema": {
+   "name": "quoteBand",
+   "title": "Quote band",
+   "kind": "block",
+   "icon": "quote",
+   "category": "Social proof",
+   "description": "A full-width quote with its own color scheme",
+   "variants": [
+    {
+     "id": "centered",
+     "name": "Centered"
+    },
+    {
+     "id": "split",
+     "name": "Quote and photo"
+    }
+   ],
+   "preview": {
+    "title": "author",
+    "subtitle": "quote",
+    "media": "photo"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "design",
+     "title": "Design",
+     "icon": "palette"
+    }
+   ],
+   "fields": [
+    {
+     "name": "quote",
+     "title": "Quote",
+     "type": "text",
+     "rows": 3,
+     "group": "content",
+     "validation": {
+      "required": true,
+      "recommendedMax": 200
+     }
+    },
+    {
+     "name": "author",
+     "title": "Name",
+     "type": "string",
+     "group": "content",
+     "validation": {
+      "required": true,
+      "max": 48
+     }
+    },
+    {
+     "name": "role",
+     "title": "Role",
+     "type": "string",
+     "group": "content",
+     "validation": {
+      "max": 60
+     }
+    },
+    {
+     "name": "photo",
+     "title": "Photo",
+     "type": "image",
+     "group": "content"
+    },
+    {
+     "name": "button",
+     "title": "Button",
+     "type": "button",
+     "group": "content"
+    },
+    {
+     "name": "scheme",
+     "title": "Color scheme",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "inherit",
+     "options": [
+      {
+       "value": "inherit",
+       "label": "Page"
+      },
+      {
+       "value": "light",
+       "label": "Light"
+      },
+      {
+       "value": "dark",
+       "label": "Dark"
+      }
+     ]
+    },
+    {
+     "name": "surface",
+     "title": "Background",
+     "type": "select",
+     "group": "design",
+     "layout": "cards",
+     "initialValue": "default",
+     "options": [
+      {
+       "value": "default",
+       "label": "Default",
+       "description": "Page background"
+      },
+      {
+       "value": "raised",
+       "label": "Raised",
+       "description": "One step lighter"
+      },
+      {
+       "value": "inverse",
+       "label": "Inverse",
+       "description": "Charcoal in light mode"
+      },
+      {
+       "value": "brand",
+       "label": "Brand",
+       "description": "Ember orange"
+      },
+      {
+       "value": "image",
+       "label": "Photo",
+       "description": "With an overlay"
+      }
+     ]
+    },
+    {
+     "name": "background",
+     "title": "Background photo",
+     "type": "image",
+     "group": "design",
+     "hidden": {
+      "field": "surface",
+      "equals": "image"
+     },
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "overlay",
+     "title": "Overlay",
+     "type": "number",
+     "group": "design",
+     "layout": "slider",
+     "hidden": {
+      "field": "surface",
+      "equals": "image"
+     },
+     "numeric": {
+      "min": 0,
+      "max": 90,
+      "step": 5,
+      "unit": "%"
+     },
+     "initialValue": 45
+    },
+    {
+     "name": "useCustomAccent",
+     "title": "Use a different accent color",
+     "type": "boolean",
+     "group": "design"
+    },
+    {
+     "name": "accent",
+     "title": "Accent",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "hidden": {
+      "field": "useCustomAccent",
+      "equals": true
+     },
+     "initialValue": "ember",
+     "options": [
+      {
+       "value": "ember",
+       "label": "Ember"
+      },
+      {
+       "value": "moss",
+       "label": "Moss"
+      },
+      {
+       "value": "sand",
+       "label": "Sand"
+      }
+     ]
+    },
+    {
+     "name": "spacing",
+     "title": "Spacing",
+     "type": "object",
+     "group": "design",
+     "icon": "spacing-vertical",
+     "fields": [
+      {
+       "name": "top",
+       "title": "Top",
+       "type": "select",
+       "layout": "segmented",
+       "initialValue": "lg",
+       "options": [
+        {
+         "value": "none",
+         "label": "None"
+        },
+        {
+         "value": "md",
+         "label": "M"
+        },
+        {
+         "value": "lg",
+         "label": "L"
+        },
+        {
+         "value": "xl",
+         "label": "XL"
+        }
+       ]
+      },
+      {
+       "name": "bottom",
+       "title": "Bottom",
+       "type": "select",
+       "layout": "segmented",
+       "initialValue": "lg",
+       "options": [
+        {
+         "value": "none",
+         "label": "None"
+        },
+        {
+         "value": "md",
+         "label": "M"
+        },
+        {
+         "value": "lg",
+         "label": "L"
+        },
+        {
+         "value": "xl",
+         "label": "XL"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "width",
+     "title": "Content width",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "narrow",
+     "options": [
+      {
+       "value": "narrow",
+       "label": "Narrow"
+      },
+      {
+       "value": "default",
+       "label": "Default"
+      },
+      {
+       "value": "wide",
+       "label": "Wide"
+      }
+     ]
+    },
+    {
+     "name": "isFullBleed",
+     "title": "Edge to edge",
+     "type": "boolean",
+     "group": "design",
+     "initialValue": true
+    }
+   ]
+  },
+  "value": {
+   "_variant": "split",
+   "quote": "Our restaurant runs four Ember ovens over live fire every night. Two years in, they cook better than the day they arrived.",
+   "author": "Chef Amara Osei",
+   "role": "Hearth & Ash, Portland",
+   "photo": {
+    "url": "https://picsum.photos/seed/amara-osei/900/1100",
+    "alt": "Chef Amara Osei lifting the lid of an Ember Dutch oven over coals",
+    "name": "amara-osei.jpg",
+    "width": 1800,
+    "height": 2200
+   },
+   "button": {
+    "label": "Read Amara's story",
+    "href": "/journal/hearth-and-ash",
+    "type": "entry",
+    "title": "Cooking for 90 over live fire",
+    "style": "outline",
+    "arrow": true
+   },
+   "scheme": "dark",
+   "surface": "image",
+   "background": {
+    "url": "https://picsum.photos/seed/hearth-embers/1600/1000",
+    "alt": "Close-up of glowing embers under a cast iron pot",
+    "name": "hearth-embers.jpg",
+    "width": 3200,
+    "height": 2000
+   },
+   "overlay": 55,
+   "useCustomAccent": true,
+   "accent": "sand",
+   "spacing": {
+    "top": "xl",
+    "bottom": "xl"
+   },
+   "width": "default",
+   "isFullBleed": true
+  }
+ }
+]

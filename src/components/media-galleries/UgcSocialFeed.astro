@@ -1,0 +1,137 @@
+---
+// Social photo feed (UGC) (variant: grid, 4 columns, manual posts) — Caldera #cookedoncaldera.
+---
+
+<section id="ugc-social-feed" class="section ugc-feed" data-variant="grid">
+  <!-- kit: ugc-social-feed -->
+  <div class="container">
+    <div class="head">
+      <div>
+        <h2>#cookedoncaldera</h2>
+        <p class="lead">Tag <strong>@calderaoutside</strong> and your cook could end up here.</p>
+      </div>
+      <a class="btn btn-secondary" href="https://www.instagram.com/calderaoutside" target="_blank" rel="noopener">Follow @calderaoutside</a>
+    </div>
+
+    <ul class="posts" role="list">
+      <li class="post">
+        <a href="https://www.instagram.com/p/C8wq1LzS0aB/" target="_blank" rel="noopener">
+          <img src="https://picsum.photos/seed/ugc-dutch-oven-snow/1080/1080" alt="Dutch oven on coals in fresh snow" width="2160" height="2160" loading="lazy" />
+          <span class="overlay">
+            <span class="handle">@wintercamper</span>
+            <span class="view">View on Instagram ↗</span>
+          </span>
+        </a>
+        <a class="shop" href="/products/ember-dutch-oven">Shop: Ember Dutch Oven</a>
+      </li>
+      <li class="post">
+        <a href="https://www.instagram.com/p/C8zT4mGJ9kQ/" target="_blank" rel="noopener">
+          <img src="https://picsum.photos/seed/ugc-skillet-pancakes/1080/1080" alt="Blueberry pancakes in a skillet on a camp stove" width="2160" height="2160" loading="lazy" />
+          <span class="overlay">
+            <span class="handle">@sierrasunday</span>
+            <span class="view">View on Instagram ↗</span>
+          </span>
+        </a>
+        <a class="shop" href="/products/ridge-skillet">Shop: Ridge Skillet</a>
+      </li>
+      <li class="post">
+        <a href="https://www.instagram.com/p/C90bR2nLx4e/" target="_blank" rel="noopener">
+          <img src="https://picsum.photos/seed/ugc-grill-beach/1080/1080" alt="Cable Fold grill on a beach fire at sunset" width="2160" height="2160" loading="lazy" />
+          <span class="overlay">
+            <span class="handle">@coastcooks</span>
+            <span class="view">View on Instagram ↗</span>
+          </span>
+        </a>
+        <a class="shop" href="/products/cable-fold-grill">Shop: Cable Fold Grill</a>
+      </li>
+      <li class="post">
+        <a href="https://www.instagram.com/p/C92XvQ8Ln1s/" target="_blank" rel="noopener">
+          <img src="https://picsum.photos/seed/ugc-kettle-summit/1080/1080" alt="Trail Kettle steaming on a summit rock" width="2160" height="2160" loading="lazy" />
+          <span class="overlay">
+            <span class="handle">@theohikes</span>
+            <span class="view">View on Instagram ↗</span>
+          </span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<style>
+  .head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 1rem 2rem;
+    margin-bottom: 2rem;
+  }
+  .head .lead {
+    margin: 0;
+  }
+  .posts {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+  .post {
+    display: grid;
+    gap: 0.5rem;
+    align-content: start;
+  }
+  .post > a:first-child {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    border-radius: var(--radius-sm);
+    aspect-ratio: 1;
+    background: var(--surface-2);
+  }
+  .post img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 400ms ease;
+  }
+  .overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0.875rem;
+    color: #fff;
+    background: linear-gradient(to top, rgb(0 0 0 / 0.6), transparent 55%);
+    font-size: 0.875rem;
+  }
+  .handle {
+    font-weight: 700;
+  }
+  .view {
+    font-size: 0.75rem;
+    opacity: 0;
+    transition: opacity 150ms ease;
+  }
+  .post > a:first-child:hover img {
+    transform: scale(1.04);
+  }
+  .post > a:first-child:hover .view,
+  .post > a:first-child:focus-visible .view {
+    opacity: 0.9;
+  }
+  .shop {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--ink-2);
+    text-decoration: none;
+  }
+  .shop:hover {
+    color: var(--brand);
+  }
+  @media (max-width: 860px) {
+    .posts { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>

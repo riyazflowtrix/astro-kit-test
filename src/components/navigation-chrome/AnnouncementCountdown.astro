@@ -1,0 +1,186 @@
+<aside id="announcement-countdown" class="acd" aria-label="Announcement" data-tone="sale" data-starts-at="2026-11-26T00:00:00-08:00" data-ends-at="2026-12-02T23:59:00-08:00" data-remember-days="3">
+  <!-- kit: announcement-countdown -->
+  <div class="container acd__inner">
+    <div class="acd__messages" aria-live="polite">
+      <p class="acd__message is-active"><a href="/collections/sale">Black Friday: 25% off every skillet and Dutch oven</a></p>
+      <p class="acd__message"><a href="/shipping">Free shipping over $80 · Order by Dec 18 for the holidays</a></p>
+    </div>
+
+    <div class="acd__countdown" data-ends="2026-11-30T23:59:00-08:00">
+      <span class="acd__label">Ends in</span>
+      <span class="acd__clock" role="timer" aria-label="Time left in the sale">
+        <span><b data-unit="d">31</b>d</span>
+        <span><b data-unit="h">00</b>h</span>
+        <span><b data-unit="m">00</b>m</span>
+        <span><b data-unit="s">00</b>s</span>
+      </span>
+    </div>
+    <p class="acd__ended" hidden>The sale has ended — thanks for cooking with us.</p>
+
+    <button class="acd__dismiss" type="button">
+      <span class="visually-hidden">Dismiss announcement</span>
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+</aside>
+
+<script is:inline>
+  (function () {
+    var root = document.getElementById("announcement-countdown");
+    if (!root) return;
+    var key = "kit-announcement-countdown-dismissed";
+    try {
+      var until = Number(localStorage.getItem(key) || 0);
+      if (until > Date.now()) root.hidden = true;
+    } catch (e) {}
+
+    root.querySelector(".acd__dismiss").addEventListener("click", function () {
+      root.hidden = true;
+      try {
+        var days = Number(root.getAttribute("data-remember-days")) || 0;
+        localStorage.setItem(key, String(Date.now() + days * 86400000));
+      } catch (e) {}
+    });
+
+    var messages = Array.prototype.slice.call(root.querySelectorAll(".acd__message"));
+    var index = 0;
+    var paused = false;
+    root.addEventListener("mouseenter", function () { paused = true; });
+    root.addEventListener("mouseleave", function () { paused = false; });
+    root.addEventListener("focusin", function () { paused = true; });
+    root.addEventListener("focusout", function () { paused = false; });
+    setInterval(function () {
+      if (paused || messages.length < 2) return;
+      messages[index].classList.remove("is-active");
+      index = (index + 1) % messages.length;
+      messages[index].classList.add("is-active");
+    }, 5000);
+
+    var countdown = root.querySelector(".acd__countdown");
+    var ended = root.querySelector(".acd__ended");
+    var end = new Date(countdown.getAttribute("data-ends")).getTime();
+    function pad(n) { return n < 10 ? "0" + n : String(n); }
+    function tick() {
+      var left = end - Date.now();
+      if (left <= 0) {
+        countdown.hidden = true;
+        ended.hidden = false;
+        return;
+      }
+      var s = Math.floor(left / 1000);
+      root.querySelector('[data-unit="d"]').textContent = String(Math.floor(s / 86400));
+      root.querySelector('[data-unit="h"]').textContent = pad(Math.floor((s % 86400) / 3600));
+      root.querySelector('[data-unit="m"]').textContent = pad(Math.floor((s % 3600) / 60));
+      root.querySelector('[data-unit="s"]').textContent = pad(s % 60);
+      setTimeout(tick, 1000);
+    }
+    tick();
+  })();
+</script>
+
+<style>
+  .acd {
+    position: relative;
+    background: #8f1d14;
+    color: #fff;
+    font-size: 0.9375rem;
+  }
+
+  .acd[hidden],
+  .acd__ended[hidden],
+  .acd__countdown[hidden] {
+    display: none;
+  }
+
+  .acd__inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    min-height: 48px;
+    padding-block: 0.5rem;
+    padding-right: calc(var(--gutter) + 44px);
+    text-align: center;
+  }
+
+  .acd__messages {
+    display: grid;
+  }
+
+  .acd__message {
+    grid-area: 1 / 1;
+    margin: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 300ms ease;
+  }
+
+  .acd__message.is-active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .acd__message a {
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .acd__message a:hover {
+    text-decoration: underline;
+  }
+
+  .acd__countdown {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .acd__label {
+    font-size: 0.8125rem;
+    opacity: 0.85;
+  }
+
+  .acd__clock {
+    display: inline-flex;
+    gap: 0.25rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .acd__clock > span {
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
+    background: rgb(255 255 255 / 0.15);
+    font-size: 0.8125rem;
+  }
+
+  .acd__clock b {
+    font-weight: 700;
+  }
+
+  .acd__ended {
+    margin: 0;
+  }
+
+  .acd__dismiss {
+    position: absolute;
+    right: var(--gutter);
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .acd__message {
+      transition: none;
+    }
+  }
+</style>

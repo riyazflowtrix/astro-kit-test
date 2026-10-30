@@ -1,0 +1,112 @@
+---
+---
+
+<section id="stats-band" class="section stats-band">
+  <!-- kit: stats-band -->
+  <div class="container sb">
+    <h2 class="sb-heading">Care that shows up in the numbers.</h2>
+    <dl class="sb-stats">
+      <div class="sb-stat">
+        <dt class="sb-label">Median wait to see a clinician</dt>
+        <dd class="sb-value"><span class="sb-num" data-count="11" data-decimals="0">11</span><span class="sb-suffix"> min</span></dd>
+        <dd class="sb-meta">
+          <a href="https://junipercare.com/reports/2026-access" target="_blank" rel="noopener">2026 access report</a> · as of <time datetime="2026-06-30">30 June 2026</time>
+        </dd>
+      </div>
+      <div class="sb-stat">
+        <dt class="sb-label">Patients who'd recommend us</dt>
+        <dd class="sb-value"><span class="sb-num" data-count="94" data-decimals="0">94</span><span class="sb-suffix">%</span></dd>
+        <dd class="sb-meta">
+          <a href="https://junipercare.com/reports/2026-access" target="_blank" rel="noopener">2026 access report</a> · as of <time datetime="2026-06-30">30 June 2026</time>
+        </dd>
+      </div>
+      <div class="sb-stat">
+        <dt class="sb-label">Visits completed since 2021</dt>
+        <dd class="sb-value"><span class="sb-num" data-count="1.2" data-decimals="1">1.2</span><span class="sb-suffix">M</span></dd>
+        <dd class="sb-meta">As of <time datetime="2026-09-01">1 September 2026</time></dd>
+      </div>
+      <div class="sb-stat">
+        <dt class="sb-label">States with licensed clinicians</dt>
+        <dd class="sb-value"><span class="sb-num" data-count="42" data-decimals="0">42</span></dd>
+        <dd class="sb-meta">As of <time datetime="2026-09-01">1 September 2026</time></dd>
+      </div>
+    </dl>
+  </div>
+</section>
+
+<style>
+  .stats-band {
+    background: var(--brand);
+    color: var(--brand-ink);
+  }
+  .sb {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: center;
+  }
+  .sb-heading { margin: 0; max-width: 14ch; }
+  .sb-stats {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2rem 2.5rem;
+    margin: 0;
+  }
+  .sb-stat {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid rgb(255 255 255 / 0.35);
+    padding-top: 1rem;
+  }
+  .sb-value {
+    order: -1;
+    margin: 0 0 0.25rem;
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    font-variant-numeric: tabular-nums;
+  }
+  .sb-suffix { font-size: 0.6em; margin-left: 0.05em; }
+  .sb-label { font-weight: 600; }
+  .sb-meta {
+    margin: 0.25rem 0 0;
+    font-size: 0.8125rem;
+    opacity: 0.8;
+  }
+  .sb-meta a { color: inherit; }
+  @media (max-width: 800px) {
+    .sb { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 420px) {
+    .sb-stats { grid-template-columns: 1fr; }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    var root = document.getElementById("stats-band");
+    if (!root || !("IntersectionObserver" in window)) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    var nums = Array.prototype.slice.call(root.querySelectorAll(".sb-num"));
+    function run(el) {
+      var target = parseFloat(el.getAttribute("data-count"));
+      var decimals = parseInt(el.getAttribute("data-decimals") || "0", 10);
+      var start = null, duration = 1400;
+      function tick(t) {
+        if (start === null) start = t;
+        var p = Math.min((t - start) / duration, 1);
+        var eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = (target * eased).toFixed(decimals);
+        if (p < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) { run(entry.target); io.unobserve(entry.target); }
+      });
+    }, { threshold: 0.4 });
+    nums.forEach(function (n) { io.observe(n); });
+  })();
+</script>

@@ -1,0 +1,167 @@
+---
+---
+
+<section id="press-mentions" class="section section--muted press-mentions">
+  <!-- kit: press-mentions -->
+  <div class="container">
+    <h2 class="pm-heading">In the press</h2>
+
+    <div class="pm-quotes" aria-live="polite">
+      <figure class="pm-quote is-active" id="pm-quote-1">
+        <blockquote cite="https://trailheadquarterly.com/gear/caldera-ridge-skillet-review">
+          <p>“The rare piece of camp gear you'll still own in thirty years.”</p>
+        </blockquote>
+        <figcaption>
+          Hannah Brooks, <cite>Trailhead Quarterly</cite> · <time datetime="2026-03-14">March 2026</time> ·
+          <a href="https://trailheadquarterly.com/gear/caldera-ridge-skillet-review" target="_blank" rel="noopener">Read the review</a>
+        </figcaption>
+      </figure>
+      <figure class="pm-quote" id="pm-quote-2" hidden>
+        <blockquote cite="https://thegeardesk.com/best-camp-grills-2026">
+          <p>“Folds flatter than a cutting board and grills like a backyard kettle.”</p>
+        </blockquote>
+        <figcaption>
+          Marcus Lee, <cite>The Gear Desk</cite> · <time datetime="2026-05-02">May 2026</time> ·
+          <a href="https://thegeardesk.com/best-camp-grills-2026" target="_blank" rel="noopener">Best camp grills of 2026</a>
+        </figcaption>
+      </figure>
+      <figure class="pm-quote" id="pm-quote-3" hidden>
+        <blockquote cite="https://fieldkitchenreview.com/caldera-foundry-visit">
+          <p>“Caldera is doing for cast iron what small-batch roasters did for coffee.”</p>
+        </blockquote>
+        <figcaption>
+          <cite>Field Kitchen Review</cite> · <time datetime="2025-11-20">November 2025</time> ·
+          <a href="https://fieldkitchenreview.com/caldera-foundry-visit" target="_blank" rel="noopener">A day at the foundry</a>
+        </figcaption>
+      </figure>
+      <figure class="pm-quote" id="pm-quote-4" hidden>
+        <blockquote cite="https://pacificoutdoorjournal.com/awards/2026">
+          <p>“Our pick for the best Dutch oven for car camping.”</p>
+        </blockquote>
+        <figcaption>
+          Jess Moreno, <cite>Pacific Outdoor Journal</cite> · <time datetime="2026-08-08">August 2026</time> ·
+          <a href="https://pacificoutdoorjournal.com/awards/2026" target="_blank" rel="noopener">2026 gear awards</a>
+        </figcaption>
+      </figure>
+    </div>
+
+    <ul class="pm-logos is-grayscale" role="list" aria-label="Choose a press quote">
+      <li>
+        <button type="button" class="pm-logo" aria-controls="pm-quote-1" aria-pressed="true">
+          <img src="https://cdn.bettercms.site/kit/logos/trailhead-quarterly.svg" alt="Trailhead Quarterly logo" width="160" height="48" loading="lazy" />
+        </button>
+      </li>
+      <li>
+        <button type="button" class="pm-logo" aria-controls="pm-quote-2" aria-pressed="false">
+          <img src="https://cdn.bettercms.site/kit/logos/the-gear-desk.svg" alt="The Gear Desk logo" width="160" height="48" loading="lazy" />
+        </button>
+      </li>
+      <li>
+        <button type="button" class="pm-logo" aria-controls="pm-quote-3" aria-pressed="false">
+          <img src="https://cdn.bettercms.site/kit/logos/field-kitchen-review.svg" alt="Field Kitchen Review logo" width="160" height="48" loading="lazy" />
+        </button>
+      </li>
+      <li>
+        <button type="button" class="pm-logo" aria-controls="pm-quote-4" aria-pressed="false">
+          <img src="https://cdn.bettercms.site/kit/logos/pacific-outdoor-journal.svg" alt="Pacific Outdoor Journal logo" width="160" height="48" loading="lazy" />
+        </button>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<style>
+  .press-mentions { text-align: center; }
+  .pm-heading {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 1.5rem;
+  }
+  .pm-quotes {
+    display: grid;
+    min-height: 10rem;
+    align-items: center;
+    max-width: 820px;
+    margin: 0 auto 2.5rem;
+  }
+  .pm-quote { margin: 0; grid-area: 1 / 1; }
+  .pm-quote.is-active { animation: pm-fade 400ms ease; }
+  .pm-quote blockquote { margin: 0 0 1rem; }
+  .pm-quote blockquote p {
+    margin: 0;
+    font-size: clamp(1.5rem, 3.4vw, 2.25rem);
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+  }
+  .pm-quote figcaption { color: var(--ink-2); font-size: 0.9375rem; }
+  .pm-quote cite { font-style: normal; font-weight: 600; color: var(--ink); }
+  .pm-quote a { color: var(--brand); }
+  .pm-logos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem 1rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .pm-logo {
+    position: relative;
+    padding: 0.75rem 1rem;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    font: inherit;
+    font-size: 0.8125rem;
+    color: var(--ink-3);
+  }
+  .pm-logo img { height: 28px; width: auto; max-width: 160px; }
+  .pm-logo::after {
+    content: "";
+    position: absolute;
+    left: 1rem;
+    right: 1rem;
+    bottom: 0;
+    height: 2px;
+    background: transparent;
+  }
+  .pm-logo[aria-pressed="true"]::after { background: var(--brand); }
+  .is-grayscale .pm-logo img { filter: grayscale(1); opacity: 0.55; }
+  .is-grayscale .pm-logo[aria-pressed="true"] img,
+  .is-grayscale .pm-logo:hover img { opacity: 1; }
+  @keyframes pm-fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .pm-quote.is-active { animation: none; } }
+</style>
+
+<script is:inline>
+  (function () {
+    var root = document.getElementById("press-mentions");
+    if (!root) return;
+    var buttons = Array.prototype.slice.call(root.querySelectorAll(".pm-logo"));
+    var quotes = Array.prototype.slice.call(root.querySelectorAll(".pm-quote"));
+    var index = 0, timer = null;
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    function show(i) {
+      index = i;
+      quotes.forEach(function (q, n) { q.hidden = n !== i; q.classList.toggle("is-active", n === i); });
+      buttons.forEach(function (b, n) { b.setAttribute("aria-pressed", n === i ? "true" : "false"); });
+    }
+    function start() {
+      if (reduce) return;
+      stop();
+      timer = setInterval(function () { show((index + 1) % quotes.length); }, 6000);
+    }
+    function stop() { if (timer) clearInterval(timer); timer = null; }
+    buttons.forEach(function (b, n) {
+      b.addEventListener("click", function () { show(n); stop(); });
+    });
+    root.addEventListener("mouseenter", stop);
+    root.addEventListener("mouseleave", start);
+    root.addEventListener("focusin", stop);
+    start();
+  })();
+</script>

@@ -1,0 +1,387 @@
+---
+---
+
+<section id="conversion-multi-step-form" class="section section--muted msf" data-progress="steps">
+  <!-- kit: conversion-multi-step-form -->
+  <div class="container msf__wrap">
+    <div class="section-head section-head--center">
+      <h2>Book your first visit</h2>
+      <p class="lead">Three short steps, about two minutes. Your physio reads this before you arrive, so the first session is all treatment.</p>
+    </div>
+
+    <div class="msf__card card">
+      <ol class="msf__progress" aria-label="Progress">
+        <li class="is-current" aria-current="step"><span>1</span> About you</li>
+        <li><span>2</span> What brings you in</li>
+        <li><span>3</span> Paying for care</li>
+      </ol>
+
+      <form class="msf__form" action="#" method="post" data-form="form_contact" novalidate>
+        <fieldset class="msf__step" data-step="1">
+          <legend>About you</legend>
+          <p class="msf__desc">So we can confirm your appointment.</p>
+          <div class="msf__grid">
+            <div class="field">
+              <label for="msf-full_name">Full name</label>
+              <input id="msf-full_name" name="full_name" type="text" autocomplete="name" required />
+            </div>
+            <div class="field">
+              <label for="msf-email">Email</label>
+              <input id="msf-email" name="email" type="email" autocomplete="email" required />
+            </div>
+            <div class="field">
+              <label for="msf-phone">Mobile number</label>
+              <input id="msf-phone" name="phone" type="tel" autocomplete="tel" required />
+            </div>
+            <div class="field">
+              <label for="msf-dob">Date of birth</label>
+              <input id="msf-dob" name="date_of_birth" type="date" autocomplete="bday" required />
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset class="msf__step" data-step="2" hidden>
+          <legend>What brings you in</legend>
+          <fieldset class="msf__group">
+            <legend>Where does it hurt?</legend>
+            <div class="msf__options">
+              <label class="msf__option"><input type="checkbox" name="area" value="neck" /> Neck</label>
+              <label class="msf__option"><input type="checkbox" name="area" value="shoulder" /> Shoulder</label>
+              <label class="msf__option"><input type="checkbox" name="area" value="lower-back" /> Lower back</label>
+              <label class="msf__option"><input type="checkbox" name="area" value="hip" /> Hip</label>
+              <label class="msf__option"><input type="checkbox" name="area" value="knee" /> Knee</label>
+              <label class="msf__option"><input type="checkbox" name="area" value="ankle-foot" /> Ankle or foot</label>
+            </div>
+          </fieldset>
+
+          <div class="field msf__scale">
+            <label for="msf-pain">How bad is it on a typical day? <output for="msf-pain" class="msf__pain-value">5</output></label>
+            <input id="msf-pain" name="pain_level" type="range" min="0" max="10" step="1" value="5" />
+            <div class="msf__scale-labels"><span>No pain</span><span>Worst pain imaginable</span></div>
+          </div>
+
+          <fieldset class="msf__group">
+            <legend>Have you had surgery for this?</legend>
+            <div class="msf__options">
+              <label class="msf__option"><input type="radio" name="had_surgery" value="yes" required /> Yes</label>
+              <label class="msf__option"><input type="radio" name="had_surgery" value="no" /> No</label>
+            </div>
+          </fieldset>
+
+          <div class="field" data-show-if="had_surgery" data-show-op="equals" data-show-value="yes" hidden>
+            <label for="msf-surgery_date">When was the surgery?</label>
+            <input id="msf-surgery_date" name="surgery_date" type="date" required disabled />
+          </div>
+        </fieldset>
+
+        <fieldset class="msf__step" data-step="3" hidden>
+          <legend>Paying for care</legend>
+          <div class="field">
+            <label for="msf-insurer">How will you pay?</label>
+            <select id="msf-insurer" name="insurer" required>
+              <option value="">Choose one</option>
+              <option value="aetna">Aetna</option>
+              <option value="bcbs">Blue Cross Blue Shield</option>
+              <option value="uhc">UnitedHealthcare</option>
+              <option value="self-pay">Self-pay</option>
+            </select>
+          </div>
+          <div class="field" data-show-if="insurer" data-show-op="not" data-show-value="self-pay" hidden>
+            <label for="msf-member_id">Member ID</label>
+            <input id="msf-member_id" name="member_id" type="text" required disabled />
+          </div>
+          <label class="msf__consent">
+            <input type="checkbox" name="privacy_consent" required />
+            <span>I've read the <a href="/privacy-practices">Notice of Privacy Practices</a> and agree to Juniper Physio storing this information for my care.</span>
+          </label>
+        </fieldset>
+
+        <p class="msf__error" role="alert" hidden>Please fill in the required fields to continue.</p>
+
+        <div class="msf__nav">
+          <button type="button" class="btn btn-secondary" data-action="back" hidden>Back</button>
+          <button type="button" class="btn btn-primary" data-action="next">Continue</button>
+          <button type="submit" class="btn btn-primary" data-action="submit" hidden>Request appointment</button>
+        </div>
+      </form>
+
+      <div class="msf__success" role="status" hidden>
+        <p>Thanks — we'll text you within one business day with two appointment times to choose from.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  #conversion-multi-step-form [hidden] {
+    display: none !important;
+  }
+
+  .msf__wrap {
+    max-width: 760px;
+  }
+
+  .msf__card {
+    padding: clamp(1.25rem, 4vw, 2.5rem);
+    box-shadow: var(--shadow);
+  }
+
+  .msf__progress {
+    display: flex;
+    gap: 0.5rem;
+    margin: 0 0 2rem;
+    padding: 0;
+    list-style: none;
+    counter-reset: step;
+  }
+
+  .msf__progress li {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding-top: 0.75rem;
+    border-top: 3px solid var(--line);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--ink-3);
+  }
+
+  .msf__progress li span {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--surface-2);
+    font-size: 0.75rem;
+  }
+
+  .msf__progress li.is-current,
+  .msf__progress li.is-done {
+    border-color: var(--brand);
+    color: var(--ink);
+  }
+
+  .msf__progress li.is-current span,
+  .msf__progress li.is-done span {
+    background: var(--brand);
+    color: var(--brand-ink);
+  }
+
+  .msf__step {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    display: grid;
+    gap: 1.25rem;
+    min-width: 0;
+  }
+
+  .msf__step > legend {
+    padding: 0;
+    margin-bottom: 0.25rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+
+  .msf__step[hidden],
+  .msf__step [hidden] {
+    display: none;
+  }
+
+  .msf__desc {
+    margin: -0.75rem 0 0;
+    color: var(--ink-2);
+  }
+
+  .msf__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+  }
+
+  .msf__group {
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  .msf__group legend {
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+
+  .msf__options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .msf__option {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    min-height: 44px;
+    padding: 0 0.9rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+  }
+
+  .msf__option:has(input:checked) {
+    border-color: var(--brand);
+    background: var(--brand-soft);
+  }
+
+  .msf__scale input {
+    min-height: auto;
+    padding: 0;
+    border: 0;
+    accent-color: var(--brand);
+  }
+
+  .msf__pain-value {
+    display: inline-block;
+    min-width: 2ch;
+    margin-left: 0.25rem;
+    color: var(--brand);
+  }
+
+  .msf__scale-labels {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    font-size: 0.8125rem;
+    color: var(--ink-3);
+  }
+
+  .msf__consent {
+    display: flex;
+    gap: 0.6rem;
+    align-items: flex-start;
+    font-size: 0.875rem;
+    color: var(--ink-2);
+  }
+
+  .msf__consent input {
+    margin-top: 0.3rem;
+  }
+
+  .msf__error {
+    margin: 1rem 0 0;
+    color: var(--brand);
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+
+  .msf__nav {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    margin-top: 2rem;
+  }
+
+  .msf__nav [hidden] {
+    display: none;
+  }
+
+  .msf__success {
+    padding: 1.25rem;
+    border-radius: var(--radius);
+    background: #e8f4ec;
+    color: var(--success);
+    font-weight: 500;
+  }
+
+  .msf__success p {
+    margin: 0;
+  }
+
+  @media (max-width: 560px) {
+    .msf__progress li {
+      font-size: 0;
+      gap: 0;
+    }
+
+    .msf__progress li span {
+      font-size: 0.75rem;
+    }
+  }
+</style>
+
+<script is:inline>
+  (() => {
+    const root = document.getElementById("conversion-multi-step-form");
+    if (!root) return;
+    const form = root.querySelector("form");
+    const steps = [...root.querySelectorAll(".msf__step")];
+    const marks = [...root.querySelectorAll(".msf__progress li")];
+    const back = root.querySelector('[data-action="back"]');
+    const next = root.querySelector('[data-action="next"]');
+    const submit = root.querySelector('[data-action="submit"]');
+    const error = root.querySelector(".msf__error");
+    const success = root.querySelector(".msf__success");
+    const pain = root.querySelector("#msf-pain");
+    const painOut = root.querySelector(".msf__pain-value");
+    let current = 0;
+
+    pain.addEventListener("input", () => (painOut.textContent = pain.value));
+
+    const valueOf = (name) => {
+      const el = form.elements.namedItem(name);
+      if (!el) return "";
+      return el.value || "";
+    };
+
+    const applyShowIf = () => {
+      root.querySelectorAll("[data-show-if]").forEach((wrap) => {
+        const v = valueOf(wrap.dataset.showIf);
+        const show = wrap.dataset.showOp === "equals" ? v === wrap.dataset.showValue : v !== "" && v !== wrap.dataset.showValue;
+        wrap.hidden = !show;
+        wrap.querySelectorAll("input, select, textarea").forEach((i) => (i.disabled = !show));
+      });
+    };
+    form.addEventListener("change", applyShowIf);
+
+    const valid = () => {
+      const step = steps[current];
+      let ok = true;
+      step.querySelectorAll("input, select, textarea").forEach((el) => {
+        if (!el.disabled && !el.checkValidity()) ok = false;
+      });
+      if (current === 1 && !step.querySelector('input[name="area"]:checked')) ok = false;
+      error.hidden = ok;
+      return ok;
+    };
+
+    const show = (i) => {
+      current = i;
+      steps.forEach((s, n) => (s.hidden = n !== i));
+      marks.forEach((m, n) => {
+        m.classList.toggle("is-current", n === i);
+        m.classList.toggle("is-done", n < i);
+        if (n === i) m.setAttribute("aria-current", "step");
+        else m.removeAttribute("aria-current");
+      });
+      back.hidden = i === 0;
+      next.hidden = i === steps.length - 1;
+      submit.hidden = i !== steps.length - 1;
+      error.hidden = true;
+    };
+
+    next.addEventListener("click", () => {
+      if (valid()) show(current + 1);
+    });
+    back.addEventListener("click", () => show(current - 1));
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (!valid()) return;
+      form.hidden = true;
+      root.querySelector(".msf__progress").hidden = true;
+      success.hidden = false;
+    });
+  })();
+</script>

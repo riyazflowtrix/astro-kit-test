@@ -1,0 +1,2503 @@
+[
+ {
+  "id": "pricing-tiers-billing-toggle",
+  "name": "Plans with monthly / yearly switch",
+  "category": "Pricing & plans",
+  "kind": "block",
+  "brand": "Northwind",
+  "previewLayout": "grid-3",
+  "proves": "Both cycle prices written per tier (no computed discount) \u00b7 per-seat pricing as a conditional \u00b7 'Everything in X, plus' inheritance \u00b7 developer-locked payment price IDs",
+  "schema": {
+   "name": "planTiers",
+   "title": "Pricing plans",
+   "kind": "block",
+   "icon": "currency-dollar",
+   "category": "Pricing & plans",
+   "description": "Plan columns with a monthly / yearly switch",
+   "variants": [
+    {
+     "id": "columns",
+     "name": "Columns"
+    },
+    {
+     "id": "cards-compact",
+     "name": "Compact cards",
+     "description": "Less copy, for a pricing strip on the home page"
+    }
+   ],
+   "preview": {
+    "title": "heading",
+    "subtitle": "toggle.defaultCycle"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "plans",
+     "title": "Plans"
+    },
+    {
+     "name": "settings",
+     "title": "Settings"
+    }
+   ],
+   "fieldsets": [
+    {
+     "name": "monthly",
+     "title": "Billed monthly"
+    },
+    {
+     "name": "yearly",
+     "title": "Billed yearly"
+    },
+    {
+     "name": "ids",
+     "title": "Payment IDs",
+     "description": "Set by a developer. Checkout uses these, not the numbers above.",
+     "collapsed": true
+    }
+   ],
+   "fields": [
+    {
+     "name": "eyebrow",
+     "title": "Eyebrow",
+     "type": "string",
+     "validation": {
+      "max": 32
+     }
+    },
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "validation": {
+      "required": true,
+      "recommendedMax": 48
+     },
+     "ai": true,
+     "localized": true
+    },
+    {
+     "name": "intro",
+     "title": "Intro",
+     "type": "text",
+     "rows": 2,
+     "validation": {
+      "recommendedMax": 160
+     },
+     "ai": true
+    },
+    {
+     "name": "toggle",
+     "title": "Billing switch",
+     "type": "object",
+     "icon": "toggle-right",
+     "openMode": "inline",
+     "fields": [
+      {
+       "name": "defaultCycle",
+       "title": "Opens on",
+       "type": "select",
+       "layout": "segmented",
+       "initialValue": "yearly",
+       "options": [
+        {
+         "value": "monthly",
+         "label": "Monthly"
+        },
+        {
+         "value": "yearly",
+         "label": "Yearly"
+        }
+       ]
+      },
+      {
+       "name": "badge",
+       "title": "Yearly badge",
+       "type": "string",
+       "validation": {
+        "max": 16
+       },
+       "placeholder": "Save 20%"
+      }
+     ]
+    },
+    {
+     "name": "plans",
+     "title": "Plans",
+     "type": "array",
+     "group": "plans",
+     "itemNoun": "plan",
+     "validation": {
+      "min": 2,
+      "max": 4
+     },
+     "of": [
+      {
+       "name": "plan",
+       "title": "Plan",
+       "type": "object",
+       "icon": "badge",
+       "preview": {
+        "title": "name",
+        "subtitle": "audience",
+        "fallback": "Untitled plan"
+       },
+       "fields": [
+        {
+         "name": "name",
+         "title": "Plan name",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 20
+         }
+        },
+        {
+         "name": "audience",
+         "title": "Who it's for",
+         "type": "string",
+         "validation": {
+          "recommendedMax": 60
+         },
+         "placeholder": "For teams shipping to production"
+        },
+        {
+         "name": "pricing",
+         "title": "Price",
+         "type": "select",
+         "layout": "segmented",
+         "initialValue": "flat",
+         "options": [
+          {
+           "value": "free",
+           "label": "Free"
+          },
+          {
+           "value": "flat",
+           "label": "Flat"
+          },
+          {
+           "value": "seat",
+           "label": "Per seat"
+          },
+          {
+           "value": "custom",
+           "label": "Custom"
+          }
+         ]
+        },
+        {
+         "name": "monthly",
+         "title": "Price",
+         "type": "number",
+         "fieldset": "monthly",
+         "numeric": {
+          "unit": "USD",
+          "min": 0,
+          "step": 1
+         },
+         "hidden": {
+          "field": "pricing",
+          "equals": [
+           "flat",
+           "seat"
+          ]
+         },
+         "validation": {
+          "required": true
+         },
+         "description": "Per month, when paid monthly."
+        },
+        {
+         "name": "yearly",
+         "title": "Price a month",
+         "type": "number",
+         "fieldset": "yearly",
+         "numeric": {
+          "unit": "USD",
+          "min": 0,
+          "step": 1
+         },
+         "hidden": {
+          "field": "pricing",
+          "equals": [
+           "flat",
+           "seat"
+          ]
+         },
+         "validation": {
+          "required": true
+         },
+         "description": "Per month, when paid yearly."
+        },
+        {
+         "name": "minSeats",
+         "title": "Minimum seats",
+         "type": "number",
+         "hidden": {
+          "field": "pricing",
+          "equals": "seat"
+         },
+         "numeric": {
+          "min": 1,
+          "max": 50,
+          "step": 1,
+          "unit": "seats"
+         },
+         "description": "The price above is per seat."
+        },
+        {
+         "name": "customLabel",
+         "title": "Price label",
+         "type": "string",
+         "hidden": {
+          "field": "pricing",
+          "equals": "custom"
+         },
+         "validation": {
+          "max": 20
+         },
+         "placeholder": "Let's talk"
+        },
+        {
+         "name": "button",
+         "title": "Button",
+         "type": "button",
+         "validation": {
+          "required": true
+         }
+        },
+        {
+         "name": "badge",
+         "title": "Badge",
+         "type": "string",
+         "validation": {
+          "max": 18
+         },
+         "placeholder": "Most popular"
+        },
+        {
+         "name": "inherits",
+         "title": "Everything in",
+         "type": "string",
+         "validation": {
+          "max": 20
+         },
+         "description": "The previous plan's name. Shows \"Everything in Pro, plus:\"."
+        },
+        {
+         "name": "features",
+         "title": "Features",
+         "type": "array",
+         "itemNoun": "feature",
+         "of": [
+          {
+           "name": "feature",
+           "title": "Feature",
+           "type": "string"
+          }
+         ],
+         "validation": {
+          "max": 8
+         },
+         "description": "Only what's new when \"Everything in\" is set."
+        },
+        {
+         "name": "stripeMonthly",
+         "title": "Monthly price ID",
+         "type": "string",
+         "fieldset": "ids",
+         "access": {
+          "edit": "schema.manage"
+         },
+         "lockReason": "Set by the developer in Stripe",
+         "hidden": {
+          "field": "pricing",
+          "equals": [
+           "flat",
+           "seat"
+          ]
+         },
+         "validation": {
+          "pattern": "^price_[A-Za-z0-9]+$",
+          "patternMessage": "Use a Stripe price ID, like price_1PqRsT."
+         }
+        },
+        {
+         "name": "stripeYearly",
+         "title": "Yearly price ID",
+         "type": "string",
+         "fieldset": "ids",
+         "access": {
+          "edit": "schema.manage"
+         },
+         "lockReason": "Set by the developer in Stripe",
+         "hidden": {
+          "field": "pricing",
+          "equals": [
+           "flat",
+           "seat"
+          ]
+         },
+         "validation": {
+          "pattern": "^price_[A-Za-z0-9]+$",
+          "patternMessage": "Use a Stripe price ID, like price_1PqRsT."
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "footnote",
+     "title": "Footnote",
+     "type": "text",
+     "rows": 2,
+     "group": "settings",
+     "validation": {
+      "max": 200
+     }
+    },
+    {
+     "name": "currency",
+     "title": "Currency",
+     "type": "select",
+     "group": "settings",
+     "initialValue": "USD",
+     "options": [
+      {
+       "value": "USD",
+       "label": "US dollar"
+      },
+      {
+       "value": "EUR",
+       "label": "Euro"
+      },
+      {
+       "value": "GBP",
+       "label": "Pound sterling"
+      }
+     ],
+     "description": "Doesn't convert prices."
+    }
+   ]
+  },
+  "value": {
+   "_variant": "columns",
+   "eyebrow": "Pricing",
+   "heading": "Start free. Pay when you ship.",
+   "intro": "Every plan includes unlimited endpoints, signed webhooks and automatic retries.",
+   "toggle": {
+    "defaultCycle": "yearly",
+    "badge": "Save 20%"
+   },
+   "plans": [
+    {
+     "_key": "pl1",
+     "name": "Hobby",
+     "audience": "For side projects and prototypes",
+     "pricing": "free",
+     "button": {
+      "label": "Start building",
+      "href": "https://app.northwind.dev/signup",
+      "type": "url",
+      "style": "outline"
+     },
+     "features": [
+      "100k events a month",
+      "3-day event history",
+      "Community support"
+     ]
+    },
+    {
+     "_key": "pl2",
+     "name": "Pro",
+     "audience": "For apps in production",
+     "pricing": "flat",
+     "monthly": 49,
+     "yearly": 39,
+     "button": {
+      "label": "Start 14-day trial",
+      "href": "https://app.northwind.dev/signup?plan=pro",
+      "type": "url",
+      "style": "primary",
+      "arrow": true
+     },
+     "badge": "Most popular",
+     "inherits": "Hobby",
+     "features": [
+      "2M events a month",
+      "30-day event history",
+      "Replay failed deliveries",
+      "Email support, 1-day reply"
+     ],
+     "stripeMonthly": "price_1PqProMonthly49",
+     "stripeYearly": "price_1PqProYearly468"
+    },
+    {
+     "_key": "pl3",
+     "name": "Team",
+     "audience": "For teams with on-call rotations",
+     "pricing": "seat",
+     "monthly": 25,
+     "yearly": 20,
+     "minSeats": 3,
+     "button": {
+      "label": "Start 14-day trial",
+      "href": "https://app.northwind.dev/signup?plan=team",
+      "type": "url",
+      "style": "secondary"
+     },
+     "inherits": "Pro",
+     "features": [
+      "10M events a month",
+      "90-day event history",
+      "SSO with Google and Okta",
+      "Audit log"
+     ],
+     "stripeMonthly": "price_1PqTeamSeatMonthly25",
+     "stripeYearly": "price_1PqTeamSeatYearly240"
+    },
+    {
+     "_key": "pl4",
+     "name": "Enterprise",
+     "audience": "For regulated industries and high volume",
+     "pricing": "custom",
+     "customLabel": "Let's talk",
+     "button": {
+      "label": "Talk to sales",
+      "href": "/contact-sales",
+      "type": "page",
+      "style": "outline"
+     },
+     "inherits": "Team",
+     "features": [
+      "Volume pricing",
+      "Dedicated region",
+      "99.99% uptime SLA",
+      "HIPAA BAA"
+     ]
+    }
+   ],
+   "footnote": "Prices in USD, excluding tax. Events over your plan's allowance are billed at $0.40 per 100k.",
+   "currency": "USD"
+  }
+ },
+ {
+  "id": "pricing-usage-calculator",
+  "name": "Usage-based price calculator",
+  "category": "Pricing & plans",
+  "kind": "block",
+  "brand": "Northwind",
+  "previewLayout": "split",
+  "proves": "Slider inputs keyed for a formula \u00b7 rates \u203a graduated tiers per input (4 levels) \u00b7 base price + included units \u00b7 contact-sales threshold",
+  "schema": {
+   "name": "usageCalculator",
+   "title": "Price calculator",
+   "kind": "block",
+   "icon": "calculator",
+   "category": "Pricing & plans",
+   "description": "Sliders for usage, with the monthly estimate worked out live",
+   "preview": {
+    "title": "heading",
+    "subtitle": "intro"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "inputs",
+     "title": "Sliders"
+    },
+    {
+     "name": "rates",
+     "title": "Rates"
+    },
+    {
+     "name": "settings",
+     "title": "Settings"
+    }
+   ],
+   "fields": [
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "validation": {
+      "required": true,
+      "recommendedMax": 48
+     }
+    },
+    {
+     "name": "intro",
+     "title": "Intro",
+     "type": "text",
+     "rows": 2,
+     "validation": {
+      "recommendedMax": 160
+     }
+    },
+    {
+     "name": "inputs",
+     "title": "Sliders",
+     "type": "array",
+     "group": "inputs",
+     "itemNoun": "slider",
+     "validation": {
+      "min": 1,
+      "max": 4
+     },
+     "of": [
+      {
+       "name": "input",
+       "title": "Slider",
+       "type": "object",
+       "icon": "adjustments-horizontal",
+       "preview": {
+        "title": "label",
+        "subtitle": "unit",
+        "fallback": "Untitled slider"
+       },
+       "fields": [
+        {
+         "name": "key",
+         "title": "Key",
+         "type": "string",
+         "access": {
+          "edit": "schema.manage"
+         },
+         "lockReason": "Used by the rates below",
+         "validation": {
+          "required": true,
+          "pattern": "^[a-z][a-zA-Z0-9]*$",
+          "patternMessage": "Use camelCase letters and numbers, like hoursPerRun."
+         }
+        },
+        {
+         "name": "label",
+         "title": "Label",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 40
+         }
+        },
+        {
+         "name": "help",
+         "title": "Hint",
+         "type": "string",
+         "validation": {
+          "max": 90
+         }
+        },
+        {
+         "name": "unit",
+         "title": "Unit",
+         "type": "string",
+         "validation": {
+          "max": 16
+         },
+         "placeholder": "events"
+        },
+        {
+         "name": "min",
+         "title": "Lowest",
+         "type": "number",
+         "validation": {
+          "required": true
+         }
+        },
+        {
+         "name": "max",
+         "title": "Highest",
+         "type": "number",
+         "validation": {
+          "required": true
+         }
+        },
+        {
+         "name": "start",
+         "title": "Starts at",
+         "type": "number",
+         "validation": {
+          "required": true
+         }
+        },
+        {
+         "name": "scale",
+         "title": "Scale",
+         "type": "select",
+         "layout": "segmented",
+         "initialValue": "linear",
+         "options": [
+          {
+           "value": "linear",
+           "label": "Even steps"
+          },
+          {
+           "value": "log",
+           "label": "Grows faster",
+           "description": "For ranges like 100k to 100M"
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "basePrice",
+     "title": "Platform fee",
+     "type": "number",
+     "group": "rates",
+     "numeric": {
+      "unit": "USD",
+      "min": 0,
+      "step": 1
+     },
+     "description": "Monthly, before usage. 0 for pay-as-you-go."
+    },
+    {
+     "name": "rates",
+     "title": "Rates",
+     "type": "array",
+     "group": "rates",
+     "itemNoun": "rate",
+     "validation": {
+      "min": 1,
+      "max": 4
+     },
+     "of": [
+      {
+       "name": "rate",
+       "title": "Rate",
+       "type": "object",
+       "icon": "receipt",
+       "preview": {
+        "title": "input",
+        "subtitle": "included",
+        "fallback": "Untitled rate"
+       },
+       "fields": [
+        {
+         "name": "input",
+         "title": "For slider",
+         "type": "string",
+         "validation": {
+          "required": true
+         },
+         "description": "The slider's key, e.g. events."
+        },
+        {
+         "name": "included",
+         "title": "Included free",
+         "type": "number",
+         "numeric": {
+          "min": 0,
+          "step": 1
+         },
+         "description": "Units covered by the platform fee."
+        },
+        {
+         "name": "per",
+         "title": "Priced per",
+         "type": "number",
+         "initialValue": 1,
+         "numeric": {
+          "min": 1,
+          "step": 1
+         },
+         "description": "Bundle size, e.g. 100000 for \"per 100k events\"."
+        },
+        {
+         "name": "tiers",
+         "title": "Price steps",
+         "type": "array",
+         "itemNoun": "step",
+         "openMode": "inline",
+         "validation": {
+          "min": 1,
+          "max": 6
+         },
+         "description": "Each step prices only the units inside it.",
+         "of": [
+          {
+           "name": "tier",
+           "title": "Step",
+           "type": "object",
+           "icon": "stairs",
+           "preview": {
+            "title": "upTo",
+            "subtitle": "price",
+            "fallback": "Untitled step"
+           },
+           "fields": [
+            {
+             "name": "upTo",
+             "title": "Up to",
+             "type": "number",
+             "numeric": {
+              "min": 1,
+              "step": 1
+             },
+             "description": "Leave empty on the last step for \"and above\"."
+            },
+            {
+             "name": "price",
+             "title": "Price",
+             "type": "number",
+             "numeric": {
+              "unit": "USD",
+              "min": 0,
+              "step": 0.01
+             },
+             "validation": {
+              "required": true
+             }
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "showBreakdown",
+     "title": "Show the breakdown",
+     "type": "boolean",
+     "group": "settings",
+     "initialValue": true
+    },
+    {
+     "name": "contactAbove",
+     "title": "Talk to sales above",
+     "type": "number",
+     "group": "settings",
+     "numeric": {
+      "unit": "USD",
+      "min": 0,
+      "step": 100
+     },
+     "description": "Above this, a sales button replaces the price. Leave empty for never."
+    },
+    {
+     "name": "salesButton",
+     "title": "Sales button",
+     "type": "button",
+     "group": "settings",
+     "hidden": {
+      "field": "contactAbove",
+      "notEmpty": true
+     }
+    },
+    {
+     "name": "button",
+     "title": "Button",
+     "type": "button",
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "disclaimer",
+     "title": "Disclaimer",
+     "type": "string",
+     "group": "settings",
+     "validation": {
+      "max": 140
+     }
+    },
+    {
+     "name": "currency",
+     "title": "Currency",
+     "type": "select",
+     "group": "settings",
+     "initialValue": "USD",
+     "options": [
+      {
+       "value": "USD",
+       "label": "US dollar"
+      },
+      {
+       "value": "EUR",
+       "label": "Euro"
+      },
+      {
+       "value": "GBP",
+       "label": "Pound sterling"
+      }
+     ],
+     "description": "Doesn't convert prices."
+    }
+   ]
+  },
+  "value": {
+   "heading": "Estimate your monthly bill",
+   "intro": "Pay for the events you send. No per-endpoint fees, no surprise overages.",
+   "inputs": [
+    {
+     "_key": "in1",
+     "key": "events",
+     "label": "Events a month",
+     "help": "Count every webhook delivery attempt, retries included.",
+     "unit": "events",
+     "min": 100000,
+     "max": 100000000,
+     "start": 5000000,
+     "scale": "log"
+    },
+    {
+     "_key": "in2",
+     "key": "retentionDays",
+     "label": "Event history",
+     "unit": "days",
+     "min": 3,
+     "max": 90,
+     "start": 30,
+     "scale": "linear"
+    }
+   ],
+   "basePrice": 49,
+   "rates": [
+    {
+     "_key": "ra1",
+     "input": "events",
+     "included": 2000000,
+     "per": 100000,
+     "tiers": [
+      {
+       "_key": "ti1",
+       "upTo": 10000000,
+       "price": 0.4
+      },
+      {
+       "_key": "ti2",
+       "upTo": 50000000,
+       "price": 0.3
+      },
+      {
+       "_key": "ti3",
+       "price": 0.2
+      }
+     ]
+    },
+    {
+     "_key": "ra2",
+     "input": "retentionDays",
+     "included": 30,
+     "per": 30,
+     "tiers": [
+      {
+       "_key": "ti4",
+       "price": 20
+      }
+     ]
+    }
+   ],
+   "showBreakdown": true,
+   "contactAbove": 2500,
+   "salesButton": {
+    "label": "Get volume pricing",
+    "href": "/contact-sales",
+    "type": "page",
+    "style": "secondary"
+   },
+   "button": {
+    "label": "Start 14-day trial",
+    "href": "https://app.northwind.dev/signup?plan=pro",
+    "type": "url",
+    "style": "primary",
+    "arrow": true
+   },
+   "disclaimer": "An estimate before tax. Your invoice uses your actual usage for the month.",
+   "currency": "USD"
+  }
+ },
+ {
+  "id": "pricing-feature-matrix",
+  "name": "Full feature comparison matrix",
+  "category": "Pricing & plans",
+  "kind": "block",
+  "brand": "Northwind",
+  "previewLayout": "table",
+  "proves": "Plans as keyed columns \u00b7 one `table` keyed by plan key \u00b7 Yes / no columns with per-row (limits) and per-cell (partial, add-on, soon) types \u00b7 row groups \u00b7 price row \u2192 Offers JSON-LD \u00b7 sticky header + mobile mode",
+  "schema": {
+   "name": "planComparison",
+   "title": "Plan comparison",
+   "kind": "block",
+   "icon": "table-options",
+   "category": "Pricing & plans",
+   "description": "Every feature across every plan, grouped, with a sticky header",
+   "preview": {
+    "title": "heading"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "design",
+     "title": "Design"
+    }
+   ],
+   "fields": [
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "validation": {
+      "required": true,
+      "recommendedMax": 48
+     }
+    },
+    {
+     "name": "plans",
+     "title": "Columns",
+     "type": "array",
+     "itemNoun": "column",
+     "validation": {
+      "min": 2,
+      "max": 5
+     },
+     "of": [
+      {
+       "name": "column",
+       "title": "Column",
+       "type": "object",
+       "icon": "columns",
+       "preview": {
+        "title": "name",
+        "subtitle": "price",
+        "fallback": "Untitled column"
+       },
+       "fields": [
+        {
+         "name": "key",
+         "title": "Key",
+         "type": "string",
+         "access": {
+          "edit": "schema.manage"
+         },
+         "lockReason": "The matrix's plan columns use this key",
+         "validation": {
+          "required": true,
+          "pattern": "^[a-z]+$",
+          "patternMessage": "Use lowercase letters, like email.",
+          "unique": true
+         }
+        },
+        {
+         "name": "name",
+         "title": "Plan name",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 20
+         }
+        },
+        {
+         "name": "price",
+         "title": "Price line",
+         "type": "string",
+         "validation": {
+          "max": 24
+         },
+         "placeholder": "$39/mo"
+        },
+        {
+         "name": "button",
+         "title": "Button",
+         "type": "button"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "matrix",
+     "title": "Matrix",
+     "type": "table",
+     "validation": {
+      "required": true
+     },
+     "table": {
+      "maxColumns": 6,
+      "maxRows": 80,
+      "columnTypes": [
+       "text",
+       "boolean",
+       "money",
+       "link",
+       "richtext-inline"
+      ],
+      "jsonLd": [
+       "Offers"
+      ],
+      "settings": {
+       "phones": [],
+       "totals": false,
+       "sticky": false
+      }
+     }
+    },
+    {
+     "name": "isHeaderSticky",
+     "title": "Keep the header row in view",
+     "type": "boolean",
+     "group": "design",
+     "initialValue": true
+    },
+    {
+     "name": "mobile",
+     "title": "On phones",
+     "type": "select",
+     "group": "design",
+     "layout": "cards",
+     "initialValue": "one-plan",
+     "options": [
+      {
+       "value": "one-plan",
+       "label": "One plan at a time",
+       "icon": "device-mobile",
+       "description": "A plan switcher above the table"
+      },
+      {
+       "value": "scroll",
+       "label": "Scroll sideways",
+       "icon": "arrows-horizontal",
+       "description": "Feature names stay pinned"
+      }
+     ]
+    }
+   ]
+  },
+  "value": {
+   "heading": "Compare every feature",
+   "plans": [
+    {
+     "_key": "c1",
+     "key": "hobby",
+     "name": "Hobby",
+     "price": "$0",
+     "button": {
+      "label": "Start free",
+      "href": "https://app.northwind.dev/signup",
+      "type": "url",
+      "style": "outline"
+     }
+    },
+    {
+     "_key": "c2",
+     "key": "pro",
+     "name": "Pro",
+     "price": "$39/mo",
+     "button": {
+      "label": "Start trial",
+      "href": "https://app.northwind.dev/signup?plan=pro",
+      "type": "url",
+      "style": "primary"
+     }
+    },
+    {
+     "_key": "c3",
+     "key": "team",
+     "name": "Team",
+     "price": "$20/seat",
+     "button": {
+      "label": "Start trial",
+      "href": "https://app.northwind.dev/signup?plan=team",
+      "type": "url",
+      "style": "secondary"
+     }
+    },
+    {
+     "_key": "c4",
+     "key": "enterprise",
+     "name": "Enterprise",
+     "price": "Custom",
+     "button": {
+      "label": "Talk to sales",
+      "href": "/contact-sales",
+      "type": "page",
+      "style": "outline"
+     }
+    }
+   ],
+   "matrix": {
+    "id": "tbl_northwind_plans",
+    "caption": "Northwind plans compared: delivery limits, retries, static IPs, SSO and compliance by plan",
+    "headerRow": true,
+    "headerColumn": true,
+    "design": {
+     "responsive": "scroll",
+     "sticky": true
+    },
+    "rowGroups": [
+     {
+      "_key": "price",
+      "label": "Price"
+     },
+     {
+      "_key": "delivery",
+      "label": "Delivery"
+     },
+     {
+      "_key": "security",
+      "label": "Security & compliance"
+     }
+    ],
+    "footnotes": [
+     {
+      "_key": "f1",
+      "text": "Every delivery attempt counts, retries included."
+     },
+     {
+      "_key": "f2",
+      "text": "Per seat, billed monthly."
+     },
+     {
+      "_key": "f3",
+      "text": "A Business Associate Agreement for teams handling health data."
+     }
+    ],
+    "jsonLd": {
+     "type": "Offers",
+     "priceRow": "r1"
+    },
+    "columns": [
+     {
+      "type": "text",
+      "_key": "feature",
+      "label": "Feature"
+     },
+     {
+      "type": "boolean",
+      "_key": "hobby",
+      "label": "Hobby"
+     },
+     {
+      "type": "boolean",
+      "_key": "pro",
+      "label": "Pro",
+      "highlight": true
+     },
+     {
+      "type": "boolean",
+      "_key": "team",
+      "label": "Team"
+     },
+     {
+      "type": "boolean",
+      "_key": "enterprise",
+      "label": "Enterprise"
+     }
+    ],
+    "rows": [
+     {
+      "_key": "r1",
+      "group": "price",
+      "cells": {
+       "feature": "Price a month",
+       "hobby": {
+        "value": 0,
+        "type": "money"
+       },
+       "pro": {
+        "value": 39,
+        "type": "money"
+       },
+       "team": {
+        "value": 20,
+        "type": "money",
+        "note": "f2"
+       },
+       "enterprise": {
+        "value": "Custom",
+        "type": "text"
+       }
+      }
+     },
+     {
+      "_key": "r2",
+      "group": "delivery",
+      "type": "text",
+      "cells": {
+       "feature": {
+        "value": "Events a month",
+        "note": "f1"
+       },
+       "hobby": "100k",
+       "pro": "2M",
+       "team": "10M",
+       "enterprise": "Unlimited"
+      }
+     },
+     {
+      "_key": "r3",
+      "group": "delivery",
+      "cells": {
+       "feature": {
+        "value": {
+         "label": "Automatic retries",
+         "href": "https://docs.northwind.dev/delivery/retries"
+        },
+        "type": "link"
+       },
+       "hobby": {
+        "value": "3 attempts",
+        "type": "text"
+       },
+       "pro": true,
+       "team": true,
+       "enterprise": true
+      }
+     },
+     {
+      "_key": "r4",
+      "group": "delivery",
+      "cells": {
+       "feature": "Static IPs",
+       "hobby": false,
+       "pro": {
+        "value": "Add-on, $29/mo",
+        "type": "text"
+       },
+       "team": true,
+       "enterprise": true
+      }
+     },
+     {
+      "_key": "r5",
+      "group": "security",
+      "cells": {
+       "feature": "SAML SSO",
+       "hobby": false,
+       "pro": false,
+       "team": {
+        "value": "Google, Okta",
+        "type": "text"
+       },
+       "enterprise": true
+      }
+     },
+     {
+      "_key": "r6",
+      "group": "security",
+      "cells": {
+       "feature": {
+        "value": "HIPAA BAA",
+        "note": "f3"
+       },
+       "hobby": false,
+       "pro": false,
+       "team": false,
+       "enterprise": true
+      }
+     },
+     {
+      "_key": "r7",
+      "group": "security",
+      "cells": {
+       "feature": "Customer-managed keys",
+       "hobby": false,
+       "pro": false,
+       "team": false,
+       "enterprise": {
+        "value": "Coming soon",
+        "type": "text"
+       }
+      }
+     }
+    ]
+   },
+   "isHeaderSticky": true,
+   "mobile": "one-plan"
+  }
+ },
+ {
+  "id": "pricing-single-plan-addons",
+  "name": "Single plan with add-ons",
+  "category": "Pricing & plans",
+  "kind": "block",
+  "brand": "Juniper Physio",
+  "previewLayout": "split",
+  "proves": "One plan object + add-on array with units, quantities and preselection \u00b7 eligibility flags \u00b7 live total",
+  "schema": {
+   "name": "planWithAddons",
+   "title": "Plan with add-ons",
+   "kind": "block",
+   "icon": "playlist-add",
+   "category": "Pricing & plans",
+   "description": "One membership or plan, with optional extras and a running total",
+   "preview": {
+    "title": "plan.name",
+    "subtitle": "heading"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "addons",
+     "title": "Add-ons"
+    }
+   ],
+   "fieldsets": [
+    {
+     "name": "price",
+     "title": "Price",
+     "columns": 2
+    }
+   ],
+   "fields": [
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "validation": {
+      "required": true,
+      "recommendedMax": 48
+     }
+    },
+    {
+     "name": "intro",
+     "title": "Intro",
+     "type": "text",
+     "rows": 2,
+     "validation": {
+      "recommendedMax": 180
+     }
+    },
+    {
+     "name": "plan",
+     "title": "Plan",
+     "type": "object",
+     "icon": "id-badge",
+     "openMode": "drill",
+     "fields": [
+      {
+       "name": "name",
+       "title": "Plan name",
+       "type": "string",
+       "validation": {
+        "required": true,
+        "max": 32
+       }
+      },
+      {
+       "name": "price",
+       "title": "Price",
+       "type": "number",
+       "fieldset": "price",
+       "numeric": {
+        "unit": "USD",
+        "min": 0,
+        "step": 1
+       },
+       "validation": {
+        "required": true
+       }
+      },
+      {
+       "name": "interval",
+       "title": "Billed",
+       "type": "select",
+       "fieldset": "price",
+       "initialValue": "month",
+       "options": [
+        {
+         "value": "month",
+         "label": "Per month"
+        },
+        {
+         "value": "year",
+         "label": "Per year"
+        },
+        {
+         "value": "once",
+         "label": "Once"
+        }
+       ]
+      },
+      {
+       "name": "commitment",
+       "title": "Minimum term",
+       "type": "string",
+       "validation": {
+        "max": 40
+       },
+       "placeholder": "3 months, then month to month"
+      },
+      {
+       "name": "includes",
+       "title": "Includes",
+       "type": "array",
+       "itemNoun": "benefit",
+       "of": [
+        {
+         "name": "benefit",
+         "title": "Benefit",
+         "type": "string"
+        }
+       ],
+       "validation": {
+        "min": 1,
+        "max": 8
+       }
+      }
+     ]
+    },
+    {
+     "name": "addons",
+     "title": "Add-ons",
+     "type": "array",
+     "group": "addons",
+     "itemNoun": "add-on",
+     "validation": {
+      "max": 8
+     },
+     "of": [
+      {
+       "name": "addon",
+       "title": "Add-on",
+       "type": "object",
+       "icon": "circle-plus",
+       "preview": {
+        "title": "name",
+        "subtitle": "price",
+        "fallback": "Untitled add-on"
+       },
+       "fields": [
+        {
+         "name": "name",
+         "title": "Name",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 40
+         }
+        },
+        {
+         "name": "description",
+         "title": "Description",
+         "type": "string",
+         "validation": {
+          "recommendedMax": 90
+         }
+        },
+        {
+         "name": "price",
+         "title": "Price",
+         "type": "number",
+         "numeric": {
+          "unit": "USD",
+          "min": 0,
+          "step": 1
+         },
+         "validation": {
+          "required": true
+         }
+        },
+        {
+         "name": "unit",
+         "title": "Charged",
+         "type": "select",
+         "initialValue": "session",
+         "options": [
+          {
+           "value": "session",
+           "label": "Per session"
+          },
+          {
+           "value": "month",
+           "label": "Per month"
+          },
+          {
+           "value": "once",
+           "label": "Once"
+          }
+         ]
+        },
+        {
+         "name": "allowQuantity",
+         "title": "Let them choose how many",
+         "type": "boolean"
+        },
+        {
+         "name": "maxQuantity",
+         "title": "Up to",
+         "type": "number",
+         "hidden": {
+          "field": "allowQuantity",
+          "equals": true
+         },
+         "numeric": {
+          "min": 2,
+          "max": 12,
+          "step": 1
+         }
+        },
+        {
+         "name": "isPreselected",
+         "title": "Selected by default",
+         "type": "boolean"
+        },
+        {
+         "name": "isHsaEligible",
+         "title": "HSA or FSA eligible",
+         "type": "boolean"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "totalLabel",
+     "title": "Total label",
+     "type": "string",
+     "validation": {
+      "max": 32
+     },
+     "placeholder": "Your monthly total"
+    },
+    {
+     "name": "button",
+     "title": "Button",
+     "type": "button",
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "finePrint",
+     "title": "Small print",
+     "type": "richtext"
+    }
+   ]
+  },
+  "value": {
+   "heading": "The Recovery Membership",
+   "intro": "Steady, one-to-one care for runners, climbers and anyone coming back from an injury. Book online, cancel any time after three months.",
+   "plan": {
+    "name": "Recovery Membership",
+    "price": 189,
+    "interval": "month",
+    "commitment": "3 months, then month to month",
+    "includes": [
+     "Two 45-minute sessions a month",
+     "A home program in the Juniper app",
+     "Message your physio between visits",
+     "10% off retail and taping"
+    ]
+   },
+   "addons": [
+    {
+     "_key": "ad1",
+     "name": "Extra session",
+     "description": "Another 45-minute visit in the same month.",
+     "price": 95,
+     "unit": "session",
+     "allowQuantity": true,
+     "maxQuantity": 4,
+     "isHsaEligible": true
+    },
+    {
+     "_key": "ad2",
+     "name": "Dry needling",
+     "description": "Added to a session for stubborn muscle tension.",
+     "price": 40,
+     "unit": "session",
+     "allowQuantity": true,
+     "maxQuantity": 6,
+     "isHsaEligible": true
+    },
+    {
+     "_key": "ad3",
+     "name": "Sports massage, 60 min",
+     "description": "With one of our licensed massage therapists.",
+     "price": 105,
+     "unit": "session",
+     "allowQuantity": false,
+     "isHsaEligible": false
+    },
+    {
+     "_key": "ad4",
+     "name": "Running gait analysis",
+     "description": "Treadmill video analysis and a written report.",
+     "price": 150,
+     "unit": "once",
+     "allowQuantity": false,
+     "isHsaEligible": true
+    }
+   ],
+   "totalLabel": "Your monthly total",
+   "button": {
+    "label": "Book your first visit",
+    "href": "/book",
+    "type": "page",
+    "style": "primary",
+    "arrow": true
+   },
+   "finePrint": "<p>Unused sessions roll over for one month. We'll give you a superbill for out-of-network insurance claims. Cancel with 30 days' notice after the first three months \u2014 <a href=\"/membership-terms\">read the terms</a>.</p>"
+  }
+ },
+ {
+  "id": "pricing-enterprise-card",
+  "name": "Enterprise contact card",
+  "category": "Pricing & plans",
+  "kind": "block",
+  "brand": "Northwind",
+  "previewLayout": "split",
+  "proves": "Action select \u2192 form reference (opens in place) / calendar URL / plain link \u00b7 compliance badges \u00b7 customer logos with alt \u00b7 inline quote",
+  "schema": {
+   "name": "enterpriseCard",
+   "title": "Enterprise card",
+   "kind": "block",
+   "icon": "building",
+   "category": "Pricing & plans",
+   "description": "The \"talk to us\" panel for large customers",
+   "preview": {
+    "title": "heading",
+    "subtitle": "action"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "proof",
+     "title": "Proof"
+    }
+   ],
+   "fields": [
+    {
+     "name": "eyebrow",
+     "title": "Eyebrow",
+     "type": "string",
+     "validation": {
+      "max": 32
+     }
+    },
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "validation": {
+      "required": true,
+      "recommendedMax": 48
+     },
+     "ai": true
+    },
+    {
+     "name": "body",
+     "title": "Body",
+     "type": "text",
+     "rows": 3,
+     "validation": {
+      "recommendedMax": 220
+     },
+     "ai": true
+    },
+    {
+     "name": "points",
+     "title": "What's included",
+     "type": "array",
+     "itemNoun": "point",
+     "openMode": "inline",
+     "validation": {
+      "max": 6
+     },
+     "of": [
+      {
+       "name": "point",
+       "title": "Point",
+       "type": "object",
+       "icon": "check",
+       "preview": {
+        "title": "label",
+        "fallback": "Untitled point"
+       },
+       "fields": [
+        {
+         "name": "icon",
+         "title": "Icon",
+         "type": "icon"
+        },
+        {
+         "name": "label",
+         "title": "Label",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 48
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "action",
+     "title": "The button",
+     "type": "select",
+     "layout": "cards",
+     "initialValue": "form",
+     "options": [
+      {
+       "value": "form",
+       "label": "Opens a form",
+       "icon": "forms",
+       "description": "Submissions arrive in Forms"
+      },
+      {
+       "value": "calendar",
+       "label": "Books a call",
+       "icon": "calendar",
+       "description": "A scheduling page opens in place"
+      },
+      {
+       "value": "link",
+       "label": "Goes to a page",
+       "icon": "link"
+      }
+     ]
+    },
+    {
+     "name": "form",
+     "title": "Form",
+     "type": "reference",
+     "reference": {
+      "to": [
+       "form"
+      ]
+     },
+     "hidden": {
+      "field": "action",
+      "equals": "form"
+     },
+     "validation": {
+      "required": true
+     },
+     "description": "Shared: every placement uses the same form."
+    },
+    {
+     "name": "calendarUrl",
+     "title": "Scheduling page",
+     "type": "url",
+     "hidden": {
+      "field": "action",
+      "equals": "calendar"
+     },
+     "validation": {
+      "required": true,
+      "pattern": "^https://(cal\\.com|calendly\\.com|meetings\\.hubspot\\.com|savvycal\\.com)/",
+      "patternMessage": "Use a Cal.com, Calendly, HubSpot or SavvyCal link, like https://cal.com/caldera/fitting."
+     }
+    },
+    {
+     "name": "buttonLabel",
+     "title": "Button label",
+     "type": "string",
+     "hidden": {
+      "field": "action",
+      "equals": [
+       "form",
+       "calendar"
+      ]
+     },
+     "validation": {
+      "required": true,
+      "max": 24
+     },
+     "placeholder": "Talk to sales"
+    },
+    {
+     "name": "button",
+     "title": "Button",
+     "type": "button",
+     "hidden": {
+      "field": "action",
+      "equals": "link"
+     }
+    },
+    {
+     "name": "responseTime",
+     "title": "Reply promise",
+     "type": "string",
+     "validation": {
+      "max": 48
+     },
+     "placeholder": "We reply within one business day"
+    },
+    {
+     "name": "compliance",
+     "title": "Compliance",
+     "type": "multiselect",
+     "group": "proof",
+     "layout": "checkbox",
+     "options": [
+      {
+       "value": "soc2",
+       "label": "SOC 2 Type II"
+      },
+      {
+       "value": "iso27001",
+       "label": "ISO 27001"
+      },
+      {
+       "value": "hipaa",
+       "label": "HIPAA"
+      },
+      {
+       "value": "gdpr",
+       "label": "GDPR"
+      },
+      {
+       "value": "pci",
+       "label": "PCI DSS"
+      }
+     ]
+    },
+    {
+     "name": "logos",
+     "title": "Customer logos",
+     "type": "array",
+     "group": "proof",
+     "itemNoun": "logo",
+     "arrayLayout": "grid",
+     "validation": {
+      "max": 6
+     },
+     "of": [
+      {
+       "name": "logo",
+       "title": "Logo",
+       "type": "object",
+       "icon": "building",
+       "preview": {
+        "title": "name",
+        "media": "logo",
+        "fallback": "Untitled logo"
+       },
+       "fields": [
+        {
+         "name": "name",
+         "title": "Company",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 32
+         },
+         "description": "Not shown. Used as the logo's alt text."
+        },
+        {
+         "name": "logo",
+         "title": "Logo",
+         "type": "image",
+         "validation": {
+          "required": true
+         },
+         "description": "SVG or a transparent PNG, one color."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "quote",
+     "title": "Quote",
+     "type": "object",
+     "group": "proof",
+     "icon": "quote",
+     "openMode": "drill",
+     "fields": [
+      {
+       "name": "text",
+       "title": "Quote",
+       "type": "text",
+       "rows": 3,
+       "validation": {
+        "recommendedMax": 200
+       }
+      },
+      {
+       "name": "name",
+       "title": "Name",
+       "type": "string",
+       "validation": {
+        "max": 40
+       }
+      },
+      {
+       "name": "role",
+       "title": "Role and company",
+       "type": "string",
+       "validation": {
+        "max": 60
+       }
+      }
+     ]
+    }
+   ]
+  },
+  "value": {
+   "eyebrow": "Enterprise",
+   "heading": "Billions of events. One calm on-call.",
+   "body": "Volume pricing, a dedicated region and a named engineer who knows your integration. We'll scope it with you in a 30-minute call.",
+   "points": [
+    {
+     "_key": "ep1",
+     "icon": "server",
+     "label": "Dedicated region in US, EU or APAC"
+    },
+    {
+     "_key": "ep2",
+     "icon": "shield-lock",
+     "label": "SAML SSO, SCIM and audit log export"
+    },
+    {
+     "_key": "ep3",
+     "icon": "clock-check",
+     "label": "99.99% uptime SLA with credits"
+    },
+    {
+     "_key": "ep4",
+     "icon": "headset",
+     "label": "Named support engineer, 1-hour P1 response"
+    }
+   ],
+   "action": "form",
+   "form": "form_contact",
+   "buttonLabel": "Talk to sales",
+   "responseTime": "We reply within one business day",
+   "compliance": [
+    "soc2",
+    "hipaa",
+    "gdpr"
+   ],
+   "logos": [
+    {
+     "_key": "lg1",
+     "name": "Halcyon Health",
+     "logo": {
+      "url": "https://picsum.photos/seed/northwind-logo-halcyon/320/120",
+      "alt": "Halcyon Health logo",
+      "name": "northwind-logo-halcyon.png",
+      "width": 320,
+      "height": 120
+     }
+    },
+    {
+     "_key": "lg2",
+     "name": "Ferrous Freight",
+     "logo": {
+      "url": "https://picsum.photos/seed/northwind-logo-ferrous/320/120",
+      "alt": "Ferrous Freight logo",
+      "name": "northwind-logo-ferrous.png",
+      "width": 320,
+      "height": 120
+     }
+    },
+    {
+     "_key": "lg3",
+     "name": "Kestrel Pay",
+     "logo": {
+      "url": "https://picsum.photos/seed/northwind-logo-kestrel/320/120",
+      "alt": "Kestrel Pay logo",
+      "name": "northwind-logo-kestrel.png",
+      "width": 320,
+      "height": 120
+     }
+    }
+   ],
+   "quote": {
+    "text": "We moved 4 billion webhooks a month to Northwind and our pager went quiet within a week.",
+    "name": "Ines Albright",
+    "role": "Staff Engineer, Kestrel Pay"
+   }
+  }
+ },
+ {
+  "id": "pricing-faq",
+  "name": "Pricing FAQ",
+  "category": "Pricing & plans",
+  "kind": "block",
+  "brand": "Northwind",
+  "previewLayout": "accordion",
+  "proves": "Grouped questions (written here or FAQs collection) \u00b7 price tokens in answers so copy never drifts from the plans \u00b7 FAQPage rich results",
+  "schema": {
+   "name": "pricingFaq",
+   "title": "Pricing FAQ",
+   "kind": "block",
+   "icon": "help-circle",
+   "category": "Pricing & plans",
+   "description": "Billing questions, grouped, with prices that stay in sync",
+   "variants": [
+    {
+     "id": "accordion",
+     "name": "Accordion"
+    },
+    {
+     "id": "two-col",
+     "name": "Two columns",
+     "description": "Group names left, questions right"
+    }
+   ],
+   "preview": {
+    "title": "heading"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "settings",
+     "title": "Settings"
+    }
+   ],
+   "fields": [
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "validation": {
+      "required": true,
+      "recommendedMax": 48
+     },
+     "localized": true
+    },
+    {
+     "name": "source",
+     "title": "Questions come from",
+     "type": "select",
+     "layout": "segmented",
+     "initialValue": "inline",
+     "options": [
+      {
+       "value": "inline",
+       "label": "Written here"
+      },
+      {
+       "value": "collection",
+       "label": "FAQs collection"
+      }
+     ]
+    },
+    {
+     "name": "groups",
+     "title": "Groups",
+     "type": "array",
+     "itemNoun": "group",
+     "hidden": {
+      "field": "source",
+      "equals": "inline"
+     },
+     "validation": {
+      "min": 1,
+      "max": 5
+     },
+     "of": [
+      {
+       "name": "faqGroup",
+       "title": "Group",
+       "type": "object",
+       "icon": "folder",
+       "preview": {
+        "title": "title",
+        "fallback": "Untitled group"
+       },
+       "fields": [
+        {
+         "name": "title",
+         "title": "Group title",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 32
+         }
+        },
+        {
+         "name": "items",
+         "title": "Questions",
+         "type": "array",
+         "itemNoun": "question",
+         "validation": {
+          "min": 1,
+          "max": 10
+         },
+         "of": [
+          {
+           "name": "faqItem",
+           "title": "Question",
+           "type": "object",
+           "icon": "help-circle",
+           "preview": {
+            "title": "question",
+            "subtitle": "answer",
+            "fallback": "Untitled question"
+           },
+           "fields": [
+            {
+             "name": "question",
+             "title": "Question",
+             "type": "string",
+             "validation": {
+              "required": true,
+              "max": 120
+             },
+             "ai": true,
+             "localized": true
+            },
+            {
+             "name": "answer",
+             "title": "Answer",
+             "type": "richtext",
+             "validation": {
+              "required": true
+             },
+             "ai": true,
+             "localized": true,
+             "description": "Use {{pro.yearly}}-style tokens so prices stay in step with the plans.",
+             "helpMore": "Tokens read the Plans block on this page: {{key.monthly}}, {{key.yearly}} or {{key.name}}, where key is the plan name in lowercase."
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "questions",
+     "title": "FAQs to show",
+     "type": "array",
+     "hidden": {
+      "field": "source",
+      "equals": "collection"
+     },
+     "validation": {
+      "max": 12
+     },
+     "of": [
+      {
+       "name": "faqRef",
+       "title": "FAQ",
+       "type": "reference",
+       "reference": {
+        "to": [
+         "col_faq"
+        ],
+        "filter": "category == 'billing'"
+       }
+      }
+     ]
+    },
+    {
+     "name": "contactButton",
+     "title": "Contact button",
+     "type": "button"
+    },
+    {
+     "name": "useRichResults",
+     "title": "FAQ rich results",
+     "type": "boolean",
+     "group": "settings",
+     "initialValue": true,
+     "description": "Turn off if another FAQ on this page already sends it."
+    },
+    {
+     "name": "isFirstOpen",
+     "title": "Open the first question",
+     "type": "boolean",
+     "group": "settings",
+     "initialValue": true
+    }
+   ]
+  },
+  "value": {
+   "_variant": "two-col",
+   "heading": "Billing questions",
+   "source": "inline",
+   "groups": [
+    {
+     "_key": "fg1",
+     "title": "Plans and billing",
+     "items": [
+      {
+       "_key": "fq1",
+       "question": "What happens if I go over my events?",
+       "answer": "<p>Nothing breaks. Extra events are billed at $0.40 per 100k at the end of the month, and we email you at 80% and 100% of your allowance.</p>"
+      },
+      {
+       "_key": "fq2",
+       "question": "How much do I save paying yearly?",
+       "answer": "<p>Pro is {{pro.yearly}} a month billed yearly instead of {{pro.monthly}} monthly \u2014 two months free, roughly 20%.</p>"
+      },
+      {
+       "_key": "fq3",
+       "question": "Can I switch plans later?",
+       "answer": "<p>Any time, from Settings \u203a Billing. Upgrades are prorated to the day; downgrades take effect at the next renewal.</p>"
+      }
+     ]
+    },
+    {
+     "_key": "fg2",
+     "title": "Payments and invoices",
+     "items": [
+      {
+       "_key": "fq4",
+       "question": "Do you accept invoices and purchase orders?",
+       "answer": "<p>On Team (yearly) and Enterprise, yes \u2014 net-30 by ACH or wire. Everyone else pays by card.</p>"
+      },
+      {
+       "_key": "fq5",
+       "question": "Is there a free trial?",
+       "answer": "<p>Pro and Team have a 14-day trial with no card required. Hobby is free forever.</p>"
+      }
+     ]
+    }
+   ],
+   "questions": [
+    "fq_ship"
+   ],
+   "contactButton": {
+    "label": "Ask the billing team",
+    "href": "mailto:billing@northwind.dev",
+    "type": "email",
+    "email": "billing@northwind.dev",
+    "style": "link"
+   },
+   "useRichResults": true,
+   "isFirstOpen": true
+  }
+ },
+ {
+  "id": "pricing-annual-savings-banner",
+  "name": "Pay-yearly savings banner",
+  "category": "Pricing & plans",
+  "kind": "block",
+  "brand": "Juniper Physio",
+  "previewLayout": "banner",
+  "proves": "Savings expressed three ways (percent / months free / amount) as a conditional unit \u00b7 audience targeting (members on monthly) \u00b7 placement",
+  "schema": {
+   "name": "savingsBanner",
+   "title": "Savings banner",
+   "kind": "block",
+   "icon": "pig-money",
+   "category": "Pricing & plans",
+   "description": "A nudge to switch to yearly billing, shown to the right people",
+   "preview": {
+    "title": "message",
+    "subtitle": "audience",
+    "icon": "pig-money"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "targeting",
+     "title": "Who and where"
+    }
+   ],
+   "fields": [
+    {
+     "name": "message",
+     "title": "Message",
+     "type": "string",
+     "validation": {
+      "required": true,
+      "max": 90,
+      "recommendedMax": 70
+     },
+     "ai": true,
+     "description": "{{saving}} becomes the saving."
+    },
+    {
+     "name": "savingType",
+     "title": "Saving shown as",
+     "type": "select",
+     "layout": "segmented",
+     "initialValue": "months",
+     "options": [
+      {
+       "value": "percent",
+       "label": "Percent"
+      },
+      {
+       "value": "months",
+       "label": "Months free"
+      },
+      {
+       "value": "amount",
+       "label": "Amount"
+      }
+     ]
+    },
+    {
+     "name": "percent",
+     "title": "Percent",
+     "type": "number",
+     "hidden": {
+      "field": "savingType",
+      "equals": "percent"
+     },
+     "numeric": {
+      "min": 1,
+      "max": 50,
+      "step": 1,
+      "unit": "%"
+     },
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "months",
+     "title": "Months free",
+     "type": "number",
+     "hidden": {
+      "field": "savingType",
+      "equals": "months"
+     },
+     "numeric": {
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "unit": "months"
+     },
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "amount",
+     "title": "Amount",
+     "type": "number",
+     "hidden": {
+      "field": "savingType",
+      "equals": "amount"
+     },
+     "numeric": {
+      "unit": "USD",
+      "min": 1,
+      "step": 1
+     },
+     "validation": {
+      "required": true
+     },
+     "description": "In dollars."
+    },
+    {
+     "name": "button",
+     "title": "Button",
+     "type": "button",
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "audience",
+     "title": "Who sees it",
+     "type": "select",
+     "group": "targeting",
+     "initialValue": "monthly-members",
+     "options": [
+      {
+       "value": "everyone",
+       "label": "Everyone"
+      },
+      {
+       "value": "visitors",
+       "label": "Visitors who aren't members"
+      },
+      {
+       "value": "monthly-members",
+       "label": "Members paying monthly",
+       "description": "Needs them signed in to the member portal"
+      }
+     ]
+    },
+    {
+     "name": "placements",
+     "title": "Shows on",
+     "type": "multiselect",
+     "group": "targeting",
+     "layout": "checkbox",
+     "validation": {
+      "min": 1
+     },
+     "options": [
+      {
+       "value": "pricing",
+       "label": "Membership page"
+      },
+      {
+       "value": "portal",
+       "label": "Member portal home"
+      },
+      {
+       "value": "booking",
+       "label": "After booking confirmation"
+      }
+     ]
+    },
+    {
+     "name": "until",
+     "title": "Show until",
+     "type": "date",
+     "group": "targeting",
+     "description": "Leave empty for an always-on offer."
+    },
+    {
+     "name": "isDismissible",
+     "title": "Visitors can close it",
+     "type": "boolean",
+     "group": "targeting",
+     "initialValue": true,
+     "description": "Closed banners stay hidden for 30 days."
+    }
+   ]
+  },
+  "value": {
+   "message": "Pay yearly and get {{saving}} of membership free.",
+   "savingType": "months",
+   "percent": 15,
+   "months": 2,
+   "amount": 378,
+   "button": {
+    "label": "Switch to yearly",
+    "href": "/portal/billing?cycle=yearly",
+    "type": "page",
+    "style": "primary"
+   },
+   "audience": "monthly-members",
+   "placements": [
+    "portal",
+    "pricing"
+   ],
+   "until": "2026-12-31",
+   "isDismissible": true
+  }
+ }
+]

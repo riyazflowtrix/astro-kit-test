@@ -1,0 +1,47 @@
+<section id="related-posts" class="section related-posts">
+  <!-- kit: related-posts -->
+  <div class="container">
+    <hr class="related-posts__divider" />
+    <h2 class="related-posts__title">Keep reading</h2>
+    <ul class="related-posts__grid" role="list">
+      <li>
+        <article class="related-card">
+          <a class="related-card__media" href="/journal/no-knead-bread-over-coals"><img src="https://picsum.photos/seed/caldera-journal-bread/800/600" alt="A round loaf in a Dutch oven surrounded by coals" width="800" height="600" loading="lazy" /></a>
+          <p class="related-card__type">Story &middot; Recipes</p>
+          <h3><a href="/journal/no-knead-bread-over-coals">No-knead bread over coals</a></h3>
+          <p class="related-card__meta"><time datetime="2026-10-15">Oct 15, 2026</time> &middot; 6 min read</p>
+        </article>
+      </li>
+      <li>
+        <article class="related-card">
+          <a class="related-card__media" href="/recipes/dutch-oven-short-ribs"><img src="https://picsum.photos/seed/caldera-recipe-short-ribs/800/600" alt="Braised short ribs in a Dutch oven with carrots" width="800" height="600" loading="lazy" /></a>
+          <p class="related-card__type related-card__type--recipe">Recipe &middot; Serves 6</p>
+          <h3><a href="/recipes/dutch-oven-short-ribs">Coal-braised short ribs</a></h3>
+          <p class="related-card__meta">4 hr &middot; Made with the Ember Dutch Oven</p>
+        </article>
+      </li>
+      <li>
+        <article class="related-card">
+          <a class="related-card__media" href="/journal/rescue-a-rusty-skillet"><img src="https://picsum.photos/seed/caldera-journal-rust/800/600" alt="A rusty skillet next to steel wool and a bottle of oil" width="800" height="600" loading="lazy" /></a>
+          <p class="related-card__type">Story &middot; Cast iron</p>
+          <h3><a href="/journal/rescue-a-rusty-skillet">How to rescue a rusty skillet</a></h3>
+          <p class="related-card__meta"><time datetime="2026-10-01">Oct 1, 2026</time> &middot; 5 min read</p>
+        </article>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<style>
+  .related-posts__divider { border: 0; border-top: 1px solid var(--line); margin: 0 0 2.5rem; }
+  .related-posts__title { margin-bottom: 1.75rem; }
+  .related-posts__grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 1.5rem; }
+  .related-card__media { display: block; aspect-ratio: 4 / 3; border-radius: var(--radius); overflow: hidden; margin-bottom: 1rem; }
+  .related-card__media img { width: 100%; height: 100%; object-fit: cover; }
+  .related-card__type { margin: 0 0 0.375rem; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--brand); }
+  .related-card__type--recipe { color: var(--success); }
+  .related-card h3 { font-size: 1.125rem; margin-bottom: 0.375rem; }
+  .related-card h3 a { text-decoration: none; }
+  .related-card h3 a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .related-card__meta { margin: 0; font-size: 0.875rem; color: var(--ink-3); }
+</style>

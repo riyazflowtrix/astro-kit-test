@@ -1,0 +1,223 @@
+<div id="cookie-consent" class="cc" role="region" aria-labelledby="cookie-consent-title" data-variant="bar">
+  <!-- kit: cookie-consent -->
+  <div class="container cc__inner">
+    <div class="cc__main">
+      <div class="cc__copy">
+        <h2 id="cookie-consent-title" class="cc__title">Cookies, briefly</h2>
+        <p>We use essential cookies to run this site and, if you agree, analytics to see which stories help rivers most. We never sell your data. <a href="/privacy/cookies">Cookie policy</a></p>
+      </div>
+      <div class="cc__buttons">
+        <button type="button" class="btn btn-secondary" data-action="customize" aria-expanded="false" aria-controls="cookie-consent-prefs">Choose cookies</button>
+        <button type="button" class="btn btn-secondary" data-action="reject">Reject all</button>
+        <button type="button" class="btn btn-primary" data-action="accept">Accept all</button>
+      </div>
+    </div>
+
+    <form class="cc__prefs" id="cookie-consent-prefs" action="#" hidden>
+      <fieldset>
+        <legend class="visually-hidden">Cookie categories</legend>
+        <div class="cc__cat">
+          <input type="checkbox" id="cookie-consent-essential" name="essential" checked disabled />
+          <label for="cookie-consent-essential">
+            <strong>Essential</strong>
+            <span>Keeps you signed in and remembers this choice. Always on.</span>
+          </label>
+        </div>
+        <div class="cc__cat">
+          <input type="checkbox" id="cookie-consent-analytics" name="analytics" />
+          <label for="cookie-consent-analytics">
+            <strong>Analytics</strong>
+            <span>Plausible and Google Analytics, to count visits and see which pages people read.</span>
+          </label>
+        </div>
+        <div class="cc__cat">
+          <input type="checkbox" id="cookie-consent-marketing" name="marketing" />
+          <label for="cookie-consent-marketing">
+            <strong>Marketing</strong>
+            <span>Meta Pixel, to show our campaigns to people who visited — and to measure if they work.</span>
+          </label>
+        </div>
+      </fieldset>
+      <button type="submit" class="btn btn-primary">Save my choices</button>
+    </form>
+
+    <p class="cc__saved" role="status" hidden></p>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    var root = document.getElementById("cookie-consent");
+    if (!root) return;
+    var main = root.querySelector(".cc__main");
+    var prefs = root.querySelector(".cc__prefs");
+    var saved = root.querySelector(".cc__saved");
+    var customize = root.querySelector('[data-action="customize"]');
+
+    function done(text) {
+      main.hidden = true;
+      prefs.hidden = true;
+      saved.hidden = false;
+      saved.innerHTML = "";
+      saved.appendChild(document.createTextNode(text + " "));
+      var again = document.createElement("button");
+      again.type = "button";
+      again.textContent = "Change";
+      again.addEventListener("click", function () {
+        saved.hidden = true;
+        main.hidden = false;
+      });
+      saved.appendChild(again);
+    }
+    function setAll(on) {
+      root.querySelectorAll('.cc__prefs input:not([disabled])').forEach(function (i) { i.checked = on; });
+    }
+    customize.addEventListener("click", function () {
+      var open = prefs.hidden;
+      prefs.hidden = !open;
+      customize.setAttribute("aria-expanded", String(open));
+    });
+    root.querySelector('[data-action="accept"]').addEventListener("click", function () {
+      setAll(true);
+      done("Thanks. All cookies are on.");
+    });
+    root.querySelector('[data-action="reject"]').addEventListener("click", function () {
+      setAll(false);
+      done("Only essential cookies are on.");
+    });
+    prefs.addEventListener("submit", function (e) {
+      e.preventDefault();
+      done("Your cookie choices are saved.");
+    });
+  })();
+</script>
+
+<style>
+  .cc {
+    position: relative;
+    background: var(--bg);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    box-shadow: 0 -8px 24px rgb(0 0 0 / 0.06);
+  }
+
+  .cc__inner {
+    padding-block: 1.25rem;
+  }
+
+  .cc__main {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem 2rem;
+  }
+
+  .cc__main[hidden],
+  .cc__prefs[hidden],
+  .cc__saved[hidden] {
+    display: none;
+  }
+
+  .cc__copy {
+    flex: 1;
+  }
+
+  .cc__title {
+    margin-bottom: 0.25rem;
+    font-size: 1rem;
+    letter-spacing: 0;
+  }
+
+  .cc__copy p {
+    margin: 0;
+    font-size: 0.9375rem;
+    color: var(--ink-2);
+  }
+
+  .cc__copy a {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  .cc__buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    flex-shrink: 0;
+  }
+
+  .cc__prefs {
+    display: grid;
+    gap: 1rem;
+    justify-items: start;
+    margin-top: 1.25rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .cc__prefs fieldset {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  .cc__cat {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    padding: 1rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+
+  .cc__cat input {
+    width: 18px;
+    height: 18px;
+    margin-top: 0.2rem;
+    accent-color: var(--brand);
+    flex-shrink: 0;
+  }
+
+  .cc__cat label {
+    display: grid;
+    gap: 0.125rem;
+    cursor: pointer;
+  }
+
+  .cc__cat span {
+    font-size: 0.875rem;
+    color: var(--ink-2);
+  }
+
+  .cc__saved {
+    margin: 0;
+    font-size: 0.9375rem;
+    color: var(--ink-2);
+  }
+
+  .cc__saved :global(button) {
+    border: 0;
+    background: none;
+    padding: 0;
+    font: inherit;
+    font-weight: 600;
+    color: var(--ink);
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  @media (max-width: 860px) {
+    .cc__main {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .cc__buttons .btn {
+      flex: 1 1 auto;
+    }
+  }
+</style>

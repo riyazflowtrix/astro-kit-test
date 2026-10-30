@@ -1,0 +1,209 @@
+---
+---
+
+<section
+  id="reader-poll"
+  class="section section--muted poll"
+  data-variant="inline"
+  data-type="single"
+  data-show-results="afterVote"
+  data-closes-at="2026-11-01T23:59:00-04:00"
+  data-one-vote="true"
+>
+  <!-- kit: reader-poll -->
+  <div class="container poll__wrap">
+    <div class="poll__card card">
+      <span class="eyebrow">Reader poll</span>
+      <form class="poll__form" action="#" method="post">
+        <fieldset>
+          <legend><h2>How do you read Atlas most days?</h2></legend>
+          <p class="poll__context">We're redesigning the morning edition. Your answer decides what we build first.</p>
+          <div class="poll__options">
+            <label class="poll__option"><input type="radio" name="answer" value="newsletter" required /> The morning newsletter</label>
+            <label class="poll__option"><input type="radio" name="answer" value="app" /> The app, on the commute</label>
+            <label class="poll__option"><input type="radio" name="answer" value="website" /> The website, at my desk</label>
+            <label class="poll__option"><input type="radio" name="answer" value="print" /> The weekend print edition</label>
+            <label class="poll__option"><input type="radio" name="answer" value="other" /> Something else</label>
+            <div class="field poll__other" hidden>
+              <label for="poll-other">Tell us how</label>
+              <input id="poll-other" name="other" type="text" maxlength="140" />
+            </div>
+          </div>
+        </fieldset>
+        <div class="poll__actions">
+          <button class="btn btn-primary" type="submit">Vote</button>
+          <p class="poll__closes">Poll closes November 1 at 11:59pm ET · One vote per reader</p>
+        </div>
+      </form>
+
+      <div class="poll__results" role="status" hidden>
+        <h2>How do you read Atlas most days?</h2>
+        <ul>
+          <li><span class="poll__res-label">The morning newsletter</span><span class="poll__bar"><span style="width:41%"></span></span><span class="poll__pct">41%</span></li>
+          <li><span class="poll__res-label">The app, on the commute</span><span class="poll__bar"><span style="width:27%"></span></span><span class="poll__pct">27%</span></li>
+          <li><span class="poll__res-label">The website, at my desk</span><span class="poll__bar"><span style="width:22%"></span></span><span class="poll__pct">22%</span></li>
+          <li><span class="poll__res-label">The weekend print edition</span><span class="poll__bar"><span style="width:7%"></span></span><span class="poll__pct">7%</span></li>
+          <li><span class="poll__res-label">Something else</span><span class="poll__bar"><span style="width:3%"></span></span><span class="poll__pct">3%</span></li>
+        </ul>
+        <p class="poll__votes">3,906 votes</p>
+        <p class="poll__thanks">Thanks. We'll publish what we learn on November 4.</p>
+      </div>
+
+      <p class="poll__related">Related: <a href="/stories/redesigning-the-morning-edition">Why we're rebuilding the morning edition</a></p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .poll [hidden] {
+    display: none !important;
+  }
+
+  .poll__wrap {
+    max-width: 720px;
+  }
+
+  .poll__card {
+    padding: clamp(1.25rem, 4vw, 2.5rem);
+  }
+
+  .poll fieldset {
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  .poll legend h2,
+  .poll__results h2 {
+    font-size: clamp(1.375rem, 3vw, 1.875rem);
+  }
+
+  .poll__context {
+    color: var(--ink-2);
+  }
+
+  .poll__options {
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .poll__option {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    min-height: 48px;
+    padding: 0 1rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  .poll__option:has(input:checked) {
+    border-color: var(--brand);
+    background: var(--brand-soft);
+  }
+
+  .poll__actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1.25rem;
+  }
+
+  .poll__closes {
+    margin: 0;
+    font-size: 0.8125rem;
+    color: var(--ink-3);
+  }
+
+  .poll__results ul {
+    display: grid;
+    gap: 0.75rem;
+    margin: 0 0 1rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  .poll__results li {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.3rem 1rem;
+    font-size: 0.9375rem;
+  }
+
+  .poll__bar {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    height: 10px;
+    border-radius: 999px;
+    background: var(--surface-2);
+    overflow: hidden;
+  }
+
+  .poll__bar span {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: var(--brand);
+  }
+
+  .poll__pct {
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .poll__votes {
+    font-size: 0.8125rem;
+    color: var(--ink-3);
+  }
+
+  .poll__thanks {
+    font-weight: 600;
+  }
+
+  .poll__related {
+    margin: 1.5rem 0 0;
+    padding-top: 1rem;
+    border-top: 1px solid var(--line);
+    font-size: 0.875rem;
+  }
+
+  .poll__related a {
+    font-weight: 600;
+    color: var(--brand);
+  }
+</style>
+
+<script is:inline>
+  (() => {
+    const root = document.getElementById("reader-poll");
+    if (!root) return;
+    const form = root.querySelector(".poll__form");
+    const results = root.querySelector(".poll__results");
+    const other = root.querySelector(".poll__other");
+    const KEY = "atlas-poll-morning-edition";
+    const showResults = () => {
+      form.hidden = true;
+      results.hidden = false;
+    };
+    try {
+      if (localStorage.getItem(KEY)) showResults();
+    } catch (e) {}
+    form.addEventListener("change", () => {
+      const picked = form.querySelector('input[name="answer"]:checked');
+      const isOther = !!picked && picked.value === "other";
+      other.hidden = !isOther;
+      other.querySelector("input").required = isOther;
+    });
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (!form.reportValidity()) return;
+      try {
+        localStorage.setItem(KEY, "1");
+      } catch (err) {}
+      showResults();
+    });
+  })();
+</script>

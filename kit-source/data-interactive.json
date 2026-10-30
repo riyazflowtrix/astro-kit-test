@@ -1,0 +1,4787 @@
+[
+ {
+  "id": "data-table-specs",
+  "name": "Spec table",
+  "category": "Data & interactive",
+  "kind": "block",
+  "brand": "Caldera",
+  "previewLayout": "table",
+  "proves": "Typed columns \u00b7 rows from manual / CSV / collection \u00b7 default sort \u00b7 caption + row headers for screen readers",
+  "schema": {
+   "name": "dataTable",
+   "title": "Data table",
+   "kind": "block",
+   "icon": "table",
+   "category": "Data & interactive",
+   "description": "Rows and typed columns. Sortable, searchable, readable on phones",
+   "variants": [
+    {
+     "id": "lined",
+     "name": "Lined",
+     "description": "Hairlines between rows"
+    },
+    {
+     "id": "striped",
+     "name": "Striped",
+     "description": "Alternating row tint"
+    },
+    {
+     "id": "cards",
+     "name": "Cards on phones",
+     "description": "Each row becomes a card under 640px"
+    }
+   ],
+   "preview": {
+    "title": "heading",
+    "subtitle": "table.caption",
+    "icon": "table"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "data",
+     "title": "Data",
+     "icon": "database"
+    },
+    {
+     "name": "display",
+     "title": "Display"
+    }
+   ],
+   "fields": [
+    {
+     "name": "eyebrow",
+     "title": "Eyebrow",
+     "type": "string",
+     "group": "content",
+     "validation": {
+      "max": 32
+     }
+    },
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "group": "content",
+     "validation": {
+      "required": true,
+      "recommendedMax": 60
+     },
+     "ai": true
+    },
+    {
+     "name": "source",
+     "title": "Rows come from",
+     "type": "select",
+     "group": "data",
+     "layout": "segmented",
+     "initialValue": "manual",
+     "options": [
+      {
+       "value": "manual",
+       "label": "Typed here"
+      },
+      {
+       "value": "csv",
+       "label": "CSV file"
+      },
+      {
+       "value": "collection",
+       "label": "Collection"
+      }
+     ]
+    },
+    {
+     "name": "table",
+     "title": "Table",
+     "type": "table",
+     "group": "data",
+     "hidden": {
+      "field": "source",
+      "equals": "manual"
+     },
+     "validation": {
+      "required": true
+     },
+     "table": {
+      "maxColumns": 8,
+      "maxRows": 60,
+      "columnTypes": [
+       "text",
+       "number",
+       "money",
+       "boolean",
+       "rating",
+       "link",
+       "reference"
+      ],
+      "jsonLd": [
+       "Dataset",
+       "ItemList"
+      ],
+      "settings": {
+       "phones": [],
+       "sort": true,
+       "search": true
+      }
+     }
+    },
+    {
+     "name": "csvFile",
+     "title": "CSV file",
+     "type": "file",
+     "group": "data",
+     "hidden": {
+      "field": "source",
+      "equals": "csv"
+     },
+     "validation": {
+      "required": true
+     },
+     "description": "First row = headers matching the column keys."
+    },
+    {
+     "name": "delimiter",
+     "title": "Separator",
+     "type": "select",
+     "group": "data",
+     "layout": "segmented",
+     "hidden": {
+      "field": "source",
+      "equals": "csv"
+     },
+     "initialValue": "comma",
+     "options": [
+      {
+       "value": "comma",
+       "label": "Comma"
+      },
+      {
+       "value": "semicolon",
+       "label": "Semicolon"
+      },
+      {
+       "value": "tab",
+       "label": "Tab"
+      }
+     ]
+    },
+    {
+     "name": "collection",
+     "title": "Collection",
+     "type": "reference",
+     "group": "data",
+     "reference": {
+      "to": [
+       "collection"
+      ]
+     },
+     "hidden": {
+      "field": "source",
+      "equals": "collection"
+     },
+     "validation": {
+      "required": true
+     },
+     "description": "One row per entry."
+    },
+    {
+     "name": "defaultSort",
+     "title": "Sort when the page loads",
+     "type": "object",
+     "group": "display",
+     "icon": "arrows-sort",
+     "fields": [
+      {
+       "name": "column",
+       "title": "Column key",
+       "type": "string",
+       "validation": {
+        "pattern": "^[a-z][a-zA-Z0-9]*$",
+        "patternMessage": "Use camelCase letters and numbers, like hoursPerRun."
+       }
+      },
+      {
+       "name": "direction",
+       "title": "Direction",
+       "type": "select",
+       "layout": "segmented",
+       "initialValue": "asc",
+       "options": [
+        {
+         "value": "asc",
+         "label": "A \u2192 Z"
+        },
+        {
+         "value": "desc",
+         "label": "Z \u2192 A"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "pageSize",
+     "title": "Rows per page",
+     "type": "number",
+     "group": "display",
+     "numeric": {
+      "min": 5,
+      "max": 100,
+      "step": 5
+     },
+     "description": "Leave empty to show every row."
+    }
+   ]
+  },
+  "value": {
+   "_variant": "cards",
+   "eyebrow": "Sizing",
+   "heading": "Find the skillet that fits your fire.",
+   "source": "manual",
+   "table": {
+    "id": "tbl_skillet_sizes",
+    "caption": "Caldera skillets and grates compared by diameter, weight, material, induction support and price.",
+    "headerRow": true,
+    "headerColumn": true,
+    "design": {
+     "responsive": "cards",
+     "sticky": true,
+     "hideCaption": true
+    },
+    "notes": "Weights are without the lid. Every piece ships pre-seasoned and carries the lifetime warranty.",
+    "footnotes": [
+     {
+      "_key": "f1",
+      "text": "Our bestseller."
+     },
+     {
+      "_key": "f2",
+      "text": "Open fire and gas only."
+     }
+    ],
+    "jsonLd": {
+     "type": "ItemList",
+     "axis": "rows"
+    },
+    "columns": [
+     {
+      "type": "text",
+      "_key": "model",
+      "label": "Model"
+     },
+     {
+      "type": "number",
+      "_key": "diameter",
+      "label": "Diameter",
+      "unit": "in",
+      "sortable": true
+     },
+     {
+      "type": "number",
+      "_key": "weight",
+      "label": "Weight",
+      "unit": "lb",
+      "sortable": true,
+      "description": "Without the lid"
+     },
+     {
+      "type": "text",
+      "_key": "material",
+      "label": "Material",
+      "sortable": true
+     },
+     {
+      "type": "boolean",
+      "_key": "induction",
+      "label": "Induction",
+      "trueLabel": "Works on induction",
+      "falseLabel": "Not for induction"
+     },
+     {
+      "type": "money",
+      "_key": "price",
+      "label": "Price",
+      "currency": "USD",
+      "sortable": true
+     }
+    ],
+    "rows": [
+     {
+      "_key": "r1",
+      "cells": {
+       "model": "Ridge Skillet 8\"",
+       "diameter": 8,
+       "weight": 3.9,
+       "material": "Cast iron",
+       "induction": true,
+       "price": 55
+      }
+     },
+     {
+      "_key": "r2",
+      "highlight": true,
+      "cells": {
+       "model": "Ridge Skillet 10\"",
+       "diameter": 10,
+       "weight": 5.2,
+       "material": "Cast iron",
+       "induction": true,
+       "price": {
+        "value": 65,
+        "note": "f1"
+       }
+      }
+     },
+     {
+      "_key": "r3",
+      "cells": {
+       "model": "Ridge Skillet 12\"",
+       "diameter": 12,
+       "weight": 7.4,
+       "material": "Cast iron",
+       "induction": true,
+       "price": 85
+      }
+     },
+     {
+      "_key": "r4",
+      "cells": {
+       "model": "Carbon Pan 11\"",
+       "diameter": 11,
+       "weight": 3.1,
+       "material": "Carbon steel",
+       "induction": true,
+       "price": 79
+      }
+     },
+     {
+      "_key": "r5",
+      "cells": {
+       "model": "Cable Fold Grate",
+       "diameter": 16,
+       "weight": 4.6,
+       "material": "Stainless steel",
+       "induction": {
+        "value": false,
+        "note": "f2"
+       },
+       "price": 189
+      }
+     }
+    ]
+   },
+   "delimiter": "comma",
+   "defaultSort": {
+    "column": "diameter",
+    "direction": "asc"
+   }
+  }
+ },
+ {
+  "id": "table-comparison",
+  "name": "Table",
+  "category": "Data & interactive",
+  "kind": "block",
+  "brand": "Caldera",
+  "previewLayout": "table",
+  "proves": "The `table` type (D42): caption \u00b7 row headers \u00b7 typed columns (Number, Money, Yes / no, Rating, Reference) \u00b7 row groups \u00b7 per-row and per-cell types \u00b7 footnotes \u00b7 notes \u00b7 ItemList JSON-LD",
+  "schema": {
+   "name": "tableBlock",
+   "title": "Table",
+   "kind": "block",
+   "icon": "table",
+   "category": "Data & interactive",
+   "description": "A real data table: comparisons, specs, pricing, reports",
+   "preview": {
+    "title": "heading",
+    "subtitle": "table.caption",
+    "icon": "table"
+   },
+   "fields": [
+    {
+     "name": "eyebrow",
+     "title": "Eyebrow",
+     "type": "string",
+     "validation": {
+      "max": 32
+     }
+    },
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "validation": {
+      "recommendedMax": 60
+     },
+     "ai": true
+    },
+    {
+     "name": "intro",
+     "title": "Intro",
+     "type": "text",
+     "rows": 2,
+     "validation": {
+      "recommendedMax": 200
+     }
+    },
+    {
+     "name": "table",
+     "title": "Table",
+     "type": "table",
+     "validation": {
+      "required": true
+     },
+     "table": {
+      "jsonLd": [
+       "ItemList",
+       "Dataset",
+       "Offers"
+      ],
+      "settings": {
+       "sort": true,
+       "search": true
+      }
+     }
+    }
+   ]
+  },
+  "value": {
+   "eyebrow": "Field notes",
+   "heading": "Which pan for which fire?",
+   "intro": "Weights from our own scale, heat-up times over one chimney of lump charcoal.",
+   "table": {
+    "id": "tbl_kit_pans",
+    "caption": "Caldera pans compared: weight, heat-up time, lid, price and rating",
+    "headerRow": true,
+    "headerColumn": true,
+    "design": {
+     "responsive": "stack",
+     "hideCaption": true
+    },
+    "rowGroups": [
+     {
+      "_key": "pans",
+      "label": "Pans"
+     },
+     {
+      "_key": "grates",
+      "label": "Grates"
+     }
+    ],
+    "notes": "Weights on a kitchen scale; heat-up over one full chimney of lump charcoal, 2025 season.",
+    "footnotes": [
+     {
+      "_key": "f1",
+      "text": "With the lid, which doubles as a skillet."
+     }
+    ],
+    "jsonLd": {
+     "type": "ItemList",
+     "axis": "rows"
+    },
+    "columns": [
+     {
+      "type": "reference",
+      "_key": "pan",
+      "label": "Pan",
+      "refTo": [
+       "col_products"
+      ]
+     },
+     {
+      "type": "number",
+      "_key": "weight",
+      "label": "Weight",
+      "unit": "kg",
+      "sortable": true
+     },
+     {
+      "type": "number",
+      "_key": "heat",
+      "label": "Heats in",
+      "unit": "min",
+      "sortable": true,
+      "description": "Time to 200 \u00b0C over a full chimney of lump charcoal"
+     },
+     {
+      "type": "boolean",
+      "_key": "lid",
+      "label": "Lid",
+      "trueLabel": "Lid included",
+      "falseLabel": "No lid"
+     },
+     {
+      "type": "money",
+      "_key": "price",
+      "label": "Price",
+      "currency": "USD",
+      "sortable": true
+     },
+     {
+      "type": "rating",
+      "_key": "rating",
+      "label": "Rating",
+      "sortable": true
+     }
+    ],
+    "rows": [
+     {
+      "_key": "r1",
+      "group": "pans",
+      "cells": {
+       "pan": {
+        "ref": "en_p3",
+        "label": "Ridge Skillet 10\"",
+        "href": "/products/ridge-skillet-10"
+       },
+       "weight": 2.4,
+       "heat": 7,
+       "lid": false,
+       "price": 72,
+       "rating": 4.7
+      }
+     },
+     {
+      "_key": "r2",
+      "group": "pans",
+      "highlight": true,
+      "cells": {
+       "pan": {
+        "ref": "en_p2",
+        "label": "Ember Dutch Oven 5.5qt",
+        "href": "/products/ember-dutch-oven"
+       },
+       "weight": {
+        "value": 6.2,
+        "note": "f1"
+       },
+       "heat": 9,
+       "lid": true,
+       "price": 165,
+       "rating": 4.9
+      }
+     },
+     {
+      "_key": "r3",
+      "group": "pans",
+      "cells": {
+       "pan": {
+        "value": "Carbon Steel Pan 10\"",
+        "type": "text"
+       },
+       "weight": 1.5,
+       "heat": 3,
+       "lid": false,
+       "price": 75,
+       "rating": 4.6
+      }
+     },
+     {
+      "_key": "r4",
+      "group": "grates",
+      "cells": {
+       "pan": {
+        "ref": "en_p1",
+        "label": "Cable Fold Grill",
+        "href": "/products/cable-fold"
+       },
+       "weight": 1.1,
+       "heat": {
+        "value": "Heats with the fire",
+        "type": "text"
+       },
+       "lid": false,
+       "price": 89,
+       "rating": 4.8
+      }
+     }
+    ]
+   }
+  }
+ },
+ {
+  "id": "chart-attrition",
+  "name": "Chart with annotations",
+  "category": "Data & interactive",
+  "kind": "block",
+  "brand": "Betterwork",
+  "previewLayout": "media",
+  "proves": "Chart type \u2192 series \u2192 data points (3 levels) \u00b7 annotations \u00b7 text alternative required \u00b7 data from CSV or URL",
+  "schema": {
+   "name": "chartBlock",
+   "title": "Chart",
+   "kind": "block",
+   "icon": "chart-line",
+   "category": "Data & interactive",
+   "description": "Line, bar, area or donut chart with a written takeaway",
+   "variants": [
+    {
+     "id": "card",
+     "name": "In a card"
+    },
+    {
+     "id": "bare",
+     "name": "Full width"
+    }
+   ],
+   "preview": {
+    "title": "heading",
+    "subtitle": "summary",
+    "icon": "chart-line"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "data",
+     "title": "Data",
+     "icon": "database"
+    },
+    {
+     "name": "display",
+     "title": "Display"
+    }
+   ],
+   "fields": [
+    {
+     "name": "eyebrow",
+     "title": "Eyebrow",
+     "type": "string",
+     "group": "content",
+     "validation": {
+      "max": 32
+     }
+    },
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "group": "content",
+     "validation": {
+      "required": true,
+      "recommendedMax": 70
+     },
+     "ai": true
+    },
+    {
+     "name": "summary",
+     "title": "Takeaway",
+     "type": "text",
+     "rows": 2,
+     "group": "content",
+     "validation": {
+      "required": true,
+      "max": 240
+     },
+     "ai": true,
+     "description": "Read by screen readers instead of the chart."
+    },
+    {
+     "name": "chartType",
+     "title": "Chart",
+     "type": "select",
+     "group": "content",
+     "layout": "cards",
+     "initialValue": "line",
+     "options": [
+      {
+       "value": "line",
+       "label": "Line",
+       "icon": "chart-line",
+       "description": "Change over time"
+      },
+      {
+       "value": "bar",
+       "label": "Bar",
+       "icon": "chart-bar",
+       "description": "Compare amounts"
+      },
+      {
+       "value": "area",
+       "label": "Area",
+       "icon": "chart-area",
+       "description": "Totals over time"
+      },
+      {
+       "value": "donut",
+       "label": "Donut",
+       "icon": "chart-donut",
+       "description": "Parts of a whole, 2\u20135 slices"
+      }
+     ]
+    },
+    {
+     "name": "isStacked",
+     "title": "Stack the series",
+     "type": "boolean",
+     "group": "content",
+     "hidden": {
+      "field": "chartType",
+      "equals": [
+       "bar",
+       "area"
+      ]
+     }
+    },
+    {
+     "name": "source",
+     "title": "Data comes from",
+     "type": "select",
+     "group": "data",
+     "layout": "segmented",
+     "initialValue": "manual",
+     "options": [
+      {
+       "value": "manual",
+       "label": "Typed here"
+      },
+      {
+       "value": "csv",
+       "label": "CSV file"
+      },
+      {
+       "value": "url",
+       "label": "JSON URL"
+      }
+     ]
+    },
+    {
+     "name": "series",
+     "title": "Series",
+     "type": "array",
+     "group": "data",
+     "itemNoun": "series",
+     "hidden": {
+      "field": "source",
+      "equals": "manual"
+     },
+     "validation": {
+      "min": 1,
+      "max": 5
+     },
+     "of": [
+      {
+       "name": "seriesItem",
+       "title": "Series",
+       "type": "object",
+       "icon": "chart-dots",
+       "preview": {
+        "title": "name",
+        "subtitle": "style",
+        "fallback": "Untitled series"
+       },
+       "fields": [
+        {
+         "name": "name",
+         "title": "Name",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 40
+         }
+        },
+        {
+         "name": "color",
+         "title": "Color",
+         "type": "color",
+         "description": "Leave empty to use the brand palette in order."
+        },
+        {
+         "name": "style",
+         "title": "Line",
+         "type": "select",
+         "layout": "segmented",
+         "initialValue": "solid",
+         "options": [
+          {
+           "value": "solid",
+           "label": "Solid"
+          },
+          {
+           "value": "dashed",
+           "label": "Dashed"
+          }
+         ]
+        },
+        {
+         "name": "points",
+         "title": "Data points",
+         "type": "array",
+         "itemNoun": "point",
+         "openMode": "inline",
+         "validation": {
+          "min": 2,
+          "max": 24
+         },
+         "of": [
+          {
+           "name": "point",
+           "title": "Point",
+           "type": "object",
+           "icon": "point",
+           "preview": {
+            "title": "x",
+            "subtitle": "y",
+            "fallback": "Untitled point"
+           },
+           "fields": [
+            {
+             "name": "x",
+             "title": "Label",
+             "type": "string",
+             "validation": {
+              "required": true,
+              "max": 16
+             },
+             "placeholder": "Q1 2026"
+            },
+            {
+             "name": "y",
+             "title": "Value",
+             "type": "number",
+             "validation": {
+              "required": true
+             }
+            },
+            {
+             "name": "label",
+             "title": "Callout",
+             "type": "string",
+             "validation": {
+              "max": 24
+             }
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "csvFile",
+     "title": "CSV file",
+     "type": "file",
+     "group": "data",
+     "hidden": {
+      "field": "source",
+      "equals": "csv"
+     },
+     "validation": {
+      "required": true
+     },
+     "description": "First column = labels, one column per series."
+    },
+    {
+     "name": "dataUrl",
+     "title": "JSON URL",
+     "type": "url",
+     "group": "data",
+     "hidden": {
+      "field": "source",
+      "equals": "url"
+     },
+     "validation": {
+      "required": true,
+      "pattern": "^https://",
+      "patternMessage": "Use an https:// address, like https://your-site.com."
+     },
+     "access": {
+      "edit": "schema.manage"
+     },
+     "lockReason": "The endpoint and its shape are set by a developer."
+    },
+    {
+     "name": "refresh",
+     "title": "Refresh",
+     "type": "select",
+     "group": "data",
+     "hidden": {
+      "field": "source",
+      "equals": "url"
+     },
+     "options": [
+      {
+       "value": "build",
+       "label": "On publish"
+      },
+      {
+       "value": "hourly",
+       "label": "Every hour"
+      },
+      {
+       "value": "live",
+       "label": "Every page view"
+      }
+     ]
+    },
+    {
+     "name": "axes",
+     "title": "Axes",
+     "type": "object",
+     "group": "display",
+     "icon": "axis-x",
+     "openMode": "drill",
+     "fields": [
+      {
+       "name": "xTitle",
+       "title": "Horizontal axis",
+       "type": "string",
+       "validation": {
+        "max": 32
+       }
+      },
+      {
+       "name": "yTitle",
+       "title": "Vertical axis",
+       "type": "string",
+       "validation": {
+        "max": 32
+       }
+      },
+      {
+       "name": "format",
+       "title": "Number format",
+       "type": "select",
+       "initialValue": "number",
+       "options": [
+        {
+         "value": "number",
+         "label": "1,234"
+        },
+        {
+         "value": "percent",
+         "label": "12%"
+        },
+        {
+         "value": "currency",
+         "label": "$1,234"
+        },
+        {
+         "value": "compact",
+         "label": "1.2k"
+        }
+       ]
+      },
+      {
+       "name": "yMin",
+       "title": "Start at",
+       "type": "number",
+       "description": "Leave empty to start at zero."
+      },
+      {
+       "name": "yMax",
+       "title": "End at",
+       "type": "number"
+      }
+     ]
+    },
+    {
+     "name": "annotations",
+     "title": "Annotations",
+     "type": "array",
+     "group": "display",
+     "itemNoun": "annotation",
+     "validation": {
+      "max": 4
+     },
+     "of": [
+      {
+       "name": "annotation",
+       "title": "Annotation",
+       "type": "object",
+       "icon": "message-circle",
+       "preview": {
+        "title": "label",
+        "subtitle": "at",
+        "fallback": "Untitled note"
+       },
+       "fields": [
+        {
+         "name": "at",
+         "title": "At label",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 16
+         },
+         "description": "Must match a point label, e.g. Q3 2025."
+        },
+        {
+         "name": "label",
+         "title": "Note",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 40
+         }
+        },
+        {
+         "name": "detail",
+         "title": "Detail",
+         "type": "text",
+         "rows": 2,
+         "validation": {
+          "max": 160
+         }
+        },
+        {
+         "name": "tone",
+         "title": "Tone",
+         "type": "select",
+         "layout": "segmented",
+         "initialValue": "neutral",
+         "options": [
+          {
+           "value": "neutral",
+           "label": "Neutral"
+          },
+          {
+           "value": "positive",
+           "label": "Good"
+          },
+          {
+           "value": "negative",
+           "label": "Bad"
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "showTable",
+     "title": "Show the numbers as a table",
+     "type": "boolean",
+     "group": "display",
+     "initialValue": true
+    },
+    {
+     "name": "sourceLabel",
+     "title": "Source",
+     "type": "string",
+     "group": "display",
+     "validation": {
+      "max": 80
+     },
+     "placeholder": "Betterwork benchmark, 1,240 companies"
+    },
+    {
+     "name": "sourceLink",
+     "title": "Source link",
+     "type": "link",
+     "group": "display"
+    }
+   ]
+  },
+  "value": {
+   "_variant": "card",
+   "eyebrow": "2026 benchmark",
+   "heading": "Teams on Betterwork lose fewer people every quarter.",
+   "summary": "Voluntary attrition at Betterwork customers fell from 4.1% to 2.6% a quarter over six quarters, while the industry median stayed near 4%.",
+   "chartType": "line",
+   "isStacked": false,
+   "source": "manual",
+   "series": [
+    {
+     "_key": "s1",
+     "name": "Betterwork customers",
+     "color": "#4F46E5",
+     "style": "solid",
+     "points": [
+      {
+       "_key": "p1",
+       "x": "Q1 2025",
+       "y": 4.1
+      },
+      {
+       "_key": "p2",
+       "x": "Q2 2025",
+       "y": 3.8
+      },
+      {
+       "_key": "p3",
+       "x": "Q3 2025",
+       "y": 3.4
+      },
+      {
+       "_key": "p4",
+       "x": "Q4 2025",
+       "y": 3
+      },
+      {
+       "_key": "p5",
+       "x": "Q1 2026",
+       "y": 2.8
+      },
+      {
+       "_key": "p6",
+       "x": "Q2 2026",
+       "y": 2.6,
+       "label": "2.6%"
+      }
+     ]
+    },
+    {
+     "_key": "s2",
+     "name": "Industry median",
+     "color": "#9CA3AF",
+     "style": "dashed",
+     "points": [
+      {
+       "_key": "p7",
+       "x": "Q1 2025",
+       "y": 4.2
+      },
+      {
+       "_key": "p8",
+       "x": "Q2 2025",
+       "y": 4
+      },
+      {
+       "_key": "p9",
+       "x": "Q3 2025",
+       "y": 4.1
+      },
+      {
+       "_key": "p10",
+       "x": "Q4 2025",
+       "y": 3.9
+      },
+      {
+       "_key": "p11",
+       "x": "Q1 2026",
+       "y": 4
+      },
+      {
+       "_key": "p12",
+       "x": "Q2 2026",
+       "y": 3.9
+      }
+     ]
+    }
+   ],
+   "refresh": "build",
+   "axes": {
+    "xTitle": "Quarter",
+    "yTitle": "Voluntary attrition",
+    "format": "percent",
+    "yMin": 0,
+    "yMax": 5
+   },
+   "annotations": [
+    {
+     "_key": "a1",
+     "at": "Q3 2025",
+     "label": "Stay interviews launched",
+     "detail": "Managers get a prompt to talk with anyone whose engagement score drops two weeks in a row.",
+     "tone": "positive"
+    }
+   ],
+   "showTable": true,
+   "sourceLabel": "Betterwork benchmark, 1,240 companies, 2025\u20132026",
+   "sourceLink": {
+    "type": "page",
+    "href": "/research/attrition-2026",
+    "title": "Attrition benchmark 2026"
+   }
+  }
+ },
+ {
+  "id": "roi-calculator",
+  "name": "ROI calculator",
+  "category": "Data & interactive",
+  "kind": "block",
+  "brand": "Betterwork",
+  "previewLayout": "form",
+  "proves": "Typed inputs (slider \u00b7 number \u00b7 select) \u2192 formula outputs \u00b7 conditional control settings \u00b7 locked formulas",
+  "schema": {
+   "name": "roiCalculator",
+   "title": "ROI calculator",
+   "kind": "block",
+   "icon": "calculator",
+   "category": "Data & interactive",
+   "description": "Inputs on the left, live results on the right",
+   "variants": [
+    {
+     "id": "split",
+     "name": "Side by side"
+    },
+    {
+     "id": "stacked",
+     "name": "Stacked"
+    }
+   ],
+   "preview": {
+    "title": "heading",
+    "subtitle": "intro",
+    "icon": "calculator"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "logic",
+     "title": "Inputs & formulas",
+     "icon": "math-function"
+    },
+    {
+     "name": "settings",
+     "title": "Settings"
+    }
+   ],
+   "fields": [
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "group": "content",
+     "validation": {
+      "required": true,
+      "recommendedMax": 60
+     },
+     "ai": true
+    },
+    {
+     "name": "intro",
+     "title": "Intro",
+     "type": "text",
+     "rows": 2,
+     "group": "content",
+     "validation": {
+      "recommendedMax": 180
+     },
+     "ai": true
+    },
+    {
+     "name": "inputs",
+     "title": "Inputs",
+     "type": "array",
+     "group": "logic",
+     "itemNoun": "input",
+     "validation": {
+      "min": 1,
+      "max": 6
+     },
+     "of": [
+      {
+       "name": "input",
+       "title": "Input",
+       "type": "object",
+       "icon": "adjustments-horizontal",
+       "preview": {
+        "title": "label",
+        "subtitle": "key",
+        "fallback": "Untitled input"
+       },
+       "fields": [
+        {
+         "name": "label",
+         "title": "Question",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 60
+         },
+         "placeholder": "How many people do you pay?"
+        },
+        {
+         "name": "key",
+         "title": "Key",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "pattern": "^[a-z][a-zA-Z0-9]*$",
+          "patternMessage": "Use camelCase letters and numbers, like hoursPerRun.",
+          "unique": true
+         },
+         "description": "The name formulas use, e.g. employees."
+        },
+        {
+         "name": "control",
+         "title": "Control",
+         "type": "select",
+         "layout": "segmented",
+         "initialValue": "slider",
+         "options": [
+          {
+           "value": "slider",
+           "label": "Slider"
+          },
+          {
+           "value": "number",
+           "label": "Number"
+          },
+          {
+           "value": "select",
+           "label": "Choice"
+          }
+         ]
+        },
+        {
+         "name": "min",
+         "title": "Minimum",
+         "type": "number",
+         "hidden": {
+          "field": "control",
+          "equals": [
+           "slider",
+           "number"
+          ]
+         }
+        },
+        {
+         "name": "max",
+         "title": "Maximum",
+         "type": "number",
+         "hidden": {
+          "field": "control",
+          "equals": [
+           "slider",
+           "number"
+          ]
+         }
+        },
+        {
+         "name": "step",
+         "title": "Step",
+         "type": "number",
+         "hidden": {
+          "field": "control",
+          "equals": [
+           "slider",
+           "number"
+          ]
+         }
+        },
+        {
+         "name": "unit",
+         "title": "Unit",
+         "type": "string",
+         "validation": {
+          "max": 10
+         },
+         "hidden": {
+          "field": "control",
+          "equals": [
+           "slider",
+           "number"
+          ]
+         },
+         "placeholder": "people"
+        },
+        {
+         "name": "choices",
+         "title": "Choices",
+         "type": "array",
+         "itemNoun": "choice",
+         "openMode": "inline",
+         "hidden": {
+          "field": "control",
+          "equals": "select"
+         },
+         "validation": {
+          "min": 2,
+          "max": 6
+         },
+         "of": [
+          {
+           "name": "choice",
+           "title": "Choice",
+           "type": "object",
+           "icon": "circle-dot",
+           "preview": {
+            "title": "label",
+            "subtitle": "value",
+            "fallback": "Untitled choice"
+           },
+           "fields": [
+            {
+             "name": "label",
+             "title": "Label",
+             "type": "string",
+             "validation": {
+              "required": true,
+              "max": 32
+             }
+            },
+            {
+             "name": "value",
+             "title": "Value",
+             "type": "number",
+             "validation": {
+              "required": true
+             }
+            }
+           ]
+          }
+         ]
+        },
+        {
+         "name": "defaultValue",
+         "title": "Starts at",
+         "type": "number",
+         "validation": {
+          "required": true
+         }
+        },
+        {
+         "name": "help",
+         "title": "Help",
+         "type": "string",
+         "validation": {
+          "max": 90
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "outputs",
+     "title": "Results",
+     "type": "array",
+     "group": "logic",
+     "itemNoun": "result",
+     "validation": {
+      "min": 1,
+      "max": 4
+     },
+     "of": [
+      {
+       "name": "output",
+       "title": "Result",
+       "type": "object",
+       "icon": "equal",
+       "preview": {
+        "title": "label",
+        "subtitle": "formula",
+        "fallback": "Untitled result"
+       },
+       "fields": [
+        {
+         "name": "label",
+         "title": "Label",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 48
+         }
+        },
+        {
+         "name": "key",
+         "title": "Key",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "pattern": "^[a-z][a-zA-Z0-9]*$",
+          "patternMessage": "Use camelCase letters and numbers, like hoursPerRun.",
+          "unique": true
+         },
+         "description": "Later results can use it, e.g. costSaved."
+        },
+        {
+         "name": "formula",
+         "title": "Formula",
+         "type": "code",
+         "validation": {
+          "required": true
+         },
+         "access": {
+          "edit": "schema.manage"
+         },
+         "lockReason": "Formulas are checked by finance before they ship.",
+         "description": "Arithmetic on input and result keys, e.g. runs * hoursPerRun * 0.72."
+        },
+        {
+         "name": "format",
+         "title": "Format",
+         "type": "select",
+         "layout": "segmented",
+         "initialValue": "number",
+         "options": [
+          {
+           "value": "number",
+           "label": "1,234"
+          },
+          {
+           "value": "currency",
+           "label": "$"
+          },
+          {
+           "value": "percent",
+           "label": "%"
+          },
+          {
+           "value": "hours",
+           "label": "Hours"
+          }
+         ]
+        },
+        {
+         "name": "decimals",
+         "title": "Decimals",
+         "type": "number",
+         "numeric": {
+          "min": 0,
+          "max": 2,
+          "step": 1
+         },
+         "initialValue": 0
+        },
+        {
+         "name": "isHighlighted",
+         "title": "Headline result",
+         "type": "boolean"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "assumptions",
+     "title": "How we calculate",
+     "type": "richtext",
+     "group": "content",
+     "description": "Shown behind a \"How we calculate\" link."
+    },
+    {
+     "name": "button",
+     "title": "Button",
+     "type": "button",
+     "group": "content"
+    },
+    {
+     "name": "disclaimer",
+     "title": "Small print",
+     "type": "text",
+     "rows": 2,
+     "group": "content",
+     "validation": {
+      "max": 240
+     }
+    },
+    {
+     "name": "allowEmailResults",
+     "title": "Offer to email the results",
+     "type": "boolean",
+     "group": "settings",
+     "description": "Submissions arrive in the chosen form."
+    },
+    {
+     "name": "form",
+     "title": "Send to form",
+     "type": "reference",
+     "group": "settings",
+     "reference": {
+      "to": [
+       "form"
+      ]
+     },
+     "hidden": {
+      "field": "allowEmailResults",
+      "equals": true
+     },
+     "validation": {
+      "required": true
+     }
+    }
+   ]
+  },
+  "value": {
+   "_variant": "split",
+   "heading": "See how many hours payroll gives back.",
+   "intro": "Move the sliders to match your team. Results update as you go and assume the average Betterwork customer's time savings.",
+   "inputs": [
+    {
+     "_key": "i1",
+     "label": "How many people do you pay?",
+     "key": "employees",
+     "control": "slider",
+     "min": 10,
+     "max": 2000,
+     "step": 10,
+     "unit": "people",
+     "defaultValue": 120
+    },
+    {
+     "_key": "i2",
+     "label": "How often do you run payroll?",
+     "key": "runs",
+     "control": "select",
+     "choices": [
+      {
+       "_key": "ch1",
+       "label": "Monthly",
+       "value": 12
+      },
+      {
+       "_key": "ch2",
+       "label": "Twice a month",
+       "value": 24
+      },
+      {
+       "_key": "ch3",
+       "label": "Every two weeks",
+       "value": 26
+      },
+      {
+       "_key": "ch4",
+       "label": "Weekly",
+       "value": 52
+      }
+     ],
+     "defaultValue": 26
+    },
+    {
+     "_key": "i3",
+     "label": "Hours spent on each run today",
+     "key": "hoursPerRun",
+     "control": "number",
+     "min": 1,
+     "max": 40,
+     "step": 0.5,
+     "unit": "hours",
+     "defaultValue": 6,
+     "help": "Include approvals, fixes and the bank file."
+    },
+    {
+     "_key": "i4",
+     "label": "Loaded hourly cost of your payroll lead",
+     "key": "hourlyCost",
+     "control": "number",
+     "min": 15,
+     "max": 250,
+     "step": 1,
+     "unit": "USD",
+     "defaultValue": 48
+    }
+   ],
+   "outputs": [
+    {
+     "_key": "o1",
+     "label": "Hours back each year",
+     "key": "hoursSaved",
+     "formula": "runs * hoursPerRun * 0.72",
+     "format": "hours",
+     "decimals": 0,
+     "isHighlighted": true
+    },
+    {
+     "_key": "o2",
+     "label": "Saved each year",
+     "key": "costSaved",
+     "formula": "hoursSaved * hourlyCost",
+     "format": "currency",
+     "decimals": 0
+    },
+    {
+     "_key": "o3",
+     "label": "Saved per employee",
+     "key": "perEmployee",
+     "formula": "costSaved / employees",
+     "format": "currency",
+     "decimals": 2
+    }
+   ],
+   "assumptions": "<p>We use a <strong>72% reduction</strong> in time per payroll run, the median across 1,240 Betterwork customers in 2025. Hourly cost should include benefits and overhead, usually 1.3\u00d7 salary.</p>",
+   "button": {
+    "label": "Book a payroll demo",
+    "href": "/demo?topic=payroll",
+    "type": "page",
+    "title": "Book a demo",
+    "style": "primary",
+    "arrow": true
+   },
+   "disclaimer": "Estimates only. Your results depend on pay complexity, number of states and approval steps.",
+   "allowEmailResults": true,
+   "form": "form_contact"
+  }
+ },
+ {
+  "id": "product-configurator",
+  "name": "Product configurator",
+  "category": "Data & interactive",
+  "kind": "block",
+  "brand": "Caldera",
+  "previewLayout": "split",
+  "proves": "Steps \u2192 options \u2192 availability rules (4 levels) \u00b7 price deltas \u00b7 single vs multi pick \u00b7 Shopify variant references",
+  "schema": {
+   "name": "productConfigurator",
+   "title": "Product configurator",
+   "kind": "block",
+   "icon": "adjustments",
+   "category": "Data & interactive",
+   "description": "Build a kit step by step with a running total",
+   "variants": [
+    {
+     "id": "stepper",
+     "name": "One step at a time"
+    },
+    {
+     "id": "all",
+     "name": "All steps on one page"
+    }
+   ],
+   "preview": {
+    "title": "heading",
+    "media": "image"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "steps",
+     "title": "Steps",
+     "icon": "list-numbers"
+    },
+    {
+     "name": "checkout",
+     "title": "Checkout"
+    }
+   ],
+   "fields": [
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "group": "content",
+     "validation": {
+      "required": true,
+      "recommendedMax": 50
+     },
+     "ai": true
+    },
+    {
+     "name": "intro",
+     "title": "Intro",
+     "type": "text",
+     "rows": 2,
+     "group": "content",
+     "validation": {
+      "recommendedMax": 160
+     }
+    },
+    {
+     "name": "image",
+     "title": "Image",
+     "type": "image",
+     "group": "content",
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "baseProduct",
+     "title": "Base product",
+     "type": "reference",
+     "group": "checkout",
+     "reference": {
+      "to": [
+       "shopify"
+      ]
+     },
+     "validation": {
+      "required": true
+     },
+     "description": "Its Shopify price is the starting total."
+    },
+    {
+     "name": "steps",
+     "title": "Steps",
+     "type": "array",
+     "group": "steps",
+     "itemNoun": "step",
+     "validation": {
+      "min": 1,
+      "max": 6
+     },
+     "of": [
+      {
+       "name": "step",
+       "title": "Step",
+       "type": "object",
+       "icon": "list-numbers",
+       "preview": {
+        "title": "title",
+        "subtitle": "selection",
+        "fallback": "Untitled step"
+       },
+       "fields": [
+        {
+         "name": "title",
+         "title": "Step title",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 40
+         },
+         "placeholder": "Choose your grate"
+        },
+        {
+         "name": "key",
+         "title": "Key",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "pattern": "^[a-z][a-zA-Z0-9]*$",
+          "patternMessage": "Use camelCase letters and numbers, like hoursPerRun.",
+          "unique": true
+         },
+         "description": "Used by rules in other steps, e.g. grate."
+        },
+        {
+         "name": "help",
+         "title": "Help",
+         "type": "string",
+         "validation": {
+          "max": 90
+         }
+        },
+        {
+         "name": "selection",
+         "title": "Customers pick",
+         "type": "select",
+         "layout": "segmented",
+         "initialValue": "single",
+         "options": [
+          {
+           "value": "single",
+           "label": "One"
+          },
+          {
+           "value": "multiple",
+           "label": "Several"
+          }
+         ]
+        },
+        {
+         "name": "isRequired",
+         "title": "Required",
+         "type": "boolean",
+         "initialValue": true,
+         "description": "Checkout stays disabled until this step has a pick."
+        },
+        {
+         "name": "maxPicks",
+         "title": "At most",
+         "type": "number",
+         "hidden": {
+          "field": "selection",
+          "equals": "multiple"
+         },
+         "numeric": {
+          "min": 2,
+          "max": 8,
+          "step": 1
+         }
+        },
+        {
+         "name": "display",
+         "title": "Show options as",
+         "type": "select",
+         "layout": "segmented",
+         "initialValue": "cards",
+         "options": [
+          {
+           "value": "cards",
+           "label": "Cards"
+          },
+          {
+           "value": "swatches",
+           "label": "Swatches"
+          },
+          {
+           "value": "list",
+           "label": "List"
+          }
+         ]
+        },
+        {
+         "name": "options",
+         "title": "Options",
+         "type": "array",
+         "itemNoun": "option",
+         "validation": {
+          "min": 2,
+          "max": 8
+         },
+         "of": [
+          {
+           "name": "option",
+           "title": "Option",
+           "type": "object",
+           "icon": "circle-check",
+           "preview": {
+            "title": "label",
+            "subtitle": "priceDelta",
+            "media": "image",
+            "fallback": "Untitled option"
+           },
+           "fields": [
+            {
+             "name": "label",
+             "title": "Label",
+             "type": "string",
+             "validation": {
+              "required": true,
+              "max": 40
+             }
+            },
+            {
+             "name": "key",
+             "title": "Key",
+             "type": "string",
+             "validation": {
+              "required": true,
+              "pattern": "^[a-z][a-zA-Z0-9]*$",
+              "patternMessage": "Use camelCase letters and numbers, like hoursPerRun."
+             },
+             "description": "Unique within the step, e.g. xl."
+            },
+            {
+             "name": "detail",
+             "title": "Detail",
+             "type": "string",
+             "validation": {
+              "max": 80
+             }
+            },
+            {
+             "name": "image",
+             "title": "Image",
+             "type": "image"
+            },
+            {
+             "name": "swatch",
+             "title": "Swatch",
+             "type": "color"
+            },
+            {
+             "name": "priceDelta",
+             "title": "Price change",
+             "type": "number",
+             "numeric": {
+              "unit": "USD",
+              "step": 1
+             },
+             "description": "Added to the total. Use a negative number for a discount."
+            },
+            {
+             "name": "variant",
+             "title": "Shopify product",
+             "type": "reference",
+             "reference": {
+              "to": [
+               "shopify"
+              ]
+             },
+             "description": "Added to the cart with the base product."
+            },
+            {
+             "name": "isDefault",
+             "title": "Picked by default",
+             "type": "boolean"
+            },
+            {
+             "name": "availability",
+             "title": "Availability",
+             "type": "object",
+             "icon": "git-branch",
+             "openMode": "drill",
+             "fields": [
+              {
+               "name": "mode",
+               "title": "Available",
+               "type": "select",
+               "layout": "radio",
+               "initialValue": "always",
+               "options": [
+                {
+                 "value": "always",
+                 "label": "Always"
+                },
+                {
+                 "value": "requires",
+                 "label": "Only with another pick",
+                 "description": "e.g. the griddle needs the XL grate"
+                },
+                {
+                 "value": "excludes",
+                 "label": "Not with another pick"
+                }
+               ]
+              },
+              {
+               "name": "rule",
+               "title": "Other pick",
+               "type": "string",
+               "hidden": {
+                "field": "mode",
+                "equals": [
+                 "requires",
+                 "excludes"
+                ]
+               },
+               "validation": {
+                "required": true,
+                "pattern": "^[a-z][a-zA-Z0-9]*\\.[a-z][a-zA-Z0-9]*$",
+                "patternMessage": "Use the step key, a dot, then the option key, like grate.xl."
+               }
+              },
+              {
+               "name": "unavailableNote",
+               "title": "Note when unavailable",
+               "type": "string",
+               "hidden": {
+                "field": "mode",
+                "equals": [
+                 "requires",
+                 "excludes"
+                ]
+               },
+               "validation": {
+                "max": 60
+               }
+              },
+              {
+               "name": "isSoldOut",
+               "title": "Sold out",
+               "type": "boolean"
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "showTotal",
+     "title": "Show running total",
+     "type": "boolean",
+     "group": "checkout",
+     "initialValue": true
+    },
+    {
+     "name": "button",
+     "title": "Add to cart button",
+     "type": "button",
+     "group": "checkout"
+    },
+    {
+     "name": "shippingNote",
+     "title": "Under the button",
+     "type": "string",
+     "group": "checkout",
+     "validation": {
+      "max": 80
+     },
+     "placeholder": "Free shipping over $150"
+    }
+   ]
+  },
+  "value": {
+   "_variant": "stepper",
+   "heading": "Build your Cable Fold kit.",
+   "intro": "Start with the grate, add legs, then the pans you'll actually cook in. Everything packs flat into one sleeve.",
+   "image": {
+    "url": "https://picsum.photos/seed/cable-fold-kit/1600/1000",
+    "alt": "The Cable Fold Grill folded flat beside its canvas sleeve",
+    "name": "cable-fold-kit.jpg",
+    "width": 3200,
+    "height": 2000
+   },
+   "baseProduct": "gid://shopify/Product/8812",
+   "steps": [
+    {
+     "_key": "st1",
+     "title": "Choose your grate",
+     "key": "grate",
+     "selection": "single",
+     "isRequired": true,
+     "display": "cards",
+     "options": [
+      {
+       "_key": "op1",
+       "label": "Cable Fold 16\"",
+       "key": "standard",
+       "detail": "Feeds four. Folds to 2 cm.",
+       "image": {
+        "url": "https://picsum.photos/seed/grate-16/1600/1000",
+        "alt": "The 16 inch Cable Fold grate over coals",
+        "name": "grate-16.jpg",
+        "width": 3200,
+        "height": 2000
+       },
+       "priceDelta": 0,
+       "isDefault": true,
+       "availability": {
+        "mode": "always"
+       }
+      },
+      {
+       "_key": "op2",
+       "label": "Cable Fold XL 22\"",
+       "key": "xl",
+       "detail": "Feeds eight. Takes the griddle plate.",
+       "image": {
+        "url": "https://picsum.photos/seed/grate-22/1600/1000",
+        "alt": "The 22 inch XL grate with two pans on it",
+        "name": "grate-22.jpg",
+        "width": 3200,
+        "height": 2000
+       },
+       "priceDelta": 60,
+       "variant": "gid://shopify/Product/8812",
+       "availability": {
+        "mode": "always"
+       }
+      }
+     ]
+    },
+    {
+     "_key": "st2",
+     "title": "Pick the legs",
+     "key": "legs",
+     "selection": "single",
+     "isRequired": true,
+     "display": "swatches",
+     "options": [
+      {
+       "_key": "op3",
+       "label": "Folding steel",
+       "key": "steel",
+       "swatch": "#4B5563",
+       "priceDelta": 0,
+       "isDefault": true,
+       "availability": {
+        "mode": "always"
+       }
+      },
+      {
+       "_key": "op4",
+       "label": "Titanium",
+       "key": "titanium",
+       "detail": "Saves 480 g",
+       "swatch": "#9CA3AF",
+       "priceDelta": 85,
+       "availability": {
+        "mode": "always",
+        "isSoldOut": true
+       }
+      }
+     ]
+    },
+    {
+     "_key": "st3",
+     "title": "Add pans",
+     "key": "pans",
+     "help": "Pick up to three. Bundles save 15%.",
+     "selection": "multiple",
+     "isRequired": false,
+     "maxPicks": 3,
+     "display": "cards",
+     "options": [
+      {
+       "_key": "op5",
+       "label": "Ridge Skillet 10\"",
+       "key": "skillet",
+       "image": {
+        "url": "https://picsum.photos/seed/ridge-skillet/1600/1000",
+        "alt": "Ridge Skillet with two fried eggs",
+        "name": "ridge-skillet.jpg",
+        "width": 3200,
+        "height": 2000
+       },
+       "priceDelta": 55,
+       "variant": "gid://shopify/Product/8814",
+       "availability": {
+        "mode": "always"
+       }
+      },
+      {
+       "_key": "op6",
+       "label": "Griddle plate",
+       "key": "griddle",
+       "detail": "Smash burgers, flatbreads, pancakes",
+       "image": {
+        "url": "https://picsum.photos/seed/griddle-plate/1600/1000",
+        "alt": "Flatbreads blistering on the griddle plate",
+        "name": "griddle-plate.jpg",
+        "width": 3200,
+        "height": 2000
+       },
+       "priceDelta": 45,
+       "availability": {
+        "mode": "requires",
+        "rule": "grate.xl",
+        "unavailableNote": "Fits the XL grate only"
+       }
+      },
+      {
+       "_key": "op7",
+       "label": "Trail Kettle 1L",
+       "key": "kettle",
+       "image": {
+        "url": "https://picsum.photos/seed/trail-kettle/1600/1000",
+        "alt": "Trail Kettle steaming on the grate",
+        "name": "trail-kettle.jpg",
+        "width": 3200,
+        "height": 2000
+       },
+       "priceDelta": 39,
+       "variant": "gid://shopify/Product/8815",
+       "availability": {
+        "mode": "always"
+       }
+      }
+     ]
+    }
+   ],
+   "showTotal": true,
+   "button": {
+    "label": "Add kit to cart",
+    "href": "/cart",
+    "type": "page",
+    "title": "Cart",
+    "style": "primary",
+    "arrow": true
+   },
+   "shippingNote": "Free shipping over $150 \u00b7 Lifetime warranty"
+  }
+ },
+ {
+  "id": "stockist-map",
+  "name": "Map with markers",
+  "category": "Data & interactive",
+  "kind": "block",
+  "brand": "Caldera",
+  "previewLayout": "media",
+  "proves": "Categories \u2192 markers \u2192 popup \u2192 button \u00b7 geopoints \u00b7 manual or collection source \u00b7 list fallback for keyboard users",
+  "schema": {
+   "name": "markerMap",
+   "title": "Map",
+   "kind": "block",
+   "icon": "map-pin",
+   "category": "Data & interactive",
+   "description": "Pins on a map with popups, filters and a list beside it",
+   "variants": [
+    {
+     "id": "list-left",
+     "name": "List on the left"
+    },
+    {
+     "id": "full",
+     "name": "Full-width map"
+    }
+   ],
+   "preview": {
+    "title": "heading",
+    "subtitle": "intro",
+    "icon": "map-pin"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "places",
+     "title": "Places",
+     "icon": "map-pins"
+    },
+    {
+     "name": "map",
+     "title": "Map"
+    }
+   ],
+   "fields": [
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "group": "content",
+     "validation": {
+      "required": true,
+      "recommendedMax": 50
+     },
+     "ai": true
+    },
+    {
+     "name": "intro",
+     "title": "Intro",
+     "type": "text",
+     "rows": 2,
+     "group": "content",
+     "validation": {
+      "recommendedMax": 160
+     }
+    },
+    {
+     "name": "categories",
+     "title": "Categories",
+     "type": "array",
+     "group": "places",
+     "itemNoun": "category",
+     "validation": {
+      "max": 6
+     },
+     "of": [
+      {
+       "name": "category",
+       "title": "Category",
+       "type": "object",
+       "icon": "tag",
+       "preview": {
+        "title": "label",
+        "subtitle": "key",
+        "fallback": "Untitled category"
+       },
+       "fields": [
+        {
+         "name": "label",
+         "title": "Label",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 24
+         }
+        },
+        {
+         "name": "key",
+         "title": "Key",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "pattern": "^[a-z][a-zA-Z0-9]*$",
+          "patternMessage": "Use camelCase letters and numbers, like hoursPerRun.",
+          "unique": true
+         }
+        },
+        {
+         "name": "color",
+         "title": "Pin color",
+         "type": "color"
+        },
+        {
+         "name": "icon",
+         "title": "Pin icon",
+         "type": "icon"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "source",
+     "title": "Places come from",
+     "type": "select",
+     "group": "places",
+     "layout": "segmented",
+     "initialValue": "manual",
+     "options": [
+      {
+       "value": "manual",
+       "label": "Added here"
+      },
+      {
+       "value": "collection",
+       "label": "Locations collection"
+      }
+     ]
+    },
+    {
+     "name": "markers",
+     "title": "Places",
+     "type": "array",
+     "group": "places",
+     "itemNoun": "place",
+     "hidden": {
+      "field": "source",
+      "equals": "manual"
+     },
+     "validation": {
+      "min": 1,
+      "max": 50
+     },
+     "of": [
+      {
+       "name": "marker",
+       "title": "Place",
+       "type": "object",
+       "icon": "map-pin",
+       "preview": {
+        "title": "name",
+        "subtitle": "address",
+        "fallback": "Untitled place"
+       },
+       "fields": [
+        {
+         "name": "name",
+         "title": "Name",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 60
+         }
+        },
+        {
+         "name": "category",
+         "title": "Category key",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "pattern": "^[a-z][a-zA-Z0-9]*$",
+          "patternMessage": "Use camelCase letters and numbers, like hoursPerRun."
+         },
+         "description": "One of the category keys above, e.g. retailer."
+        },
+        {
+         "name": "location",
+         "title": "Pin",
+         "type": "geopoint",
+         "validation": {
+          "required": true
+         }
+        },
+        {
+         "name": "address",
+         "title": "Address",
+         "type": "text",
+         "rows": 2,
+         "validation": {
+          "required": true,
+          "max": 160
+         }
+        },
+        {
+         "name": "phone",
+         "title": "Phone",
+         "type": "string",
+         "validation": {
+          "pattern": "^\\+?[0-9 ()-]{7,20}$",
+          "patternMessage": "Use digits, spaces and an optional +, like +1 541 555 0182."
+         }
+        },
+        {
+         "name": "hours",
+         "title": "Opening hours",
+         "type": "array",
+         "itemNoun": "line",
+         "openMode": "inline",
+         "validation": {
+          "max": 7
+         },
+         "of": [
+          {
+           "name": "hoursLine",
+           "title": "Line",
+           "type": "object",
+           "icon": "clock",
+           "preview": {
+            "title": "days",
+            "subtitle": "times",
+            "fallback": "Untitled line"
+           },
+           "fields": [
+            {
+             "name": "days",
+             "title": "Days",
+             "type": "string",
+             "validation": {
+              "required": true,
+              "max": 20
+             },
+             "placeholder": "Mon\u2013Fri"
+            },
+            {
+             "name": "times",
+             "title": "Hours",
+             "type": "string",
+             "validation": {
+              "required": true,
+              "pattern": "^(Closed|\\d{1,2}:\\d{2}\u2013\\d{1,2}:\\d{2})$",
+              "patternMessage": "Use opening hours, like 09:00\u201318:00 or Closed."
+             }
+            }
+           ]
+          }
+         ]
+        },
+        {
+         "name": "popup",
+         "title": "Popup",
+         "type": "object",
+         "icon": "message-2",
+         "openMode": "drill",
+         "fields": [
+          {
+           "name": "image",
+           "title": "Image",
+           "type": "image"
+          },
+          {
+           "name": "body",
+           "title": "Body",
+           "type": "text",
+           "rows": 2,
+           "validation": {
+            "recommendedMax": 120
+           }
+          },
+          {
+           "name": "button",
+           "title": "Button",
+           "type": "button"
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "collection",
+     "title": "Collection",
+     "type": "reference",
+     "group": "places",
+     "reference": {
+      "to": [
+       "collection"
+      ]
+     },
+     "hidden": {
+      "field": "source",
+      "equals": "collection"
+     },
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "provider",
+     "title": "Map provider",
+     "type": "select",
+     "group": "map",
+     "access": {
+      "edit": "schema.manage"
+     },
+     "lockReason": "The provider key is set in the site's environment.",
+     "options": [
+      {
+       "value": "maplibre",
+       "label": "MapLibre"
+      },
+      {
+       "value": "mapbox",
+       "label": "Mapbox"
+      },
+      {
+       "value": "google",
+       "label": "Google Maps"
+      }
+     ]
+    },
+    {
+     "name": "style",
+     "title": "Map style",
+     "type": "select",
+     "group": "map",
+     "layout": "segmented",
+     "options": [
+      {
+       "value": "outdoors",
+       "label": "Outdoors"
+      },
+      {
+       "value": "light",
+       "label": "Light"
+      },
+      {
+       "value": "satellite",
+       "label": "Satellite"
+      }
+     ]
+    },
+    {
+     "name": "center",
+     "title": "Start centered on",
+     "type": "geopoint",
+     "group": "map",
+     "description": "Leave empty to fit every pin."
+    },
+    {
+     "name": "zoom",
+     "title": "Start zoom",
+     "type": "number",
+     "group": "map",
+     "layout": "slider",
+     "numeric": {
+      "min": 2,
+      "max": 16,
+      "step": 1
+     }
+    },
+    {
+     "name": "useClustering",
+     "title": "Group nearby pins",
+     "type": "boolean",
+     "group": "map",
+     "initialValue": true
+    },
+    {
+     "name": "showList",
+     "title": "List beside the map",
+     "type": "boolean",
+     "group": "map",
+     "initialValue": true
+    },
+    {
+     "name": "showNearMe",
+     "title": "Show Near me button",
+     "type": "boolean",
+     "group": "map"
+    },
+    {
+     "name": "useConsentGate",
+     "title": "Ask before loading the map",
+     "type": "boolean",
+     "group": "map",
+     "description": "Needed in the EU for Google Maps."
+    }
+   ]
+  },
+  "value": {
+   "_variant": "list-left",
+   "heading": "Hold one before you buy one.",
+   "intro": "Our pans are in 40 shops across the West. Find the nearest, or visit the workshop in Bend.",
+   "categories": [
+    {
+     "_key": "k1",
+     "label": "Workshop",
+     "key": "workshop",
+     "color": "#E0663B",
+     "icon": "hammer"
+    },
+    {
+     "_key": "k2",
+     "label": "Retailers",
+     "key": "retailer",
+     "color": "#1E1B18",
+     "icon": "building-store"
+    },
+    {
+     "_key": "k3",
+     "label": "Restaurants",
+     "key": "restaurant",
+     "color": "#4F6B4A",
+     "icon": "tools-kitchen-2"
+    }
+   ],
+   "source": "manual",
+   "markers": [
+    {
+     "_key": "mk1",
+     "name": "Caldera Workshop",
+     "category": "workshop",
+     "location": {
+      "label": "Bend, Oregon",
+      "lat": 44.0582,
+      "lng": -121.3153
+     },
+     "address": "61 NW Oregon Ave\nBend, OR 97703",
+     "phone": "+1 541 555 0182",
+     "hours": [
+      {
+       "_key": "h1",
+       "days": "Tue\u2013Sat",
+       "times": "10:00\u201318:00"
+      },
+      {
+       "_key": "h2",
+       "days": "Sun\u2013Mon",
+       "times": "Closed"
+      }
+     ],
+     "popup": {
+      "image": {
+       "url": "https://picsum.photos/seed/bend-workshop/1600/1000",
+       "alt": "The Caldera workshop floor with skillets cooling on racks",
+       "name": "bend-workshop.jpg",
+       "width": 3200,
+       "height": 2000
+      },
+      "body": "Watch a pour on Saturdays at 11. Seconds sale on the first weekend of each month.",
+      "button": {
+       "label": "Get directions",
+       "href": "https://maps.google.com/?q=61+NW+Oregon+Ave+Bend",
+       "type": "url",
+       "style": "primary",
+       "newTab": true
+      }
+     }
+    },
+    {
+     "_key": "mk2",
+     "name": "Next Adventure",
+     "category": "retailer",
+     "location": {
+      "label": "Portland, Oregon",
+      "lat": 45.5191,
+      "lng": -122.6627
+     },
+     "address": "426 SE Grand Ave\nPortland, OR 97214",
+     "phone": "+1 503 555 0144",
+     "hours": [
+      {
+       "_key": "h3",
+       "days": "Daily",
+       "times": "10:00\u201319:00"
+      }
+     ],
+     "popup": {
+      "body": "Full cookware range and the Cable Fold on display.",
+      "button": {
+       "label": "Visit store site",
+       "href": "https://www.nextadventure.net",
+       "type": "url",
+       "style": "outline",
+       "newTab": true
+      }
+     }
+    },
+    {
+     "_key": "mk3",
+     "name": "Neptune Mountaineering",
+     "category": "retailer",
+     "location": {
+      "label": "Boulder, Colorado",
+      "lat": 39.9865,
+      "lng": -105.2509
+     },
+     "address": "633 S Broadway\nBoulder, CO 80305",
+     "hours": [
+      {
+       "_key": "h4",
+       "days": "Daily",
+       "times": "09:00\u201320:00"
+      }
+     ],
+     "popup": {
+      "body": "Skillets and kettles. Ask for the camp kitchen wall."
+     }
+    },
+    {
+     "_key": "mk4",
+     "name": "Hearth & Ash",
+     "category": "restaurant",
+     "location": {
+      "label": "Portland, Oregon",
+      "lat": 45.5231,
+      "lng": -122.6765
+     },
+     "address": "1120 SW Morrison St\nPortland, OR 97205",
+     "popup": {
+      "image": {
+       "url": "https://picsum.photos/seed/hearth-ash/1600/1000",
+       "alt": "Four Ember Dutch ovens over the live fire at Hearth & Ash",
+       "name": "hearth-ash.jpg",
+       "width": 3200,
+       "height": 2000
+      },
+      "body": "Chef Amara Osei cooks over four Ember ovens every night.",
+      "button": {
+       "label": "Read the story",
+       "href": "/journal/hearth-and-ash",
+       "type": "entry",
+       "title": "Cooking for 90 over live fire",
+       "style": "link"
+      }
+     }
+    }
+   ],
+   "provider": "maplibre",
+   "style": "outdoors",
+   "zoom": 6,
+   "useClustering": true,
+   "showList": true,
+   "showNearMe": true,
+   "useConsentGate": false
+  }
+ },
+ {
+  "id": "product-compare-slider",
+  "name": "Product comparison slider",
+  "category": "Data & interactive",
+  "kind": "block",
+  "brand": "Caldera",
+  "previewLayout": "table",
+  "proves": "References to products \u00b7 attributes pulled from referenced fields or typed per product \u00b7 swipe on phones",
+  "schema": {
+   "name": "comparisonSlider",
+   "title": "Comparison slider",
+   "kind": "block",
+   "icon": "arrows-left-right",
+   "category": "Data & interactive",
+   "description": "Two to four products side by side, swipeable on phones",
+   "variants": [
+    {
+     "id": "columns",
+     "name": "Columns"
+    },
+    {
+     "id": "slider",
+     "name": "Slider"
+    }
+   ],
+   "preview": {
+    "title": "heading",
+    "subtitle": "intro"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "rows",
+     "title": "Rows",
+     "icon": "list-details"
+    },
+    {
+     "name": "display",
+     "title": "Display"
+    }
+   ],
+   "fields": [
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "group": "content",
+     "validation": {
+      "required": true,
+      "recommendedMax": 50
+     },
+     "ai": true
+    },
+    {
+     "name": "intro",
+     "title": "Intro",
+     "type": "text",
+     "rows": 2,
+     "group": "content"
+    },
+    {
+     "name": "products",
+     "title": "Products",
+     "type": "array",
+     "group": "content",
+     "itemNoun": "product",
+     "validation": {
+      "min": 2,
+      "max": 4,
+      "unique": true
+     },
+     "of": [
+      {
+       "name": "product",
+       "title": "Product",
+       "type": "reference",
+       "reference": {
+        "to": [
+         "col_products"
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "name": "recommended",
+     "title": "Recommended",
+     "type": "reference",
+     "group": "content",
+     "reference": {
+      "to": [
+       "col_products"
+      ]
+     },
+     "description": "Must be one of the products above."
+    },
+    {
+     "name": "attributes",
+     "title": "Rows",
+     "type": "array",
+     "group": "rows",
+     "itemNoun": "row",
+     "validation": {
+      "min": 1,
+      "max": 14
+     },
+     "of": [
+      {
+       "name": "attribute",
+       "title": "Row",
+       "type": "object",
+       "icon": "list-details",
+       "preview": {
+        "title": "label",
+        "subtitle": "field",
+        "fallback": "Untitled row"
+       },
+       "fields": [
+        {
+         "name": "source",
+         "title": "Values come from",
+         "type": "select",
+         "layout": "segmented",
+         "initialValue": "field",
+         "options": [
+          {
+           "value": "field",
+           "label": "Product field"
+          },
+          {
+           "value": "custom",
+           "label": "Typed here"
+          }
+         ]
+        },
+        {
+         "name": "field",
+         "title": "Product field",
+         "type": "select",
+         "hidden": {
+          "field": "source",
+          "equals": "field"
+         },
+         "validation": {
+          "required": true
+         },
+         "options": [
+          {
+           "value": "capacity",
+           "label": "Capacity"
+          },
+          {
+           "value": "weight",
+           "label": "Weight"
+          },
+          {
+           "value": "material",
+           "label": "Material"
+          },
+          {
+           "value": "heatRating",
+           "label": "Heat rating"
+          },
+          {
+           "value": "induction",
+           "label": "Induction"
+          },
+          {
+           "value": "packedSize",
+           "label": "Packed size"
+          },
+          {
+           "value": "warranty",
+           "label": "Warranty"
+          },
+          {
+           "value": "price",
+           "label": "Price"
+          }
+         ]
+        },
+        {
+         "name": "label",
+         "title": "Row label",
+         "type": "string",
+         "validation": {
+          "max": 32
+         },
+         "description": "Leave empty to use the field's name."
+        },
+        {
+         "name": "tooltip",
+         "title": "Explainer",
+         "type": "string",
+         "validation": {
+          "max": 90
+         }
+        },
+        {
+         "name": "values",
+         "title": "Values",
+         "type": "array",
+         "itemNoun": "value",
+         "openMode": "inline",
+         "hidden": {
+          "field": "source",
+          "equals": "custom"
+         },
+         "validation": {
+          "max": 4
+         },
+         "of": [
+          {
+           "name": "cellValue",
+           "title": "Value",
+           "type": "object",
+           "icon": "square",
+           "preview": {
+            "title": "value",
+            "fallback": "Untitled value"
+           },
+           "fields": [
+            {
+             "name": "product",
+             "title": "Product",
+             "type": "reference",
+             "reference": {
+              "to": [
+               "col_products"
+              ]
+             }
+            },
+            {
+             "name": "value",
+             "title": "Value",
+             "type": "string",
+             "validation": {
+              "required": true,
+              "max": 40
+             }
+            }
+           ]
+          }
+         ]
+        },
+        {
+         "name": "showDifferences",
+         "title": "Highlight differences",
+         "type": "boolean"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "mobile",
+     "title": "On phones",
+     "type": "select",
+     "group": "display",
+     "layout": "radio",
+     "initialValue": "swipe",
+     "options": [
+      {
+       "value": "swipe",
+       "label": "Swipe",
+       "description": "One product at a time, row labels stay put"
+      },
+      {
+       "value": "pair",
+       "label": "Pick two",
+       "description": "Two dropdowns choose which pair to compare"
+      },
+      {
+       "value": "stack",
+       "label": "Stack",
+       "description": "Each product as its own card"
+      }
+     ]
+    },
+    {
+     "name": "isHeaderSticky",
+     "title": "Keep the header row in view",
+     "type": "boolean",
+     "group": "display",
+     "initialValue": true
+    },
+    {
+     "name": "showAddToCart",
+     "title": "Show add to cart buttons",
+     "type": "boolean",
+     "group": "display",
+     "initialValue": true
+    }
+   ]
+  },
+  "value": {
+   "_variant": "slider",
+   "heading": "Which one comes camping?",
+   "intro": "Three pieces, three kinds of trip. Here's how they stack up.",
+   "products": [
+    "en_p1",
+    "en_p2",
+    "en_p3"
+   ],
+   "recommended": "en_p1",
+   "attributes": [
+    {
+     "_key": "at1",
+     "source": "field",
+     "field": "weight",
+     "showDifferences": true
+    },
+    {
+     "_key": "at2",
+     "source": "field",
+     "field": "packedSize",
+     "label": "Packed",
+     "tooltip": "Measured folded or nested, without the sleeve."
+    },
+    {
+     "_key": "at3",
+     "source": "field",
+     "field": "heatRating",
+     "showDifferences": true
+    },
+    {
+     "_key": "at4",
+     "source": "field",
+     "field": "induction"
+    },
+    {
+     "_key": "at5",
+     "source": "custom",
+     "label": "Best for",
+     "values": [
+      {
+       "_key": "v1",
+       "product": "en_p1",
+       "value": "Group trips, car camping"
+      },
+      {
+       "_key": "v2",
+       "product": "en_p2",
+       "value": "Stews, bread, base camp"
+      },
+      {
+       "_key": "v3",
+       "product": "en_p3",
+       "value": "Everyday, stove to fire"
+      }
+     ]
+    },
+    {
+     "_key": "at6",
+     "source": "field",
+     "field": "warranty",
+     "label": "Warranty"
+    },
+    {
+     "_key": "at7",
+     "source": "field",
+     "field": "price"
+    }
+   ],
+   "mobile": "swipe",
+   "isHeaderSticky": true,
+   "showAddToCart": true
+  }
+ },
+ {
+  "id": "countdown-live-counter",
+  "name": "Countdown and live counter",
+  "category": "Data & interactive",
+  "kind": "block",
+  "brand": "Caldera",
+  "previewLayout": "centered",
+  "proves": "Datetime + time zone \u00b7 what happens after zero (conditional) \u00b7 live counter from a static rate or an API \u00b7 aria-live",
+  "schema": {
+   "name": "countdown",
+   "title": "Countdown",
+   "kind": "block",
+   "icon": "hourglass",
+   "category": "Data & interactive",
+   "description": "Counts down to a launch, then swaps to a message or button",
+   "variants": [
+    {
+     "id": "banner",
+     "name": "Banner"
+    },
+    {
+     "id": "hero",
+     "name": "Large"
+    }
+   ],
+   "preview": {
+    "title": "heading",
+    "subtitle": "target"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "timer",
+     "title": "Timer",
+     "icon": "clock"
+    },
+    {
+     "name": "counter",
+     "title": "Live counter",
+     "icon": "activity"
+    }
+   ],
+   "fields": [
+    {
+     "name": "eyebrow",
+     "title": "Eyebrow",
+     "type": "string",
+     "group": "content",
+     "validation": {
+      "max": 32
+     }
+    },
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "group": "content",
+     "validation": {
+      "required": true,
+      "recommendedMax": 50
+     },
+     "ai": true,
+     "localized": true
+    },
+    {
+     "name": "body",
+     "title": "Body",
+     "type": "text",
+     "rows": 2,
+     "group": "content",
+     "localized": true
+    },
+    {
+     "name": "button",
+     "title": "Button",
+     "type": "button",
+     "group": "content"
+    },
+    {
+     "name": "target",
+     "title": "Counts down to",
+     "type": "datetime",
+     "group": "timer",
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "timezone",
+     "title": "Time zone",
+     "type": "select",
+     "group": "timer",
+     "initialValue": "America/Los_Angeles",
+     "description": "The launch happens at this zone's time for everyone.",
+     "options": [
+      {
+       "value": "America/Los_Angeles",
+       "label": "Pacific (Bend)"
+      },
+      {
+       "value": "America/New_York",
+       "label": "Eastern"
+      },
+      {
+       "value": "Europe/London",
+       "label": "London"
+      },
+      {
+       "value": "UTC",
+       "label": "UTC"
+      }
+     ]
+    },
+    {
+     "name": "units",
+     "title": "Show",
+     "type": "multiselect",
+     "group": "timer",
+     "initialValue": [
+      "days",
+      "hours",
+      "minutes",
+      "seconds"
+     ],
+     "options": [
+      {
+       "value": "days",
+       "label": "Days"
+      },
+      {
+       "value": "hours",
+       "label": "Hours"
+      },
+      {
+       "value": "minutes",
+       "label": "Minutes"
+      },
+      {
+       "value": "seconds",
+       "label": "Seconds"
+      }
+     ]
+    },
+    {
+     "name": "labels",
+     "title": "Unit labels",
+     "type": "object",
+     "group": "timer",
+     "icon": "language",
+     "openMode": "drill",
+     "fields": [
+      {
+       "name": "days",
+       "title": "Days",
+       "type": "string",
+       "validation": {
+        "max": 12
+       },
+       "localized": true,
+       "placeholder": "days"
+      },
+      {
+       "name": "hours",
+       "title": "Hours",
+       "type": "string",
+       "validation": {
+        "max": 12
+       },
+       "localized": true,
+       "placeholder": "hrs"
+      },
+      {
+       "name": "minutes",
+       "title": "Minutes",
+       "type": "string",
+       "validation": {
+        "max": 12
+       },
+       "localized": true,
+       "placeholder": "min"
+      },
+      {
+       "name": "seconds",
+       "title": "Seconds",
+       "type": "string",
+       "validation": {
+        "max": 12
+       },
+       "localized": true,
+       "placeholder": "sec"
+      }
+     ]
+    },
+    {
+     "name": "afterEnd",
+     "title": "When it reaches zero",
+     "type": "select",
+     "group": "timer",
+     "layout": "radio",
+     "initialValue": "message",
+     "options": [
+      {
+       "value": "hide",
+       "label": "Hide the block"
+      },
+      {
+       "value": "message",
+       "label": "Show a message",
+       "description": "Swap the timer for new copy and a button"
+      },
+      {
+       "value": "keep",
+       "label": "Keep it at zero"
+      }
+     ]
+    },
+    {
+     "name": "endedHeading",
+     "title": "Heading after launch",
+     "type": "string",
+     "group": "timer",
+     "hidden": {
+      "field": "afterEnd",
+      "equals": "message"
+     },
+     "validation": {
+      "required": true,
+      "max": 60
+     },
+     "localized": true
+    },
+    {
+     "name": "endedButton",
+     "title": "Button after launch",
+     "type": "button",
+     "group": "timer",
+     "hidden": {
+      "field": "afterEnd",
+      "equals": "message"
+     }
+    },
+    {
+     "name": "counter",
+     "title": "Live counter",
+     "type": "object",
+     "group": "counter",
+     "icon": "activity",
+     "openMode": "drill",
+     "fields": [
+      {
+       "name": "showLiveCounter",
+       "title": "Show a live counter",
+       "type": "boolean"
+      },
+      {
+       "name": "label",
+       "title": "Label",
+       "type": "string",
+       "hidden": {
+        "field": "showLiveCounter",
+        "equals": true
+       },
+       "validation": {
+        "max": 40
+       },
+       "localized": true
+      },
+      {
+       "name": "source",
+       "title": "Number comes from",
+       "type": "select",
+       "layout": "segmented",
+       "hidden": {
+        "field": "showLiveCounter",
+        "equals": true
+       },
+       "initialValue": "rate",
+       "options": [
+        {
+         "value": "rate",
+         "label": "Start + rate"
+        },
+        {
+         "value": "api",
+         "label": "Live API"
+        }
+       ]
+      },
+      {
+       "name": "startValue",
+       "title": "Starts at",
+       "type": "number",
+       "hidden": {
+        "field": "source",
+        "equals": "rate"
+       }
+      },
+      {
+       "name": "startedAt",
+       "title": "Counted from",
+       "type": "datetime",
+       "hidden": {
+        "field": "source",
+        "equals": "rate"
+       }
+      },
+      {
+       "name": "perHour",
+       "title": "Adds per hour",
+       "type": "number",
+       "hidden": {
+        "field": "source",
+        "equals": "rate"
+       },
+       "numeric": {
+        "min": 0,
+        "step": 1
+       },
+       "description": "Only a real average. Fake urgency breaks EU law."
+      },
+      {
+       "name": "endpoint",
+       "title": "Endpoint",
+       "type": "url",
+       "hidden": {
+        "field": "source",
+        "equals": "api"
+       },
+       "validation": {
+        "required": true,
+        "pattern": "^https://",
+        "patternMessage": "Use an https:// address, like https://your-site.com."
+       },
+       "access": {
+        "view": "schema.view",
+        "edit": "schema.manage"
+       },
+       "lockReason": "Set by a developer. It must return { \"value\": number }."
+      },
+      {
+       "name": "refreshSeconds",
+       "title": "Refresh every",
+       "type": "number",
+       "hidden": {
+        "field": "source",
+        "equals": "api"
+       },
+       "numeric": {
+        "min": 10,
+        "max": 600,
+        "step": 5,
+        "unit": "s"
+       }
+      },
+      {
+       "name": "format",
+       "title": "Format",
+       "type": "select",
+       "layout": "segmented",
+       "hidden": {
+        "field": "showLiveCounter",
+        "equals": true
+       },
+       "initialValue": "full",
+       "options": [
+        {
+         "value": "full",
+         "label": "12,431"
+        },
+        {
+         "value": "compact",
+         "label": "12.4k"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "announce",
+     "title": "Screen reader updates",
+     "type": "select",
+     "group": "timer",
+     "advanced": true,
+     "initialValue": "off",
+     "options": [
+      {
+       "value": "off",
+       "label": "Off",
+       "description": "Recommended: a ticking timer announced every second is noise"
+      },
+      {
+       "value": "minute",
+       "label": "Every minute"
+      }
+     ]
+    }
+   ]
+  },
+  "value": {
+   "_variant": "banner",
+   "eyebrow": "Fall drop",
+   "heading": "The Ember 7qt lands Friday.",
+   "body": "Our biggest Dutch oven, enamelled in Ash Grey. The first run is 600 pieces.",
+   "button": {
+    "label": "Get a launch reminder",
+    "href": "#reminder",
+    "type": "section",
+    "style": "outline"
+   },
+   "target": "2026-10-16T09:00:00-07:00[America/Los_Angeles]",
+   "timezone": "America/Los_Angeles",
+   "units": [
+    "days",
+    "hours",
+    "minutes",
+    "seconds"
+   ],
+   "labels": {
+    "days": "days",
+    "hours": "hrs",
+    "minutes": "min",
+    "seconds": "sec"
+   },
+   "afterEnd": "message",
+   "endedHeading": "The Ember 7qt is here.",
+   "endedButton": {
+    "label": "Shop the Ember 7qt",
+    "href": "/products/ember-dutch-oven-7qt",
+    "type": "page",
+    "style": "primary",
+    "arrow": true
+   },
+   "counter": {
+    "showLiveCounter": true,
+    "label": "people on the reminder list",
+    "source": "api",
+    "endpoint": "https://api.caldera.com/v1/launch/ember-7qt/subscribers",
+    "refreshSeconds": 60,
+    "format": "full"
+   },
+   "announce": "off"
+  }
+ },
+ {
+  "id": "reader-poll",
+  "name": "Poll",
+  "category": "Data & interactive",
+  "kind": "block",
+  "brand": "Atlas Journal",
+  "previewLayout": "form",
+  "proves": "Question type switches options vs scale vs open answer \u00b7 results visibility \u00b7 close date \u00b7 one vote per reader",
+  "schema": {
+   "name": "poll",
+   "title": "Poll",
+   "kind": "block",
+   "icon": "chart-bar-popular",
+   "category": "Data & interactive",
+   "description": "One question with live results",
+   "variants": [
+    {
+     "id": "card",
+     "name": "Card"
+    },
+    {
+     "id": "inline",
+     "name": "In the story"
+    }
+   ],
+   "preview": {
+    "title": "question",
+    "subtitle": "type",
+    "icon": "chart-bar-popular"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Question",
+     "default": true
+    },
+    {
+     "name": "rules",
+     "title": "Rules"
+    }
+   ],
+   "fields": [
+    {
+     "name": "question",
+     "title": "Question",
+     "type": "string",
+     "group": "content",
+     "validation": {
+      "required": true,
+      "max": 140
+     },
+     "ai": true
+    },
+    {
+     "name": "context",
+     "title": "Context",
+     "type": "text",
+     "rows": 2,
+     "group": "content",
+     "validation": {
+      "recommendedMax": 200
+     }
+    },
+    {
+     "name": "type",
+     "title": "Answer type",
+     "type": "select",
+     "group": "content",
+     "layout": "cards",
+     "initialValue": "single",
+     "options": [
+      {
+       "value": "single",
+       "label": "Pick one",
+       "icon": "circle-dot"
+      },
+      {
+       "value": "multiple",
+       "label": "Pick several",
+       "icon": "checkbox"
+      },
+      {
+       "value": "scale",
+       "label": "Scale",
+       "icon": "adjustments-horizontal",
+       "description": "1 to 5, 0 to 10"
+      },
+      {
+       "value": "open",
+       "label": "Written answer",
+       "icon": "message"
+      }
+     ]
+    },
+    {
+     "name": "options",
+     "title": "Options",
+     "type": "array",
+     "group": "content",
+     "itemNoun": "option",
+     "hidden": {
+      "field": "type",
+      "equals": [
+       "single",
+       "multiple"
+      ]
+     },
+     "validation": {
+      "min": 2,
+      "max": 8
+     },
+     "of": [
+      {
+       "name": "pollOption",
+       "title": "Option",
+       "type": "object",
+       "icon": "circle-dot",
+       "preview": {
+        "title": "label",
+        "media": "image",
+        "fallback": "Untitled option"
+       },
+       "fields": [
+        {
+         "name": "label",
+         "title": "Label",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 60
+         }
+        },
+        {
+         "name": "image",
+         "title": "Image",
+         "type": "image"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "maxPicks",
+     "title": "At most",
+     "type": "number",
+     "group": "content",
+     "hidden": {
+      "field": "type",
+      "equals": "multiple"
+     },
+     "numeric": {
+      "min": 2,
+      "max": 8,
+      "step": 1
+     }
+    },
+    {
+     "name": "allowOther",
+     "title": "\"Other\" with a text box",
+     "type": "boolean",
+     "group": "content",
+     "hidden": {
+      "field": "type",
+      "equals": [
+       "single",
+       "multiple"
+      ]
+     }
+    },
+    {
+     "name": "scale",
+     "title": "Scale",
+     "type": "object",
+     "group": "content",
+     "icon": "adjustments-horizontal",
+     "openMode": "drill",
+     "hidden": {
+      "field": "type",
+      "equals": "scale"
+     },
+     "fields": [
+      {
+       "name": "min",
+       "title": "From",
+       "type": "number",
+       "initialValue": 1,
+       "numeric": {
+        "min": 0,
+        "max": 1,
+        "step": 1
+       }
+      },
+      {
+       "name": "max",
+       "title": "To",
+       "type": "number",
+       "initialValue": 5,
+       "numeric": {
+        "min": 3,
+        "max": 10,
+        "step": 1
+       }
+      },
+      {
+       "name": "minLabel",
+       "title": "Low label",
+       "type": "string",
+       "validation": {
+        "max": 24
+       },
+       "placeholder": "Not at all"
+      },
+      {
+       "name": "maxLabel",
+       "title": "High label",
+       "type": "string",
+       "validation": {
+        "max": 24
+       },
+       "placeholder": "Every day"
+      }
+     ]
+    },
+    {
+     "name": "placeholder",
+     "title": "Answer placeholder",
+     "type": "string",
+     "group": "content",
+     "hidden": {
+      "field": "type",
+      "equals": "open"
+     },
+     "validation": {
+      "max": 60
+     }
+    },
+    {
+     "name": "useModeration",
+     "title": "Review answers before showing them",
+     "type": "boolean",
+     "group": "content",
+     "hidden": {
+      "field": "type",
+      "equals": "open"
+     },
+     "initialValue": true
+    },
+    {
+     "name": "showResults",
+     "title": "Show results",
+     "type": "select",
+     "group": "rules",
+     "layout": "radio",
+     "initialValue": "afterVote",
+     "options": [
+      {
+       "value": "afterVote",
+       "label": "After someone votes"
+      },
+      {
+       "value": "afterClose",
+       "label": "When the poll closes"
+      },
+      {
+       "value": "never",
+       "label": "Never",
+       "description": "Results stay in Forms \u203a Submissions"
+      }
+     ]
+    },
+    {
+     "name": "closesAt",
+     "title": "Closes",
+     "type": "datetime",
+     "group": "rules",
+     "description": "Leave empty to keep it open."
+    },
+    {
+     "name": "voters",
+     "title": "Who can vote",
+     "type": "select",
+     "group": "rules",
+     "layout": "segmented",
+     "initialValue": "anyone",
+     "options": [
+      {
+       "value": "anyone",
+       "label": "Anyone"
+      },
+      {
+       "value": "members",
+       "label": "Signed in"
+      },
+      {
+       "value": "subscribers",
+       "label": "Subscribers"
+      }
+     ]
+    },
+    {
+     "name": "useOneVote",
+     "title": "One vote per reader",
+     "type": "boolean",
+     "group": "rules",
+     "initialValue": true
+    },
+    {
+     "name": "thankYou",
+     "title": "Thank-you line",
+     "type": "string",
+     "group": "rules",
+     "validation": {
+      "max": 100
+     }
+    },
+    {
+     "name": "relatedStory",
+     "title": "Results story",
+     "type": "reference",
+     "group": "rules",
+     "reference": {
+      "to": [
+       "col_journal"
+      ]
+     },
+     "description": "Linked under the results once it's published."
+    }
+   ]
+  },
+  "value": {
+   "_variant": "inline",
+   "question": "How do you read Atlas most days?",
+   "context": "We're redesigning the morning edition. Your answer decides what we build first.",
+   "type": "single",
+   "options": [
+    {
+     "_key": "o1",
+     "label": "The morning newsletter"
+    },
+    {
+     "_key": "o2",
+     "label": "The app, on the commute"
+    },
+    {
+     "_key": "o3",
+     "label": "The website, at my desk"
+    },
+    {
+     "_key": "o4",
+     "label": "The weekend print edition"
+    }
+   ],
+   "allowOther": true,
+   "scale": {
+    "min": 1,
+    "max": 5
+   },
+   "useModeration": true,
+   "showResults": "afterVote",
+   "closesAt": "2026-11-01T23:59:00-04:00[America/New_York]",
+   "voters": "anyone",
+   "useOneVote": true,
+   "thankYou": "Thanks. We'll publish what we learn on November 4.",
+   "relatedStory": "en_2"
+  }
+ },
+ {
+  "id": "safe-embed",
+  "name": "Embed (iframe, HTML, script)",
+  "category": "Data & interactive",
+  "kind": "block",
+  "brand": "Northwind",
+  "previewLayout": "media",
+  "proves": "Kind switches URL vs code \u00b7 sandbox + permissions developer-locked \u00b7 consent placeholder \u00b7 required iframe title",
+  "schema": {
+   "name": "embed",
+   "title": "Embed",
+   "kind": "block",
+   "icon": "frame",
+   "category": "Data & interactive",
+   "description": "Third-party content in a safe frame, with a consent placeholder",
+   "variants": [
+    {
+     "id": "framed",
+     "name": "Framed"
+    },
+    {
+     "id": "bare",
+     "name": "No frame"
+    }
+   ],
+   "preview": {
+    "title": "title",
+    "subtitle": "kind",
+    "icon": "code"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "security",
+     "title": "Security",
+     "icon": "shield-lock"
+    },
+    {
+     "name": "privacy",
+     "title": "Privacy",
+     "icon": "cookie"
+    }
+   ],
+   "fields": [
+    {
+     "name": "title",
+     "title": "Title",
+     "type": "string",
+     "group": "content",
+     "validation": {
+      "required": true,
+      "max": 80
+     },
+     "description": "Not shown. Read by screen readers."
+    },
+    {
+     "name": "kind",
+     "title": "Type",
+     "type": "select",
+     "group": "content",
+     "layout": "cards",
+     "initialValue": "iframe",
+     "options": [
+      {
+       "value": "iframe",
+       "label": "Page in a frame",
+       "icon": "app-window",
+       "description": "Paste the embed URL"
+      },
+      {
+       "value": "oembed",
+       "label": "Link preview",
+       "icon": "link",
+       "description": "YouTube, Figma, CodePen\u2026"
+      },
+      {
+       "value": "html",
+       "label": "HTML",
+       "icon": "code",
+       "description": "Snippet from a provider"
+      },
+      {
+       "value": "script",
+       "label": "Script",
+       "icon": "file-code",
+       "description": "A widget loaded from a URL"
+      }
+     ]
+    },
+    {
+     "name": "url",
+     "title": "Embed URL",
+     "type": "url",
+     "group": "content",
+     "hidden": {
+      "field": "kind",
+      "equals": [
+       "iframe",
+       "oembed"
+      ]
+     },
+     "validation": {
+      "required": true,
+      "pattern": "^https://",
+      "patternMessage": "Use an https:// address, like https://your-site.com/embed."
+     }
+    },
+    {
+     "name": "html",
+     "title": "HTML",
+     "type": "code",
+     "group": "content",
+     "hidden": {
+      "field": "kind",
+      "equals": "html"
+     },
+     "validation": {
+      "required": true
+     },
+     "access": {
+      "edit": "schema.manage"
+     },
+     "lockReason": "Raw HTML runs on your site. A developer reviews it."
+    },
+    {
+     "name": "scriptSrc",
+     "title": "Script URL",
+     "type": "url",
+     "group": "content",
+     "hidden": {
+      "field": "kind",
+      "equals": "script"
+     },
+     "validation": {
+      "required": true,
+      "pattern": "^https://",
+      "patternMessage": "Use an https:// script, like https://your-site.com/widget.js."
+     },
+     "access": {
+      "edit": "schema.manage"
+     },
+     "lockReason": "Scripts run with full access to the page. A developer reviews them."
+    },
+    {
+     "name": "size",
+     "title": "Size",
+     "type": "object",
+     "group": "content",
+     "icon": "aspect-ratio",
+     "fields": [
+      {
+       "name": "ratio",
+       "title": "Shape",
+       "type": "select",
+       "layout": "segmented",
+       "initialValue": "16:9",
+       "options": [
+        {
+         "value": "16:9",
+         "label": "16:9"
+        },
+        {
+         "value": "4:3",
+         "label": "4:3"
+        },
+        {
+         "value": "1:1",
+         "label": "1:1"
+        },
+        {
+         "value": "fixed",
+         "label": "Fixed"
+        }
+       ]
+      },
+      {
+       "name": "height",
+       "title": "Height",
+       "type": "number",
+       "hidden": {
+        "field": "ratio",
+        "equals": "fixed"
+       },
+       "numeric": {
+        "unit": "px",
+        "min": 120,
+        "max": 1200,
+        "step": 10
+       }
+      }
+     ]
+    },
+    {
+     "name": "caption",
+     "title": "Caption",
+     "type": "string",
+     "group": "content",
+     "validation": {
+      "max": 140
+     }
+    },
+    {
+     "name": "fallback",
+     "title": "Fallback text",
+     "type": "text",
+     "rows": 2,
+     "group": "content",
+     "description": "Shown if the embed can't load or consent is declined."
+    },
+    {
+     "name": "sandbox",
+     "title": "Allow inside the frame",
+     "type": "multiselect",
+     "group": "security",
+     "hidden": {
+      "field": "kind",
+      "equals": [
+       "iframe",
+       "oembed"
+      ]
+     },
+     "access": {
+      "view": "schema.view",
+      "edit": "schema.manage"
+     },
+     "lockReason": "Loosening the sandbox is a security decision.",
+     "initialValue": [
+      "allow-scripts",
+      "allow-same-origin"
+     ],
+     "options": [
+      {
+       "value": "allow-scripts",
+       "label": "Scripts"
+      },
+      {
+       "value": "allow-same-origin",
+       "label": "Same origin (cookies, storage)"
+      },
+      {
+       "value": "allow-forms",
+       "label": "Forms"
+      },
+      {
+       "value": "allow-popups",
+       "label": "Pop-ups"
+      },
+      {
+       "value": "allow-popups-to-escape-sandbox",
+       "label": "Pop-ups without the sandbox"
+      },
+      {
+       "value": "allow-downloads",
+       "label": "Downloads"
+      },
+      {
+       "value": "allow-presentation",
+       "label": "Presentation"
+      }
+     ]
+    },
+    {
+     "name": "permissions",
+     "title": "Browser features",
+     "type": "multiselect",
+     "group": "security",
+     "hidden": {
+      "field": "kind",
+      "equals": [
+       "iframe",
+       "oembed"
+      ]
+     },
+     "access": {
+      "view": "schema.view",
+      "edit": "schema.manage"
+     },
+     "options": [
+      {
+       "value": "fullscreen",
+       "label": "Full screen"
+      },
+      {
+       "value": "clipboard-write",
+       "label": "Copy to clipboard"
+      },
+      {
+       "value": "autoplay",
+       "label": "Autoplay"
+      },
+      {
+       "value": "camera",
+       "label": "Camera"
+      },
+      {
+       "value": "microphone",
+       "label": "Microphone"
+      },
+      {
+       "value": "payment",
+       "label": "Payment"
+      }
+     ]
+    },
+    {
+     "name": "useLazyLoad",
+     "title": "Load when scrolled near",
+     "type": "boolean",
+     "group": "security",
+     "initialValue": true
+    },
+    {
+     "name": "consent",
+     "title": "Consent",
+     "type": "object",
+     "group": "privacy",
+     "icon": "cookie",
+     "openMode": "drill",
+     "fields": [
+      {
+       "name": "isRequired",
+       "title": "Ask first",
+       "type": "boolean",
+       "initialValue": true
+      },
+      {
+       "name": "category",
+       "title": "Cookie category",
+       "type": "select",
+       "hidden": {
+        "field": "isRequired",
+        "equals": true
+       },
+       "initialValue": "functional",
+       "options": [
+        {
+         "value": "functional",
+         "label": "Functional"
+        },
+        {
+         "value": "analytics",
+         "label": "Analytics"
+        },
+        {
+         "value": "marketing",
+         "label": "Marketing"
+        }
+       ]
+      },
+      {
+       "name": "provider",
+       "title": "Provider name",
+       "type": "string",
+       "hidden": {
+        "field": "isRequired",
+        "equals": true
+       },
+       "validation": {
+        "required": true,
+        "max": 40
+       },
+       "placeholder": "StackBlitz"
+      },
+      {
+       "name": "message",
+       "title": "Placeholder text",
+       "type": "text",
+       "rows": 2,
+       "hidden": {
+        "field": "isRequired",
+        "equals": true
+       },
+       "validation": {
+        "max": 200
+       }
+      },
+      {
+       "name": "privacyLink",
+       "title": "Provider's privacy policy",
+       "type": "link",
+       "hidden": {
+        "field": "isRequired",
+        "equals": true
+       }
+      },
+      {
+       "name": "previewImage",
+       "title": "Placeholder image",
+       "type": "image",
+       "hidden": {
+        "field": "isRequired",
+        "equals": true
+       }
+      }
+     ]
+    }
+   ]
+  },
+  "value": {
+   "_variant": "framed",
+   "title": "Northwind SDK quickstart running in StackBlitz",
+   "kind": "iframe",
+   "url": "https://stackblitz.com/edit/northwind-sdk-quickstart?embed=1&file=src%2Findex.ts&view=editor",
+   "size": {
+    "ratio": "fixed",
+    "height": 560
+   },
+   "caption": "Edit the API key line and press Run. Nothing leaves the sandbox.",
+   "fallback": "Open the quickstart on StackBlitz: https://stackblitz.com/edit/northwind-sdk-quickstart",
+   "sandbox": [
+    "allow-scripts",
+    "allow-same-origin",
+    "allow-forms",
+    "allow-popups"
+   ],
+   "permissions": [
+    "clipboard-write",
+    "fullscreen"
+   ],
+   "useLazyLoad": true,
+   "consent": {
+    "isRequired": true,
+    "category": "functional",
+    "provider": "StackBlitz",
+    "message": "This demo runs on StackBlitz, which sets cookies. Load it to try the SDK in your browser.",
+    "privacyLink": {
+     "type": "url",
+     "href": "https://stackblitz.com/privacy-policy",
+     "newTab": true
+    },
+    "previewImage": {
+     "url": "https://picsum.photos/seed/northwind-stackblitz/1400/800",
+     "alt": "Screenshot of the quickstart code editor with index.ts open",
+     "name": "northwind-stackblitz.jpg",
+     "width": 2800,
+     "height": 1600
+    }
+   }
+  }
+ },
+ {
+  "id": "code-snippet-tabs",
+  "name": "Code snippet with tabs",
+  "category": "Data & interactive",
+  "kind": "block",
+  "brand": "Northwind",
+  "previewLayout": "tabs",
+  "proves": "Tabs per language/package manager \u00b7 line highlights by pattern \u00b7 synced tab groups \u00b7 optional runnable playground",
+  "schema": {
+   "name": "codeSnippet",
+   "title": "Code snippet",
+   "kind": "block",
+   "icon": "terminal-2",
+   "category": "Data & interactive",
+   "description": "One snippet in several languages, with copy and run",
+   "variants": [
+    {
+     "id": "dark",
+     "name": "Dark"
+    },
+    {
+     "id": "light",
+     "name": "Light"
+    }
+   ],
+   "preview": {
+    "title": "heading",
+    "subtitle": "intro",
+    "icon": "terminal-2"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "behavior",
+     "title": "Behavior"
+    }
+   ],
+   "fields": [
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "group": "content",
+     "validation": {
+      "recommendedMax": 60
+     }
+    },
+    {
+     "name": "intro",
+     "title": "Intro",
+     "type": "text",
+     "rows": 2,
+     "group": "content"
+    },
+    {
+     "name": "tabs",
+     "title": "Tabs",
+     "type": "array",
+     "group": "content",
+     "itemNoun": "tab",
+     "validation": {
+      "min": 1,
+      "max": 6
+     },
+     "of": [
+      {
+       "name": "codeTab",
+       "title": "Tab",
+       "type": "object",
+       "icon": "file-code",
+       "preview": {
+        "title": "label",
+        "subtitle": "filename",
+        "fallback": "Untitled tab"
+       },
+       "fields": [
+        {
+         "name": "label",
+         "title": "Tab label",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 16
+         },
+         "placeholder": "npm"
+        },
+        {
+         "name": "language",
+         "title": "Language",
+         "type": "select",
+         "validation": {
+          "required": true
+         },
+         "options": [
+          {
+           "value": "bash",
+           "label": "Shell"
+          },
+          {
+           "value": "ts",
+           "label": "TypeScript"
+          },
+          {
+           "value": "js",
+           "label": "JavaScript"
+          },
+          {
+           "value": "python",
+           "label": "Python"
+          },
+          {
+           "value": "go",
+           "label": "Go"
+          },
+          {
+           "value": "json",
+           "label": "JSON"
+          },
+          {
+           "value": "html",
+           "label": "HTML"
+          },
+          {
+           "value": "css",
+           "label": "CSS"
+          }
+         ]
+        },
+        {
+         "name": "filename",
+         "title": "File name",
+         "type": "string",
+         "validation": {
+          "max": 48,
+          "pattern": "^[\\w./-]+$",
+          "patternMessage": "Use letters, numbers, dots, slashes and hyphens, like src/index.ts."
+         }
+        },
+        {
+         "name": "code",
+         "title": "Code",
+         "type": "code",
+         "validation": {
+          "required": true
+         }
+        },
+        {
+         "name": "highlight",
+         "title": "Highlight lines",
+         "type": "string",
+         "validation": {
+          "pattern": "^\\d+(-\\d+)?(,\\s*\\d+(-\\d+)?)*$",
+          "patternMessage": "Use line numbers and ranges, like 1, 4-6."
+         },
+         "placeholder": "3, 7-9"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "syncGroup",
+     "title": "Sync group",
+     "type": "string",
+     "group": "behavior",
+     "advanced": true,
+     "validation": {
+      "pattern": "^[a-z0-9-]+$",
+      "patternMessage": "Use lowercase letters, numbers and hyphens, like camp-kitchen."
+     },
+     "description": "Snippets with the same group switch tabs together."
+    },
+    {
+     "name": "showLineNumbers",
+     "title": "Show line numbers",
+     "type": "boolean",
+     "group": "behavior"
+    },
+    {
+     "name": "showCopyButton",
+     "title": "Show copy button",
+     "type": "boolean",
+     "group": "behavior",
+     "initialValue": true
+    },
+    {
+     "name": "useLineWrap",
+     "title": "Wrap long lines",
+     "type": "boolean",
+     "group": "behavior"
+    },
+    {
+     "name": "isRunnable",
+     "title": "Open in a playground",
+     "type": "boolean",
+     "group": "behavior"
+    },
+    {
+     "name": "playground",
+     "title": "Playground",
+     "type": "object",
+     "group": "behavior",
+     "icon": "player-play",
+     "openMode": "drill",
+     "hidden": {
+      "field": "isRunnable",
+      "equals": true
+     },
+     "fields": [
+      {
+       "name": "provider",
+       "title": "Provider",
+       "type": "select",
+       "layout": "segmented",
+       "initialValue": "stackblitz",
+       "options": [
+        {
+         "value": "stackblitz",
+         "label": "StackBlitz"
+        },
+        {
+         "value": "codesandbox",
+         "label": "CodeSandbox"
+        }
+       ]
+      },
+      {
+       "name": "template",
+       "title": "Template",
+       "type": "select",
+       "initialValue": "node",
+       "options": [
+        {
+         "value": "node",
+         "label": "Node"
+        },
+        {
+         "value": "vite-react",
+         "label": "Vite + React"
+        },
+        {
+         "value": "next",
+         "label": "Next.js"
+        }
+       ]
+      },
+      {
+       "name": "openFile",
+       "title": "Open file",
+       "type": "string",
+       "validation": {
+        "pattern": "^[\\w./-]+$",
+        "patternMessage": "Use a file path, like src/index.ts."
+       }
+      },
+      {
+       "name": "dependencies",
+       "title": "Dependencies",
+       "type": "array",
+       "itemNoun": "package",
+       "of": [
+        {
+         "name": "dependency",
+         "title": "Package",
+         "type": "string"
+        }
+       ],
+       "description": "Package names to install, e.g. @northwind/sdk."
+      }
+     ]
+    }
+   ]
+  },
+  "value": {
+   "_variant": "dark",
+   "heading": "Install the SDK",
+   "intro": "Node 20 or newer. The SDK has no runtime dependencies.",
+   "tabs": [
+    {
+     "_key": "t1",
+     "label": "npm",
+     "language": "bash",
+     "code": "npm install @northwind/sdk"
+    },
+    {
+     "_key": "t2",
+     "label": "pnpm",
+     "language": "bash",
+     "code": "pnpm add @northwind/sdk"
+    },
+    {
+     "_key": "t3",
+     "label": "bun",
+     "language": "bash",
+     "code": "bun add @northwind/sdk"
+    },
+    {
+     "_key": "t4",
+     "label": "First call",
+     "language": "ts",
+     "filename": "src/index.ts",
+     "code": "import { Northwind } from \"@northwind/sdk\";\n\nconst nw = new Northwind({ apiKey: process.env.NORTHWIND_KEY });\n\nconst orders = await nw.orders.list({ status: \"open\", limit: 20 });\nfor (const order of orders.data) {\n  console.log(order.id, order.total);\n}",
+     "highlight": "3, 5"
+    }
+   ],
+   "syncGroup": "package-manager",
+   "showLineNumbers": true,
+   "showCopyButton": true,
+   "useLineWrap": false,
+   "isRunnable": true,
+   "playground": {
+    "provider": "stackblitz",
+    "template": "node",
+    "openFile": "src/index.ts",
+    "dependencies": [
+     "@northwind/sdk"
+    ]
+   }
+  }
+ }
+]

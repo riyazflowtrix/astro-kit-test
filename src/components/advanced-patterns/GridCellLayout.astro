@@ -1,0 +1,212 @@
+---
+// Bento gift guide: four-column grid, each cell with its own span, surface, alignment and padding.
+---
+
+<section id="grid-cell-layout" class="section bento">
+  <!-- kit: grid-cell-layout -->
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Gift guide</span>
+      <h2>Gifts for people who cook outside.</h2>
+    </div>
+
+    <div class="bento__grid">
+      <a class="cell cell--c2 cell--r2 cell--dark cell--pad-none cell--x-start cell--y-end cell--image" href="/products/ember-dutch-oven">
+        <img src="https://picsum.photos/seed/gift-campfire/1200/1200" alt="A wrapped Ember Dutch oven beside a campfire in the snow" width="2400" height="2400" loading="lazy" />
+        <span class="cell__caption">The Ember, wrapped for the solstice</span>
+      </a>
+
+      <article class="cell cell--light cell--pad-md cell--x-center cell--y-center product">
+        <span class="badge">Under $70</span>
+        <img src="https://picsum.photos/seed/caldera-trail-griddle/600/600" alt="A flat cast iron trail griddle with two pour spouts" width="600" height="600" loading="lazy" />
+        <h3><a href="/products/trail-griddle">Trail Griddle</a></h3>
+        <p class="product__price">$68</p>
+      </article>
+
+      <div class="cell cell--brand cell--pad-lg cell--x-start cell--y-end stat">
+        <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true" class="stat__icon"><path d="M3 8h18v4H3zM5 12h14v9H5zM12 8v13M12 8c-2-4-6-4-6-1.5S10 8 12 8zm0 0c2-4 6-4 6-1.5S14 8 12 8z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" /></svg>
+        <span class="stat__value">Free</span>
+        <span class="stat__label">Gift wrap on every order till Dec 20</span>
+      </div>
+
+      <figure class="cell cell--c2 cell--warm cell--pad-lg cell--x-start cell--y-center quote">
+        <div class="stars" role="img" aria-label="Rated 5 out of 5">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <blockquote>
+          <p>My dad has used his Ridge every Sunday since I gave it to him. It's the only gift he's ever mentioned twice.</p>
+        </blockquote>
+        <figcaption><strong>Sam Whitaker</strong> · Customer, Missoula</figcaption>
+      </figure>
+
+      <article class="cell cell--r2 cell--light cell--pad-md cell--x-center cell--y-start product cell--hide-mobile">
+        <span class="badge">Stocking stuffer</span>
+        <img src="https://picsum.photos/seed/caldera-lid-lifter/600/800" alt="A forged steel lid lifter hanging from a hook" width="600" height="800" loading="lazy" />
+        <h3><a href="/products/spark-lid-lifter">Spark lid lifter</a></h3>
+        <p class="product__price">$22</p>
+      </article>
+
+      <div class="cell cell--c3 cell--dark cell--pad-lg cell--x-start cell--y-center cta" style="--tone: #1E1B18">
+        <div>
+          <h3>Not sure? Send a gift card.</h3>
+          <p>Delivered by email on the day you choose.</p>
+        </div>
+        <a class="btn btn-primary" href="/gift-cards">Buy a gift card <span aria-hidden="true">&rarr;</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .bento__grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-auto-rows: minmax(220px, auto);
+    grid-auto-flow: dense;
+    gap: 1rem;
+  }
+  .cell {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    text-decoration: none;
+    min-width: 0;
+  }
+  .cell--c2 { grid-column: span 2; }
+  .cell--c3 { grid-column: span 3; }
+  .cell--r2 { grid-row: span 2; }
+  .cell--dark { background: var(--tone, var(--dark)); color: var(--dark-ink); }
+  .cell--light { background: var(--bg); border: 1px solid var(--line); }
+  .cell--brand { background: var(--brand); color: var(--brand-ink); }
+  .cell--warm { background: #f6f1ea; }
+  .cell--pad-md { padding: 1.25rem; }
+  .cell--pad-lg { padding: 1.75rem; }
+  .cell--x-start { align-items: flex-start; text-align: left; }
+  .cell--x-center { align-items: center; text-align: center; }
+  .cell--y-start { justify-content: flex-start; }
+  .cell--y-center { justify-content: center; }
+  .cell--y-end { justify-content: flex-end; }
+
+  .cell--image {
+    position: relative;
+    min-height: 360px;
+  }
+  .cell--image img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 300ms ease;
+  }
+  .cell--image:hover img {
+    transform: scale(1.03);
+  }
+  .cell--image::after {
+    content: "";
+    position: absolute;
+    inset: 40% 0 0;
+    background: linear-gradient(transparent, rgb(0 0 0 / 0.65));
+  }
+  .cell__caption {
+    position: relative;
+    z-index: 1;
+    padding: 1.5rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+  .product {
+    gap: 0.5rem;
+  }
+  .product img {
+    width: 100%;
+    max-width: 200px;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: var(--radius);
+  }
+  .cell--r2.product img {
+    max-width: 240px;
+    aspect-ratio: 3 / 4;
+  }
+  .product h3 {
+    margin: 0.25rem 0 0;
+    font-size: 1.0625rem;
+  }
+  .product h3 a {
+    text-decoration: none;
+  }
+  .product h3 a::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+  }
+  .product {
+    position: relative;
+  }
+  .product__price {
+    margin: 0;
+    color: var(--ink-2);
+  }
+  .stat__icon {
+    margin-bottom: auto;
+  }
+  .stat__value {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+  .stat__label {
+    margin-top: 0.5rem;
+  }
+  .stars {
+    color: var(--warning);
+    letter-spacing: 0.1em;
+  }
+  .quote blockquote {
+    margin: 0.5rem 0 1rem;
+    font-size: clamp(1.125rem, 2vw, 1.375rem);
+    font-weight: 500;
+    line-height: 1.4;
+  }
+  .quote blockquote p {
+    margin: 0;
+  }
+  .quote figcaption {
+    font-size: 0.875rem;
+    color: var(--ink-2);
+  }
+  .cta {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem 2rem;
+  }
+  .cta h3 {
+    font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  }
+  .cta p {
+    margin: 0;
+    color: color-mix(in srgb, var(--dark-ink) 75%, transparent);
+  }
+
+  @media (max-width: 860px) {
+    .bento__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-auto-rows: minmax(180px, auto);
+    }
+    .cell--c3 { grid-column: span 2; }
+  }
+  @media (max-width: 560px) {
+    .bento__grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .cell--c2,
+    .cell--c3 { grid-column: auto; }
+    .cell--r2 { grid-row: auto; }
+    .cell--hide-mobile { display: none; }
+    .cell--image { min-height: 300px; }
+  }
+</style>

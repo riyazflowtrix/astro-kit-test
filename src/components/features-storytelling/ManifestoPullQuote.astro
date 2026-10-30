@@ -1,0 +1,76 @@
+---
+---
+
+<section id="manifesto-pull-quote" class="section section--dark manifesto-pull-quote">
+  <!-- kit: manifesto-pull-quote -->
+  <img class="mpq-bg" src="https://picsum.photos/seed/caldera-embers-night/2400/1400" alt="Embers glowing in a fire ring at night" width="3600" height="2100" loading="lazy" />
+  <div class="mpq-overlay" style="opacity: 0.5;" aria-hidden="true"></div>
+  <div class="container mpq-inner">
+    <span class="eyebrow">What we believe</span>
+    <ol class="mpq-lines" role="list">
+      <li><p>Buy it <em>once</em>.</p></li>
+      <li><p>Cook outside more than you scroll.</p></li>
+      <li><p>Fix things before you replace them.</p></li>
+      <li><p>Make it in a place you can <em>visit</em>.</p></li>
+      <li><p>Hand it down with the stains still on it.</p></li>
+    </ol>
+    <footer class="mpq-attribution">
+      <img class="mpq-signature" src="https://cdn.caldera.co/brand/ana-signature.svg" alt="Ana Ruiz's signature" width="320" height="120" loading="lazy" />
+      <p><strong>Ana Ruiz</strong><br /><span>Founder, Caldera Cookware</span></p>
+    </footer>
+  </div>
+</section>
+
+<style>
+  .manifesto-pull-quote {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    text-align: center;
+  }
+  .mpq-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 60%;
+    z-index: -2;
+  }
+  .mpq-overlay {
+    position: absolute;
+    inset: 0;
+    background: #000;
+    z-index: -1;
+  }
+  .mpq-inner { position: relative; }
+  .mpq-lines {
+    margin: 0 auto 2.5rem;
+    padding: 0;
+    list-style: none;
+    max-width: 22ch;
+  }
+  .mpq-lines p {
+    margin: 0 0 0.25em;
+    font-size: clamp(1.75rem, 5.5vw, 4rem);
+    font-weight: 700;
+    line-height: 1.12;
+    letter-spacing: -0.03em;
+  }
+  .mpq-lines em {
+    font-style: italic;
+    color: color-mix(in srgb, var(--brand) 70%, white);
+  }
+  .mpq-attribution {
+    display: grid;
+    justify-items: center;
+    gap: 0.25rem;
+  }
+  .mpq-signature {
+    width: 160px;
+    height: auto;
+    filter: invert(1);
+  }
+  .mpq-attribution p { margin: 0; line-height: 1.4; }
+  .mpq-attribution span { opacity: 0.75; font-size: 0.9375rem; }
+</style>

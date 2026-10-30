@@ -1,0 +1,155 @@
+---
+// Author bio (variant: card, circle photo, bio from profile, socials + latest 3 posts) — Caldera, Priya Nair.
+---
+
+<section id="author-bio" class="section section--muted author-bio" data-variant="card">
+  <!-- kit: author-bio -->
+  <div class="container">
+    <aside class="card bio-card" aria-labelledby="author-bio-heading">
+      <p class="eyebrow" id="author-bio-heading">About the author</p>
+      <div class="profile">
+        <img class="photo" src="https://picsum.photos/seed/priya-nair/320/320" alt="Portrait of Priya Nair" width="320" height="320" loading="lazy" />
+        <div>
+          <h2 class="name">Priya Nair</h2>
+          <p class="role">Caldera product engineering</p>
+          <p class="bio">Priya designs and tests every pan Caldera makes, usually over a campfire before it ever sees a lab. She writes about cast iron, fire and the food that comes off it.</p>
+          <ul class="social" role="list">
+            <li><a href="https://www.instagram.com/priyacooksoutside" target="_blank" rel="noopener">Instagram</a></li>
+            <li><a href="https://www.linkedin.com/in/priya-nair-caldera" target="_blank" rel="noopener">LinkedIn</a></li>
+            <li><a href="https://priyanair.cooking" target="_blank" rel="noopener">Website</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="latest">
+        <h3>Latest from Priya</h3>
+        <ul role="list">
+          <li>
+            <a href="/journal/30-minute-campfire-loaf">
+              <span class="post-title">The 30-minute campfire loaf</span>
+              <time datetime="2026-09-24">24 Sep 2026</time>
+            </a>
+          </li>
+          <li>
+            <a href="/journal/seasoning-cast-iron-open-fire">
+              <span class="post-title">Seasoning cast iron over an open fire</span>
+              <time datetime="2026-08-12">12 Aug 2026</time>
+            </a>
+          </li>
+          <li>
+            <a href="/journal/why-dry-meat-sears-better">
+              <span class="post-title">Why dry meat sears better</span>
+              <time datetime="2026-07-03">3 Jul 2026</time>
+            </a>
+          </li>
+        </ul>
+        <a class="all" href="/authors/priya-nair">All posts by Priya Nair <span aria-hidden="true">→</span></a>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<style>
+  .bio-card {
+    max-width: 820px;
+    margin-inline: auto;
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+    box-shadow: var(--shadow);
+  }
+  .profile {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+  }
+  .photo {
+    flex: none;
+    width: 112px;
+    height: 112px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  .name {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+  .role {
+    margin: 0.125rem 0 0.75rem;
+    color: var(--ink-3);
+    font-size: 0.9375rem;
+  }
+  .bio {
+    color: var(--ink-2);
+  }
+  .social {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .social a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 36px;
+    padding: 0 0.875rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .social a:hover {
+    border-color: var(--ink-3);
+  }
+  .latest {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+  }
+  .latest h3 {
+    font-size: 1rem;
+  }
+  .latest ul {
+    list-style: none;
+    margin: 0 0 1rem;
+    padding: 0;
+  }
+  .latest li a {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.625rem 0;
+    border-bottom: 1px solid var(--line);
+    text-decoration: none;
+  }
+  .latest li a:hover .post-title {
+    color: var(--brand);
+  }
+  .post-title {
+    font-weight: 600;
+  }
+  .latest time {
+    flex: none;
+    font-size: 0.875rem;
+    color: var(--ink-3);
+  }
+  .all {
+    font-weight: 600;
+    color: var(--brand);
+    text-decoration: none;
+  }
+  @media (max-width: 560px) {
+    .profile {
+      flex-direction: column;
+    }
+    .photo {
+      width: 88px;
+      height: 88px;
+    }
+    .latest li a {
+      flex-direction: column;
+      gap: 0.125rem;
+    }
+  }
+</style>

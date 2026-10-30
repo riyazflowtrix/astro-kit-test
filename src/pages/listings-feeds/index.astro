@@ -1,0 +1,36 @@
+---
+import Base from "../../layouts/Base.astro";
+import BlogIndex from "../../components/listings-feeds/BlogIndex.astro";
+import CategoryFilterBar from "../../components/listings-feeds/CategoryFilterBar.astro";
+import RelatedPosts from "../../components/listings-feeds/RelatedPosts.astro";
+import ResourceLibrary from "../../components/listings-feeds/ResourceLibrary.astro";
+import PodcastEpisodeList from "../../components/listings-feeds/PodcastEpisodeList.astro";
+import Changelog from "../../components/listings-feeds/Changelog.astro";
+import PublicRoadmap from "../../components/listings-feeds/PublicRoadmap.astro";
+import SearchResultsPage from "../../components/listings-feeds/SearchResultsPage.astro";
+---
+
+<Base title="Listings & feeds" description="Blog indexes, filters, resource libraries, podcasts, changelogs, roadmaps and search from the BetterCMS Kit.">
+  <section class="section kit-intro">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Kit library</span>
+        <h1>Listings &amp; feeds</h1>
+        <p class="lead">Blog indexes, topic filters, resource libraries, podcast feeds, changelogs, roadmaps and search results.</p>
+      </div>
+    </div>
+  </section>
+
+  <BlogIndex />
+  <CategoryFilterBar />
+  <RelatedPosts />
+  <ResourceLibrary />
+  <PodcastEpisodeList />
+  <Changelog />
+  <PublicRoadmap />
+  <SearchResultsPage />
+</Base>
+
+<style>
+  .kit-intro { padding-bottom: 0; }
+</style>

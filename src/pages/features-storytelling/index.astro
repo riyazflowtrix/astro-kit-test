@@ -1,0 +1,45 @@
+---
+import Base from "../../layouts/Base.astro";
+import FeatureIconGrid from "../../components/features-storytelling/FeatureIconGrid.astro";
+import FeatureAlternatingRows from "../../components/features-storytelling/FeatureAlternatingRows.astro";
+import BentoFeatureShowcase from "../../components/features-storytelling/BentoFeatureShowcase.astro";
+import StepsHowItWorks from "../../components/features-storytelling/StepsHowItWorks.astro";
+import TimelineCompanyHistory from "../../components/features-storytelling/TimelineCompanyHistory.astro";
+import TabsWithMedia from "../../components/features-storytelling/TabsWithMedia.astro";
+import AccordionFeatureImageSwap from "../../components/features-storytelling/AccordionFeatureImageSwap.astro";
+import ComparisonVsCompetitors from "../../components/features-storytelling/ComparisonVsCompetitors.astro";
+import StatsBand from "../../components/features-storytelling/StatsBand.astro";
+import ManifestoPullQuote from "../../components/features-storytelling/ManifestoPullQuote.astro";
+import ProblemSolution from "../../components/features-storytelling/ProblemSolution.astro";
+import IntegrationsGrid from "../../components/features-storytelling/IntegrationsGrid.astro";
+---
+
+<Base title="Features & storytelling" description="Feature grids, bento layouts, steps, timelines, tabs, comparisons, stats and integrations from the BetterCMS Kit.">
+  <section class="section kit-intro">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Kit library</span>
+        <h1>Features &amp; storytelling</h1>
+        <p class="lead">Twelve ways to explain what a product does and why it matters, from icon grids to comparison tables.</p>
+      </div>
+    </div>
+  </section>
+
+  <FeatureIconGrid />
+  <FeatureAlternatingRows />
+  <BentoFeatureShowcase />
+  <StepsHowItWorks />
+  <TimelineCompanyHistory />
+  <TabsWithMedia />
+  <AccordionFeatureImageSwap />
+  <ComparisonVsCompetitors />
+  <StatsBand />
+  <ManifestoPullQuote />
+  <ProblemSolution />
+  <IntegrationsGrid />
+</Base>
+
+<style>
+  .kit-intro { padding-bottom: 0; }
+  .kit-intro .section-head { margin-bottom: 0; }
+</style>

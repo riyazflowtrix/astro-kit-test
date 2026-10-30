@@ -1,0 +1,96 @@
+<section id="commerce-size-guide" class="section size-guide">
+  <!-- kit: commerce-size-guide -->
+  <div class="container">
+    <div class="section-head">
+      <h2>Fire glove and apron sizes</h2>
+      <p class="lead">Our gloves are cut snug for grip. If you wear liners, size up.</p>
+    </div>
+
+    <div class="size-guide__layout">
+      <div class="size-guide__tables">
+        <div class="size-guide__scroll" role="region" aria-labelledby="tbl_glove_sizes-caption" tabindex="0">
+          <table id="tbl_glove_sizes">
+            <caption id="tbl_glove_sizes-caption">Leather fire gloves, hand size</caption>
+            <thead>
+              <tr>
+                <td></td>
+                <th scope="colgroup" colspan="2">Inches</th>
+                <th scope="colgroup" colspan="2">Centimetres</th>
+              </tr>
+              <tr>
+                <th scope="col">Size</th>
+                <th scope="col">Palm width</th>
+                <th scope="col">Hand length</th>
+                <th scope="col">Palm width</th>
+                <th scope="col">Hand length</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">S</th><td>3&ndash;3.25</td><td>6.75&ndash;7</td><td>7.6&ndash;8.3</td><td>17&ndash;18</td></tr>
+              <tr><th scope="row">M</th><td>3.5&ndash;3.75</td><td>7.25&ndash;7.5</td><td>8.9&ndash;9.5</td><td>18.5&ndash;19</td></tr>
+              <tr><th scope="row">L</th><td>4&ndash;4.25</td><td>7.75&ndash;8</td><td>10.2&ndash;10.8</td><td>19.7&ndash;20.3</td></tr>
+              <tr><th scope="row">XL</th><td>4.5&ndash;4.75</td><td>8.25&ndash;8.5</td><td>11.4&ndash;12</td><td>21&ndash;21.6</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="size-guide__scroll" role="region" aria-labelledby="tbl_apron_sizes-caption" tabindex="0">
+          <table id="tbl_apron_sizes">
+            <caption id="tbl_apron_sizes-caption">Waxed canvas apron, length</caption>
+            <thead>
+              <tr>
+                <td></td>
+                <th scope="colgroup" colspan="2">Inches</th>
+                <th scope="colgroup" colspan="2">Centimetres</th>
+              </tr>
+              <tr>
+                <th scope="col">Size</th>
+                <th scope="col">Length</th>
+                <th scope="col">Chest width</th>
+                <th scope="col">Length</th>
+                <th scope="col">Chest width</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">Regular</th><td>34</td><td>24</td><td>86</td><td>61</td></tr>
+              <tr><th scope="row">Long</th><td>38</td><td>26</td><td>97</td><td>66</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <aside class="size-guide__measure" aria-labelledby="size-guide-measure-title">
+        <img src="https://picsum.photos/seed/caldera-glove-measure/1200/800" alt="Line drawing of an open hand with arrows across the palm below the knuckles and from wrist crease to fingertip" width="1200" height="800" loading="lazy" />
+        <h3 id="size-guide-measure-title">How to measure</h3>
+        <ol>
+          <li><strong>Palm width</strong> Measure across your palm just below the knuckles, thumb excluded.</li>
+          <li><strong>Hand length</strong> From the crease of your wrist to the tip of your middle finger.</li>
+        </ol>
+        <div class="size-guide__note">
+          <p>Between sizes? Go up if you'll wear liners or handle cast iron straight from the coals; go down for camp-kitchen dexterity.</p>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<style>
+  .size-guide__layout { display: grid; gap: 2.5rem; }
+  @media (min-width: 960px) { .size-guide__layout { grid-template-columns: 1.4fr 1fr; gap: 3rem; align-items: start; } }
+  .size-guide__tables { display: grid; gap: 2rem; min-width: 0; }
+  .size-guide__scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); }
+  .size-guide table { width: 100%; min-width: 480px; border-collapse: collapse; font-size: 0.9375rem; font-variant-numeric: tabular-nums; }
+  .size-guide caption { text-align: left; padding: 1rem 1rem 0.75rem; font-weight: 700; }
+  .size-guide th, .size-guide td { padding: 0.625rem 1rem; text-align: left; border-top: 1px solid var(--line); }
+  .size-guide thead th { font-size: 0.8125rem; color: var(--ink-2); background: var(--surface); }
+  .size-guide thead th[scope="colgroup"] { text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.75rem; color: var(--ink-3); }
+  .size-guide thead td { background: var(--surface); }
+  .size-guide tbody th { font-weight: 700; position: sticky; left: 0; background: var(--bg); }
+  .size-guide tbody tr:hover td { background: var(--surface); }
+  .size-guide__measure { padding: 1.5rem; background: var(--surface); border-radius: var(--radius-lg); }
+  .size-guide__measure img { border-radius: var(--radius); margin-bottom: 1.25rem; width: 100%; }
+  .size-guide__measure ol { padding-left: 1.25rem; margin: 0 0 1.25rem; display: grid; gap: 0.75rem; color: var(--ink-2); }
+  .size-guide__measure ol strong { display: block; color: var(--ink); }
+  .size-guide__note { padding: 1rem; border-left: 3px solid var(--brand); background: var(--bg); border-radius: var(--radius-sm); }
+  .size-guide__note p { margin: 0; font-size: 0.9375rem; }
+</style>

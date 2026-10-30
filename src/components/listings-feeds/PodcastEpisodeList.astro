@@ -1,0 +1,86 @@
+<section id="podcast-episode-list" class="section podcast">
+  <!-- kit: podcast-episode-list -->
+  <div class="container">
+    <header class="podcast__show">
+      <img class="podcast__art" src="https://picsum.photos/seed/lowandslow-art/1500/1500" alt="Low & Slow podcast cover: a skillet over embers with the show name in cream type" width="3000" height="3000" loading="lazy" />
+      <div class="podcast__info">
+        <span class="eyebrow">Podcast</span>
+        <h2>Low &amp; Slow</h2>
+        <p class="lead">Conversations with the people who cook outside for a living &mdash; guides, pitmasters, foragers and the occasional blacksmith. Every other Tuesday.</p>
+        <p class="podcast__hosts">Hosted by <strong>Mei Tanaka</strong> and <strong>Jonah Reyes</strong></p>
+        <div class="podcast__actions">
+          <a class="btn btn-primary" href="https://podcasts.apple.com/us/podcast/low-slow/id1742210981" target="_blank" rel="noopener">Subscribe free</a>
+          <ul class="podcast__platforms" role="list" aria-label="Listen on">
+            <li><a href="https://podcasts.apple.com/us/podcast/low-slow/id1742210981" target="_blank" rel="noopener">Apple Podcasts</a></li>
+            <li><a href="https://open.spotify.com/show/4kT9pQvZ2mRuLowSlow" target="_blank" rel="noopener">Spotify</a></li>
+            <li><a href="https://www.youtube.com/@calderacooks/podcasts" target="_blank" rel="noopener">YouTube</a></li>
+            <li><a href="https://caldera.bettercms.site/podcast/feed.xml">RSS</a></li>
+          </ul>
+        </div>
+      </div>
+    </header>
+
+    <ol class="podcast__episodes" role="list">
+      <li class="episode episode--latest">
+        <div class="episode__head">
+          <span class="badge">Latest</span>
+          <p class="episode__meta">Episode 42 &middot; <time datetime="2026-10-27">Oct 27, 2026</time> &middot; 58 min</p>
+        </div>
+        <h3><a href="/podcast/smoke-and-the-high-desert">Smoke and the high desert, with pitmaster Rosa Delgado</a></h3>
+        <p class="episode__notes">Rosa ran a barbecue trailer outside Burns, Oregon for nine years. We talk juniper smoke, cooking for 300 at a rodeo, and why she still uses a 40-year-old offset.</p>
+        <audio controls preload="none" src="https://caldera.bettercms.site/podcast/episodes/042-smoke-and-the-high-desert.mp3" aria-label="Play episode 42">
+          <a href="https://caldera.bettercms.site/podcast/episodes/042-smoke-and-the-high-desert.mp3">Download episode 42</a>
+        </audio>
+      </li>
+      <li class="episode">
+        <a class="episode__play" href="/podcast/foraging-the-cascades" aria-label="Play episode 41"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor" /></svg></a>
+        <div>
+          <p class="episode__meta">Episode 41 &middot; <time datetime="2026-10-13">Oct 13, 2026</time> &middot; 47 min</p>
+          <h3><a href="/podcast/foraging-the-cascades">Foraging the Cascades in October</a></h3>
+          <p class="episode__notes">Chanterelles, huckleberries and the rules for picking on public land, with guide Tom Okafor.</p>
+        </div>
+      </li>
+      <li class="episode">
+        <a class="episode__play" href="/podcast/bonus-reader-questions" aria-label="Play bonus episode"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor" /></svg></a>
+        <div>
+          <p class="episode__meta"><span class="episode__bonus">Bonus</span> <time datetime="2026-10-06">Oct 6, 2026</time> &middot; 22 min</p>
+          <h3><a href="/podcast/bonus-reader-questions">Your seasoning questions, answered</a></h3>
+          <p class="episode__notes">Mei takes listener questions on sticky pans, flaking and whether you can really use soap.</p>
+        </div>
+      </li>
+      <li class="episode">
+        <a class="episode__play" href="/podcast/the-blacksmith-of-joseph" aria-label="Play episode 40"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor" /></svg></a>
+        <div>
+          <p class="episode__meta">Episode 40 &middot; <time datetime="2026-09-29">Sep 29, 2026</time> &middot; 1 hr 4 min</p>
+          <h3><a href="/podcast/the-blacksmith-of-joseph">The blacksmith of Joseph, Oregon</a></h3>
+          <p class="episode__notes">Hand-forged carbon steel pans, a waitlist of two years, and a forge that runs on coal from Utah.</p>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<style>
+  .podcast__show { display: grid; gap: 1.5rem; margin-bottom: 2.5rem; align-items: center; }
+  @media (min-width: 760px) { .podcast__show { grid-template-columns: 240px 1fr; gap: 2.5rem; } }
+  .podcast__art { width: 100%; max-width: 240px; aspect-ratio: 1; object-fit: cover; border-radius: var(--radius-lg); box-shadow: var(--shadow); }
+  .podcast__hosts { font-size: 0.9375rem; color: var(--ink-2); }
+  .podcast__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.5rem; }
+  .podcast__platforms { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; font-size: 0.875rem; font-weight: 600; }
+  .podcast__platforms a { color: var(--ink-2); text-underline-offset: 3px; }
+  .podcast__episodes { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.75rem; }
+  .episode { display: grid; grid-template-columns: 44px 1fr; gap: 1rem; padding: 1.25rem; border: 1px solid var(--line); border-radius: var(--radius); }
+  .episode--latest { grid-template-columns: 1fr; background: var(--surface); border-color: transparent; padding: 1.5rem; }
+  .episode__head { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.75rem; }
+  .episode__meta { margin: 0 0 0.25rem; font-size: 0.8125rem; color: var(--ink-3); }
+  .episode__head .episode__meta { margin: 0; }
+  .episode h3 { font-size: 1.0625rem; margin-bottom: 0.375rem; }
+  .episode--latest h3 { font-size: 1.375rem; margin-top: 0.5rem; }
+  .episode h3 a { text-decoration: none; }
+  .episode h3 a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .episode__notes { margin: 0; color: var(--ink-2); font-size: 0.9375rem; }
+  .episode audio { width: 100%; margin-top: 1rem; }
+  .episode__play { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: var(--ink); color: var(--bg); }
+  .episode__play:hover { background: var(--brand); }
+  .episode__bonus { font-weight: 700; color: var(--brand); }
+</style>

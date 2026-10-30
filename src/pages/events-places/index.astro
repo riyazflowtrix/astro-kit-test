@@ -1,0 +1,66 @@
+---
+import Base from "../../layouts/Base.astro";
+import EventsList from "../../components/events-places/EventsList.astro";
+import WebinarRegistration from "../../components/events-places/WebinarRegistration.astro";
+import LocationsDirectory from "../../components/events-places/LocationsDirectory.astro";
+import RestaurantMenu from "../../components/events-places/RestaurantMenu.astro";
+---
+
+<Base title="Events & places" description="Event lists and detail pages, webinar registration, location directories, menus and single location pages.">
+  <section class="section category-intro">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Kit library</span>
+        <h1>Events &amp; places</h1>
+        <p class="lead">Things that happen at a time and things that live at an address: events, webinars, stores and restaurants.</p>
+      </div>
+    </div>
+  </section>
+
+  <EventsList />
+  <WebinarRegistration />
+  <LocationsDirectory />
+  <RestaurantMenu />
+
+  <section class="section section--muted">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Entry pages</span>
+        <h2>Standalone entries</h2>
+        <p class="lead">These sections are whole pages, so they open on their own.</p>
+      </div>
+      <div class="grid grid-2">
+        <a class="card entry-card" href="/events-places/event-detail/">
+          <h3>Event detail (conference)</h3>
+          <p>Signal Summit 2027: days, sessions, speakers, venue and stream, and ticket tiers.</p>
+        </a>
+        <a class="card entry-card" href="/events-places/location-page/">
+          <h3>Single location page</h3>
+          <p>Fiamma Mission: address and map, split-shift hours, holiday hours, booking and private dining.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .category-intro {
+    padding-bottom: 0;
+  }
+
+  .entry-card {
+    display: block;
+    padding: 1.5rem;
+    text-decoration: none;
+    transition: border-color 150ms ease;
+  }
+
+  .entry-card:hover {
+    border-color: var(--ink-3);
+  }
+
+  .entry-card p {
+    margin: 0;
+    color: var(--ink-2);
+  }
+</style>

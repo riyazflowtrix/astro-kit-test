@@ -1,0 +1,247 @@
+---
+// Masonry gallery (variant: masonry) — Halden Studio, Cedar House.
+---
+
+<section id="masonry-gallery" class="section masonry-gallery" data-variant="masonry">
+  <!-- kit: masonry-gallery -->
+  <div class="container">
+    <header class="section-head">
+      <h2>Cedar House, Whidbey Island</h2>
+      <p class="lead">A 1,400 sq ft retreat built around three old-growth cedars. Completed 2025.</p>
+    </header>
+
+    <ul class="masonry" role="list">
+      <li class="tile">
+        <figure>
+          <a class="tile-link" href="https://picsum.photos/seed/halden-cedar-exterior/1200/1600" data-lightbox>
+            <img src="https://picsum.photos/seed/halden-cedar-exterior/1200/1600" alt="Timber house with floor-to-ceiling glass among cedar trunks at dusk" width="2400" height="3200" loading="lazy" style="object-position: 50% 45%" />
+          </a>
+          <figcaption>
+            <span class="caption">The north façade, glazed full height so the cedars read as part of the room.</span>
+            <span class="credit">Photo: <a href="https://linaokafor.photo" target="_blank" rel="noopener">Lina Okafor</a></span>
+          </figcaption>
+        </figure>
+      </li>
+      <li class="tile">
+        <figure>
+          <a class="tile-link" href="https://picsum.photos/seed/halden-cedar-kitchen/1600/1067" data-lightbox>
+            <img src="https://picsum.photos/seed/halden-cedar-kitchen/1600/1067" alt="Kitchen with charred-oak cabinets and a concrete island" width="3200" height="2134" loading="lazy" />
+          </a>
+          <figcaption>
+            <span class="caption">Charred oak and board-formed concrete in the kitchen.</span>
+            <span class="credit">Photo: Lina Okafor</span>
+          </figcaption>
+        </figure>
+      </li>
+      <li class="tile">
+        <figure>
+          <a class="tile-link" href="https://picsum.photos/seed/halden-cedar-stair/1200/1800" data-lightbox>
+            <img src="https://picsum.photos/seed/halden-cedar-stair/1200/1800" alt="A floating timber stair lit from a skylight" width="2400" height="3600" loading="lazy" />
+          </a>
+          <figcaption>
+            <span class="caption">The stair hangs from a single steel spine.</span>
+            <span class="credit">Photo: Lina Okafor</span>
+          </figcaption>
+        </figure>
+      </li>
+      <li class="tile">
+        <figure>
+          <a class="tile-link" href="https://picsum.photos/seed/halden-cedar-bath/1600/1067" data-lightbox>
+            <img src="https://picsum.photos/seed/halden-cedar-bath/1600/1067" alt="Soaking tub facing a forest view" width="3200" height="2134" loading="lazy" />
+          </a>
+          <figcaption>
+            <span class="credit">Photo: Lina Okafor</span>
+          </figcaption>
+        </figure>
+      </li>
+      <li class="tile">
+        <figure>
+          <a class="tile-link" href="https://picsum.photos/seed/halden-cedar-detail/1200/1200" data-lightbox>
+            <img src="https://picsum.photos/seed/halden-cedar-detail/1200/1200" alt="Close-up of a hand-cut cedar shingle wall" width="2400" height="2400" loading="lazy" />
+          </a>
+          <figcaption>
+            <span class="caption">Hand-split shingles from fallen site trees.</span>
+            <span class="credit">Photo: Halden Studio</span>
+          </figcaption>
+        </figure>
+      </li>
+      <li class="tile">
+        <figure>
+          <a class="tile-link" href="https://picsum.photos/seed/halden-cedar-deck/1600/1067" data-lightbox>
+            <img src="https://picsum.photos/seed/halden-cedar-deck/1600/1067" alt="Deck wrapped around a cedar trunk at sunrise" width="3200" height="2134" loading="lazy" style="object-position: 35% 60%" />
+          </a>
+          <figcaption>
+            <span class="caption">The deck steps around the oldest cedar rather than through it.</span>
+            <span class="credit">Photo: Lina Okafor</span>
+          </figcaption>
+        </figure>
+      </li>
+    </ul>
+  </div>
+
+  <dialog class="lightbox" aria-label="Photo viewer">
+    <button class="lb-close" type="button" aria-label="Close">×</button>
+    <button class="lb-nav lb-prev" type="button" aria-label="Previous photo">‹</button>
+    <figure class="lb-figure">
+      <img class="lb-img" src="https://picsum.photos/seed/halden-cedar-exterior/1200/1600" alt="" />
+      <figcaption class="lb-caption"></figcaption>
+    </figure>
+    <button class="lb-nav lb-next" type="button" aria-label="Next photo">›</button>
+  </dialog>
+</section>
+
+<style>
+  .masonry {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    columns: 3;
+    column-gap: 8px;
+  }
+  .tile {
+    break-inside: avoid;
+    margin-bottom: 8px;
+  }
+  .tile figure {
+    position: relative;
+    margin: 0;
+    overflow: hidden;
+    border-radius: var(--radius-sm);
+    background: var(--surface-2);
+  }
+  .tile-link {
+    display: block;
+    cursor: zoom-in;
+  }
+  .tile img {
+    width: 100%;
+    transition: transform 400ms ease;
+  }
+  .tile figcaption {
+    position: absolute;
+    inset: auto 0 0 0;
+    display: grid;
+    gap: 0.125rem;
+    padding: 2.5rem 1rem 0.875rem;
+    font-size: 0.875rem;
+    line-height: 1.4;
+    color: #fff;
+    background: linear-gradient(to top, rgb(0 0 0 / 0.72), transparent);
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 200ms ease, transform 200ms ease;
+    pointer-events: none;
+  }
+  .tile figcaption a {
+    pointer-events: auto;
+  }
+  .credit {
+    font-size: 0.75rem;
+    opacity: 0.8;
+  }
+  .tile:hover figcaption,
+  .tile:focus-within figcaption {
+    opacity: 1;
+    transform: none;
+  }
+  .tile:hover img {
+    transform: scale(1.03);
+  }
+  @media (hover: none) {
+    .tile figcaption {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @media (max-width: 960px) {
+    .masonry { columns: 2; }
+  }
+  @media (max-width: 600px) {
+    .masonry { columns: 1; }
+  }
+
+  .lightbox {
+    width: min(1100px, 100vw - 24px);
+    max-height: calc(100vh - 24px);
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #fff;
+    overflow: visible;
+  }
+  .lightbox::backdrop {
+    background: rgb(10 10 12 / 0.9);
+  }
+  .lb-figure {
+    margin: 0;
+    display: grid;
+    gap: 0.75rem;
+    justify-items: center;
+  }
+  .lb-img {
+    max-height: calc(100vh - 140px);
+    width: auto;
+    border-radius: var(--radius-sm);
+  }
+  .lb-caption {
+    font-size: 0.9375rem;
+    text-align: center;
+    max-width: 60ch;
+  }
+  .lb-close,
+  .lb-nav {
+    position: fixed;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border: 0;
+    border-radius: 50%;
+    background: rgb(255 255 255 / 0.14);
+    color: #fff;
+    font-size: 1.75rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+  .lb-close { top: 12px; right: 12px; }
+  .lb-prev { left: 12px; top: 50%; }
+  .lb-next { right: 12px; top: 50%; }
+</style>
+
+<script is:inline>
+  (function () {
+    var root = document.getElementById("masonry-gallery");
+    if (!root) return;
+    var links = Array.prototype.slice.call(root.querySelectorAll("[data-lightbox]"));
+    var dialog = root.querySelector(".lightbox");
+    var img = root.querySelector(".lb-img");
+    var cap = root.querySelector(".lb-caption");
+    var index = 0;
+    function show(i) {
+      index = (i + links.length) % links.length;
+      var link = links[index];
+      var thumb = link.querySelector("img");
+      var fig = link.closest("figure");
+      var caption = fig ? fig.querySelector("figcaption") : null;
+      img.src = link.getAttribute("href");
+      img.alt = thumb ? thumb.alt : "";
+      cap.textContent = caption ? caption.textContent.replace(/\s+/g, " ").trim() : "";
+    }
+    links.forEach(function (link, i) {
+      link.addEventListener("click", function (e) {
+        if (!dialog.showModal) return;
+        e.preventDefault();
+        show(i);
+        dialog.showModal();
+      });
+    });
+    root.querySelector(".lb-close").addEventListener("click", function () { dialog.close(); });
+    root.querySelector(".lb-prev").addEventListener("click", function () { show(index - 1); });
+    root.querySelector(".lb-next").addEventListener("click", function () { show(index + 1); });
+    dialog.addEventListener("keydown", function (e) {
+      if (e.key === "ArrowLeft") show(index - 1);
+      if (e.key === "ArrowRight") show(index + 1);
+    });
+    dialog.addEventListener("click", function (e) { if (e.target === dialog) dialog.close(); });
+  })();
+</script>

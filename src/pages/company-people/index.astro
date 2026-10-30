@@ -1,0 +1,53 @@
+---
+import Base from "../../layouts/Base.astro";
+import TeamGrid from "../../components/company-people/TeamGrid.astro";
+import LeadershipBios from "../../components/company-people/LeadershipBios.astro";
+import ValuesCulture from "../../components/company-people/ValuesCulture.astro";
+import CareersList from "../../components/company-people/CareersList.astro";
+import AboutTimeline from "../../components/company-people/AboutTimeline.astro";
+import PressKit from "../../components/company-people/PressKit.astro";
+---
+
+<Base title="Company & people" description="Team grids, leadership bios, values, careers, job postings, company story and press kit from the BetterCMS Kit.">
+  <section class="section kit-intro">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Kit library</span>
+        <h1>Company &amp; people</h1>
+        <p class="lead">The pages that introduce the team, the story and the open roles behind a brand.</p>
+      </div>
+    </div>
+  </section>
+
+  <TeamGrid />
+  <LeadershipBios />
+  <ValuesCulture />
+  <CareersList />
+  <AboutTimeline />
+  <PressKit />
+
+  <section class="section kit-entries">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Entry pages</span>
+        <h2>Standalone entries</h2>
+      </div>
+      <div class="grid grid-3">
+        <a class="card kit-entry-card" href="/company-people/job-posting">
+          <h3>Job posting</h3>
+          <p>Foundry Technician (Finishing): a full job page with salary, apply form and JobPosting structured data.</p>
+          <span class="kit-entry-more">Open page →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .kit-intro { padding-bottom: 0; }
+  .kit-intro .section-head { margin-bottom: 0; }
+  .kit-entry-card { display: block; padding: 1.5rem; text-decoration: none; transition: box-shadow 150ms ease; }
+  .kit-entry-card:hover { box-shadow: var(--shadow); }
+  .kit-entry-card p { color: var(--ink-2); }
+  .kit-entry-more { font-weight: 600; color: var(--brand); }
+</style>

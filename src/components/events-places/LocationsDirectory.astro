@@ -1,0 +1,353 @@
+---
+---
+
+<section id="locations-directory" class="section locations" data-variant="map-left" data-source="inline" data-zoom="5" data-clustering="true" data-mobile-view="list">
+  <!-- kit: locations-directory -->
+  <div class="container">
+    <div class="section-head">
+      <h2>Stores &amp; workshops</h2>
+      <p class="lead">Pick up a pan, get yours re-seasoned, or book a fire-cooking class.</p>
+    </div>
+
+    <form class="locations__tools" action="#" role="search">
+      <div class="field locations__search">
+        <label for="loc-search">Find a location</label>
+        <input id="loc-search" name="q" type="search" placeholder="City or ZIP code" autocomplete="postal-code" />
+      </div>
+      <div class="field">
+        <label for="loc-service">Service</label>
+        <select id="loc-service" name="service">
+          <option value="">All services</option>
+          <option value="workshops">Workshops</option>
+          <option value="reseasoning">Re-seasoning</option>
+          <option value="engraving">Engraving</option>
+          <option value="repairs">Repairs</option>
+          <option value="pickup">Order pickup</option>
+        </select>
+      </div>
+      <button type="button" class="btn btn-secondary locations__near">Use my location</button>
+    </form>
+
+    <div class="locations__layout">
+      <div class="locations__map" role="region" aria-label="Map of Caldera locations">
+        <div class="locations__canvas" aria-hidden="true">
+          <span style="left:5%;top:7%">Oregon</span>
+          <span style="left:78%;top:64%">Colorado</span>
+        </div>
+        <button type="button" class="locations__pin is-flagship" data-loc="l1" style="left:15.3%;top:32.8%" aria-label="Caldera Bend — Foundry Store"></button>
+        <button type="button" class="locations__pin is-flagship" data-loc="l2" style="left:8.6%;top:16.3%" aria-label="Caldera Portland"></button>
+        <button type="button" class="locations__pin" data-loc="l3" style="left:91.5%;top:77.6%" aria-label="Basecamp Outfitters, Boulder"></button>
+      </div>
+
+      <ul class="locations__list">
+        <li class="locations__item card" data-loc="l1" data-type="flagship" data-services="workshops reseasoning engraving repairs pickup" data-search="bend oregon or 97702" data-lat="44.0471" data-lng="-121.2831">
+          <img src="https://picsum.photos/seed/caldera-bend-store/1200/800" alt="The Caldera Foundry Store: skillets on a long timber wall, the foundry visible through glass" width="2400" height="1600" loading="lazy" />
+          <div class="locations__body">
+            <p class="locations__type">Flagship</p>
+            <h3><a href="/stores/bend" title="Bend store">Caldera Bend — Foundry Store</a></h3>
+            <address>1180 SE Centennial Ct<br />Bend, OR 97702</address>
+            <p><a href="tel:+15415550142">+1 541 555 0142</a></p>
+            <details class="locations__hours">
+              <summary>Opening hours</summary>
+              <table>
+                <caption class="visually-hidden">Opening hours, Caldera Bend</caption>
+                <tbody>
+                  <tr><th scope="row">Mon</th><td>Closed</td></tr>
+                  <tr><th scope="row">Tue</th><td>10:00–18:00</td></tr>
+                  <tr><th scope="row">Wed</th><td>10:00–18:00</td></tr>
+                  <tr><th scope="row">Thu</th><td>10:00–19:00</td></tr>
+                  <tr><th scope="row">Fri</th><td>10:00–19:00</td></tr>
+                  <tr><th scope="row">Sat</th><td>09:00–17:00</td></tr>
+                  <tr><th scope="row">Sun</th><td>11:00–16:00</td></tr>
+                </tbody>
+              </table>
+            </details>
+            <ul class="locations__services">
+              <li>Workshops</li>
+              <li>Re-seasoning</li>
+              <li>Engraving</li>
+              <li>Repairs</li>
+            </ul>
+          </div>
+        </li>
+        <li class="locations__item card" data-loc="l2" data-type="flagship" data-services="reseasoning pickup" data-search="portland oregon or 97210" data-lat="45.5354" data-lng="-122.6982">
+          <div class="locations__body">
+            <p class="locations__type">Flagship</p>
+            <h3>Caldera Portland</h3>
+            <address>2235 NW Thurman St<br />Portland, OR 97210</address>
+            <p><a href="tel:+15035550198">+1 503 555 0198</a></p>
+            <details class="locations__hours">
+              <summary>Opening hours</summary>
+              <table>
+                <caption class="visually-hidden">Opening hours, Caldera Portland</caption>
+                <tbody>
+                  <tr><th scope="row">Tue</th><td>11:00–19:00</td></tr>
+                  <tr><th scope="row">Wed</th><td>11:00–19:00</td></tr>
+                  <tr><th scope="row">Sat</th><td>10:00–18:00</td></tr>
+                </tbody>
+              </table>
+            </details>
+            <ul class="locations__services">
+              <li>Re-seasoning</li>
+              <li>Order pickup</li>
+            </ul>
+          </div>
+        </li>
+        <li class="locations__item card" data-loc="l3" data-type="stockist" data-services="pickup" data-search="boulder colorado co 80302" data-lat="40.0189" data-lng="-105.2747">
+          <div class="locations__body">
+            <p class="locations__type">Stockist</p>
+            <h3>Basecamp Outfitters (stockist)</h3>
+            <address>1420 Pearl St<br />Boulder, CO 80302</address>
+            <ul class="locations__services">
+              <li>Order pickup</li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <p class="locations__empty" role="status" hidden>No locations match. Try another city or service.</p>
+  </div>
+</section>
+
+<style>
+  .locations [hidden] {
+    display: none !important;
+  }
+
+  .locations__tools {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .locations__tools .field {
+    flex: 1 1 200px;
+  }
+
+  .locations__search {
+    flex-grow: 2 !important;
+  }
+
+  .locations__layout {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 1.5rem;
+    align-items: start;
+  }
+
+  .locations__map {
+    position: sticky;
+    top: 1rem;
+    min-height: 520px;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--line);
+    overflow: hidden;
+  }
+
+  .locations__canvas {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 15% 25%, #dce6d2 0 28%, transparent 60%),
+      radial-gradient(ellipse at 85% 75%, #ebe2cd 0 22%, transparent 55%),
+      linear-gradient(0deg, rgb(0 0 0 / 0.04) 1px, transparent 1px) 0 0 / 44px 44px,
+      linear-gradient(90deg, rgb(0 0 0 / 0.04) 1px, transparent 1px) 0 0 / 44px 44px,
+      #eff1ea;
+  }
+
+  .locations__canvas span {
+    position: absolute;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgb(0 0 0 / 0.25);
+  }
+
+  .locations__pin {
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    margin: -11px 0 0 -11px;
+    padding: 0;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    background: var(--ink-2);
+    box-shadow: 0 2px 8px rgb(0 0 0 / 0.3);
+    cursor: pointer;
+  }
+
+  .locations__pin.is-flagship {
+    width: 28px;
+    height: 28px;
+    margin: -14px 0 0 -14px;
+    background: var(--brand);
+  }
+
+  .locations__pin.is-active {
+    outline: 3px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  .locations__list {
+    display: grid;
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .locations__item {
+    transition: border-color 150ms ease, box-shadow 150ms ease;
+  }
+
+  .locations__item.is-active {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgb(47 91 216 / 0.15);
+  }
+
+  .locations__item img {
+    width: 100%;
+    aspect-ratio: 3 / 1;
+    object-fit: cover;
+  }
+
+  .locations__body {
+    padding: 1.25rem;
+    font-size: 0.9375rem;
+  }
+
+  .locations__type {
+    margin: 0 0 0.25rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--brand);
+  }
+
+  .locations__body h3 {
+    margin-bottom: 0.35rem;
+    font-size: 1.125rem;
+  }
+
+  .locations__body h3 a {
+    text-decoration: none;
+  }
+
+  .locations__body address {
+    font-style: normal;
+    color: var(--ink-2);
+    margin-bottom: 0.5rem;
+  }
+
+  .locations__body p {
+    margin-bottom: 0.5rem;
+  }
+
+  .locations__hours summary {
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  .locations__hours table {
+    margin-top: 0.5rem;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+
+  .locations__hours th,
+  .locations__hours td {
+    padding: 0.15rem 1.25rem 0.15rem 0;
+    text-align: left;
+  }
+
+  .locations__services {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin: 0.75rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .locations__services li {
+    padding: 0.15rem 0.6rem;
+    border-radius: 999px;
+    background: var(--surface);
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  .locations__empty {
+    margin-top: 1rem;
+    color: var(--ink-2);
+  }
+
+  @media (max-width: 900px) {
+    .locations__layout {
+      grid-template-columns: 1fr;
+    }
+
+    .locations__map {
+      position: relative;
+      top: 0;
+      min-height: 320px;
+      order: 2;
+    }
+  }
+</style>
+
+<script is:inline>
+  (() => {
+    const root = document.getElementById("locations-directory");
+    if (!root) return;
+    const items = [...root.querySelectorAll(".locations__item")];
+    const pins = [...root.querySelectorAll(".locations__pin")];
+    const search = root.querySelector("#loc-search");
+    const service = root.querySelector("#loc-service");
+    const empty = root.querySelector(".locations__empty");
+    const select = (id) => {
+      items.forEach((i) => i.classList.toggle("is-active", i.dataset.loc === id));
+      pins.forEach((p) => p.classList.toggle("is-active", p.dataset.loc === id));
+    };
+    pins.forEach((p) =>
+      p.addEventListener("click", () => {
+        select(p.dataset.loc);
+        const item = items.find((i) => i.dataset.loc === p.dataset.loc);
+        if (item) item.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      })
+    );
+    items.forEach((i) => i.addEventListener("mouseenter", () => select(i.dataset.loc)));
+    const filter = () => {
+      const q = search.value.trim().toLowerCase();
+      const s = service.value;
+      let shown = 0;
+      items.forEach((i) => {
+        const ok = (!q || i.dataset.search.includes(q)) && (!s || i.dataset.services.split(" ").includes(s));
+        i.hidden = !ok;
+        const pin = pins.find((p) => p.dataset.loc === i.dataset.loc);
+        if (pin) pin.hidden = !ok;
+        if (ok) shown++;
+      });
+      empty.hidden = shown > 0;
+    };
+    search.addEventListener("input", filter);
+    service.addEventListener("change", filter);
+    root.querySelector("form").addEventListener("submit", (e) => e.preventDefault());
+    root.querySelector(".locations__near").addEventListener("click", () => {
+      if (!navigator.geolocation) return;
+      navigator.geolocation.getCurrentPosition((pos) => {
+        const { latitude, longitude } = pos.coords;
+        const list = root.querySelector(".locations__list");
+        items
+          .map((i) => ({ i, d: Math.hypot(Number(i.dataset.lat) - latitude, Number(i.dataset.lng) - longitude) }))
+          .sort((a, b) => a.d - b.d)
+          .forEach(({ i }) => list.appendChild(i));
+        select(list.firstElementChild.dataset.loc);
+      });
+    });
+  })();
+</script>

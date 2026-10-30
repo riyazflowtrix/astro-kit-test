@@ -1,0 +1,98 @@
+<footer id="footer-minimal" class="fmin" data-alignment="between" data-theme="light">
+  <!-- kit: footer-minimal -->
+  <div class="container">
+    <div class="fmin__top">
+      <p class="fmin__statement">Let's make something worth keeping.</p>
+      <a class="fmin__email" href="mailto:hello@northbound.studio?subject=New%20project">hello@northbound.studio</a>
+    </div>
+    <div class="fmin__bottom">
+      <nav aria-label="Footer">
+        <ul class="fmin__links">
+          <li><a href="/work">Work</a></li>
+          <li><a href="/studio">Studio</a></li>
+          <li><a href="/careers">Careers</a></li>
+          <li><a href="/privacy">Privacy</a></li>
+        </ul>
+      </nav>
+      <ul class="fmin__social">
+        <li><a href="https://instagram.com/northbound.studio" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href="https://linkedin.com/company/northbound-studio" target="_blank" rel="noopener">LinkedIn</a></li>
+        <li><a href="https://dribbble.com/northbound" target="_blank" rel="noopener">Dribbble</a></li>
+      </ul>
+      <p class="fmin__copyright">© {new Date().getFullYear()} Northbound Studio, Lisbon</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .fmin {
+    background: var(--bg);
+    border-top: 1px solid var(--line);
+    padding-block: clamp(40px, 6vw, 72px) 2rem;
+  }
+
+  .fmin a {
+    text-decoration: none;
+  }
+
+  .fmin__top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .fmin__statement {
+    margin: 0;
+    font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+
+  .fmin__email {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--brand);
+    border-bottom: 2px solid currentColor;
+    overflow-wrap: anywhere;
+  }
+
+  .fmin__bottom {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem 2rem;
+    padding-top: 1.5rem;
+    font-size: 0.875rem;
+  }
+
+  .fmin__links,
+  .fmin__social {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.25rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .fmin__links a,
+  .fmin__social a {
+    color: var(--ink-2);
+  }
+
+  .fmin__links a:hover,
+  .fmin__social a:hover {
+    color: var(--ink);
+  }
+
+  .fmin__copyright {
+    margin: 0;
+    color: var(--ink-3);
+  }
+</style>

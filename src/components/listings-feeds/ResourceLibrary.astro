@@ -1,0 +1,173 @@
+<section id="resource-library" class="section resources">
+  <!-- kit: resource-library -->
+  <div class="container">
+    <div class="section-head">
+      <h2>Guides for finance teams that close fast</h2>
+      <p class="lead">Playbooks, benchmarks and templates from 1,400 finance teams on Ledgerline.</p>
+    </div>
+
+    <form class="resources__search" role="search" action="#" method="get">
+      <label for="resources-q" class="visually-hidden">Search resources</label>
+      <input id="resources-q" name="q" type="search" placeholder="Search guides, reports and templates" />
+      <button class="btn btn-secondary resources__filters-btn" type="button" aria-expanded="false" aria-controls="resources-facets">Filters</button>
+    </form>
+
+    <div class="resources__layout">
+      <aside id="resources-facets" class="resources__facets" aria-label="Filter resources">
+        <fieldset class="resources__facet">
+          <legend>Type</legend>
+          <label><input type="checkbox" name="type" value="guide" /> Guide <span>(18)</span></label>
+          <label><input type="checkbox" name="type" value="report" /> Report <span>(9)</span></label>
+          <label><input type="checkbox" name="type" value="template" /> Template <span>(7)</span></label>
+          <label><input type="checkbox" name="type" value="webinar" /> Webinar <span>(4)</span></label>
+        </fieldset>
+        <fieldset class="resources__facet">
+          <legend>Topic</legend>
+          <div class="resources__chips">
+            <label><input type="checkbox" name="topic" value="audit" /><span>Audit</span></label>
+            <label><input type="checkbox" name="topic" value="month-end-close" /><span>Month-end close</span></label>
+            <label><input type="checkbox" name="topic" value="reconciliation" /><span>Reconciliation</span></label>
+            <label><input type="checkbox" name="topic" value="revenue" /><span>Revenue</span></label>
+            <label><input type="checkbox" name="topic" value="spend" /><span>Spend</span></label>
+          </div>
+        </fieldset>
+        <details class="resources__facet">
+          <summary>Industry</summary>
+          <div class="field">
+            <label for="resources-industry" class="visually-hidden">Industry</label>
+            <select id="resources-industry" name="industry">
+              <option value="">All industries</option>
+              <option value="ecommerce">Ecommerce</option>
+              <option value="healthcare">Healthcare</option>
+              <option value="saas">SaaS</option>
+              <option value="manufacturing">Manufacturing</option>
+            </select>
+          </div>
+        </details>
+      </aside>
+
+      <div class="resources__results">
+        <article class="resource resource--pinned" data-type="report">
+          <img src="https://picsum.photos/seed/ledgerline-close-benchmark/1200/630" alt="Bar chart cover of the 2026 close benchmark report" width="1200" height="630" loading="lazy" />
+          <div class="resource__body">
+            <p class="resource__type"><span class="badge">Pinned</span> Report &middot; Month-end close</p>
+            <h3><a href="/resources/close-benchmark-2026">The 2026 Close Benchmark</a></h3>
+            <p>How 1,400 finance teams closed the books this year: median days to close, where time goes, and what the fastest 10% do differently.</p>
+            <p class="resource__gate"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M6 11h12v9H6z M8 11V8a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" stroke-width="2" /></svg>Free download with your work email</p>
+          </div>
+        </article>
+
+        <ul class="resources__grid" role="list">
+          <li class="resource" data-type="guide">
+            <img src="https://picsum.photos/seed/ledgerline-five-day-close/800/450" alt="A calendar with five days highlighted" width="800" height="450" loading="lazy" />
+            <p class="resource__type">Guide &middot; Month-end close</p>
+            <h3><a href="/resources/five-day-close">The five-day close playbook</a></h3>
+            <p>A day-by-day checklist for getting from 12 days to five without hiring.</p>
+          </li>
+          <li class="resource" data-type="template">
+            <img src="https://picsum.photos/seed/ledgerline-recon-template/800/450" alt="A spreadsheet with reconciliation columns" width="800" height="450" loading="lazy" />
+            <p class="resource__type">Template &middot; Reconciliation</p>
+            <h3><a href="/resources/bank-reconciliation-template">Bank reconciliation template</a></h3>
+            <p>The workbook our customers' controllers use before they switch to auto-matching.</p>
+            <p class="resource__gate"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M6 11h12v9H6z M8 11V8a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" stroke-width="2" /></svg>Free download</p>
+          </li>
+          <li class="resource" data-type="guide">
+            <img src="https://picsum.photos/seed/ledgerline-audit-ready/800/450" alt="A folder of documents labelled audit" width="800" height="450" loading="lazy" />
+            <p class="resource__type">Guide &middot; Audit</p>
+            <h3><a href="/resources/audit-ready-all-year">Stay audit-ready all year</a></h3>
+            <p>Evidence, approvals and a PBC list your auditors will actually thank you for.</p>
+          </li>
+          <li class="resource" data-type="webinar">
+            <img src="https://picsum.photos/seed/ledgerline-rev-rec-webinar/800/450" alt="Two speakers on a webinar screen" width="800" height="450" loading="lazy" />
+            <p class="resource__type">Webinar &middot; Revenue</p>
+            <h3><a href="/resources/rev-rec-for-usage-pricing">Revenue recognition for usage pricing</a></h3>
+            <p>45 minutes with two SaaS controllers on ASC 606 when every invoice is different.</p>
+          </li>
+          <li class="resource" data-type="report">
+            <img src="https://picsum.photos/seed/ledgerline-spend-report/800/450" alt="Pie chart of software spend by category" width="800" height="450" loading="lazy" />
+            <p class="resource__type">Report &middot; Spend</p>
+            <h3><a href="/resources/saas-spend-report">The finance team software spend report</a></h3>
+            <p>What 600 teams pay for their stack, and which tools they cut in 2026.</p>
+            <p class="resource__gate"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M6 11h12v9H6z M8 11V8a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" stroke-width="2" /></svg>Free download</p>
+          </li>
+          <li class="resource" data-type="template">
+            <img src="https://picsum.photos/seed/ledgerline-accrual-template/800/450" alt="An accrual schedule spreadsheet" width="800" height="450" loading="lazy" />
+            <p class="resource__type">Template &middot; Month-end close</p>
+            <h3><a href="/resources/accrual-schedule-template">Accrual schedule template</a></h3>
+            <p>Track prepaid expenses and deferred revenue by month, with formulas built in.</p>
+            <p class="resource__gate"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M6 11h12v9H6z M8 11V8a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" stroke-width="2" /></svg>Free download</p>
+          </li>
+        </ul>
+        <p class="resources__empty" data-empty hidden>No resources match those filters.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const root = document.getElementById("resource-library");
+  if (root) {
+    const btn = root.querySelector<HTMLButtonElement>(".resources__filters-btn");
+    const facets = root.querySelector<HTMLElement>(".resources__facets");
+    btn?.addEventListener("click", () => {
+      const open = btn.getAttribute("aria-expanded") !== "true";
+      btn.setAttribute("aria-expanded", String(open));
+      facets?.classList.toggle("is-open", open);
+    });
+    const search = root.querySelector<HTMLInputElement>("#resources-q");
+    const update = () => {
+      const types = Array.from(root.querySelectorAll<HTMLInputElement>('input[name="type"]:checked')).map((i) => i.value);
+      const q = (search?.value ?? "").trim().toLowerCase();
+      let shown = 0;
+      root.querySelectorAll<HTMLElement>(".resource").forEach((r) => {
+        const okType = types.length === 0 || types.includes(r.dataset.type ?? "");
+        const okText = q === "" || (r.textContent ?? "").toLowerCase().includes(q);
+        r.hidden = !(okType && okText);
+        if (!r.hidden) shown++;
+      });
+      const empty = root.querySelector<HTMLElement>("[data-empty]");
+      if (empty) empty.hidden = shown > 0;
+    };
+    root.addEventListener("change", update);
+    search?.addEventListener("input", update);
+    root.querySelector(".resources__search")?.addEventListener("submit", (e) => e.preventDefault());
+  }
+</script>
+
+<style>
+  .resources__search { display: flex; gap: 0.75rem; margin-bottom: 2rem; }
+  .resources__search input { flex: 1; min-width: 0; min-height: 48px; padding: 0 1rem; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
+  .resources__filters-btn { display: none; }
+  .resources__layout { display: grid; gap: 2rem; }
+  @media (min-width: 900px) { .resources__layout { grid-template-columns: 240px 1fr; gap: 3rem; } }
+  .resources__facets { gap: 1.75rem; align-content: start; display: grid; }
+  @media (max-width: 899px) {
+    .resources__filters-btn { display: inline-flex; }
+    .resources__facets { padding: 1.25rem; border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); }
+    .resources__facets:not(.is-open) { display: none; }
+  }
+  .resources__facet { border: 0; margin: 0; padding: 0; min-width: 0; display: grid; gap: 0.5rem; }
+  .resources__facet legend, .resources__facet summary { font-weight: 700; font-size: 0.875rem; margin-bottom: 0.5rem; cursor: pointer; }
+  .resources__facet > label { display: flex; align-items: center; gap: 0.5rem; font-size: 0.9375rem; }
+  .resources__facet > label span { color: var(--ink-3); }
+  .resources__chips { display: flex; flex-wrap: wrap; gap: 0.375rem; }
+  .resources__chips input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+  .resources__chips span { display: inline-flex; align-items: center; min-height: 32px; padding: 0 0.75rem; border: 1px solid var(--line); border-radius: 999px; font-size: 0.8125rem; cursor: pointer; }
+  .resources__chips input:checked + span { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  .resources__chips input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .resources__results { min-width: 0; }
+  .resource img { border-radius: var(--radius); width: 100%; aspect-ratio: 16 / 9; object-fit: cover; margin-bottom: 0.875rem; }
+  .resource h3 { font-size: 1.0625rem; margin-bottom: 0.375rem; }
+  .resource h3 a { text-decoration: none; }
+  .resource h3 a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .resource p { font-size: 0.9375rem; color: var(--ink-2); margin-bottom: 0.5rem; }
+  .resource__type { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; font-size: 0.75rem !important; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent) !important; }
+  .resource__gate { display: flex; align-items: center; gap: 0.375rem; font-size: 0.8125rem !important; color: var(--ink-3) !important; }
+  .resource--pinned { display: grid; gap: 1.25rem; padding: 1.25rem; margin-bottom: 2rem; border: 1px solid var(--line); border-radius: var(--radius-lg); background: var(--surface); }
+  @media (min-width: 720px) { .resource--pinned { grid-template-columns: 1fr 1fr; align-items: center; } }
+  .resource--pinned img { margin: 0; }
+  .resource--pinned h3 { font-size: 1.375rem; }
+  .resources__grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr)); gap: 2rem 1.5rem; }
+  .resource[hidden] { display: none !important; }
+  .resources__empty { padding: 2rem; text-align: center; color: var(--ink-3); }
+</style>

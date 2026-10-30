@@ -1,0 +1,181 @@
+---
+// "Cook along": one pinned recipe + two auto-filled from Recipes/Camp topics, plus referenced products, author and guide page.
+---
+
+<section id="references-web" class="section section--muted refs">
+  <!-- kit: references-web -->
+  <div class="container">
+    <div class="section-head">
+      <h2>Cook along</h2>
+    </div>
+
+    <ul class="refs__recipes grid grid-3">
+      <li>
+        <a class="card recipe" href="/recipes/campfire-paella">
+          <img src="https://picsum.photos/seed/campfire-paella/800/560" alt="A wide paella pan over a wood fire" width="800" height="560" loading="lazy" />
+          <div class="recipe__body">
+            <span class="badge">Pinned</span>
+            <h3>Campfire paella for eight</h3>
+            <p>One pan, one fire, and the crust everybody fights over.</p>
+            <span class="recipe__meta">90 min · Serves 8</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a class="card recipe" href="/recipes/skillet-cornbread">
+          <img src="https://picsum.photos/seed/skillet-cornbread/800/560" alt="Golden cornbread in a skillet set on a log" width="800" height="560" loading="lazy" />
+          <div class="recipe__body">
+            <span class="recipe__topic">Recipes</span>
+            <h3>Skillet cornbread over coals</h3>
+            <p>Brown butter in the pan first, then pour the batter into the sizzle.</p>
+            <span class="recipe__meta">35 min · Serves 6</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a class="card recipe" href="/recipes/dutch-oven-chili">
+          <img src="https://picsum.photos/seed/dutch-oven-chili/800/560" alt="A Dutch oven of chili with coals heaped on the lid" width="800" height="560" loading="lazy" />
+          <div class="recipe__body">
+            <span class="recipe__topic">Camp</span>
+            <h3>Coal-lid Dutch oven chili</h3>
+            <p>Low and slow with coals on top and below, ready by sundown.</p>
+            <span class="recipe__meta">3 hr · Serves 10</span>
+          </div>
+        </a>
+      </li>
+    </ul>
+
+    <div class="refs__links">
+      <div class="refs__group">
+        <h3 class="refs__label">Cooked on</h3>
+        <ul class="refs__products">
+          <li>
+            <a href="/products/cable-fold">
+              <img src="https://picsum.photos/seed/caldera-cable-fold/160/160" alt="The Cable Fold Grill folded flat" width="160" height="160" loading="lazy" />
+              <span><strong>Cable Fold Grill</strong><span>$140</span></span>
+            </a>
+          </li>
+          <li>
+            <a href="/products/ridge-skillet">
+              <img src="https://picsum.photos/seed/caldera-ridge-skillet/160/160" alt="The 10-inch Ridge Skillet from above" width="160" height="160" loading="lazy" />
+              <span><strong>Ridge Skillet, 10"</strong><span>$95</span></span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="refs__group">
+        <h3 class="refs__label">Recipes by</h3>
+        <a class="refs__author" href="/authors/jonah-reyes">
+          <img src="https://picsum.photos/seed/jonah-reyes/160/160" alt="Jonah Reyes, Caldera's head of recipes" width="160" height="160" loading="lazy" />
+          <span><strong>Jonah Reyes</strong><span>Head of recipes, Caldera</span></span>
+        </a>
+      </div>
+
+      <div class="refs__group">
+        <h3 class="refs__label">New to the grill?</h3>
+        <a class="btn btn-secondary" href="/cable-fold-guide">Read the Cable Fold guide <span aria-hidden="true">&rarr;</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .refs__recipes {
+    margin: 0 0 2.5rem;
+    padding: 0;
+    list-style: none;
+  }
+  .recipe {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    text-decoration: none;
+    transition: border-color 150ms ease;
+  }
+  .recipe:hover {
+    border-color: var(--ink-3);
+  }
+  .recipe img {
+    width: 100%;
+    aspect-ratio: 10 / 7;
+    object-fit: cover;
+  }
+  .recipe__body {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+    padding: 1.25rem;
+    flex: 1;
+  }
+  .recipe__body h3 {
+    margin: 0.25rem 0;
+  }
+  .recipe__body p {
+    color: var(--ink-2);
+    font-size: 0.9375rem;
+    flex: 1;
+  }
+  .recipe__topic {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--brand);
+  }
+  .recipe__meta {
+    font-size: 0.8125rem;
+    color: var(--ink-3);
+  }
+  .refs__links {
+    display: grid;
+    gap: 1.5rem 2.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    padding-top: 2rem;
+    border-top: 1px solid var(--line);
+  }
+  .refs__label {
+    font-size: 0.8125rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-3);
+    margin-bottom: 0.75rem;
+  }
+  .refs__products {
+    display: grid;
+    gap: 0.75rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .refs__products a,
+  .refs__author {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+  }
+  .refs__products img {
+    width: 56px;
+    height: 56px;
+    border-radius: var(--radius-sm);
+    object-fit: cover;
+  }
+  .refs__author img {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  .refs__products a > span,
+  .refs__author > span {
+    display: grid;
+    font-size: 0.9375rem;
+  }
+  .refs__products a > span span,
+  .refs__author > span span {
+    color: var(--ink-2);
+    font-size: 0.875rem;
+  }
+</style>

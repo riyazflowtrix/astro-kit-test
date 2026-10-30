@@ -1,0 +1,133 @@
+<section id="hero-split-testimonial" class="section hstm" data-variant="overlap" data-testimonial-source="collection">
+  <!-- kit: hero-split-testimonial -->
+  <div class="container hstm__grid">
+    <div class="hstm__copy">
+      <span class="eyebrow">Made in Bend, Oregon</span>
+      <h2 class="hstm__title">Cookware that gets better every time it meets a fire.</h2>
+      <p class="lead">Every Caldera pan is cast, machined and seasoned by twelve people in one workshop — and guaranteed for life.</p>
+      <div class="btn-row hstm__buttons">
+        <a class="btn btn-primary" href="/products">Shop cookware <span aria-hidden="true">→</span></a>
+        <a class="hstm__link" href="/about#workshop">Visit the workshop</a>
+      </div>
+    </div>
+
+    <div class="hstm__media">
+      <img src="https://picsum.photos/seed/caldera-workshop/1600/2000" alt="A worker pouring molten iron into a skillet mould in the Bend workshop" width="1600" height="2000" />
+      <figure class="hstm__quote" data-entry="ts_maya">
+        <span class="hstm__stars" aria-label="5 out of 5 stars">★★★★★</span>
+        <blockquote>
+          <p>“I've cooked on the same Caldera skillet three nights a week for six years. It's better now than the day it arrived.”</p>
+        </blockquote>
+        <figcaption>
+          <img src="https://picsum.photos/seed/caldera-maya/160/160" alt="Maya Okafor" width="160" height="160" />
+          <span><strong>Maya Okafor</strong>Chef-owner, Ember &amp; Salt, Portland</span>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hstm__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(2rem, 6vw, 5rem);
+    align-items: center;
+  }
+
+  .hstm__title {
+    font-size: clamp(2.25rem, 5vw, 3.5rem);
+  }
+
+  .hstm__buttons {
+    align-items: center;
+    gap: 1.25rem;
+    margin-top: 0.75rem;
+  }
+
+  .hstm__link {
+    font-weight: 600;
+    text-underline-offset: 4px;
+  }
+
+  .hstm__media {
+    position: relative;
+    padding-bottom: 3rem;
+  }
+
+  .hstm__media > img {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+  }
+
+  .hstm__quote {
+    position: absolute;
+    left: -2.5rem;
+    bottom: 0;
+    width: min(360px, 90%);
+    margin: 0;
+    padding: 1.5rem;
+    border-radius: var(--radius-lg);
+    background: var(--bg);
+    box-shadow: 0 20px 48px rgb(0 0 0 / 0.14);
+  }
+
+  .hstm__stars {
+    color: #e0a31c;
+    letter-spacing: 0.1em;
+  }
+
+  .hstm__quote blockquote {
+    margin: 0.5rem 0 1rem;
+  }
+
+  .hstm__quote blockquote p {
+    margin: 0;
+    font-size: 1.0625rem;
+    font-weight: 500;
+    line-height: 1.5;
+  }
+
+  .hstm__quote figcaption {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .hstm__quote figcaption img {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .hstm__quote figcaption span {
+    display: grid;
+    font-size: 0.8125rem;
+    color: var(--ink-2);
+  }
+
+  .hstm__quote figcaption strong {
+    font-size: 0.9375rem;
+    color: var(--ink);
+  }
+
+  @media (max-width: 860px) {
+    .hstm__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .hstm__media {
+      padding-bottom: 0;
+    }
+
+    .hstm__quote {
+      position: relative;
+      left: auto;
+      width: auto;
+      margin: -4rem 1rem 0;
+    }
+  }
+</style>

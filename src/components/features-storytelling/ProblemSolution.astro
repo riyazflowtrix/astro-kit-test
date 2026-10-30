@@ -1,0 +1,116 @@
+---
+---
+
+<section id="problem-solution" class="section section--muted problem-solution">
+  <!-- kit: problem-solution -->
+  <div class="container">
+    <header class="section-head section-head--center">
+      <span class="eyebrow">Sound familiar?</span>
+      <h2>Month-end shouldn't take your whole week.</h2>
+    </header>
+
+    <div class="ps">
+      <div class="ps-cols">
+        <div class="ps-col-head ps-col-head--problem">
+          <h3>Without Ledgerly</h3>
+          <p>The average small business owner spends 11 hours a month on books.</p>
+        </div>
+        <div class="ps-col-head ps-col-head--solution">
+          <h3>With Ledgerly</h3>
+          <p>Most customers close the month in under two hours.</p>
+        </div>
+      </div>
+
+      <ul class="ps-pairs" role="list">
+        <li class="ps-pair">
+          <p class="ps-problem"><span class="visually-hidden">Without Ledgerly: </span>Matching bank lines to invoices by hand, one by one.</p>
+          <div class="ps-solution">
+            <p><span class="visually-hidden">With Ledgerly: </span>95% of bank lines match themselves overnight.</p>
+            <span class="ps-metric">6 hours saved a month</span>
+          </div>
+        </li>
+        <li class="ps-pair">
+          <p class="ps-problem"><span class="visually-hidden">Without Ledgerly: </span>Chasing clients for payment over awkward emails.</p>
+          <div class="ps-solution">
+            <p><span class="visually-hidden">With Ledgerly: </span>Polite reminders go out on schedule, in your voice.</p>
+            <span class="ps-metric">Paid 9 days sooner</span>
+          </div>
+        </li>
+        <li class="ps-pair">
+          <p class="ps-problem"><span class="visually-hidden">Without Ledgerly: </span>A shoebox of receipts every April.</p>
+          <div class="ps-solution">
+            <p><span class="visually-hidden">With Ledgerly: </span>Forward a receipt once; it's filed against the right expense.</p>
+          </div>
+        </li>
+        <li class="ps-pair">
+          <p class="ps-problem"><span class="visually-hidden">Without Ledgerly: </span>Not knowing if you can afford the next hire.</p>
+          <div class="ps-solution">
+            <p><span class="visually-hidden">With Ledgerly: </span>A 90-day cash forecast that updates every morning.</p>
+          </div>
+        </li>
+      </ul>
+
+      <div class="btn-row ps-cta">
+        <a class="btn btn-primary" href="/how-it-works" title="How it works">See how it works <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .ps { max-width: 980px; margin-inline: auto; }
+  .ps-cols,
+  .ps-pair {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+  .ps-col-head {
+    padding: 1.25rem 1.5rem;
+    border-radius: var(--radius) var(--radius) 0 0;
+  }
+  .ps-col-head h3 { font-size: 1rem; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.25rem; }
+  .ps-col-head p { margin: 0; color: var(--ink-2); font-size: 0.9375rem; }
+  .ps-col-head--problem { background: var(--surface-2); }
+  .ps-col-head--problem h3 { color: var(--ink-3); }
+  .ps-col-head--solution { background: var(--brand); color: var(--brand-ink); }
+  .ps-col-head--solution p { color: inherit; opacity: 0.9; }
+  .ps-pairs { margin: 0; padding: 0; list-style: none; display: grid; gap: 0; }
+  .ps-pair > * {
+    margin: 0;
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .ps-problem {
+    background: var(--bg);
+    color: var(--ink-2);
+  }
+  .ps-solution { background: var(--bg); display: grid; gap: 0.5rem; justify-items: start; }
+  .ps-solution p { margin: 0; font-weight: 600; }
+  .ps-metric {
+    display: inline-block;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--success);
+    background: color-mix(in srgb, var(--success) 12%, transparent);
+    padding: 0.125rem 0.625rem;
+    border-radius: 999px;
+  }
+  .ps-pair:last-child > * { border-bottom: 0; }
+  .ps-pair:last-child .ps-problem { border-bottom-left-radius: var(--radius); }
+  .ps-pair:last-child .ps-solution { border-bottom-right-radius: var(--radius); }
+  .ps-cta { justify-content: center; margin-top: 2.5rem; }
+  @media (max-width: 640px) {
+    .ps-cols { grid-template-columns: 1fr; gap: 0.5rem; margin-bottom: 1rem; }
+    .ps-col-head { border-radius: var(--radius); }
+    .ps-pairs { gap: 1rem; }
+    .ps-pair { grid-template-columns: 1fr; gap: 0; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); }
+    .ps-problem { border-bottom: 1px dashed var(--line) !important; }
+    .ps-problem .visually-hidden,
+    .ps-solution .visually-hidden {
+      position: static; width: auto; height: auto; margin: 0; clip: auto; overflow: visible; white-space: normal;
+      display: block; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; text-decoration: none;
+    }
+    .ps-solution .visually-hidden { color: var(--brand); }
+  }
+</style>

@@ -1,0 +1,4657 @@
+[
+ {
+  "id": "rich-blog-post",
+  "name": "Rich blog post",
+  "category": "Long-form & docs",
+  "kind": "entry",
+  "brand": "Caldera",
+  "previewLayout": "article",
+  "proves": "One rich-text body holds key takeaways, callouts, tables, code, images, video, pull quotes, toggles, footnotes and linked components \u00b7 sponsor disclosure is conditional",
+  "schema": {
+   "name": "journalPost",
+   "title": "Journal post",
+   "kind": "entry",
+   "icon": "news",
+   "category": "Long-form & docs",
+   "description": "A Journal story with a rich body",
+   "preview": {
+    "title": "title",
+    "subtitle": "dek",
+    "media": "coverImage"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "icon": "file-text",
+     "default": true
+    },
+    {
+     "name": "media",
+     "title": "Media",
+     "icon": "photo"
+    },
+    {
+     "name": "settings",
+     "title": "Settings",
+     "icon": "settings"
+    }
+   ],
+   "fieldsets": [
+    {
+     "name": "byline",
+     "title": "Byline"
+    },
+    {
+     "name": "dates",
+     "title": "Dates"
+    },
+    {
+     "name": "sponsor",
+     "title": "Sponsorship",
+     "collapsed": true
+    }
+   ],
+   "fields": [
+    {
+     "name": "title",
+     "title": "Title",
+     "type": "string",
+     "group": "content",
+     "validation": {
+      "required": true,
+      "max": 90,
+      "recommendedMax": 70
+     },
+     "ai": true,
+     "localized": true,
+     "description": "The page's only H1."
+    },
+    {
+     "name": "slug",
+     "title": "Slug",
+     "type": "slug",
+     "group": "content",
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "dek",
+     "title": "Dek",
+     "type": "text",
+     "rows": 2,
+     "group": "content",
+     "validation": {
+      "required": true,
+      "recommendedMax": 160
+     },
+     "ai": true,
+     "localized": true,
+     "description": "Also shown on cards."
+    },
+    {
+     "name": "authors",
+     "title": "Authors",
+     "type": "array",
+     "of": [
+      {
+       "name": "author",
+       "title": "Author",
+       "type": "reference",
+       "reference": {
+        "to": [
+         "col_authors"
+        ]
+       }
+      }
+     ],
+     "group": "content",
+     "fieldset": "byline",
+     "validation": {
+      "min": 1,
+      "max": 3
+     },
+     "description": "The first author leads the byline."
+    },
+    {
+     "name": "topics",
+     "title": "Topics",
+     "type": "array",
+     "of": [
+      {
+       "name": "topic",
+       "title": "Topic",
+       "type": "reference",
+       "reference": {
+        "to": [
+         "col_topics"
+        ]
+       }
+      }
+     ],
+     "group": "content",
+     "fieldset": "byline",
+     "validation": {
+      "min": 1,
+      "max": 4
+     },
+     "description": "The first topic is the label on cards."
+    },
+    {
+     "name": "publishedAt",
+     "title": "Publish date",
+     "type": "datetime",
+     "group": "content",
+     "fieldset": "dates",
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "updatedAt",
+     "title": "Updated",
+     "type": "datetime",
+     "group": "content",
+     "fieldset": "dates",
+     "description": "Only for real corrections or updates."
+    },
+    {
+     "name": "readingTime",
+     "title": "Reading time",
+     "type": "number",
+     "group": "content",
+     "fieldset": "dates",
+     "readOnly": true,
+     "numeric": {
+      "unit": "min"
+     },
+     "description": "Worked out from the body word count."
+    },
+    {
+     "name": "body",
+     "title": "Body",
+     "type": "richtext",
+     "group": "content",
+     "validation": {
+      "required": true
+     },
+     "ai": true,
+     "localized": true,
+     "description": "Type / for images, tables, callouts, code, video and components.",
+     "helpMore": "H2 and H3 build the table of contents. Components stay shared with Blocks; a field edited here changes only this place."
+    },
+    {
+     "name": "closingButton",
+     "title": "Closing button",
+     "type": "button",
+     "group": "content"
+    },
+    {
+     "name": "coverImage",
+     "title": "Cover image",
+     "type": "image",
+     "group": "media",
+     "validation": {
+      "required": true
+     },
+     "description": "1600 \u00d7 900 or larger. Used on cards and when shared."
+    },
+    {
+     "name": "coverCaption",
+     "title": "Cover caption",
+     "type": "string",
+     "group": "media",
+     "validation": {
+      "max": 140
+     }
+    },
+    {
+     "name": "isSponsored",
+     "title": "Sponsored",
+     "type": "boolean",
+     "group": "settings",
+     "fieldset": "sponsor",
+     "description": "Adds a \"Paid partnership\" label and marks partner links sponsored."
+    },
+    {
+     "name": "sponsorName",
+     "title": "Partner",
+     "type": "string",
+     "group": "settings",
+     "fieldset": "sponsor",
+     "hidden": {
+      "field": "isSponsored",
+      "equals": true
+     },
+     "validation": {
+      "required": true,
+      "max": 40
+     }
+    },
+    {
+     "name": "sponsorLink",
+     "title": "Partner link",
+     "type": "link",
+     "group": "settings",
+     "fieldset": "sponsor",
+     "hidden": {
+      "field": "isSponsored",
+      "equals": true
+     },
+     "initialValue": {
+      "type": "url",
+      "href": "",
+      "rel": "sponsored",
+      "newTab": true
+     }
+    },
+    {
+     "name": "isFeatured",
+     "title": "Featured",
+     "type": "boolean",
+     "group": "settings"
+    },
+    {
+     "name": "showContents",
+     "title": "Show table of contents",
+     "type": "boolean",
+     "group": "settings",
+     "initialValue": true
+    },
+    {
+     "name": "related",
+     "title": "Related stories",
+     "type": "select",
+     "group": "settings",
+     "layout": "radio",
+     "initialValue": "auto",
+     "options": [
+      {
+       "value": "auto",
+       "label": "Automatic",
+       "description": "Same topics, newest first"
+      },
+      {
+       "value": "manual",
+       "label": "Pick them"
+      },
+      {
+       "value": "none",
+       "label": "Don't show"
+      }
+     ],
+     "description": ""
+    },
+    {
+     "name": "relatedPosts",
+     "title": "Stories",
+     "type": "array",
+     "of": [
+      {
+       "name": "relatedPost",
+       "title": "Storie",
+       "type": "reference",
+       "reference": {
+        "to": [
+         "col_journal",
+         "col_recipes"
+        ]
+       }
+      }
+     ],
+     "group": "settings",
+     "hidden": {
+      "field": "related",
+      "equals": "manual"
+     },
+     "validation": {
+      "min": 1,
+      "max": 3,
+      "unique": true
+     }
+    },
+    {
+     "name": "layout",
+     "title": "Layout",
+     "type": "select",
+     "group": "settings",
+     "layout": "cards",
+     "initialValue": "standard",
+     "options": [
+      {
+       "value": "standard",
+       "label": "Standard",
+       "icon": "file-text",
+       "description": "Text column, inline images"
+      },
+      {
+       "value": "wide",
+       "label": "Wide",
+       "icon": "layout-columns",
+       "description": "Full-width images"
+      },
+      {
+       "value": "essay",
+       "label": "Photo essay",
+       "icon": "library-photo",
+       "description": "Images first, short captions"
+      }
+     ],
+     "description": ""
+    }
+   ]
+  },
+  "value": {
+   "title": "The 30-minute campfire loaf",
+   "slug": "30-minute-campfire-loaf",
+   "dek": "No starter, no oven, no proofing basket. A Dutch oven, a bag of coals and a dough you mix at lunch.",
+   "authors": [
+    "en_a2"
+   ],
+   "topics": [
+    "tp_recipes",
+    "tp_camp",
+    "tp_cast-iron"
+   ],
+   "publishedAt": "2026-09-24T09:00:00-07:00[America/Los_Angeles]",
+   "updatedAt": "2026-09-30T16:20:00-07:00[America/Los_Angeles]",
+   "readingTime": 7,
+   "body": "<p>Bread is the thing people assume you can't make outside. You can, and it's easier over coals than in most home ovens: a cast-iron Dutch oven is a steam oven with a lid.</p><aside data-rt=\"takeaways\"><p data-title>Key takeaways</p><ul><li>Mix at lunch, bake at dusk: four hours does the proofing for you.</li><li>Two-thirds of the coals go on the lid.</li><li>Lift the lid once, at 20 minutes.</li></ul></aside><h2>What you need</h2><table data-rt=\"table\" data-header=\"true\"><caption>Gear for one 900 g loaf</caption><thead><tr><th scope=\"col\">Item</th><th scope=\"col\">Why</th></tr></thead><tbody><tr><td>5.5 qt Dutch oven</td><td>Holds steam for the first 15 minutes</td></tr><tr><td>18 charcoal briquettes</td><td>About 220\u00b0C with 12 on the lid, 6 under</td></tr><tr><td>Parchment sling</td><td>Lowers the dough in without burnt knuckles</td></tr></tbody></table><div data-rt=\"callout\" data-callout=\"tip\"><p data-title=\"true\">Count your coals</p><div data-body=\"true\"><p>Two-thirds on the lid, one-third underneath. Bread burns from the bottom first.</p></div></div><h2>Mix at lunch, bake at dusk</h2><p>Stir 500 g flour, 360 g warm water, 10 g salt and 4 g instant yeast until shaggy. Cover it and forget it for four hours.</p><figure data-rt=\"image\" data-align=\"full\" data-size=\"full\"><img src=\"https://picsum.photos/seed/campfire-loaf-dough/1600/1000\" alt=\"A shaggy dough in a steel bowl on a camp table\"><figcaption>Four hours later: doubled and bubbly. Photo: Daniel Okafor</figcaption></figure><h3>Shaping without a counter</h3><p>Flour the parchment, tip the dough out and fold the four edges into the middle. Flip it seam-down and let it sit while the coals catch.</p><div data-rt=\"video\" data-embed=\"video\" data-url=\"https://www.youtube.com/watch?v=Kc7sqbW3f8Y\"><a href=\"https://www.youtube.com/watch?v=Kc7sqbW3f8Y\">https://www.youtube.com/watch?v=Kc7sqbW3f8Y</a></div><figure data-rt=\"pullquote\"><blockquote><p>Thin coals, patient lid. Lift it once at 20 minutes and never again.</p></blockquote><figcaption><span data-name>Priya Nair</span>, <span data-role>Caldera product engineering</span></figcaption></figure><div data-rt=\"component\" data-block=\"article-cta\" data-ref=\"article-cta\" data-id=\"ci_loaf_cta\" data-name=\"Inline CTA\" data-overrides=\"{&quot;heading&quot;:&quot;Baking this weekend? The Ember Dutch Oven ships in two days.&quot;}\">\u29c9&nbsp;Inline CTA \u00b7 component</div><h2>Bake</h2><p>Lid on for 20 minutes, lid off for 10. Knock the base: hollow means done. A probe should read 96\u00b0C.<sup data-rt=\"fn\" id=\"fnref-1\" data-note=\"At the centre of the loaf, with an instant-read probe pushed in from the side.\"><a href=\"#fn-1\" aria-label=\"Footnote 1\">1</a></sup></p><pre><code>Lid on   20 min  ~220\u00b0C  12 coals top, 6 under\nLid off  10 min  ~200\u00b0C  6 coals under only</code></pre><div data-rt=\"callout\" data-callout=\"warning\"><p data-title=\"true\">Never on a picnic table</p><div data-body=\"true\"><p>A loaded Dutch oven over coals scorches wood. Use the Cable Fold grate or bare ground.</p></div></div><details data-rt=\"toggle\"><summary>Can I use whole wheat?</summary><div data-body=\"true\"><p>Swap up to 150 g. Add 20 g more water, the bran drinks it.</p></div></details><details data-rt=\"toggle\"><summary>What if it rains?</summary><div data-body=\"true\"><p>The lid keeps rain off the dough. Keep the coals under a tarp until you need them.</p></div></details><div data-rt=\"component\" data-block=\"product-card\" data-ref=\"product-card\" data-id=\"ci_loaf_dutch\" data-name=\"Product card\" data-overrides=\"{&quot;badge&quot;:&quot;Used here&quot;}\">\u29c9&nbsp;Product card \u00b7 component</div><ol class=\"cs-footnotes\" data-rt=\"footnotes\" aria-label=\"Footnotes\"><li id=\"fn-1\">At the centre of the loaf, with an instant-read probe pushed in from the side. <a href=\"#fnref-1\" aria-label=\"Back to reference 1\">\u21a9</a></li></ol>",
+   "closingButton": {
+    "label": "Shop the Dutch oven",
+    "href": "/products/ember-dutch-oven",
+    "type": "entry",
+    "entryId": "en_p2",
+    "title": "Ember Dutch Oven 5.5qt",
+    "style": "primary",
+    "arrow": true
+   },
+   "coverImage": {
+    "url": "https://picsum.photos/seed/campfire-loaf/1600/1000",
+    "alt": "A crusty round loaf on a parchment sling beside a smoking Dutch oven",
+    "name": "campfire-loaf.jpg",
+    "width": 3200,
+    "height": 2000
+   },
+   "coverCaption": "Loaf number three of the trip, Deschutes National Forest.",
+   "isSponsored": false,
+   "isFeatured": true,
+   "showContents": true,
+   "related": "auto",
+   "relatedPosts": [],
+   "layout": "standard"
+  }
+ },
+ {
+  "id": "author-bio",
+  "name": "Author bio",
+  "category": "Long-form & docs",
+  "kind": "block",
+  "brand": "Caldera",
+  "previewLayout": "split",
+  "proves": "One reference drives photo, name, role, bio and socials \u00b7 per-placement bio override \u00b7 latest posts by that author",
+  "schema": {
+   "name": "authorBio",
+   "title": "Author bio",
+   "kind": "block",
+   "icon": "user-circle",
+   "category": "Long-form & docs",
+   "description": "Who wrote it, with a link to everything else they wrote",
+   "variants": [
+    {
+     "id": "card",
+     "name": "Card"
+    },
+    {
+     "id": "inline",
+     "name": "Inline",
+     "description": "A slim row under the article"
+    },
+    {
+     "id": "profile",
+     "name": "Profile",
+     "description": "Large photo, for author pages"
+    }
+   ],
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "icon": "file-text",
+     "default": true
+    },
+    {
+     "name": "design",
+     "title": "Design",
+     "icon": "palette"
+    }
+   ],
+   "preview": {
+    "title": "heading",
+    "subtitle": "author",
+    "icon": "user-circle"
+   },
+   "fields": [
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "group": "content",
+     "initialValue": "About the author",
+     "validation": {
+      "max": 40
+     },
+     "description": "Leave empty on author pages."
+    },
+    {
+     "name": "author",
+     "title": "Author",
+     "type": "reference",
+     "group": "content",
+     "reference": {
+      "to": [
+       "col_authors"
+      ]
+     },
+     "description": "Leave empty on a post to use its first author."
+    },
+    {
+     "name": "bioSource",
+     "title": "Bio",
+     "type": "select",
+     "group": "content",
+     "layout": "segmented",
+     "initialValue": "profile",
+     "options": [
+      {
+       "value": "profile",
+       "label": "From their profile"
+      },
+      {
+       "value": "custom",
+       "label": "Written here"
+      }
+     ]
+    },
+    {
+     "name": "bio",
+     "title": "Bio for this placement",
+     "type": "richtext",
+     "group": "content",
+     "hidden": {
+      "field": "bioSource",
+      "equals": "custom"
+     },
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "showSocial",
+     "title": "Show social links",
+     "type": "boolean",
+     "group": "content",
+     "initialValue": true
+    },
+    {
+     "name": "showLatest",
+     "title": "Show their latest posts",
+     "type": "boolean",
+     "group": "content"
+    },
+    {
+     "name": "latestCount",
+     "title": "How many",
+     "type": "number",
+     "group": "content",
+     "layout": "slider",
+     "hidden": {
+      "field": "showLatest",
+      "equals": true
+     },
+     "numeric": {
+      "min": 2,
+      "max": 6,
+      "step": 1
+     },
+     "initialValue": 3,
+     "description": ""
+    },
+    {
+     "name": "button",
+     "title": "Button",
+     "type": "button",
+     "group": "content",
+     "placeholder": "All posts by {name}"
+    },
+    {
+     "name": "photoShape",
+     "title": "Photo",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "circle",
+     "options": [
+      {
+       "value": "circle",
+       "label": "Circle"
+      },
+      {
+       "value": "rounded",
+       "label": "Rounded"
+      },
+      {
+       "value": "none",
+       "label": "No photo"
+      }
+     ],
+     "description": ""
+    }
+   ]
+  },
+  "value": {
+   "_variant": "card",
+   "heading": "About the author",
+   "author": "en_a2",
+   "bioSource": "profile",
+   "bio": "",
+   "showSocial": true,
+   "showLatest": true,
+   "latestCount": 3,
+   "button": {
+    "label": "All posts by {name}",
+    "href": "/authors/priya-nair",
+    "type": "entry",
+    "entryId": "en_a2",
+    "title": "Priya Nair",
+    "style": "link",
+    "arrow": true
+   },
+   "photoShape": "circle"
+  }
+ },
+ {
+  "id": "docs-page",
+  "name": "Docs page",
+  "category": "Long-form & docs",
+  "kind": "entry",
+  "brand": "Ledgerline",
+  "previewLayout": "article",
+  "blocks": [
+   {
+    "name": "codeTabs",
+    "title": "Code tabs",
+    "kind": "block",
+    "icon": "code",
+    "category": "Long-form & docs",
+    "description": "The same example in several languages",
+    "variants": [
+     {
+      "id": "tabs",
+      "name": "Tabs"
+     },
+     {
+      "id": "stacked",
+      "name": "Stacked",
+      "description": "Every language visible, one after another"
+     }
+    ],
+    "groups": [
+     {
+      "name": "content",
+      "title": "Content",
+      "icon": "file-text",
+      "default": true
+     },
+     {
+      "name": "design",
+      "title": "Design",
+      "icon": "palette"
+     }
+    ],
+    "preview": {
+     "title": "title",
+     "subtitle": "syncKey",
+     "icon": "code"
+    },
+    "fields": [
+     {
+      "name": "title",
+      "title": "Title",
+      "type": "string",
+      "group": "content",
+      "validation": {
+       "max": 60
+      },
+      "placeholder": "Create a journal entry"
+     },
+     {
+      "name": "tabs",
+      "title": "Languages",
+      "type": "array",
+      "group": "content",
+      "itemNoun": "language",
+      "validation": {
+       "min": 1,
+       "max": 8
+      },
+      "of": [
+       {
+        "name": "snippet",
+        "title": "Snippet",
+        "type": "object",
+        "icon": "code",
+        "preview": {
+         "title": "language",
+         "subtitle": "filename"
+        },
+        "fields": [
+         {
+          "name": "language",
+          "title": "Language",
+          "type": "select",
+          "validation": {
+           "required": true
+          },
+          "options": [
+           {
+            "value": "curl",
+            "label": "cURL"
+           },
+           {
+            "value": "javascript",
+            "label": "JavaScript"
+           },
+           {
+            "value": "typescript",
+            "label": "TypeScript"
+           },
+           {
+            "value": "python",
+            "label": "Python"
+           },
+           {
+            "value": "ruby",
+            "label": "Ruby"
+           },
+           {
+            "value": "go",
+            "label": "Go"
+           },
+           {
+            "value": "java",
+            "label": "Java"
+           },
+           {
+            "value": "php",
+            "label": "PHP"
+           },
+           {
+            "value": "json",
+            "label": "JSON"
+           }
+          ]
+         },
+         {
+          "name": "label",
+          "title": "Tab name",
+          "type": "string",
+          "validation": {
+           "max": 16
+          },
+          "description": "Leave empty to use the language name."
+         },
+         {
+          "name": "filename",
+          "title": "File name",
+          "type": "string",
+          "validation": {
+           "max": 40
+          },
+          "placeholder": "create-entry.ts",
+          "description": ""
+         },
+         {
+          "name": "code",
+          "title": "Code",
+          "type": "code",
+          "validation": {
+           "required": true
+          },
+          "openMode": "dialog"
+         },
+         {
+          "name": "highlight",
+          "title": "Highlight lines",
+          "type": "string",
+          "validation": {
+           "pattern": "^\\d+(-\\d+)?(,\\s*\\d+(-\\d+)?)*$",
+           "patternMessage": "Use line numbers like 3, 7-9."
+          },
+          "placeholder": "3, 7-9",
+          "description": ""
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "name": "syncKey",
+      "title": "Switch together",
+      "type": "string",
+      "group": "content",
+      "initialValue": "sdk",
+      "validation": {
+       "pattern": "^[a-z0-9-]+$",
+       "patternMessage": "Lowercase letters, numbers and hyphens only."
+      },
+      "description": "Code tabs with the same key switch language together."
+     },
+     {
+      "name": "showLineNumbers",
+      "title": "Show line numbers",
+      "type": "boolean",
+      "group": "design",
+      "description": ""
+     },
+     {
+      "name": "showCopyButton",
+      "title": "Show copy button",
+      "type": "boolean",
+      "group": "design",
+      "initialValue": true,
+      "description": ""
+     },
+     {
+      "name": "maxHeight",
+      "title": "Max height",
+      "type": "number",
+      "group": "design",
+      "numeric": {
+       "unit": "px",
+       "min": 160,
+       "max": 800,
+       "step": 40
+      },
+      "description": "Longer code scrolls inside the block."
+     }
+    ]
+   }
+  ],
+  "proves": "Sidebar position by reference to a nav group \u00b7 auto ToC with depth \u00b7 prev/next auto or manual \u00b7 deprecation reveals a notice",
+  "schema": {
+   "name": "docPage",
+   "title": "Docs page",
+   "kind": "entry",
+   "icon": "book",
+   "category": "Long-form & docs",
+   "description": "A guide or reference page in the docs",
+   "preview": {
+    "title": "title",
+    "subtitle": "summary",
+    "icon": "book"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "icon": "file-text",
+     "default": true
+    },
+    {
+     "name": "navigation",
+     "title": "Navigation",
+     "icon": "list-tree"
+    },
+    {
+     "name": "settings",
+     "title": "Settings",
+     "icon": "settings"
+    }
+   ],
+   "fieldsets": [
+    {
+     "name": "status",
+     "title": "Status",
+     "description": "Beta and deprecated pages show a notice at the top."
+    }
+   ],
+   "fields": [
+    {
+     "name": "title",
+     "title": "Title",
+     "type": "string",
+     "group": "content",
+     "validation": {
+      "required": true,
+      "max": 70
+     },
+     "localized": true
+    },
+    {
+     "name": "slug",
+     "title": "Slug",
+     "type": "slug",
+     "group": "content",
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "summary",
+     "title": "Summary",
+     "type": "text",
+     "rows": 2,
+     "group": "content",
+     "validation": {
+      "required": true,
+      "recommendedMax": 160
+     },
+     "localized": true
+    },
+    {
+     "name": "body",
+     "title": "Body",
+     "type": "richtext",
+     "group": "content",
+     "validation": {
+      "required": true
+     },
+     "localized": true,
+     "description": "Type / for callouts, tables, Code tabs and images.",
+     "helpMore": "H2 and H3 build the \"On this page\" list."
+    },
+    {
+     "name": "sidebarGroup",
+     "title": "Sidebar group",
+     "type": "reference",
+     "group": "navigation",
+     "reference": {
+      "to": [
+       "col_doc_groups"
+      ]
+     },
+     "validation": {
+      "required": true
+     },
+     "description": "The sidebar itself is shared."
+    },
+    {
+     "name": "sidebarLabel",
+     "title": "Sidebar label",
+     "type": "string",
+     "group": "navigation",
+     "validation": {
+      "max": 28
+     },
+     "description": "Leave empty to use the title."
+    },
+    {
+     "name": "sidebarPosition",
+     "title": "Position",
+     "type": "number",
+     "group": "navigation",
+     "numeric": {
+      "min": 1,
+      "step": 1
+     },
+     "description": "Lower comes first."
+    },
+    {
+     "name": "tocDepth",
+     "title": "On this page",
+     "type": "select",
+     "group": "navigation",
+     "layout": "segmented",
+     "initialValue": "h3",
+     "options": [
+      {
+       "value": "off",
+       "label": "Off"
+      },
+      {
+       "value": "h2",
+       "label": "H2 only"
+      },
+      {
+       "value": "h3",
+       "label": "H2 + H3"
+      }
+     ],
+     "description": ""
+    },
+    {
+     "name": "pager",
+     "title": "Previous / next",
+     "type": "select",
+     "group": "navigation",
+     "layout": "radio",
+     "initialValue": "auto",
+     "options": [
+      {
+       "value": "auto",
+       "label": "Follow the sidebar order"
+      },
+      {
+       "value": "manual",
+       "label": "Choose them"
+      },
+      {
+       "value": "off",
+       "label": "Hide"
+      }
+     ],
+     "description": ""
+    },
+    {
+     "name": "prev",
+     "title": "Previous page",
+     "type": "reference",
+     "group": "navigation",
+     "reference": {
+      "to": [
+       "col_docs"
+      ]
+     },
+     "hidden": {
+      "field": "pager",
+      "equals": "manual"
+     }
+    },
+    {
+     "name": "next",
+     "title": "Next page",
+     "type": "reference",
+     "group": "navigation",
+     "reference": {
+      "to": [
+       "col_docs"
+      ]
+     },
+     "hidden": {
+      "field": "pager",
+      "equals": "manual"
+     }
+    },
+    {
+     "name": "status",
+     "title": "Status",
+     "type": "select",
+     "group": "settings",
+     "fieldset": "status",
+     "layout": "segmented",
+     "initialValue": "stable",
+     "options": [
+      {
+       "value": "stable",
+       "label": "Stable"
+      },
+      {
+       "value": "beta",
+       "label": "Beta"
+      },
+      {
+       "value": "deprecated",
+       "label": "Deprecated"
+      }
+     ],
+     "description": ""
+    },
+    {
+     "name": "statusNote",
+     "title": "Notice",
+     "type": "richtext",
+     "group": "settings",
+     "fieldset": "status",
+     "hidden": {
+      "field": "status",
+      "equals": [
+       "beta",
+       "deprecated"
+      ]
+     },
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "replacement",
+     "title": "Use instead",
+     "type": "reference",
+     "group": "settings",
+     "fieldset": "status",
+     "reference": {
+      "to": [
+       "col_docs"
+      ]
+     },
+     "hidden": {
+      "field": "status",
+      "equals": "deprecated"
+     }
+    },
+    {
+     "name": "apiVersion",
+     "title": "API version",
+     "type": "select",
+     "group": "settings",
+     "options": [
+      {
+       "value": "2026-09-01",
+       "label": "2026-09-01 (latest)"
+      },
+      {
+       "value": "2026-03-01",
+       "label": "2026-03-01"
+      },
+      {
+       "value": "2025-09-01",
+       "label": "2025-09-01"
+      }
+     ],
+     "description": "The version the examples on this page use."
+    },
+    {
+     "name": "lastReviewed",
+     "title": "Last reviewed",
+     "type": "date",
+     "group": "settings"
+    },
+    {
+     "name": "editUrl",
+     "title": "Source file",
+     "type": "url",
+     "group": "settings",
+     "access": {
+      "view": "schema.view",
+      "edit": "schema.manage"
+     },
+     "advanced": true,
+     "description": "Powers the \"Edit on GitHub\" link."
+    }
+   ]
+  },
+  "value": {
+   "title": "Close several entities at once",
+   "slug": "multi-entity-close",
+   "summary": "Group subsidiaries under a parent, run one checklist, and let Ledgerline post intercompany eliminations for you.",
+   "body": "<p>Multi-entity close lets a parent company close every subsidiary from one checklist. Each entity keeps its own ledger; the checklist and eliminations are shared.</p><div data-rt=\"callout\" data-callout=\"info\"><p data-title=\"true\">Available on Scale and Enterprise</p><div data-body=\"true\"><p>Multi-entity close needs at least two entities with the same fiscal calendar.</p></div></div><h2>Before you start</h2><ul><li>Every entity has a functional currency set.</li><li>Intercompany accounts are mapped in <a href=\"/guides/intercompany-mapping\">Intercompany mapping</a>.</li></ul><h2>Create a close group</h2><p>A close group is the parent and the entities it closes. Create one from the dashboard or the API.</p><div data-rt=\"component\" data-block=\"code-tabs\" data-ref=\"code-tabs\" data-id=\"ci_doc_close_group\" data-name=\"Code tabs\" data-overrides=\"{&quot;title&quot;:&quot;Create a close group&quot;}\">\u29c9&nbsp;Code tabs \u00b7 component</div><h3>Order of operations</h3><table data-rt=\"table\" data-header=\"true\"><thead><tr><th scope=\"col\">Step</th><th scope=\"col\">Runs on</th></tr></thead><tbody><tr><td>Bank reconciliation</td><td>Each entity</td></tr><tr><td>Intercompany eliminations</td><td>The parent</td></tr><tr><td>Consolidated reports</td><td>The parent</td></tr></tbody></table><div data-rt=\"callout\" data-callout=\"warning\"><p data-title=\"true\">Lock periods last</p><div data-body=\"true\"><p>Locking an entity before eliminations post blocks them. Lock the parent after every child.</p></div></div><h2>Troubleshooting</h2><details data-rt=\"toggle\"><summary>Eliminations didn't post</summary><div data-body=\"true\"><p>Check that both sides of the intercompany pair use mapped accounts. Unmapped lines are skipped and listed in the close report.</p></div></details>",
+   "sidebarGroup": "en_dg_closing",
+   "sidebarLabel": "Multi-entity close",
+   "sidebarPosition": 3,
+   "tocDepth": "h3",
+   "pager": "auto",
+   "status": "beta",
+   "statusNote": "<p>Multi-entity close is in beta. The API shape is stable; the dashboard checklist may change before general availability in Q1 2027.</p>",
+   "apiVersion": "2026-09-01",
+   "lastReviewed": "2026-09-29",
+   "editUrl": "https://github.com/ledgerline/docs/blob/main/guides/multi-entity-close.mdx"
+  }
+ },
+ {
+  "id": "code-tabs",
+  "name": "Code tabs",
+  "category": "Long-form & docs",
+  "kind": "block",
+  "brand": "Ledgerline",
+  "previewLayout": "tabs",
+  "proves": "One example in N languages \u00b7 language is a select, not a free label \u00b7 tabs sync across the page by key",
+  "schema": {
+   "name": "codeTabs",
+   "title": "Code tabs",
+   "kind": "block",
+   "icon": "code",
+   "category": "Long-form & docs",
+   "description": "The same example in several languages",
+   "variants": [
+    {
+     "id": "tabs",
+     "name": "Tabs"
+    },
+    {
+     "id": "stacked",
+     "name": "Stacked",
+     "description": "Every language visible, one after another"
+    }
+   ],
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "icon": "file-text",
+     "default": true
+    },
+    {
+     "name": "design",
+     "title": "Design",
+     "icon": "palette"
+    }
+   ],
+   "preview": {
+    "title": "title",
+    "subtitle": "syncKey",
+    "icon": "code"
+   },
+   "fields": [
+    {
+     "name": "title",
+     "title": "Title",
+     "type": "string",
+     "group": "content",
+     "validation": {
+      "max": 60
+     },
+     "placeholder": "Create a journal entry"
+    },
+    {
+     "name": "tabs",
+     "title": "Languages",
+     "type": "array",
+     "group": "content",
+     "itemNoun": "language",
+     "validation": {
+      "min": 1,
+      "max": 8
+     },
+     "of": [
+      {
+       "name": "snippet",
+       "title": "Snippet",
+       "type": "object",
+       "icon": "code",
+       "preview": {
+        "title": "language",
+        "subtitle": "filename"
+       },
+       "fields": [
+        {
+         "name": "language",
+         "title": "Language",
+         "type": "select",
+         "validation": {
+          "required": true
+         },
+         "options": [
+          {
+           "value": "curl",
+           "label": "cURL"
+          },
+          {
+           "value": "javascript",
+           "label": "JavaScript"
+          },
+          {
+           "value": "typescript",
+           "label": "TypeScript"
+          },
+          {
+           "value": "python",
+           "label": "Python"
+          },
+          {
+           "value": "ruby",
+           "label": "Ruby"
+          },
+          {
+           "value": "go",
+           "label": "Go"
+          },
+          {
+           "value": "java",
+           "label": "Java"
+          },
+          {
+           "value": "php",
+           "label": "PHP"
+          },
+          {
+           "value": "json",
+           "label": "JSON"
+          }
+         ]
+        },
+        {
+         "name": "label",
+         "title": "Tab name",
+         "type": "string",
+         "validation": {
+          "max": 16
+         },
+         "description": "Leave empty to use the language name."
+        },
+        {
+         "name": "filename",
+         "title": "File name",
+         "type": "string",
+         "validation": {
+          "max": 40
+         },
+         "placeholder": "create-entry.ts",
+         "description": ""
+        },
+        {
+         "name": "code",
+         "title": "Code",
+         "type": "code",
+         "validation": {
+          "required": true
+         },
+         "openMode": "dialog"
+        },
+        {
+         "name": "highlight",
+         "title": "Highlight lines",
+         "type": "string",
+         "validation": {
+          "pattern": "^\\d+(-\\d+)?(,\\s*\\d+(-\\d+)?)*$",
+          "patternMessage": "Use line numbers like 3, 7-9."
+         },
+         "placeholder": "3, 7-9",
+         "description": ""
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "syncKey",
+     "title": "Switch together",
+     "type": "string",
+     "group": "content",
+     "initialValue": "sdk",
+     "validation": {
+      "pattern": "^[a-z0-9-]+$",
+      "patternMessage": "Lowercase letters, numbers and hyphens only."
+     },
+     "description": "Code tabs with the same key switch language together."
+    },
+    {
+     "name": "showLineNumbers",
+     "title": "Show line numbers",
+     "type": "boolean",
+     "group": "design",
+     "description": ""
+    },
+    {
+     "name": "showCopyButton",
+     "title": "Show copy button",
+     "type": "boolean",
+     "group": "design",
+     "initialValue": true,
+     "description": ""
+    },
+    {
+     "name": "maxHeight",
+     "title": "Max height",
+     "type": "number",
+     "group": "design",
+     "numeric": {
+      "unit": "px",
+      "min": 160,
+      "max": 800,
+      "step": 40
+     },
+     "description": "Longer code scrolls inside the block."
+    }
+   ]
+  },
+  "value": {
+   "_variant": "tabs",
+   "title": "Post a journal entry",
+   "tabs": [
+    {
+     "_key": "l1",
+     "language": "curl",
+     "filename": "",
+     "code": "curl https://api.ledgerline.com/v2/journal-entries \\\n  -H \"Authorization: Bearer $LEDGERLINE_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n    \"date\": \"2026-09-30\",\n    \"lines\": [\n      { \"account\": \"6100\", \"debit\": 1250.00 },\n      { \"account\": \"2000\", \"credit\": 1250.00 }\n    ]\n  }'",
+     "highlight": "5-8"
+    },
+    {
+     "_key": "l2",
+     "language": "typescript",
+     "label": "Node.js",
+     "filename": "post-entry.ts",
+     "code": "import { Ledgerline } from \"@ledgerline/node\";\n\nconst ll = new Ledgerline(process.env.LEDGERLINE_KEY!);\n\nawait ll.journalEntries.create({\n  date: \"2026-09-30\",\n  lines: [\n    { account: \"6100\", debit: 1250 },\n    { account: \"2000\", credit: 1250 },\n  ],\n});",
+     "highlight": "5-11"
+    },
+    {
+     "_key": "l3",
+     "language": "python",
+     "filename": "post_entry.py",
+     "code": "from ledgerline import Ledgerline\n\nll = Ledgerline(os.environ[\"LEDGERLINE_KEY\"])\n\nll.journal_entries.create(\n    date=\"2026-09-30\",\n    lines=[\n        {\"account\": \"6100\", \"debit\": 1250},\n        {\"account\": \"2000\", \"credit\": 1250},\n    ],\n)"
+    }
+   ],
+   "syncKey": "sdk",
+   "showLineNumbers": true,
+   "showCopyButton": true,
+   "maxHeight": 420
+  }
+ },
+ {
+  "id": "kb-article",
+  "name": "Knowledge-base article",
+  "category": "Long-form & docs",
+  "kind": "entry",
+  "brand": "Ledgerline",
+  "previewLayout": "article",
+  "proves": "'Was this helpful?' modelled as settings, not markup \u00b7 'No' path is quick reasons, a form or a contact button \u00b7 review ownership",
+  "schema": {
+   "name": "kbArticle",
+   "title": "Help article",
+   "kind": "entry",
+   "icon": "lifebuoy",
+   "category": "Long-form & docs",
+   "description": "A help-center answer with feedback",
+   "preview": {
+    "title": "title",
+    "subtitle": "category",
+    "icon": "lifebuoy"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "icon": "file-text",
+     "default": true
+    },
+    {
+     "name": "feedback",
+     "title": "Feedback",
+     "icon": "thumb-up"
+    },
+    {
+     "name": "settings",
+     "title": "Settings",
+     "icon": "settings"
+    }
+   ],
+   "fields": [
+    {
+     "name": "title",
+     "title": "Title",
+     "type": "string",
+     "group": "content",
+     "validation": {
+      "required": true,
+      "max": 90
+     },
+     "localized": true
+    },
+    {
+     "name": "slug",
+     "title": "Slug",
+     "type": "slug",
+     "group": "content",
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "category",
+     "title": "Category",
+     "type": "reference",
+     "group": "content",
+     "reference": {
+      "to": [
+       "col_kb_categories"
+      ]
+     },
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "summary",
+     "title": "Short answer",
+     "type": "text",
+     "rows": 2,
+     "group": "content",
+     "validation": {
+      "recommendedMax": 200
+     },
+     "localized": true,
+     "description": "Shown above the steps."
+    },
+    {
+     "name": "body",
+     "title": "Body",
+     "type": "richtext",
+     "group": "content",
+     "validation": {
+      "required": true
+     },
+     "localized": true
+    },
+    {
+     "name": "appliesTo",
+     "title": "Applies to",
+     "type": "multiselect",
+     "group": "content",
+     "options": [
+      {
+       "value": "starter",
+       "label": "Starter"
+      },
+      {
+       "value": "growth",
+       "label": "Growth"
+      },
+      {
+       "value": "scale",
+       "label": "Scale"
+      },
+      {
+       "value": "enterprise",
+       "label": "Enterprise"
+      }
+     ],
+     "description": "Leave empty for every plan."
+    },
+    {
+     "name": "related",
+     "title": "Related articles",
+     "type": "array",
+     "of": [
+      {
+       "name": "related",
+       "title": "Related article",
+       "type": "reference",
+       "reference": {
+        "to": [
+         "col_kb"
+        ]
+       }
+      }
+     ],
+     "group": "content",
+     "validation": {
+      "max": 5,
+      "unique": true
+     }
+    },
+    {
+     "name": "showFeedback",
+     "title": "Ask \"Was this helpful?\"",
+     "type": "boolean",
+     "group": "feedback",
+     "initialValue": true,
+     "description": "Answers are counted in Growth \u203a Analytics."
+    },
+    {
+     "name": "question",
+     "title": "Question",
+     "type": "string",
+     "group": "feedback",
+     "hidden": {
+      "field": "showFeedback",
+      "equals": true
+     },
+     "initialValue": "Was this article helpful?",
+     "validation": {
+      "max": 48
+     },
+     "description": ""
+    },
+    {
+     "name": "thanks",
+     "title": "After Yes",
+     "type": "string",
+     "group": "feedback",
+     "hidden": {
+      "field": "showFeedback",
+      "equals": true
+     },
+     "initialValue": "Thanks \u2014 glad it helped.",
+     "validation": {
+      "max": 80
+     },
+     "description": ""
+    },
+    {
+     "name": "onNo",
+     "title": "After No",
+     "type": "select",
+     "group": "feedback",
+     "layout": "radio",
+     "hidden": {
+      "field": "showFeedback",
+      "equals": true
+     },
+     "initialValue": "reasons",
+     "options": [
+      {
+       "value": "reasons",
+       "label": "Ask why, with quick reasons"
+      },
+      {
+       "value": "form",
+       "label": "Show a form"
+      },
+      {
+       "value": "contact",
+       "label": "Offer to contact support"
+      }
+     ],
+     "description": ""
+    },
+    {
+     "name": "reasons",
+     "title": "Reasons",
+     "type": "array",
+     "itemNoun": "reason",
+     "of": [
+      {
+       "name": "reason",
+       "title": "Reason",
+       "type": "string"
+      }
+     ],
+     "group": "feedback",
+     "hidden": {
+      "field": "onNo",
+      "equals": "reasons"
+     },
+     "validation": {
+      "min": 2,
+      "max": 5
+     }
+    },
+    {
+     "name": "noForm",
+     "title": "Form",
+     "type": "reference",
+     "group": "feedback",
+     "reference": {
+      "to": [
+       "form"
+      ]
+     },
+     "hidden": {
+      "field": "onNo",
+      "equals": "form"
+     },
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "contactButton",
+     "title": "Contact button",
+     "type": "button",
+     "group": "feedback",
+     "hidden": {
+      "field": "onNo",
+      "equals": "contact"
+     }
+    },
+    {
+     "name": "owner",
+     "title": "Owner",
+     "type": "reference",
+     "group": "settings",
+     "reference": {
+      "to": [
+       "col_people"
+      ]
+     },
+     "description": "Gets the \"needs review\" reminder and the No answers."
+    },
+    {
+     "name": "lastReviewed",
+     "title": "Last reviewed",
+     "type": "date",
+     "group": "settings",
+     "validation": {
+      "required": true
+     },
+     "description": "Articles over 6 months old are flagged."
+    },
+    {
+     "name": "internalNotes",
+     "title": "Internal notes",
+     "type": "text",
+     "rows": 3,
+     "group": "settings",
+     "description": "Never shown on the site."
+    }
+   ]
+  },
+  "value": {
+   "title": "Why is my bank feed missing transactions?",
+   "slug": "bank-feed-missing-transactions",
+   "category": "en_kbc_bank-feeds",
+   "summary": "Most gaps are a pending sync or an expired bank login. Reconnect the account and run a 90-day backfill.",
+   "body": "<ol><li>Open <strong>Banking \u203a Connections</strong> and look for a yellow <em>Reconnect</em> badge.</li><li>Click <strong>Reconnect</strong> and sign in to your bank again.</li><li>Choose <strong>Backfill 90 days</strong>. New lines appear within 15 minutes.</li></ol><figure data-rt=\"image\" data-align=\"center\" data-size=\"m\"><img src=\"https://picsum.photos/seed/ledgerline-reconnect/1600/1000\" alt=\"The Connections list with a yellow Reconnect badge on the Chase operating account\"><figcaption>An expired connection shows Reconnect.</figcaption></figure><div data-rt=\"callout\" data-callout=\"info\"><p data-title=\"true\">Pending transactions</p><div data-body=\"true\"><p>Banks send pending card charges only once they settle, usually 1\u20133 business days later.</p></div></div>",
+   "appliesTo": [],
+   "related": [
+    "en_kb_reconnect-bank",
+    "en_kb_duplicate-lines"
+   ],
+   "showFeedback": true,
+   "question": "Was this article helpful?",
+   "thanks": "Thanks \u2014 glad it helped.",
+   "onNo": "reasons",
+   "reasons": [
+    "Steps didn't work",
+    "My bank isn't listed",
+    "Hard to follow",
+    "Not what I was looking for"
+   ],
+   "owner": "en_p_rina-das",
+   "lastReviewed": "2026-08-18",
+   "internalNotes": "Plaid outage on 2026-07-02 caused a spike in tickets; link this article in the macro."
+  }
+ },
+ {
+  "id": "glossary",
+  "name": "Glossary A\u2013Z",
+  "category": "Long-form & docs",
+  "kind": "block",
+  "brand": "Caldera",
+  "previewLayout": "list",
+  "proves": "Terms written here or from a Glossary collection \u00b7 auto letter index \u00b7 aliases and see-also links \u00b7 each term deep-linkable",
+  "schema": {
+   "name": "glossary",
+   "title": "Glossary",
+   "kind": "block",
+   "icon": "abc",
+   "category": "Long-form & docs",
+   "description": "Terms and definitions, A to Z",
+   "variants": [
+    {
+     "id": "list",
+     "name": "List"
+    },
+    {
+     "id": "columns",
+     "name": "Two columns"
+    }
+   ],
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "icon": "file-text",
+     "default": true
+    },
+    {
+     "name": "design",
+     "title": "Design",
+     "icon": "palette"
+    }
+   ],
+   "preview": {
+    "title": "heading",
+    "subtitle": "intro",
+    "icon": "abc"
+   },
+   "fields": [
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "group": "content",
+     "validation": {
+      "required": true,
+      "max": 48
+     },
+     "localized": true
+    },
+    {
+     "name": "intro",
+     "title": "Intro",
+     "type": "text",
+     "rows": 2,
+     "group": "content",
+     "localized": true,
+     "description": ""
+    },
+    {
+     "name": "source",
+     "title": "Terms come from",
+     "type": "select",
+     "group": "content",
+     "layout": "segmented",
+     "initialValue": "inline",
+     "options": [
+      {
+       "value": "inline",
+       "label": "Written here"
+      },
+      {
+       "value": "collection",
+       "label": "Glossary collection"
+      }
+     ]
+    },
+    {
+     "name": "topics",
+     "title": "Only these topics",
+     "type": "array",
+     "of": [
+      {
+       "name": "topic",
+       "title": "Only these topic",
+       "type": "reference",
+       "reference": {
+        "to": [
+         "col_topics"
+        ]
+       }
+      }
+     ],
+     "group": "content",
+     "hidden": {
+      "field": "source",
+      "equals": "collection"
+     },
+     "validation": {
+      "max": 4
+     },
+     "description": "Leave empty for every term."
+    },
+    {
+     "name": "terms",
+     "title": "Terms",
+     "type": "array",
+     "group": "content",
+     "itemNoun": "term",
+     "hidden": {
+      "field": "source",
+      "equals": "inline"
+     },
+     "validation": {
+      "min": 1,
+      "max": 300
+     },
+     "description": "Sorted A to Z on the page.",
+     "of": [
+      {
+       "name": "term",
+       "title": "Term",
+       "type": "object",
+       "icon": "abc",
+       "preview": {
+        "title": "term",
+        "subtitle": "definition",
+        "fallback": "Untitled term"
+       },
+       "fields": [
+        {
+         "name": "term",
+         "title": "Term",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 48,
+          "unique": true
+         },
+         "localized": true
+        },
+        {
+         "name": "anchor",
+         "title": "Anchor",
+         "type": "string",
+         "validation": {
+          "pattern": "^[a-z0-9-]+$",
+          "patternMessage": "Use lowercase letters, numbers and hyphens, like camp-kitchen."
+         },
+         "description": "Made from the term if empty."
+        },
+        {
+         "name": "definition",
+         "title": "Definition",
+         "type": "richtext",
+         "validation": {
+          "required": true
+         },
+         "localized": true
+        },
+        {
+         "name": "aliases",
+         "title": "Also called",
+         "type": "tags",
+         "validation": {
+          "max": 5
+         },
+         "description": "Other names people search for."
+        },
+        {
+         "name": "seeAlso",
+         "title": "See also",
+         "type": "tags",
+         "validation": {
+          "max": 4
+         },
+         "description": "Other terms in this list, spelled exactly as written."
+        },
+        {
+         "name": "link",
+         "title": "Learn more",
+         "type": "link"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "showLetterNav",
+     "title": "Show A to Z bar",
+     "type": "boolean",
+     "group": "design",
+     "initialValue": true
+    },
+    {
+     "name": "isNavSticky",
+     "title": "Keep the A to Z bar in view",
+     "type": "boolean",
+     "group": "design",
+     "hidden": {
+      "field": "showLetterNav",
+      "equals": true
+     },
+     "description": ""
+    },
+    {
+     "name": "showSearch",
+     "title": "Show search box",
+     "type": "boolean",
+     "group": "design",
+     "initialValue": true
+    }
+   ]
+  },
+  "value": {
+   "_variant": "list",
+   "heading": "Fire cooking glossary",
+   "intro": "The words our cooks use, explained without the jargon.",
+   "source": "inline",
+   "topics": [],
+   "terms": [
+    {
+     "_key": "g1",
+     "term": "Bark",
+     "anchor": "bark",
+     "definition": "<p>The dark, crusty outer layer that forms on smoked meat as rub, smoke and rendered fat dry on the surface.</p>",
+     "aliases": [],
+     "seeAlso": [
+      "Maillard reaction",
+      "Stall"
+     ]
+    },
+    {
+     "_key": "g2",
+     "term": "Carryover cooking",
+     "anchor": "carryover",
+     "definition": "<p>The few degrees food keeps rising after it leaves the heat. Pull a steak 3\u20135\u00b0C before your target.</p>",
+     "aliases": [
+      "carry-over"
+     ],
+     "seeAlso": []
+    },
+    {
+     "_key": "g3",
+     "term": "Maillard reaction",
+     "anchor": "maillard",
+     "definition": "<p>The browning of proteins and sugars above about 140\u00b0C that gives seared food its flavour.</p>",
+     "aliases": [
+      "browning",
+      "maillard"
+     ],
+     "seeAlso": [
+      "Bark"
+     ],
+     "link": {
+      "type": "entry",
+      "href": "/journal/why-dry-meat-sears-better",
+      "title": "Why dry meat sears better"
+     }
+    },
+    {
+     "_key": "g4",
+     "term": "Polymerisation",
+     "anchor": "polymerisation",
+     "definition": "<p>What happens when a thin coat of oil is heated past its smoke point and bonds into the hard, slick layer we call seasoning.</p>",
+     "aliases": [
+      "seasoning layer",
+      "polymerization"
+     ],
+     "seeAlso": [],
+     "link": {
+      "type": "entry",
+      "href": "/journal/seasoning-cast-iron-open-fire",
+      "entryId": "en_1",
+      "title": "Seasoning cast iron over an open fire"
+     }
+    },
+    {
+     "_key": "g5",
+     "term": "Stall",
+     "anchor": "stall",
+     "definition": "<p>The long plateau around 65\u201375\u00b0C when a large cut stops rising because evaporation cools its surface.</p>",
+     "aliases": [
+      "the stall",
+      "plateau"
+     ],
+     "seeAlso": [
+      "Bark"
+     ]
+    }
+   ],
+   "showLetterNav": true,
+   "isNavSticky": true,
+   "showSearch": true
+  }
+ },
+ {
+  "id": "recipe",
+  "name": "Recipe",
+  "category": "Long-form & docs",
+  "kind": "entry",
+  "brand": "Caldera",
+  "previewLayout": "article",
+  "proves": "Ingredient groups \u2192 items with amount/unit/prep \u00b7 steps with images and optional timers \u00b7 nutrition \u00b7 Recipe JSON-LD from fields",
+  "schema": {
+   "name": "recipe",
+   "title": "Recipe",
+   "kind": "entry",
+   "icon": "chef-hat",
+   "category": "Long-form & docs",
+   "description": "A recipe with structured ingredients, steps and nutrition",
+   "preview": {
+    "title": "title",
+    "subtitle": "summary",
+    "media": "image"
+   },
+   "groups": [
+    {
+     "name": "overview",
+     "title": "Overview",
+     "icon": "file-text",
+     "default": true
+    },
+    {
+     "name": "ingredients",
+     "title": "Ingredients",
+     "icon": "list"
+    },
+    {
+     "name": "method",
+     "title": "Method",
+     "icon": "list-numbers"
+    },
+    {
+     "name": "nutrition",
+     "title": "Nutrition",
+     "icon": "apple"
+    }
+   ],
+   "fieldsets": [
+    {
+     "name": "times",
+     "title": "Times",
+     "columns": 2
+    },
+    {
+     "name": "yield",
+     "title": "Makes"
+    },
+    {
+     "name": "facts",
+     "title": "Per serving",
+     "columns": 2
+    }
+   ],
+   "fields": [
+    {
+     "name": "title",
+     "title": "Title",
+     "type": "string",
+     "group": "overview",
+     "validation": {
+      "required": true,
+      "max": 80
+     },
+     "localized": true
+    },
+    {
+     "name": "slug",
+     "title": "Slug",
+     "type": "slug",
+     "group": "overview",
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "summary",
+     "title": "Summary",
+     "type": "text",
+     "rows": 2,
+     "group": "overview",
+     "validation": {
+      "required": true,
+      "recommendedMax": 160
+     },
+     "localized": true
+    },
+    {
+     "name": "image",
+     "title": "Image",
+     "type": "image",
+     "group": "overview",
+     "validation": {
+      "required": true
+     },
+     "description": "1600 \u00d7 1200 or larger. Google shows it in recipe results."
+    },
+    {
+     "name": "video",
+     "title": "Video",
+     "type": "video",
+     "group": "overview"
+    },
+    {
+     "name": "authors",
+     "title": "Authors",
+     "type": "array",
+     "of": [
+      {
+       "name": "author",
+       "title": "Author",
+       "type": "reference",
+       "reference": {
+        "to": [
+         "col_authors"
+        ]
+       }
+      }
+     ],
+     "group": "overview",
+     "validation": {
+      "min": 1,
+      "max": 2
+     }
+    },
+    {
+     "name": "course",
+     "title": "Course",
+     "type": "select",
+     "group": "overview",
+     "validation": {
+      "required": true
+     },
+     "options": [
+      {
+       "value": "breakfast",
+       "label": "Breakfast"
+      },
+      {
+       "value": "main",
+       "label": "Main"
+      },
+      {
+       "value": "side",
+       "label": "Side"
+      },
+      {
+       "value": "bread",
+       "label": "Bread"
+      },
+      {
+       "value": "dessert",
+       "label": "Dessert"
+      }
+     ],
+     "description": ""
+    },
+    {
+     "name": "methods",
+     "title": "Cooked on",
+     "type": "multiselect",
+     "group": "overview",
+     "options": [
+      {
+       "value": "campfire",
+       "label": "Campfire"
+      },
+      {
+       "value": "coals",
+       "label": "Coals"
+      },
+      {
+       "value": "grill",
+       "label": "Grill"
+      },
+      {
+       "value": "stove",
+       "label": "Stovetop"
+      },
+      {
+       "value": "oven",
+       "label": "Oven"
+      }
+     ]
+    },
+    {
+     "name": "difficulty",
+     "title": "Difficulty",
+     "type": "select",
+     "group": "overview",
+     "layout": "segmented",
+     "options": [
+      {
+       "value": "easy",
+       "label": "Easy"
+      },
+      {
+       "value": "medium",
+       "label": "Medium"
+      },
+      {
+       "value": "hard",
+       "label": "Hard"
+      }
+     ],
+     "description": ""
+    },
+    {
+     "name": "dietary",
+     "title": "Dietary",
+     "type": "multiselect",
+     "group": "overview",
+     "options": [
+      {
+       "value": "vegetarian",
+       "label": "Vegetarian"
+      },
+      {
+       "value": "vegan",
+       "label": "Vegan"
+      },
+      {
+       "value": "gluten-free",
+       "label": "Gluten-free"
+      },
+      {
+       "value": "dairy-free",
+       "label": "Dairy-free"
+      }
+     ]
+    },
+    {
+     "name": "prepMinutes",
+     "title": "Prep",
+     "type": "number",
+     "group": "overview",
+     "fieldset": "times",
+     "numeric": {
+      "unit": "min",
+      "min": 0,
+      "step": 5
+     },
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "cookMinutes",
+     "title": "Cook",
+     "type": "number",
+     "group": "overview",
+     "fieldset": "times",
+     "numeric": {
+      "unit": "min",
+      "min": 0,
+      "step": 5
+     },
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "restMinutes",
+     "title": "Rest",
+     "type": "number",
+     "group": "overview",
+     "fieldset": "times",
+     "numeric": {
+      "unit": "min",
+      "min": 0,
+      "step": 5
+     },
+     "description": "In minutes. Counts toward the total."
+    },
+    {
+     "name": "totalMinutes",
+     "title": "Total",
+     "type": "number",
+     "group": "overview",
+     "fieldset": "times",
+     "readOnly": true,
+     "numeric": {
+      "unit": "min"
+     },
+     "description": "In minutes: prep + cook + rest."
+    },
+    {
+     "name": "servings",
+     "title": "Servings",
+     "type": "number",
+     "group": "overview",
+     "fieldset": "yield",
+     "numeric": {
+      "min": 1,
+      "max": 40,
+      "step": 1
+     },
+     "validation": {
+      "required": true
+     },
+     "description": "Readers can scale amounts from this."
+    },
+    {
+     "name": "yieldLabel",
+     "title": "Yield",
+     "type": "string",
+     "group": "overview",
+     "fieldset": "yield",
+     "validation": {
+      "max": 32
+     },
+     "placeholder": "one 10-inch skillet",
+     "description": "Shown instead of \"Serves 8\"."
+    },
+    {
+     "name": "equipment",
+     "title": "Cooked in",
+     "type": "array",
+     "of": [
+      {
+       "name": "equipment",
+       "title": "Cooked in",
+       "type": "reference",
+       "reference": {
+        "to": [
+         "shopify"
+        ]
+       }
+      }
+     ],
+     "group": "overview",
+     "validation": {
+      "max": 4
+     },
+     "description": "Caldera gear used. Shown with a link to each product."
+    },
+    {
+     "name": "ingredientGroups",
+     "title": "Ingredients",
+     "type": "array",
+     "group": "ingredients",
+     "itemNoun": "group",
+     "validation": {
+      "min": 1,
+      "max": 8
+     },
+     "of": [
+      {
+       "name": "ingredientGroup",
+       "title": "Group",
+       "type": "object",
+       "icon": "list",
+       "preview": {
+        "title": "title",
+        "fallback": "Untitled ingredient group"
+       },
+       "fields": [
+        {
+         "name": "title",
+         "title": "Group name",
+         "type": "string",
+         "validation": {
+          "max": 40
+         },
+         "placeholder": "For the glaze",
+         "description": "Leave empty for a single list."
+        },
+        {
+         "name": "items",
+         "title": "Items",
+         "type": "array",
+         "itemNoun": "ingredient",
+         "validation": {
+          "min": 1,
+          "max": 30
+         },
+         "of": [
+          {
+           "name": "ingredient",
+           "title": "Ingredient",
+           "type": "object",
+           "icon": "point",
+           "preview": {
+            "title": "name",
+            "subtitle": "amount",
+            "fallback": "Untitled ingredient"
+           },
+           "fields": [
+            {
+             "name": "amount",
+             "title": "Amount",
+             "type": "number",
+             "numeric": {
+              "min": 0,
+              "step": 0.25
+             },
+             "description": "Leave empty for \"to taste\"."
+            },
+            {
+             "name": "amountMax",
+             "title": "Up to",
+             "type": "number",
+             "numeric": {
+              "min": 0,
+              "step": 0.25
+             },
+             "hidden": {
+              "field": "amount",
+              "notEmpty": true
+             },
+             "description": "For ranges like 2\u20133 cloves."
+            },
+            {
+             "name": "unit",
+             "title": "Unit",
+             "type": "select",
+             "initialValue": "",
+             "options": [
+              {
+               "value": "",
+               "label": "None"
+              },
+              {
+               "value": "g",
+               "label": "g"
+              },
+              {
+               "value": "kg",
+               "label": "kg"
+              },
+              {
+               "value": "ml",
+               "label": "ml"
+              },
+              {
+               "value": "l",
+               "label": "l"
+              },
+              {
+               "value": "tsp",
+               "label": "tsp"
+              },
+              {
+               "value": "tbsp",
+               "label": "tbsp"
+              },
+              {
+               "value": "cup",
+               "label": "cup"
+              },
+              {
+               "value": "oz",
+               "label": "oz"
+              },
+              {
+               "value": "lb",
+               "label": "lb"
+              },
+              {
+               "value": "clove",
+               "label": "clove"
+              },
+              {
+               "value": "pinch",
+               "label": "pinch"
+              }
+             ],
+             "description": "Converts for readers who switch between metric and imperial."
+            },
+            {
+             "name": "name",
+             "title": "Ingredient",
+             "type": "string",
+             "validation": {
+              "required": true,
+              "max": 60
+             },
+             "localized": true
+            },
+            {
+             "name": "prep",
+             "title": "Prep",
+             "type": "string",
+             "validation": {
+              "max": 40
+             },
+             "placeholder": "melted and cooled",
+             "localized": true,
+             "description": ""
+            },
+            {
+             "name": "isOptional",
+             "title": "Optional",
+             "type": "boolean",
+             "description": ""
+            },
+            {
+             "name": "product",
+             "title": "Shop link",
+             "type": "reference",
+             "reference": {
+              "to": [
+               "shopify"
+              ]
+             },
+             "advanced": true,
+             "description": "Caldera pantry items only."
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "steps",
+     "title": "Steps",
+     "type": "array",
+     "group": "method",
+     "itemNoun": "step",
+     "validation": {
+      "min": 1,
+      "max": 20
+     },
+     "of": [
+      {
+       "name": "step",
+       "title": "Step",
+       "type": "object",
+       "icon": "list-numbers",
+       "preview": {
+        "title": "title",
+        "subtitle": "instruction",
+        "media": "image",
+        "fallback": "Untitled step"
+       },
+       "fields": [
+        {
+         "name": "title",
+         "title": "Short name",
+         "type": "string",
+         "validation": {
+          "max": 40
+         }
+        },
+        {
+         "name": "instruction",
+         "title": "Instruction",
+         "type": "richtext",
+         "validation": {
+          "required": true
+         },
+         "localized": true
+        },
+        {
+         "name": "image",
+         "title": "Image",
+         "type": "image"
+        },
+        {
+         "name": "hasTimer",
+         "title": "Add a timer",
+         "type": "boolean"
+        },
+        {
+         "name": "timerMinutes",
+         "title": "Timer",
+         "type": "number",
+         "hidden": {
+          "field": "hasTimer",
+          "equals": true
+         },
+         "numeric": {
+          "unit": "min",
+          "min": 1,
+          "max": 720,
+          "step": 1
+         },
+         "validation": {
+          "required": true
+         },
+         "description": ""
+        },
+        {
+         "name": "timerLabel",
+         "title": "Timer label",
+         "type": "string",
+         "hidden": {
+          "field": "hasTimer",
+          "equals": true
+         },
+         "validation": {
+          "max": 20
+         },
+         "placeholder": "Bake",
+         "description": ""
+        },
+        {
+         "name": "tip",
+         "title": "Tip",
+         "type": "text",
+         "rows": 2,
+         "validation": {
+          "max": 200
+         },
+         "description": "Shown as a note under the step."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "notes",
+     "title": "Cook's notes",
+     "type": "richtext",
+     "group": "method"
+    },
+    {
+     "name": "showNutrition",
+     "title": "Show nutrition",
+     "type": "boolean",
+     "group": "nutrition",
+     "initialValue": true,
+     "description": "Shown as estimates, with a disclaimer."
+    },
+    {
+     "name": "calories",
+     "title": "Calories",
+     "type": "number",
+     "group": "nutrition",
+     "fieldset": "facts",
+     "numeric": {
+      "unit": "kcal",
+      "min": 0
+     },
+     "hidden": {
+      "field": "showNutrition",
+      "equals": true
+     }
+    },
+    {
+     "name": "protein",
+     "title": "Protein",
+     "type": "number",
+     "group": "nutrition",
+     "fieldset": "facts",
+     "numeric": {
+      "unit": "g",
+      "min": 0
+     },
+     "hidden": {
+      "field": "showNutrition",
+      "equals": true
+     }
+    },
+    {
+     "name": "fat",
+     "title": "Fat",
+     "type": "number",
+     "group": "nutrition",
+     "fieldset": "facts",
+     "numeric": {
+      "unit": "g",
+      "min": 0
+     },
+     "hidden": {
+      "field": "showNutrition",
+      "equals": true
+     }
+    },
+    {
+     "name": "carbs",
+     "title": "Carbohydrates",
+     "type": "number",
+     "group": "nutrition",
+     "fieldset": "facts",
+     "numeric": {
+      "unit": "g",
+      "min": 0
+     },
+     "hidden": {
+      "field": "showNutrition",
+      "equals": true
+     }
+    },
+    {
+     "name": "fiber",
+     "title": "Fibre",
+     "type": "number",
+     "group": "nutrition",
+     "fieldset": "facts",
+     "numeric": {
+      "unit": "g",
+      "min": 0
+     },
+     "hidden": {
+      "field": "showNutrition",
+      "equals": true
+     }
+    },
+    {
+     "name": "sodium",
+     "title": "Sodium",
+     "type": "number",
+     "group": "nutrition",
+     "fieldset": "facts",
+     "numeric": {
+      "unit": "mg",
+      "min": 0
+     },
+     "hidden": {
+      "field": "showNutrition",
+      "equals": true
+     }
+    },
+    {
+     "name": "rating",
+     "title": "Reader rating",
+     "type": "rating",
+     "group": "nutrition",
+     "readOnly": true,
+     "description": "Average of reader ratings. Not editable."
+    }
+   ]
+  },
+  "value": {
+   "title": "Cast-iron skillet cornbread",
+   "slug": "cast-iron-skillet-cornbread",
+   "summary": "Crisp-edged, barely sweet cornbread baked in a screaming-hot skillet over coals \u2014 or in the oven at home.",
+   "image": {
+    "url": "https://picsum.photos/seed/skillet-cornbread/1600/1200",
+    "alt": "A golden cornbread in a 10-inch cast iron skillet, one wedge cut out",
+    "name": "skillet-cornbread.jpg",
+    "width": 3200,
+    "height": 2400
+   },
+   "video": {
+    "url": "https://www.youtube.com/watch?v=3n1u3pTw1kM"
+   },
+   "authors": [
+    "en_a1"
+   ],
+   "course": "bread",
+   "methods": [
+    "coals",
+    "oven"
+   ],
+   "difficulty": "easy",
+   "dietary": [
+    "vegetarian"
+   ],
+   "prepMinutes": 10,
+   "cookMinutes": 25,
+   "restMinutes": 10,
+   "totalMinutes": 45,
+   "servings": 8,
+   "yieldLabel": "one 10-inch skillet",
+   "equipment": [
+    "gid://shopify/Product/8814"
+   ],
+   "ingredientGroups": [
+    {
+     "_key": "ig1",
+     "title": "",
+     "items": [
+      {
+       "_key": "i1",
+       "amount": 240,
+       "unit": "g",
+       "name": "medium-grind cornmeal"
+      },
+      {
+       "_key": "i2",
+       "amount": 125,
+       "unit": "g",
+       "name": "plain flour"
+      },
+      {
+       "_key": "i3",
+       "amount": 2,
+       "unit": "tsp",
+       "name": "baking powder"
+      },
+      {
+       "_key": "i4",
+       "amount": 1,
+       "unit": "tsp",
+       "name": "fine salt"
+      },
+      {
+       "_key": "i5",
+       "amount": 2,
+       "unit": "tbsp",
+       "name": "honey"
+      },
+      {
+       "_key": "i6",
+       "amount": 480,
+       "unit": "ml",
+       "name": "buttermilk"
+      },
+      {
+       "_key": "i7",
+       "amount": 2,
+       "unit": "",
+       "name": "eggs",
+       "prep": "beaten"
+      },
+      {
+       "_key": "i8",
+       "amount": 60,
+       "unit": "g",
+       "name": "butter",
+       "prep": "melted, plus 1 tbsp for the pan"
+      }
+     ]
+    },
+    {
+     "_key": "ig2",
+     "title": "To serve",
+     "items": [
+      {
+       "_key": "i9",
+       "amount": 2,
+       "unit": "tbsp",
+       "name": "hot honey",
+       "isOptional": true
+      },
+      {
+       "_key": "i10",
+       "unit": "",
+       "name": "flaky salt",
+       "prep": "to taste"
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "_key": "s1",
+     "title": "Heat the pan",
+     "instruction": "<p>Set the skillet over medium coals or in a <strong>220\u00b0C</strong> oven with 1 tbsp butter inside for <strong>10 minutes</strong>.</p>",
+     "hasTimer": true,
+     "timerMinutes": 10,
+     "timerLabel": "Preheat",
+     "image": {
+      "url": "https://picsum.photos/seed/cornbread-pan-heat/1200/900",
+      "alt": "Butter foaming in a hot cast iron skillet",
+      "name": "cornbread-pan-heat.jpg",
+      "width": 2400,
+      "height": 1800
+     }
+    },
+    {
+     "_key": "s2",
+     "title": "Mix",
+     "instruction": "<p>Whisk the dry ingredients. Stir in the honey, buttermilk, eggs and melted butter until just combined \u2014 lumps are fine.</p>"
+    },
+    {
+     "_key": "s3",
+     "title": "Bake",
+     "instruction": "<p>Pour the batter into the sizzling pan. Cover with the lid and pile coals on top, or bake uncovered in the oven, for <strong>25 minutes</strong>.</p>",
+     "hasTimer": true,
+     "timerMinutes": 25,
+     "timerLabel": "Bake",
+     "tip": "It's done when a skewer comes out clean and the edges pull away from the pan."
+    },
+    {
+     "_key": "s4",
+     "title": "Rest",
+     "instruction": "<p>Rest 10 minutes in the pan so it slices cleanly. Drizzle with hot honey and flaky salt.</p>",
+     "hasTimer": true,
+     "timerMinutes": 10,
+     "timerLabel": "Rest"
+    }
+   ],
+   "notes": "<p><strong>No buttermilk?</strong> Stir 1 tbsp lemon juice into 480 ml milk and wait 5 minutes.</p><p>Keeps two days wrapped. Reheat wedges cut-side down in a dry skillet.</p>",
+   "showNutrition": true,
+   "calories": 290,
+   "protein": 7,
+   "fat": 10,
+   "carbs": 43,
+   "fiber": 2,
+   "sodium": 420,
+   "rating": 4.8
+  }
+ },
+ {
+  "id": "course-curriculum",
+  "name": "Course curriculum",
+  "category": "Long-form & docs",
+  "kind": "block",
+  "brand": "Kestrel Academy",
+  "previewLayout": "accordion",
+  "proves": "Modules \u2192 lessons \u2192 resources \u2192 file (4 drill levels) \u00b7 lesson type reveals video / reading / quiz / live fields \u00b7 free previews",
+  "schema": {
+   "name": "curriculum",
+   "title": "Course curriculum",
+   "kind": "block",
+   "icon": "school",
+   "category": "Long-form & docs",
+   "description": "Modules and lessons, with free previews and resources",
+   "variants": [
+    {
+     "id": "accordion",
+     "name": "Accordion"
+    },
+    {
+     "id": "timeline",
+     "name": "Week by week"
+    }
+   ],
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "icon": "file-text",
+     "default": true
+    },
+    {
+     "name": "design",
+     "title": "Design",
+     "icon": "palette"
+    }
+   ],
+   "preview": {
+    "title": "heading",
+    "subtitle": "course",
+    "icon": "school"
+   },
+   "fields": [
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "group": "content",
+     "initialValue": "What you'll learn",
+     "validation": {
+      "max": 48
+     },
+     "localized": true
+    },
+    {
+     "name": "course",
+     "title": "Course",
+     "type": "reference",
+     "group": "content",
+     "reference": {
+      "to": [
+       "col_courses"
+      ]
+     },
+     "validation": {
+      "required": true
+     },
+     "description": "Totals, enrolment and the course page come from here."
+    },
+    {
+     "name": "modules",
+     "title": "Modules",
+     "type": "array",
+     "group": "content",
+     "itemNoun": "module",
+     "validation": {
+      "min": 1,
+      "max": 16
+     },
+     "of": [
+      {
+       "name": "module",
+       "title": "Module",
+       "type": "object",
+       "icon": "folder",
+       "preview": {
+        "title": "title",
+        "subtitle": "summary",
+        "fallback": "Untitled module"
+       },
+       "fields": [
+        {
+         "name": "title",
+         "title": "Title",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 60
+         },
+         "localized": true
+        },
+        {
+         "name": "summary",
+         "title": "Summary",
+         "type": "text",
+         "rows": 2,
+         "validation": {
+          "recommendedMax": 200
+         },
+         "localized": true
+        },
+        {
+         "name": "unlock",
+         "title": "Opens",
+         "type": "select",
+         "layout": "segmented",
+         "initialValue": "now",
+         "options": [
+          {
+           "value": "now",
+           "label": "At enrolment"
+          },
+          {
+           "value": "previous",
+           "label": "After the last module"
+          },
+          {
+           "value": "date",
+           "label": "On a date"
+          }
+         ],
+         "description": ""
+        },
+        {
+         "name": "unlockDate",
+         "title": "Opens on",
+         "type": "date",
+         "hidden": {
+          "field": "unlock",
+          "equals": "date"
+         },
+         "validation": {
+          "required": true
+         }
+        },
+        {
+         "name": "lessons",
+         "title": "Lessons",
+         "type": "array",
+         "itemNoun": "lesson",
+         "validation": {
+          "min": 1,
+          "max": 20
+         },
+         "of": [
+          {
+           "name": "lesson",
+           "title": "Lesson",
+           "type": "object",
+           "icon": "player-play",
+           "preview": {
+            "title": "title",
+            "subtitle": "type",
+            "fallback": "Untitled lesson"
+           },
+           "fields": [
+            {
+             "name": "title",
+             "title": "Title",
+             "type": "string",
+             "validation": {
+              "required": true,
+              "max": 80
+             },
+             "localized": true
+            },
+            {
+             "name": "type",
+             "title": "Type",
+             "type": "select",
+             "layout": "segmented",
+             "validation": {
+              "required": true
+             },
+             "initialValue": "video",
+             "options": [
+              {
+               "value": "video",
+               "label": "Video",
+               "icon": "player-play"
+              },
+              {
+               "value": "reading",
+               "label": "Reading",
+               "icon": "file-text"
+              },
+              {
+               "value": "quiz",
+               "label": "Quiz",
+               "icon": "checklist"
+              },
+              {
+               "value": "assignment",
+               "label": "Assignment",
+               "icon": "pencil"
+              },
+              {
+               "value": "live",
+               "label": "Live",
+               "icon": "broadcast"
+              }
+             ],
+             "description": ""
+            },
+            {
+             "name": "minutes",
+             "title": "Length",
+             "type": "number",
+             "numeric": {
+              "unit": "min",
+              "min": 1,
+              "max": 240,
+              "step": 1
+             },
+             "validation": {
+              "required": true
+             },
+             "description": "In minutes. Adds up to the module and course totals."
+            },
+            {
+             "name": "video",
+             "title": "Video",
+             "type": "video",
+             "hidden": {
+              "field": "type",
+              "equals": "video"
+             },
+             "validation": {
+              "required": true
+             }
+            },
+            {
+             "name": "captions",
+             "title": "Captions",
+             "type": "file",
+             "hidden": {
+              "field": "type",
+              "equals": "video"
+             },
+             "description": "A .vtt file. Required on every video lesson."
+            },
+            {
+             "name": "reading",
+             "title": "Reading",
+             "type": "richtext",
+             "hidden": {
+              "field": "type",
+              "equals": [
+               "reading",
+               "assignment"
+              ]
+             },
+             "validation": {
+              "required": true
+             }
+            },
+            {
+             "name": "quiz",
+             "title": "Quiz",
+             "type": "reference",
+             "reference": {
+              "to": [
+               "col_quizzes"
+              ]
+             },
+             "hidden": {
+              "field": "type",
+              "equals": "quiz"
+             },
+             "validation": {
+              "required": true
+             }
+            },
+            {
+             "name": "liveAt",
+             "title": "Starts",
+             "type": "datetime",
+             "hidden": {
+              "field": "type",
+              "equals": "live"
+             },
+             "validation": {
+              "required": true
+             },
+             "description": "Shown in each student's own time zone."
+            },
+            {
+             "name": "isFreePreview",
+             "title": "Free preview",
+             "type": "boolean",
+             "description": "Visitors can open it before enrolling."
+            },
+            {
+             "name": "resources",
+             "title": "Resources",
+             "type": "array",
+             "itemNoun": "resource",
+             "openMode": "inline",
+             "validation": {
+              "max": 8
+             },
+             "of": [
+              {
+               "name": "resource",
+               "title": "Resource",
+               "type": "object",
+               "icon": "paperclip",
+               "preview": {
+                "title": "label",
+                "subtitle": "kind"
+               },
+               "fields": [
+                {
+                 "name": "label",
+                 "title": "Label",
+                 "type": "string",
+                 "validation": {
+                  "required": true,
+                  "max": 48
+                 }
+                },
+                {
+                 "name": "kind",
+                 "title": "Kind",
+                 "type": "select",
+                 "layout": "segmented",
+                 "initialValue": "file",
+                 "options": [
+                  {
+                   "value": "file",
+                   "label": "File"
+                  },
+                  {
+                   "value": "link",
+                   "label": "Link"
+                  }
+                 ],
+                 "description": ""
+                },
+                {
+                 "name": "file",
+                 "title": "File",
+                 "type": "file",
+                 "hidden": {
+                  "field": "kind",
+                  "equals": "file"
+                 },
+                 "validation": {
+                  "required": true
+                 }
+                },
+                {
+                 "name": "link",
+                 "title": "Link",
+                 "type": "link",
+                 "hidden": {
+                  "field": "kind",
+                  "equals": "link"
+                 },
+                 "validation": {
+                  "required": true
+                 }
+                }
+               ]
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "isFirstOpen",
+     "title": "Open the first module",
+     "type": "boolean",
+     "group": "design",
+     "initialValue": true,
+     "description": ""
+    },
+    {
+     "name": "showLengths",
+     "title": "Show lengths",
+     "type": "boolean",
+     "group": "design",
+     "initialValue": true
+    },
+    {
+     "name": "showNumbers",
+     "title": "Number lessons",
+     "type": "boolean",
+     "group": "design",
+     "initialValue": true,
+     "description": "1.1, 1.2 \u2026 restarting each module."
+    }
+   ]
+  },
+  "value": {
+   "_variant": "accordion",
+   "heading": "What you'll learn",
+   "course": "en_course_brand-identity-systems",
+   "modules": [
+    {
+     "_key": "m1",
+     "title": "Foundations of identity",
+     "summary": "Read a brief, audit an existing identity and write a positioning line the system can grow from.",
+     "unlock": "now",
+     "lessons": [
+      {
+       "_key": "l1",
+       "title": "What an identity system actually is",
+       "type": "video",
+       "minutes": 12,
+       "video": {
+        "url": "https://vimeo.com/912345678"
+       },
+       "captions": {
+        "url": "https://kestrel.academy/media/captions/bis-1-1.vtt",
+        "name": "bis-1-1.vtt",
+        "size": 18432
+       },
+       "isFreePreview": true,
+       "resources": [
+        {
+         "_key": "r1",
+         "label": "Slides (PDF)",
+         "kind": "file",
+         "file": {
+          "url": "https://kestrel.academy/media/bis-1-1-slides.pdf",
+          "name": "bis-1-1-slides.pdf",
+          "size": 4194304
+         }
+        }
+       ]
+      },
+      {
+       "_key": "l2",
+       "title": "Auditing an existing brand",
+       "type": "reading",
+       "minutes": 20,
+       "reading": "<p>Before you design anything, inventory what's already out there: every logo lock-up, colour, typeface and template in use.</p>",
+       "resources": [
+        {
+         "_key": "r2",
+         "label": "Audit spreadsheet",
+         "kind": "link",
+         "link": {
+          "type": "url",
+          "href": "https://docs.google.com/spreadsheets/d/1kestrel-audit-template/copy",
+          "newTab": true
+         }
+        }
+       ]
+      },
+      {
+       "_key": "l3",
+       "title": "Check your understanding",
+       "type": "quiz",
+       "minutes": 8,
+       "quiz": "en_quiz_bis-m1"
+      }
+     ]
+    },
+    {
+     "_key": "m2",
+     "title": "Marks, type and colour",
+     "summary": "Build a logo suite, pair typefaces with a reason, and make a colour system that passes contrast.",
+     "unlock": "previous",
+     "lessons": [
+      {
+       "_key": "l4",
+       "title": "Designing a flexible logo suite",
+       "type": "video",
+       "minutes": 26,
+       "video": {
+        "url": "https://vimeo.com/912345690"
+       },
+       "resources": []
+      },
+      {
+       "_key": "l5",
+       "title": "Critique with Ana Kova\u010d",
+       "type": "live",
+       "minutes": 60,
+       "liveAt": "2026-11-12T17:00:00+00:00[Europe/London]",
+       "resources": []
+      },
+      {
+       "_key": "l6",
+       "title": "Assignment: a three-colour system",
+       "type": "assignment",
+       "minutes": 90,
+       "reading": "<p>Build primary, secondary and neutral ramps. Every text pairing must reach 4.5:1.</p>",
+       "resources": [
+        {
+         "_key": "r3",
+         "label": "Figma starter file",
+         "kind": "link",
+         "link": {
+          "type": "url",
+          "href": "https://www.figma.com/community/file/1300000000000000001",
+          "newTab": true
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "isFirstOpen": true,
+   "showLengths": true,
+   "showNumbers": true
+  }
+ },
+ {
+  "id": "legal-policy",
+  "name": "Legal / policy page",
+  "category": "Long-form & docs",
+  "kind": "page",
+  "brand": "Caldera",
+  "previewLayout": "article",
+  "proves": "Numbered sections \u2192 clauses with optional plain-English summaries \u00b7 effective date + version history with archived copies",
+  "schema": {
+   "name": "policyPage",
+   "title": "Policy page",
+   "kind": "page",
+   "icon": "scale",
+   "category": "Long-form & docs",
+   "description": "Terms, privacy, warranty or returns, numbered and versioned",
+   "preview": {
+    "title": "title",
+    "subtitle": "version",
+    "icon": "scale"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "icon": "file-text",
+     "default": true
+    },
+    {
+     "name": "versions",
+     "title": "Versions",
+     "icon": "history"
+    },
+    {
+     "name": "settings",
+     "title": "Settings",
+     "icon": "settings"
+    }
+   ],
+   "fieldsets": [
+    {
+     "name": "dates",
+     "title": "Dates"
+    }
+   ],
+   "fields": [
+    {
+     "name": "title",
+     "title": "Title",
+     "type": "string",
+     "group": "content",
+     "validation": {
+      "required": true,
+      "max": 60
+     },
+     "localized": true
+    },
+    {
+     "name": "slug",
+     "title": "Slug",
+     "type": "slug",
+     "group": "content",
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "policyType",
+     "title": "Policy",
+     "type": "select",
+     "group": "content",
+     "access": {
+      "edit": "schema.manage"
+     },
+     "lockReason": "Set by the developer. Footer and checkout links depend on it.",
+     "options": [
+      {
+       "value": "terms",
+       "label": "Terms of service"
+      },
+      {
+       "value": "privacy",
+       "label": "Privacy"
+      },
+      {
+       "value": "cookies",
+       "label": "Cookies"
+      },
+      {
+       "value": "returns",
+       "label": "Returns"
+      },
+      {
+       "value": "warranty",
+       "label": "Warranty"
+      },
+      {
+       "value": "accessibility",
+       "label": "Accessibility"
+      }
+     ],
+     "description": "Footer and checkout links use this."
+    },
+    {
+     "name": "effectiveDate",
+     "title": "Effective from",
+     "type": "date",
+     "group": "content",
+     "fieldset": "dates",
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "version",
+     "title": "Version",
+     "type": "string",
+     "group": "content",
+     "fieldset": "dates",
+     "validation": {
+      "required": true,
+      "pattern": "^\\d+\\.\\d+$",
+      "patternMessage": "Use a version like 2.1."
+     },
+     "description": "Bump the first number for material changes."
+    },
+    {
+     "name": "summary",
+     "title": "In short",
+     "type": "richtext",
+     "group": "content",
+     "localized": true
+    },
+    {
+     "name": "sections",
+     "title": "Sections",
+     "type": "array",
+     "group": "content",
+     "itemNoun": "section",
+     "validation": {
+      "min": 1,
+      "max": 40
+     },
+     "description": "Numbered automatically in this order.",
+     "of": [
+      {
+       "name": "section",
+       "title": "Section",
+       "type": "object",
+       "icon": "section",
+       "preview": {
+        "title": "heading",
+        "subtitle": "anchor",
+        "fallback": "Untitled section"
+       },
+       "fields": [
+        {
+         "name": "heading",
+         "title": "Heading",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 80
+         },
+         "localized": true
+        },
+        {
+         "name": "anchor",
+         "title": "Anchor",
+         "type": "string",
+         "validation": {
+          "pattern": "^[a-z0-9-]+$",
+          "patternMessage": "Use lowercase letters, numbers and hyphens, like camp-kitchen."
+         },
+         "description": "Changing it once live breaks existing links."
+        },
+        {
+         "name": "clauses",
+         "title": "Clauses",
+         "type": "array",
+         "itemNoun": "clause",
+         "validation": {
+          "min": 1,
+          "max": 30
+         },
+         "of": [
+          {
+           "name": "clause",
+           "title": "Clause",
+           "type": "object",
+           "icon": "align-left",
+           "preview": {
+            "title": "heading",
+            "subtitle": "body",
+            "fallback": "Untitled clause"
+           },
+           "fields": [
+            {
+             "name": "heading",
+             "title": "Heading",
+             "type": "string",
+             "validation": {
+              "max": 80
+             },
+             "localized": true
+            },
+            {
+             "name": "body",
+             "title": "Body",
+             "type": "richtext",
+             "validation": {
+              "required": true
+             },
+             "localized": true
+            },
+            {
+             "name": "hasSummary",
+             "title": "Add a plain-English note",
+             "type": "boolean"
+            },
+            {
+             "name": "plain",
+             "title": "Plain-English note",
+             "type": "text",
+             "rows": 2,
+             "hidden": {
+              "field": "hasSummary",
+              "equals": true
+             },
+             "validation": {
+              "required": true,
+              "max": 240
+             },
+             "localized": true,
+             "description": ""
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "contactEmail",
+     "title": "Questions go to",
+     "type": "email",
+     "group": "content",
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "versions",
+     "title": "Version history",
+     "type": "array",
+     "group": "versions",
+     "itemNoun": "version",
+     "validation": {
+      "max": 30
+     },
+     "of": [
+      {
+       "name": "pastVersion",
+       "title": "Past version",
+       "type": "object",
+       "icon": "history",
+       "preview": {
+        "title": "version",
+        "subtitle": "effectiveDate"
+       },
+       "fields": [
+        {
+         "name": "version",
+         "title": "Version",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "pattern": "^\\d+\\.\\d+$",
+          "patternMessage": "Use a version like 2.1."
+         }
+        },
+        {
+         "name": "effectiveDate",
+         "title": "Effective from",
+         "type": "date",
+         "validation": {
+          "required": true
+         }
+        },
+        {
+         "name": "changes",
+         "title": "What changed",
+         "type": "text",
+         "rows": 2,
+         "validation": {
+          "required": true,
+          "max": 300
+         }
+        },
+        {
+         "name": "archive",
+         "title": "Archived copy",
+         "type": "file",
+         "description": "A PDF of the full text as it stood."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "numbering",
+     "title": "Numbering",
+     "type": "select",
+     "group": "settings",
+     "layout": "segmented",
+     "initialValue": "decimal",
+     "options": [
+      {
+       "value": "decimal",
+       "label": "1. 1.1"
+      },
+      {
+       "value": "roman",
+       "label": "I, A"
+      },
+      {
+       "value": "none",
+       "label": "None"
+      }
+     ],
+     "description": ""
+    },
+    {
+     "name": "showContents",
+     "title": "Show table of contents",
+     "type": "boolean",
+     "group": "settings",
+     "initialValue": true
+    },
+    {
+     "name": "showChangeBanner",
+     "title": "Show a banner when it changes",
+     "type": "boolean",
+     "group": "settings",
+     "description": "Shows a site banner for 30 days after a new effective date."
+    }
+   ]
+  },
+  "value": {
+   "title": "Warranty & returns",
+   "slug": "warranty-returns",
+   "policyType": "warranty",
+   "effectiveDate": "2026-10-01",
+   "version": "3.0",
+   "summary": "<p>Cast iron and carbon steel are covered for life against cracks, warps and failed welds. Unused items can come back within 60 days for a full refund. Seasoning wear isn't a defect.</p>",
+   "sections": [
+    {
+     "_key": "s1",
+     "heading": "Lifetime warranty",
+     "anchor": "lifetime-warranty",
+     "clauses": [
+      {
+       "_key": "c1",
+       "heading": "What's covered",
+       "body": "<p>Caldera warrants every cast iron and carbon steel product against defects in materials and workmanship, including cracking, warping beyond 1.5 mm and weld failure, for the life of the product.</p>",
+       "hasSummary": true,
+       "plain": "If it cracks, warps or a weld fails, we replace it. Forever."
+      },
+      {
+       "_key": "c2",
+       "heading": "What isn't",
+       "body": "<p>Rust, seasoning loss, discolouration and damage from misuse \u2014 including thermal shock from cold water on a hot pan \u2014 are not defects.</p>",
+       "hasSummary": true,
+       "plain": "Rust and worn seasoning are fixable, not faults. We'll show you how."
+      }
+     ]
+    },
+    {
+     "_key": "s2",
+     "heading": "Returns",
+     "anchor": "returns",
+     "clauses": [
+      {
+       "_key": "c3",
+       "heading": "60-day window",
+       "body": "<p>Unused items in original packaging may be returned within 60 days of delivery for a full refund to the original payment method.</p>",
+       "hasSummary": false
+      },
+      {
+       "_key": "c4",
+       "heading": "How to start a return",
+       "body": "<p>Start a return at <a href=\"/returns\">caldera.bettercms.site/returns</a> with your order number. We email a prepaid label within one business day.</p>",
+       "hasSummary": false
+      }
+     ]
+    }
+   ],
+   "contactEmail": "care@caldera.co",
+   "versions": [
+    {
+     "_key": "h1",
+     "version": "2.1",
+     "effectiveDate": "2025-03-01",
+     "changes": "Returns window extended from 30 to 45 days.",
+     "archive": {
+      "url": "https://caldera.bettercms.site/media/legal/warranty-returns-v2-1.pdf",
+      "name": "warranty-returns-v2-1.pdf",
+      "size": 186000
+     }
+    },
+    {
+     "_key": "h2",
+     "version": "2.0",
+     "effectiveDate": "2024-01-15",
+     "changes": "Carbon steel added to the lifetime warranty.",
+     "archive": {
+      "url": "https://caldera.bettercms.site/media/legal/warranty-returns-v2-0.pdf",
+      "name": "warranty-returns-v2-0.pdf",
+      "size": 171000
+     }
+    }
+   ],
+   "numbering": "decimal",
+   "showContents": true,
+   "showChangeBanner": true
+  }
+ },
+ {
+  "id": "case-study",
+  "name": "Case study",
+  "category": "Long-form & docs",
+  "kind": "entry",
+  "brand": "Ledgerline",
+  "previewLayout": "article",
+  "proves": "Customer facts as an object \u00b7 headline metrics repeater \u00b7 challenge/solution/results as three rich-text bodies \u00b7 quote written here or referenced",
+  "schema": {
+   "name": "caseStudy",
+   "title": "Case study",
+   "kind": "entry",
+   "icon": "briefcase",
+   "category": "Long-form & docs",
+   "description": "A customer story with results",
+   "preview": {
+    "title": "title",
+    "subtitle": "customerName",
+    "media": "customerLogo"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "icon": "file-text",
+     "default": true
+    },
+    {
+     "name": "customer",
+     "title": "Customer",
+     "icon": "building"
+    },
+    {
+     "name": "media",
+     "title": "Media",
+     "icon": "photo"
+    }
+   ],
+   "fieldsets": [
+    {
+     "name": "quote",
+     "title": "Quote"
+    }
+   ],
+   "fields": [
+    {
+     "name": "title",
+     "title": "Title",
+     "type": "string",
+     "group": "content",
+     "validation": {
+      "required": true,
+      "max": 90
+     },
+     "localized": true
+    },
+    {
+     "name": "slug",
+     "title": "Slug",
+     "type": "slug",
+     "group": "content",
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "summary",
+     "title": "Summary",
+     "type": "text",
+     "rows": 2,
+     "group": "content",
+     "validation": {
+      "required": true,
+      "recommendedMax": 180
+     },
+     "localized": true
+    },
+    {
+     "name": "metrics",
+     "title": "Headline results",
+     "type": "array",
+     "group": "content",
+     "itemNoun": "result",
+     "openMode": "inline",
+     "validation": {
+      "min": 2,
+      "max": 4
+     },
+     "of": [
+      {
+       "name": "metric",
+       "title": "Result",
+       "type": "object",
+       "icon": "chart-bar",
+       "preview": {
+        "title": "value",
+        "subtitle": "label"
+       },
+       "fields": [
+        {
+         "name": "value",
+         "title": "Number",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 10
+         },
+         "placeholder": "3 days"
+        },
+        {
+         "name": "label",
+         "title": "Label",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 40
+         }
+        },
+        {
+         "name": "context",
+         "title": "Compared with",
+         "type": "string",
+         "validation": {
+          "max": 40
+         },
+         "placeholder": "down from 11"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "challenge",
+     "title": "The challenge",
+     "type": "richtext",
+     "group": "content",
+     "validation": {
+      "required": true
+     },
+     "ai": true,
+     "localized": true
+    },
+    {
+     "name": "solution",
+     "title": "The solution",
+     "type": "richtext",
+     "group": "content",
+     "validation": {
+      "required": true
+     },
+     "ai": true,
+     "localized": true
+    },
+    {
+     "name": "results",
+     "title": "The results",
+     "type": "richtext",
+     "group": "content",
+     "validation": {
+      "required": true
+     },
+     "ai": true,
+     "localized": true
+    },
+    {
+     "name": "quoteSource",
+     "title": "Quote",
+     "type": "select",
+     "group": "content",
+     "fieldset": "quote",
+     "layout": "segmented",
+     "initialValue": "written",
+     "options": [
+      {
+       "value": "written",
+       "label": "Write it here"
+      },
+      {
+       "value": "testimonial",
+       "label": "From Testimonials"
+      },
+      {
+       "value": "none",
+       "label": "None"
+      }
+     ],
+     "description": "Testimonials are reused on pricing and the homepage."
+    },
+    {
+     "name": "quote",
+     "title": "Quote",
+     "type": "text",
+     "rows": 3,
+     "group": "content",
+     "fieldset": "quote",
+     "hidden": {
+      "field": "quoteSource",
+      "equals": "written"
+     },
+     "validation": {
+      "required": true,
+      "recommendedMax": 220
+     }
+    },
+    {
+     "name": "quoteName",
+     "title": "Name",
+     "type": "string",
+     "group": "content",
+     "fieldset": "quote",
+     "hidden": {
+      "field": "quoteSource",
+      "equals": "written"
+     },
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "quoteRole",
+     "title": "Role",
+     "type": "string",
+     "group": "content",
+     "fieldset": "quote",
+     "hidden": {
+      "field": "quoteSource",
+      "equals": "written"
+     }
+    },
+    {
+     "name": "quotePhoto",
+     "title": "Photo",
+     "type": "image",
+     "group": "content",
+     "fieldset": "quote",
+     "hidden": {
+      "field": "quoteSource",
+      "equals": "written"
+     }
+    },
+    {
+     "name": "testimonial",
+     "title": "Testimonial",
+     "type": "reference",
+     "group": "content",
+     "fieldset": "quote",
+     "reference": {
+      "to": [
+       "col_testimonials"
+      ]
+     },
+     "hidden": {
+      "field": "quoteSource",
+      "equals": "testimonial"
+     },
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "productsUsed",
+     "title": "Products used",
+     "type": "multiselect",
+     "group": "content",
+     "options": [
+      {
+       "value": "close",
+       "label": "Close"
+      },
+      {
+       "value": "reconcile",
+       "label": "Reconcile"
+      },
+      {
+       "value": "spend",
+       "label": "Spend"
+      },
+      {
+       "value": "reports",
+       "label": "Reports"
+      }
+     ],
+     "description": "Also filters the customer list."
+    },
+    {
+     "name": "button",
+     "title": "Button",
+     "type": "button",
+     "group": "content"
+    },
+    {
+     "name": "customerName",
+     "title": "Company",
+     "type": "string",
+     "group": "customer",
+     "validation": {
+      "required": true,
+      "max": 40
+     }
+    },
+    {
+     "name": "customerLogo",
+     "title": "Logo",
+     "type": "image",
+     "group": "customer",
+     "validation": {
+      "required": true
+     },
+     "description": "SVG or a transparent PNG."
+    },
+    {
+     "name": "industry",
+     "title": "Industry",
+     "type": "select",
+     "group": "customer",
+     "options": [
+      {
+       "value": "saas",
+       "label": "Software"
+      },
+      {
+       "value": "ecommerce",
+       "label": "E-commerce"
+      },
+      {
+       "value": "marketplace",
+       "label": "Marketplace"
+      },
+      {
+       "value": "fintech",
+       "label": "Fintech"
+      },
+      {
+       "value": "healthcare",
+       "label": "Healthcare"
+      }
+     ],
+     "description": ""
+    },
+    {
+     "name": "companySize",
+     "title": "Company size",
+     "type": "select",
+     "group": "customer",
+     "options": [
+      {
+       "value": "1-50",
+       "label": "1\u201350"
+      },
+      {
+       "value": "51-200",
+       "label": "51\u2013200"
+      },
+      {
+       "value": "201-1000",
+       "label": "201\u20131,000"
+      },
+      {
+       "value": "1000+",
+       "label": "1,000+"
+      }
+     ],
+     "description": ""
+    },
+    {
+     "name": "region",
+     "title": "Region",
+     "type": "select",
+     "group": "customer",
+     "options": [
+      {
+       "value": "na",
+       "label": "North America"
+      },
+      {
+       "value": "emea",
+       "label": "Europe & Middle East"
+      },
+      {
+       "value": "apac",
+       "label": "Asia Pacific"
+      }
+     ],
+     "description": ""
+    },
+    {
+     "name": "website",
+     "title": "Website",
+     "type": "url",
+     "group": "customer"
+    },
+    {
+     "name": "coverImage",
+     "title": "Cover image",
+     "type": "image",
+     "group": "media",
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "pdf",
+     "title": "PDF version",
+     "type": "file",
+     "group": "media",
+     "description": "Offered as a download on the page."
+    }
+   ]
+  },
+  "value": {
+   "title": "How Northbeam closes its books in 3 days",
+   "slug": "northbeam",
+   "summary": "Northbeam's four-person finance team cut month-end close from 11 days to 3 while revenue doubled \u2014 without adding headcount.",
+   "metrics": [
+    {
+     "_key": "m1",
+     "value": "3 days",
+     "label": "Month-end close",
+     "context": "down from 11"
+    },
+    {
+     "_key": "m2",
+     "value": "92%",
+     "label": "Transactions auto-matched",
+     "context": "up from 40%"
+    },
+    {
+     "_key": "m3",
+     "value": "0",
+     "label": "New finance hires",
+     "context": "while revenue doubled"
+    }
+   ],
+   "challenge": "<p>Northbeam sells to 6,000 Shopify brands across three currencies. Its finance team reconciled Stripe payouts against bank lines in spreadsheets \u2014 <strong>11 days</strong> every month, and growing.</p>",
+   "solution": "<p>Ledgerline connected Stripe, two banks and NetSuite in an afternoon. Bank rules matched payouts automatically, and the multi-entity checklist replaced a 140-row spreadsheet.</p>",
+   "results": "<p>Close now takes three days. The controller spends the rest of the month on forecasting instead of matching, and auditors pull evidence straight from the close report.</p>",
+   "quoteSource": "written",
+   "quote": "We closed March in three days and nobody stayed late. I didn't think that was possible at our volume.",
+   "quoteName": "Dana Whitfield",
+   "quoteRole": "Controller, Northbeam",
+   "quotePhoto": {
+    "url": "https://picsum.photos/seed/dana-whitfield/400/400",
+    "alt": "Portrait of Dana Whitfield",
+    "name": "dana-whitfield.jpg",
+    "width": 800,
+    "height": 800
+   },
+   "productsUsed": [
+    "close",
+    "reconcile"
+   ],
+   "button": {
+    "label": "Book a demo",
+    "href": "/demo",
+    "type": "page",
+    "title": "Book a demo",
+    "style": "primary",
+    "arrow": true
+   },
+   "customerName": "Northbeam",
+   "customerLogo": {
+    "url": "https://picsum.photos/seed/northbeam-logo/480/160",
+    "alt": "Northbeam",
+    "name": "northbeam-logo.svg",
+    "width": 480,
+    "height": 160
+   },
+   "industry": "saas",
+   "companySize": "201-1000",
+   "region": "na",
+   "website": "https://www.northbeam.io",
+   "coverImage": {
+    "url": "https://picsum.photos/seed/northbeam-team/1600/1000",
+    "alt": "Northbeam's finance team at a whiteboard covered in a close calendar",
+    "name": "northbeam-team.jpg",
+    "width": 3200,
+    "height": 2000
+   },
+   "pdf": {
+    "url": "https://ledgerline.com/media/customers/northbeam-one-pager.pdf",
+    "name": "northbeam-one-pager.pdf",
+    "size": 612000
+   }
+  }
+ },
+ {
+  "id": "podcast-episode",
+  "name": "Podcast episode",
+  "category": "Long-form & docs",
+  "kind": "entry",
+  "brand": "Caldera",
+  "previewLayout": "article",
+  "proves": "Audio file + show notes + timestamped chapters + transcript (a11y) \u00b7 guests by reference \u00b7 feeds the RSS and PodcastEpisode JSON-LD",
+  "schema": {
+   "name": "podcastEpisode",
+   "title": "Podcast episode",
+   "kind": "entry",
+   "icon": "microphone",
+   "category": "Long-form & docs",
+   "description": "One episode of the show, with audio, notes and transcript",
+   "preview": {
+    "title": "title",
+    "subtitle": "episodeNumber",
+    "media": "art"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "icon": "file-text",
+     "default": true
+    },
+    {
+     "name": "audio",
+     "title": "Audio",
+     "icon": "headphones"
+    },
+    {
+     "name": "transcript",
+     "title": "Transcript",
+     "icon": "file-text"
+    }
+   ],
+   "fieldsets": [
+    {
+     "name": "numbering",
+     "title": "Numbering",
+     "columns": 2
+    }
+   ],
+   "fields": [
+    {
+     "name": "title",
+     "title": "Title",
+     "type": "string",
+     "group": "content",
+     "validation": {
+      "required": true,
+      "max": 90
+     },
+     "description": "Without the episode number. Apps add it."
+    },
+    {
+     "name": "slug",
+     "title": "Slug",
+     "type": "slug",
+     "group": "content",
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "episodeType",
+     "title": "Type",
+     "type": "select",
+     "group": "content",
+     "fieldset": "numbering",
+     "layout": "segmented",
+     "initialValue": "full",
+     "options": [
+      {
+       "value": "full",
+       "label": "Full"
+      },
+      {
+       "value": "bonus",
+       "label": "Bonus"
+      },
+      {
+       "value": "trailer",
+       "label": "Trailer"
+      }
+     ],
+     "description": ""
+    },
+    {
+     "name": "season",
+     "title": "Season",
+     "type": "number",
+     "group": "content",
+     "fieldset": "numbering",
+     "numeric": {
+      "min": 1,
+      "step": 1
+     }
+    },
+    {
+     "name": "episodeNumber",
+     "title": "Episode",
+     "type": "number",
+     "group": "content",
+     "fieldset": "numbering",
+     "numeric": {
+      "min": 1,
+      "step": 1
+     },
+     "hidden": {
+      "field": "episodeType",
+      "equals": "full"
+     },
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "publishedAt",
+     "title": "Publish date",
+     "type": "datetime",
+     "group": "content",
+     "validation": {
+      "required": true
+     },
+     "description": "Also the release time in podcast apps."
+    },
+    {
+     "name": "summary",
+     "title": "Summary",
+     "type": "text",
+     "rows": 2,
+     "group": "content",
+     "validation": {
+      "required": true,
+      "recommendedMax": 250
+     },
+     "description": "The first lines podcast apps show. No links."
+    },
+    {
+     "name": "showNotes",
+     "title": "Show notes",
+     "type": "richtext",
+     "group": "content",
+     "validation": {
+      "required": true
+     },
+     "description": "Also goes into the RSS feed."
+    },
+    {
+     "name": "hosts",
+     "title": "Hosts",
+     "type": "array",
+     "of": [
+      {
+       "name": "host",
+       "title": "Host",
+       "type": "reference",
+       "reference": {
+        "to": [
+         "col_authors"
+        ]
+       }
+      }
+     ],
+     "group": "content",
+     "validation": {
+      "min": 1,
+      "max": 3
+     }
+    },
+    {
+     "name": "guests",
+     "title": "Guests",
+     "type": "array",
+     "of": [
+      {
+       "name": "guest",
+       "title": "Guest",
+       "type": "reference",
+       "reference": {
+        "to": [
+         "col_people"
+        ]
+       }
+      }
+     ],
+     "group": "content",
+     "validation": {
+      "max": 4
+     },
+     "description": "Each guest gets a card and links back from their profile."
+    },
+    {
+     "name": "chapters",
+     "title": "Chapters",
+     "type": "array",
+     "group": "content",
+     "itemNoun": "chapter",
+     "openMode": "inline",
+     "validation": {
+      "max": 30
+     },
+     "of": [
+      {
+       "name": "chapter",
+       "title": "Chapter",
+       "type": "object",
+       "icon": "clock",
+       "preview": {
+        "title": "title",
+        "subtitle": "start"
+       },
+       "fields": [
+        {
+         "name": "start",
+         "title": "Starts at",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "pattern": "^(\\d{1,2}:)?[0-5]?\\d:[0-5]\\d$",
+          "patternMessage": "Use mm:ss or h:mm:ss, like 12:40."
+         },
+         "placeholder": "12:30"
+        },
+        {
+         "name": "title",
+         "title": "Title",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 60
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "audio",
+     "title": "Audio file",
+     "type": "file",
+     "group": "audio",
+     "validation": {
+      "required": true
+     },
+     "description": "MP3 or M4A. The player and the RSS feed both use it."
+    },
+    {
+     "name": "durationSeconds",
+     "title": "Length",
+     "type": "number",
+     "group": "audio",
+     "readOnly": true,
+     "numeric": {
+      "unit": "s"
+     },
+     "description": "Read from the audio file."
+    },
+    {
+     "name": "isExplicit",
+     "title": "Explicit content",
+     "type": "boolean",
+     "group": "audio",
+     "description": "Marks it explicit in podcast apps."
+    },
+    {
+     "name": "art",
+     "title": "Episode art",
+     "type": "image",
+     "group": "audio",
+     "description": "Square, 3000 \u00d7 3000. Leave empty to use the show art."
+    },
+    {
+     "name": "video",
+     "title": "Video version",
+     "type": "video",
+     "group": "audio"
+    },
+    {
+     "name": "transcriptSource",
+     "title": "Transcript",
+     "type": "select",
+     "group": "transcript",
+     "layout": "segmented",
+     "initialValue": "text",
+     "options": [
+      {
+       "value": "text",
+       "label": "Write or paste"
+      },
+      {
+       "value": "file",
+       "label": "Upload file"
+      }
+     ]
+    },
+    {
+     "name": "transcript",
+     "title": "Transcript text",
+     "type": "richtext",
+     "group": "transcript",
+     "hidden": {
+      "field": "transcriptSource",
+      "equals": "text"
+     },
+     "description": "Bold each speaker's name at the start of their turn."
+    },
+    {
+     "name": "transcriptFile",
+     "title": "Transcript file",
+     "type": "file",
+     "group": "transcript",
+     "hidden": {
+      "field": "transcriptSource",
+      "equals": "file"
+     },
+     "description": "A .vtt or .srt file. Also used as player captions."
+    }
+   ]
+  },
+  "value": {
+   "title": "Cooking at 3,000 metres",
+   "slug": "cooking-at-3000-metres",
+   "episodeType": "full",
+   "season": 3,
+   "episodeNumber": 42,
+   "publishedAt": "2026-09-29T05:00:00-07:00[America/Los_Angeles]",
+   "summary": "Mountain guide In\u00e9s Calder\u00f3n on why water boils at 90\u00b0C up high, the one pan she carries up Aconcagua, and dinner for twelve in a snowstorm.",
+   "showNotes": "<p>In\u00e9s guides on Aconcagua and in the Cordillera Blanca. We talk altitude, fuel and feeding a team at the end of a 14-hour day.</p><h3>Mentioned</h3><ul><li><a href=\"/products/carbon-pan-8\">Carbon Steel Pan 8\"</a></li><li><a href=\"/recipes/one-pot-lentils\">One-pot lentils with chorizo</a></li><li><a href=\"https://www.ineshighaltitude.com\" rel=\"nofollow\">In\u00e9s's guiding company</a></li></ul>",
+   "hosts": [
+    "au_mei"
+   ],
+   "guests": [
+    "en_p_ines-calderon"
+   ],
+   "chapters": [
+    {
+     "_key": "ch1",
+     "start": "0:00",
+     "title": "Intro"
+    },
+    {
+     "_key": "ch2",
+     "start": "3:12",
+     "title": "Why water boils at 90\u00b0C"
+    },
+    {
+     "_key": "ch3",
+     "start": "17:45",
+     "title": "The one-pan kit list"
+    },
+    {
+     "_key": "ch4",
+     "start": "34:20",
+     "title": "Dinner for twelve in a storm"
+    }
+   ],
+   "audio": {
+    "url": "https://media.caldera.co/podcast/low-slow-s3e42.mp3",
+    "name": "low-slow-s3e42.mp3",
+    "size": 61234567
+   },
+   "durationSeconds": 2934,
+   "isExplicit": false,
+   "art": null,
+   "video": {
+    "url": "https://www.youtube.com/watch?v=Fq3J2xQm8Hk"
+   },
+   "transcriptSource": "text",
+   "transcript": "<p><strong>Mei:</strong> In\u00e9s, you've cooked on more summits than anyone I know. What surprises people first?</p><p><strong>In\u00e9s:</strong> That pasta never cooks. Water boils at about ninety degrees up there, so everything takes twice as long and you burn twice the fuel.</p>"
+  }
+ }
+]

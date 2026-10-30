@@ -1,0 +1,111 @@
+---
+// 3D model / Lottie / 360° embed (variant: split, kind: model, load on click) — Caldera Cable Fold Grill.
+---
+
+<section id="interactive-3d-lottie-embed" class="section section--muted embed-3d" data-variant="split">
+  <!-- kit: interactive-3d-lottie-embed -->
+  <div class="container split">
+    <div class="copy">
+      <span class="eyebrow">Spin it</span>
+      <h2>See how the Cable Fold folds.</h2>
+      <div class="body">
+        <p>Drag to turn it. On an iPhone, tap <strong>View in your space</strong> to put it on your own table.</p>
+      </div>
+      <div class="btn-row">
+        <a class="btn btn-secondary" rel="ar" href="https://cdn.caldera.co/3d/cable-fold.usdz">
+          <img src="https://picsum.photos/seed/cable-fold-3d-still/160/120" alt="" width="1" height="1" class="ar-img" />
+          View in your space
+        </a>
+      </div>
+    </div>
+
+    <div class="viewer" data-model="https://cdn.caldera.co/3d/cable-fold.glb" data-ios-model="https://cdn.caldera.co/3d/cable-fold.usdz" data-camera-orbit="35deg 70deg 1.6m" data-auto-rotate="true" role="region" aria-label="Interactive 3D model of the Cable Fold Grill, shown half unfolded">
+      <img class="fallback" src="https://picsum.photos/seed/cable-fold-3d-still/1600/1200" alt="The Cable Fold Grill half unfolded on a white background" width="3200" height="2400" loading="lazy" />
+      <button type="button" class="load btn btn-primary">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2 3 7v10l9 5 9-5V7z" /><path d="M3 7l9 5 9-5M12 12v10" /></svg>
+        Load 3D model (5.8 MB)
+      </button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .split {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: center;
+  }
+  .body {
+    color: var(--ink-2);
+    font-size: 1.0625rem;
+    margin-bottom: 1.5rem;
+  }
+  .ar-img {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+  }
+  .viewer {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    background: var(--bg);
+    border: 1px solid var(--line);
+  }
+  .fallback {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .load {
+    position: absolute;
+    left: 50%;
+    bottom: 1.25rem;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    box-shadow: var(--shadow);
+  }
+  .viewer :global(model-viewer) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg);
+  }
+  @media (max-width: 860px) {
+    .split {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    var root = document.getElementById("interactive-3d-lottie-embed");
+    if (!root) return;
+    var viewer = root.querySelector(".viewer");
+    var button = root.querySelector(".load");
+    button.addEventListener("click", function () {
+      if (!customElements.get("model-viewer")) {
+        var s = document.createElement("script");
+        s.type = "module";
+        s.src = "https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js";
+        document.head.appendChild(s);
+      }
+      var mv = document.createElement("model-viewer");
+      mv.setAttribute("src", viewer.dataset.model);
+      mv.setAttribute("ios-src", viewer.dataset.iosModel);
+      mv.setAttribute("camera-orbit", viewer.dataset.cameraOrbit);
+      mv.setAttribute("poster", root.querySelector(".fallback").src);
+      mv.setAttribute("alt", viewer.getAttribute("aria-label"));
+      mv.setAttribute("camera-controls", "");
+      mv.setAttribute("ar", "");
+      if (viewer.dataset.autoRotate === "true") mv.setAttribute("auto-rotate", "");
+      viewer.appendChild(mv);
+      button.remove();
+    });
+  })();
+</script>

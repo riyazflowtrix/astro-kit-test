@@ -1,0 +1,4065 @@
+[
+ {
+  "id": "conversion-cta-band",
+  "name": "CTA band",
+  "category": "Conversion & forms",
+  "kind": "block",
+  "brand": "Caldera",
+  "previewLayout": "centered",
+  "proves": "Variants that swap layout without losing content \u00b7 two button units \u00b7 background as a conditional design cluster (color vs photo + overlay)",
+  "schema": {
+   "name": "callToAction",
+   "title": "Call to action band",
+   "kind": "block",
+   "icon": "click",
+   "category": "Conversion & forms",
+   "description": "A full-width band with one message and one or two buttons",
+   "variants": [
+    {
+     "id": "centered",
+     "name": "Centered"
+    },
+    {
+     "id": "split",
+     "name": "Split with image",
+     "description": "Text left, photo right"
+    },
+    {
+     "id": "inline",
+     "name": "Inline",
+     "description": "Text and buttons on one row"
+    }
+   ],
+   "preview": {
+    "title": "heading",
+    "subtitle": "body",
+    "media": "image"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "design",
+     "title": "Design"
+    }
+   ],
+   "fields": [
+    {
+     "name": "eyebrow",
+     "title": "Eyebrow",
+     "type": "string",
+     "validation": {
+      "max": 32
+     }
+    },
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "validation": {
+      "required": true,
+      "max": 80,
+      "recommendedMax": 50
+     },
+     "ai": true,
+     "localized": true
+    },
+    {
+     "name": "body",
+     "title": "Body",
+     "type": "text",
+     "rows": 2,
+     "validation": {
+      "recommendedMax": 140
+     },
+     "ai": true,
+     "localized": true,
+     "description": "Hidden on phones in the Inline layout."
+    },
+    {
+     "name": "primaryButton",
+     "title": "Primary button",
+     "type": "button",
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "secondaryButton",
+     "title": "Secondary button",
+     "type": "button"
+    },
+    {
+     "name": "image",
+     "title": "Image",
+     "type": "image",
+     "description": "Split layout only."
+    },
+    {
+     "name": "background",
+     "title": "Background",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "color",
+     "options": [
+      {
+       "value": "color",
+       "label": "Color"
+      },
+      {
+       "value": "photo",
+       "label": "Photo"
+      }
+     ]
+    },
+    {
+     "name": "color",
+     "title": "Background color",
+     "type": "color",
+     "group": "design",
+     "hidden": {
+      "field": "background",
+      "equals": "color"
+     }
+    },
+    {
+     "name": "photo",
+     "title": "Background photo",
+     "type": "image",
+     "group": "design",
+     "hidden": {
+      "field": "background",
+      "equals": "photo"
+     },
+     "description": "At least 2000px wide."
+    },
+    {
+     "name": "overlay",
+     "title": "Darken photo",
+     "type": "number",
+     "group": "design",
+     "layout": "slider",
+     "hidden": {
+      "field": "background",
+      "equals": "photo"
+     },
+     "numeric": {
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "%"
+     }
+    },
+    {
+     "name": "theme",
+     "title": "Theme",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "light",
+     "options": [
+      {
+       "value": "light",
+       "label": "Light"
+      },
+      {
+       "value": "dark",
+       "label": "Dark"
+      },
+      {
+       "value": "brand",
+       "label": "Brand"
+      }
+     ]
+    }
+   ]
+  },
+  "value": {
+   "_variant": "split",
+   "eyebrow": "Lifetime warranty",
+   "heading": "Cook on it for 60 days. Keep it for life.",
+   "body": "If it isn't the best pan you own, send it back \u2014 seasoning and all.",
+   "primaryButton": {
+    "label": "Shop cookware",
+    "href": "/products",
+    "type": "page",
+    "title": "Shop",
+    "style": "primary",
+    "arrow": true
+   },
+   "secondaryButton": {
+    "label": "Read the warranty",
+    "href": "/warranty",
+    "type": "page",
+    "style": "outline"
+   },
+   "image": {
+    "url": "https://picsum.photos/seed/caldera-cta-skillet-eggs/1400/1050",
+    "alt": "Eggs frying in a cast iron skillet on a camp stove at sunrise",
+    "name": "caldera-cta-skillet-eggs.jpg",
+    "width": 1400,
+    "height": 1050
+   },
+   "background": "photo",
+   "color": "#1E1B18",
+   "photo": {
+    "url": "https://picsum.photos/seed/caldera-cta-campfire-wide/2400/1000",
+    "alt": "A campfire at dusk with a pine forest behind",
+    "name": "caldera-cta-campfire-wide.jpg",
+    "width": 2400,
+    "height": 1000
+   },
+   "overlay": 45,
+   "theme": "dark"
+  }
+ },
+ {
+  "id": "conversion-newsletter-consent",
+  "name": "Newsletter sign-up with consent",
+  "category": "Conversion & forms",
+  "kind": "block",
+  "brand": "Caldera",
+  "previewLayout": "form",
+  "proves": "The simple inline form: visible label + placeholder + submit label \u00b7 interest checkboxes that tag subscribers \u00b7 consent mode (checkbox vs notice) \u00b7 success with an optional code",
+  "schema": {
+   "name": "newsletter",
+   "title": "Newsletter sign-up",
+   "kind": "block",
+   "icon": "mail",
+   "category": "Conversion & forms",
+   "description": "An email field, a promise and a clear consent line",
+   "variants": [
+    {
+     "id": "inline",
+     "name": "Inline",
+     "description": "Field and button on one row"
+    },
+    {
+     "id": "card",
+     "name": "Card",
+     "description": "Stacked, with an image"
+    }
+   ],
+   "preview": {
+    "title": "heading",
+    "subtitle": "body",
+    "icon": "mail"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "form",
+     "title": "Form & consent"
+    },
+    {
+     "name": "success",
+     "title": "After sign-up"
+    }
+   ],
+   "fields": [
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "validation": {
+      "required": true,
+      "recommendedMax": 48
+     },
+     "ai": true
+    },
+    {
+     "name": "body",
+     "title": "Body",
+     "type": "text",
+     "rows": 2,
+     "validation": {
+      "recommendedMax": 140
+     },
+     "ai": true
+    },
+    {
+     "name": "image",
+     "title": "Image",
+     "type": "image",
+     "description": "Card layout only."
+    },
+    {
+     "name": "form",
+     "title": "Form",
+     "type": "reference",
+     "reference": {
+      "to": [
+       "form"
+      ]
+     },
+     "validation": {
+      "required": true
+     },
+     "description": "Sign-ups go to this form's list. Pick the one connected to your email tool."
+    },
+    {
+     "name": "emailLabel",
+     "title": "Field label",
+     "type": "string",
+     "group": "form",
+     "validation": {
+      "required": true,
+      "max": 32
+     },
+     "initialValue": "Email address",
+     "description": "Read by screen readers. The Inline layout hides it."
+    },
+    {
+     "name": "placeholder",
+     "title": "Placeholder",
+     "type": "string",
+     "group": "form",
+     "validation": {
+      "max": 40
+     },
+     "placeholder": "you@example.com"
+    },
+    {
+     "name": "submitLabel",
+     "title": "Button label",
+     "type": "string",
+     "group": "form",
+     "validation": {
+      "required": true,
+      "max": 20
+     },
+     "placeholder": "Subscribe"
+    },
+    {
+     "name": "interests",
+     "title": "Interests",
+     "type": "array",
+     "group": "form",
+     "itemNoun": "interest",
+     "openMode": "inline",
+     "validation": {
+      "max": 5
+     },
+     "description": "Each one adds a tag to the subscriber.",
+     "of": [
+      {
+       "name": "interest",
+       "title": "Interest",
+       "type": "object",
+       "icon": "tag",
+       "preview": {
+        "title": "label",
+        "subtitle": "tag",
+        "fallback": "Untitled interest"
+       },
+       "fields": [
+        {
+         "name": "label",
+         "title": "Label",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 32
+         }
+        },
+        {
+         "name": "tag",
+         "title": "Tag",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "pattern": "^[a-z0-9-]+$",
+          "patternMessage": "Use lowercase letters, numbers and hyphens, like camp-kitchen."
+         },
+         "description": "Exactly as named in your email tool."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "consent",
+     "title": "Consent",
+     "type": "select",
+     "group": "form",
+     "layout": "radio",
+     "initialValue": "checkbox",
+     "options": [
+      {
+       "value": "checkbox",
+       "label": "Unticked checkbox",
+       "description": "Required for the EU, UK and Canada"
+      },
+      {
+       "value": "notice",
+       "label": "A notice under the button",
+       "description": "Signing up is the consent"
+      }
+     ]
+    },
+    {
+     "name": "consentText",
+     "title": "Consent wording",
+     "type": "richtext",
+     "group": "form",
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "successMessage",
+     "title": "Thank-you message",
+     "type": "string",
+     "group": "success",
+     "validation": {
+      "required": true,
+      "max": 120
+     },
+     "placeholder": "You're in. Check your inbox to confirm."
+    },
+    {
+     "name": "welcomeCode",
+     "title": "Welcome code",
+     "type": "string",
+     "group": "success",
+     "validation": {
+      "pattern": "^[A-Z0-9]{3,20}$",
+      "patternMessage": "Use capital letters and numbers, like SAVE20."
+     },
+     "description": "Must exist in Shopify."
+    }
+   ]
+  },
+  "value": {
+   "_variant": "inline",
+   "heading": "Recipes from the fire, once a month",
+   "body": "One campfire recipe, one care tip and first word on new gear. No daily emails, ever.",
+   "image": {
+    "url": "https://picsum.photos/seed/caldera-newsletter-paella/1200/900",
+    "alt": "A paella pan over a fire with friends reaching in with spoons",
+    "name": "caldera-newsletter-paella.jpg",
+    "width": 1200,
+    "height": 900
+   },
+   "form": "form_newsletter",
+   "emailLabel": "Email address",
+   "placeholder": "you@example.com",
+   "submitLabel": "Subscribe",
+   "interests": [
+    {
+     "_key": "i1",
+     "label": "Recipes",
+     "tag": "recipes"
+    },
+    {
+     "_key": "i2",
+     "label": "New gear",
+     "tag": "launches"
+    },
+    {
+     "_key": "i3",
+     "label": "Restocks",
+     "tag": "restocks"
+    }
+   ],
+   "consent": "checkbox",
+   "consentText": "<p>Yes, email me the monthly letter. Unsubscribe in one click. See our <a href=\"/privacy\">privacy policy</a>.</p>",
+   "successMessage": "You're in. Check your inbox to confirm your email.",
+   "welcomeCode": "FIRSTFIRE10"
+  }
+ },
+ {
+  "id": "conversion-lead-capture",
+  "name": "Lead capture form + success state",
+  "category": "Conversion & forms",
+  "kind": "block",
+  "brand": "Caldera",
+  "previewLayout": "form",
+  "proves": "Form reference + section-level presentation \u00b7 success: message / redirect / file download as a conditional trio \u00b7 hidden attribution fields with tokens",
+  "schema": {
+   "name": "leadForm",
+   "title": "Lead form",
+   "kind": "block",
+   "icon": "forms",
+   "category": "Conversion & forms",
+   "description": "A pitch beside a form, with what happens after they send it",
+   "variants": [
+    {
+     "id": "form-right",
+     "name": "Form on the right"
+    },
+    {
+     "id": "form-below",
+     "name": "Form below the text"
+    }
+   ],
+   "preview": {
+    "title": "heading",
+    "subtitle": "form",
+    "icon": "forms"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "form",
+     "title": "Form"
+    },
+    {
+     "name": "success",
+     "title": "After sending"
+    }
+   ],
+   "fields": [
+    {
+     "name": "eyebrow",
+     "title": "Eyebrow",
+     "type": "string",
+     "validation": {
+      "max": 32
+     }
+    },
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "validation": {
+      "required": true,
+      "recommendedMax": 56
+     },
+     "ai": true
+    },
+    {
+     "name": "body",
+     "title": "Body",
+     "type": "richtext",
+     "ai": true
+    },
+    {
+     "name": "points",
+     "title": "Reasons to apply",
+     "type": "array",
+     "itemNoun": "reason",
+     "openMode": "inline",
+     "validation": {
+      "max": 4
+     },
+     "of": [
+      {
+       "name": "point",
+       "title": "Reason",
+       "type": "object",
+       "icon": "check",
+       "preview": {
+        "title": "label",
+        "fallback": "Untitled reason"
+       },
+       "fields": [
+        {
+         "name": "icon",
+         "title": "Icon",
+         "type": "icon"
+        },
+        {
+         "name": "label",
+         "title": "Label",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 56
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "form",
+     "title": "Form",
+     "type": "reference",
+     "reference": {
+      "to": [
+       "form"
+      ]
+     },
+     "validation": {
+      "required": true
+     },
+     "description": "Fields, notifications and submissions are managed in Forms.",
+     "group": "form"
+    },
+    {
+     "name": "submitLabel",
+     "title": "Button label",
+     "type": "string",
+     "group": "form",
+     "validation": {
+      "max": 24
+     },
+     "description": "Overrides the form's own label here only."
+    },
+    {
+     "name": "hiddenFields",
+     "title": "Hidden fields",
+     "type": "array",
+     "group": "form",
+     "itemNoun": "hidden field",
+     "openMode": "inline",
+     "advanced": true,
+     "validation": {
+      "max": 6
+     },
+     "description": "Not shown. Sent with every submission from this page.",
+     "helpMore": "Tokens: {{utm_source}}, {{utm_campaign}}, {{page_url}}, {{referrer}}.",
+     "of": [
+      {
+       "name": "hiddenField",
+       "title": "Hidden field",
+       "type": "object",
+       "icon": "eye-off",
+       "preview": {
+        "title": "name",
+        "subtitle": "value",
+        "fallback": "Untitled hidden field"
+       },
+       "fields": [
+        {
+         "name": "name",
+         "title": "Field key",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "pattern": "^[a-z_]+$",
+          "patternMessage": "Use lowercase letters and underscores, like analytics_storage."
+         }
+        },
+        {
+         "name": "value",
+         "title": "Value",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 80
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "onSuccess",
+     "title": "Then",
+     "type": "select",
+     "group": "success",
+     "layout": "cards",
+     "initialValue": "message",
+     "options": [
+      {
+       "value": "message",
+       "label": "Show a message",
+       "icon": "message-check"
+      },
+      {
+       "value": "redirect",
+       "label": "Go to a page",
+       "icon": "arrow-right",
+       "description": "Best for tracking conversions"
+      },
+      {
+       "value": "download",
+       "label": "Start a download",
+       "icon": "download"
+      }
+     ]
+    },
+    {
+     "name": "successMessage",
+     "title": "Message",
+     "type": "richtext",
+     "group": "success",
+     "hidden": {
+      "field": "onSuccess",
+      "equals": [
+       "message",
+       "download"
+      ]
+     },
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "redirect",
+     "title": "Page",
+     "type": "link",
+     "group": "success",
+     "hidden": {
+      "field": "onSuccess",
+      "equals": "redirect"
+     },
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "file",
+     "title": "File",
+     "type": "file",
+     "group": "success",
+     "hidden": {
+      "field": "onSuccess",
+      "equals": "download"
+     },
+     "validation": {
+      "required": true
+     },
+     "description": "A PDF under 10 MB. The link is also emailed to them."
+    },
+    {
+     "name": "privacyNote",
+     "title": "Privacy note",
+     "type": "richtext",
+     "group": "form"
+    }
+   ]
+  },
+  "value": {
+   "_variant": "form-right",
+   "eyebrow": "Wholesale",
+   "heading": "Stock Caldera in your store",
+   "body": "<p>We partner with independent outfitters, kitchen shops and guiding companies. Tell us about your store and a member of our wholesale team will reply within two business days.</p>",
+   "points": [
+    {
+     "_key": "lp1",
+     "icon": "truck",
+     "label": "Free freight on orders over $2,000"
+    },
+    {
+     "_key": "lp2",
+     "icon": "calendar-dollar",
+     "label": "Net-30 terms from your second order"
+    },
+    {
+     "_key": "lp3",
+     "icon": "photo",
+     "label": "Shelf talkers and a product photo library"
+    }
+   ],
+   "form": "form_wholesale",
+   "submitLabel": "Apply for wholesale",
+   "hiddenFields": [
+    {
+     "_key": "hf1",
+     "name": "lead_source",
+     "value": "{{utm_source}}"
+    },
+    {
+     "_key": "hf2",
+     "name": "landing_page",
+     "value": "{{page_url}}"
+    }
+   ],
+   "onSuccess": "download",
+   "successMessage": "<p>Thanks \u2014 we've got it. Your wholesale line sheet is downloading, and Maya from our wholesale team will email you within two business days.</p>",
+   "redirect": {
+    "type": "page",
+    "href": "/wholesale/thanks",
+    "title": "Wholesale thanks"
+   },
+   "file": {
+    "url": "https://cdn.bettercms.site/caldera/caldera-wholesale-line-sheet-2026.pdf",
+    "name": "caldera-wholesale-line-sheet-2026.pdf"
+   },
+   "privacyNote": "<p>We only use your details to review your application. <a href=\"/privacy\">Privacy policy</a>.</p>"
+  }
+ },
+ {
+  "id": "conversion-multi-step-form",
+  "name": "Multi-step form",
+  "category": "Conversion & forms",
+  "kind": "block",
+  "brand": "Juniper Physio",
+  "previewLayout": "form",
+  "proves": "form grouped into steps by field key OR steps \u203a polymorphic fields \u203a options built here \u00b7 visitor-side showIf branching \u00b7 progress UI",
+  "schema": {
+   "name": "multiStepForm",
+   "title": "Multi-step form",
+   "kind": "block",
+   "icon": "list-check",
+   "category": "Conversion & forms",
+   "description": "A long form split into short steps with a progress bar",
+   "preview": {
+    "title": "heading",
+    "subtitle": "source",
+    "icon": "list-numbers"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "steps",
+     "title": "Steps"
+    },
+    {
+     "name": "settings",
+     "title": "Settings"
+    }
+   ],
+   "fields": [
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "validation": {
+      "required": true,
+      "recommendedMax": 48
+     }
+    },
+    {
+     "name": "intro",
+     "title": "Intro",
+     "type": "text",
+     "rows": 2,
+     "validation": {
+      "recommendedMax": 160
+     }
+    },
+    {
+     "name": "source",
+     "title": "Fields come from",
+     "type": "select",
+     "group": "steps",
+     "layout": "cards",
+     "initialValue": "form",
+     "options": [
+      {
+       "value": "form",
+       "label": "A form in Forms",
+       "icon": "forms",
+       "description": "Recommended: one set of fields everywhere"
+      },
+      {
+       "value": "inline",
+       "label": "Built here",
+       "icon": "pencil",
+       "description": "Only for a one-off form"
+      }
+     ]
+    },
+    {
+     "name": "form",
+     "title": "Form",
+     "type": "reference",
+     "reference": {
+      "to": [
+       "form"
+      ]
+     },
+     "validation": {
+      "required": true
+     },
+     "description": "Its fields are grouped into the steps below by key.",
+     "group": "steps",
+     "hidden": {
+      "field": "source",
+      "equals": "form"
+     }
+    },
+    {
+     "name": "formSteps",
+     "title": "Steps",
+     "type": "array",
+     "group": "steps",
+     "itemNoun": "step",
+     "hidden": {
+      "field": "source",
+      "equals": "form"
+     },
+     "validation": {
+      "min": 2,
+      "max": 6
+     },
+     "description": "Fields not placed in a step go in the last one.",
+     "of": [
+      {
+       "name": "formStep",
+       "title": "Step",
+       "type": "object",
+       "icon": "list-numbers",
+       "preview": {
+        "title": "title",
+        "subtitle": "fieldKeys",
+        "fallback": "Untitled step"
+       },
+       "fields": [
+        {
+         "name": "title",
+         "title": "Step title",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 32
+         }
+        },
+        {
+         "name": "description",
+         "title": "Description",
+         "type": "string",
+         "validation": {
+          "max": 100
+         }
+        },
+        {
+         "name": "fieldKeys",
+         "title": "Fields",
+         "type": "array",
+         "itemNoun": "field",
+         "of": [
+          {
+           "name": "fieldKey",
+           "title": "Field",
+           "type": "string"
+          }
+         ],
+         "validation": {
+          "min": 1
+         },
+         "description": "The form's field keys, in order, e.g. first_name."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "steps",
+     "title": "Steps",
+     "type": "array",
+     "group": "steps",
+     "itemNoun": "step",
+     "hidden": {
+      "field": "source",
+      "equals": "inline"
+     },
+     "validation": {
+      "min": 2,
+      "max": 6
+     },
+     "of": [
+      {
+       "name": "step",
+       "title": "Step",
+       "type": "object",
+       "icon": "list-numbers",
+       "preview": {
+        "title": "title",
+        "subtitle": "description",
+        "fallback": "Untitled step"
+       },
+       "fields": [
+        {
+         "name": "title",
+         "title": "Step title",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 32
+         }
+        },
+        {
+         "name": "description",
+         "title": "Description",
+         "type": "string",
+         "validation": {
+          "max": 100
+         }
+        },
+        {
+         "name": "fields",
+         "title": "Fields",
+         "type": "array",
+         "itemNoun": "field",
+         "validation": {
+          "min": 1,
+          "max": 8
+         },
+         "of": [
+          {
+           "name": "textField",
+           "title": "Text",
+           "type": "object",
+           "icon": "forms",
+           "preview": {
+            "title": "label",
+            "subtitle": "key",
+            "fallback": "Untitled text field"
+           },
+           "fields": [
+            {
+             "name": "key",
+             "title": "Key",
+             "type": "string",
+             "validation": {
+              "required": true,
+              "pattern": "^[a-z_]+$",
+              "patternMessage": "Use lowercase letters and underscores, like analytics_storage."
+             },
+             "description": "The column name in submissions."
+            },
+            {
+             "name": "label",
+             "title": "Label",
+             "type": "string",
+             "validation": {
+              "required": true,
+              "max": 60
+             }
+            },
+            {
+             "name": "format",
+             "title": "Format",
+             "type": "select",
+             "initialValue": "text",
+             "options": [
+              {
+               "value": "text",
+               "label": "Text"
+              },
+              {
+               "value": "email",
+               "label": "Email"
+              },
+              {
+               "value": "phone",
+               "label": "Phone"
+              },
+              {
+               "value": "date",
+               "label": "Date"
+              },
+              {
+               "value": "long",
+               "label": "Paragraph"
+              }
+             ]
+            },
+            {
+             "name": "isRequired",
+             "title": "Required",
+             "type": "boolean"
+            },
+            {
+             "name": "showIf",
+             "title": "Only show if",
+             "type": "object",
+             "icon": "git-branch",
+             "openMode": "popover",
+             "description": "Leave empty to always show it.",
+             "fields": [
+              {
+               "name": "field",
+               "title": "Answer to",
+               "type": "string",
+               "validation": {
+                "max": 32
+               },
+               "description": "The key of an earlier question or field."
+              },
+              {
+               "name": "operator",
+               "title": "Condition",
+               "type": "select",
+               "initialValue": "equals",
+               "options": [
+                {
+                 "value": "equals",
+                 "label": "Is"
+                },
+                {
+                 "value": "not",
+                 "label": "Is not"
+                },
+                {
+                 "value": "answered",
+                 "label": "Has any answer"
+                }
+               ]
+              },
+              {
+               "name": "value",
+               "title": "Value",
+               "type": "string",
+               "hidden": {
+                "field": "operator",
+                "equals": [
+                 "equals",
+                 "not"
+                ]
+               },
+               "validation": {
+                "max": 48
+               },
+               "description": "The answer's key, e.g. self-pay."
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "name": "choiceField",
+           "title": "Choice",
+           "type": "object",
+           "icon": "list-check",
+           "preview": {
+            "title": "label",
+            "subtitle": "key",
+            "fallback": "Untitled choice field"
+           },
+           "fields": [
+            {
+             "name": "key",
+             "title": "Key",
+             "type": "string",
+             "validation": {
+              "required": true,
+              "pattern": "^[a-z_]+$",
+              "patternMessage": "Use lowercase letters and underscores, like analytics_storage."
+             }
+            },
+            {
+             "name": "label",
+             "title": "Question",
+             "type": "string",
+             "validation": {
+              "required": true,
+              "max": 80
+             }
+            },
+            {
+             "name": "allowMultiple",
+             "title": "Allow several answers",
+             "type": "boolean"
+            },
+            {
+             "name": "options",
+             "title": "Answers",
+             "type": "array",
+             "itemNoun": "answer",
+             "openMode": "inline",
+             "validation": {
+              "min": 2,
+              "max": 12
+             },
+             "of": [
+              {
+               "name": "choice",
+               "title": "Answer",
+               "type": "object",
+               "icon": "point",
+               "preview": {
+                "title": "label",
+                "subtitle": "value",
+                "fallback": "Untitled answer"
+               },
+               "fields": [
+                {
+                 "name": "label",
+                 "title": "Label",
+                 "type": "string",
+                 "validation": {
+                  "required": true,
+                  "max": 48
+                 }
+                },
+                {
+                 "name": "value",
+                 "title": "Key",
+                 "type": "string",
+                 "validation": {
+                  "required": true,
+                  "pattern": "^[a-z0-9-]+$",
+                  "patternMessage": "Use lowercase letters, numbers and hyphens, like camp-kitchen."
+                 }
+                }
+               ]
+              }
+             ]
+            },
+            {
+             "name": "isRequired",
+             "title": "Required",
+             "type": "boolean"
+            },
+            {
+             "name": "showIf",
+             "title": "Only show if",
+             "type": "object",
+             "icon": "git-branch",
+             "openMode": "popover",
+             "description": "Leave empty to always show it.",
+             "fields": [
+              {
+               "name": "field",
+               "title": "Answer to",
+               "type": "string",
+               "validation": {
+                "max": 32
+               },
+               "description": "The key of an earlier question or field."
+              },
+              {
+               "name": "operator",
+               "title": "Condition",
+               "type": "select",
+               "initialValue": "equals",
+               "options": [
+                {
+                 "value": "equals",
+                 "label": "Is"
+                },
+                {
+                 "value": "not",
+                 "label": "Is not"
+                },
+                {
+                 "value": "answered",
+                 "label": "Has any answer"
+                }
+               ]
+              },
+              {
+               "name": "value",
+               "title": "Value",
+               "type": "string",
+               "hidden": {
+                "field": "operator",
+                "equals": [
+                 "equals",
+                 "not"
+                ]
+               },
+               "validation": {
+                "max": 48
+               },
+               "description": "The answer's key, e.g. self-pay."
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "name": "scaleField",
+           "title": "Scale",
+           "type": "object",
+           "icon": "adjustments-horizontal",
+           "preview": {
+            "title": "label",
+            "subtitle": "key",
+            "fallback": "Untitled scale field"
+           },
+           "fields": [
+            {
+             "name": "key",
+             "title": "Key",
+             "type": "string",
+             "validation": {
+              "required": true,
+              "pattern": "^[a-z_]+$",
+              "patternMessage": "Use lowercase letters and underscores, like analytics_storage."
+             }
+            },
+            {
+             "name": "label",
+             "title": "Question",
+             "type": "string",
+             "validation": {
+              "required": true,
+              "max": 80
+             }
+            },
+            {
+             "name": "min",
+             "title": "From",
+             "type": "number",
+             "initialValue": 0
+            },
+            {
+             "name": "max",
+             "title": "To",
+             "type": "number",
+             "initialValue": 10
+            },
+            {
+             "name": "minLabel",
+             "title": "Low end means",
+             "type": "string",
+             "validation": {
+              "max": 24
+             },
+             "placeholder": "No pain"
+            },
+            {
+             "name": "maxLabel",
+             "title": "High end means",
+             "type": "string",
+             "validation": {
+              "max": 24
+             },
+             "placeholder": "Worst pain imaginable"
+            },
+            {
+             "name": "showIf",
+             "title": "Only show if",
+             "type": "object",
+             "icon": "git-branch",
+             "openMode": "popover",
+             "description": "Leave empty to always show it.",
+             "fields": [
+              {
+               "name": "field",
+               "title": "Answer to",
+               "type": "string",
+               "validation": {
+                "max": 32
+               },
+               "description": "The key of an earlier question or field."
+              },
+              {
+               "name": "operator",
+               "title": "Condition",
+               "type": "select",
+               "initialValue": "equals",
+               "options": [
+                {
+                 "value": "equals",
+                 "label": "Is"
+                },
+                {
+                 "value": "not",
+                 "label": "Is not"
+                },
+                {
+                 "value": "answered",
+                 "label": "Has any answer"
+                }
+               ]
+              },
+              {
+               "name": "value",
+               "title": "Value",
+               "type": "string",
+               "hidden": {
+                "field": "operator",
+                "equals": [
+                 "equals",
+                 "not"
+                ]
+               },
+               "validation": {
+                "max": 48
+               },
+               "description": "The answer's key, e.g. self-pay."
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "name": "consentField",
+           "title": "Consent",
+           "type": "object",
+           "icon": "shield-check",
+           "preview": {
+            "title": "key",
+            "fallback": "Untitled consent field"
+           },
+           "fields": [
+            {
+             "name": "key",
+             "title": "Key",
+             "type": "string",
+             "validation": {
+              "required": true,
+              "pattern": "^[a-z_]+$",
+              "patternMessage": "Use lowercase letters and underscores, like analytics_storage."
+             }
+            },
+            {
+             "name": "text",
+             "title": "Wording",
+             "type": "richtext",
+             "validation": {
+              "required": true
+             }
+            },
+            {
+             "name": "isRequired",
+             "title": "Must be ticked to send",
+             "type": "boolean",
+             "initialValue": true
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "progress",
+     "title": "Progress",
+     "type": "select",
+     "group": "settings",
+     "layout": "segmented",
+     "initialValue": "steps",
+     "options": [
+      {
+       "value": "bar",
+       "label": "Bar"
+      },
+      {
+       "value": "steps",
+       "label": "Step names"
+      },
+      {
+       "value": "count",
+       "label": "Step 2 of 4"
+      }
+     ]
+    },
+    {
+     "name": "useSaveProgress",
+     "title": "Remember answers",
+     "type": "boolean",
+     "group": "settings",
+     "initialValue": true,
+     "description": "Keeps answers on this device for 24 hours."
+    },
+    {
+     "name": "submitLabel",
+     "title": "Last button label",
+     "type": "string",
+     "group": "settings",
+     "validation": {
+      "required": true,
+      "max": 24
+     },
+     "placeholder": "Send"
+    },
+    {
+     "name": "successMessage",
+     "title": "Thank-you message",
+     "type": "richtext",
+     "group": "settings",
+     "validation": {
+      "required": true
+     }
+    }
+   ]
+  },
+  "value": {
+   "heading": "Book your first visit",
+   "intro": "Three short steps, about two minutes. Your physio reads this before you arrive, so the first session is all treatment.",
+   "source": "inline",
+   "form": "form_contact",
+   "formSteps": [
+    {
+     "_key": "fs1",
+     "title": "About you",
+     "fieldKeys": [
+      "name",
+      "email",
+      "phone"
+     ]
+    },
+    {
+     "_key": "fs2",
+     "title": "Your message",
+     "fieldKeys": [
+      "topic",
+      "message"
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "_key": "st1",
+     "title": "About you",
+     "description": "So we can confirm your appointment.",
+     "fields": [
+      {
+       "_key": "f1",
+       "_type": "textField",
+       "key": "full_name",
+       "label": "Full name",
+       "format": "text",
+       "isRequired": true
+      },
+      {
+       "_key": "f2",
+       "_type": "textField",
+       "key": "email",
+       "label": "Email",
+       "format": "email",
+       "isRequired": true
+      },
+      {
+       "_key": "f3",
+       "_type": "textField",
+       "key": "phone",
+       "label": "Mobile number",
+       "format": "phone",
+       "isRequired": true
+      },
+      {
+       "_key": "f4",
+       "_type": "textField",
+       "key": "date_of_birth",
+       "label": "Date of birth",
+       "format": "date",
+       "isRequired": true
+      }
+     ]
+    },
+    {
+     "_key": "st2",
+     "title": "What brings you in",
+     "fields": [
+      {
+       "_key": "f5",
+       "_type": "choiceField",
+       "key": "area",
+       "label": "Where does it hurt?",
+       "allowMultiple": true,
+       "isRequired": true,
+       "options": [
+        {
+         "_key": "o1",
+         "label": "Neck",
+         "value": "neck"
+        },
+        {
+         "_key": "o2",
+         "label": "Shoulder",
+         "value": "shoulder"
+        },
+        {
+         "_key": "o3",
+         "label": "Lower back",
+         "value": "lower-back"
+        },
+        {
+         "_key": "o4",
+         "label": "Hip",
+         "value": "hip"
+        },
+        {
+         "_key": "o5",
+         "label": "Knee",
+         "value": "knee"
+        },
+        {
+         "_key": "o6",
+         "label": "Ankle or foot",
+         "value": "ankle-foot"
+        }
+       ]
+      },
+      {
+       "_key": "f6",
+       "_type": "scaleField",
+       "key": "pain_level",
+       "label": "How bad is it on a typical day?",
+       "min": 0,
+       "max": 10,
+       "minLabel": "No pain",
+       "maxLabel": "Worst pain imaginable"
+      },
+      {
+       "_key": "f7",
+       "_type": "choiceField",
+       "key": "had_surgery",
+       "label": "Have you had surgery for this?",
+       "allowMultiple": false,
+       "isRequired": true,
+       "options": [
+        {
+         "_key": "o7",
+         "label": "Yes",
+         "value": "yes"
+        },
+        {
+         "_key": "o8",
+         "label": "No",
+         "value": "no"
+        }
+       ]
+      },
+      {
+       "_key": "f8",
+       "_type": "textField",
+       "key": "surgery_date",
+       "label": "When was the surgery?",
+       "format": "date",
+       "isRequired": true,
+       "showIf": {
+        "field": "had_surgery",
+        "operator": "equals",
+        "value": "yes"
+       }
+      }
+     ]
+    },
+    {
+     "_key": "st3",
+     "title": "Paying for care",
+     "fields": [
+      {
+       "_key": "f9",
+       "_type": "choiceField",
+       "key": "insurer",
+       "label": "How will you pay?",
+       "allowMultiple": false,
+       "isRequired": true,
+       "options": [
+        {
+         "_key": "o9",
+         "label": "Aetna",
+         "value": "aetna"
+        },
+        {
+         "_key": "o10",
+         "label": "Blue Cross Blue Shield",
+         "value": "bcbs"
+        },
+        {
+         "_key": "o11",
+         "label": "UnitedHealthcare",
+         "value": "uhc"
+        },
+        {
+         "_key": "o12",
+         "label": "Self-pay",
+         "value": "self-pay"
+        }
+       ]
+      },
+      {
+       "_key": "f10",
+       "_type": "textField",
+       "key": "member_id",
+       "label": "Member ID",
+       "format": "text",
+       "isRequired": true,
+       "showIf": {
+        "field": "insurer",
+        "operator": "not",
+        "value": "self-pay"
+       }
+      },
+      {
+       "_key": "f11",
+       "_type": "consentField",
+       "key": "privacy_consent",
+       "text": "<p>I've read the <a href=\"/privacy-practices\">Notice of Privacy Practices</a> and agree to Juniper Physio storing this information for my care.</p>",
+       "isRequired": true
+      }
+     ]
+    }
+   ],
+   "progress": "steps",
+   "useSaveProgress": false,
+   "submitLabel": "Request appointment",
+   "successMessage": "<p>Thanks \u2014 we'll text you within one business day with two appointment times to choose from.</p>"
+  }
+ },
+ {
+  "id": "conversion-booking-embed",
+  "name": "Booking / reservations embed",
+  "category": "Conversion & forms",
+  "kind": "block",
+  "brand": "Hearth & Ash",
+  "previewLayout": "split",
+  "proves": "Provider select \u2192 provider-specific ids (conditional) \u00b7 experiences array with party-size range and deposits \u00b7 large-party handoff",
+  "schema": {
+   "name": "booking",
+   "title": "Booking",
+   "kind": "block",
+   "icon": "calendar-time",
+   "category": "Conversion & forms",
+   "description": "Reservations or appointments from your booking provider",
+   "preview": {
+    "title": "heading",
+    "subtitle": "provider",
+    "icon": "calendar-event"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "provider",
+     "title": "Booking provider"
+    },
+    {
+     "name": "experiences",
+     "title": "What can be booked"
+    }
+   ],
+   "fields": [
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "validation": {
+      "required": true,
+      "recommendedMax": 48
+     }
+    },
+    {
+     "name": "intro",
+     "title": "Intro",
+     "type": "text",
+     "rows": 2,
+     "validation": {
+      "recommendedMax": 180
+     }
+    },
+    {
+     "name": "provider",
+     "title": "Provider",
+     "type": "select",
+     "group": "provider",
+     "validation": {
+      "required": true
+     },
+     "options": [
+      {
+       "value": "resy",
+       "label": "Resy"
+      },
+      {
+       "value": "opentable",
+       "label": "OpenTable"
+      },
+      {
+       "value": "tock",
+       "label": "Tock"
+      },
+      {
+       "value": "calcom",
+       "label": "Cal.com",
+       "description": "For appointments and consultations"
+      }
+     ]
+    },
+    {
+     "name": "resyVenueId",
+     "title": "Resy venue ID",
+     "type": "number",
+     "group": "provider",
+     "hidden": {
+      "field": "provider",
+      "equals": "resy"
+     },
+     "validation": {
+      "required": true
+     },
+     "description": "The number in your Resy widget code, e.g. 58421."
+    },
+    {
+     "name": "openTableRid",
+     "title": "OpenTable restaurant ID",
+     "type": "number",
+     "group": "provider",
+     "hidden": {
+      "field": "provider",
+      "equals": "opentable"
+     },
+     "validation": {
+      "required": true
+     },
+     "description": "The rid in your OpenTable widget code."
+    },
+    {
+     "name": "tockSlug",
+     "title": "Tock page",
+     "type": "string",
+     "group": "provider",
+     "hidden": {
+      "field": "provider",
+      "equals": "tock"
+     },
+     "validation": {
+      "required": true,
+      "pattern": "^[a-z0-9-]+$",
+      "patternMessage": "Use the part after exploretock.com/, like caldera-kitchen."
+     }
+    },
+    {
+     "name": "calLink",
+     "title": "Cal.com link",
+     "type": "url",
+     "group": "provider",
+     "hidden": {
+      "field": "provider",
+      "equals": "calcom"
+     },
+     "validation": {
+      "required": true,
+      "pattern": "^https://cal\\.com/",
+      "patternMessage": "Use a cal.com link, like https://cal.com/caldera/demo."
+     }
+    },
+    {
+     "name": "display",
+     "title": "Shows as",
+     "type": "select",
+     "group": "provider",
+     "layout": "segmented",
+     "initialValue": "inline",
+     "options": [
+      {
+       "value": "inline",
+       "label": "Inline widget"
+      },
+      {
+       "value": "button",
+       "label": "Button that opens it"
+      }
+     ]
+    },
+    {
+     "name": "experiences",
+     "title": "Experiences",
+     "type": "array",
+     "group": "experiences",
+     "itemNoun": "experience",
+     "validation": {
+      "max": 6
+     },
+     "of": [
+      {
+       "name": "experience",
+       "title": "Experience",
+       "type": "object",
+       "icon": "tools-kitchen-2",
+       "preview": {
+        "title": "name",
+        "subtitle": "duration",
+        "media": "image",
+        "fallback": "Untitled experience"
+       },
+       "fields": [
+        {
+         "name": "name",
+         "title": "Name",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 40
+         }
+        },
+        {
+         "name": "description",
+         "title": "Description",
+         "type": "text",
+         "rows": 2,
+         "validation": {
+          "recommendedMax": 160
+         }
+        },
+        {
+         "name": "image",
+         "title": "Image",
+         "type": "image"
+        },
+        {
+         "name": "duration",
+         "title": "Length",
+         "type": "number",
+         "numeric": {
+          "min": 15,
+          "max": 360,
+          "step": 15,
+          "unit": "min"
+         }
+        },
+        {
+         "name": "partyMin",
+         "title": "Smallest party",
+         "type": "number",
+         "numeric": {
+          "min": 1,
+          "max": 20,
+          "step": 1,
+          "unit": "guests"
+         }
+        },
+        {
+         "name": "partyMax",
+         "title": "Largest party",
+         "type": "number",
+         "numeric": {
+          "min": 1,
+          "max": 40,
+          "step": 1,
+          "unit": "guests"
+         }
+        },
+        {
+         "name": "pricePerPerson",
+         "title": "Price per person",
+         "type": "number",
+         "numeric": {
+          "unit": "USD",
+          "min": 0,
+          "step": 1
+         },
+         "description": "0 or empty for \u00e0 la carte."
+        },
+        {
+         "name": "hasDeposit",
+         "title": "Takes a deposit",
+         "type": "boolean"
+        },
+        {
+         "name": "bookingType",
+         "title": "Booking type ID",
+         "type": "string",
+         "access": {
+          "edit": "schema.manage"
+         },
+         "lockReason": "Matches the provider's booking type",
+         "description": "Opens the widget straight on this experience."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "largePartyFrom",
+     "title": "Large parties from",
+     "type": "number",
+     "numeric": {
+      "min": 6,
+      "max": 40,
+      "step": 1,
+      "unit": "guests"
+     },
+     "description": "Parties this size or bigger see the button below instead."
+    },
+    {
+     "name": "largePartyButton",
+     "title": "Large party button",
+     "type": "button",
+     "hidden": {
+      "field": "largePartyFrom",
+      "notEmpty": true
+     }
+    },
+    {
+     "name": "policy",
+     "title": "Booking policy",
+     "type": "richtext"
+    },
+    {
+     "name": "phone",
+     "title": "Phone",
+     "type": "link"
+    }
+   ]
+  },
+  "value": {
+   "heading": "Reserve a table",
+   "intro": "Bookings open 30 days ahead at 10am. A few seats at the counter are always kept for walk-ins.",
+   "provider": "resy",
+   "resyVenueId": 58421,
+   "display": "inline",
+   "experiences": [
+    {
+     "_key": "ex1",
+     "name": "Dining room",
+     "description": "The full \u00e0 la carte menu from the wood-fired hearth.",
+     "image": {
+      "url": "https://picsum.photos/seed/hearthash-dining-room/1200/900",
+      "alt": "A candlelit dining room with an open wood fire at the back",
+      "name": "hearthash-dining-room.jpg",
+      "width": 1200,
+      "height": 900
+     },
+     "duration": 120,
+     "partyMin": 1,
+     "partyMax": 6,
+     "hasDeposit": false,
+     "bookingType": "resy-dining"
+    },
+    {
+     "_key": "ex2",
+     "name": "Chef's counter",
+     "description": "Nine courses cooked in front of you by Chef Amara Osei and the team.",
+     "image": {
+      "url": "https://picsum.photos/seed/hearthash-chefs-counter/1200/900",
+      "alt": "Chef plating a course at a counter facing the hearth",
+      "name": "hearthash-chefs-counter.jpg",
+      "width": 1200,
+      "height": 900
+     },
+     "duration": 180,
+     "partyMin": 1,
+     "partyMax": 4,
+     "pricePerPerson": 165,
+     "hasDeposit": true,
+     "bookingType": "resy-counter"
+    }
+   ],
+   "largePartyFrom": 7,
+   "largePartyButton": {
+    "label": "Plan a private dinner",
+    "href": "/private-dining",
+    "type": "page",
+    "style": "outline"
+   },
+   "policy": "<p>Cancel up to 24 hours ahead at no charge. Chef's counter bookings take a $50 per person deposit, credited to your bill. Tell us about allergies when you book \u2014 the kitchen cooks without nuts on request.</p>",
+   "phone": {
+    "type": "phone",
+    "href": "tel:+15035550199",
+    "phone": "+1 503 555 0199",
+    "label": "(503) 555-0199"
+   }
+  }
+ },
+ {
+  "id": "conversion-waitlist-referral",
+  "name": "Waitlist with referral rewards",
+  "category": "Conversion & forms",
+  "kind": "block",
+  "brand": "Caldera",
+  "previewLayout": "split",
+  "proves": "Reuses one form with a list tag \u00b7 referral reward ladder \u00b7 share channels + message token \u00b7 an honest signup counter with a minimum",
+  "schema": {
+   "name": "waitlist",
+   "title": "Waitlist",
+   "kind": "block",
+   "icon": "user-plus",
+   "category": "Conversion & forms",
+   "description": "Join-the-list for a launch, with rewards for sharing",
+   "preview": {
+    "title": "heading",
+    "subtitle": "launch",
+    "media": "image"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "form",
+     "title": "Sign-up"
+    },
+    {
+     "name": "referral",
+     "title": "Referrals"
+    }
+   ],
+   "fields": [
+    {
+     "name": "eyebrow",
+     "title": "Eyebrow",
+     "type": "string",
+     "validation": {
+      "max": 32
+     }
+    },
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "validation": {
+      "required": true,
+      "recommendedMax": 48
+     },
+     "ai": true
+    },
+    {
+     "name": "body",
+     "title": "Body",
+     "type": "text",
+     "rows": 3,
+     "validation": {
+      "recommendedMax": 220
+     },
+     "ai": true
+    },
+    {
+     "name": "image",
+     "title": "Image",
+     "type": "image",
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "launch",
+     "title": "Launch window",
+     "type": "string",
+     "validation": {
+      "max": 32
+     },
+     "placeholder": "Spring 2027",
+     "description": "Words, not a date, until the date is certain."
+    },
+    {
+     "name": "form",
+     "title": "Form",
+     "type": "reference",
+     "reference": {
+      "to": [
+       "form"
+      ]
+     },
+     "validation": {
+      "required": true
+     },
+     "description": "Sign-ups join this form's list with the tag below.",
+     "group": "form"
+    },
+    {
+     "name": "listTag",
+     "title": "List tag",
+     "type": "string",
+     "group": "form",
+     "validation": {
+      "required": true,
+      "pattern": "^[a-z0-9-]+$",
+      "patternMessage": "Use lowercase letters, numbers and hyphens, like camp-kitchen."
+     },
+     "description": "Tags everyone who joins here."
+    },
+    {
+     "name": "submitLabel",
+     "title": "Button label",
+     "type": "string",
+     "group": "form",
+     "validation": {
+      "required": true,
+      "max": 24
+     },
+     "placeholder": "Join the waitlist"
+    },
+    {
+     "name": "showCounter",
+     "title": "Show how many have joined",
+     "type": "boolean",
+     "group": "form",
+     "description": "A live count from the form's submissions."
+    },
+    {
+     "name": "counterMin",
+     "title": "Only once it passes",
+     "type": "number",
+     "group": "form",
+     "hidden": {
+      "field": "showCounter",
+      "equals": true
+     },
+     "numeric": {
+      "min": 0,
+      "step": 50,
+      "unit": "sign-ups"
+     },
+     "description": "Hides the count while it's below this."
+    },
+    {
+     "name": "useReferrals",
+     "title": "Referral rewards",
+     "type": "boolean",
+     "group": "referral"
+    },
+    {
+     "name": "rewards",
+     "title": "Rewards",
+     "type": "array",
+     "group": "referral",
+     "itemNoun": "reward",
+     "openMode": "inline",
+     "hidden": {
+      "field": "useReferrals",
+      "equals": true
+     },
+     "validation": {
+      "min": 1,
+      "max": 4
+     },
+     "of": [
+      {
+       "name": "reward",
+       "title": "Reward",
+       "type": "object",
+       "icon": "gift",
+       "preview": {
+        "title": "reward",
+        "subtitle": "friends",
+        "fallback": "Untitled reward"
+       },
+       "fields": [
+        {
+         "name": "friends",
+         "title": "Friends who join",
+         "type": "number",
+         "numeric": {
+          "min": 1,
+          "max": 50,
+          "step": 1
+         },
+         "validation": {
+          "required": true
+         }
+        },
+        {
+         "name": "reward",
+         "title": "Reward",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 48
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "channels",
+     "title": "Share buttons",
+     "type": "multiselect",
+     "group": "referral",
+     "layout": "checkbox",
+     "hidden": {
+      "field": "useReferrals",
+      "equals": true
+     },
+     "options": [
+      {
+       "value": "copy",
+       "label": "Copy link"
+      },
+      {
+       "value": "email",
+       "label": "Email"
+      },
+      {
+       "value": "sms",
+       "label": "Text message"
+      },
+      {
+       "value": "whatsapp",
+       "label": "WhatsApp"
+      },
+      {
+       "value": "x",
+       "label": "X"
+      }
+     ]
+    },
+    {
+     "name": "shareMessage",
+     "title": "Share message",
+     "type": "text",
+     "rows": 2,
+     "group": "referral",
+     "hidden": {
+      "field": "useReferrals",
+      "equals": true
+     },
+     "validation": {
+      "max": 200
+     },
+     "description": "{{link}} becomes their personal link."
+    },
+    {
+     "name": "successMessage",
+     "title": "After joining",
+     "type": "richtext",
+     "validation": {
+      "required": true
+     },
+     "description": "{{position}} shows their place in line when referrals are on."
+    }
+   ]
+  },
+  "value": {
+   "eyebrow": "Coming spring 2027",
+   "heading": "The Ember Pizza Oven",
+   "body": "A cast iron pizza oven that sits on any fire ring and hits 900\u00b0F in twenty minutes. The first run is 1,500 ovens, and the waitlist gets first access and launch pricing.",
+   "image": {
+    "url": "https://picsum.photos/seed/caldera-pizza-oven-teaser/1600/1200",
+    "alt": "A cast iron dome oven glowing over a campfire with a blistered pizza inside",
+    "name": "caldera-pizza-oven-teaser.jpg",
+    "width": 1600,
+    "height": 1200
+   },
+   "launch": "Spring 2027",
+   "form": "form_newsletter",
+   "listTag": "ember-oven-waitlist",
+   "submitLabel": "Join the waitlist",
+   "showCounter": true,
+   "counterMin": 500,
+   "useReferrals": true,
+   "rewards": [
+    {
+     "_key": "rw1",
+     "friends": 1,
+     "reward": "Move up 100 places"
+    },
+    {
+     "_key": "rw2",
+     "friends": 3,
+     "reward": "A free pizza peel ($45)"
+    },
+    {
+     "_key": "rw3",
+     "friends": 10,
+     "reward": "Your oven ships in the first week"
+    }
+   ],
+   "channels": [
+    "copy",
+    "email",
+    "sms",
+    "whatsapp"
+   ],
+   "shareMessage": "I'm on the list for Caldera's new pizza oven \u2014 900\u00b0F over a campfire. Join with my link and we both move up: {{link}}",
+   "successMessage": "<p>You're number <strong>{{position}}</strong>. Share your link \u2014 every friend who joins moves you up.</p>"
+  }
+ },
+ {
+  "id": "conversion-contact-section",
+  "name": "Contact section",
+  "category": "Conversion & forms",
+  "kind": "block",
+  "brand": "Caldera",
+  "previewLayout": "split",
+  "proves": "Channel cards with typed links (email / phone / chat / visit) \u00b7 form reference \u00b7 optional map pin + address \u00b7 layout variants",
+  "schema": {
+   "name": "contactSection",
+   "title": "Contact",
+   "kind": "block",
+   "icon": "address-book",
+   "category": "Conversion & forms",
+   "description": "Ways to reach you, a form and where to find you",
+   "variants": [
+    {
+     "id": "form-right",
+     "name": "Channels left, form right"
+    },
+    {
+     "id": "channels-only",
+     "name": "Channels only"
+    },
+    {
+     "id": "stacked",
+     "name": "Stacked",
+     "description": "Channels, then the form, then the map"
+    }
+   ],
+   "preview": {
+    "title": "heading",
+    "subtitle": "intro",
+    "icon": "address-book"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "channels",
+     "title": "Channels"
+    },
+    {
+     "name": "visit",
+     "title": "Visit us"
+    }
+   ],
+   "fields": [
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "validation": {
+      "required": true,
+      "recommendedMax": 48
+     }
+    },
+    {
+     "name": "intro",
+     "title": "Intro",
+     "type": "text",
+     "rows": 2,
+     "validation": {
+      "recommendedMax": 160
+     }
+    },
+    {
+     "name": "channels",
+     "title": "Channels",
+     "type": "array",
+     "group": "channels",
+     "itemNoun": "channel",
+     "validation": {
+      "min": 1,
+      "max": 5
+     },
+     "of": [
+      {
+       "name": "channel",
+       "title": "Channel",
+       "type": "object",
+       "icon": "message-circle",
+       "preview": {
+        "title": "label",
+        "subtitle": "detail",
+        "fallback": "Untitled channel"
+       },
+       "fields": [
+        {
+         "name": "kind",
+         "title": "Type",
+         "type": "select",
+         "layout": "segmented",
+         "initialValue": "email",
+         "options": [
+          {
+           "value": "email",
+           "label": "Email",
+           "icon": "mail"
+          },
+          {
+           "value": "phone",
+           "label": "Phone",
+           "icon": "phone"
+          },
+          {
+           "value": "chat",
+           "label": "Chat",
+           "icon": "message"
+          },
+          {
+           "value": "visit",
+           "label": "Visit",
+           "icon": "map-pin"
+          }
+         ]
+        },
+        {
+         "name": "label",
+         "title": "Label",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 32
+         },
+         "placeholder": "Orders and returns"
+        },
+        {
+         "name": "link",
+         "title": "Link",
+         "type": "link",
+         "validation": {
+          "required": true
+         },
+         "description": "An email, phone number or page. #chat opens the chat widget."
+        },
+        {
+         "name": "detail",
+         "title": "Detail",
+         "type": "string",
+         "validation": {
+          "max": 60
+         }
+        },
+        {
+         "name": "hours",
+         "title": "Hours",
+         "type": "string",
+         "validation": {
+          "max": 48
+         },
+         "placeholder": "Mon\u2013Fri, 8am\u20135pm PT"
+        },
+        {
+         "name": "replyTime",
+         "title": "Reply time",
+         "type": "string",
+         "validation": {
+          "max": 32
+         },
+         "placeholder": "Within a day"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "form",
+     "title": "Form",
+     "type": "reference",
+     "reference": {
+      "to": [
+       "form"
+      ]
+     },
+     "validation": {},
+     "description": "Edit its fields and who gets notified in Forms."
+    },
+    {
+     "name": "showMap",
+     "title": "Show a map",
+     "type": "boolean",
+     "group": "visit"
+    },
+    {
+     "name": "location",
+     "title": "Map pin",
+     "type": "geopoint",
+     "group": "visit",
+     "hidden": {
+      "field": "showMap",
+      "equals": true
+     },
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "address",
+     "title": "Address",
+     "type": "text",
+     "rows": 3,
+     "group": "visit",
+     "hidden": {
+      "field": "showMap",
+      "equals": true
+     }
+    }
+   ]
+  },
+  "value": {
+   "_variant": "form-right",
+   "heading": "Talk to a person",
+   "intro": "Our customer team works from the Bend foundry. We answer every email ourselves, usually the same day.",
+   "channels": [
+    {
+     "_key": "ch1",
+     "kind": "email",
+     "label": "Orders and returns",
+     "link": {
+      "type": "email",
+      "href": "mailto:help@caldera.com",
+      "email": "help@caldera.com"
+     },
+     "detail": "help@caldera.com",
+     "hours": "Mon\u2013Fri, 8am\u20135pm PT",
+     "replyTime": "Within a day"
+    },
+    {
+     "_key": "ch2",
+     "kind": "phone",
+     "label": "Call the foundry",
+     "link": {
+      "type": "phone",
+      "href": "tel:+15415550182",
+      "phone": "+1 541 555 0182"
+     },
+     "detail": "(541) 555-0182",
+     "hours": "Mon\u2013Fri, 9am\u20134pm PT"
+    },
+    {
+     "_key": "ch3",
+     "kind": "chat",
+     "label": "Chat with us",
+     "link": {
+      "type": "section",
+      "href": "#chat"
+     },
+     "detail": "Live on weekdays",
+     "replyTime": "A few minutes"
+    },
+    {
+     "_key": "ch4",
+     "kind": "email",
+     "label": "Wholesale",
+     "link": {
+      "type": "email",
+      "href": "mailto:wholesale@caldera.com",
+      "email": "wholesale@caldera.com",
+      "subject": "Wholesale enquiry"
+     },
+     "detail": "wholesale@caldera.com"
+    }
+   ],
+   "form": "form_contact",
+   "showMap": true,
+   "location": {
+    "label": "Caldera Foundry",
+    "address": "1020 NW Wall St, Bend, OR 97703",
+    "lat": 44.0596,
+    "lng": -121.3133
+   },
+   "address": "Caldera Foundry & Shop\n1020 NW Wall St\nBend, OR 97703"
+  }
+ },
+ {
+  "id": "conversion-quiz-product-finder",
+  "name": "Quiz / product finder",
+  "category": "Conversion & forms",
+  "kind": "block",
+  "brand": "Caldera",
+  "previewLayout": "centered",
+  "proves": "Six drill levels: questions \u203a answers \u203a scores \u203a product refs \u00b7 visitor-side branching (showIf) \u00b7 results mapped to products with a fallback \u00b7 optional email gate",
+  "schema": {
+   "name": "productQuiz",
+   "title": "Product finder quiz",
+   "kind": "block",
+   "icon": "zoom-question",
+   "category": "Conversion & forms",
+   "description": "A few questions that recommend the right product",
+   "preview": {
+    "title": "heading",
+    "subtitle": "intro",
+    "media": "image"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Intro",
+     "default": true
+    },
+    {
+     "name": "questions",
+     "title": "Questions"
+    },
+    {
+     "name": "results",
+     "title": "Results"
+    },
+    {
+     "name": "capture",
+     "title": "Email"
+    }
+   ],
+   "fields": [
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "validation": {
+      "required": true,
+      "recommendedMax": 48
+     },
+     "ai": true
+    },
+    {
+     "name": "intro",
+     "title": "Intro",
+     "type": "text",
+     "rows": 2,
+     "validation": {
+      "recommendedMax": 160
+     }
+    },
+    {
+     "name": "image",
+     "title": "Image",
+     "type": "image"
+    },
+    {
+     "name": "startLabel",
+     "title": "Start button label",
+     "type": "string",
+     "validation": {
+      "required": true,
+      "max": 24
+     },
+     "placeholder": "Find my pan"
+    },
+    {
+     "name": "questions",
+     "title": "Questions",
+     "type": "array",
+     "group": "questions",
+     "itemNoun": "question",
+     "validation": {
+      "min": 2,
+      "max": 8
+     },
+     "of": [
+      {
+       "name": "question",
+       "title": "Question",
+       "type": "object",
+       "icon": "help-circle",
+       "preview": {
+        "title": "question",
+        "subtitle": "key",
+        "fallback": "Untitled question"
+       },
+       "fields": [
+        {
+         "name": "key",
+         "title": "Key",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "pattern": "^[a-z_]+$",
+          "patternMessage": "Use lowercase letters and underscores, like analytics_storage.",
+          "unique": true
+         },
+         "description": "Used by \"Only show if\" on later questions."
+        },
+        {
+         "name": "question",
+         "title": "Question",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 90
+         },
+         "ai": true
+        },
+        {
+         "name": "help",
+         "title": "Hint",
+         "type": "string",
+         "validation": {
+          "max": 90
+         }
+        },
+        {
+         "name": "style",
+         "title": "Answers look like",
+         "type": "select",
+         "layout": "segmented",
+         "initialValue": "buttons",
+         "options": [
+          {
+           "value": "buttons",
+           "label": "Buttons"
+          },
+          {
+           "value": "images",
+           "label": "Picture cards"
+          }
+         ]
+        },
+        {
+         "name": "allowMultiple",
+         "title": "Allow several answers",
+         "type": "boolean"
+        },
+        {
+         "name": "answers",
+         "title": "Answers",
+         "type": "array",
+         "itemNoun": "answer",
+         "validation": {
+          "min": 2,
+          "max": 6
+         },
+         "of": [
+          {
+           "name": "answer",
+           "title": "Answer",
+           "type": "object",
+           "icon": "point",
+           "preview": {
+            "title": "label",
+            "subtitle": "key",
+            "media": "image",
+            "fallback": "Untitled answer"
+           },
+           "fields": [
+            {
+             "name": "key",
+             "title": "Key",
+             "type": "string",
+             "validation": {
+              "required": true,
+              "pattern": "^[a-z0-9-]+$",
+              "patternMessage": "Use lowercase letters, numbers and hyphens, like camp-kitchen."
+             }
+            },
+            {
+             "name": "label",
+             "title": "Label",
+             "type": "string",
+             "validation": {
+              "required": true,
+              "max": 48
+             }
+            },
+            {
+             "name": "image",
+             "title": "Image",
+             "type": "image",
+             "description": "Used when answers show as picture cards."
+            },
+            {
+             "name": "scores",
+             "title": "Points",
+             "type": "array",
+             "itemNoun": "score",
+             "openMode": "inline",
+             "validation": {
+              "max": 6
+             },
+             "description": "The highest total wins.",
+             "of": [
+              {
+               "name": "score",
+               "title": "Score",
+               "type": "object",
+               "icon": "plus-minus",
+               "preview": {
+                "title": "product",
+                "subtitle": "points",
+                "fallback": "Untitled score"
+               },
+               "fields": [
+                {
+                 "name": "product",
+                 "title": "Product",
+                 "type": "reference",
+                 "reference": {
+                  "to": [
+                   "col_products"
+                  ]
+                 },
+                 "validation": {
+                  "required": true
+                 }
+                },
+                {
+                 "name": "points",
+                 "title": "Points",
+                 "type": "number",
+                 "initialValue": 1,
+                 "numeric": {
+                  "min": -5,
+                  "max": 5,
+                  "step": 1
+                 },
+                 "description": "Negative points rule a product out."
+                }
+               ]
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        },
+        {
+         "name": "showIf",
+         "title": "Only show if",
+         "type": "object",
+         "icon": "git-branch",
+         "openMode": "popover",
+         "description": "Leave empty to always show it.",
+         "fields": [
+          {
+           "name": "field",
+           "title": "Answer to",
+           "type": "string",
+           "validation": {
+            "max": 32
+           },
+           "description": "The key of an earlier question or field."
+          },
+          {
+           "name": "operator",
+           "title": "Condition",
+           "type": "select",
+           "initialValue": "equals",
+           "options": [
+            {
+             "value": "equals",
+             "label": "Is"
+            },
+            {
+             "value": "not",
+             "label": "Is not"
+            },
+            {
+             "value": "answered",
+             "label": "Has any answer"
+            }
+           ]
+          },
+          {
+           "name": "value",
+           "title": "Value",
+           "type": "string",
+           "hidden": {
+            "field": "operator",
+            "equals": [
+             "equals",
+             "not"
+            ]
+           },
+           "validation": {
+            "max": 48
+           },
+           "description": "The answer's key, e.g. self-pay."
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "resultsHeading",
+     "title": "Results heading",
+     "type": "string",
+     "group": "results",
+     "validation": {
+      "max": 48
+     },
+     "placeholder": "Your match"
+    },
+    {
+     "name": "showTop",
+     "title": "Products to show",
+     "type": "number",
+     "group": "results",
+     "layout": "slider",
+     "initialValue": 1,
+     "numeric": {
+      "min": 1,
+      "max": 3,
+      "step": 1
+     }
+    },
+    {
+     "name": "results",
+     "title": "Result copy",
+     "type": "array",
+     "group": "results",
+     "itemNoun": "result",
+     "validation": {
+      "max": 12
+     },
+     "of": [
+      {
+       "name": "result",
+       "title": "Result",
+       "type": "object",
+       "icon": "award",
+       "preview": {
+        "title": "heading",
+        "subtitle": "product",
+        "fallback": "Untitled result"
+       },
+       "fields": [
+        {
+         "name": "product",
+         "title": "Product",
+         "type": "reference",
+         "reference": {
+          "to": [
+           "col_products"
+          ]
+         },
+         "validation": {
+          "required": true
+         }
+        },
+        {
+         "name": "heading",
+         "title": "Heading",
+         "type": "string",
+         "validation": {
+          "max": 60
+         },
+         "ai": true
+        },
+        {
+         "name": "why",
+         "title": "Why it fits",
+         "type": "richtext",
+         "ai": true
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "fallback",
+     "title": "If nothing scores",
+     "type": "reference",
+     "group": "results",
+     "reference": {
+      "to": [
+       "col_products"
+      ]
+     },
+     "validation": {
+      "required": true
+     },
+     "description": "Recommended when every product scores zero or less."
+    },
+    {
+     "name": "retakeLabel",
+     "title": "Retake label",
+     "type": "string",
+     "group": "results",
+     "validation": {
+      "max": 24
+     },
+     "placeholder": "Start over"
+    },
+    {
+     "name": "useEmailGate",
+     "title": "Ask for an email before results",
+     "type": "boolean",
+     "group": "capture",
+     "description": "Results are always shown, even if they skip."
+    },
+    {
+     "name": "form",
+     "title": "Form",
+     "type": "reference",
+     "reference": {
+      "to": [
+       "form"
+      ]
+     },
+     "validation": {
+      "required": true
+     },
+     "description": "Answers are saved with the email on this form.",
+     "group": "capture",
+     "hidden": {
+      "field": "useEmailGate",
+      "equals": true
+     }
+    },
+    {
+     "name": "emailPrompt",
+     "title": "Prompt",
+     "type": "string",
+     "group": "capture",
+     "hidden": {
+      "field": "useEmailGate",
+      "equals": true
+     },
+     "validation": {
+      "max": 90
+     },
+     "placeholder": "Want your results and a care guide by email?"
+    }
+   ]
+  },
+  "value": {
+   "heading": "Find your first pan",
+   "intro": "Four quick questions about how you cook. We'll match you with one piece of Caldera that will earn its place.",
+   "image": {
+    "url": "https://picsum.photos/seed/caldera-quiz-cooks/1600/1000",
+    "alt": "Three Caldera pans laid out on a picnic table beside a lake",
+    "name": "caldera-quiz-cooks.jpg",
+    "width": 1600,
+    "height": 1000
+   },
+   "startLabel": "Find my pan",
+   "questions": [
+    {
+     "_key": "q1",
+     "key": "where",
+     "question": "Where do you cook most?",
+     "style": "images",
+     "allowMultiple": false,
+     "answers": [
+      {
+       "_key": "a1",
+       "key": "home",
+       "label": "At home",
+       "image": {
+        "url": "https://picsum.photos/seed/caldera-quiz-home/600/600",
+        "alt": "A kitchen stove",
+        "name": "caldera-quiz-home.jpg",
+        "width": 600,
+        "height": 600
+       },
+       "scores": [
+        {
+         "_key": "s1",
+         "product": "en_p3",
+         "points": 2
+        },
+        {
+         "_key": "s2",
+         "product": "en_p2",
+         "points": 2
+        }
+       ]
+      },
+      {
+       "_key": "a2",
+       "key": "campsite",
+       "label": "At the campsite",
+       "image": {
+        "url": "https://picsum.photos/seed/caldera-quiz-camp/600/600",
+        "alt": "A fire ring at a campsite",
+        "name": "caldera-quiz-camp.jpg",
+        "width": 600,
+        "height": 600
+       },
+       "scores": [
+        {
+         "_key": "s3",
+         "product": "en_p2",
+         "points": 2
+        },
+        {
+         "_key": "s4",
+         "product": "en_p1",
+         "points": 1
+        }
+       ]
+      },
+      {
+       "_key": "a3",
+       "key": "backcountry",
+       "label": "Miles from the car",
+       "image": {
+        "url": "https://picsum.photos/seed/caldera-quiz-trail/600/600",
+        "alt": "A backpack on a mountain trail",
+        "name": "caldera-quiz-trail.jpg",
+        "width": 600,
+        "height": 600
+       },
+       "scores": [
+        {
+         "_key": "s5",
+         "product": "en_p1",
+         "points": 3
+        },
+        {
+         "_key": "s6",
+         "product": "en_p4",
+         "points": 2
+        },
+        {
+         "_key": "s7",
+         "product": "en_p2",
+         "points": -5
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "_key": "q2",
+     "key": "carry",
+     "question": "How far do you carry your kit?",
+     "help": "Cast iron is heavy. Be honest.",
+     "style": "buttons",
+     "allowMultiple": false,
+     "showIf": {
+      "field": "where",
+      "operator": "not",
+      "value": "home"
+     },
+     "answers": [
+      {
+       "_key": "a4",
+       "key": "car",
+       "label": "From the car to the fire",
+       "scores": [
+        {
+         "_key": "s8",
+         "product": "en_p2",
+         "points": 1
+        }
+       ]
+      },
+      {
+       "_key": "a5",
+       "key": "pack",
+       "label": "In my backpack",
+       "scores": [
+        {
+         "_key": "s9",
+         "product": "en_p1",
+         "points": 2
+        },
+        {
+         "_key": "s10",
+         "product": "en_p3",
+         "points": -2
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "_key": "q3",
+     "key": "cook",
+     "question": "What do you want to cook?",
+     "style": "buttons",
+     "allowMultiple": true,
+     "answers": [
+      {
+       "_key": "a6",
+       "key": "sear",
+       "label": "Steaks and smash burgers",
+       "scores": [
+        {
+         "_key": "s11",
+         "product": "en_p3",
+         "points": 2
+        },
+        {
+         "_key": "s12",
+         "product": "en_p1",
+         "points": 1
+        }
+       ]
+      },
+      {
+       "_key": "a7",
+       "key": "bake",
+       "label": "Bread and cobblers",
+       "scores": [
+        {
+         "_key": "s13",
+         "product": "en_p2",
+         "points": 3
+        }
+       ]
+      },
+      {
+       "_key": "a8",
+       "key": "brew",
+       "label": "Coffee and noodles",
+       "scores": [
+        {
+         "_key": "s14",
+         "product": "en_p4",
+         "points": 3
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "resultsHeading": "Your match",
+   "showTop": 2,
+   "results": [
+    {
+     "_key": "r1",
+     "product": "en_p2",
+     "heading": "The Ember does it all at camp",
+     "why": "<p>Bake bread on coals, braise for eight, and flip the lid into a skillet for breakfast. Worth every pound of the carry from the car.</p>"
+    },
+    {
+     "_key": "r2",
+     "product": "en_p1",
+     "heading": "Light enough for the long trail",
+     "why": "<p>The Cable Fold weighs 1.1 kg and turns any fire ring into a grill. Pair it with the Trail Kettle.</p>"
+    }
+   ],
+   "fallback": "en_p3",
+   "retakeLabel": "Start over",
+   "useEmailGate": true,
+   "form": "form_newsletter",
+   "emailPrompt": "Want your results and a care guide by email?"
+  }
+ },
+ {
+  "id": "conversion-exit-intent-popup",
+  "name": "Exit-intent popup",
+  "category": "Conversion & forms",
+  "kind": "global",
+  "brand": "Caldera",
+  "previewLayout": "form",
+  "proves": "Trigger rules (exit / delay / scroll / click) with per-trigger inputs \u00b7 page targeting \u00b7 frequency capping \u00b7 offer as code / form / link",
+  "schema": {
+   "name": "popup",
+   "title": "Popup",
+   "kind": "global",
+   "icon": "app-window",
+   "category": "Conversion & forms",
+   "description": "A modal shown by a trigger, to the right people, not too often",
+   "preview": {
+    "title": "heading",
+    "subtitle": "trigger",
+    "media": "image"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "trigger",
+     "title": "When"
+    },
+    {
+     "name": "targeting",
+     "title": "Where and who"
+    },
+    {
+     "name": "design",
+     "title": "Design"
+    }
+   ],
+   "fields": [
+    {
+     "name": "name",
+     "title": "Popup name",
+     "type": "string",
+     "validation": {
+      "required": true,
+      "max": 48
+     },
+     "description": "Only your team sees this."
+    },
+    {
+     "name": "image",
+     "title": "Image",
+     "type": "image"
+    },
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "validation": {
+      "required": true,
+      "recommendedMax": 40
+     },
+     "ai": true
+    },
+    {
+     "name": "body",
+     "title": "Body",
+     "type": "text",
+     "rows": 2,
+     "validation": {
+      "recommendedMax": 140
+     },
+     "ai": true
+    },
+    {
+     "name": "offer",
+     "title": "Offer",
+     "type": "select",
+     "layout": "segmented",
+     "initialValue": "form",
+     "options": [
+      {
+       "value": "form",
+       "label": "Email for a code"
+      },
+      {
+       "value": "code",
+       "label": "Show a code"
+      },
+      {
+       "value": "link",
+       "label": "A button"
+      }
+     ]
+    },
+    {
+     "name": "form",
+     "title": "Form",
+     "type": "reference",
+     "reference": {
+      "to": [
+       "form"
+      ]
+     },
+     "validation": {
+      "required": true
+     },
+     "description": "They get the code after signing up through this form.",
+     "hidden": {
+      "field": "offer",
+      "equals": "form"
+     }
+    },
+    {
+     "name": "code",
+     "title": "Discount code",
+     "type": "string",
+     "hidden": {
+      "field": "offer",
+      "equals": [
+       "form",
+       "code"
+      ]
+     },
+     "validation": {
+      "required": true,
+      "pattern": "^[A-Z0-9]{3,20}$",
+      "patternMessage": "Use capital letters and numbers, like SAVE20."
+     },
+     "description": "Must exist in Shopify. With a form, it's shown after sign-up."
+    },
+    {
+     "name": "button",
+     "title": "Button",
+     "type": "button",
+     "hidden": {
+      "field": "offer",
+      "equals": "link"
+     }
+    },
+    {
+     "name": "declineLabel",
+     "title": "Close link text",
+     "type": "string",
+     "validation": {
+      "required": true,
+      "max": 24
+     },
+     "initialValue": "No thanks"
+    },
+    {
+     "name": "trigger",
+     "title": "Show when",
+     "type": "select",
+     "group": "trigger",
+     "layout": "cards",
+     "initialValue": "exit",
+     "options": [
+      {
+       "value": "exit",
+       "label": "They're about to leave",
+       "icon": "door-exit",
+       "description": "Mouse heads for the tab bar; on phones, a fast scroll up"
+      },
+      {
+       "value": "delay",
+       "label": "After some time",
+       "icon": "clock"
+      },
+      {
+       "value": "scroll",
+       "label": "After scrolling",
+       "icon": "arrow-down"
+      },
+      {
+       "value": "click",
+       "label": "They click something",
+       "icon": "click"
+      }
+     ]
+    },
+    {
+     "name": "delaySeconds",
+     "title": "After",
+     "type": "number",
+     "group": "trigger",
+     "hidden": {
+      "field": "trigger",
+      "equals": "delay"
+     },
+     "numeric": {
+      "min": 5,
+      "max": 120,
+      "step": 5,
+      "unit": "seconds"
+     },
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "scrollPercent",
+     "title": "After scrolling",
+     "type": "number",
+     "group": "trigger",
+     "layout": "slider",
+     "hidden": {
+      "field": "trigger",
+      "equals": "scroll"
+     },
+     "numeric": {
+      "min": 10,
+      "max": 90,
+      "step": 10,
+      "unit": "%"
+     },
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "clickSelector",
+     "title": "Opens from",
+     "type": "string",
+     "group": "trigger",
+     "hidden": {
+      "field": "trigger",
+      "equals": "click"
+     },
+     "access": {
+      "view": "schema.view",
+      "edit": "schema.manage"
+     },
+     "lockReason": "A CSS selector set by the developer",
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "includedPages",
+     "title": "Only on pages",
+     "type": "array",
+     "itemNoun": "path",
+     "of": [
+      {
+       "name": "path",
+       "title": "Path",
+       "type": "string"
+      }
+     ],
+     "group": "targeting",
+     "description": "Paths like /products/*. Leave empty for every page."
+    },
+    {
+     "name": "excludedPages",
+     "title": "Never on pages",
+     "type": "array",
+     "itemNoun": "path",
+     "of": [
+      {
+       "name": "path",
+       "title": "Path",
+       "type": "string"
+      }
+     ],
+     "group": "targeting",
+     "initialValue": [
+      "/cart",
+      "/checkout/*"
+     ],
+     "description": "Paths like /checkout/*."
+    },
+    {
+     "name": "audience",
+     "title": "Who sees it",
+     "type": "select",
+     "group": "targeting",
+     "initialValue": "not-subscribed",
+     "options": [
+      {
+       "value": "everyone",
+       "label": "Everyone"
+      },
+      {
+       "value": "new",
+       "label": "First-time visitors"
+      },
+      {
+       "value": "not-subscribed",
+       "label": "People not on the list yet"
+      },
+      {
+       "value": "no-orders",
+       "label": "People who haven't ordered"
+      }
+     ]
+    },
+    {
+     "name": "devices",
+     "title": "Devices",
+     "type": "multiselect",
+     "group": "targeting",
+     "layout": "checkbox",
+     "validation": {
+      "min": 1
+     },
+     "options": [
+      {
+       "value": "desktop",
+       "label": "Desktop"
+      },
+      {
+       "value": "tablet",
+       "label": "Tablet"
+      },
+      {
+       "value": "phone",
+       "label": "Phone"
+      }
+     ]
+    },
+    {
+     "name": "frequency",
+     "title": "How often",
+     "type": "select",
+     "group": "targeting",
+     "initialValue": "days",
+     "options": [
+      {
+       "value": "session",
+       "label": "Once per visit"
+      },
+      {
+       "value": "days",
+       "label": "Once every few days"
+      },
+      {
+       "value": "once",
+       "label": "Only once, ever"
+      }
+     ]
+    },
+    {
+     "name": "everyDays",
+     "title": "Every",
+     "type": "number",
+     "group": "targeting",
+     "hidden": {
+      "field": "frequency",
+      "equals": "days"
+     },
+     "numeric": {
+      "min": 1,
+      "max": 90,
+      "step": 1,
+      "unit": "days"
+     },
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "size",
+     "title": "Size",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "medium",
+     "options": [
+      {
+       "value": "small",
+       "label": "Corner card"
+      },
+      {
+       "value": "medium",
+       "label": "Centered"
+      },
+      {
+       "value": "full",
+       "label": "Full screen"
+      }
+     ],
+     "description": "Full screen on phones can hurt search rankings."
+    },
+    {
+     "name": "theme",
+     "title": "Theme",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "light",
+     "options": [
+      {
+       "value": "light",
+       "label": "Light"
+      },
+      {
+       "value": "dark",
+       "label": "Dark"
+      },
+      {
+       "value": "brand",
+       "label": "Brand"
+      }
+     ]
+    }
+   ]
+  },
+  "value": {
+   "name": "First-order 10% exit popup",
+   "image": {
+    "url": "https://picsum.photos/seed/caldera-popup-skillet/800/1000",
+    "alt": "A cast iron skillet with cornbread fresh from the fire",
+    "name": "caldera-popup-skillet.jpg",
+    "width": 800,
+    "height": 1000
+   },
+   "heading": "Before you go \u2014 10% off",
+   "body": "Join the monthly letter and get 10% off your first order. One email a month, unsubscribe any time.",
+   "offer": "form",
+   "form": "form_newsletter",
+   "code": "FIRSTFIRE10",
+   "declineLabel": "No thanks",
+   "trigger": "exit",
+   "delaySeconds": 30,
+   "includedPages": [
+    "/products/*",
+    "/collections/*"
+   ],
+   "excludedPages": [
+    "/cart",
+    "/checkout/*",
+    "/account/*"
+   ],
+   "audience": "not-subscribed",
+   "devices": [
+    "desktop",
+    "tablet"
+   ],
+   "frequency": "days",
+   "everyDays": 14,
+   "size": "medium",
+   "theme": "light"
+  }
+ },
+ {
+  "id": "conversion-trust-badges",
+  "name": "Trust badges & guarantees row",
+  "category": "Conversion & forms",
+  "kind": "block",
+  "brand": "Caldera",
+  "previewLayout": "logos",
+  "proves": "Typed badges (guarantee / shipping / certification\u2026) with logo only when certified \u00b7 payment icons as a multiselect \u00b7 a synced review score that can't be typed",
+  "schema": {
+   "name": "trustRow",
+   "title": "Trust row",
+   "kind": "block",
+   "icon": "shield-check",
+   "category": "Conversion & forms",
+   "description": "Guarantees, shipping promises, certifications and how people pay",
+   "variants": [
+    {
+     "id": "row",
+     "name": "Row",
+     "description": "Icons and short lines in one row"
+    },
+    {
+     "id": "cards",
+     "name": "Cards",
+     "description": "Each promise with a sentence"
+    },
+    {
+     "id": "compact",
+     "name": "Compact",
+     "description": "Under the buy button"
+    }
+   ],
+   "preview": {
+    "title": "badges.0.title",
+    "subtitle": "badges.1.title",
+    "icon": "shield-check"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "design",
+     "title": "Design"
+    }
+   ],
+   "fields": [
+    {
+     "name": "badges",
+     "title": "Badges",
+     "type": "array",
+     "itemNoun": "badge",
+     "validation": {
+      "min": 2,
+      "max": 6
+     },
+     "of": [
+      {
+       "name": "badge",
+       "title": "Badge",
+       "type": "object",
+       "icon": "rosette",
+       "preview": {
+        "title": "title",
+        "subtitle": "detail",
+        "media": "logo",
+        "fallback": "Untitled badge"
+       },
+       "fields": [
+        {
+         "name": "kind",
+         "title": "Type",
+         "type": "select",
+         "initialValue": "guarantee",
+         "options": [
+          {
+           "value": "guarantee",
+           "label": "Guarantee"
+          },
+          {
+           "value": "shipping",
+           "label": "Shipping"
+          },
+          {
+           "value": "returns",
+           "label": "Returns"
+          },
+          {
+           "value": "certification",
+           "label": "Certification",
+           "description": "B Corp, 1% for the Planet\u2026"
+          },
+          {
+           "value": "origin",
+           "label": "Made in"
+          }
+         ]
+        },
+        {
+         "name": "icon",
+         "title": "Icon",
+         "type": "icon",
+         "hidden": {
+          "field": "kind",
+          "equals": [
+           "guarantee",
+           "shipping",
+           "returns",
+           "origin"
+          ]
+         }
+        },
+        {
+         "name": "logo",
+         "title": "Certification logo",
+         "type": "image",
+         "hidden": {
+          "field": "kind",
+          "equals": "certification"
+         },
+         "validation": {
+          "required": true
+         }
+        },
+        {
+         "name": "title",
+         "title": "Title",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 28
+         }
+        },
+        {
+         "name": "detail",
+         "title": "Detail",
+         "type": "string",
+         "validation": {
+          "max": 80
+         },
+         "description": "Shown on the Cards layout and as a tooltip elsewhere."
+        },
+        {
+         "name": "link",
+         "title": "Link",
+         "type": "link"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "payments",
+     "title": "Payment icons",
+     "type": "multiselect",
+     "layout": "checkbox",
+     "options": [
+      {
+       "value": "visa",
+       "label": "Visa"
+      },
+      {
+       "value": "mastercard",
+       "label": "Mastercard"
+      },
+      {
+       "value": "amex",
+       "label": "American Express"
+      },
+      {
+       "value": "apple-pay",
+       "label": "Apple Pay"
+      },
+      {
+       "value": "google-pay",
+       "label": "Google Pay"
+      },
+      {
+       "value": "shop-pay",
+       "label": "Shop Pay"
+      },
+      {
+       "value": "paypal",
+       "label": "PayPal"
+      },
+      {
+       "value": "afterpay",
+       "label": "Afterpay"
+      }
+     ]
+    },
+    {
+     "name": "showRating",
+     "title": "Show rating",
+     "type": "boolean"
+    },
+    {
+     "name": "ratingSource",
+     "title": "Reviews from",
+     "type": "select",
+     "hidden": {
+      "field": "showRating",
+      "equals": true
+     },
+     "access": {
+      "edit": "schema.manage"
+     },
+     "lockReason": "Connected in Settings \u203a Integrations",
+     "options": [
+      {
+       "value": "okendo",
+       "label": "Okendo"
+      },
+      {
+       "value": "judgeme",
+       "label": "Judge.me"
+      },
+      {
+       "value": "google",
+       "label": "Google reviews"
+      }
+     ]
+    },
+    {
+     "name": "alignment",
+     "title": "Alignment",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "center",
+     "options": [
+      {
+       "value": "left",
+       "label": "Left"
+      },
+      {
+       "value": "center",
+       "label": "Center"
+      }
+     ]
+    },
+    {
+     "name": "showDivider",
+     "title": "Lines above and below",
+     "type": "boolean",
+     "group": "design"
+    }
+   ]
+  },
+  "value": {
+   "_variant": "row",
+   "badges": [
+    {
+     "_key": "b1",
+     "kind": "guarantee",
+     "icon": "infinity",
+     "title": "Lifetime warranty",
+     "detail": "If it cracks or warps, we replace it. No receipt needed.",
+     "link": {
+      "type": "page",
+      "href": "/warranty",
+      "title": "Warranty"
+     }
+    },
+    {
+     "_key": "b2",
+     "kind": "returns",
+     "icon": "arrow-back-up",
+     "title": "60-day returns",
+     "detail": "Even if you've cooked in it."
+    },
+    {
+     "_key": "b3",
+     "kind": "shipping",
+     "icon": "truck",
+     "title": "Free shipping over $80",
+     "detail": "Contiguous US, plastic-free packaging."
+    },
+    {
+     "_key": "b4",
+     "kind": "origin",
+     "icon": "map-pin",
+     "title": "Poured in Bend, Oregon"
+    },
+    {
+     "_key": "b5",
+     "kind": "certification",
+     "logo": {
+      "url": "https://picsum.photos/seed/caldera-badge-one-percent/240/240",
+      "alt": "1% for the Planet member",
+      "name": "caldera-badge-one-percent.jpg",
+      "width": 240,
+      "height": 240
+     },
+     "title": "1% for the Planet",
+     "detail": "1% of every sale funds public-lands conservation.",
+     "link": {
+      "type": "url",
+      "href": "https://onepercentfortheplanet.org",
+      "newTab": true
+     }
+    }
+   ],
+   "payments": [
+    "visa",
+    "mastercard",
+    "amex",
+    "apple-pay",
+    "shop-pay",
+    "paypal"
+   ],
+   "showRating": true,
+   "ratingSource": "okendo",
+   "alignment": "center",
+   "showDivider": true
+  }
+ }
+]

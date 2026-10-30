@@ -1,0 +1,2595 @@
+[
+ {
+  "id": "testimonial-grid",
+  "name": "Testimonial grid",
+  "category": "Social proof",
+  "kind": "block",
+  "brand": "Caldera",
+  "previewLayout": "grid-3",
+  "proves": "References to a Testimonials collection \u00b7 pick vs query (tags, limit, min rating) \u00b7 uniqueness",
+  "schema": {
+   "name": "testimonialGrid",
+   "title": "Testimonial grid",
+   "kind": "block",
+   "icon": "message-star",
+   "category": "Social proof",
+   "description": "Customer quotes from the Testimonials collection, in a grid or masonry",
+   "variants": [
+    {
+     "id": "grid",
+     "name": "Grid",
+     "description": "Equal cards in rows"
+    },
+    {
+     "id": "masonry",
+     "name": "Masonry",
+     "description": "Cards keep their natural height"
+    },
+    {
+     "id": "featured",
+     "name": "Featured + grid",
+     "description": "The first quote large, the rest small"
+    }
+   ],
+   "preview": {
+    "title": "heading",
+    "icon": "message-star"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "design",
+     "title": "Design"
+    }
+   ],
+   "fields": [
+    {
+     "name": "eyebrow",
+     "title": "Eyebrow",
+     "type": "string",
+     "validation": {
+      "max": 32
+     }
+    },
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "validation": {
+      "required": true,
+      "recommendedMax": 60
+     },
+     "ai": true,
+     "localized": true
+    },
+    {
+     "name": "source",
+     "title": "Which testimonials",
+     "type": "select",
+     "layout": "radio",
+     "initialValue": "pick",
+     "options": [
+      {
+       "value": "pick",
+       "label": "Pick them",
+       "description": "A fixed set in your order"
+      },
+      {
+       "value": "query",
+       "label": "Latest matching",
+       "description": "Filled from the collection by tag"
+      }
+     ]
+    },
+    {
+     "name": "testimonials",
+     "title": "Testimonials",
+     "type": "array",
+     "itemNoun": "testimonial",
+     "hidden": {
+      "field": "source",
+      "equals": "pick"
+     },
+     "validation": {
+      "min": 3,
+      "max": 12,
+      "unique": true
+     },
+     "of": [
+      {
+       "name": "testimonial",
+       "title": "Testimonial",
+       "type": "reference",
+       "reference": {
+        "to": [
+         "col_testimonials"
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "name": "tags",
+     "title": "Tagged",
+     "type": "tags",
+     "hidden": {
+      "field": "source",
+      "equals": "query"
+     }
+    },
+    {
+     "name": "limit",
+     "title": "How many",
+     "type": "number",
+     "hidden": {
+      "field": "source",
+      "equals": "query"
+     },
+     "initialValue": 6,
+     "numeric": {
+      "min": 3,
+      "max": 12,
+      "step": 3
+     }
+    },
+    {
+     "name": "minRating",
+     "title": "Minimum rating",
+     "type": "rating",
+     "hidden": {
+      "field": "source",
+      "equals": "query"
+     },
+     "description": "Leave empty to include quotes without a rating."
+    },
+    {
+     "name": "showRating",
+     "title": "Show rating",
+     "type": "boolean",
+     "group": "design",
+     "initialValue": true
+    },
+    {
+     "name": "showPhotos",
+     "title": "Show photos",
+     "type": "boolean",
+     "group": "design",
+     "initialValue": true
+    },
+    {
+     "name": "button",
+     "title": "Button",
+     "type": "button"
+    },
+    {
+     "name": "theme",
+     "title": "Theme",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "light",
+     "options": [
+      {
+       "value": "light",
+       "label": "Light"
+      },
+      {
+       "value": "dark",
+       "label": "Dark"
+      },
+      {
+       "value": "brand",
+       "label": "Brand"
+      }
+     ]
+    }
+   ]
+  },
+  "value": {
+   "_variant": "masonry",
+   "eyebrow": "Reviews",
+   "heading": "Cooked over, carried in, handed down.",
+   "source": "pick",
+   "testimonials": [
+    "ts_maya",
+    "ts_theo",
+    "ts_amara"
+   ],
+   "tags": [],
+   "limit": 6,
+   "showRating": true,
+   "showPhotos": true,
+   "button": {
+    "label": "Read all 2,418 reviews",
+    "href": "/reviews",
+    "type": "page",
+    "title": "Reviews",
+    "style": "outline",
+    "arrow": true
+   },
+   "theme": "light"
+  }
+ },
+ {
+  "id": "testimonial-video-slider",
+  "name": "Video testimonial slider",
+  "category": "Social proof",
+  "kind": "block",
+  "brand": "Ledgerly",
+  "previewLayout": "carousel",
+  "proves": "Video vs quote slides via conditional fields \u00b7 captions file required for a11y \u00b7 transcript as rich text",
+  "schema": {
+   "name": "videoTestimonials",
+   "title": "Video testimonials",
+   "kind": "block",
+   "icon": "video",
+   "category": "Social proof",
+   "description": "A slider of customer stories: video with captions, or a written quote",
+   "variants": [
+    {
+     "id": "cards",
+     "name": "Cards",
+     "description": "Several slides visible, peek at the next"
+    },
+    {
+     "id": "spotlight",
+     "name": "Spotlight",
+     "description": "One large slide at a time"
+    }
+   ],
+   "preview": {
+    "title": "heading",
+    "icon": "movie"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "design",
+     "title": "Design"
+    }
+   ],
+   "fields": [
+    {
+     "name": "eyebrow",
+     "title": "Eyebrow",
+     "type": "string",
+     "validation": {
+      "max": 32
+     }
+    },
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "validation": {
+      "required": true,
+      "recommendedMax": 60
+     },
+     "ai": true,
+     "localized": true
+    },
+    {
+     "name": "slides",
+     "title": "Slides",
+     "type": "array",
+     "itemNoun": "slide",
+     "validation": {
+      "min": 2,
+      "max": 10
+     },
+     "of": [
+      {
+       "name": "slide",
+       "title": "Slide",
+       "type": "object",
+       "icon": "movie",
+       "preview": {
+        "title": "person.name",
+        "subtitle": "pullQuote",
+        "media": "poster",
+        "fallback": "Untitled slide"
+       },
+       "fields": [
+        {
+         "name": "kind",
+         "title": "Type",
+         "type": "select",
+         "layout": "segmented",
+         "initialValue": "video",
+         "options": [
+          {
+           "value": "video",
+           "label": "Video"
+          },
+          {
+           "value": "quote",
+           "label": "Quote"
+          }
+         ]
+        },
+        {
+         "name": "video",
+         "title": "Video",
+         "type": "video",
+         "hidden": {
+          "field": "kind",
+          "equals": "video"
+         },
+         "validation": {
+          "required": true
+         },
+         "description": "Hosted MP4, YouTube or Vimeo."
+        },
+        {
+         "name": "poster",
+         "title": "Poster",
+         "type": "image",
+         "hidden": {
+          "field": "kind",
+          "equals": "video"
+         },
+         "validation": {
+          "required": true
+         }
+        },
+        {
+         "name": "captions",
+         "title": "Captions",
+         "type": "file",
+         "hidden": {
+          "field": "kind",
+          "equals": "video"
+         },
+         "validation": {
+          "required": true
+         },
+         "description": "A .vtt file. Required for hosted MP4s."
+        },
+        {
+         "name": "transcript",
+         "title": "Transcript",
+         "type": "richtext",
+         "hidden": {
+          "field": "kind",
+          "equals": "video"
+         },
+         "localized": true
+        },
+        {
+         "name": "pullQuote",
+         "title": "Pull quote",
+         "type": "text",
+         "rows": 3,
+         "validation": {
+          "required": true,
+          "recommendedMax": 160
+         },
+         "localized": true
+        },
+        {
+         "name": "duration",
+         "title": "Length",
+         "type": "string",
+         "hidden": {
+          "field": "kind",
+          "equals": "video"
+         },
+         "placeholder": "1:24",
+         "validation": {
+          "pattern": "^\\d{1,2}:\\d{2}$",
+          "patternMessage": "Use m:ss, like 1:24."
+         }
+        },
+        {
+         "name": "person",
+         "title": "Person",
+         "type": "object",
+         "icon": "user",
+         "fields": [
+          {
+           "name": "name",
+           "title": "Name",
+           "type": "string",
+           "validation": {
+            "required": true,
+            "max": 48
+           }
+          },
+          {
+           "name": "role",
+           "title": "Role",
+           "type": "string",
+           "validation": {
+            "max": 64
+           },
+           "localized": true,
+           "placeholder": "Owner"
+          },
+          {
+           "name": "company",
+           "title": "Company",
+           "type": "string",
+           "validation": {
+            "max": 48
+           }
+          },
+          {
+           "name": "photo",
+           "title": "Photo",
+           "type": "image",
+           "description": "Square, at least 192px."
+          }
+         ]
+        },
+        {
+         "name": "testimonial",
+         "title": "Linked testimonial",
+         "type": "reference",
+         "reference": {
+          "to": [
+           "col_testimonials"
+          ]
+         },
+         "advanced": true
+        },
+        {
+         "name": "caseStudy",
+         "title": "Case study link",
+         "type": "link"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "autoplay",
+     "title": "Play automatically",
+     "type": "boolean",
+     "group": "design"
+    },
+    {
+     "name": "allowInlinePlay",
+     "title": "Play on the card",
+     "type": "boolean",
+     "group": "design",
+     "initialValue": false,
+     "description": "Off opens videos in a lightbox."
+    },
+    {
+     "name": "theme",
+     "title": "Theme",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "light",
+     "options": [
+      {
+       "value": "light",
+       "label": "Light"
+      },
+      {
+       "value": "dark",
+       "label": "Dark"
+      },
+      {
+       "value": "brand",
+       "label": "Brand"
+      }
+     ]
+    }
+   ]
+  },
+  "value": {
+   "_variant": "cards",
+   "eyebrow": "Customer stories",
+   "heading": "Hear it from the people closing their books on Fridays.",
+   "slides": [
+    {
+     "_key": "v1",
+     "kind": "video",
+     "video": {
+      "url": "https://cdn.ledgerly.com/stories/masa-bakery.mp4"
+     },
+     "poster": {
+      "url": "https://picsum.photos/seed/ledgerly-rosa-poster/900/1200",
+      "alt": "Rosa Delgado behind the counter at Masa Bakery",
+      "name": "ledgerly-rosa-poster.jpg",
+      "width": 1800,
+      "height": 2400
+     },
+     "captions": {
+      "name": "masa-bakery.en.vtt",
+      "size": 4820,
+      "url": "https://cdn.ledgerly.com/stories/masa-bakery.en.vtt"
+     },
+     "transcript": "<p><strong>Rosa:</strong> I used to do the books on Sunday nights with a glass of wine and a lot of swearing. Now Ledgerly does most of it before I open on Monday.</p>",
+     "pullQuote": "We stopped paying our bookkeeper overtime in March.",
+     "duration": "1:12",
+     "person": {
+      "name": "Rosa Delgado",
+      "role": "Owner",
+      "company": "Masa Bakery",
+      "photo": "https://i.pravatar.cc/192?img=32"
+     },
+     "caseStudy": {
+      "type": "entry",
+      "href": "/customers/masa-bakery",
+      "label": "Read Masa's story",
+      "title": "Masa Bakery"
+     }
+    },
+    {
+     "_key": "v2",
+     "kind": "video",
+     "video": {
+      "url": "https://vimeo.com/870112233"
+     },
+     "poster": {
+      "url": "https://picsum.photos/seed/ledgerly-north-fork-poster/900/1200",
+      "alt": "Devon Park in the North Fork Builders workshop",
+      "name": "ledgerly-north-fork-poster.jpg",
+      "width": 1800,
+      "height": 2400
+     },
+     "captions": {
+      "name": "north-fork.en.vtt",
+      "size": 6120,
+      "url": "https://cdn.ledgerly.com/stories/north-fork.en.vtt"
+     },
+     "pullQuote": "Job costing used to be a spreadsheet only I understood.",
+     "duration": "1:38",
+     "person": {
+      "name": "Devon Park",
+      "role": "Operations lead",
+      "company": "North Fork Builders",
+      "photo": "https://i.pravatar.cc/192?img=12"
+     }
+    },
+    {
+     "_key": "v3",
+     "kind": "quote",
+     "pullQuote": "Our accountant asked what changed. The answer was: everything is just already there.",
+     "person": {
+      "name": "Priya Shah",
+      "role": "Co-founder",
+      "company": "Loop & Thread",
+      "photo": "https://i.pravatar.cc/192?img=45"
+     }
+    }
+   ],
+   "autoplay": false,
+   "allowInlinePlay": false,
+   "theme": "dark"
+  }
+ },
+ {
+  "id": "wall-of-love",
+  "name": "Wall of love",
+  "category": "Social proof",
+  "kind": "block",
+  "brand": "Caldera",
+  "previewLayout": "grid-3",
+  "proves": "Polymorphic array (social post \u00b7 store review \u00b7 photo post) each with its own required source link and rights flag",
+  "schema": {
+   "name": "wallOfLove",
+   "title": "Wall of love",
+   "kind": "block",
+   "icon": "heart",
+   "category": "Social proof",
+   "description": "A masonry wall of real posts and reviews: social posts, store reviews, photos",
+   "variants": [
+    {
+     "id": "masonry",
+     "name": "Masonry"
+    },
+    {
+     "id": "marquee",
+     "name": "Scrolling columns",
+     "description": "Columns drift slowly in opposite directions"
+    }
+   ],
+   "preview": {
+    "title": "heading",
+    "icon": "heart"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "design",
+     "title": "Design"
+    }
+   ],
+   "fields": [
+    {
+     "name": "eyebrow",
+     "title": "Eyebrow",
+     "type": "string",
+     "validation": {
+      "max": 32
+     }
+    },
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "validation": {
+      "required": true,
+      "recommendedMax": 60
+     },
+     "ai": true,
+     "localized": true
+    },
+    {
+     "name": "items",
+     "title": "Posts",
+     "type": "array",
+     "itemNoun": "post",
+     "validation": {
+      "min": 6,
+      "max": 40
+     },
+     "of": [
+      {
+       "name": "socialPost",
+       "title": "Social post",
+       "type": "object",
+       "icon": "brand-x",
+       "preview": {
+        "title": "handle",
+        "subtitle": "text",
+        "media": "photo",
+        "fallback": "Untitled social post"
+       },
+       "fields": [
+        {
+         "name": "network",
+         "title": "Network",
+         "type": "select",
+         "layout": "segmented",
+         "initialValue": "x",
+         "options": [
+          {
+           "value": "x",
+           "label": "X"
+          },
+          {
+           "value": "threads",
+           "label": "Threads"
+          },
+          {
+           "value": "bluesky",
+           "label": "Bluesky"
+          },
+          {
+           "value": "linkedin",
+           "label": "LinkedIn"
+          }
+         ]
+        },
+        {
+         "name": "name",
+         "title": "Name",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 48
+         }
+        },
+        {
+         "name": "handle",
+         "title": "Handle",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "pattern": "^@?[A-Za-z0-9_.]{1,30}$",
+          "patternMessage": "Use letters, numbers, dots and underscores, like custom.rank."
+         },
+         "placeholder": "@mayaoutside"
+        },
+        {
+         "name": "photo",
+         "title": "Photo",
+         "type": "image"
+        },
+        {
+         "name": "text",
+         "title": "Post text",
+         "type": "text",
+         "rows": 4,
+         "validation": {
+          "required": true,
+          "max": 500
+         },
+         "description": "Copy it exactly, typos and emoji included."
+        },
+        {
+         "name": "date",
+         "title": "Posted",
+         "type": "date"
+        },
+        {
+         "name": "url",
+         "title": "Original post",
+         "type": "url",
+         "validation": {
+          "required": true
+         }
+        }
+       ]
+      },
+      {
+       "name": "review",
+       "title": "Store review",
+       "type": "object",
+       "icon": "star",
+       "preview": {
+        "title": "reviewer",
+        "subtitle": "title",
+        "fallback": "Untitled review"
+       },
+       "fields": [
+        {
+         "name": "platform",
+         "title": "Platform",
+         "type": "select",
+         "initialValue": "site",
+         "options": [
+          {
+           "value": "site",
+           "label": "Our store"
+          },
+          {
+           "value": "google",
+           "label": "Google"
+          },
+          {
+           "value": "trustpilot",
+           "label": "Trustpilot"
+          },
+          {
+           "value": "amazon",
+           "label": "Amazon"
+          },
+          {
+           "value": "rei",
+           "label": "REI"
+          }
+         ]
+        },
+        {
+         "name": "rating",
+         "title": "Rating",
+         "type": "rating",
+         "validation": {
+          "required": true
+         }
+        },
+        {
+         "name": "title",
+         "title": "Review title",
+         "type": "string",
+         "validation": {
+          "max": 80
+         }
+        },
+        {
+         "name": "text",
+         "title": "Review",
+         "type": "text",
+         "rows": 4,
+         "validation": {
+          "required": true,
+          "max": 600
+         }
+        },
+        {
+         "name": "reviewer",
+         "title": "Reviewer",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 48
+         },
+         "placeholder": "Jordan K."
+        },
+        {
+         "name": "isVerified",
+         "title": "Verified buyer",
+         "type": "boolean",
+         "description": "Only when the platform shows the badge."
+        },
+        {
+         "name": "date",
+         "title": "Reviewed",
+         "type": "date"
+        },
+        {
+         "name": "url",
+         "title": "Original post",
+         "type": "url",
+         "validation": {},
+         "description": "Link to the review if the platform has one."
+        }
+       ]
+      },
+      {
+       "name": "photoPost",
+       "title": "Photo post",
+       "type": "object",
+       "icon": "brand-instagram",
+       "preview": {
+        "title": "handle",
+        "subtitle": "caption",
+        "media": "image",
+        "fallback": "Untitled photo post"
+       },
+       "fields": [
+        {
+         "name": "image",
+         "title": "Image",
+         "type": "image",
+         "validation": {
+          "required": true
+         }
+        },
+        {
+         "name": "handle",
+         "title": "Handle",
+         "type": "string",
+         "validation": {
+          "required": true
+         },
+         "placeholder": "@trailkitchen"
+        },
+        {
+         "name": "caption",
+         "title": "Caption",
+         "type": "text",
+         "rows": 2,
+         "validation": {
+          "max": 300
+         }
+        },
+        {
+         "name": "hasRights",
+         "title": "Creator gave permission",
+         "type": "boolean",
+         "validation": {
+          "required": true
+         },
+         "description": "Reposting a photo needs the creator's written OK."
+        },
+        {
+         "name": "url",
+         "title": "Original post",
+         "type": "url",
+         "validation": {
+          "required": true
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "showSourceIcons",
+     "title": "Show platform icons",
+     "type": "boolean",
+     "group": "design",
+     "initialValue": true
+    },
+    {
+     "name": "maxHeight",
+     "title": "Collapse after",
+     "type": "number",
+     "group": "design",
+     "layout": "slider",
+     "initialValue": 900,
+     "numeric": {
+      "min": 400,
+      "max": 2000,
+      "step": 100,
+      "unit": "px"
+     },
+     "description": "Adds \"Show more\" below this height."
+    },
+    {
+     "name": "theme",
+     "title": "Theme",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "light",
+     "options": [
+      {
+       "value": "light",
+       "label": "Light"
+      },
+      {
+       "value": "dark",
+       "label": "Dark"
+      },
+      {
+       "value": "brand",
+       "label": "Brand"
+      }
+     ]
+    }
+   ]
+  },
+  "value": {
+   "_variant": "masonry",
+   "eyebrow": "#cookedoncaldera",
+   "heading": "4,000 campfires and counting.",
+   "items": [
+    {
+     "_key": "w1",
+     "_type": "socialPost",
+     "network": "x",
+     "name": "Maya Reyes",
+     "handle": "@mayaoutside",
+     "photo": {
+      "url": "https://i.pravatar.cc/192?img=47",
+      "alt": "",
+      "name": "maya.jpg"
+     },
+     "text": "Took the Cable Fold on a 6-day Wind River trip. Grilled trout every night, folded it flat every morning. Best thing in my pack and I've been guiding for 12 years.",
+     "date": "2026-07-22",
+     "url": "https://x.com/mayaoutside/status/1815500112233"
+    },
+    {
+     "_key": "w2",
+     "_type": "review",
+     "platform": "rei",
+     "rating": 5,
+     "title": "Heirloom quality",
+     "text": "Heavier than titanium, obviously, but nothing else sears like this over a fire. Seasoning held up to a week of eggs and bacon.",
+     "reviewer": "Jordan K.",
+     "isVerified": true,
+     "date": "2026-06-03",
+     "url": "https://www.rei.com/product/caldera-ridge-skillet#reviews"
+    },
+    {
+     "_key": "w3",
+     "_type": "photoPost",
+     "image": {
+      "url": "https://picsum.photos/seed/ugc-trail-kitchen/900/1100",
+      "alt": "A Dutch oven of chilli on a granite slab at sunset",
+      "name": "ugc-trail-kitchen.jpg",
+      "width": 1800,
+      "height": 2200
+     },
+     "handle": "@trailkitchen",
+     "caption": "Chilli at 11,000 ft. The Ember came along for all 4 days.",
+     "hasRights": true,
+     "url": "https://www.instagram.com/p/C9xK2aLvT1m/"
+    },
+    {
+     "_key": "w4",
+     "_type": "review",
+     "platform": "site",
+     "rating": 4,
+     "title": "Great pan, read the care card",
+     "text": "Rusted a little after I left it wet overnight \u2014 my fault. Re-oiled it and it's been perfect since. Customer service sent a care kit for free.",
+     "reviewer": "Sam O.",
+     "isVerified": true,
+     "date": "2026-05-18"
+    },
+    {
+     "_key": "w5",
+     "_type": "socialPost",
+     "network": "bluesky",
+     "name": "Theo Lindqvist",
+     "handle": "@theohikes",
+     "photo": {
+      "url": "https://i.pravatar.cc/192?img=68",
+      "alt": "",
+      "name": "theo.jpg"
+     },
+     "text": "PCT update: still carrying the Trail Kettle at mile 1,900. Every other piece of gear has been replaced at least once.",
+     "date": "2026-08-30",
+     "url": "https://bsky.app/profile/theohikes.bsky.social/post/3l2kq7xyz"
+    },
+    {
+     "_key": "w6",
+     "_type": "review",
+     "platform": "google",
+     "rating": 5,
+     "text": "Toured the foundry in Bend \u2014 they let my kids pour sand into the moulds. Bought two skillets on the way out.",
+     "reviewer": "Lena W.",
+     "isVerified": false,
+     "date": "2026-04-11",
+     "url": "https://maps.google.com/?cid=1188223344556677"
+    }
+   ],
+   "showSourceIcons": true,
+   "maxHeight": 900,
+   "theme": "light"
+  }
+ },
+ {
+  "id": "case-study-cards",
+  "name": "Case study cards",
+  "category": "Social proof",
+  "kind": "block",
+  "brand": "Ledgerly",
+  "previewLayout": "grid-3",
+  "proves": "Array of objects wrapping a reference + per-card override \u00b7 three ways to choose (pick, by industry, latest)",
+  "schema": {
+   "name": "caseStudyCards",
+   "title": "Case study cards",
+   "kind": "block",
+   "icon": "briefcase",
+   "category": "Social proof",
+   "description": "Cards for customer stories: logo, headline result, link to the full story",
+   "variants": [
+    {
+     "id": "cards",
+     "name": "Cards",
+     "description": "Three across"
+    },
+    {
+     "id": "feature",
+     "name": "Featured story",
+     "description": "One large card with the metric front and center"
+    },
+    {
+     "id": "carousel",
+     "name": "Carousel"
+    }
+   ],
+   "preview": {
+    "title": "heading",
+    "icon": "briefcase"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "design",
+     "title": "Design"
+    }
+   ],
+   "fields": [
+    {
+     "name": "eyebrow",
+     "title": "Eyebrow",
+     "type": "string",
+     "validation": {
+      "max": 32
+     }
+    },
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "validation": {
+      "required": true,
+      "recommendedMax": 60
+     },
+     "ai": true,
+     "localized": true
+    },
+    {
+     "name": "source",
+     "title": "Which stories",
+     "type": "select",
+     "layout": "radio",
+     "initialValue": "pick",
+     "options": [
+      {
+       "value": "pick",
+       "label": "Pick them"
+      },
+      {
+       "value": "industry",
+       "label": "By industry",
+       "description": "Newest stories in the industries you choose"
+      },
+      {
+       "value": "latest",
+       "label": "Latest"
+      }
+     ]
+    },
+    {
+     "name": "stories",
+     "title": "Stories",
+     "type": "array",
+     "itemNoun": "story",
+     "hidden": {
+      "field": "source",
+      "equals": "pick"
+     },
+     "validation": {
+      "min": 1,
+      "max": 6,
+      "unique": true
+     },
+     "of": [
+      {
+       "name": "card",
+       "title": "Story",
+       "type": "object",
+       "icon": "briefcase",
+       "preview": {
+        "title": "caseStudy",
+        "subtitle": "metricOverride",
+        "fallback": "Untitled story"
+       },
+       "fields": [
+        {
+         "name": "caseStudy",
+         "title": "Case study",
+         "type": "reference",
+         "reference": {
+          "to": [
+           "col_case_studies"
+          ]
+         },
+         "validation": {
+          "required": true
+         }
+        },
+        {
+         "name": "metricOverride",
+         "title": "Headline result",
+         "type": "string",
+         "placeholder": "Closed books 4\u00d7 faster",
+         "validation": {
+          "max": 40
+         },
+         "description": "Replaces the story's headline metric on this card only."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "industries",
+     "title": "Industries",
+     "type": "multiselect",
+     "hidden": {
+      "field": "source",
+      "equals": "industry"
+     },
+     "options": [
+      {
+       "value": "hospitality",
+       "label": "Hospitality"
+      },
+      {
+       "value": "retail",
+       "label": "Retail"
+      },
+      {
+       "value": "agency",
+       "label": "Agencies"
+      },
+      {
+       "value": "construction",
+       "label": "Construction"
+      },
+      {
+       "value": "nonprofit",
+       "label": "Nonprofits"
+      }
+     ]
+    },
+    {
+     "name": "limit",
+     "title": "How many",
+     "type": "number",
+     "hidden": {
+      "field": "source",
+      "equals": [
+       "industry",
+       "latest"
+      ]
+     },
+     "initialValue": 3,
+     "numeric": {
+      "min": 1,
+      "max": 9,
+      "step": 1
+     }
+    },
+    {
+     "name": "button",
+     "title": "Button",
+     "type": "button"
+    },
+    {
+     "name": "showLogos",
+     "title": "Show customer logos",
+     "type": "boolean",
+     "group": "design",
+     "initialValue": true
+    },
+    {
+     "name": "theme",
+     "title": "Theme",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "light",
+     "options": [
+      {
+       "value": "light",
+       "label": "Light"
+      },
+      {
+       "value": "dark",
+       "label": "Dark"
+      },
+      {
+       "value": "brand",
+       "label": "Brand"
+      }
+     ]
+    }
+   ]
+  },
+  "value": {
+   "_variant": "cards",
+   "eyebrow": "Customers",
+   "heading": "Teams that got their Fridays back.",
+   "source": "pick",
+   "stories": [
+    {
+     "_key": "k1",
+     "caseStudy": "cs_masa_bakery",
+     "metricOverride": "6 hours saved every month"
+    },
+    {
+     "_key": "k2",
+     "caseStudy": "cs_north_fork_builders"
+    },
+    {
+     "_key": "k3",
+     "caseStudy": "cs_loop_and_thread",
+     "metricOverride": "Paid 9 days sooner"
+    }
+   ],
+   "industries": [],
+   "limit": 3,
+   "button": {
+    "label": "All customer stories",
+    "href": "/customers",
+    "type": "page",
+    "title": "Customers",
+    "style": "outline",
+    "arrow": true
+   },
+   "showLogos": true,
+   "theme": "light"
+  }
+ },
+ {
+  "id": "logo-cloud",
+  "name": "Logo cloud",
+  "category": "Social proof",
+  "kind": "block",
+  "brand": "Caldera",
+  "previewLayout": "logos",
+  "proves": "Grid array of tiny popover objects \u00b7 required company name for a11y \u00b7 marquee-only field hidden by variant",
+  "schema": {
+   "name": "logoCloud",
+   "title": "Logo cloud",
+   "kind": "block",
+   "icon": "building-skyscraper",
+   "category": "Social proof",
+   "description": "Logos of customers, retailers or partners, as a static row or an endless marquee",
+   "variants": [
+    {
+     "id": "row",
+     "name": "Row",
+     "description": "One or two centered rows"
+    },
+    {
+     "id": "grid",
+     "name": "Grid",
+     "description": "Bordered cells"
+    },
+    {
+     "id": "marquee",
+     "name": "Marquee",
+     "description": "Scrolls endlessly; pauses on hover"
+    }
+   ],
+   "preview": {
+    "title": "heading",
+    "icon": "building-skyscraper"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "design",
+     "title": "Design"
+    }
+   ],
+   "fields": [
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "validation": {
+      "max": 80
+     },
+     "localized": true,
+     "placeholder": "Sold at"
+    },
+    {
+     "name": "logos",
+     "title": "Logos",
+     "type": "array",
+     "itemNoun": "logo",
+     "arrayLayout": "grid",
+     "validation": {
+      "min": 3,
+      "max": 30
+     },
+     "of": [
+      {
+       "name": "logo",
+       "title": "Logo",
+       "type": "object",
+       "icon": "photo",
+       "openMode": "popover",
+       "preview": {
+        "title": "name",
+        "media": "logo",
+        "fallback": "Untitled logo"
+       },
+       "fields": [
+        {
+         "name": "name",
+         "title": "Company name",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 48
+         },
+         "description": "Not shown. Read by screen readers."
+        },
+        {
+         "name": "logo",
+         "title": "Logo",
+         "type": "image",
+         "validation": {
+          "required": true
+         },
+         "description": "SVG or a transparent PNG."
+        },
+        {
+         "name": "link",
+         "title": "Link",
+         "type": "link"
+        },
+        {
+         "name": "scale",
+         "title": "Optical size",
+         "type": "number",
+         "layout": "slider",
+         "initialValue": 100,
+         "numeric": {
+          "min": 60,
+          "max": 140,
+          "step": 5,
+          "unit": "%"
+         },
+         "description": "Nudges wide or tall marks so logos look the same size."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "isGrayscale",
+     "title": "Grayscale logos",
+     "type": "boolean",
+     "group": "design",
+     "initialValue": true
+    },
+    {
+     "name": "speed",
+     "title": "Scroll speed",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "hidden": {
+      "field": "_variant",
+      "equals": "marquee"
+     },
+     "initialValue": "slow",
+     "options": [
+      {
+       "value": "slow",
+       "label": "Slow"
+      },
+      {
+       "value": "medium",
+       "label": "Medium"
+      },
+      {
+       "value": "fast",
+       "label": "Fast"
+      }
+     ]
+    },
+    {
+     "name": "logoHeight",
+     "title": "Logo height",
+     "type": "number",
+     "group": "design",
+     "layout": "slider",
+     "initialValue": 32,
+     "numeric": {
+      "min": 20,
+      "max": 64,
+      "step": 4,
+      "unit": "px"
+     }
+    },
+    {
+     "name": "theme",
+     "title": "Theme",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "light",
+     "options": [
+      {
+       "value": "light",
+       "label": "Light"
+      },
+      {
+       "value": "dark",
+       "label": "Dark"
+      },
+      {
+       "value": "brand",
+       "label": "Brand"
+      }
+     ]
+    }
+   ]
+  },
+  "value": {
+   "_variant": "marquee",
+   "heading": "Sold at independent outfitters and these retailers",
+   "logos": [
+    {
+     "_key": "l1",
+     "name": "REI Co-op",
+     "logo": {
+      "url": "https://cdn.bettercms.site/kit/logos/rei.svg",
+      "alt": "REI Co-op logo",
+      "name": "rei.svg",
+      "width": 160,
+      "height": 48
+     }
+    },
+    {
+     "_key": "l2",
+     "name": "Huckberry",
+     "logo": {
+      "url": "https://cdn.bettercms.site/kit/logos/huckberry.svg",
+      "alt": "Huckberry logo",
+      "name": "huckberry.svg",
+      "width": 160,
+      "height": 48
+     }
+    },
+    {
+     "_key": "l3",
+     "name": "Backcountry",
+     "logo": {
+      "url": "https://cdn.bettercms.site/kit/logos/backcountry.svg",
+      "alt": "Backcountry logo",
+      "name": "backcountry.svg",
+      "width": 160,
+      "height": 48
+     },
+     "scale": 90
+    },
+    {
+     "_key": "l4",
+     "name": "Moosejaw",
+     "logo": {
+      "url": "https://cdn.bettercms.site/kit/logos/moosejaw.svg",
+      "alt": "Moosejaw logo",
+      "name": "moosejaw.svg",
+      "width": 160,
+      "height": 48
+     }
+    },
+    {
+     "_key": "l5",
+     "name": "Cabela's",
+     "logo": {
+      "url": "https://cdn.bettercms.site/kit/logos/cabelas.svg",
+      "alt": "Cabela's logo",
+      "name": "cabelas.svg",
+      "width": 160,
+      "height": 48
+     },
+     "scale": 110
+    },
+    {
+     "_key": "l6",
+     "name": "Williams Sonoma",
+     "logo": {
+      "url": "https://cdn.bettercms.site/kit/logos/williams-sonoma.svg",
+      "alt": "Williams Sonoma logo",
+      "name": "williams-sonoma.svg",
+      "width": 160,
+      "height": 48
+     },
+     "scale": 85
+    },
+    {
+     "_key": "l7",
+     "name": "Food52",
+     "logo": {
+      "url": "https://cdn.bettercms.site/kit/logos/food52.svg",
+      "alt": "Food52 logo",
+      "name": "food52.svg",
+      "width": 160,
+      "height": 48
+     }
+    }
+   ],
+   "isGrayscale": true,
+   "speed": "slow",
+   "logoHeight": 32,
+   "theme": "light"
+  }
+ },
+ {
+  "id": "press-mentions",
+  "name": "Press mentions",
+  "category": "Social proof",
+  "kind": "block",
+  "brand": "Caldera",
+  "previewLayout": "logos",
+  "proves": "Quotes tied to a required source link \u00b7 logo + quote + journalist per mention \u00b7 rotator variant",
+  "schema": {
+   "name": "pressMentions",
+   "title": "Press mentions",
+   "kind": "block",
+   "icon": "article",
+   "category": "Social proof",
+   "description": "What publications said, with the outlet's logo and a link to the article",
+   "variants": [
+    {
+     "id": "quotes",
+     "name": "Quotes",
+     "description": "Quote cards with the outlet's logo"
+    },
+    {
+     "id": "rotator",
+     "name": "Logo rotator",
+     "description": "Logos in a row; the quote changes as each is selected"
+    }
+   ],
+   "preview": {
+    "title": "heading",
+    "icon": "news"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "design",
+     "title": "Design"
+    }
+   ],
+   "fields": [
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "validation": {
+      "recommendedMax": 48
+     },
+     "localized": true,
+     "placeholder": "As seen in"
+    },
+    {
+     "name": "mentions",
+     "title": "Mentions",
+     "type": "array",
+     "itemNoun": "mention",
+     "validation": {
+      "min": 2,
+      "max": 8
+     },
+     "of": [
+      {
+       "name": "mention",
+       "title": "Mention",
+       "type": "object",
+       "icon": "news",
+       "preview": {
+        "title": "outlet",
+        "subtitle": "quote",
+        "media": "logo",
+        "fallback": "Untitled mention"
+       },
+       "fields": [
+        {
+         "name": "outlet",
+         "title": "Publication",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 48
+         }
+        },
+        {
+         "name": "logo",
+         "title": "Publication logo",
+         "type": "image",
+         "validation": {
+          "required": true
+         },
+         "description": "SVG or a transparent PNG."
+        },
+        {
+         "name": "quote",
+         "title": "Quote",
+         "type": "text",
+         "rows": 3,
+         "validation": {
+          "required": true,
+          "recommendedMax": 140
+         },
+         "localized": true,
+         "description": "Their exact words. Trim with \"\u2026\" if needed."
+        },
+        {
+         "name": "article",
+         "title": "Article",
+         "type": "link",
+         "validation": {
+          "required": true
+         }
+        },
+        {
+         "name": "author",
+         "title": "Journalist",
+         "type": "string",
+         "validation": {
+          "max": 48
+         }
+        },
+        {
+         "name": "date",
+         "title": "Published",
+         "type": "date"
+        },
+        {
+         "name": "isFeatured",
+         "title": "Featured",
+         "type": "boolean"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "isGrayscale",
+     "title": "Grayscale logos",
+     "type": "boolean",
+     "group": "design",
+     "initialValue": true
+    },
+    {
+     "name": "theme",
+     "title": "Theme",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "light",
+     "options": [
+      {
+       "value": "light",
+       "label": "Light"
+      },
+      {
+       "value": "dark",
+       "label": "Dark"
+      },
+      {
+       "value": "brand",
+       "label": "Brand"
+      }
+     ]
+    }
+   ]
+  },
+  "value": {
+   "_variant": "rotator",
+   "heading": "In the press",
+   "mentions": [
+    {
+     "_key": "p1",
+     "outlet": "Trailhead Quarterly",
+     "logo": {
+      "url": "https://cdn.bettercms.site/kit/logos/trailhead-quarterly.svg",
+      "alt": "Trailhead Quarterly logo",
+      "name": "trailhead-quarterly.svg",
+      "width": 160,
+      "height": 48
+     },
+     "quote": "The rare piece of camp gear you'll still own in thirty years.",
+     "article": {
+      "type": "url",
+      "href": "https://trailheadquarterly.com/gear/caldera-ridge-skillet-review",
+      "label": "Read the review",
+      "newTab": true
+     },
+     "author": "Hannah Brooks",
+     "date": "2026-03-14",
+     "isFeatured": true
+    },
+    {
+     "_key": "p2",
+     "outlet": "The Gear Desk",
+     "logo": {
+      "url": "https://cdn.bettercms.site/kit/logos/the-gear-desk.svg",
+      "alt": "The Gear Desk logo",
+      "name": "the-gear-desk.svg",
+      "width": 160,
+      "height": 48
+     },
+     "quote": "Folds flatter than a cutting board and grills like a backyard kettle.",
+     "article": {
+      "type": "url",
+      "href": "https://thegeardesk.com/best-camp-grills-2026",
+      "label": "Best camp grills of 2026",
+      "newTab": true
+     },
+     "author": "Marcus Lee",
+     "date": "2026-05-02"
+    },
+    {
+     "_key": "p3",
+     "outlet": "Field Kitchen Review",
+     "logo": {
+      "url": "https://cdn.bettercms.site/kit/logos/field-kitchen-review.svg",
+      "alt": "Field Kitchen Review logo",
+      "name": "field-kitchen-review.svg",
+      "width": 160,
+      "height": 48
+     },
+     "quote": "Caldera is doing for cast iron what small-batch roasters did for coffee.",
+     "article": {
+      "type": "url",
+      "href": "https://fieldkitchenreview.com/caldera-foundry-visit",
+      "label": "A day at the foundry",
+      "newTab": true
+     },
+     "date": "2025-11-20"
+    },
+    {
+     "_key": "p4",
+     "outlet": "Pacific Outdoor Journal",
+     "logo": {
+      "url": "https://cdn.bettercms.site/kit/logos/pacific-outdoor-journal.svg",
+      "alt": "Pacific Outdoor Journal logo",
+      "name": "pacific-outdoor-journal.svg",
+      "width": 160,
+      "height": 48
+     },
+     "quote": "Our pick for the best Dutch oven for car camping.",
+     "article": {
+      "type": "url",
+      "href": "https://pacificoutdoorjournal.com/awards/2026",
+      "label": "2026 gear awards",
+      "newTab": true
+     },
+     "author": "Jess Moreno",
+     "date": "2026-08-08"
+    }
+   ],
+   "isGrayscale": true,
+   "theme": "light"
+  }
+ },
+ {
+  "id": "awards-certifications",
+  "name": "Awards & certifications",
+  "category": "Social proof",
+  "kind": "block",
+  "brand": "Juniper Health",
+  "previewLayout": "logos",
+  "proves": "Kind select changes required fields (certificate id + expiry for certifications) \u00b7 expiry hides stale badges",
+  "schema": {
+   "name": "awards",
+   "title": "Awards and certifications",
+   "kind": "block",
+   "icon": "award",
+   "category": "Social proof",
+   "description": "Badges for awards, security certifications and compliance, each verifiable",
+   "variants": [
+    {
+     "id": "badges",
+     "name": "Badge row"
+    },
+    {
+     "id": "cards",
+     "name": "Cards",
+     "description": "Badge with issuer, year and a verify link"
+    }
+   ],
+   "preview": {
+    "title": "heading",
+    "icon": "award"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "design",
+     "title": "Design"
+    }
+   ],
+   "fields": [
+    {
+     "name": "eyebrow",
+     "title": "Eyebrow",
+     "type": "string",
+     "validation": {
+      "max": 32
+     }
+    },
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "validation": {
+      "recommendedMax": 60
+     },
+     "localized": true
+    },
+    {
+     "name": "badges",
+     "title": "Badges",
+     "type": "array",
+     "itemNoun": "badge",
+     "validation": {
+      "min": 1,
+      "max": 12
+     },
+     "of": [
+      {
+       "name": "badge",
+       "title": "Badge",
+       "type": "object",
+       "icon": "award",
+       "preview": {
+        "title": "name",
+        "subtitle": "issuer",
+        "media": "image",
+        "fallback": "Untitled badge"
+       },
+       "fields": [
+        {
+         "name": "kind",
+         "title": "Kind",
+         "type": "select",
+         "layout": "segmented",
+         "initialValue": "award",
+         "options": [
+          {
+           "value": "award",
+           "label": "Award"
+          },
+          {
+           "value": "certification",
+           "label": "Certification",
+           "description": "Audited by a third party, e.g. SOC 2, ISO 27001"
+          },
+          {
+           "value": "membership",
+           "label": "Membership"
+          }
+         ]
+        },
+        {
+         "name": "name",
+         "title": "Name",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 64
+         },
+         "description": "Exactly as the issuer writes it, e.g. SOC 2 Type II."
+        },
+        {
+         "name": "issuer",
+         "title": "Issued by",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 64
+         }
+        },
+        {
+         "name": "image",
+         "title": "Image",
+         "type": "image",
+         "validation": {
+          "required": true
+         },
+         "description": "The issuer's official badge file."
+        },
+        {
+         "name": "year",
+         "title": "Year",
+         "type": "number",
+         "hidden": {
+          "field": "kind",
+          "equals": [
+           "award",
+           "membership"
+          ]
+         },
+         "numeric": {
+          "min": 1990,
+          "max": 2100,
+          "step": 1
+         }
+        },
+        {
+         "name": "certificateId",
+         "title": "Certificate number",
+         "type": "string",
+         "hidden": {
+          "field": "kind",
+          "equals": "certification"
+         },
+         "validation": {
+          "max": 48
+         }
+        },
+        {
+         "name": "validUntil",
+         "title": "Valid until",
+         "type": "date",
+         "hidden": {
+          "field": "kind",
+          "equals": "certification"
+         },
+         "validation": {
+          "required": true
+         },
+         "description": "The badge hides itself after this date."
+        },
+        {
+         "name": "verify",
+         "title": "Verify link",
+         "type": "link",
+         "description": "Required for certifications."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "note",
+     "title": "Note",
+     "type": "text",
+     "rows": 2,
+     "localized": true
+    },
+    {
+     "name": "button",
+     "title": "Button",
+     "type": "button"
+    },
+    {
+     "name": "isGrayscale",
+     "title": "Grayscale badges",
+     "type": "boolean",
+     "group": "design"
+    },
+    {
+     "name": "theme",
+     "title": "Theme",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "light",
+     "options": [
+      {
+       "value": "light",
+       "label": "Light"
+      },
+      {
+       "value": "dark",
+       "label": "Dark"
+      },
+      {
+       "value": "brand",
+       "label": "Brand"
+      }
+     ]
+    }
+   ]
+  },
+  "value": {
+   "_variant": "cards",
+   "eyebrow": "Trust",
+   "heading": "Your health data, held to the highest standard.",
+   "badges": [
+    {
+     "_key": "b1",
+     "kind": "certification",
+     "name": "SOC 2 Type II",
+     "issuer": "AICPA (audited by Prescient Assurance)",
+     "image": {
+      "url": "https://cdn.bettercms.site/kit/logos/soc2-type2.svg",
+      "alt": "SOC 2 Type II badge",
+      "name": "soc2-type2.svg",
+      "width": 120,
+      "height": 120
+     },
+     "certificateId": "",
+     "validUntil": "2027-03-31",
+     "verify": {
+      "type": "url",
+      "href": "https://trust.junipercare.com",
+      "label": "Trust centre",
+      "newTab": true
+     }
+    },
+    {
+     "_key": "b2",
+     "kind": "certification",
+     "name": "HITRUST CSF r2",
+     "issuer": "HITRUST Alliance",
+     "image": {
+      "url": "https://cdn.bettercms.site/kit/logos/hitrust-r2.svg",
+      "alt": "HITRUST CSF r2 badge",
+      "name": "hitrust-r2.svg",
+      "width": 120,
+      "height": 120
+     },
+     "certificateId": "HT-2025-118842",
+     "validUntil": "2027-01-15",
+     "verify": {
+      "type": "url",
+      "href": "https://hitrustalliance.net/validated-assessment-registry",
+      "label": "Validated registry",
+      "newTab": true
+     }
+    },
+    {
+     "_key": "b3",
+     "kind": "certification",
+     "name": "ISO/IEC 27001:2022",
+     "issuer": "BSI",
+     "image": {
+      "url": "https://cdn.bettercms.site/kit/logos/iso-27001.svg",
+      "alt": "ISO/IEC 27001:2022 badge",
+      "name": "iso-27001.svg",
+      "width": 120,
+      "height": 120
+     },
+     "certificateId": "IS 781204",
+     "validUntil": "2028-06-30",
+     "verify": {
+      "type": "url",
+      "href": "https://www.bsigroup.com/en-US/validate-bsi-issued-certificates/",
+      "label": "Validate with BSI",
+      "newTab": true
+     }
+    },
+    {
+     "_key": "b4",
+     "kind": "award",
+     "name": "Best Virtual Care Experience 2026",
+     "issuer": "Digital Health Awards",
+     "image": {
+      "url": "https://cdn.bettercms.site/kit/logos/dha-2026.svg",
+      "alt": "Best Virtual Care Experience 2026 badge",
+      "name": "dha-2026.svg",
+      "width": 120,
+      "height": 120
+     },
+     "year": 2026
+    }
+   ],
+   "note": "Our SOC 2 report is available under NDA. HIPAA has no official certification \u2014 we sign a BAA with every covered entity.",
+   "button": {
+    "label": "Visit our trust centre",
+    "href": "https://trust.junipercare.com",
+    "type": "url",
+    "style": "outline",
+    "newTab": true
+   },
+   "isGrayscale": false,
+   "theme": "light"
+  }
+ },
+ {
+  "id": "review-summary",
+  "name": "Review summary",
+  "category": "Social proof",
+  "kind": "block",
+  "brand": "Caldera",
+  "previewLayout": "split",
+  "proves": "Synced vs typed ratings (developer-locked provider) \u00b7 5-bucket distribution validation \u00b7 AggregateRating only with a product subject",
+  "schema": {
+   "name": "reviewSummary",
+   "title": "Review summary",
+   "kind": "block",
+   "icon": "stars",
+   "category": "Social proof",
+   "description": "Average rating, distribution bars, platform scores and a few top reviews",
+   "variants": [
+    {
+     "id": "split",
+     "name": "Summary + reviews",
+     "description": "Bars left, featured reviews right"
+    },
+    {
+     "id": "compact",
+     "name": "Compact",
+     "description": "One line: stars, average, count, platforms"
+    }
+   ],
+   "preview": {
+    "title": "heading",
+    "subtitle": "subject",
+    "icon": "stars"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "data",
+     "title": "Ratings"
+    },
+    {
+     "name": "design",
+     "title": "Design"
+    }
+   ],
+   "fields": [
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "validation": {
+      "recommendedMax": 48
+     },
+     "localized": true,
+     "placeholder": "What cooks are saying"
+    },
+    {
+     "name": "subject",
+     "title": "Reviews of",
+     "type": "reference",
+     "reference": {
+      "to": [
+       "shopify",
+       "col_products"
+      ]
+     },
+     "description": "Leave empty for store-wide reviews.",
+     "helpMore": "Star snippets in search only appear for a specific product."
+    },
+    {
+     "name": "dataSource",
+     "title": "Ratings come from",
+     "type": "select",
+     "group": "data",
+     "layout": "radio",
+     "initialValue": "connected",
+     "options": [
+      {
+       "value": "connected",
+       "label": "Connected review app",
+       "description": "Synced nightly from the reviews integration"
+      },
+      {
+       "value": "manual",
+       "label": "Typed in",
+       "description": "For ratings you can't sync, e.g. a trade show survey"
+      }
+     ]
+    },
+    {
+     "name": "provider",
+     "title": "Review app",
+     "type": "select",
+     "group": "data",
+     "hidden": {
+      "field": "dataSource",
+      "equals": "connected"
+     },
+     "access": {
+      "edit": "schema.manage"
+     },
+     "lockReason": "Connected by the developer in Settings \u203a Integrations.",
+     "options": [
+      {
+       "value": "judgeme",
+       "label": "Judge.me"
+      },
+      {
+       "value": "okendo",
+       "label": "Okendo"
+      },
+      {
+       "value": "yotpo",
+       "label": "Yotpo"
+      },
+      {
+       "value": "trustpilot",
+       "label": "Trustpilot"
+      }
+     ]
+    },
+    {
+     "name": "average",
+     "title": "Average rating",
+     "type": "number",
+     "group": "data",
+     "hidden": {
+      "field": "dataSource",
+      "equals": "manual"
+     },
+     "validation": {
+      "required": true
+     },
+     "numeric": {
+      "min": 1,
+      "max": 5,
+      "step": 0.1
+     }
+    },
+    {
+     "name": "count",
+     "title": "Number of reviews",
+     "type": "number",
+     "group": "data",
+     "hidden": {
+      "field": "dataSource",
+      "equals": "manual"
+     },
+     "validation": {
+      "required": true
+     },
+     "numeric": {
+      "min": 1,
+      "step": 1
+     }
+    },
+    {
+     "name": "ratingCounts",
+     "title": "Rating breakdown",
+     "type": "array",
+     "group": "data",
+     "hidden": {
+      "field": "dataSource",
+      "equals": "manual"
+     },
+     "validation": {
+      "min": 5,
+      "max": 5
+     },
+     "description": "One row per star level, 5 to 1. Counts must add up to the total.",
+     "of": [
+      {
+       "name": "bucket",
+       "title": "Star level",
+       "type": "object",
+       "openMode": "inline",
+       "preview": {
+        "title": "stars",
+        "subtitle": "count"
+       },
+       "fields": [
+        {
+         "name": "stars",
+         "title": "Stars",
+         "type": "number",
+         "readOnly": true,
+         "numeric": {
+          "min": 1,
+          "max": 5,
+          "step": 1
+         }
+        },
+        {
+         "name": "count",
+         "title": "Reviews",
+         "type": "number",
+         "numeric": {
+          "min": 0,
+          "step": 1
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "platforms",
+     "title": "Other platforms",
+     "type": "array",
+     "itemNoun": "platform",
+     "group": "data",
+     "validation": {
+      "max": 4
+     },
+     "of": [
+      {
+       "name": "platform",
+       "title": "Platform",
+       "type": "object",
+       "icon": "star",
+       "preview": {
+        "title": "name",
+        "subtitle": "rating"
+       },
+       "fields": [
+        {
+         "name": "name",
+         "title": "Platform",
+         "type": "select",
+         "validation": {
+          "required": true
+         },
+         "options": [
+          {
+           "value": "google",
+           "label": "Google"
+          },
+          {
+           "value": "trustpilot",
+           "label": "Trustpilot"
+          },
+          {
+           "value": "amazon",
+           "label": "Amazon"
+          },
+          {
+           "value": "rei",
+           "label": "REI"
+          },
+          {
+           "value": "g2",
+           "label": "G2"
+          }
+         ]
+        },
+        {
+         "name": "rating",
+         "title": "Rating",
+         "type": "number",
+         "validation": {
+          "required": true
+         },
+         "numeric": {
+          "min": 1,
+          "max": 5,
+          "step": 0.1
+         }
+        },
+        {
+         "name": "count",
+         "title": "Reviews",
+         "type": "number",
+         "numeric": {
+          "min": 0,
+          "step": 1
+         }
+        },
+        {
+         "name": "profile",
+         "title": "Profile link",
+         "type": "link",
+         "validation": {
+          "required": true
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "featuredReviews",
+     "title": "Featured reviews",
+     "type": "array",
+     "itemNoun": "review",
+     "validation": {
+      "max": 3
+     },
+     "of": [
+      {
+       "name": "review",
+       "title": "Review",
+       "type": "reference",
+       "reference": {
+        "to": [
+         "col_testimonials"
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "name": "button",
+     "title": "Button",
+     "type": "button"
+    },
+    {
+     "name": "useRichResults",
+     "title": "Send rating to search engines",
+     "type": "boolean",
+     "group": "data",
+     "hidden": {
+      "field": "subject",
+      "notEmpty": true
+     },
+     "initialValue": true,
+     "description": "Shows the stars in search results."
+    },
+    {
+     "name": "starColor",
+     "title": "Star color",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "brand",
+     "options": [
+      {
+       "value": "brand",
+       "label": "Brand"
+      },
+      {
+       "value": "gold",
+       "label": "Gold"
+      },
+      {
+       "value": "ink",
+       "label": "Ink"
+      }
+     ]
+    },
+    {
+     "name": "theme",
+     "title": "Theme",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "light",
+     "options": [
+      {
+       "value": "light",
+       "label": "Light"
+      },
+      {
+       "value": "dark",
+       "label": "Dark"
+      },
+      {
+       "value": "brand",
+       "label": "Brand"
+      }
+     ]
+    }
+   ]
+  },
+  "value": {
+   "_variant": "split",
+   "heading": "What cooks are saying",
+   "subject": "gid://shopify/Product/8813",
+   "dataSource": "connected",
+   "provider": "judgeme",
+   "average": 4.8,
+   "count": 2418,
+   "ratingCounts": [
+    {
+     "_key": "d5",
+     "stars": 5,
+     "count": 2031
+    },
+    {
+     "_key": "d4",
+     "stars": 4,
+     "count": 290
+    },
+    {
+     "_key": "d3",
+     "stars": 3,
+     "count": 58
+    },
+    {
+     "_key": "d2",
+     "stars": 2,
+     "count": 22
+    },
+    {
+     "_key": "d1",
+     "stars": 1,
+     "count": 17
+    }
+   ],
+   "platforms": [
+    {
+     "_key": "pl1",
+     "name": "rei",
+     "rating": 4.7,
+     "count": 612,
+     "profile": {
+      "type": "url",
+      "href": "https://www.rei.com/product/caldera-ember-dutch-oven",
+      "label": "REI reviews",
+      "newTab": true
+     }
+    },
+    {
+     "_key": "pl2",
+     "name": "amazon",
+     "rating": 4.6,
+     "count": 1290,
+     "profile": {
+      "type": "url",
+      "href": "https://www.amazon.com/dp/B0CALDERA55",
+      "label": "Amazon reviews",
+      "newTab": true
+     }
+    }
+   ],
+   "featuredReviews": [
+    "ts_amara",
+    "ts_maya"
+   ],
+   "button": {
+    "label": "Read all 2,418 reviews",
+    "href": "/products/ember-dutch-oven#reviews",
+    "type": "entry",
+    "title": "Ember Dutch Oven",
+    "style": "outline"
+   },
+   "useRichResults": true,
+   "starColor": "brand",
+   "theme": "light"
+  }
+ }
+]

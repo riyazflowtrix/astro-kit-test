@@ -1,0 +1,341 @@
+---
+// Story whose body is one list of mixed modules: text, image, stat, quote, video, gallery, callout, related.
+---
+
+<section id="polymorphic-modules" class="section story">
+  <!-- kit: polymorphic-modules -->
+  <article class="container story__inner">
+    <header class="story__head">
+      <span class="eyebrow">Atlas Journal</span>
+      <h1>The last ferry to Ilha Grande</h1>
+      <p class="lead">The island banned cars in 1994. Now a single diesel ferry decides who lives there, and the state wants to replace it.</p>
+      <p class="story__byline">By <a href="/authors/marina-teixeira">Marina Teixeira</a></p>
+    </header>
+
+    <figure class="story__cover">
+      <img src="https://picsum.photos/seed/ilha-grande-ferry/1600/1000" alt="The ferry Atlântica crossing at dusk with the island behind it" width="3200" height="2000" />
+    </figure>
+
+    <div class="modules">
+      <div class="module module--text">
+        <p>At 5:40 every morning the <em>Atlântica</em> sounds once, and Abraão empties toward the pier. Teachers, two nurses, the man who fixes every outboard on the island. Miss it and the next way off is a water taxi that costs half a day's wage.</p>
+      </div>
+
+      <figure class="module module--image module--wide">
+        <img src="https://picsum.photos/seed/abraao-pier/1600/1067" alt="Commuters with bicycles waiting on the Abraão pier before dawn" width="3200" height="2134" loading="lazy" />
+        <figcaption>The 5:40 queue at Abraão pier. <span class="credit">Photo: Luiza Prado for Atlas</span></figcaption>
+      </figure>
+
+      <aside class="module module--stat">
+        <span class="stat__value">1 boat</span>
+        <span class="stat__label">carries 3,800 residents and every school run</span>
+        <a class="stat__source" href="https://www.rj.gov.br/transportes" target="_blank" rel="noopener">Source: RJ state transport department</a>
+      </aside>
+
+      <figure class="module module--quote">
+        <blockquote>
+          <p>They call it a tourist boat. For us it's the road.</p>
+        </blockquote>
+        <figcaption><strong>Dona Célia Marques</strong>, runs the bakery on Rua da Praia</figcaption>
+      </figure>
+
+      <div class="module module--video">
+        <h2 class="module__title">Crossing with the night shift</h2>
+        <div class="video-frame" data-embed="https://player.vimeo.com/video/76979871?autoplay=1" data-title="Crossing with the night shift">
+          <img src="https://picsum.photos/seed/night-crossing/1600/1000" alt="Deckhand coiling rope under deck lights" width="3200" height="2000" loading="lazy" />
+          <button class="video-frame__play" type="button" aria-label="Play video: Crossing with the night shift">
+            <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor" /></svg>
+          </button>
+        </div>
+        <details class="transcript">
+          <summary>Read the transcript</summary>
+          <p><strong>Captain Rui Alves:</strong> Forty-one years on this water. The boat is older than most of my crew.</p>
+        </details>
+      </div>
+
+      <figure class="module module--gallery">
+        <div class="gallery__track" tabindex="0" aria-label="Photo gallery, scroll for more">
+          <img src="https://picsum.photos/seed/ilha-trail/1200/1200" alt="A trail through Atlantic forest above Abraão" width="2400" height="2400" loading="lazy" />
+          <img src="https://picsum.photos/seed/ilha-school/1200/1200" alt="Children in uniforms boarding with backpacks" width="2400" height="2400" loading="lazy" />
+          <img src="https://picsum.photos/seed/ilha-engine/1200/1200" alt="The ferry's diesel engine room" width="2400" height="2400" loading="lazy" />
+        </div>
+        <div class="gallery__controls">
+          <figcaption>A day of crossings, 5:40 to 21:15.</figcaption>
+          <div class="gallery__buttons">
+            <button type="button" class="gallery__btn" data-dir="-1" aria-label="Previous photo">&larr;</button>
+            <button type="button" class="gallery__btn" data-dir="1" aria-label="Next photo">&rarr;</button>
+          </div>
+        </div>
+      </figure>
+
+      <aside class="module module--callout" role="note">
+        <p class="callout__title">Correction</p>
+        <p>An earlier version said the ferry was built in 1971. It was launched in 1979.</p>
+      </aside>
+
+      <aside class="module module--related">
+        <span class="related__label">Read next</span>
+        <a class="related__card" href="/stories/paraty-tide-gauges">
+          <img src="https://picsum.photos/seed/paraty-tide/800/500" alt="A tide gauge on a stone quay in Paraty at low water" width="800" height="500" loading="lazy" />
+          <span class="related__text">
+            <strong>Paraty is measuring its own sea level</strong>
+            <span>Fishermen built the tide gauges the federal survey never installed.</span>
+          </span>
+        </a>
+      </aside>
+    </div>
+  </article>
+</section>
+
+<script>
+  {
+    const root = document.getElementById("polymorphic-modules");
+    if (root) {
+      const track = root.querySelector<HTMLElement>(".gallery__track");
+      root.querySelectorAll<HTMLButtonElement>(".gallery__btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          if (!track) return;
+          track.scrollBy({ left: Number(btn.dataset.dir) * track.clientWidth * 0.8, behavior: "smooth" });
+        });
+      });
+      root.querySelectorAll<HTMLElement>(".video-frame").forEach((frame) => {
+        frame.querySelector("button")?.addEventListener("click", () => {
+          const iframe = document.createElement("iframe");
+          iframe.src = frame.dataset.embed || "";
+          iframe.title = frame.dataset.title || "Video";
+          iframe.allow = "autoplay; fullscreen; picture-in-picture";
+          iframe.allowFullscreen = true;
+          frame.replaceChildren(iframe);
+        });
+      });
+    }
+  }
+</script>
+
+<style>
+  .story__inner {
+    max-width: 880px;
+  }
+  .story__head {
+    max-width: 720px;
+    margin-bottom: 2rem;
+  }
+  .story__byline {
+    font-size: 0.9375rem;
+    color: var(--ink-2);
+  }
+  .story__byline a {
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .story__cover {
+    margin: 0 0 2.5rem;
+  }
+  .story__cover img {
+    width: 100%;
+    border-radius: var(--radius);
+  }
+  .modules {
+    display: grid;
+    gap: 2.5rem;
+    max-width: 680px;
+    margin-inline: auto;
+  }
+  .module {
+    margin: 0;
+  }
+  .module--text p {
+    font-size: 1.1875rem;
+    line-height: 1.7;
+  }
+  .module--wide {
+    margin-inline: calc(-1 * max(0px, min(100px, 8vw, (100vw - 100%) / 2 - 1rem)));
+  }
+  @media (max-width: 720px) {
+    .module--wide {
+      margin-inline: 0;
+    }
+  }
+  .module--image img {
+    width: 100%;
+    border-radius: var(--radius);
+  }
+  .module figcaption {
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--ink-2);
+  }
+  .credit {
+    color: var(--ink-3);
+  }
+  .module--stat {
+    display: grid;
+    gap: 0.25rem;
+    padding: 1.75rem;
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+  .stat__value {
+    font-size: clamp(2.5rem, 7vw, 4rem);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: var(--brand);
+  }
+  .stat__label {
+    font-size: 1.125rem;
+  }
+  .stat__source {
+    font-size: 0.8125rem;
+    color: var(--ink-3);
+  }
+  .module--quote blockquote {
+    margin: 0;
+    padding-left: 1.25rem;
+    border-left: 4px solid var(--brand);
+    font-size: clamp(1.375rem, 3vw, 1.75rem);
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+  }
+  .module--quote blockquote p {
+    margin: 0;
+  }
+  .module--quote figcaption {
+    padding-left: 1.25rem;
+  }
+  .module__title {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+  }
+  .video-frame {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-radius: var(--radius);
+    background: var(--dark);
+  }
+  .video-frame img,
+  .video-frame :global(iframe) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: 0;
+  }
+  .video-frame__play {
+    position: absolute;
+    inset: 50% auto auto 50%;
+    translate: -50% -50%;
+    display: grid;
+    place-items: center;
+    width: 72px;
+    height: 72px;
+    border: 0;
+    border-radius: 50%;
+    background: var(--brand);
+    color: var(--brand-ink);
+    cursor: pointer;
+  }
+  .transcript {
+    margin-top: 0.75rem;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+  }
+  .transcript summary {
+    cursor: pointer;
+    font-weight: 600;
+  }
+  .transcript p {
+    margin: 0.75rem 0 0;
+    color: var(--ink-2);
+  }
+  .gallery__track {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 80%;
+    gap: 0.75rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+  .gallery__track img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: var(--radius);
+    scroll-snap-align: start;
+  }
+  .gallery__controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+  .gallery__buttons {
+    display: flex;
+    gap: 0.5rem;
+    flex-shrink: 0;
+  }
+  .gallery__btn {
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    background: var(--bg);
+    cursor: pointer;
+    font-size: 1.125rem;
+  }
+  .module--callout {
+    padding: 1rem 1.25rem;
+    border-radius: var(--radius-sm);
+    background: #fff8e6;
+    border: 1px solid #f1d58a;
+  }
+  .module--callout p {
+    margin: 0;
+  }
+  .callout__title {
+    font-weight: 700;
+    color: var(--warning);
+    margin-bottom: 0.25rem !important;
+  }
+  .related__label {
+    display: block;
+    margin-bottom: 0.75rem;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-3);
+  }
+  .related__card {
+    display: grid;
+    grid-template-columns: 140px minmax(0, 1fr);
+    gap: 1rem;
+    align-items: center;
+    padding: 0.75rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    text-decoration: none;
+  }
+  .related__card img {
+    width: 100%;
+    aspect-ratio: 8 / 5;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+  }
+  .related__text {
+    display: grid;
+    gap: 0.25rem;
+  }
+  .related__text span {
+    font-size: 0.875rem;
+    color: var(--ink-2);
+  }
+  @media (max-width: 480px) {
+    .related__card {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

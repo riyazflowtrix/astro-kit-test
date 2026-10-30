@@ -1,0 +1,223 @@
+---
+// Before / after slider (variant: tabs) — Halden Studio renovations.
+---
+
+<section id="before-after-slider" class="section before-after" data-variant="tabs">
+  <!-- kit: before-after-slider -->
+  <div class="container">
+    <header class="section-head section-head--center">
+      <span class="eyebrow">Renovations</span>
+      <h2>Same walls, a different house.</h2>
+    </header>
+
+    <div class="tabs" role="tablist" aria-label="Rooms">
+      <button type="button" role="tab" id="ba-tab-kitchen" aria-controls="ba-panel-kitchen" aria-selected="true">Kitchen</button>
+      <button type="button" role="tab" id="ba-tab-living" aria-controls="ba-panel-living" aria-selected="false" tabindex="-1">Living room</button>
+      <button type="button" role="tab" id="ba-tab-facade" aria-controls="ba-panel-facade" aria-selected="false" tabindex="-1">Façade</button>
+    </div>
+
+    <div class="panel" role="tabpanel" id="ba-panel-kitchen" aria-labelledby="ba-tab-kitchen">
+      <figure class="compare" style="--pos: 50%">
+        <div class="stage">
+          <img class="after" src="https://picsum.photos/seed/halden-reno-kitchen-after/1600/1067" alt="The same kitchen opened to the rafters with white oak and a skylight" width="3200" height="2134" loading="lazy" />
+          <div class="before-wrap">
+            <img class="before" src="https://picsum.photos/seed/halden-reno-kitchen-before/1600/1067" alt="Dated kitchen with oak cabinets and a dropped ceiling" width="3200" height="2134" loading="lazy" />
+          </div>
+          <span class="tag tag-before">1987</span>
+          <span class="tag tag-after">2025</span>
+          <span class="handle" aria-hidden="true"><span>‹ ›</span></span>
+          <input class="range" type="range" min="0" max="100" value="50" aria-label="Kitchen: drag to compare 1987 and 2025" />
+        </div>
+        <figcaption>We removed the dropped ceiling and found the original fir rafters. <span class="credit">Photo: Lina Okafor</span></figcaption>
+      </figure>
+    </div>
+
+    <div class="panel" role="tabpanel" id="ba-panel-living" aria-labelledby="ba-tab-living" hidden>
+      <figure class="compare" style="--pos: 50%">
+        <div class="stage">
+          <img class="after" src="https://picsum.photos/seed/halden-reno-living-after/1600/1067" alt="Living room with polished concrete and a wide picture window" width="3200" height="2134" loading="lazy" />
+          <div class="before-wrap">
+            <img class="before" src="https://picsum.photos/seed/halden-reno-living-before/1600/1067" alt="Living room with carpet and a small window" width="3200" height="2134" loading="lazy" />
+          </div>
+          <span class="tag tag-before">Before</span>
+          <span class="tag tag-after">After</span>
+          <span class="handle" aria-hidden="true"><span>‹ ›</span></span>
+          <input class="range" type="range" min="0" max="100" value="50" aria-label="Living room: drag to compare before and after" />
+        </div>
+        <figcaption><span class="credit">Photo: Lina Okafor</span></figcaption>
+      </figure>
+    </div>
+
+    <div class="panel" role="tabpanel" id="ba-panel-facade" aria-labelledby="ba-tab-facade" hidden>
+      <figure class="compare" style="--pos: 50%">
+        <div class="stage">
+          <img class="after" src="https://picsum.photos/seed/halden-reno-facade-after/1600/1067" alt="The same house clad in charred cedar" width="3200" height="2134" loading="lazy" />
+          <div class="before-wrap">
+            <img class="before" src="https://picsum.photos/seed/halden-reno-facade-before/1600/1067" alt="Vinyl-sided house front" width="3200" height="2134" loading="lazy" />
+          </div>
+          <span class="tag tag-before">Before</span>
+          <span class="tag tag-after">After</span>
+          <span class="handle" aria-hidden="true"><span>‹ ›</span></span>
+          <input class="range" type="range" min="0" max="100" value="50" aria-label="Façade: drag to compare before and after" />
+        </div>
+        <figcaption>Shou sugi ban cedar over the original frame. <span class="credit">Photo: Halden Studio</span></figcaption>
+      </figure>
+    </div>
+
+    <p class="hint">Drag the handle to compare.</p>
+  </div>
+</section>
+
+<style>
+  .tabs {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    width: fit-content;
+    max-width: 100%;
+    margin: 0 auto 1.5rem;
+    padding: 0.25rem;
+    border-radius: 999px;
+    background: var(--surface);
+  }
+  .tabs button {
+    min-height: 40px;
+    padding: 0 1.125rem;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    font: inherit;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--ink-2);
+    cursor: pointer;
+  }
+  .tabs button[aria-selected="true"] {
+    background: var(--bg);
+    color: var(--ink);
+    box-shadow: var(--shadow);
+  }
+  .compare {
+    margin: 0 auto;
+    max-width: 1000px;
+  }
+  .stage {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius);
+    aspect-ratio: 3 / 2;
+    background: var(--surface-2);
+    user-select: none;
+  }
+  .stage img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .before-wrap {
+    position: absolute;
+    inset: 0;
+    clip-path: inset(0 calc(100% - var(--pos)) 0 0);
+  }
+  .tag {
+    position: absolute;
+    top: 12px;
+    padding: 0.25rem 0.625rem;
+    border-radius: 999px;
+    background: rgb(0 0 0 / 0.6);
+    color: #fff;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    pointer-events: none;
+  }
+  .tag-before { left: 12px; }
+  .tag-after { right: 12px; }
+  .handle {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: var(--pos);
+    width: 2px;
+    margin-left: -1px;
+    background: #fff;
+    pointer-events: none;
+  }
+  .handle span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: #fff;
+    color: var(--ink);
+    font-weight: 700;
+    box-shadow: var(--shadow);
+  }
+  .range {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    opacity: 0;
+    cursor: ew-resize;
+  }
+  .range:focus-visible + .handle,
+  .stage:focus-within .handle span {
+    outline: 2px solid var(--accent);
+  }
+  figcaption {
+    margin-top: 0.75rem;
+    font-size: 0.9375rem;
+    color: var(--ink-2);
+    text-align: center;
+  }
+  .credit {
+    color: var(--ink-3);
+    font-size: 0.8125rem;
+  }
+  .hint {
+    margin: 0.5rem 0 0;
+    text-align: center;
+    font-size: 0.8125rem;
+    color: var(--ink-3);
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    var root = document.getElementById("before-after-slider");
+    if (!root) return;
+    root.querySelectorAll(".compare").forEach(function (fig) {
+      var range = fig.querySelector(".range");
+      range.addEventListener("input", function () {
+        fig.style.setProperty("--pos", range.value + "%");
+      });
+    });
+    var tabs = Array.prototype.slice.call(root.querySelectorAll('[role="tab"]'));
+    function select(tab) {
+      tabs.forEach(function (t) {
+        var on = t === tab;
+        t.setAttribute("aria-selected", String(on));
+        t.tabIndex = on ? 0 : -1;
+        document.getElementById(t.getAttribute("aria-controls")).hidden = !on;
+      });
+    }
+    tabs.forEach(function (tab, i) {
+      tab.addEventListener("click", function () { select(tab); });
+      tab.addEventListener("keydown", function (e) {
+        var next = null;
+        if (e.key === "ArrowRight") next = tabs[(i + 1) % tabs.length];
+        if (e.key === "ArrowLeft") next = tabs[(i - 1 + tabs.length) % tabs.length];
+        if (next) { e.preventDefault(); select(next); next.focus(); }
+      });
+    });
+  })();
+</script>

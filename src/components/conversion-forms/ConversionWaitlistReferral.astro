@@ -1,0 +1,197 @@
+---
+---
+
+<section id="conversion-waitlist-referral" class="section section--dark waitlist" data-list-tag="ember-oven-waitlist" data-counter-min="500">
+  <!-- kit: conversion-waitlist-referral -->
+  <div class="container waitlist__grid">
+    <div class="waitlist__copy">
+      <span class="eyebrow">Coming spring 2027</span>
+      <h2>The Ember Pizza Oven</h2>
+      <p class="lead">A cast iron pizza oven that sits on any fire ring and hits 900°F in twenty minutes. The first run is 1,500 ovens, and the waitlist gets first access and launch pricing.</p>
+      <p class="waitlist__launch">Launching <strong>Spring 2027</strong></p>
+
+      <form class="waitlist__form" action="#" method="post" data-form="form_newsletter">
+        <input type="hidden" name="list_tag" value="ember-oven-waitlist" />
+        <label class="visually-hidden" for="wl-email">Email address</label>
+        <input id="wl-email" name="email" type="email" placeholder="you@example.com" autocomplete="email" required />
+        <button class="btn btn-primary" type="submit">Join the waitlist</button>
+      </form>
+      <p class="waitlist__counter"><strong>1,284</strong> people already on the list</p>
+
+      <div class="waitlist__success" role="status" hidden>
+        <p>You're number <strong class="waitlist__position">1,285</strong>. Share your link — every friend who joins moves you up.</p>
+        <div class="waitlist__share" data-share-message="I'm on the list for Caldera's new pizza oven — 900°F over a campfire. Join with my link and we both move up: {{link}}">
+          <label class="visually-hidden" for="wl-link">Your referral link</label>
+          <input id="wl-link" type="text" readonly value="https://caldera.com/ember?ref=fire1285" />
+          <div class="waitlist__channels">
+            <button type="button" class="btn btn-secondary" data-channel="copy">Copy link</button>
+            <a class="btn btn-secondary" data-channel="email" href="mailto:?subject=Caldera%20Ember%20Pizza%20Oven">Email</a>
+            <a class="btn btn-secondary" data-channel="sms" href="sms:">SMS</a>
+            <a class="btn btn-secondary" data-channel="whatsapp" href="https://wa.me/" target="_blank" rel="noopener">WhatsApp</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="waitlist__side">
+      <img src="https://picsum.photos/seed/caldera-pizza-oven-teaser/1600/1200" alt="A cast iron dome oven glowing over a campfire with a blistered pizza inside" width="1600" height="1200" loading="lazy" />
+      <div class="waitlist__rewards">
+        <h3>Invite friends, move up</h3>
+        <ol>
+          <li><span class="waitlist__friends">1 friend</span> Move up 100 places</li>
+          <li><span class="waitlist__friends">3 friends</span> A free pizza peel ($45)</li>
+          <li><span class="waitlist__friends">10 friends</span> Your oven ships in the first week</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  #conversion-waitlist-referral [hidden] {
+    display: none !important;
+  }
+
+  .waitlist__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: center;
+  }
+
+  .waitlist__launch {
+    color: rgb(255 255 255 / 0.7);
+  }
+
+  .waitlist__form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+  }
+
+  .waitlist__form input,
+  .waitlist__share input {
+    flex: 1 1 220px;
+    min-height: 44px;
+    padding: 0.5rem 0.875rem;
+    border: 1px solid rgb(255 255 255 / 0.2);
+    border-radius: var(--radius-sm);
+    background: rgb(255 255 255 / 0.06);
+    color: #fff;
+  }
+
+  .waitlist__counter {
+    margin-top: 0.875rem;
+    font-size: 0.875rem;
+    color: rgb(255 255 255 / 0.7);
+  }
+
+  .waitlist__counter strong {
+    color: #fff;
+  }
+
+  .waitlist__success {
+    margin-top: 1.5rem;
+    padding: 1.25rem;
+    border: 1px solid rgb(255 255 255 / 0.15);
+    border-radius: var(--radius);
+  }
+
+  .waitlist__share {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .waitlist__share input {
+    width: 100%;
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+  }
+
+  .waitlist__channels {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .waitlist__channels .btn {
+    border-color: rgb(255 255 255 / 0.25);
+    color: #fff;
+    min-height: 38px;
+    font-size: 0.875rem;
+  }
+
+  .waitlist__side img {
+    width: 100%;
+    border-radius: var(--radius-lg);
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+
+  .waitlist__rewards {
+    margin-top: 1.25rem;
+    padding: 1.25rem;
+    border-radius: var(--radius);
+    background: rgb(255 255 255 / 0.05);
+  }
+
+  .waitlist__rewards ol {
+    display: grid;
+    gap: 0.75rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .waitlist__rewards li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .waitlist__friends {
+    flex: none;
+    min-width: 6.5rem;
+    padding: 0.25rem 0.6rem;
+    border-radius: 999px;
+    background: var(--brand);
+    color: #fff;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  @media (max-width: 860px) {
+    .waitlist__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script is:inline>
+  (() => {
+    const root = document.getElementById("conversion-waitlist-referral");
+    if (!root) return;
+    const form = root.querySelector(".waitlist__form");
+    const success = root.querySelector(".waitlist__success");
+    const share = root.querySelector(".waitlist__share");
+    const link = root.querySelector("#wl-link");
+    const msg = share.dataset.shareMessage.replace("{{link}}", link.value);
+    root.querySelector('[data-channel="email"]').href = "mailto:?subject=Caldera%20Ember%20Pizza%20Oven&body=" + encodeURIComponent(msg);
+    root.querySelector('[data-channel="sms"]').href = "sms:?&body=" + encodeURIComponent(msg);
+    root.querySelector('[data-channel="whatsapp"]').href = "https://wa.me/?text=" + encodeURIComponent(msg);
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (!form.reportValidity()) return;
+      form.hidden = true;
+      success.hidden = false;
+    });
+    root.querySelector('[data-channel="copy"]').addEventListener("click", (e) => {
+      const btn = e.currentTarget;
+      if (navigator.clipboard) navigator.clipboard.writeText(link.value).catch(() => {});
+      btn.textContent = "Copied";
+      setTimeout(() => (btn.textContent = "Copy link"), 1600);
+    });
+  })();
+</script>

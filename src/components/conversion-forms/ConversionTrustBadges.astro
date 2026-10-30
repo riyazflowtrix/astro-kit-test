@@ -1,0 +1,161 @@
+---
+---
+
+<section id="conversion-trust-badges" class="section trust" data-variant="row" data-alignment="center">
+  <!-- kit: conversion-trust-badges -->
+  <div class="container">
+    <ul class="trust__badges">
+      <li class="trust__badge" data-kind="guarantee">
+        <span class="trust__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9.8 9.2a3.9 3.9 0 1 0 0 5.6L12 12l2.2-2.8a3.9 3.9 0 1 1 0 5.6L12 12z" /></svg></span>
+        <h3><a href="/warranty" title="Warranty">Lifetime warranty</a></h3>
+        <p>If it cracks or warps, we replace it. No receipt needed.</p>
+      </li>
+      <li class="trust__badge" data-kind="returns">
+        <span class="trust__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14l-4-4 4-4" /><path d="M5 10h11a4 4 0 1 1 0 8h-1" /></svg></span>
+        <h3>60-day returns</h3>
+        <p>Even if you've cooked in it.</p>
+      </li>
+      <li class="trust__badge" data-kind="shipping">
+        <span class="trust__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7" /><circle cx="7" cy="17.5" r="1.8" /><circle cx="17" cy="17.5" r="1.8" /></svg></span>
+        <h3>Free shipping over $80</h3>
+        <p>Contiguous US, plastic-free packaging.</p>
+      </li>
+      <li class="trust__badge" data-kind="origin">
+        <span class="trust__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="11" r="3" /><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z" /></svg></span>
+        <h3>Poured in Bend, Oregon</h3>
+      </li>
+      <li class="trust__badge" data-kind="certification">
+        <img class="trust__logo" src="https://picsum.photos/seed/caldera-badge-one-percent/240/240" alt="1% for the Planet member" width="240" height="240" loading="lazy" />
+        <h3><a href="https://onepercentfortheplanet.org" target="_blank" rel="noopener">1% for the Planet</a></h3>
+        <p>1% of every sale funds public-lands conservation.</p>
+      </li>
+    </ul>
+
+    <hr class="trust__divider" />
+
+    <div class="trust__foot">
+      <ul class="trust__payments" aria-label="Accepted payment methods">
+        <li>Visa</li>
+        <li>Mastercard</li>
+        <li>Amex</li>
+        <li>Apple Pay</li>
+        <li>Shop Pay</li>
+        <li>PayPal</li>
+      </ul>
+      <p class="trust__rating" data-source="okendo">
+        <span class="trust__stars" aria-hidden="true">★★★★★</span>
+        <strong>4.9 out of 5</strong> from 3,812 reviews on Okendo
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .trust__badges {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-align: center;
+  }
+
+  .trust__badge {
+    display: grid;
+    justify-items: center;
+    align-content: start;
+    gap: 0.5rem;
+  }
+
+  .trust__badge h3 {
+    margin: 0;
+    font-size: 1rem;
+  }
+
+  .trust__badge h3 a {
+    text-decoration: none;
+  }
+
+  .trust__badge h3 a:hover {
+    text-decoration: underline;
+  }
+
+  .trust__badge p {
+    margin: 0;
+    max-width: 28ch;
+    font-size: 0.875rem;
+    color: var(--ink-2);
+  }
+
+  .trust__icon {
+    display: grid;
+    place-items: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: var(--brand-soft);
+    color: var(--brand);
+  }
+
+  .trust__icon svg {
+    width: 26px;
+    height: 26px;
+  }
+
+  .trust__logo {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .trust__divider {
+    margin: 2.5rem 0 1.75rem;
+    border: 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .trust__foot {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem 2rem;
+  }
+
+  .trust__payments {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .trust__payments li {
+    padding: 0.3rem 0.65rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--ink-2);
+  }
+
+  .trust__rating {
+    margin: 0;
+    font-size: 0.9375rem;
+    color: var(--ink-2);
+  }
+
+  .trust__stars {
+    color: #e0a526;
+    letter-spacing: 0.1em;
+    margin-right: 0.35rem;
+  }
+
+  .trust__rating strong {
+    color: var(--ink);
+  }
+</style>

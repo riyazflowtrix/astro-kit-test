@@ -1,0 +1,796 @@
+[
+ {
+  "slug": "navigation-chrome",
+  "name": "Navigation & chrome",
+  "sections": [
+   {
+    "id": "nav-simple-cta",
+    "name": "Simple navbar with CTA",
+    "kind": "global"
+   },
+   {
+    "id": "nav-announcement-utility",
+    "name": "Header with announcement + utility row",
+    "kind": "global"
+   },
+   {
+    "id": "nav-mega-featured-promo",
+    "name": "Mega menu with featured cards + promo slot",
+    "kind": "global"
+   },
+   {
+    "id": "nav-docs-sidebar",
+    "name": "Docs sidebar navigation",
+    "kind": "global"
+   },
+   {
+    "id": "nav-ecommerce-header",
+    "name": "E-commerce header",
+    "kind": "global"
+   },
+   {
+    "id": "nav-locale-header",
+    "name": "Multi-locale header with switchers",
+    "kind": "global"
+   },
+   {
+    "id": "sticky-mobile-cta-bar",
+    "name": "Sticky bottom CTA bar (mobile)",
+    "kind": "block"
+   },
+   {
+    "id": "announcement-countdown",
+    "name": "Announcement bar with countdown",
+    "kind": "global"
+   },
+   {
+    "id": "cookie-consent",
+    "name": "Cookie consent banner",
+    "kind": "global"
+   },
+   {
+    "id": "breadcrumb-config",
+    "name": "Breadcrumb trail",
+    "kind": "block"
+   },
+   {
+    "id": "footer-multi-column",
+    "name": "Multi-column footer",
+    "kind": "global"
+   },
+   {
+    "id": "footer-minimal",
+    "name": "Minimal footer",
+    "kind": "global"
+   },
+   {
+    "id": "footer-mega-locations",
+    "name": "Mega footer with locations + app badges",
+    "kind": "global"
+   }
+  ]
+ },
+ {
+  "slug": "heroes",
+  "name": "Heroes",
+  "sections": [
+   {
+    "id": "hero-split-media",
+    "name": "Split hero with media switch",
+    "kind": "block"
+   },
+   {
+    "id": "hero-centered-gradient",
+    "name": "Centered hero with gradient + screenshot",
+    "kind": "block"
+   },
+   {
+    "id": "hero-video-fullbleed",
+    "name": "Full-bleed video hero with captions",
+    "kind": "block"
+   },
+   {
+    "id": "hero-slider",
+    "name": "Slider hero",
+    "kind": "block"
+   },
+   {
+    "id": "hero-product",
+    "name": "Product hero with variant picker",
+    "kind": "block"
+   },
+   {
+    "id": "hero-search",
+    "name": "Search hero",
+    "kind": "block"
+   },
+   {
+    "id": "hero-lead-form",
+    "name": "Lead-form hero",
+    "kind": "block"
+   },
+   {
+    "id": "hero-app-download",
+    "name": "App download hero",
+    "kind": "block"
+   },
+   {
+    "id": "hero-stats",
+    "name": "Stats hero",
+    "kind": "block"
+   },
+   {
+    "id": "hero-logo-wall",
+    "name": "Hero with logo wall",
+    "kind": "block"
+   },
+   {
+    "id": "hero-split-testimonial",
+    "name": "Split hero with testimonial card",
+    "kind": "block"
+   },
+   {
+    "id": "hero-event",
+    "name": "Event hero",
+    "kind": "block"
+   },
+   {
+    "id": "hero-personalized",
+    "name": "Personalized hero (audiences + A/B)",
+    "kind": "block"
+   }
+  ]
+ },
+ {
+  "slug": "features-storytelling",
+  "name": "Features & storytelling",
+  "sections": [
+   {
+    "id": "feature-icon-grid",
+    "name": "Icon feature grid",
+    "kind": "block"
+   },
+   {
+    "id": "feature-alternating-rows",
+    "name": "Alternating feature rows",
+    "kind": "block"
+   },
+   {
+    "id": "bento-feature-showcase",
+    "name": "Feature bento (responsive spans)",
+    "kind": "block"
+   },
+   {
+    "id": "steps-how-it-works",
+    "name": "Steps / how it works",
+    "kind": "block"
+   },
+   {
+    "id": "timeline-company-history",
+    "name": "Timeline / company history",
+    "kind": "block"
+   },
+   {
+    "id": "tabs-with-media",
+    "name": "Tabs with media",
+    "kind": "block"
+   },
+   {
+    "id": "accordion-feature-image-swap",
+    "name": "Accordion features with image swap",
+    "kind": "block"
+   },
+   {
+    "id": "comparison-vs-competitors",
+    "name": "Comparison vs competitors",
+    "kind": "block"
+   },
+   {
+    "id": "stats-band",
+    "name": "Stats band",
+    "kind": "block"
+   },
+   {
+    "id": "manifesto-pull-quote",
+    "name": "Manifesto / pull quote",
+    "kind": "block"
+   },
+   {
+    "id": "problem-solution",
+    "name": "Problem \u2192 solution",
+    "kind": "block"
+   },
+   {
+    "id": "integrations-grid",
+    "name": "Integrations grid",
+    "kind": "block"
+   }
+  ]
+ },
+ {
+  "slug": "social-proof",
+  "name": "Social proof",
+  "sections": [
+   {
+    "id": "testimonial-grid",
+    "name": "Testimonial grid",
+    "kind": "block"
+   },
+   {
+    "id": "testimonial-video-slider",
+    "name": "Video testimonial slider",
+    "kind": "block"
+   },
+   {
+    "id": "wall-of-love",
+    "name": "Wall of love",
+    "kind": "block"
+   },
+   {
+    "id": "case-study-cards",
+    "name": "Case study cards",
+    "kind": "block"
+   },
+   {
+    "id": "logo-cloud",
+    "name": "Logo cloud",
+    "kind": "block"
+   },
+   {
+    "id": "press-mentions",
+    "name": "Press mentions",
+    "kind": "block"
+   },
+   {
+    "id": "awards-certifications",
+    "name": "Awards & certifications",
+    "kind": "block"
+   },
+   {
+    "id": "review-summary",
+    "name": "Review summary",
+    "kind": "block"
+   }
+  ]
+ },
+ {
+  "slug": "company-people",
+  "name": "Company & people",
+  "sections": [
+   {
+    "id": "team-grid",
+    "name": "Team grid",
+    "kind": "block"
+   },
+   {
+    "id": "leadership-bios",
+    "name": "Leadership with bios",
+    "kind": "block"
+   },
+   {
+    "id": "values-culture",
+    "name": "Values & culture",
+    "kind": "block"
+   },
+   {
+    "id": "careers-list",
+    "name": "Careers list",
+    "kind": "block"
+   },
+   {
+    "id": "job-posting",
+    "name": "Job posting",
+    "kind": "entry"
+   },
+   {
+    "id": "about-timeline",
+    "name": "About & mission with timeline",
+    "kind": "block"
+   },
+   {
+    "id": "press-kit",
+    "name": "Press & brand kit",
+    "kind": "block"
+   }
+  ]
+ },
+ {
+  "slug": "commerce",
+  "name": "Commerce",
+  "sections": [
+   {
+    "id": "commerce-product-grid-query",
+    "name": "Product grid (query)",
+    "kind": "block"
+   },
+   {
+    "id": "commerce-product-detail",
+    "name": "Product detail page",
+    "kind": "entry"
+   },
+   {
+    "id": "commerce-featured-product",
+    "name": "Featured product spotlight",
+    "kind": "block"
+   },
+   {
+    "id": "commerce-collection-header-facets",
+    "name": "Collection header + filters",
+    "kind": "block"
+   },
+   {
+    "id": "commerce-bundle-builder",
+    "name": "Bundle builder (choose N)",
+    "kind": "block"
+   },
+   {
+    "id": "commerce-cart-cross-sell",
+    "name": "Cart upsell & cross-sell",
+    "kind": "block"
+   },
+   {
+    "id": "commerce-promo-countdown",
+    "name": "Promo banner with code + countdown",
+    "kind": "block"
+   },
+   {
+    "id": "commerce-shop-the-look",
+    "name": "Shop the look (hotspots)",
+    "kind": "block"
+   },
+   {
+    "id": "commerce-size-guide",
+    "name": "Size guide table",
+    "kind": "block"
+   },
+   {
+    "id": "commerce-store-locator",
+    "name": "Store locator",
+    "kind": "block"
+   },
+   {
+    "id": "commerce-product-comparison",
+    "name": "Product comparison (2\u20134)",
+    "kind": "block"
+   }
+  ]
+ },
+ {
+  "slug": "pricing-plans",
+  "name": "Pricing & plans",
+  "sections": [
+   {
+    "id": "pricing-tiers-billing-toggle",
+    "name": "Plans with monthly / yearly switch",
+    "kind": "block"
+   },
+   {
+    "id": "pricing-usage-calculator",
+    "name": "Usage-based price calculator",
+    "kind": "block"
+   },
+   {
+    "id": "pricing-feature-matrix",
+    "name": "Full feature comparison matrix",
+    "kind": "block"
+   },
+   {
+    "id": "pricing-single-plan-addons",
+    "name": "Single plan with add-ons",
+    "kind": "block"
+   },
+   {
+    "id": "pricing-enterprise-card",
+    "name": "Enterprise contact card",
+    "kind": "block"
+   },
+   {
+    "id": "pricing-faq",
+    "name": "Pricing FAQ",
+    "kind": "block"
+   },
+   {
+    "id": "pricing-annual-savings-banner",
+    "name": "Pay-yearly savings banner",
+    "kind": "block"
+   }
+  ]
+ },
+ {
+  "slug": "listings-feeds",
+  "name": "Listings & feeds",
+  "sections": [
+   {
+    "id": "blog-index",
+    "name": "Blog index",
+    "kind": "block"
+   },
+   {
+    "id": "category-filter-bar",
+    "name": "Category filter bar",
+    "kind": "block"
+   },
+   {
+    "id": "related-posts",
+    "name": "Related posts",
+    "kind": "block"
+   },
+   {
+    "id": "resource-library",
+    "name": "Resource library",
+    "kind": "block"
+   },
+   {
+    "id": "podcast-episode-list",
+    "name": "Podcast episode list",
+    "kind": "block"
+   },
+   {
+    "id": "changelog",
+    "name": "Changelog",
+    "kind": "block"
+   },
+   {
+    "id": "public-roadmap",
+    "name": "Public roadmap",
+    "kind": "block"
+   },
+   {
+    "id": "search-results-page",
+    "name": "Search results page",
+    "kind": "block"
+   }
+  ]
+ },
+ {
+  "slug": "conversion-forms",
+  "name": "Conversion & forms",
+  "sections": [
+   {
+    "id": "conversion-cta-band",
+    "name": "CTA band",
+    "kind": "block"
+   },
+   {
+    "id": "conversion-newsletter-consent",
+    "name": "Newsletter sign-up with consent",
+    "kind": "block"
+   },
+   {
+    "id": "conversion-lead-capture",
+    "name": "Lead capture form + success state",
+    "kind": "block"
+   },
+   {
+    "id": "conversion-multi-step-form",
+    "name": "Multi-step form",
+    "kind": "block"
+   },
+   {
+    "id": "conversion-booking-embed",
+    "name": "Booking / reservations embed",
+    "kind": "block"
+   },
+   {
+    "id": "conversion-waitlist-referral",
+    "name": "Waitlist with referral rewards",
+    "kind": "block"
+   },
+   {
+    "id": "conversion-contact-section",
+    "name": "Contact section",
+    "kind": "block"
+   },
+   {
+    "id": "conversion-quiz-product-finder",
+    "name": "Quiz / product finder",
+    "kind": "block"
+   },
+   {
+    "id": "conversion-exit-intent-popup",
+    "name": "Exit-intent popup",
+    "kind": "global"
+   },
+   {
+    "id": "conversion-trust-badges",
+    "name": "Trust badges & guarantees row",
+    "kind": "block"
+   }
+  ]
+ },
+ {
+  "slug": "data-interactive",
+  "name": "Data & interactive",
+  "sections": [
+   {
+    "id": "data-table-specs",
+    "name": "Spec table",
+    "kind": "block"
+   },
+   {
+    "id": "table-comparison",
+    "name": "Table",
+    "kind": "block"
+   },
+   {
+    "id": "chart-attrition",
+    "name": "Chart with annotations",
+    "kind": "block"
+   },
+   {
+    "id": "roi-calculator",
+    "name": "ROI calculator",
+    "kind": "block"
+   },
+   {
+    "id": "product-configurator",
+    "name": "Product configurator",
+    "kind": "block"
+   },
+   {
+    "id": "stockist-map",
+    "name": "Map with markers",
+    "kind": "block"
+   },
+   {
+    "id": "product-compare-slider",
+    "name": "Product comparison slider",
+    "kind": "block"
+   },
+   {
+    "id": "countdown-live-counter",
+    "name": "Countdown and live counter",
+    "kind": "block"
+   },
+   {
+    "id": "reader-poll",
+    "name": "Poll",
+    "kind": "block"
+   },
+   {
+    "id": "safe-embed",
+    "name": "Embed (iframe, HTML, script)",
+    "kind": "block"
+   },
+   {
+    "id": "code-snippet-tabs",
+    "name": "Code snippet with tabs",
+    "kind": "block"
+   }
+  ]
+ },
+ {
+  "slug": "events-places",
+  "name": "Events & places",
+  "sections": [
+   {
+    "id": "events-list",
+    "name": "Events list",
+    "kind": "block"
+   },
+   {
+    "id": "event-detail",
+    "name": "Event detail (conference)",
+    "kind": "entry"
+   },
+   {
+    "id": "webinar-registration",
+    "name": "Webinar registration",
+    "kind": "block"
+   },
+   {
+    "id": "locations-directory",
+    "name": "Locations directory",
+    "kind": "block"
+   },
+   {
+    "id": "restaurant-menu",
+    "name": "Restaurant menu",
+    "kind": "block"
+   },
+   {
+    "id": "location-page",
+    "name": "Single location page",
+    "kind": "entry"
+   }
+  ]
+ },
+ {
+  "slug": "long-form-docs",
+  "name": "Long-form & docs",
+  "sections": [
+   {
+    "id": "rich-blog-post",
+    "name": "Rich blog post",
+    "kind": "entry"
+   },
+   {
+    "id": "author-bio",
+    "name": "Author bio",
+    "kind": "block"
+   },
+   {
+    "id": "docs-page",
+    "name": "Docs page",
+    "kind": "entry"
+   },
+   {
+    "id": "code-tabs",
+    "name": "Code tabs",
+    "kind": "block"
+   },
+   {
+    "id": "kb-article",
+    "name": "Knowledge-base article",
+    "kind": "entry"
+   },
+   {
+    "id": "glossary",
+    "name": "Glossary A\u2013Z",
+    "kind": "block"
+   },
+   {
+    "id": "recipe",
+    "name": "Recipe",
+    "kind": "entry"
+   },
+   {
+    "id": "course-curriculum",
+    "name": "Course curriculum",
+    "kind": "block"
+   },
+   {
+    "id": "legal-policy",
+    "name": "Legal / policy page",
+    "kind": "page"
+   },
+   {
+    "id": "case-study",
+    "name": "Case study",
+    "kind": "entry"
+   },
+   {
+    "id": "podcast-episode",
+    "name": "Podcast episode",
+    "kind": "entry"
+   }
+  ]
+ },
+ {
+  "slug": "media-galleries",
+  "name": "Media & galleries",
+  "sections": [
+   {
+    "id": "masonry-gallery",
+    "name": "Masonry gallery",
+    "kind": "block"
+   },
+   {
+    "id": "lightbox-gallery-filters",
+    "name": "Gallery with category filters",
+    "kind": "block"
+   },
+   {
+    "id": "video-section",
+    "name": "Video section (YouTube \u00b7 Vimeo \u00b7 hosted)",
+    "kind": "block"
+   },
+   {
+    "id": "before-after-slider",
+    "name": "Before / after slider",
+    "kind": "block"
+   },
+   {
+    "id": "image-hotspots",
+    "name": "Image with hotspots (shop the look)",
+    "kind": "block"
+   },
+   {
+    "id": "interactive-3d-lottie-embed",
+    "name": "3D model / Lottie / 360\u00b0 embed",
+    "kind": "block"
+   },
+   {
+    "id": "mixed-media-carousel",
+    "name": "Mixed-media carousel",
+    "kind": "block"
+   },
+   {
+    "id": "parallax-image-overlay",
+    "name": "Full-bleed parallax image with overlay text",
+    "kind": "block"
+   },
+   {
+    "id": "ugc-social-feed",
+    "name": "Social photo feed (UGC)",
+    "kind": "block"
+   }
+  ]
+ },
+ {
+  "slug": "advanced-patterns",
+  "name": "Advanced patterns",
+  "sections": [
+   {
+    "id": "page-builder-six-deep",
+    "name": "Page builder, six levels deep",
+    "kind": "block"
+   },
+   {
+    "id": "polymorphic-modules",
+    "name": "Any-block module list",
+    "kind": "entry"
+   },
+   {
+    "id": "conditional-source-matrix",
+    "name": "Conditional source matrix",
+    "kind": "block"
+   },
+   {
+    "id": "global-announcement-overrides",
+    "name": "Global block with per-page overrides",
+    "kind": "global"
+   },
+   {
+    "id": "localized-section",
+    "name": "Localized section with RTL",
+    "kind": "block"
+   },
+   {
+    "id": "personalized-hero",
+    "name": "Personalized hero with A/B test",
+    "kind": "block"
+   },
+   {
+    "id": "responsive-layout-settings",
+    "name": "Responsive layout settings",
+    "kind": "block"
+   },
+   {
+    "id": "grid-cell-layout",
+    "name": "Grid with per-cell layout",
+    "kind": "block"
+   },
+   {
+    "id": "references-web",
+    "name": "References web",
+    "kind": "block"
+   },
+   {
+    "id": "changelog-nested-validation",
+    "name": "Changelog with nested validation",
+    "kind": "block"
+   },
+   {
+    "id": "rich-text-embedded-components",
+    "name": "Rich text with components and annotations",
+    "kind": "entry"
+   },
+   {
+    "id": "dynamic-query-listing",
+    "name": "Dynamic query listing",
+    "kind": "block"
+   },
+   {
+    "id": "overlays-with-triggers",
+    "name": "Modal, drawer and popover",
+    "kind": "block"
+   },
+   {
+    "id": "scrollytelling",
+    "name": "Sticky scroll story",
+    "kind": "block"
+   },
+   {
+    "id": "a11y-critical-media-form",
+    "name": "Accessibility-critical media and form",
+    "kind": "block"
+   },
+   {
+    "id": "section-theme-tokens",
+    "name": "Section theme tokens",
+    "kind": "block"
+   }
+  ]
+ }
+]

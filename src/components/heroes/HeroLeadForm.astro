@@ -1,0 +1,168 @@
+<section id="hero-lead-form" class="section section--muted hlf" data-variant="form-right">
+  <!-- kit: hero-lead-form -->
+  <div class="container hlf__grid">
+    <div class="hlf__copy">
+      <span class="eyebrow">Brand &amp; web for outdoor companies</span>
+      <h2 class="hlf__title">Your next site should sell as hard as your product works.</h2>
+      <p class="lead">We design and build brand-led commerce sites for outdoor and food companies — strategy, identity and a CMS your team actually enjoys.</p>
+      <ul class="hlf__points">
+        <li>A 30-minute call with a founder, not a salesperson</li>
+        <li>A written plan within three working days</li>
+        <li>Fixed quotes, no hourly surprises</li>
+      </ul>
+      <img class="hlf__image" src="https://picsum.photos/seed/northbound-studio-desk/1600/1200" alt="Two designers reviewing printed brand boards on a studio wall" width="1600" height="1200" />
+      <p class="hlf__trust">Trusted by teams at Caldera, Tideline and Open Water Trust.</p>
+    </div>
+
+    <div class="hlf__card">
+      <form class="hlf__form" action="#" method="post" data-form="form_contact" data-after-submit="redirect" data-redirect="/thanks">
+        <h3 class="hlf__form-title">Book a strategy call</h3>
+        <input type="hidden" name="source" value="homepage-hero" />
+        <input type="hidden" name="service" value="brand-and-web" />
+        <div class="field">
+          <label for="hero-lead-form-name">Your name</label>
+          <input id="hero-lead-form-name" name="name" type="text" autocomplete="name" required />
+        </div>
+        <div class="field">
+          <label for="hero-lead-form-email">Work email</label>
+          <input id="hero-lead-form-email" name="email" type="email" autocomplete="email" required />
+        </div>
+        <div class="field">
+          <label for="hero-lead-form-company">Company</label>
+          <input id="hero-lead-form-company" name="company" type="text" autocomplete="organization" />
+        </div>
+        <div class="field">
+          <label for="hero-lead-form-budget">Budget</label>
+          <select id="hero-lead-form-budget" name="budget">
+            <option value="">Choose a range</option>
+            <option>Under $25k</option>
+            <option>$25k–$60k</option>
+            <option>$60k–$120k</option>
+            <option>Over $120k</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="hero-lead-form-message">What are you working on?</label>
+          <textarea id="hero-lead-form-message" name="message" rows="3"></textarea>
+        </div>
+        <button class="btn btn-primary hlf__submit" type="submit">Request a call</button>
+        <p class="hlf__privacy">We'll only use your details to reply. No newsletters unless you ask.</p>
+      </form>
+      <p class="hlf__success" role="status" hidden>Thanks — we'll reply within one working day with a few times to talk.</p>
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  (function () {
+    var root = document.getElementById("hero-lead-form");
+    if (!root) return;
+    var form = root.querySelector(".hlf__form");
+    var success = root.querySelector(".hlf__success");
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      form.hidden = true;
+      success.hidden = false;
+    });
+  })();
+</script>
+
+<style>
+  .hlf__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: clamp(2rem, 5vw, 4.5rem);
+    align-items: start;
+  }
+
+  .hlf__title {
+    font-size: clamp(2.125rem, 4.5vw, 3.25rem);
+  }
+
+  .hlf__points {
+    display: grid;
+    gap: 0.625rem;
+    margin: 1.5rem 0 2rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  .hlf__points li {
+    position: relative;
+    padding-left: 1.75rem;
+  }
+
+  .hlf__points li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    font-weight: 700;
+    color: var(--brand);
+  }
+
+  .hlf__image {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+  }
+
+  .hlf__trust {
+    margin: 1rem 0 0;
+    font-size: 0.875rem;
+    color: var(--ink-3);
+  }
+
+  .hlf__card {
+    padding: clamp(1.25rem, 3vw, 2rem);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    background: var(--bg);
+    box-shadow: var(--shadow);
+  }
+
+  .hlf__form {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .hlf__form[hidden],
+  .hlf__success[hidden] {
+    display: none;
+  }
+
+  .hlf__form-title {
+    margin: 0 0 0.25rem;
+    font-size: 1.375rem;
+  }
+
+  .hlf__form textarea {
+    resize: vertical;
+  }
+
+  .hlf__submit {
+    width: 100%;
+    min-height: 48px;
+  }
+
+  .hlf__privacy {
+    margin: 0;
+    font-size: 0.8125rem;
+    color: var(--ink-3);
+  }
+
+  .hlf__success {
+    margin: 0;
+    padding: 1rem;
+    border-radius: var(--radius);
+    background: #e3f4ea;
+    color: var(--success);
+    font-weight: 600;
+  }
+
+  @media (max-width: 880px) {
+    .hlf__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

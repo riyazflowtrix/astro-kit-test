@@ -1,0 +1,70 @@
+---
+const faqLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    ["What happens if I go over my events?", "Nothing breaks. Extra events are billed at $0.40 per 100k at the end of the month, and we email you at 80% and 100% of your allowance."],
+    ["How much do I save paying yearly?", "Pro is $39 a month billed yearly instead of $49 monthly — two months free, roughly 20%."],
+    ["Can I switch plans later?", "Any time, from Settings › Billing. Upgrades are prorated to the day; downgrades take effect at the next renewal."],
+    ["Do you accept invoices and purchase orders?", "On Team (yearly) and Enterprise, yes — net-30 by ACH or wire. Everyone else pays by card."],
+    ["Is there a free trial?", "Pro and Team have a 14-day trial with no card required. Hobby is free forever."],
+  ].map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })),
+});
+---
+
+<section id="pricing-faq" class="section section--muted pricing-faq">
+  <!-- kit: pricing-faq -->
+  <div class="container">
+    <div class="pricing-faq__head">
+      <h2>Billing questions</h2>
+      <a class="pricing-faq__contact" href="mailto:billing@northwind.dev">Ask the billing team <span aria-hidden="true">&rarr;</span></a>
+    </div>
+
+    <div class="pricing-faq__cols">
+      <div class="pricing-faq__group">
+        <h3>Plans and billing</h3>
+        <details open>
+          <summary>What happens if I go over my events?</summary>
+          <div class="pricing-faq__answer"><p>Nothing breaks. Extra events are billed at $0.40 per 100k at the end of the month, and we email you at 80% and 100% of your allowance.</p></div>
+        </details>
+        <details>
+          <summary>How much do I save paying yearly?</summary>
+          <div class="pricing-faq__answer"><p>Pro is $39 a month billed yearly instead of $49 monthly &mdash; two months free, roughly 20%.</p></div>
+        </details>
+        <details>
+          <summary>Can I switch plans later?</summary>
+          <div class="pricing-faq__answer"><p>Any time, from Settings &rsaquo; Billing. Upgrades are prorated to the day; downgrades take effect at the next renewal.</p></div>
+        </details>
+      </div>
+
+      <div class="pricing-faq__group">
+        <h3>Payments and invoices</h3>
+        <details>
+          <summary>Do you accept invoices and purchase orders?</summary>
+          <div class="pricing-faq__answer"><p>On Team (yearly) and Enterprise, yes &mdash; net-30 by ACH or wire. Everyone else pays by card.</p></div>
+        </details>
+        <details>
+          <summary>Is there a free trial?</summary>
+          <div class="pricing-faq__answer"><p>Pro and Team have a 14-day trial with no card required. Hobby is free forever.</p></div>
+        </details>
+      </div>
+    </div>
+  </div>
+  <script type="application/ld+json" set:html={faqLd} />
+</section>
+
+<style>
+  .pricing-faq__head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 0.5rem 2rem; margin-bottom: 2rem; }
+  .pricing-faq__head h2 { margin: 0; }
+  .pricing-faq__contact { font-weight: 600; color: var(--brand); text-underline-offset: 3px; }
+  .pricing-faq__cols { display: grid; gap: 2rem; }
+  @media (min-width: 860px) { .pricing-faq__cols { grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; } }
+  .pricing-faq__group h3 { font-size: 0.8125rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-3); margin-bottom: 0.5rem; }
+  .pricing-faq details { border-bottom: 1px solid var(--line); }
+  .pricing-faq summary { position: relative; padding: 1.125rem 2rem 1.125rem 0; font-weight: 600; cursor: pointer; list-style: none; }
+  .pricing-faq summary::-webkit-details-marker { display: none; }
+  .pricing-faq summary::after { content: "+"; position: absolute; right: 0.25rem; top: 50%; translate: 0 -50%; font-size: 1.5rem; font-weight: 400; color: var(--ink-3); }
+  .pricing-faq details[open] summary::after { content: "\2212"; }
+  .pricing-faq__answer { padding-bottom: 1.125rem; color: var(--ink-2); }
+  .pricing-faq__answer p { margin: 0; }
+</style>

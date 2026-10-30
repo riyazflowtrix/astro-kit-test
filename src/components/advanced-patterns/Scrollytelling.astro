@@ -1,0 +1,257 @@
+---
+// Sticky scroll story: steps on the left, media on the right swaps as each step crosses the middle of the screen.
+// Phones and reduced-motion users get a plain stack (each step followed by its media).
+---
+
+<section id="scrollytelling" class="section scrolly scrolly--media-right">
+  <!-- kit: scrollytelling -->
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">How it's made</span>
+      <h2>From scrap iron to your skillet.</h2>
+      <p class="lead">Every Ridge Skillet takes nine days and passes through six pairs of hands in Bend.</p>
+    </div>
+
+    <ol class="scrolly__steps" data-trigger-at="50">
+      <li class="step is-active" data-step="1">
+        <div class="step__text">
+          <span class="step__num">01</span>
+          <h3>We melt down old radiators</h3>
+          <p>Recycled iron from Oregon demolition yards, melted at 2,600°F with a little carbon steel for strength.</p>
+        </div>
+        <figure class="step__media step__media--video" data-transition="fade">
+          <div class="video-frame" data-embed="https://www.youtube-nocookie.com/embed/aqz-KE-bpKQ?autoplay=1">
+            <img src="https://picsum.photos/seed/foundry-pour/1600/1000" alt="Molten iron pouring from a ladle in a dark foundry" width="3200" height="2000" loading="lazy" />
+            <button class="video-frame__play" type="button" aria-label="Play video: melting the iron">
+              <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor" /></svg>
+            </button>
+          </div>
+        </figure>
+      </li>
+      <li class="step" data-step="2">
+        <div class="step__text">
+          <span class="step__num">02</span>
+          <h3>Poured into sand</h3>
+          <p>Each mould is packed by hand and used once. That's why no two handles are quite the same.</p>
+        </div>
+        <figure class="step__media" data-transition="fade">
+          <img src="https://picsum.photos/seed/sand-moulds/1600/1000" alt="Rows of sand moulds with skillet shapes pressed into them" width="3200" height="2000" loading="lazy" />
+        </figure>
+      </li>
+      <li class="step" data-step="3">
+        <div class="step__text">
+          <span class="step__num">03</span>
+          <h3>Milled smooth</h3>
+          <p>A CNC pass takes the cooking surface flat to within 0.1 mm, then we polish it by hand.</p>
+        </div>
+        <figure class="step__media step__media--stat" data-transition="zoom">
+          <span class="stat__value">0.1 mm</span>
+          <figcaption class="stat__label">Flatness of every cooking surface</figcaption>
+        </figure>
+      </li>
+      <li class="step" data-step="4">
+        <div class="step__text">
+          <span class="step__num">04</span>
+          <h3>Seasoned three times</h3>
+          <p>Flaxseed oil, baked on at 480°F, three coats. It arrives ready for eggs.</p>
+        </div>
+        <figure class="step__media" data-transition="slide">
+          <img src="https://picsum.photos/seed/seasoned-rack/1600/1000" alt="Seasoned skillets cooling on a rack, black and glossy" width="3200" height="2000" loading="lazy" />
+        </figure>
+      </li>
+      <li class="scrolly__dots" aria-hidden="true">
+        <span class="dot is-active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<script>
+  {
+    const root = document.getElementById("scrollytelling");
+    if (root) {
+      const steps = Array.from(root.querySelectorAll<HTMLElement>(".step"));
+      const dots = Array.from(root.querySelectorAll<HTMLElement>(".dot"));
+      const setActive = (i: number) => {
+        steps.forEach((s, j) => s.classList.toggle("is-active", j === i));
+        dots.forEach((d, j) => d.classList.toggle("is-active", j === i));
+      };
+      if ("IntersectionObserver" in window) {
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((e) => {
+              if (e.isIntersecting) setActive(steps.indexOf(e.target.closest(".step") as HTMLElement));
+            });
+          },
+          { rootMargin: "-50% 0px -50% 0px" }
+        );
+        steps.forEach((s) => {
+          const text = s.querySelector(".step__text");
+          if (text) io.observe(text);
+        });
+      }
+      root.querySelectorAll<HTMLElement>(".video-frame").forEach((frame) => {
+        frame.querySelector("button")?.addEventListener("click", () => {
+          const iframe = document.createElement("iframe");
+          iframe.src = frame.dataset.embed || "";
+          iframe.title = "Melting recycled iron at the foundry";
+          iframe.allow = "autoplay; encrypted-media; picture-in-picture";
+          iframe.allowFullscreen = true;
+          frame.replaceChildren(iframe);
+        });
+      });
+    }
+  }
+</script>
+
+<style>
+  .scrolly__steps {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 2rem;
+  }
+  .step {
+    display: grid;
+    gap: 1rem;
+  }
+  .step__num {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    color: var(--brand);
+    margin-bottom: 0.5rem;
+  }
+  .step__text p {
+    color: var(--ink-2);
+    font-size: 1.0625rem;
+  }
+  .step__media {
+    margin: 0;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    aspect-ratio: 16 / 10;
+    background: var(--dark);
+  }
+  .step__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .step__media--stat {
+    display: grid;
+    place-content: center;
+    text-align: center;
+    padding: 2rem;
+    color: var(--dark-ink);
+    background: radial-gradient(circle at 30% 20%, #3a2a22, var(--dark));
+  }
+  .stat__value {
+    font-size: clamp(3rem, 9vw, 6rem);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.04em;
+  }
+  .stat__label {
+    margin-top: 0.75rem;
+    color: color-mix(in srgb, var(--dark-ink) 75%, transparent);
+  }
+  .video-frame {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+  .video-frame :global(iframe) {
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+  .video-frame__play {
+    position: absolute;
+    inset: 50% auto auto 50%;
+    translate: -50% -50%;
+    display: grid;
+    place-items: center;
+    width: 72px;
+    height: 72px;
+    border: 0;
+    border-radius: 50%;
+    background: var(--brand);
+    color: var(--brand-ink);
+    cursor: pointer;
+  }
+  .scrolly__dots {
+    display: none;
+  }
+
+  /* Desktop with motion: steps left, a sticky stage on the right where media layers cross-fade. */
+  @media (min-width: 900px) and (prefers-reduced-motion: no-preference) {
+    .scrolly__steps {
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      grid-template-rows: repeat(4, auto);
+      column-gap: clamp(2rem, 5vw, 5rem);
+      row-gap: 0;
+    }
+    .step {
+      display: contents;
+    }
+    .step__text {
+      grid-column: 1;
+      min-height: 70vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      opacity: 0.35;
+      transition: opacity 300ms ease;
+    }
+    .step:nth-child(1) .step__text { grid-row: 1; }
+    .step:nth-child(2) .step__text { grid-row: 2; }
+    .step:nth-child(3) .step__text { grid-row: 3; }
+    .step:nth-child(4) .step__text { grid-row: 4; }
+    .step.is-active .step__text {
+      opacity: 1;
+    }
+    .step__media {
+      grid-column: 2;
+      grid-row: 1 / span 4;
+      align-self: start;
+      position: sticky;
+      top: calc(50vh - min(18vw, 260px));
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 500ms ease, transform 500ms ease;
+    }
+    .step__media[data-transition="zoom"] { transform: scale(0.92); }
+    .step__media[data-transition="slide"] { transform: translateY(24px); }
+    .step.is-active .step__media {
+      opacity: 1;
+      transform: none;
+      pointer-events: auto;
+      z-index: 1;
+    }
+    .scrolly__dots {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      grid-column: 2;
+      grid-row: 1 / span 4;
+      align-self: start;
+      justify-self: end;
+      position: sticky;
+      top: 50vh;
+      margin-right: -1.5rem;
+      z-index: 2;
+    }
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--line);
+      transition: background-color 200ms ease;
+    }
+    .dot.is-active {
+      background: var(--brand);
+    }
+  }
+</style>

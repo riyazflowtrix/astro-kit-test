@@ -1,0 +1,108 @@
+---
+// Dark, full-bleed testimonial over an ember background image (55% overlay), with a sand accent override.
+---
+
+<section id="section-theme-tokens" class="section theme theme--dark theme--accent-sand theme--full-bleed">
+  <!-- kit: section-theme-tokens -->
+  <img class="theme__bg" src="https://picsum.photos/seed/hearth-embers/1600/1000" alt="Close-up of glowing embers under a cast iron pot" width="3200" height="2000" loading="lazy" />
+  <div class="theme__overlay" style="--overlay: 0.55" aria-hidden="true"></div>
+  <div class="container theme__split">
+    <figure class="theme__quote">
+      <svg class="theme__mark" viewBox="0 0 48 36" width="48" height="36" aria-hidden="true"><path d="M0 36V20C0 8 6 1 18 0v7c-6 1-9 5-9 11h9v18zm30 0V20c0-12 6-19 18-20v7c-6 1-9 5-9 11h9v18z" fill="currentColor" /></svg>
+      <blockquote>
+        <p>Our restaurant runs four Ember ovens over live fire every night. Two years in, they cook better than the day they arrived.</p>
+      </blockquote>
+      <figcaption>
+        <strong>Chef Amara Osei</strong>
+        <span>Hearth &amp; Ash, Portland</span>
+      </figcaption>
+      <a class="btn theme__btn" href="/journal/hearth-and-ash" title="Cooking for 90 over live fire">Read Amara's story <span aria-hidden="true">&rarr;</span></a>
+    </figure>
+    <div class="theme__photo">
+      <img src="https://picsum.photos/seed/amara-osei/900/1100" alt="Chef Amara Osei lifting the lid of an Ember Dutch oven over coals" width="1800" height="2200" loading="lazy" />
+    </div>
+  </div>
+</section>
+
+<style>
+  .theme {
+    --theme-accent: #d9b98c;
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    padding-block: clamp(80px, 11vw, 140px);
+    background: var(--dark);
+    color: var(--dark-ink);
+  }
+  .theme__bg {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .theme__overlay {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: rgb(20 19 23 / var(--overlay));
+  }
+  .theme__split {
+    display: grid;
+    gap: clamp(2rem, 6vw, 5rem);
+    align-items: center;
+    grid-template-columns: minmax(0, 1fr);
+  }
+  @media (min-width: 860px) {
+    .theme__split {
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+    }
+  }
+  .theme__quote {
+    margin: 0;
+  }
+  .theme__mark {
+    color: var(--theme-accent);
+    margin-bottom: 1.5rem;
+  }
+  .theme__quote blockquote {
+    margin: 0 0 2rem;
+    font-size: clamp(1.5rem, 3.2vw, 2.25rem);
+    font-weight: 500;
+    line-height: 1.3;
+    letter-spacing: -0.015em;
+  }
+  .theme__quote blockquote p {
+    margin: 0;
+  }
+  .theme__quote figcaption {
+    display: grid;
+    gap: 0.125rem;
+    margin-bottom: 2rem;
+  }
+  .theme__quote figcaption strong {
+    color: var(--theme-accent);
+  }
+  .theme__quote figcaption span {
+    color: color-mix(in srgb, var(--dark-ink) 70%, transparent);
+  }
+  .theme__btn {
+    border-color: var(--theme-accent);
+    color: var(--theme-accent);
+    background: transparent;
+  }
+  .theme__btn:hover {
+    background: var(--theme-accent);
+    color: var(--dark);
+  }
+  .theme__photo img {
+    width: 100%;
+    max-width: 440px;
+    margin-inline: auto;
+    aspect-ratio: 9 / 11;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+    box-shadow: 0 30px 80px rgb(0 0 0 / 0.45);
+  }
+</style>

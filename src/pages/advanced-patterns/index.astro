@@ -1,0 +1,85 @@
+---
+import Base from "../../layouts/Base.astro";
+import PageBuilderSixDeep from "../../components/advanced-patterns/PageBuilderSixDeep.astro";
+import ConditionalSourceMatrix from "../../components/advanced-patterns/ConditionalSourceMatrix.astro";
+import GlobalAnnouncementOverrides from "../../components/advanced-patterns/GlobalAnnouncementOverrides.astro";
+import LocalizedSection from "../../components/advanced-patterns/LocalizedSection.astro";
+import PersonalizedHero from "../../components/advanced-patterns/PersonalizedHero.astro";
+import ResponsiveLayoutSettings from "../../components/advanced-patterns/ResponsiveLayoutSettings.astro";
+import GridCellLayout from "../../components/advanced-patterns/GridCellLayout.astro";
+import ReferencesWeb from "../../components/advanced-patterns/ReferencesWeb.astro";
+import ChangelogNestedValidation from "../../components/advanced-patterns/ChangelogNestedValidation.astro";
+import DynamicQueryListing from "../../components/advanced-patterns/DynamicQueryListing.astro";
+import OverlaysWithTriggers from "../../components/advanced-patterns/OverlaysWithTriggers.astro";
+import Scrollytelling from "../../components/advanced-patterns/Scrollytelling.astro";
+import A11yCriticalMediaForm from "../../components/advanced-patterns/A11yCriticalMediaForm.astro";
+import SectionThemeTokens from "../../components/advanced-patterns/SectionThemeTokens.astro";
+---
+
+<Base title="Advanced patterns">
+  <section class="section intro">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Kit library</span>
+        <h1>Advanced patterns</h1>
+        <p class="lead">Deep nesting, mixed block lists, localization, personalization, responsive settings, overlays and theme tokens.</p>
+      </div>
+    </div>
+  </section>
+
+  <PageBuilderSixDeep />
+  <ConditionalSourceMatrix />
+  <GlobalAnnouncementOverrides />
+  <LocalizedSection />
+  <PersonalizedHero />
+  <ResponsiveLayoutSettings />
+  <GridCellLayout />
+  <ReferencesWeb />
+  <ChangelogNestedValidation />
+  <DynamicQueryListing />
+  <OverlaysWithTriggers />
+  <Scrollytelling />
+  <A11yCriticalMediaForm />
+  <SectionThemeTokens />
+
+  <section class="section section--muted entries">
+    <div class="container">
+      <div class="section-head">
+        <h2>Entry pages</h2>
+        <p class="lead">These patterns are full entries, so each has its own page.</p>
+      </div>
+      <div class="grid grid-2">
+        <a class="card entry-card" href="/advanced-patterns/polymorphic-modules">
+          <h3>Any-block module list</h3>
+          <p>A long-form story whose body mixes text, image, stat, quote, video, gallery, callout and related modules.</p>
+        </a>
+        <a class="card entry-card" href="/advanced-patterns/rich-text-embedded-components">
+          <h3>Rich text with components and annotations</h3>
+          <p>A recipe article with embedded component cards, a table, footnotes and glossary terms in the body.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .intro {
+    padding-bottom: 0;
+  }
+  .intro .section-head {
+    margin-bottom: 0;
+  }
+  .entry-card {
+    display: block;
+    padding: 1.5rem;
+    text-decoration: none;
+    transition: border-color 150ms ease;
+  }
+  .entry-card:hover {
+    border-color: var(--ink-3);
+  }
+  .entry-card p {
+    margin: 0;
+    color: var(--ink-2);
+  }
+</style>

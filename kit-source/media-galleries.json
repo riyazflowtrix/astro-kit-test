@@ -1,0 +1,3271 @@
+[
+ {
+  "id": "masonry-gallery",
+  "name": "Masonry gallery",
+  "category": "Media & galleries",
+  "kind": "block",
+  "brand": "Halden Studio",
+  "previewLayout": "gallery",
+  "proves": "Bulk image array as tiles \u00b7 caption + structured credit per photo \u00b7 columns per breakpoint as design",
+  "schema": {
+   "name": "masonryGallery",
+   "title": "Masonry gallery",
+   "kind": "block",
+   "icon": "layout-board",
+   "category": "Media & galleries",
+   "description": "Photos at their natural shapes, packed in columns, with captions and credits",
+   "variants": [
+    {
+     "id": "masonry",
+     "name": "Masonry",
+     "description": "Natural heights, columns"
+    },
+    {
+     "id": "justified",
+     "name": "Justified rows",
+     "description": "Equal row heights, natural widths"
+    }
+   ],
+   "preview": {
+    "title": "heading",
+    "media": "images.0.image",
+    "icon": "layout-board"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "media",
+     "title": "Media"
+    },
+    {
+     "name": "design",
+     "title": "Design"
+    }
+   ],
+   "fields": [
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "validation": {
+      "recommendedMax": 60
+     },
+     "localized": true
+    },
+    {
+     "name": "intro",
+     "title": "Intro",
+     "type": "text",
+     "rows": 2,
+     "localized": true
+    },
+    {
+     "name": "images",
+     "title": "Photos",
+     "type": "array",
+     "group": "media",
+     "itemNoun": "photo",
+     "arrayLayout": "grid",
+     "validation": {
+      "min": 3,
+      "max": 60
+     },
+     "of": [
+      {
+       "name": "photo",
+       "title": "Photo",
+       "type": "object",
+       "icon": "photo",
+       "preview": {
+        "title": "caption",
+        "subtitle": "credit.name",
+        "media": "image",
+        "fallback": "Untitled photo"
+       },
+       "fields": [
+        {
+         "name": "image",
+         "title": "Image",
+         "type": "image",
+         "validation": {
+          "required": true
+         },
+         "description": "At least 1600px on the long side."
+        },
+        {
+         "name": "caption",
+         "title": "Caption",
+         "type": "text",
+         "rows": 2,
+         "validation": {
+          "max": 200
+         },
+         "localized": true,
+         "description": "Shown on hover and in the lightbox."
+        },
+        {
+         "name": "credit",
+         "title": "Credit",
+         "type": "object",
+         "icon": "camera",
+         "openMode": "inline",
+         "fields": [
+          {
+           "name": "name",
+           "title": "Name",
+           "type": "string",
+           "validation": {
+            "max": 48
+           }
+          },
+          {
+           "name": "link",
+           "title": "Link",
+           "type": "link"
+          }
+         ]
+        },
+        {
+         "name": "link",
+         "title": "Link",
+         "type": "link",
+         "description": "Opens this instead of the lightbox."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "useLightbox",
+     "title": "Open in a lightbox",
+     "type": "boolean",
+     "group": "design",
+     "initialValue": true
+    },
+    {
+     "name": "captionDisplay",
+     "title": "Captions",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "hover",
+     "options": [
+      {
+       "value": "below",
+       "label": "Below"
+      },
+      {
+       "value": "hover",
+       "label": "On hover"
+      },
+      {
+       "value": "lightbox",
+       "label": "Lightbox only"
+      }
+     ]
+    },
+    {
+     "name": "desktopColumns",
+     "title": "Columns on desktop",
+     "type": "number",
+     "group": "design",
+     "layout": "slider",
+     "initialValue": 3,
+     "numeric": {
+      "min": 2,
+      "max": 5,
+      "step": 1
+     }
+    },
+    {
+     "name": "tabletColumns",
+     "title": "Columns on tablet",
+     "type": "number",
+     "group": "design",
+     "layout": "slider",
+     "initialValue": 2,
+     "numeric": {
+      "min": 1,
+      "max": 3,
+      "step": 1
+     }
+    },
+    {
+     "name": "phoneColumns",
+     "title": "Columns on phones",
+     "type": "number",
+     "group": "design",
+     "layout": "slider",
+     "initialValue": 1,
+     "numeric": {
+      "min": 1,
+      "max": 2,
+      "step": 1
+     }
+    },
+    {
+     "name": "gap",
+     "title": "Gap",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "md",
+     "options": [
+      {
+       "value": "none",
+       "label": "None"
+      },
+      {
+       "value": "sm",
+       "label": "S"
+      },
+      {
+       "value": "md",
+       "label": "M"
+      },
+      {
+       "value": "lg",
+       "label": "L"
+      }
+     ]
+    },
+    {
+     "name": "theme",
+     "title": "Theme",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "light",
+     "options": [
+      {
+       "value": "light",
+       "label": "Light"
+      },
+      {
+       "value": "dark",
+       "label": "Dark"
+      },
+      {
+       "value": "brand",
+       "label": "Brand"
+      }
+     ]
+    }
+   ]
+  },
+  "value": {
+   "_variant": "masonry",
+   "heading": "Cedar House, Whidbey Island",
+   "intro": "A 1,400 sq ft retreat built around three old-growth cedars. Completed 2025.",
+   "images": [
+    {
+     "_key": "i1",
+     "image": {
+      "url": "https://picsum.photos/seed/halden-cedar-exterior/1200/1600",
+      "alt": "Timber house with floor-to-ceiling glass among cedar trunks at dusk",
+      "name": "halden-cedar-exterior.jpg",
+      "width": 2400,
+      "height": 3200,
+      "focal": {
+       "x": 50,
+       "y": 45
+      }
+     },
+     "caption": "The north fa\u00e7ade, glazed full height so the cedars read as part of the room.",
+     "credit": {
+      "name": "Lina Okafor",
+      "link": {
+       "type": "url",
+       "href": "https://linaokafor.photo",
+       "newTab": true
+      }
+     }
+    },
+    {
+     "_key": "i2",
+     "image": {
+      "url": "https://picsum.photos/seed/halden-cedar-kitchen/1600/1067",
+      "alt": "Kitchen with charred-oak cabinets and a concrete island",
+      "name": "halden-cedar-kitchen.jpg",
+      "width": 3200,
+      "height": 2134
+     },
+     "caption": "Charred oak and board-formed concrete in the kitchen.",
+     "credit": {
+      "name": "Lina Okafor"
+     }
+    },
+    {
+     "_key": "i3",
+     "image": {
+      "url": "https://picsum.photos/seed/halden-cedar-stair/1200/1800",
+      "alt": "A floating timber stair lit from a skylight",
+      "name": "halden-cedar-stair.jpg",
+      "width": 2400,
+      "height": 3600
+     },
+     "caption": "The stair hangs from a single steel spine.",
+     "credit": {
+      "name": "Lina Okafor"
+     }
+    },
+    {
+     "_key": "i4",
+     "image": {
+      "url": "https://picsum.photos/seed/halden-cedar-bath/1600/1067",
+      "alt": "Soaking tub facing a forest view",
+      "name": "halden-cedar-bath.jpg",
+      "width": 3200,
+      "height": 2134
+     },
+     "caption": "",
+     "credit": {
+      "name": "Lina Okafor"
+     }
+    },
+    {
+     "_key": "i5",
+     "image": {
+      "url": "https://picsum.photos/seed/halden-cedar-detail/1200/1200",
+      "alt": "Close-up of a hand-cut cedar shingle wall",
+      "name": "halden-cedar-detail.jpg",
+      "width": 2400,
+      "height": 2400
+     },
+     "caption": "Hand-split shingles from fallen site trees.",
+     "credit": {
+      "name": "Halden Studio"
+     }
+    },
+    {
+     "_key": "i6",
+     "image": {
+      "url": "https://picsum.photos/seed/halden-cedar-deck/1600/1067",
+      "alt": "Deck wrapped around a cedar trunk at sunrise",
+      "name": "halden-cedar-deck.jpg",
+      "width": 3200,
+      "height": 2134,
+      "focal": {
+       "x": 35,
+       "y": 60
+      }
+     },
+     "caption": "The deck steps around the oldest cedar rather than through it.",
+     "credit": {
+      "name": "Lina Okafor"
+     }
+    }
+   ],
+   "useLightbox": true,
+   "captionDisplay": "hover",
+   "desktopColumns": 3,
+   "tabletColumns": 2,
+   "phoneColumns": 1,
+   "gap": "sm",
+   "theme": "light"
+  }
+ },
+ {
+  "id": "lightbox-gallery-filters",
+  "name": "Gallery with category filters",
+  "category": "Media & galleries",
+  "kind": "block",
+  "brand": "Tidewater Hotel",
+  "previewLayout": "gallery",
+  "proves": "Filters defined once as key/label objects \u00b7 photos tag themselves by key \u00b7 URL-synced filter state",
+  "schema": {
+   "name": "filterGallery",
+   "title": "Gallery with filters",
+   "kind": "block",
+   "icon": "photo-search",
+   "category": "Media & galleries",
+   "description": "A uniform grid filtered by category chips; every photo opens in a lightbox",
+   "variants": [
+    {
+     "id": "square",
+     "name": "Square tiles"
+    },
+    {
+     "id": "landscape",
+     "name": "Landscape tiles",
+     "description": "4:3"
+    }
+   ],
+   "preview": {
+    "title": "heading",
+    "media": "images.0.image",
+    "icon": "photo-search"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "media",
+     "title": "Media"
+    },
+    {
+     "name": "design",
+     "title": "Design"
+    }
+   ],
+   "fields": [
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "validation": {
+      "recommendedMax": 60
+     },
+     "localized": true
+    },
+    {
+     "name": "categories",
+     "title": "Filters",
+     "type": "array",
+     "itemNoun": "filter",
+     "validation": {
+      "min": 2,
+      "max": 8
+     },
+     "of": [
+      {
+       "name": "category",
+       "title": "Filter",
+       "type": "object",
+       "icon": "filter",
+       "openMode": "inline",
+       "preview": {
+        "title": "label",
+        "subtitle": "key"
+       },
+       "fields": [
+        {
+         "name": "label",
+         "title": "Label",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 20
+         },
+         "localized": true
+        },
+        {
+         "name": "key",
+         "title": "Key",
+         "type": "slug",
+         "validation": {
+          "required": true,
+          "unique": true
+         },
+         "description": "Changing it unlinks the photos that use it."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "allLabel",
+     "title": "\"All\" chip label",
+     "type": "string",
+     "initialValue": "All",
+     "validation": {
+      "max": 16
+     },
+     "localized": true,
+     "description": "Leave empty to hide the All chip."
+    },
+    {
+     "name": "images",
+     "title": "Photos",
+     "type": "array",
+     "group": "media",
+     "itemNoun": "photo",
+     "arrayLayout": "grid",
+     "validation": {
+      "min": 4,
+      "max": 120
+     },
+     "of": [
+      {
+       "name": "photo",
+       "title": "Photo",
+       "type": "object",
+       "icon": "photo",
+       "preview": {
+        "title": "caption",
+        "subtitle": "categories",
+        "media": "image",
+        "fallback": "Untitled photo"
+       },
+       "fields": [
+        {
+         "name": "image",
+         "title": "Image",
+         "type": "image",
+         "validation": {
+          "required": true
+         }
+        },
+        {
+         "name": "categories",
+         "title": "Filters",
+         "type": "tags",
+         "validation": {
+          "min": 1
+         },
+         "description": "Filter keys, e.g. rooms, dining."
+        },
+        {
+         "name": "caption",
+         "title": "Caption",
+         "type": "text",
+         "rows": 2,
+         "validation": {
+          "max": 160
+         },
+         "localized": true,
+         "description": "Shown in the lightbox."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "useUrlFilter",
+     "title": "Remember filter in the URL",
+     "type": "boolean",
+     "group": "design",
+     "advanced": true
+    },
+    {
+     "name": "columns",
+     "title": "Columns on desktop",
+     "type": "number",
+     "group": "design",
+     "layout": "slider",
+     "initialValue": 4,
+     "numeric": {
+      "min": 2,
+      "max": 6,
+      "step": 1
+     }
+    },
+    {
+     "name": "initialCount",
+     "title": "Show before \"Load more\"",
+     "type": "number",
+     "group": "design",
+     "initialValue": 12,
+     "numeric": {
+      "min": 4,
+      "max": 48,
+      "step": 4
+     }
+    },
+    {
+     "name": "theme",
+     "title": "Theme",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "light",
+     "options": [
+      {
+       "value": "light",
+       "label": "Light"
+      },
+      {
+       "value": "dark",
+       "label": "Dark"
+      },
+      {
+       "value": "brand",
+       "label": "Brand"
+      }
+     ]
+    }
+   ]
+  },
+  "value": {
+   "_variant": "landscape",
+   "heading": "Inside Tidewater",
+   "categories": [
+    {
+     "_key": "c1",
+     "label": "Rooms",
+     "key": "rooms"
+    },
+    {
+     "_key": "c2",
+     "label": "Dining",
+     "key": "dining"
+    },
+    {
+     "_key": "c3",
+     "label": "Spa",
+     "key": "spa"
+    },
+    {
+     "_key": "c4",
+     "label": "The beach",
+     "key": "beach"
+    }
+   ],
+   "allLabel": "All",
+   "images": [
+    {
+     "_key": "g1",
+     "image": {
+      "url": "https://picsum.photos/seed/tidewater-king-suite/1600/1200",
+      "alt": "King suite with linen bedding and a balcony over the bay",
+      "name": "tidewater-king-suite.jpg",
+      "width": 3200,
+      "height": 2400
+     },
+     "categories": [
+      "rooms"
+     ],
+     "caption": "Bay King Suite \u2014 every suite faces the water."
+    },
+    {
+     "_key": "g2",
+     "image": {
+      "url": "https://picsum.photos/seed/tidewater-oyster-bar/1600/1200",
+      "alt": "Oyster bar counter with a chef shucking oysters",
+      "name": "tidewater-oyster-bar.jpg",
+      "width": 3200,
+      "height": 2400
+     },
+     "categories": [
+      "dining"
+     ],
+     "caption": "The Shell Bar opens at 4pm daily."
+    },
+    {
+     "_key": "g3",
+     "image": {
+      "url": "https://picsum.photos/seed/tidewater-steam-room/1600/1200",
+      "alt": "Cedar steam room with soft light",
+      "name": "tidewater-steam-room.jpg",
+      "width": 3200,
+      "height": 2400
+     },
+     "categories": [
+      "spa"
+     ],
+     "caption": ""
+    },
+    {
+     "_key": "g4",
+     "image": {
+      "url": "https://picsum.photos/seed/tidewater-dunes/1600/1200",
+      "alt": "Boardwalk through dunes to the beach at sunset",
+      "name": "tidewater-dunes.jpg",
+      "width": 3200,
+      "height": 2400
+     },
+     "categories": [
+      "beach"
+     ],
+     "caption": "A two-minute walk from the lobby."
+    },
+    {
+     "_key": "g5",
+     "image": {
+      "url": "https://picsum.photos/seed/tidewater-terrace-breakfast/1600/1200",
+      "alt": "Breakfast on a terrace above the beach",
+      "name": "tidewater-terrace-breakfast.jpg",
+      "width": 3200,
+      "height": 2400
+     },
+     "categories": [
+      "dining",
+      "beach"
+     ],
+     "caption": "Breakfast on the Dune Terrace."
+    },
+    {
+     "_key": "g6",
+     "image": {
+      "url": "https://picsum.photos/seed/tidewater-twin-room/1600/1200",
+      "alt": "Twin room with two double beds and a reading nook",
+      "name": "tidewater-twin-room.jpg",
+      "width": 3200,
+      "height": 2400
+     },
+     "categories": [
+      "rooms"
+     ],
+     "caption": "Harbour Twin."
+    }
+   ],
+   "useUrlFilter": true,
+   "columns": 3,
+   "initialCount": 12,
+   "theme": "light"
+  }
+ },
+ {
+  "id": "video-section",
+  "name": "Video section (YouTube \u00b7 Vimeo \u00b7 hosted)",
+  "category": "Media & galleries",
+  "kind": "block",
+  "brand": "Caldera",
+  "previewLayout": "media",
+  "proves": "Source select switches link vs file \u00b7 captions per language required for hosted \u00b7 chapters with timestamp validation \u00b7 VideoObject JSON-LD",
+  "schema": {
+   "name": "videoSection",
+   "title": "Video",
+   "kind": "block",
+   "icon": "player-play",
+   "category": "Media & galleries",
+   "description": "A featured video from YouTube, Vimeo or your own host, with captions, chapters and a transcript",
+   "variants": [
+    {
+     "id": "contained",
+     "name": "Contained",
+     "description": "Inside the page width with a title above"
+    },
+    {
+     "id": "fullbleed",
+     "name": "Full width"
+    },
+    {
+     "id": "split",
+     "name": "Split",
+     "description": "Video beside the text and chapter list"
+    }
+   ],
+   "preview": {
+    "title": "title",
+    "media": "poster",
+    "icon": "player-play"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "access",
+     "title": "Captions & chapters"
+    },
+    {
+     "name": "design",
+     "title": "Playback"
+    }
+   ],
+   "fields": [
+    {
+     "name": "eyebrow",
+     "title": "Eyebrow",
+     "type": "string",
+     "validation": {
+      "max": 32
+     }
+    },
+    {
+     "name": "title",
+     "title": "Title",
+     "type": "string",
+     "validation": {
+      "required": true,
+      "recommendedMax": 70
+     },
+     "localized": true,
+     "description": "Also the video's name for search engines."
+    },
+    {
+     "name": "description",
+     "title": "Description",
+     "type": "text",
+     "rows": 3,
+     "validation": {
+      "recommendedMax": 300
+     },
+     "localized": true,
+     "description": "Also sent to search engines."
+    },
+    {
+     "name": "source",
+     "title": "Hosted on",
+     "type": "select",
+     "layout": "segmented",
+     "initialValue": "youtube",
+     "options": [
+      {
+       "value": "youtube",
+       "label": "YouTube"
+      },
+      {
+       "value": "vimeo",
+       "label": "Vimeo"
+      },
+      {
+       "value": "hosted",
+       "label": "Our media library"
+      }
+     ]
+    },
+    {
+     "name": "video",
+     "title": "Video link",
+     "type": "video",
+     "hidden": {
+      "field": "source",
+      "equals": [
+       "youtube",
+       "vimeo"
+      ]
+     },
+     "validation": {
+      "required": true
+     },
+     "description": "Paste the watch link."
+    },
+    {
+     "name": "file",
+     "title": "Video file",
+     "type": "file",
+     "hidden": {
+      "field": "source",
+      "equals": "hosted"
+     },
+     "validation": {
+      "required": true
+     },
+     "description": "MP4 (H.264) up to 500 MB."
+    },
+    {
+     "name": "poster",
+     "title": "Poster",
+     "type": "image",
+     "validation": {
+      "required": true
+     },
+     "description": "At 16:9."
+    },
+    {
+     "name": "duration",
+     "title": "Length",
+     "type": "string",
+     "placeholder": "4:32",
+     "validation": {
+      "required": true,
+      "pattern": "^(\\d{1,2}:)?\\d{1,2}:\\d{2}$",
+      "patternMessage": "Use m:ss or h:mm:ss, like 4:05."
+     },
+     "description": "Also sent to search engines."
+    },
+    {
+     "name": "uploadDate",
+     "title": "Published",
+     "type": "date",
+     "validation": {
+      "required": true
+     },
+     "description": "The date the video first went public."
+    },
+    {
+     "name": "captions",
+     "title": "Caption tracks",
+     "type": "array",
+     "group": "access",
+     "itemNoun": "caption track",
+     "hidden": {
+      "field": "source",
+      "equals": "hosted"
+     },
+     "validation": {
+      "min": 1,
+      "max": 12
+     },
+     "description": "One WebVTT file per language.",
+     "of": [
+      {
+       "name": "track",
+       "title": "Caption track",
+       "type": "object",
+       "icon": "badge-cc",
+       "preview": {
+        "title": "label",
+        "subtitle": "language"
+       },
+       "fields": [
+        {
+         "name": "language",
+         "title": "Language",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "pattern": "^[a-z]{2}(-[A-Z]{2})?$",
+          "patternMessage": "Use a language code, like en or es-MX."
+         },
+         "placeholder": "en"
+        },
+        {
+         "name": "label",
+         "title": "Label",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 24
+         },
+         "placeholder": "English",
+         "description": "Shown in the captions menu."
+        },
+        {
+         "name": "file",
+         "title": "WebVTT file",
+         "type": "file",
+         "validation": {
+          "required": true
+         }
+        },
+        {
+         "name": "kind",
+         "title": "Kind",
+         "type": "select",
+         "layout": "segmented",
+         "initialValue": "captions",
+         "options": [
+          {
+           "value": "captions",
+           "label": "Captions",
+           "description": "Speech plus sounds"
+          },
+          {
+           "value": "subtitles",
+           "label": "Subtitles",
+           "description": "Translated speech only"
+          }
+         ]
+        },
+        {
+         "name": "isOnByDefault",
+         "title": "On by default",
+         "type": "boolean",
+         "description": "One track at most."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "chapters",
+     "title": "Chapters",
+     "type": "array",
+     "group": "access",
+     "itemNoun": "chapter",
+     "validation": {
+      "max": 30
+     },
+     "description": "The first one must start at 0:00.",
+     "of": [
+      {
+       "name": "chapter",
+       "title": "Chapter",
+       "type": "object",
+       "icon": "list",
+       "openMode": "inline",
+       "preview": {
+        "title": "title",
+        "subtitle": "start"
+       },
+       "fields": [
+        {
+         "name": "start",
+         "title": "Starts at",
+         "type": "string",
+         "placeholder": "1:05",
+         "validation": {
+          "required": true,
+          "pattern": "^(\\d{1,2}:)?\\d{1,2}:\\d{2}$",
+          "patternMessage": "Use m:ss or h:mm:ss, like 4:05."
+         }
+        },
+        {
+         "name": "title",
+         "title": "Title",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 60
+         },
+         "localized": true
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "transcript",
+     "title": "Transcript",
+     "type": "richtext",
+     "group": "access",
+     "localized": true
+    },
+    {
+     "name": "button",
+     "title": "Button",
+     "type": "button"
+    },
+    {
+     "name": "autoplay",
+     "title": "Play automatically",
+     "type": "boolean",
+     "group": "design"
+    },
+    {
+     "name": "loop",
+     "title": "Loop the video",
+     "type": "boolean",
+     "group": "design",
+     "hidden": {
+      "field": "autoplay",
+      "equals": true
+     }
+    },
+    {
+     "name": "controls",
+     "title": "Show player controls",
+     "type": "boolean",
+     "group": "design",
+     "initialValue": true
+    },
+    {
+     "name": "startAt",
+     "title": "Start at",
+     "type": "string",
+     "group": "design",
+     "advanced": true,
+     "placeholder": "0:30",
+     "validation": {
+      "pattern": "^((\\d{1,2}:)?\\d{1,2}:\\d{2})?$",
+      "patternMessage": "Use m:ss, like 1:24."
+     }
+    },
+    {
+     "name": "usePrivacyMode",
+     "title": "Privacy-enhanced embed",
+     "type": "boolean",
+     "group": "design",
+     "initialValue": true,
+     "hidden": {
+      "field": "source",
+      "equals": "youtube"
+     },
+     "description": "No tracking cookies until play."
+    },
+    {
+     "name": "theme",
+     "title": "Theme",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "light",
+     "options": [
+      {
+       "value": "light",
+       "label": "Light"
+      },
+      {
+       "value": "dark",
+       "label": "Dark"
+      },
+      {
+       "value": "brand",
+       "label": "Brand"
+      }
+     ]
+    }
+   ]
+  },
+  "value": {
+   "_variant": "split",
+   "eyebrow": "The film",
+   "title": "How we pour a skillet: a day at the Bend foundry",
+   "description": "Follow one Ridge Skillet from scrap iron to seasoned pan \u2014 the pour, the machining and the three-coat seasoning.",
+   "source": "hosted",
+   "file": {
+    "name": "foundry-day-1080p.mp4",
+    "size": 412000000,
+    "url": "https://cdn.caldera.co/film/foundry-day-1080p.mp4"
+   },
+   "poster": {
+    "url": "https://picsum.photos/seed/caldera-foundry-film-poster/1920/1080",
+    "alt": "Caster in a leather apron pouring molten iron",
+    "name": "caldera-foundry-film-poster.jpg",
+    "width": 3840,
+    "height": 2160
+   },
+   "duration": "6:48",
+   "uploadDate": "2026-03-02",
+   "captions": [
+    {
+     "_key": "cc1",
+     "language": "en",
+     "label": "English",
+     "file": {
+      "name": "foundry-day.en.vtt",
+      "size": 18400,
+      "url": "https://cdn.caldera.co/film/foundry-day.en.vtt"
+     },
+     "kind": "captions",
+     "isOnByDefault": true
+    },
+    {
+     "_key": "cc2",
+     "language": "es",
+     "label": "Espa\u00f1ol",
+     "file": {
+      "name": "foundry-day.es.vtt",
+      "size": 19100,
+      "url": "https://cdn.caldera.co/film/foundry-day.es.vtt"
+     },
+     "kind": "subtitles"
+    }
+   ],
+   "chapters": [
+    {
+     "_key": "ch1",
+     "start": "0:00",
+     "title": "Scrap iron in"
+    },
+    {
+     "_key": "ch2",
+     "start": "1:12",
+     "title": "Making the sand moulds"
+    },
+    {
+     "_key": "ch3",
+     "start": "2:40",
+     "title": "The pour at 2,600\u00b0F"
+    },
+    {
+     "_key": "ch4",
+     "start": "4:05",
+     "title": "Machining the surface"
+    },
+    {
+     "_key": "ch5",
+     "start": "5:30",
+     "title": "Three coats of seasoning"
+    }
+   ],
+   "transcript": "<p><strong>Ana Ruiz:</strong> Every pan starts as something else \u2014 an engine block, a radiator, a fence post. We melt it down at about 2,600 degrees\u2026</p>",
+   "button": {
+    "label": "Shop the Ridge Skillet",
+    "href": "/products/ridge-skillet",
+    "type": "entry",
+    "title": "Ridge Skillet 10\"",
+    "style": "primary"
+   },
+   "autoplay": false,
+   "controls": true,
+   "usePrivacyMode": true,
+   "theme": "dark"
+  }
+ },
+ {
+  "id": "before-after-slider",
+  "name": "Before / after slider",
+  "category": "Media & galleries",
+  "kind": "block",
+  "brand": "Halden Studio",
+  "previewLayout": "media",
+  "proves": "Paired required images per comparison \u00b7 localised labels with defaults \u00b7 single vs tabs via one array",
+  "schema": {
+   "name": "beforeAfter",
+   "title": "Before and after",
+   "kind": "block",
+   "icon": "arrows-horizontal",
+   "category": "Media & galleries",
+   "description": "A draggable divider comparing two photos of the same view",
+   "variants": [
+    {
+     "id": "single",
+     "name": "Single comparison"
+    },
+    {
+     "id": "tabs",
+     "name": "Several comparisons",
+     "description": "Tabs switch between projects"
+    }
+   ],
+   "preview": {
+    "title": "heading",
+    "media": "comparisons.0.after",
+    "icon": "arrows-horizontal"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "media",
+     "title": "Media"
+    },
+    {
+     "name": "design",
+     "title": "Design"
+    }
+   ],
+   "fields": [
+    {
+     "name": "eyebrow",
+     "title": "Eyebrow",
+     "type": "string",
+     "validation": {
+      "max": 32
+     }
+    },
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "validation": {
+      "recommendedMax": 60
+     },
+     "localized": true
+    },
+    {
+     "name": "comparisons",
+     "title": "Comparisons",
+     "type": "array",
+     "group": "media",
+     "itemNoun": "comparison",
+     "validation": {
+      "min": 1,
+      "max": 6
+     },
+     "description": "Add more than one to show tabs.",
+     "of": [
+      {
+       "name": "comparison",
+       "title": "Comparison",
+       "type": "object",
+       "icon": "arrows-horizontal",
+       "preview": {
+        "title": "label",
+        "subtitle": "caption",
+        "media": "after",
+        "fallback": "Untitled comparison"
+       },
+       "fields": [
+        {
+         "name": "label",
+         "title": "Tab label",
+         "type": "string",
+         "validation": {
+          "max": 24
+         },
+         "localized": true,
+         "description": "Only shown when there are several."
+        },
+        {
+         "name": "before",
+         "title": "Before",
+         "type": "image",
+         "validation": {
+          "required": true
+         },
+         "description": "Same position, size and crop as After."
+        },
+        {
+         "name": "after",
+         "title": "After",
+         "type": "image",
+         "validation": {
+          "required": true
+         }
+        },
+        {
+         "name": "beforeLabel",
+         "title": "Before label",
+         "type": "string",
+         "initialValue": "Before",
+         "validation": {
+          "max": 16
+         },
+         "localized": true
+        },
+        {
+         "name": "afterLabel",
+         "title": "After label",
+         "type": "string",
+         "initialValue": "After",
+         "validation": {
+          "max": 16
+         },
+         "localized": true
+        },
+        {
+         "name": "caption",
+         "title": "Caption",
+         "type": "text",
+         "rows": 2,
+         "validation": {
+          "max": 200
+         },
+         "localized": true
+        },
+        {
+         "name": "credit",
+         "title": "Credit",
+         "type": "object",
+         "icon": "camera",
+         "openMode": "inline",
+         "fields": [
+          {
+           "name": "name",
+           "title": "Name",
+           "type": "string",
+           "validation": {
+            "max": 48
+           }
+          },
+          {
+           "name": "link",
+           "title": "Link",
+           "type": "link"
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "start",
+     "title": "Divider starts at",
+     "type": "number",
+     "group": "design",
+     "layout": "slider",
+     "initialValue": 50,
+     "numeric": {
+      "min": 10,
+      "max": 90,
+      "step": 5,
+      "unit": "%"
+     }
+    },
+    {
+     "name": "orientation",
+     "title": "Direction",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "horizontal",
+     "options": [
+      {
+       "value": "horizontal",
+       "label": "Side by side"
+      },
+      {
+       "value": "vertical",
+       "label": "Top and bottom"
+      }
+     ]
+    },
+    {
+     "name": "showHint",
+     "title": "Nudge on first view",
+     "type": "boolean",
+     "group": "design",
+     "initialValue": true
+    },
+    {
+     "name": "theme",
+     "title": "Theme",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "light",
+     "options": [
+      {
+       "value": "light",
+       "label": "Light"
+      },
+      {
+       "value": "dark",
+       "label": "Dark"
+      },
+      {
+       "value": "brand",
+       "label": "Brand"
+      }
+     ]
+    }
+   ]
+  },
+  "value": {
+   "_variant": "tabs",
+   "eyebrow": "Renovations",
+   "heading": "Same walls, a different house.",
+   "comparisons": [
+    {
+     "_key": "b1",
+     "label": "Kitchen",
+     "before": {
+      "url": "https://picsum.photos/seed/halden-reno-kitchen-before/1600/1067",
+      "alt": "Dated kitchen with oak cabinets and a dropped ceiling",
+      "name": "halden-reno-kitchen-before.jpg",
+      "width": 3200,
+      "height": 2134
+     },
+     "after": {
+      "url": "https://picsum.photos/seed/halden-reno-kitchen-after/1600/1067",
+      "alt": "The same kitchen opened to the rafters with white oak and a skylight",
+      "name": "halden-reno-kitchen-after.jpg",
+      "width": 3200,
+      "height": 2134
+     },
+     "beforeLabel": "1987",
+     "afterLabel": "2025",
+     "caption": "We removed the dropped ceiling and found the original fir rafters.",
+     "credit": {
+      "name": "Lina Okafor"
+     }
+    },
+    {
+     "_key": "b2",
+     "label": "Living room",
+     "before": {
+      "url": "https://picsum.photos/seed/halden-reno-living-before/1600/1067",
+      "alt": "Living room with carpet and a small window",
+      "name": "halden-reno-living-before.jpg",
+      "width": 3200,
+      "height": 2134
+     },
+     "after": {
+      "url": "https://picsum.photos/seed/halden-reno-living-after/1600/1067",
+      "alt": "Living room with polished concrete and a wide picture window",
+      "name": "halden-reno-living-after.jpg",
+      "width": 3200,
+      "height": 2134
+     },
+     "beforeLabel": "Before",
+     "afterLabel": "After",
+     "caption": "",
+     "credit": {
+      "name": "Lina Okafor"
+     }
+    },
+    {
+     "_key": "b3",
+     "label": "Fa\u00e7ade",
+     "before": {
+      "url": "https://picsum.photos/seed/halden-reno-facade-before/1600/1067",
+      "alt": "Vinyl-sided house front",
+      "name": "halden-reno-facade-before.jpg",
+      "width": 3200,
+      "height": 2134
+     },
+     "after": {
+      "url": "https://picsum.photos/seed/halden-reno-facade-after/1600/1067",
+      "alt": "The same house clad in charred cedar",
+      "name": "halden-reno-facade-after.jpg",
+      "width": 3200,
+      "height": 2134
+     },
+     "beforeLabel": "Before",
+     "afterLabel": "After",
+     "caption": "Shou sugi ban cedar over the original frame.",
+     "credit": {
+      "name": "Halden Studio"
+     }
+    }
+   ],
+   "start": 50,
+   "orientation": "horizontal",
+   "showHint": true,
+   "theme": "light"
+  }
+ },
+ {
+  "id": "image-hotspots",
+  "name": "Image with hotspots (shop the look)",
+  "category": "Media & galleries",
+  "kind": "block",
+  "brand": "Caldera",
+  "previewLayout": "media",
+  "proves": "Points stored as % coordinates \u00b7 each pin opens a live product reference OR a note (conditional) \u00b7 required pin labels",
+  "schema": {
+   "name": "imageHotspots",
+   "title": "Image with hotspots",
+   "kind": "block",
+   "icon": "focus-2",
+   "category": "Media & galleries",
+   "description": "Pins on a photo that open a product card or a note: shop the look, label the parts",
+   "variants": [
+    {
+     "id": "pins",
+     "name": "Pins",
+     "description": "Numbered dots with pop-up cards"
+    },
+    {
+     "id": "sidebar",
+     "name": "Pins + list",
+     "description": "A list beside the photo highlights each pin"
+    }
+   ],
+   "preview": {
+    "title": "heading",
+    "media": "image",
+    "icon": "focus-2"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "media",
+     "title": "Media"
+    },
+    {
+     "name": "design",
+     "title": "Design"
+    }
+   ],
+   "fields": [
+    {
+     "name": "eyebrow",
+     "title": "Eyebrow",
+     "type": "string",
+     "validation": {
+      "max": 32
+     }
+    },
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "validation": {
+      "recommendedMax": 60
+     },
+     "localized": true
+    },
+    {
+     "name": "image",
+     "title": "Image",
+     "type": "image",
+     "group": "media",
+     "validation": {
+      "required": true
+     },
+     "description": "Pins are placed in % of this photo. Changing the crop moves them."
+    },
+    {
+     "name": "mobileImage",
+     "title": "Phone photo",
+     "type": "image",
+     "group": "media",
+     "advanced": true,
+     "description": "Pins show as a list on this crop."
+    },
+    {
+     "name": "hotspots",
+     "title": "Hotspots",
+     "type": "array",
+     "itemNoun": "hotspot",
+     "validation": {
+      "min": 1,
+      "max": 12
+     },
+     "of": [
+      {
+       "name": "hotspot",
+       "title": "Hotspot",
+       "type": "object",
+       "icon": "point",
+       "preview": {
+        "title": "label",
+        "subtitle": "kind",
+        "fallback": "Untitled hotspot"
+       },
+       "fields": [
+        {
+         "name": "label",
+         "title": "Label",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 48
+         },
+         "localized": true,
+         "description": "Not shown. Read by screen readers."
+        },
+        {
+         "name": "x",
+         "title": "Across",
+         "type": "number",
+         "layout": "slider",
+         "validation": {
+          "required": true
+         },
+         "numeric": {
+          "min": 0,
+          "max": 100,
+          "step": 0.5,
+          "unit": "%"
+         },
+         "description": "0 is the left edge, 100 the right."
+        },
+        {
+         "name": "y",
+         "title": "Down",
+         "type": "number",
+         "layout": "slider",
+         "validation": {
+          "required": true
+         },
+         "numeric": {
+          "min": 0,
+          "max": 100,
+          "step": 0.5,
+          "unit": "%"
+         },
+         "description": "0 is the top edge, 100 the bottom."
+        },
+        {
+         "name": "kind",
+         "title": "Opens",
+         "type": "select",
+         "layout": "segmented",
+         "initialValue": "product",
+         "options": [
+          {
+           "value": "product",
+           "label": "Product"
+          },
+          {
+           "value": "note",
+           "label": "Note"
+          }
+         ]
+        },
+        {
+         "name": "product",
+         "title": "Product",
+         "type": "reference",
+         "reference": {
+          "to": [
+           "shopify"
+          ]
+         },
+         "hidden": {
+          "field": "kind",
+          "equals": "product"
+         },
+         "validation": {
+          "required": true
+         }
+        },
+        {
+         "name": "title",
+         "title": "Title",
+         "type": "string",
+         "hidden": {
+          "field": "kind",
+          "equals": "note"
+         },
+         "validation": {
+          "required": true,
+          "max": 48
+         },
+         "localized": true
+        },
+        {
+         "name": "body",
+         "title": "Body",
+         "type": "text",
+         "rows": 3,
+         "hidden": {
+          "field": "kind",
+          "equals": "note"
+         },
+         "validation": {
+          "max": 240
+         },
+         "localized": true
+        },
+        {
+         "name": "link",
+         "title": "Link",
+         "type": "link",
+         "hidden": {
+          "field": "kind",
+          "equals": "note"
+         }
+        },
+        {
+         "name": "cardSide",
+         "title": "Card opens",
+         "type": "select",
+         "layout": "segmented",
+         "initialValue": "auto",
+         "advanced": true,
+         "options": [
+          {
+           "value": "auto",
+           "label": "Auto"
+          },
+          {
+           "value": "left",
+           "label": "Left"
+          },
+          {
+           "value": "right",
+           "label": "Right"
+          },
+          {
+           "value": "top",
+           "label": "Above"
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "pinStyle",
+     "title": "Pin style",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "number",
+     "options": [
+      {
+       "value": "dot",
+       "label": "Dot"
+      },
+      {
+       "value": "plus",
+       "label": "Plus"
+      },
+      {
+       "value": "number",
+       "label": "Number"
+      }
+     ]
+    },
+    {
+     "name": "usePulse",
+     "title": "Pulse pins",
+     "type": "boolean",
+     "group": "design",
+     "initialValue": true
+    },
+    {
+     "name": "theme",
+     "title": "Theme",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "light",
+     "options": [
+      {
+       "value": "light",
+       "label": "Light"
+      },
+      {
+       "value": "dark",
+       "label": "Dark"
+      },
+      {
+       "value": "brand",
+       "label": "Brand"
+      }
+     ]
+    }
+   ]
+  },
+  "value": {
+   "_variant": "sidebar",
+   "eyebrow": "Shop the camp kitchen",
+   "heading": "Everything on the tailgate, ready by sundown.",
+   "image": {
+    "url": "https://picsum.photos/seed/caldera-camp-kitchen/2000/1250",
+    "alt": "A tailgate camp kitchen with a Dutch oven, folding grill, skillet and kettle",
+    "name": "caldera-camp-kitchen.jpg",
+    "width": 4000,
+    "height": 2500,
+    "focal": {
+     "x": 50,
+     "y": 55
+    }
+   },
+   "hotspots": [
+    {
+     "_key": "h1",
+     "label": "Ember Dutch Oven",
+     "x": 24,
+     "y": 58,
+     "kind": "product",
+     "product": "gid://shopify/Product/8813",
+     "cardSide": "auto"
+    },
+    {
+     "_key": "h2",
+     "label": "Cable Fold Grill",
+     "x": 52.5,
+     "y": 66,
+     "kind": "product",
+     "product": "gid://shopify/Product/8812",
+     "cardSide": "auto"
+    },
+    {
+     "_key": "h3",
+     "label": "Ridge Skillet 10 inch",
+     "x": 71,
+     "y": 49,
+     "kind": "product",
+     "product": "gid://shopify/Product/8814",
+     "cardSide": "left"
+    },
+    {
+     "_key": "h4",
+     "label": "Why the tailgate height matters",
+     "x": 88,
+     "y": 30,
+     "kind": "note",
+     "title": "Cook at hip height",
+     "body": "A tailgate puts the grate at 34 inches \u2014 the same as a kitchen counter. Your back will thank you on day three.",
+     "link": {
+      "type": "page",
+      "href": "/journal/tailgate-kitchen",
+      "label": "Set up a tailgate kitchen",
+      "title": "Tailgate kitchen"
+     },
+     "cardSide": "left"
+    }
+   ],
+   "pinStyle": "number",
+   "usePulse": true,
+   "theme": "light"
+  }
+ },
+ {
+  "id": "interactive-3d-lottie-embed",
+  "name": "3D model / Lottie / 360\u00b0 embed",
+  "category": "Media & galleries",
+  "kind": "block",
+  "brand": "Caldera",
+  "previewLayout": "split",
+  "proves": "Embed kind decides file vs allow-listed URL \u00b7 required still fallback + accessible name \u00b7 load-on-click for performance",
+  "schema": {
+   "name": "interactiveEmbed",
+   "title": "Interactive embed",
+   "kind": "block",
+   "icon": "box",
+   "category": "Media & galleries",
+   "description": "A spinnable 3D model, a Lottie animation or a hosted 360\u00b0/Spline scene, with a still fallback",
+   "variants": [
+    {
+     "id": "contained",
+     "name": "Contained"
+    },
+    {
+     "id": "split",
+     "name": "Split",
+     "description": "Viewer beside heading and copy"
+    }
+   ],
+   "preview": {
+    "title": "heading",
+    "media": "fallback",
+    "icon": "box"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "media",
+     "title": "Media"
+    },
+    {
+     "name": "design",
+     "title": "Design"
+    }
+   ],
+   "fields": [
+    {
+     "name": "eyebrow",
+     "title": "Eyebrow",
+     "type": "string",
+     "validation": {
+      "max": 32
+     }
+    },
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "validation": {
+      "recommendedMax": 60
+     },
+     "localized": true
+    },
+    {
+     "name": "body",
+     "title": "Body",
+     "type": "richtext",
+     "localized": true
+    },
+    {
+     "name": "kind",
+     "title": "Type",
+     "type": "select",
+     "layout": "cards",
+     "group": "media",
+     "initialValue": "model",
+     "options": [
+      {
+       "value": "model",
+       "label": "3D model",
+       "icon": "box",
+       "description": "A .glb file people can spin and view in AR"
+      },
+      {
+       "value": "lottie",
+       "label": "Lottie animation",
+       "icon": "sparkles",
+       "description": "A .json or .lottie file"
+      },
+      {
+       "value": "iframe",
+       "label": "Hosted scene",
+       "icon": "world",
+       "description": "Spline, Sketchfab, Matterport or a 360\u00b0 tour"
+      }
+     ]
+    },
+    {
+     "name": "model",
+     "title": "Model file",
+     "type": "file",
+     "group": "media",
+     "hidden": {
+      "field": "kind",
+      "equals": "model"
+     },
+     "validation": {
+      "required": true
+     },
+     "description": "GLB under 8 MB."
+    },
+    {
+     "name": "iosModel",
+     "title": "iPhone AR file",
+     "type": "file",
+     "group": "media",
+     "hidden": {
+      "field": "kind",
+      "equals": "model"
+     },
+     "description": "USDZ, so iPhones can place it in the room."
+    },
+    {
+     "name": "cameraOrbit",
+     "title": "Starting angle",
+     "type": "string",
+     "group": "media",
+     "hidden": {
+      "field": "kind",
+      "equals": "model"
+     },
+     "placeholder": "30deg 75deg 2m",
+     "advanced": true,
+     "description": "Rotation, tilt and distance, e.g. 45deg 60deg 2m."
+    },
+    {
+     "name": "useAutoRotate",
+     "title": "Rotate slowly",
+     "type": "boolean",
+     "group": "design",
+     "hidden": {
+      "field": "kind",
+      "equals": "model"
+     },
+     "initialValue": true
+    },
+    {
+     "name": "lottie",
+     "title": "Animation file",
+     "type": "file",
+     "group": "media",
+     "hidden": {
+      "field": "kind",
+      "equals": "lottie"
+     },
+     "validation": {
+      "required": true
+     },
+     "description": "Lottie .json or .lottie, under 500 KB."
+    },
+    {
+     "name": "loop",
+     "title": "Loop the animation",
+     "type": "boolean",
+     "group": "design",
+     "hidden": {
+      "field": "kind",
+      "equals": "lottie"
+     },
+     "initialValue": true
+    },
+    {
+     "name": "playOn",
+     "title": "Play",
+     "type": "select",
+     "group": "design",
+     "hidden": {
+      "field": "kind",
+      "equals": "lottie"
+     },
+     "layout": "segmented",
+     "initialValue": "view",
+     "options": [
+      {
+       "value": "view",
+       "label": "In view"
+      },
+      {
+       "value": "hover",
+       "label": "On hover"
+      },
+      {
+       "value": "scroll",
+       "label": "With scroll"
+      }
+     ]
+    },
+    {
+     "name": "embedUrl",
+     "title": "Scene link",
+     "type": "url",
+     "group": "media",
+     "hidden": {
+      "field": "kind",
+      "equals": "iframe"
+     },
+     "validation": {
+      "required": true,
+      "pattern": "^https://(my\\.spline\\.design|prod\\.spline\\.design|sketchfab\\.com|my\\.matterport\\.com|kuula\\.co)/",
+      "patternMessage": "Use a Spline, Sketchfab, Matterport or Kuula link, like https://my.spline.design/caldera."
+     },
+     "description": "The share or embed link from the host.",
+     "helpMore": "Only allow-listed hosts load. Ask a developer to add another."
+    },
+    {
+     "name": "fallback",
+     "title": "Still image",
+     "type": "image",
+     "group": "media",
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "label",
+     "title": "Accessible name",
+     "type": "string",
+     "validation": {
+      "required": true,
+      "max": 120
+     },
+     "localized": true,
+     "description": "Not shown. Read by screen readers."
+    },
+    {
+     "name": "aspect",
+     "title": "Shape",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "4:3",
+     "options": [
+      {
+       "value": "1:1",
+       "label": "Square"
+      },
+      {
+       "value": "4:3",
+       "label": "4:3"
+      },
+      {
+       "value": "16:9",
+       "label": "16:9"
+      }
+     ]
+    },
+    {
+     "name": "loadOn",
+     "title": "Load",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "click",
+     "options": [
+      {
+       "value": "view",
+       "label": "In view"
+      },
+      {
+       "value": "click",
+       "label": "On click"
+      }
+     ]
+    },
+    {
+     "name": "theme",
+     "title": "Theme",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "light",
+     "options": [
+      {
+       "value": "light",
+       "label": "Light"
+      },
+      {
+       "value": "dark",
+       "label": "Dark"
+      },
+      {
+       "value": "brand",
+       "label": "Brand"
+      }
+     ]
+    }
+   ]
+  },
+  "value": {
+   "_variant": "split",
+   "eyebrow": "Spin it",
+   "heading": "See how the Cable Fold folds.",
+   "body": "<p>Drag to turn it. On an iPhone, tap <strong>View in your space</strong> to put it on your own table.</p>",
+   "kind": "model",
+   "model": {
+    "name": "cable-fold.glb",
+    "size": 5800000,
+    "url": "https://cdn.caldera.co/3d/cable-fold.glb"
+   },
+   "iosModel": {
+    "name": "cable-fold.usdz",
+    "size": 7200000,
+    "url": "https://cdn.caldera.co/3d/cable-fold.usdz"
+   },
+   "cameraOrbit": "35deg 70deg 1.6m",
+   "useAutoRotate": true,
+   "fallback": {
+    "url": "https://picsum.photos/seed/cable-fold-3d-still/1600/1200",
+    "alt": "The Cable Fold Grill half unfolded on a white background",
+    "name": "cable-fold-3d-still.jpg",
+    "width": 3200,
+    "height": 2400
+   },
+   "label": "Interactive 3D model of the Cable Fold Grill, shown half unfolded",
+   "aspect": "4:3",
+   "loadOn": "click",
+   "theme": "light"
+  }
+ },
+ {
+  "id": "mixed-media-carousel",
+  "name": "Mixed-media carousel",
+  "category": "Media & galleries",
+  "kind": "block",
+  "brand": "Caldera",
+  "previewLayout": "carousel",
+  "proves": "Polymorphic slides (photo \u00b7 video \u00b7 quote \u00b7 product) \u00b7 per-breakpoint slides visible \u00b7 interval shown only with autoplay",
+  "schema": {
+   "name": "mediaCarousel",
+   "title": "Mixed-media carousel",
+   "kind": "block",
+   "icon": "carousel-horizontal",
+   "category": "Media & galleries",
+   "description": "Slides of different kinds (photo, video, quote, product) in one swipeable row",
+   "variants": [
+    {
+     "id": "peek",
+     "name": "Peek",
+     "description": "Shows a slice of the next slide"
+    },
+    {
+     "id": "full",
+     "name": "One at a time"
+    },
+    {
+     "id": "cards",
+     "name": "Cards",
+     "description": "Several slides visible"
+    }
+   ],
+   "preview": {
+    "title": "heading",
+    "icon": "carousel-horizontal"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "media",
+     "title": "Media"
+    },
+    {
+     "name": "design",
+     "title": "Design"
+    }
+   ],
+   "fields": [
+    {
+     "name": "eyebrow",
+     "title": "Eyebrow",
+     "type": "string",
+     "validation": {
+      "max": 32
+     }
+    },
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "validation": {
+      "recommendedMax": 60
+     },
+     "localized": true
+    },
+    {
+     "name": "slides",
+     "title": "Slides",
+     "type": "array",
+     "itemNoun": "slide",
+     "validation": {
+      "min": 2,
+      "max": 16
+     },
+     "of": [
+      {
+       "name": "imageSlide",
+       "title": "Photo",
+       "type": "object",
+       "icon": "photo",
+       "preview": {
+        "title": "caption",
+        "media": "image",
+        "fallback": "Untitled photo slide"
+       },
+       "fields": [
+        {
+         "name": "image",
+         "title": "Image",
+         "type": "image",
+         "validation": {
+          "required": true
+         }
+        },
+        {
+         "name": "caption",
+         "title": "Caption",
+         "type": "string",
+         "validation": {
+          "max": 120
+         },
+         "localized": true
+        },
+        {
+         "name": "link",
+         "title": "Link",
+         "type": "link"
+        }
+       ]
+      },
+      {
+       "name": "videoSlide",
+       "title": "Video",
+       "type": "object",
+       "icon": "player-play",
+       "preview": {
+        "title": "caption",
+        "media": "poster",
+        "fallback": "Untitled video slide"
+       },
+       "fields": [
+        {
+         "name": "video",
+         "title": "Video",
+         "type": "video",
+         "validation": {
+          "required": true
+         }
+        },
+        {
+         "name": "poster",
+         "title": "Poster",
+         "type": "image",
+         "validation": {
+          "required": true
+         }
+        },
+        {
+         "name": "captions",
+         "title": "Captions",
+         "type": "file",
+         "description": "WebVTT. Required if the clip has speech."
+        },
+        {
+         "name": "caption",
+         "title": "Caption",
+         "type": "string",
+         "validation": {
+          "max": 120
+         },
+         "localized": true
+        },
+        {
+         "name": "muted",
+         "title": "Start muted",
+         "type": "boolean",
+         "initialValue": true
+        }
+       ]
+      },
+      {
+       "name": "quoteSlide",
+       "title": "Quote",
+       "type": "object",
+       "icon": "quote",
+       "preview": {
+        "title": "author",
+        "subtitle": "quote",
+        "media": "photo",
+        "fallback": "Untitled quote slide"
+       },
+       "fields": [
+        {
+         "name": "quote",
+         "title": "Quote",
+         "type": "text",
+         "rows": 3,
+         "validation": {
+          "required": true,
+          "recommendedMax": 180
+         },
+         "localized": true
+        },
+        {
+         "name": "author",
+         "title": "Name",
+         "type": "string",
+         "validation": {
+          "required": true
+         }
+        },
+        {
+         "name": "role",
+         "title": "Role",
+         "type": "string",
+         "localized": true
+        },
+        {
+         "name": "photo",
+         "title": "Photo",
+         "type": "image"
+        },
+        {
+         "name": "background",
+         "title": "Background image",
+         "type": "image"
+        }
+       ]
+      },
+      {
+       "name": "productSlide",
+       "title": "Product",
+       "type": "object",
+       "icon": "shopping-bag",
+       "preview": {
+        "title": "badge",
+        "subtitle": "product",
+        "media": "image",
+        "fallback": "Untitled product slide"
+       },
+       "fields": [
+        {
+         "name": "product",
+         "title": "Product",
+         "type": "reference",
+         "reference": {
+          "to": [
+           "shopify"
+          ]
+         },
+         "validation": {
+          "required": true
+         }
+        },
+        {
+         "name": "image",
+         "title": "Image",
+         "type": "image",
+         "description": "Leave empty to use the product photo."
+        },
+        {
+         "name": "badge",
+         "title": "Badge",
+         "type": "string",
+         "validation": {
+          "max": 16
+         },
+         "placeholder": "New"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "autoplay",
+     "title": "Play automatically",
+     "type": "boolean",
+     "group": "design"
+    },
+    {
+     "name": "interval",
+     "title": "Seconds per slide",
+     "type": "number",
+     "group": "design",
+     "layout": "slider",
+     "hidden": {
+      "field": "autoplay",
+      "equals": true
+     },
+     "initialValue": 6,
+     "numeric": {
+      "min": 3,
+      "max": 15,
+      "step": 1,
+      "unit": "s"
+     }
+    },
+    {
+     "name": "loop",
+     "title": "Loop back to the start",
+     "type": "boolean",
+     "group": "design",
+     "initialValue": true
+    },
+    {
+     "name": "perViewDesktop",
+     "title": "Slides visible on desktop",
+     "type": "number",
+     "group": "design",
+     "layout": "slider",
+     "initialValue": 3,
+     "numeric": {
+      "min": 1,
+      "max": 5,
+      "step": 0.5
+     },
+     "description": "Halves show a peek of the next slide."
+    },
+    {
+     "name": "perViewMobile",
+     "title": "Slides visible on phones",
+     "type": "number",
+     "group": "design",
+     "layout": "slider",
+     "initialValue": 1.2,
+     "numeric": {
+      "min": 1,
+      "max": 2,
+      "step": 0.1
+     }
+    },
+    {
+     "name": "controls",
+     "title": "Controls",
+     "type": "multiselect",
+     "group": "design",
+     "initialValue": [
+      "arrows",
+      "dots"
+     ],
+     "options": [
+      {
+       "value": "arrows",
+       "label": "Arrows"
+      },
+      {
+       "value": "dots",
+       "label": "Dots"
+      },
+      {
+       "value": "progress",
+       "label": "Progress bar"
+      }
+     ]
+    },
+    {
+     "name": "theme",
+     "title": "Theme",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "light",
+     "options": [
+      {
+       "value": "light",
+       "label": "Light"
+      },
+      {
+       "value": "dark",
+       "label": "Dark"
+      },
+      {
+       "value": "brand",
+       "label": "Brand"
+      }
+     ]
+    }
+   ]
+  },
+  "value": {
+   "_variant": "peek",
+   "eyebrow": "Field notes",
+   "heading": "A weekend on the Deschutes.",
+   "slides": [
+    {
+     "_key": "s1",
+     "_type": "imageSlide",
+     "image": {
+      "url": "https://picsum.photos/seed/deschutes-camp-dawn/1600/1067",
+      "alt": "Tent and campfire on a riverbank at dawn",
+      "name": "deschutes-camp-dawn.jpg",
+      "width": 3200,
+      "height": 2134,
+      "focal": {
+       "x": 40,
+       "y": 55
+      }
+     },
+     "caption": "Dawn at Mile 12 camp."
+    },
+    {
+     "_key": "s2",
+     "_type": "videoSlide",
+     "video": {
+      "url": "https://cdn.caldera.co/film/deschutes-sear-loop.mp4"
+     },
+     "poster": {
+      "url": "https://picsum.photos/seed/deschutes-sear-poster/1600/1067",
+      "alt": "Trout searing in a skillet over coals",
+      "name": "deschutes-sear-poster.jpg",
+      "width": 3200,
+      "height": 2134
+     },
+     "caption": "Trout, butter, coals. That's the recipe.",
+     "muted": true
+    },
+    {
+     "_key": "s3",
+     "_type": "quoteSlide",
+     "quote": "We packed one skillet for four people and three days. It was the only pan we needed.",
+     "author": "Maya Reyes",
+     "role": "Backcountry guide, Montana",
+     "photo": {
+      "url": "https://i.pravatar.cc/192?img=47",
+      "alt": "",
+      "name": "maya.jpg"
+     },
+     "background": {
+      "url": "https://picsum.photos/seed/deschutes-river-dusk/1600/1067",
+      "alt": "River canyon at dusk",
+      "name": "deschutes-river-dusk.jpg",
+      "width": 3200,
+      "height": 2134
+     }
+    },
+    {
+     "_key": "s4",
+     "_type": "productSlide",
+     "product": "gid://shopify/Product/8814",
+     "image": {
+      "url": "https://picsum.photos/seed/deschutes-skillet-rock/1600/1067",
+      "alt": "Ridge Skillet resting on a river stone",
+      "name": "deschutes-skillet-rock.jpg",
+      "width": 3200,
+      "height": 2134
+     },
+     "badge": "In this trip"
+    },
+    {
+     "_key": "s5",
+     "_type": "imageSlide",
+     "image": {
+      "url": "https://picsum.photos/seed/deschutes-raft/1600/1067",
+      "alt": "Two rafts pulled up on a gravel bar",
+      "name": "deschutes-raft.jpg",
+      "width": 3200,
+      "height": 2134
+     },
+     "caption": "Lunch stop at Whitehorse Rapids.",
+     "link": {
+      "type": "page",
+      "href": "/journal/deschutes-float",
+      "label": "Read the trip",
+      "title": "Three days on the Deschutes"
+     }
+    }
+   ],
+   "autoplay": false,
+   "interval": 6,
+   "loop": true,
+   "perViewDesktop": 2.5,
+   "perViewMobile": 1.15,
+   "controls": [
+    "arrows",
+    "progress"
+   ],
+   "theme": "light"
+  }
+ },
+ {
+  "id": "parallax-image-overlay",
+  "name": "Full-bleed parallax image with overlay text",
+  "category": "Media & galleries",
+  "kind": "block",
+  "brand": "Tidewater Hotel",
+  "previewLayout": "media",
+  "proves": "Art-directed phone image \u00b7 decorative flag \u00b7 9-position text grid shown only when there is text \u00b7 parallax strength only for the parallax variant",
+  "schema": {
+   "name": "parallaxImage",
+   "title": "Full-bleed image",
+   "kind": "block",
+   "icon": "photo-scan",
+   "category": "Media & galleries",
+   "description": "An edge-to-edge photo with optional parallax and text over it",
+   "variants": [
+    {
+     "id": "parallax",
+     "name": "Parallax",
+     "description": "The photo moves slower than the page"
+    },
+    {
+     "id": "fixed",
+     "name": "Fixed",
+     "description": "The page scrolls over a still photo"
+    },
+    {
+     "id": "static",
+     "name": "Static"
+    }
+   ],
+   "preview": {
+    "title": "heading",
+    "media": "image",
+    "icon": "photo-scan"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "media",
+     "title": "Media"
+    },
+    {
+     "name": "design",
+     "title": "Design"
+    }
+   ],
+   "fields": [
+    {
+     "name": "eyebrow",
+     "title": "Eyebrow",
+     "type": "string",
+     "validation": {
+      "max": 32
+     }
+    },
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "validation": {
+      "recommendedMax": 60
+     },
+     "ai": true,
+     "localized": true
+    },
+    {
+     "name": "body",
+     "title": "Body",
+     "type": "text",
+     "rows": 2,
+     "validation": {
+      "recommendedMax": 160
+     },
+     "localized": true
+    },
+    {
+     "name": "button",
+     "title": "Button",
+     "type": "button"
+    },
+    {
+     "name": "image",
+     "title": "Image",
+     "type": "image",
+     "group": "media",
+     "validation": {
+      "required": true
+     },
+     "description": "At least 2400px wide."
+    },
+    {
+     "name": "mobileImage",
+     "title": "Phone photo",
+     "type": "image",
+     "group": "media"
+    },
+    {
+     "name": "isDecorative",
+     "title": "Decorative only",
+     "type": "boolean",
+     "group": "media",
+     "description": "Screen readers skip the photo."
+    },
+    {
+     "name": "credit",
+     "title": "Photo credit",
+     "type": "string",
+     "group": "media",
+     "validation": {
+      "max": 64
+     }
+    },
+    {
+     "name": "position",
+     "title": "Text position",
+     "type": "select",
+     "group": "design",
+     "layout": "grid",
+     "initialValue": "bottom-left",
+     "hidden": {
+      "field": "heading",
+      "notEmpty": true
+     },
+     "options": [
+      {
+       "value": "top-left",
+       "label": "Top left"
+      },
+      {
+       "value": "top-center",
+       "label": "Top"
+      },
+      {
+       "value": "top-right",
+       "label": "Top right"
+      },
+      {
+       "value": "middle-left",
+       "label": "Left"
+      },
+      {
+       "value": "center",
+       "label": "Center"
+      },
+      {
+       "value": "middle-right",
+       "label": "Right"
+      },
+      {
+       "value": "bottom-left",
+       "label": "Bottom left"
+      },
+      {
+       "value": "bottom-center",
+       "label": "Bottom"
+      },
+      {
+       "value": "bottom-right",
+       "label": "Bottom right"
+      }
+     ]
+    },
+    {
+     "name": "overlay",
+     "title": "Overlay",
+     "type": "number",
+     "group": "design",
+     "layout": "slider",
+     "initialValue": 40,
+     "numeric": {
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "%"
+     }
+    },
+    {
+     "name": "overlayStyle",
+     "title": "Overlay shape",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "gradient",
+     "options": [
+      {
+       "value": "flat",
+       "label": "Flat"
+      },
+      {
+       "value": "gradient",
+       "label": "Gradient"
+      }
+     ]
+    },
+    {
+     "name": "height",
+     "title": "Height",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "tall",
+     "options": [
+      {
+       "value": "medium",
+       "label": "60%"
+      },
+      {
+       "value": "tall",
+       "label": "80%"
+      },
+      {
+       "value": "screen",
+       "label": "Full screen"
+      }
+     ],
+     "description": "Share of the browser window's height."
+    },
+    {
+     "name": "intensity",
+     "title": "Parallax strength",
+     "type": "number",
+     "group": "design",
+     "layout": "slider",
+     "hidden": {
+      "field": "_variant",
+      "equals": "parallax"
+     },
+     "initialValue": 20,
+     "numeric": {
+      "min": 5,
+      "max": 40,
+      "step": 5,
+      "unit": "%"
+     }
+    }
+   ]
+  },
+  "value": {
+   "_variant": "parallax",
+   "eyebrow": "The coast",
+   "heading": "Where the tide sets the schedule.",
+   "body": "Ninety rooms on a quiet stretch of the Oregon coast. No resort fee, no wristbands.",
+   "button": {
+    "label": "Check availability",
+    "href": "/book",
+    "type": "page",
+    "title": "Book",
+    "style": "primary",
+    "arrow": true
+   },
+   "image": {
+    "url": "https://picsum.photos/seed/tidewater-coast-aerial/2400/1200",
+    "alt": "Aerial view of the hotel above a long empty beach at low tide",
+    "name": "tidewater-coast-aerial.jpg",
+    "width": 4800,
+    "height": 2400,
+    "focal": {
+     "x": 62,
+     "y": 48
+    }
+   },
+   "mobileImage": {
+    "url": "https://picsum.photos/seed/tidewater-coast-portrait/1080/1600",
+    "alt": "The hotel's dune boardwalk leading to the beach",
+    "name": "tidewater-coast-portrait.jpg",
+    "width": 2160,
+    "height": 3200,
+    "focal": {
+     "x": 50,
+     "y": 60
+    }
+   },
+   "isDecorative": false,
+   "credit": "Photo: Jonah Reyes",
+   "position": "bottom-left",
+   "overlay": 45,
+   "overlayStyle": "gradient",
+   "height": "tall",
+   "intensity": 20
+  }
+ },
+ {
+  "id": "ugc-social-feed",
+  "name": "Social photo feed (UGC)",
+  "category": "Media & galleries",
+  "kind": "block",
+  "brand": "Caldera",
+  "previewLayout": "gallery",
+  "proves": "Connected account vs approved hashtag vs hand-picked \u00b7 developer-locked connection \u00b7 rights + permalink required per photo",
+  "schema": {
+   "name": "ugcFeed",
+   "title": "Social photo feed",
+   "kind": "block",
+   "icon": "brand-instagram",
+   "category": "Media & galleries",
+   "description": "A grid of customer photos from a connected Instagram account or hashtag, or picked by hand",
+   "variants": [
+    {
+     "id": "grid",
+     "name": "Grid"
+    },
+    {
+     "id": "strip",
+     "name": "Strip",
+     "description": "One scrolling row"
+    }
+   ],
+   "preview": {
+    "title": "heading",
+    "icon": "brand-instagram"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "media",
+     "title": "Media"
+    },
+    {
+     "name": "design",
+     "title": "Design"
+    }
+   ],
+   "fields": [
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "validation": {
+      "recommendedMax": 48
+     },
+     "localized": true
+    },
+    {
+     "name": "followButton",
+     "title": "Follow button",
+     "type": "button"
+    },
+    {
+     "name": "source",
+     "title": "Photos from",
+     "type": "select",
+     "layout": "radio",
+     "initialValue": "account",
+     "options": [
+      {
+       "value": "account",
+       "label": "Our account",
+       "description": "Newest posts from the connected profile"
+      },
+      {
+       "value": "hashtag",
+       "label": "A hashtag",
+       "description": "Only posts you approve in Media \u203a Social"
+      },
+      {
+       "value": "manual",
+       "label": "Picked photos"
+      }
+     ]
+    },
+    {
+     "name": "account",
+     "title": "Account",
+     "type": "string",
+     "access": {
+      "edit": "schema.manage"
+     },
+     "lockReason": "Connected in Settings \u203a Integrations.",
+     "hidden": {
+      "field": "source",
+      "equals": "account"
+     },
+     "placeholder": "@calderaoutside"
+    },
+    {
+     "name": "hashtag",
+     "title": "Hashtag",
+     "type": "string",
+     "hidden": {
+      "field": "source",
+      "equals": "hashtag"
+     },
+     "validation": {
+      "required": true,
+      "pattern": "^#?[A-Za-z0-9_]+$",
+      "patternMessage": "Use letters, numbers and underscores, like utm_source."
+     },
+     "placeholder": "#cookedoncaldera"
+    },
+    {
+     "name": "limit",
+     "title": "How many",
+     "type": "number",
+     "hidden": {
+      "field": "source",
+      "equals": [
+       "account",
+       "hashtag"
+      ]
+     },
+     "initialValue": 8,
+     "numeric": {
+      "min": 4,
+      "max": 24,
+      "step": 4
+     }
+    },
+    {
+     "name": "posts",
+     "title": "Photos",
+     "type": "array",
+     "group": "media",
+     "itemNoun": "photo",
+     "arrayLayout": "grid",
+     "hidden": {
+      "field": "source",
+      "equals": "manual"
+     },
+     "validation": {
+      "min": 4,
+      "max": 24
+     },
+     "of": [
+      {
+       "name": "post",
+       "title": "Photo",
+       "type": "object",
+       "icon": "photo",
+       "preview": {
+        "title": "handle",
+        "subtitle": "permalink",
+        "media": "image",
+        "fallback": "Untitled photo"
+       },
+       "fields": [
+        {
+         "name": "image",
+         "title": "Image",
+         "type": "image",
+         "validation": {
+          "required": true
+         }
+        },
+        {
+         "name": "handle",
+         "title": "Creator",
+         "type": "string",
+         "validation": {
+          "required": true
+         },
+         "placeholder": "@trailkitchen"
+        },
+        {
+         "name": "permalink",
+         "title": "Original post",
+         "type": "url",
+         "validation": {
+          "required": true
+         }
+        },
+        {
+         "name": "hasRights",
+         "title": "Creator gave permission",
+         "type": "boolean",
+         "validation": {
+          "required": true
+         },
+         "description": "Required before it can be published."
+        },
+        {
+         "name": "products",
+         "title": "Products shown",
+         "type": "array",
+         "of": [
+          {
+           "name": "product",
+           "title": "Product",
+           "type": "reference",
+           "reference": {
+            "to": [
+             "shopify"
+            ]
+           }
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "columns",
+     "title": "Columns on desktop",
+     "type": "number",
+     "group": "design",
+     "layout": "slider",
+     "initialValue": 4,
+     "numeric": {
+      "min": 3,
+      "max": 6,
+      "step": 1
+     }
+    },
+    {
+     "name": "theme",
+     "title": "Theme",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "light",
+     "options": [
+      {
+       "value": "light",
+       "label": "Light"
+      },
+      {
+       "value": "dark",
+       "label": "Dark"
+      },
+      {
+       "value": "brand",
+       "label": "Brand"
+      }
+     ]
+    }
+   ]
+  },
+  "value": {
+   "_variant": "grid",
+   "heading": "#cookedoncaldera",
+   "followButton": {
+    "label": "Follow @calderaoutside",
+    "href": "https://www.instagram.com/calderaoutside",
+    "type": "url",
+    "style": "outline",
+    "newTab": true
+   },
+   "source": "manual",
+   "account": "@calderaoutside",
+   "limit": 8,
+   "posts": [
+    {
+     "_key": "u1",
+     "image": {
+      "url": "https://picsum.photos/seed/ugc-dutch-oven-snow/1080/1080",
+      "alt": "Dutch oven on coals in fresh snow",
+      "name": "ugc-dutch-oven-snow.jpg",
+      "width": 2160,
+      "height": 2160
+     },
+     "handle": "@wintercamper",
+     "permalink": "https://www.instagram.com/p/C8wq1LzS0aB/",
+     "hasRights": true,
+     "products": [
+      "gid://shopify/Product/8813"
+     ]
+    },
+    {
+     "_key": "u2",
+     "image": {
+      "url": "https://picsum.photos/seed/ugc-skillet-pancakes/1080/1080",
+      "alt": "Blueberry pancakes in a skillet on a camp stove",
+      "name": "ugc-skillet-pancakes.jpg",
+      "width": 2160,
+      "height": 2160
+     },
+     "handle": "@sierrasunday",
+     "permalink": "https://www.instagram.com/p/C8zT4mGJ9kQ/",
+     "hasRights": true,
+     "products": [
+      "gid://shopify/Product/8814"
+     ]
+    },
+    {
+     "_key": "u3",
+     "image": {
+      "url": "https://picsum.photos/seed/ugc-grill-beach/1080/1080",
+      "alt": "Cable Fold grill on a beach fire at sunset",
+      "name": "ugc-grill-beach.jpg",
+      "width": 2160,
+      "height": 2160
+     },
+     "handle": "@coastcooks",
+     "permalink": "https://www.instagram.com/p/C90bR2nLx4e/",
+     "hasRights": true,
+     "products": [
+      "gid://shopify/Product/8812"
+     ]
+    },
+    {
+     "_key": "u4",
+     "image": {
+      "url": "https://picsum.photos/seed/ugc-kettle-summit/1080/1080",
+      "alt": "Trail Kettle steaming on a summit rock",
+      "name": "ugc-kettle-summit.jpg",
+      "width": 2160,
+      "height": 2160
+     },
+     "handle": "@theohikes",
+     "permalink": "https://www.instagram.com/p/C92XvQ8Ln1s/",
+     "hasRights": true,
+     "products": []
+    }
+   ],
+   "columns": 4,
+   "theme": "light"
+  }
+ }
+]

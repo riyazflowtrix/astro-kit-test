@@ -1,0 +1,305 @@
+<aside id="nav-docs-sidebar" class="nds" aria-label="Documentation">
+  <!-- kit: nav-docs-sidebar -->
+  <button class="nds__toggle" type="button" aria-expanded="false" aria-controls="nav-docs-sidebar-panel">
+    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M4 7h16M4 12h16M4 17h10"/></svg>
+    Docs menu
+  </button>
+
+  <div class="nds__panel" id="nav-docs-sidebar-panel">
+    <div class="nds__top">
+      <details class="nds__versions">
+        <summary>
+          <span class="nds__version-label">Version</span>
+          <strong>v3</strong>
+          <span class="nds__status nds__status--current">current</span>
+        </summary>
+        <ul>
+          <li><a href="/docs" aria-current="true">v3 <span class="nds__status nds__status--current">current</span></a></li>
+          <li><a href="/docs/v2">v2 <span class="nds__status nds__status--legacy">legacy</span></a></li>
+        </ul>
+      </details>
+
+      <form class="nds__search" role="search" action="#">
+        <label class="visually-hidden" for="nav-docs-sidebar-q">Search docs</label>
+        <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M20 20l-4-4"/></svg>
+        <input id="nav-docs-sidebar-q" type="search" name="q" placeholder="Search docs ⌘K" />
+      </form>
+    </div>
+
+    <nav class="nds__tree" aria-label="Docs pages">
+      <details class="nds__section" open>
+        <summary>
+          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M5 15c-1 1-1.5 4-1.5 4.5s3.5-.5 4.5-1.5M9 15l-3-3c1-4 4-8 11-9-1 7-5 10-9 11zM14.5 9.5h.01"/></svg>
+          Get started
+        </summary>
+        <ul>
+          <li><a href="/docs/quickstart" aria-current="page">Quickstart</a></li>
+          <li>
+            <a href="/docs/install">Install the agent</a>
+            <ul>
+              <li><a href="/docs/install/kubernetes">Kubernetes</a></li>
+              <li><a href="/docs/install/docker">Docker</a></li>
+              <li><a href="/docs/install/linux">Bare metal</a></li>
+            </ul>
+          </li>
+        </ul>
+      </details>
+
+      <details class="nds__section">
+        <summary>
+          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><circle cx="6" cy="19" r="2" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="18" cy="5" r="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M8 19h8.5a3.5 3.5 0 0 0 0-7h-9a3.5 3.5 0 0 1 0-7H16"/></svg>
+          Traces
+        </summary>
+        <ul>
+          <li><a href="/docs/traces/sampling">Sampling rules <span class="nds__badge nds__badge--new">new</span></a></li>
+          <li><a href="/docs/traces/service-map">Service map <span class="nds__badge nds__badge--beta">beta</span></a></li>
+          <li><a href="/docs/traces/span-api-v1">Legacy span API <span class="nds__badge nds__badge--deprecated">deprecated</span></a></li>
+        </ul>
+      </details>
+    </nav>
+
+    <ul class="nds__footer">
+      <li><a href="/changelog">Changelog</a></li>
+      <li><a href="https://status.tideline.dev" target="_blank" rel="noopener">Status ↗</a></li>
+    </ul>
+  </div>
+</aside>
+
+<script is:inline>
+  (function () {
+    var root = document.getElementById("nav-docs-sidebar");
+    if (!root) return;
+    var toggle = root.querySelector(".nds__toggle");
+    var panel = root.querySelector(".nds__panel");
+    toggle.addEventListener("click", function () {
+      var open = toggle.getAttribute("aria-expanded") !== "true";
+      toggle.setAttribute("aria-expanded", String(open));
+      panel.classList.toggle("is-open", open);
+    });
+  })();
+</script>
+
+<style>
+  .nds {
+    width: 100%;
+    max-width: 280px;
+    font-size: 0.9375rem;
+  }
+
+  .nds__toggle {
+    display: none;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    min-height: 44px;
+    padding: 0 1rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    background: var(--bg);
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .nds__panel {
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .nds__top {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .nds__versions {
+    position: relative;
+  }
+
+  .nds__versions summary {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 40px;
+    padding: 0 0.75rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .nds__versions summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .nds__version-label {
+    color: var(--ink-3);
+    font-size: 0.8125rem;
+  }
+
+  .nds__versions ul {
+    margin: 0.375rem 0 0;
+    padding: 0.375rem;
+    list-style: none;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    background: var(--bg);
+    box-shadow: var(--shadow);
+  }
+
+  .nds__versions ul a {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.4rem 0.5rem;
+    border-radius: 4px;
+    text-decoration: none;
+  }
+
+  .nds__versions ul a:hover {
+    background: var(--surface);
+  }
+
+  .nds__status {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    padding: 0.05rem 0.4rem;
+    border-radius: 999px;
+  }
+
+  .nds__status--current {
+    background: #e3f4ea;
+    color: var(--success);
+  }
+
+  .nds__status--legacy {
+    background: var(--surface-2);
+    color: var(--ink-2);
+  }
+
+  .nds__search {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .nds__search svg {
+    position: absolute;
+    left: 0.75rem;
+    color: var(--ink-3);
+  }
+
+  .nds__search input {
+    width: 100%;
+    min-height: 40px;
+    padding: 0 0.75rem 0 2.25rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    background: var(--surface);
+  }
+
+  .nds__tree {
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .nds__section summary {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 36px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .nds__section ul {
+    margin: 0;
+    padding: 0 0 0.5rem 0;
+    list-style: none;
+  }
+
+  .nds__section ul ul {
+    margin-left: 0.75rem;
+    padding: 0 0 0 0.5rem;
+    border-left: 1px solid var(--line);
+  }
+
+  .nds__section a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding: 0.35rem 0.625rem;
+    border-radius: var(--radius-sm);
+    color: var(--ink-2);
+    text-decoration: none;
+  }
+
+  .nds__section a:hover {
+    background: var(--surface);
+    color: var(--ink);
+  }
+
+  .nds__section a[aria-current="page"] {
+    background: var(--brand-soft);
+    color: var(--brand);
+    font-weight: 600;
+  }
+
+  .nds__badge {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 0.05rem 0.4rem;
+    border-radius: 4px;
+  }
+
+  .nds__badge--new {
+    background: #e3f4ea;
+    color: var(--success);
+  }
+
+  .nds__badge--beta {
+    background: #e6ecfb;
+    color: var(--accent);
+  }
+
+  .nds__badge--deprecated {
+    background: var(--surface-2);
+    color: var(--ink-3);
+    text-decoration: line-through;
+  }
+
+  .nds__footer {
+    display: flex;
+    gap: 1rem;
+    margin: 0;
+    padding: 1rem 0 0;
+    list-style: none;
+    border-top: 1px solid var(--line);
+    font-size: 0.875rem;
+  }
+
+  .nds__footer a {
+    color: var(--ink-2);
+    text-decoration: none;
+  }
+
+  @media (max-width: 760px) {
+    .nds {
+      max-width: none;
+    }
+
+    .nds__toggle {
+      display: inline-flex;
+    }
+
+    .nds__panel {
+      display: none;
+      margin-top: 1rem;
+    }
+
+    .nds__panel.is-open {
+      display: grid;
+    }
+  }
+</style>

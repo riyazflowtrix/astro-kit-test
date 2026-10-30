@@ -1,0 +1,254 @@
+---
+---
+
+<section id="chart-attrition" class="section chart" data-variant="card" data-chart-type="line" data-source="manual">
+  <!-- kit: chart-attrition -->
+  <div class="container">
+    <figure class="chart__card card">
+      <div class="chart__head">
+        <span class="eyebrow">2026 benchmark</span>
+        <h2>Teams on Betterwork lose fewer people every quarter.</h2>
+      </div>
+
+      <ul class="chart__legend">
+        <li><span class="chart__swatch" style="background:#4F46E5"></span> Betterwork customers</li>
+        <li><span class="chart__swatch chart__swatch--dashed"></span> Industry median</li>
+      </ul>
+
+      <div class="chart__plot">
+        <svg viewBox="0 0 640 310" role="img" aria-labelledby="chart-attrition-title chart-attrition-desc">
+          <title id="chart-attrition-title">Voluntary attrition by quarter, Q1 2025 to Q2 2026</title>
+          <desc id="chart-attrition-desc">Voluntary attrition at Betterwork customers fell from 4.1% to 2.6% a quarter over six quarters, while the industry median stayed near 4%.</desc>
+          <g class="chart__grid">
+            <line x1="60" x2="620" y1="20" y2="20" />
+            <line x1="60" x2="620" y1="68" y2="68" />
+            <line x1="60" x2="620" y1="116" y2="116" />
+            <line x1="60" x2="620" y1="164" y2="164" />
+            <line x1="60" x2="620" y1="212" y2="212" />
+            <line x1="60" x2="620" y1="260" y2="260" class="chart__axis" />
+          </g>
+          <g class="chart__ylabels">
+            <text x="50" y="24">5%</text>
+            <text x="50" y="72">4%</text>
+            <text x="50" y="120">3%</text>
+            <text x="50" y="168">2%</text>
+            <text x="50" y="216">1%</text>
+            <text x="50" y="264">0%</text>
+          </g>
+          <g class="chart__xlabels">
+            <text x="60" y="284">Q1 2025</text>
+            <text x="172" y="284">Q2 2025</text>
+            <text x="284" y="284">Q3 2025</text>
+            <text x="396" y="284">Q4 2025</text>
+            <text x="508" y="284">Q1 2026</text>
+            <text x="620" y="284">Q2 2026</text>
+          </g>
+          <text class="chart__axis-title" x="340" y="306">Quarter</text>
+
+          <g class="chart__annotation" data-tone="positive">
+            <line x1="284" x2="284" y1="20" y2="260" />
+            <rect x="292" y="196" width="168" height="26" rx="5" />
+            <text x="300" y="213">Stay interviews launched</text>
+          </g>
+
+          <polyline class="chart__line chart__line--median" points="60,58.4 172,68 284,63.2 396,72.8 508,68 620,72.8" />
+          <polyline class="chart__line chart__line--brand" points="60,63.2 172,77.6 284,96.8 396,116 508,125.6 620,135.2" />
+          <g class="chart__dots">
+            <circle cx="60" cy="63.2" r="4" />
+            <circle cx="172" cy="77.6" r="4" />
+            <circle cx="284" cy="96.8" r="4" />
+            <circle cx="396" cy="116" r="4" />
+            <circle cx="508" cy="125.6" r="4" />
+            <circle cx="620" cy="135.2" r="5" />
+          </g>
+          <text class="chart__point-label" x="612" y="160">2.6%</text>
+        </svg>
+      </div>
+
+      <figcaption class="chart__caption">
+        <p>Voluntary attrition at Betterwork customers fell from 4.1% to 2.6% a quarter over six quarters, while the industry median stayed near 4%.</p>
+        <p class="chart__note"><strong>Q3 2025 · Stay interviews launched.</strong> Managers get a prompt to talk with anyone whose engagement score drops two weeks in a row.</p>
+        <p class="chart__source">Source: <a href="/research/attrition-2026" title="Attrition benchmark 2026">Betterwork benchmark, 1,240 companies, 2025–2026</a></p>
+      </figcaption>
+
+      <details class="chart__data">
+        <summary>Show the data as a table</summary>
+        <div class="chart__table-wrap">
+          <table>
+            <caption class="visually-hidden">Voluntary attrition by quarter</caption>
+            <thead>
+              <tr><th scope="col">Quarter</th><th scope="col">Betterwork customers</th><th scope="col">Industry median</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">Q1 2025</th><td>4.1%</td><td>4.2%</td></tr>
+              <tr><th scope="row">Q2 2025</th><td>3.8%</td><td>4.0%</td></tr>
+              <tr><th scope="row">Q3 2025</th><td>3.4%</td><td>4.1%</td></tr>
+              <tr><th scope="row">Q4 2025</th><td>3.0%</td><td>3.9%</td></tr>
+              <tr><th scope="row">Q1 2026</th><td>2.8%</td><td>4.0%</td></tr>
+              <tr><th scope="row">Q2 2026</th><td>2.6%</td><td>3.9%</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+    </figure>
+  </div>
+</section>
+
+<style>
+  .chart__card {
+    margin: 0;
+    padding: clamp(1.25rem, 4vw, 2.5rem);
+    box-shadow: var(--shadow);
+  }
+
+  .chart__head h2 {
+    max-width: 24ch;
+  }
+
+  .chart__legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    margin: 0.5rem 0 1rem;
+    padding: 0;
+    list-style: none;
+    font-size: 0.875rem;
+    color: var(--ink-2);
+  }
+
+  .chart__legend li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .chart__swatch {
+    width: 22px;
+    height: 3px;
+    border-radius: 2px;
+  }
+
+  .chart__swatch--dashed {
+    background: repeating-linear-gradient(90deg, #9ca3af 0 6px, transparent 6px 10px);
+  }
+
+  .chart__plot svg {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+
+  .chart__grid line {
+    stroke: var(--line);
+    stroke-width: 1;
+  }
+
+  .chart__grid .chart__axis {
+    stroke: var(--ink-3);
+  }
+
+  .chart__ylabels text {
+    font-size: 12px;
+    fill: var(--ink-3);
+    text-anchor: end;
+  }
+
+  .chart__xlabels text {
+    font-size: 12px;
+    fill: var(--ink-3);
+    text-anchor: middle;
+  }
+
+  .chart__axis-title {
+    font-size: 11px;
+    fill: var(--ink-3);
+    text-anchor: middle;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .chart__line {
+    fill: none;
+    stroke-width: 3;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+  }
+
+  .chart__line--brand {
+    stroke: #4f46e5;
+  }
+
+  .chart__line--median {
+    stroke: #9ca3af;
+    stroke-dasharray: 7 6;
+    stroke-width: 2.5;
+  }
+
+  .chart__dots circle {
+    fill: #fff;
+    stroke: #4f46e5;
+    stroke-width: 2.5;
+  }
+
+  .chart__point-label {
+    font-size: 14px;
+    font-weight: 700;
+    fill: #4f46e5;
+    text-anchor: middle;
+  }
+
+  .chart__annotation line {
+    stroke: var(--success);
+    stroke-dasharray: 3 4;
+  }
+
+  .chart__annotation rect {
+    fill: #e8f4ec;
+  }
+
+  .chart__annotation text {
+    font-size: 12px;
+    font-weight: 600;
+    fill: var(--success);
+  }
+
+  .chart__caption {
+    margin-top: 1.25rem;
+    font-size: 0.9375rem;
+    color: var(--ink-2);
+  }
+
+  .chart__note {
+    padding-left: 0.875rem;
+    border-left: 3px solid var(--success);
+  }
+
+  .chart__source {
+    font-size: 0.8125rem;
+    color: var(--ink-3);
+  }
+
+  .chart__data summary {
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.875rem;
+  }
+
+  .chart__table-wrap {
+    overflow-x: auto;
+    margin-top: 0.75rem;
+  }
+
+  .chart__data table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+
+  .chart__data th,
+  .chart__data td {
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid var(--line);
+    text-align: left;
+  }
+</style>

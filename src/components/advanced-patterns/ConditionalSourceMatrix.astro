@@ -1,0 +1,153 @@
+---
+// Product recommendations carousel (source: external recommendations feed, falls back to bestsellers).
+---
+
+<section id="conditional-source-matrix" class="section recs">
+  <!-- kit: conditional-source-matrix -->
+  <div class="container">
+    <div class="recs__head">
+      <h2>Goes well with your skillet</h2>
+      <div class="recs__actions">
+        <a class="recs__all" href="/collections/camp-kitchen">Shop camp kitchen <span aria-hidden="true">&rarr;</span></a>
+        <div class="recs__nav">
+          <button type="button" class="recs__btn" data-dir="-1" aria-label="Previous products">&larr;</button>
+          <button type="button" class="recs__btn" data-dir="1" aria-label="Next products">&rarr;</button>
+        </div>
+      </div>
+    </div>
+
+    <ul class="recs__track" aria-label="Recommended products">
+      <li class="product">
+        <a class="product__link" href="/products/seasoning-kit">
+          <img src="https://picsum.photos/seed/caldera-seasoning-kit/800/800" alt="The Caldera seasoning kit tin with oil, cloth and scrubber" width="800" height="800" loading="lazy" />
+          <span class="product__reason">Keeps the factory seasoning going</span>
+          <span class="product__name">Seasoning kit</span>
+          <span class="product__price">$24</span>
+        </a>
+      </li>
+      <li class="product">
+        <a class="product__link" href="/products/chainmail-scrubber">
+          <img src="https://picsum.photos/seed/caldera-chainmail/800/800" alt="A stainless chainmail scrubber coiled on a board" width="800" height="800" loading="lazy" />
+          <span class="product__reason">Cleans without soap or scratches</span>
+          <span class="product__name">Chainmail scrubber</span>
+          <span class="product__price">$18</span>
+        </a>
+      </li>
+      <li class="product">
+        <a class="product__link" href="/products/ridge-lid">
+          <img src="https://picsum.photos/seed/caldera-ridge-lid/800/800" alt="A cast iron lid with basting spikes on the underside" width="800" height="800" loading="lazy" />
+          <span class="product__reason">Fits the 10-inch Ridge exactly</span>
+          <span class="product__name">Ridge Skillet lid</span>
+          <span class="product__price">$58</span>
+        </a>
+      </li>
+      <li class="product">
+        <a class="product__link" href="/products/leather-handle-sleeve">
+          <img src="https://picsum.photos/seed/caldera-handle-sleeve/800/800" alt="A waxed leather sleeve slid over a skillet handle" width="800" height="800" loading="lazy" />
+          <span class="product__reason">For lifting straight off the coals</span>
+          <span class="product__name">Leather handle sleeve</span>
+          <span class="product__price">$28</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<script>
+  {
+    const root = document.getElementById("conditional-source-matrix");
+    if (root) {
+      const track = root.querySelector<HTMLElement>(".recs__track");
+      root.querySelectorAll<HTMLButtonElement>(".recs__btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          if (!track) return;
+          track.scrollBy({ left: Number(btn.dataset.dir) * track.clientWidth * 0.75, behavior: "smooth" });
+        });
+      });
+    }
+  }
+</script>
+
+<style>
+  .recs__head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: end;
+    gap: 1rem;
+    margin-bottom: 1.75rem;
+  }
+  .recs__head h2 {
+    margin: 0;
+  }
+  .recs__actions {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+  }
+  .recs__all {
+    font-weight: 600;
+    color: var(--brand);
+    text-decoration: none;
+  }
+  .recs__nav {
+    display: flex;
+    gap: 0.5rem;
+  }
+  .recs__btn {
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    background: var(--bg);
+    cursor: pointer;
+    font-size: 1.125rem;
+  }
+  .recs__track {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(220px, calc((100% - 3 * 1.25rem) / 4));
+    gap: 1.25rem;
+    margin: 0;
+    padding: 0 0 0.5rem;
+    list-style: none;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: thin;
+  }
+  @media (max-width: 600px) {
+    .recs__track {
+      grid-auto-columns: 75%;
+    }
+  }
+  .product {
+    scroll-snap-align: start;
+  }
+  .product__link {
+    display: grid;
+    gap: 0.25rem;
+    text-decoration: none;
+  }
+  .product__link img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: var(--radius);
+    background: var(--surface);
+    margin-bottom: 0.5rem;
+    transition: transform 200ms ease;
+  }
+  .product__link:hover img {
+    transform: scale(1.02);
+  }
+  .product__reason {
+    font-size: 0.8125rem;
+    color: var(--ink-3);
+  }
+  .product__name {
+    font-weight: 600;
+  }
+  .product__price {
+    color: var(--ink-2);
+  }
+</style>

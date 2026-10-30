@@ -1,0 +1,255 @@
+---
+// Explainer video with captions, subtitles, descriptions, transcript and an audio-described version;
+// an informative chart with a long description, a decorative strip, and an accessible newsletter form.
+---
+
+<section id="a11y-critical-media-form" class="section a11y">
+  <!-- kit: a11y-critical-media-form -->
+  <div class="container a11y__inner">
+    <h2>Why the heat dome stalled over the Pacific Northwest</h2>
+
+    <div class="a11y__video">
+      <div class="video-frame" data-embed="https://player.vimeo.com/video/76979871?autoplay=1&texttrack=en">
+        <img src="https://picsum.photos/seed/heat-dome-map/1600/1000" alt="A weather map with a red high-pressure dome over Oregon and Washington" width="3200" height="2000" loading="lazy" />
+        <button class="video-frame__play" type="button" aria-label="Play video: Explainer: how a heat dome forms and why it stays put, 3 minutes">
+          <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor" /></svg>
+        </button>
+      </div>
+      <p class="a11y__video-title">Explainer: how a heat dome forms and why it stays put, 3 minutes</p>
+
+      <div class="a11y__media-tools">
+        <ul class="tracks" aria-label="Captions and descriptions">
+          <li><a href="https://cdn.atlasjournal.com/video/heat-dome/en.vtt" hreflang="en" type="text/vtt">English (CC)</a> <span class="tracks__kind">Captions, on by default</span></li>
+          <li><a href="https://cdn.atlasjournal.com/video/heat-dome/es.vtt" hreflang="es" type="text/vtt">Español</a> <span class="tracks__kind">Subtitles</span></li>
+          <li><a href="https://cdn.atlasjournal.com/video/heat-dome/en-desc.vtt" hreflang="en" type="text/vtt">English descriptions</a> <span class="tracks__kind">Descriptions</span></li>
+        </ul>
+        <a class="btn btn-secondary" href="https://vimeo.com/76979872">Watch the audio-described version</a>
+      </div>
+
+      <details class="transcript">
+        <summary>Read the transcript</summary>
+        <div class="transcript__body">
+          <p><strong>Ana Ruiz (climate reporter):</strong> In late June, a ridge of high pressure parked over the Northwest. [Wind sounds] Air sinking under that ridge heats up as it's compressed, like a bicycle pump.</p>
+          <p><strong>Dr. Owen Park (University of Washington):</strong> The jet stream bent around it and couldn't push it out for nine days.</p>
+        </div>
+      </details>
+    </div>
+
+    <figure class="a11y__figure">
+      <img src="https://picsum.photos/seed/heat-dome-chart/1600/1000" alt="Line chart of Portland daily highs, June 20 to July 5, peaking at 116°F on June 28" width="3200" height="2000" loading="lazy" aria-describedby="a11y-chart-desc" />
+      <figcaption>Portland's daily highs, June 20 – July 5.</figcaption>
+      <details class="longdesc">
+        <summary>Chart description</summary>
+        <p id="a11y-chart-desc">Daily high temperatures in Portland from June 20 to July 5. Highs sat near 80°F until June 25, climbed each day to a record 116°F on June 28, then fell back below 90°F by July 2. The previous record, 107°F, is marked as a dashed line.</p>
+      </details>
+    </figure>
+
+    <img class="a11y__decor" src="https://picsum.photos/seed/heat-texture/1600/400" alt="" role="presentation" width="3200" height="800" loading="lazy" />
+
+    <div class="signup">
+      <h3 id="a11y-signup-title">Get the climate desk newsletter</h3>
+      <form class="signup__form" action="#" method="post" novalidate aria-labelledby="a11y-signup-title">
+        <div class="field">
+          <label for="a11y-email">Email address <span class="req" aria-hidden="true">*</span><span class="visually-hidden">(required)</span></label>
+          <input id="a11y-email" name="email" type="email" autocomplete="email" required aria-describedby="a11y-email-hint a11y-email-error" />
+          <p class="field__hint" id="a11y-email-hint">One email a week, every Thursday.</p>
+          <p class="field__error" id="a11y-email-error" hidden>Enter an email address like name@example.com</p>
+        </div>
+        <div class="field">
+          <label for="a11y-first">First name <span class="opt">(optional)</span></label>
+          <input id="a11y-first" name="firstName" type="text" autocomplete="given-name" />
+        </div>
+        <button class="btn btn-primary" type="submit">Sign up</button>
+        <p class="signup__privacy">We never share your address. Unsubscribe from any email.</p>
+        <p class="signup__status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script>
+  {
+    const root = document.getElementById("a11y-critical-media-form");
+    if (root) {
+      root.querySelectorAll<HTMLElement>(".video-frame").forEach((frame) => {
+        frame.querySelector("button")?.addEventListener("click", () => {
+          const iframe = document.createElement("iframe");
+          iframe.src = frame.dataset.embed || "";
+          iframe.title = "Explainer: how a heat dome forms and why it stays put";
+          iframe.allow = "autoplay; fullscreen; picture-in-picture";
+          iframe.allowFullscreen = true;
+          frame.replaceChildren(iframe);
+          iframe.focus();
+        });
+      });
+      const form = root.querySelector<HTMLFormElement>(".signup__form");
+      const email = root.querySelector<HTMLInputElement>("#a11y-email");
+      const error = root.querySelector<HTMLElement>("#a11y-email-error");
+      const status = root.querySelector<HTMLElement>(".signup__status");
+      if (form) form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        if (!email || !error) return;
+        const ok = email.checkValidity() && email.value.trim() !== "";
+        error.hidden = ok;
+        email.setAttribute("aria-invalid", String(!ok));
+        if (!ok) {
+          email.focus();
+          return;
+        }
+        if (status) status.textContent = "Thanks. Check your inbox to confirm.";
+        form.reset();
+      });
+    }
+  }
+</script>
+
+<style>
+  .a11y__inner {
+    max-width: 880px;
+    display: grid;
+    gap: 2.5rem;
+  }
+  .a11y__inner > h2 {
+    margin: 0;
+  }
+  .video-frame {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-radius: var(--radius);
+    background: var(--dark);
+  }
+  .video-frame img,
+  .video-frame :global(iframe) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: 0;
+  }
+  .video-frame__play {
+    position: absolute;
+    inset: 50% auto auto 50%;
+    translate: -50% -50%;
+    display: grid;
+    place-items: center;
+    width: 72px;
+    height: 72px;
+    border: 0;
+    border-radius: 50%;
+    background: var(--brand);
+    color: var(--brand-ink);
+    cursor: pointer;
+  }
+  .a11y__video-title {
+    margin: 0.75rem 0 1rem;
+    font-weight: 600;
+  }
+  .a11y__media-tools {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+  .tracks {
+    display: grid;
+    gap: 0.25rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 0.9375rem;
+  }
+  .tracks a {
+    font-weight: 600;
+  }
+  .tracks__kind {
+    color: var(--ink-3);
+    font-size: 0.8125rem;
+  }
+  .transcript,
+  .longdesc {
+    margin-top: 1rem;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+  }
+  .transcript summary,
+  .longdesc summary {
+    cursor: pointer;
+    font-weight: 600;
+  }
+  .transcript__body {
+    margin-top: 0.75rem;
+    color: var(--ink-2);
+  }
+  .longdesc p {
+    margin: 0.75rem 0 0;
+    color: var(--ink-2);
+  }
+  .a11y__figure {
+    margin: 0;
+  }
+  .a11y__figure img {
+    width: 100%;
+    border-radius: var(--radius);
+  }
+  .a11y__figure figcaption {
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--ink-2);
+  }
+  .a11y__decor {
+    width: 100%;
+    height: 80px;
+    object-fit: cover;
+    border-radius: var(--radius);
+  }
+  .signup {
+    padding: clamp(1.25rem, 4vw, 2rem);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+  }
+  .signup__form {
+    display: grid;
+    gap: 1rem;
+    max-width: 480px;
+  }
+  .signup__form .btn {
+    justify-self: start;
+  }
+  .req {
+    color: var(--brand);
+  }
+  .opt {
+    font-weight: 400;
+    color: var(--ink-3);
+  }
+  .field__hint,
+  .field__error {
+    margin: 0;
+    font-size: 0.8125rem;
+  }
+  .field__hint {
+    color: var(--ink-2);
+  }
+  .field__error {
+    color: #b42318;
+    font-weight: 600;
+  }
+  .field input[aria-invalid="true"] {
+    border-color: #b42318;
+  }
+  .signup__privacy {
+    margin: 0;
+    font-size: 0.8125rem;
+    color: var(--ink-2);
+  }
+  .signup__status {
+    margin: 0;
+    font-weight: 600;
+    color: var(--success);
+  }
+  .signup__status:empty {
+    display: none;
+  }
+</style>

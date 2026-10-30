@@ -1,0 +1,115 @@
+---
+import Base from "../../layouts/Base.astro";
+import AuthorBio from "../../components/long-form-docs/AuthorBio.astro";
+import CodeTabs from "../../components/long-form-docs/CodeTabs.astro";
+import Glossary from "../../components/long-form-docs/Glossary.astro";
+import CourseCurriculum from "../../components/long-form-docs/CourseCurriculum.astro";
+---
+
+<Base title="Long-form & docs" description="Blog posts, docs, knowledge-base articles, recipes, policies, case studies and podcast episodes from the BetterCMS Kit.">
+  <section class="section intro">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Kit library</span>
+        <h1>Long-form & docs</h1>
+        <p class="lead">Articles, documentation and reference content: the blocks that live inside long pages, plus full example entries.</p>
+      </div>
+    </div>
+  </section>
+
+  <AuthorBio />
+  <CodeTabs />
+  <Glossary />
+  <CourseCurriculum />
+
+  <section class="section section--muted entries">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Entries and pages</span>
+        <h2>Full example pages</h2>
+        <p class="lead">Each of these is a complete entry or page, so it gets its own URL.</p>
+      </div>
+      <ul class="grid grid-3 entry-list" role="list">
+        <li>
+          <a class="card entry" href="/long-form-docs/rich-blog-post/">
+            <span class="badge">Blog post</span>
+            <h3>The 30-minute campfire loaf</h3>
+            <p>A rich article with takeaways, tables, callouts, video, pull quotes, toggles and footnotes.</p>
+          </a>
+        </li>
+        <li>
+          <a class="card entry" href="/long-form-docs/docs-page/">
+            <span class="badge">Docs page</span>
+            <h3>Close several entities at once</h3>
+            <p>A docs article with sidebar nav, table of contents, beta notice, code tabs and a pager.</p>
+          </a>
+        </li>
+        <li>
+          <a class="card entry" href="/long-form-docs/kb-article/">
+            <span class="badge">Knowledge base</span>
+            <h3>Why is my bank feed missing transactions?</h3>
+            <p>A help article with numbered steps and a "Was this helpful?" widget.</p>
+          </a>
+        </li>
+        <li>
+          <a class="card entry" href="/long-form-docs/recipe/">
+            <span class="badge">Recipe</span>
+            <h3>Cast-iron skillet cornbread</h3>
+            <p>Ingredient groups, steps with timers, nutrition and Recipe structured data.</p>
+          </a>
+        </li>
+        <li>
+          <a class="card entry" href="/long-form-docs/legal-policy/">
+            <span class="badge">Policy page</span>
+            <h3>Warranty & returns</h3>
+            <p>Numbered sections and clauses with plain-English summaries and a version history.</p>
+          </a>
+        </li>
+        <li>
+          <a class="card entry" href="/long-form-docs/case-study/">
+            <span class="badge">Case study</span>
+            <h3>How Northbeam closes its books in 3 days</h3>
+            <p>Customer facts, headline metrics, challenge, solution, results and a quote.</p>
+          </a>
+        </li>
+        <li>
+          <a class="card entry" href="/long-form-docs/podcast-episode/">
+            <span class="badge">Podcast episode</span>
+            <h3>Cooking at 3,000 metres</h3>
+            <p>Audio player, show notes, clickable chapters, guests and a transcript.</p>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .intro {
+    padding-bottom: 0;
+  }
+  .entry-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .entry {
+    display: block;
+    height: 100%;
+    padding: 1.5rem;
+    text-decoration: none;
+    transition: border-color 150ms ease, box-shadow 150ms ease;
+  }
+  .entry:hover {
+    border-color: var(--ink-3);
+    box-shadow: var(--shadow);
+  }
+  .entry h3 {
+    margin-top: 0.75rem;
+  }
+  .entry p {
+    margin: 0;
+    color: var(--ink-2);
+    font-size: 0.9375rem;
+  }
+</style>

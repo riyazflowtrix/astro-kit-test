@@ -1,0 +1,417 @@
+<header id="nav-mega-featured-promo" class="nmf" data-variant="full" data-open-on="click">
+  <!-- kit: nav-mega-featured-promo -->
+  <div class="container nmf__bar">
+    <a class="nmf__logo" href="/">
+      <img src="https://picsum.photos/seed/caldera-mark/240/64" alt="Caldera" width="240" height="64" />
+      <span>Caldera</span>
+    </a>
+
+    <nav class="nmf__nav" aria-label="Main">
+      <ul class="nmf__items">
+        <li>
+          <button class="nmf__trigger" type="button" aria-expanded="false" aria-controls="nmf-panel-shop">
+            Shop
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="nmf__panel" id="nmf-panel-shop" hidden>
+            <div class="container nmf__panel-inner">
+              <div class="nmf__columns">
+                <div class="nmf__col">
+                  <h3 class="nmf__col-title">Cookware</h3>
+                  <ul>
+                    <li><a href="/products?type=skillet"><strong>Skillets</strong><span>Cast iron and carbon steel, 8 to 14 inches</span></a></li>
+                    <li><a href="/products/ember-dutch-oven"><strong>Dutch ovens <span class="badge">New</span></strong><span>Enamelled, 3.5 to 7 quarts</span></a></li>
+                    <li><a href="/products/cable-fold"><strong>Grills</strong><span>The Cable Fold and the Ridge grate</span></a></li>
+                  </ul>
+                  <a class="nmf__view-all" href="/products">All cookware →</a>
+                </div>
+                <div class="nmf__col">
+                  <h3 class="nmf__col-title">Camp kitchen</h3>
+                  <ul>
+                    <li><a href="/products/trail-kettle"><strong>Kettles</strong></a></li>
+                    <li><a href="/shop/bundles"><strong>Bundles <span class="badge nmf__badge--sale">Sale</span></strong><span>Save 15% on sets</span></a></li>
+                  </ul>
+                </div>
+                <div class="nmf__col">
+                  <h3 class="nmf__col-title">Care</h3>
+                  <ul>
+                    <li><a href="/products/seasoning-oil"><strong>Seasoning oil</strong></a></li>
+                    <li><a href="/products/chainmail"><strong>Chainmail scrubber</strong></a></li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="nmf__featured">
+                <a class="nmf__card" href="/products/cable-fold">
+                  <img src="https://picsum.photos/seed/caldera-cable-fold/900/700" alt="Cable Fold Grill folded flat beside a backpack" width="900" height="700" loading="lazy" />
+                  <span class="nmf__card-kicker">Bestseller</span>
+                  <strong>Cable Fold Grill</strong>
+                  <span class="nmf__card-price">$189</span>
+                </a>
+                <a class="nmf__card" href="/journal/gift-guide">
+                  <img src="https://picsum.photos/seed/caldera-gift-guide/900/700" alt="Cast iron set wrapped in brown paper on a cabin table" width="900" height="700" loading="lazy" />
+                  <strong>The 2026 gift guide</strong>
+                  <span class="nmf__card-link">Find a gift →</span>
+                </a>
+              </div>
+
+              <aside class="nmf__promo nmf__promo--solid">
+                <h3>Holiday sets ship free</h3>
+                <p>Order by December 18 for delivery before the 24th.</p>
+                <a class="btn btn-primary" href="/shop/bundles">Shop sets</a>
+              </aside>
+            </div>
+          </div>
+        </li>
+        <li>
+          <button class="nmf__trigger" type="button" aria-expanded="false" aria-controls="nmf-panel-learn">
+            Learn
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="nmf__panel" id="nmf-panel-learn" hidden>
+            <div class="container nmf__panel-inner nmf__panel-inner--learn">
+              <div class="nmf__columns">
+                <div class="nmf__col">
+                  <h3 class="nmf__col-title">Cook</h3>
+                  <ul>
+                    <li><a href="/recipes"><strong>Recipes</strong><span>Tested over coals and on the stove</span></a></li>
+                    <li><a href="/journal/cast-iron-care"><strong>Cast iron care</strong></a></li>
+                  </ul>
+                </div>
+              </div>
+              <a class="nmf__promo nmf__promo--cover" href="/journal/fire-lessons-4">
+                <img src="https://picsum.photos/seed/caldera-film-still/900/700" alt="Cook kneeling at a campfire at dusk" width="900" height="700" loading="lazy" />
+                <span>Watch: Fire Lessons, episode 4</span>
+              </a>
+            </div>
+          </div>
+        </li>
+        <li><a class="nmf__link" href="/about">About</a></li>
+      </ul>
+    </nav>
+
+    <a class="btn btn-primary nmf__cta" href="/products/cable-fold">Shop the Fold</a>
+  </div>
+  <div class="nmf__backdrop" hidden></div>
+</header>
+
+<script is:inline>
+  (function () {
+    var root = document.getElementById("nav-mega-featured-promo");
+    if (!root) return;
+    var triggers = Array.prototype.slice.call(root.querySelectorAll(".nmf__trigger"));
+    var backdrop = root.querySelector(".nmf__backdrop");
+    function closeAll() {
+      triggers.forEach(function (t) {
+        t.setAttribute("aria-expanded", "false");
+        document.getElementById(t.getAttribute("aria-controls")).hidden = true;
+      });
+      backdrop.hidden = true;
+    }
+    triggers.forEach(function (t) {
+      t.addEventListener("click", function () {
+        var wasOpen = t.getAttribute("aria-expanded") === "true";
+        closeAll();
+        if (!wasOpen) {
+          t.setAttribute("aria-expanded", "true");
+          document.getElementById(t.getAttribute("aria-controls")).hidden = false;
+          backdrop.hidden = false;
+        }
+      });
+    });
+    backdrop.addEventListener("click", closeAll);
+    root.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") closeAll();
+    });
+    document.addEventListener("click", function (e) {
+      if (!root.contains(e.target)) closeAll();
+    });
+  })();
+</script>
+
+<style>
+  .nmf {
+    position: relative;
+    z-index: 30;
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .nmf__bar {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem 2rem;
+    min-height: 72px;
+  }
+
+  .nmf__logo {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-weight: 700;
+    font-size: 1.125rem;
+    text-decoration: none;
+  }
+
+  .nmf__logo img {
+    width: auto;
+    height: 32px;
+    border-radius: 4px;
+  }
+
+  .nmf__items {
+    display: flex;
+    gap: 0.25rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .nmf__trigger,
+  .nmf__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    min-height: 44px;
+    padding: 0 0.875rem;
+    border: 0;
+    border-radius: var(--radius-sm);
+    background: transparent;
+    font: inherit;
+    font-weight: 500;
+    color: var(--ink-2);
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .nmf__trigger:hover,
+  .nmf__link:hover,
+  .nmf__trigger[aria-expanded="true"] {
+    background: var(--surface);
+    color: var(--ink);
+  }
+
+  .nmf__trigger[aria-expanded="true"] svg {
+    transform: rotate(180deg);
+  }
+
+  .nmf__cta {
+    margin-left: auto;
+  }
+
+  .nmf__panel {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    background: var(--bg);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    box-shadow: 0 24px 40px rgb(0 0 0 / 0.08);
+    z-index: 2;
+  }
+
+  .nmf__panel[hidden],
+  .nmf__backdrop[hidden] {
+    display: none;
+  }
+
+  .nmf__panel-inner {
+    display: grid;
+    grid-template-columns: 1.4fr 1.2fr 0.8fr;
+    gap: 2rem;
+    padding-block: 2rem;
+  }
+
+  .nmf__panel-inner--learn {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .nmf__columns {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .nmf__col-title {
+    margin-bottom: 0.75rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+
+  .nmf__col ul {
+    display: grid;
+    gap: 0.75rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .nmf__col a {
+    display: grid;
+    gap: 0.125rem;
+    text-decoration: none;
+  }
+
+  .nmf__col a strong {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-weight: 600;
+  }
+
+  .nmf__col a span:not(.badge) {
+    font-size: 0.8125rem;
+    color: var(--ink-2);
+  }
+
+  .nmf__col a:hover strong {
+    color: var(--brand);
+  }
+
+  .nmf__badge--sale {
+    background: #fff3d6;
+    color: var(--warning);
+  }
+
+  .nmf__view-all {
+    display: inline-block !important;
+    margin-top: 1rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--brand);
+  }
+
+  .nmf__featured {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .nmf__card {
+    display: grid;
+    gap: 0.25rem;
+    align-content: start;
+    text-decoration: none;
+  }
+
+  .nmf__card img {
+    width: 100%;
+    aspect-ratio: 9 / 7;
+    object-fit: cover;
+    border-radius: var(--radius);
+    margin-bottom: 0.5rem;
+  }
+
+  .nmf__card-kicker {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--brand);
+  }
+
+  .nmf__card-price,
+  .nmf__card-link {
+    font-size: 0.875rem;
+    color: var(--ink-2);
+  }
+
+  .nmf__promo {
+    border-radius: var(--radius);
+  }
+
+  .nmf__promo--solid {
+    padding: 1.5rem;
+    background: var(--dark);
+    color: var(--dark-ink);
+    align-self: start;
+  }
+
+  .nmf__promo--solid h3 {
+    font-size: 1.25rem;
+  }
+
+  .nmf__promo--solid p {
+    font-size: 0.9375rem;
+    color: color-mix(in srgb, var(--dark-ink) 75%, transparent);
+  }
+
+  .nmf__promo--cover {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .nmf__promo--cover img {
+    width: 100%;
+    height: 100%;
+    min-height: 220px;
+    object-fit: cover;
+  }
+
+  .nmf__promo--cover span {
+    position: absolute;
+    inset: auto 0 0 0;
+    padding: 2.5rem 1.25rem 1.25rem;
+    background: linear-gradient(transparent, rgb(0 0 0 / 0.7));
+    font-weight: 600;
+  }
+
+  .nmf__backdrop {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    height: 60vh;
+    background: rgb(20 19 23 / 0.35);
+    z-index: 1;
+  }
+
+  @media (max-width: 960px) {
+    .nmf__panel-inner,
+    .nmf__panel-inner--learn {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .nmf__bar {
+      padding-block: 0.75rem;
+    }
+
+    .nmf__nav {
+      order: 3;
+      flex-basis: 100%;
+    }
+
+    .nmf__items {
+      margin-left: -0.875rem;
+    }
+
+    .nmf__panel {
+      position: static;
+      box-shadow: none;
+      margin-inline: calc(-1 * var(--gutter));
+    }
+
+    .nmf__items {
+      flex-wrap: wrap;
+    }
+
+    .nmf__items > li:has(.nmf__panel:not([hidden])) {
+      flex-basis: 100%;
+    }
+
+    .nmf__featured {
+      grid-template-columns: 1fr;
+    }
+
+    .nmf__backdrop {
+      display: none;
+    }
+  }
+</style>

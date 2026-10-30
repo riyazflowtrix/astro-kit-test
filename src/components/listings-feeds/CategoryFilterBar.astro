@@ -1,0 +1,51 @@
+<section id="category-filter-bar" class="section filter-bar">
+  <!-- kit: category-filter-bar -->
+  <div class="container">
+    <nav class="filter-bar__nav" aria-label="Filter stories by topic" data-target="stories" data-param="topic">
+      <ul class="filter-bar__list" role="list">
+        <li><a href="/journal#stories" class="filter-bar__pill" aria-current="true" data-topic="">All stories</a></li>
+        <li><a href="/journal?topic=cast-iron#stories" class="filter-bar__pill" data-topic="cast-iron">Cast iron</a></li>
+        <li><a href="/journal?topic=camp#stories" class="filter-bar__pill" data-topic="camp">Camp</a></li>
+        <li><a href="/journal?topic=recipes#stories" class="filter-bar__pill" data-topic="recipes">Recipes</a></li>
+        <li><a href="/journal?topic=trips#stories" class="filter-bar__pill" data-topic="trips">Trips</a></li>
+        <li><a href="/journal?topic=care#stories" class="filter-bar__pill" data-topic="care">Care</a></li>
+      </ul>
+    </nav>
+  </div>
+</section>
+
+<script>
+  const root = document.getElementById("category-filter-bar");
+  if (root) {
+    const nav = root.querySelector<HTMLElement>(".filter-bar__nav");
+    const pills = root.querySelectorAll<HTMLAnchorElement>(".filter-bar__pill");
+    pills.forEach((pill) => pill.addEventListener("click", (e) => {
+      e.preventDefault();
+      const topic = pill.dataset.topic ?? "";
+      pills.forEach((p) => {
+        if (p === pill) p.setAttribute("aria-current", "true");
+        else p.removeAttribute("aria-current");
+      });
+      const url = new URL(window.location.href);
+      if (topic) url.searchParams.set(nav?.dataset.param ?? "topic", topic);
+      else url.searchParams.delete(nav?.dataset.param ?? "topic");
+      window.history.replaceState(null, "", url);
+      // Filter the list this bar targets, if it is on the page.
+      const list = document.getElementById(nav?.dataset.target ?? "");
+      list?.querySelectorAll<HTMLElement>("article").forEach((card) => {
+        const label = card.querySelector(".badge")?.textContent?.trim().toLowerCase().replace(/\s+/g, "-") ?? "";
+        card.hidden = topic !== "" && label !== topic;
+      });
+    }));
+  }
+</script>
+
+<style>
+  .filter-bar { position: relative; padding-block: 1.25rem; border-block: 1px solid var(--line); background: color-mix(in srgb, var(--bg) 94%, transparent); }
+  .filter-bar__list { list-style: none; margin: 0; padding: 0; display: flex; gap: 0.5rem; justify-content: flex-start; overflow-x: auto; scrollbar-width: none; scroll-snap-type: x proximity; }
+  .filter-bar__list::-webkit-scrollbar { display: none; }
+  .filter-bar__list li { flex: none; scroll-snap-align: start; }
+  .filter-bar__pill { display: inline-flex; align-items: center; min-height: 40px; padding: 0 1rem; border: 1px solid var(--line); border-radius: 999px; font-size: 0.9375rem; font-weight: 500; text-decoration: none; white-space: nowrap; transition: background-color 150ms ease, border-color 150ms ease; }
+  .filter-bar__pill:hover { border-color: var(--ink-3); }
+  .filter-bar__pill[aria-current="true"] { background: var(--ink); border-color: var(--ink); color: var(--bg); }
+</style>

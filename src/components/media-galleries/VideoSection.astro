@@ -1,0 +1,151 @@
+---
+// Video section (variant: split, source: hosted) — Caldera foundry film.
+---
+
+<section id="video-section" class="section section--dark video-section" data-variant="split">
+  <!-- kit: video-section -->
+  <div class="container split">
+    <div class="copy">
+      <span class="eyebrow">The film</span>
+      <h2>How we pour a skillet: a day at the Bend foundry</h2>
+      <p class="lead">Follow one Ridge Skillet from scrap iron to seasoned pan — the pour, the machining and the three-coat seasoning.</p>
+
+      <h3 class="chapters-title">Chapters</h3>
+      <ol class="chapters">
+        <li><button type="button" data-start="0"><span class="time">0:00</span> Scrap iron in</button></li>
+        <li><button type="button" data-start="72"><span class="time">1:12</span> Making the sand moulds</button></li>
+        <li><button type="button" data-start="160"><span class="time">2:40</span> The pour at 2,600°F</button></li>
+        <li><button type="button" data-start="245"><span class="time">4:05</span> Machining the surface</button></li>
+        <li><button type="button" data-start="330"><span class="time">5:30</span> Three coats of seasoning</button></li>
+      </ol>
+
+      <div class="btn-row">
+        <a class="btn btn-primary" href="/products/ridge-skillet">Shop the Ridge Skillet</a>
+      </div>
+    </div>
+
+    <div class="media">
+      <div class="frame">
+        <video controls preload="none" playsinline poster="https://picsum.photos/seed/caldera-foundry-film-poster/1920/1080" width="3840" height="2160" aria-label="How we pour a skillet: a day at the Bend foundry">
+          <source src="https://cdn.caldera.co/film/foundry-day-1080p.mp4" type="video/mp4" />
+          <track kind="captions" srclang="en" label="English" src="https://cdn.caldera.co/film/foundry-day.en.vtt" default />
+          <track kind="subtitles" srclang="es" label="Español" src="https://cdn.caldera.co/film/foundry-day.es.vtt" />
+          <img src="https://picsum.photos/seed/caldera-foundry-film-poster/1920/1080" alt="Caster in a leather apron pouring molten iron" width="3840" height="2160" />
+        </video>
+      </div>
+      <p class="meta"><span>6:48</span> · <time datetime="2026-03-02">2 March 2026</time> · Captions in English and Español</p>
+      <details class="transcript">
+        <summary>Read the transcript</summary>
+        <div class="transcript-body">
+          <p><strong>Ana Ruiz:</strong> Every pan starts as something else — an engine block, a radiator, a fence post. We melt it down at about 2,600 degrees…</p>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<style>
+  .split {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: start;
+  }
+  .copy h2 {
+    color: var(--dark-ink);
+  }
+  .chapters-title {
+    margin-top: 2rem;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: color-mix(in srgb, var(--dark-ink) 60%, transparent);
+  }
+  .chapters {
+    list-style: none;
+    margin: 0 0 2rem;
+    padding: 0;
+    border-top: 1px solid rgb(255 255 255 / 0.12);
+  }
+  .chapters li {
+    border-bottom: 1px solid rgb(255 255 255 / 0.12);
+  }
+  .chapters button {
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+    min-height: 44px;
+    padding: 0.625rem 0;
+    border: 0;
+    background: none;
+    color: var(--dark-ink);
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+  }
+  .chapters button:hover {
+    color: #fff;
+  }
+  .time {
+    min-width: 3rem;
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    color: var(--brand);
+    padding-top: 0.1rem;
+  }
+  .frame {
+    overflow: hidden;
+    border-radius: var(--radius);
+    background: #000;
+    aspect-ratio: 16 / 9;
+  }
+  .frame video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .meta {
+    margin: 0.75rem 0 1rem;
+    font-size: 0.875rem;
+    color: color-mix(in srgb, var(--dark-ink) 65%, transparent);
+  }
+  .transcript {
+    border: 1px solid rgb(255 255 255 / 0.14);
+    border-radius: var(--radius-sm);
+    padding: 0 1rem;
+  }
+  .transcript summary {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .transcript-body {
+    padding-bottom: 0.5rem;
+    color: color-mix(in srgb, var(--dark-ink) 80%, transparent);
+  }
+  @media (max-width: 860px) {
+    .split {
+      grid-template-columns: 1fr;
+    }
+    .media {
+      order: -1;
+    }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    var root = document.getElementById("video-section");
+    if (!root) return;
+    var video = root.querySelector("video");
+    root.querySelectorAll("[data-start]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        video.currentTime = Number(btn.getAttribute("data-start")) || 0;
+        var p = video.play();
+        if (p && p.catch) p.catch(function () {});
+      });
+    });
+  })();
+</script>

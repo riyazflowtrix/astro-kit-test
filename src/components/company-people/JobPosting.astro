@@ -1,0 +1,194 @@
+---
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "JobPosting",
+  title: "Foundry Technician (Finishing)",
+  description:
+    "Turn rough castings into pans people keep for fifty years. You'll own grinding, machining and the first seasoning coat, and within a year you'll train the next technician.",
+  datePosted: "2026-10-01",
+  validThrough: "2026-11-30",
+  employmentType: "FULL_TIME",
+  hiringOrganization: { "@type": "Organization", name: "Caldera Cookware", sameAs: "https://caldera.co" },
+  jobLocation: {
+    "@type": "Place",
+    address: { "@type": "PostalAddress", addressLocality: "Bend", addressRegion: "OR", addressCountry: "US" },
+  },
+  baseSalary: {
+    "@type": "MonetaryAmount",
+    currency: "USD",
+    value: { "@type": "QuantitativeValue", minValue: 52000, maxValue: 61000, unitText: "YEAR" },
+  },
+};
+---
+
+<section id="job-posting" class="section job-posting">
+  <!-- kit: job-posting -->
+  <div class="container">
+    <nav class="jp-crumbs" aria-label="Breadcrumb">
+      <a href="/company-people/#careers-list">Careers</a> <span aria-hidden="true">/</span> <span>Workshop</span>
+    </nav>
+
+    <div class="jp">
+      <article class="jp-main">
+        <header class="jp-head">
+          <span class="badge jp-status">Open</span>
+          <h1>Foundry Technician (Finishing)</h1>
+          <p class="lead">Turn rough castings into pans people keep for fifty years. You'll own grinding, machining and the first seasoning coat, and within a year you'll train the next technician.</p>
+          <a class="btn btn-primary" href="#jp-apply">Apply for this role</a>
+        </header>
+
+        <section class="jp-block" aria-labelledby="jp-about">
+          <h2 id="jp-about">About the role</h2>
+          <p>Every Caldera pan passes through finishing: grinding the cooking surface smooth, machining the base flat and baking on the first coat of seasoning. It's skilled, physical work in a small team that cares about every pan.</p>
+        </section>
+
+        <section class="jp-block" aria-labelledby="jp-resp">
+          <h2 id="jp-resp">What you'll do</h2>
+          <ul>
+            <li>Grind and polish cooking surfaces to a 0.2 mm tolerance</li>
+            <li>Run the CNC lathe for base flattening</li>
+            <li>Apply and bake the first seasoning coat</li>
+            <li>Inspect every pan and log defects</li>
+            <li>Keep the finishing bay safe and clean</li>
+          </ul>
+        </section>
+
+        <section class="jp-block" aria-labelledby="jp-req">
+          <h2 id="jp-req">What you'll bring</h2>
+          <ul>
+            <li>Two years in a machine shop, foundry or fabrication</li>
+            <li>Comfortable lifting 25 kg repeatedly</li>
+            <li>Able to work 7am–3:30pm, Monday to Friday</li>
+          </ul>
+        </section>
+
+        <section class="jp-block" aria-labelledby="jp-bonus">
+          <h2 id="jp-bonus">Bonus points</h2>
+          <ul>
+            <li>CNC lathe experience</li>
+            <li>You cook with cast iron at home</li>
+          </ul>
+        </section>
+
+        <section class="jp-block" aria-labelledby="jp-benefits">
+          <h2 id="jp-benefits">Benefits</h2>
+          <ul class="jp-benefits">
+            <li><strong>Gear allowance</strong> — $600 a year on Caldera gear for you or your family</li>
+            <li><strong>Four-day weeks in summer</strong> — June through August, foundry included</li>
+            <li><strong>Fully paid health cover</strong> — for you and dependants</li>
+            <li><strong>Two paid camping trips</strong> — product testing counts as work</li>
+          </ul>
+        </section>
+
+        <section class="jp-block jp-apply" id="jp-apply" aria-labelledby="jp-apply-title">
+          <h2 id="jp-apply-title">Apply for this role</h2>
+          <p>We read every application and reply within a week, whatever the answer.</p>
+          <form class="jp-form" action="#" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="job" value="foundry-technician-finishing" />
+            <div class="jp-form-row">
+              <div class="field">
+                <label for="jp-name">Full name</label>
+                <input id="jp-name" name="name" type="text" autocomplete="name" required />
+              </div>
+              <div class="field">
+                <label for="jp-email">Email</label>
+                <input id="jp-email" name="email" type="email" autocomplete="email" required />
+              </div>
+            </div>
+            <div class="jp-form-row">
+              <div class="field">
+                <label for="jp-phone">Phone</label>
+                <input id="jp-phone" name="phone" type="tel" autocomplete="tel" />
+              </div>
+              <div class="field">
+                <label for="jp-link">LinkedIn or portfolio (optional)</label>
+                <input id="jp-link" name="link" type="url" placeholder="https://" />
+              </div>
+            </div>
+            <div class="field">
+              <label for="jp-resume">Résumé (PDF or Word)</label>
+              <input id="jp-resume" name="resume" type="file" accept=".pdf,.doc,.docx" required />
+            </div>
+            <div class="field">
+              <label for="jp-note">Anything else we should know?</label>
+              <textarea id="jp-note" name="note" rows="5"></textarea>
+            </div>
+            <div class="jp-consent">
+              <input id="jp-consent" name="consent" type="checkbox" required />
+              <label for="jp-consent">I agree to Caldera keeping my application for 12 months.</label>
+            </div>
+            <button class="btn btn-primary" type="submit">Apply for this role</button>
+          </form>
+        </section>
+      </article>
+
+      <aside class="jp-aside" aria-label="Role details">
+        <div class="jp-card">
+          <dl class="jp-facts">
+            <div><dt>Department</dt><dd>Workshop</dd></div>
+            <div><dt>Employment</dt><dd>Full-time</dd></div>
+            <div><dt>Workplace</dt><dd>On-site</dd></div>
+            <div><dt>Location</dt><dd>Bend Foundry, Bend, Oregon</dd></div>
+            <div><dt>Salary</dt><dd>$52,000–$61,000 USD per year</dd></div>
+            <div><dt>Apply by</dt><dd><time datetime="2026-11-30">30 November 2026</time></dd></div>
+          </dl>
+          <div class="jp-manager">
+            <img src="https://i.pravatar.cc/192?img=12" alt="Luis Ortega" width="96" height="96" loading="lazy" />
+            <span><span class="jp-manager-label">Hiring manager</span><strong>Luis Ortega</strong><span>Co-founder &amp; head of workshop</span></span>
+          </div>
+          <a class="btn btn-primary jp-aside-btn" href="#jp-apply">Apply for this role</a>
+        </div>
+      </aside>
+    </div>
+  </div>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+</section>
+
+<style>
+  .jp-crumbs { font-size: 0.875rem; color: var(--ink-3); margin-bottom: 1.5rem; }
+  .jp-crumbs a { color: var(--ink-2); }
+  .jp {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 320px;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: start;
+  }
+  .jp-head { padding-bottom: 2rem; border-bottom: 1px solid var(--line); margin-bottom: 2rem; }
+  .jp-head h1 { font-size: clamp(2rem, 4.5vw, 3rem); margin-top: 0.75rem; }
+  .jp-status { background: color-mix(in srgb, var(--success) 14%, transparent); color: var(--success); }
+  .jp-block { margin-bottom: 2.25rem; }
+  .jp-block h2 { font-size: 1.375rem; }
+  .jp-block p, .jp-block li { color: var(--ink-2); }
+  .jp-block ul { padding-left: 1.25rem; margin: 0; display: grid; gap: 0.375rem; }
+  .jp-benefits strong { color: var(--ink); }
+  .jp-apply {
+    padding: clamp(1.25rem, 4vw, 2rem);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+    scroll-margin-top: 1.5rem;
+  }
+  .jp-form { display: grid; gap: 1rem; }
+  .jp-form-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+  .jp-form input[type="file"] { padding: 0.5rem; }
+  .jp-consent { display: flex; gap: 0.625rem; align-items: flex-start; font-size: 0.875rem; }
+  .jp-consent input { margin-top: 0.3rem; width: 18px; height: 18px; flex: none; }
+  .jp-form .btn { justify-self: start; }
+  .jp-aside { position: sticky; top: 1.5rem; }
+  .jp-card { padding: 1.5rem; border: 1px solid var(--line); border-radius: var(--radius-lg); background: var(--bg); }
+  .jp-facts { margin: 0 0 1.25rem; display: grid; gap: 0.75rem; }
+  .jp-facts dt { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-3); }
+  .jp-facts dd { margin: 0; font-weight: 500; }
+  .jp-manager { display: flex; gap: 0.75rem; align-items: center; padding-top: 1.25rem; border-top: 1px solid var(--line); margin-bottom: 1.25rem; }
+  .jp-manager img { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; }
+  .jp-manager > span { display: grid; line-height: 1.3; font-size: 0.875rem; }
+  .jp-manager > span span { color: var(--ink-2); }
+  .jp-manager .jp-manager-label { font-size: 0.75rem; color: var(--ink-3); }
+  .jp-aside-btn { width: 100%; }
+  @media (max-width: 900px) {
+    .jp { grid-template-columns: 1fr; }
+    .jp-aside { position: static; }
+  }
+  @media (max-width: 560px) {
+    .jp-form-row { grid-template-columns: 1fr; }
+  }
+</style>

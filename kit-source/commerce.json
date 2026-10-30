@@ -1,0 +1,4508 @@
+[
+ {
+  "id": "commerce-product-grid-query",
+  "name": "Product grid (query)",
+  "category": "Commerce",
+  "kind": "block",
+  "brand": "Caldera",
+  "previewLayout": "grid-4",
+  "proves": "A saved query (collection \u00b7 filters \u00b7 sort \u00b7 limit) vs hand-picked products \u00b7 per-breakpoint columns \u00b7 card display toggles",
+  "schema": {
+   "name": "productGrid",
+   "title": "Product grid",
+   "kind": "block",
+   "icon": "grid-dots",
+   "category": "Commerce",
+   "description": "Products from a live query or picked by hand",
+   "variants": [
+    {
+     "id": "grid",
+     "name": "Grid",
+     "description": "Rows of cards"
+    },
+    {
+     "id": "carousel",
+     "name": "Carousel",
+     "description": "One scrolling row with a peek"
+    }
+   ],
+   "preview": {
+    "title": "heading",
+    "subtitle": "eyebrow",
+    "icon": "layout-grid"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "products",
+     "title": "Products"
+    },
+    {
+     "name": "design",
+     "title": "Design"
+    }
+   ],
+   "fieldsets": [
+    {
+     "name": "card",
+     "title": "Card",
+     "description": "What each product card shows."
+    },
+    {
+     "name": "columns",
+     "title": "Columns"
+    }
+   ],
+   "fields": [
+    {
+     "name": "eyebrow",
+     "title": "Eyebrow",
+     "type": "string",
+     "validation": {
+      "max": 40
+     }
+    },
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "validation": {
+      "required": true,
+      "recommendedMax": 48
+     },
+     "ai": true,
+     "localized": true
+    },
+    {
+     "name": "intro",
+     "title": "Intro",
+     "type": "text",
+     "rows": 2,
+     "validation": {
+      "recommendedMax": 160
+     },
+     "ai": true
+    },
+    {
+     "name": "source",
+     "title": "Products come from",
+     "type": "select",
+     "group": "products",
+     "layout": "segmented",
+     "initialValue": "query",
+     "options": [
+      {
+       "value": "query",
+       "label": "A query",
+       "description": "Updates on its own as products change"
+      },
+      {
+       "value": "manual",
+       "label": "Picked by hand",
+       "description": "A fixed list in your order"
+      }
+     ]
+    },
+    {
+     "name": "query",
+     "title": "Query",
+     "type": "object",
+     "icon": "filter",
+     "group": "products",
+     "hidden": {
+      "field": "source",
+      "equals": "query"
+     },
+     "description": "Re-runs on every publish and when stock changes.",
+     "fields": [
+      {
+       "name": "collection",
+       "title": "Collection",
+       "type": "reference",
+       "reference": {
+        "to": [
+         "collection"
+        ],
+        "filter": "singular == 'Product'"
+       },
+       "validation": {
+        "required": true
+       }
+      },
+      {
+       "name": "filters",
+       "title": "Filters",
+       "type": "array",
+       "itemNoun": "filter",
+       "openMode": "inline",
+       "validation": {
+        "max": 4
+       },
+       "description": "Every filter must match. Leave empty to show the whole collection.",
+       "of": [
+        {
+         "name": "filter",
+         "title": "Filter",
+         "type": "object",
+         "icon": "filter",
+         "preview": {
+          "title": "field",
+          "subtitle": "value",
+          "fallback": "Untitled filter"
+         },
+         "fields": [
+          {
+           "name": "field",
+           "title": "Field",
+           "type": "select",
+           "validation": {
+            "required": true
+           },
+           "options": [
+            {
+             "value": "material",
+             "label": "Material"
+            },
+            {
+             "value": "tags",
+             "label": "Tag"
+            },
+            {
+             "value": "productType",
+             "label": "Product type"
+            },
+            {
+             "value": "price",
+             "label": "Price"
+            },
+            {
+             "value": "rating",
+             "label": "Rating"
+            },
+            {
+             "value": "createdAt",
+             "label": "Date added"
+            }
+           ]
+          },
+          {
+           "name": "operator",
+           "title": "Condition",
+           "type": "select",
+           "initialValue": "eq",
+           "options": [
+            {
+             "value": "eq",
+             "label": "Is"
+            },
+            {
+             "value": "neq",
+             "label": "Is not"
+            },
+            {
+             "value": "contains",
+             "label": "Contains"
+            },
+            {
+             "value": "gte",
+             "label": "Is at least"
+            },
+            {
+             "value": "lte",
+             "label": "Is at most"
+            },
+            {
+             "value": "within",
+             "label": "In the last N days"
+            }
+           ]
+          },
+          {
+           "name": "value",
+           "title": "Value",
+           "type": "string",
+           "validation": {
+            "required": true,
+            "max": 48
+           },
+           "description": "Matches exactly. Prices in dollars, dates in days."
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "name": "sort",
+       "title": "Sort by",
+       "type": "select",
+       "initialValue": "bestselling",
+       "options": [
+        {
+         "value": "bestselling",
+         "label": "Best selling",
+         "description": "Shopify sales, last 30 days"
+        },
+        {
+         "value": "newest",
+         "label": "Newest first"
+        },
+        {
+         "value": "price-asc",
+         "label": "Price, low to high"
+        },
+        {
+         "value": "price-desc",
+         "label": "Price, high to low"
+        },
+        {
+         "value": "rating",
+         "label": "Highest rated"
+        },
+        {
+         "value": "collection",
+         "label": "Collection order",
+         "description": "The order set in Content \u203a Products"
+        }
+       ]
+      },
+      {
+       "name": "limit",
+       "title": "How many",
+       "type": "number",
+       "initialValue": 8,
+       "numeric": {
+        "min": 1,
+        "max": 24,
+        "step": 1,
+        "unit": "products"
+       },
+       "validation": {
+        "required": true,
+        "min": 1,
+        "max": 24
+       }
+      },
+      {
+       "name": "hideSoldOut",
+       "title": "Hide sold-out products",
+       "type": "boolean",
+       "initialValue": true
+      },
+      {
+       "name": "excludeCurrent",
+       "title": "Leave out this page",
+       "type": "boolean",
+       "initialValue": true
+      }
+     ]
+    },
+    {
+     "name": "products",
+     "title": "Products",
+     "type": "array",
+     "group": "products",
+     "hidden": {
+      "field": "source",
+      "equals": "manual"
+     },
+     "validation": {
+      "min": 1,
+      "max": 12
+     },
+     "of": [
+      {
+       "name": "product",
+       "title": "Product",
+       "type": "reference",
+       "reference": {
+        "to": [
+         "col_products"
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "name": "viewAllButton",
+     "title": "View all button",
+     "type": "button",
+     "description": "Leave empty to hide it."
+    },
+    {
+     "name": "showPrice",
+     "title": "Price",
+     "type": "boolean",
+     "group": "design",
+     "fieldset": "card",
+     "initialValue": true
+    },
+    {
+     "name": "showRating",
+     "title": "Show rating",
+     "type": "boolean",
+     "group": "design",
+     "fieldset": "card",
+     "initialValue": true,
+     "description": "Hidden for products with fewer than 3 reviews."
+    },
+    {
+     "name": "showSwatches",
+     "title": "Color swatches",
+     "type": "boolean",
+     "group": "design",
+     "fieldset": "card"
+    },
+    {
+     "name": "showQuickAdd",
+     "title": "Show quick add",
+     "type": "boolean",
+     "group": "design",
+     "fieldset": "card"
+    },
+    {
+     "name": "imageRatio",
+     "title": "Image shape",
+     "type": "select",
+     "group": "design",
+     "fieldset": "card",
+     "layout": "segmented",
+     "initialValue": "4:5",
+     "options": [
+      {
+       "value": "1:1",
+       "label": "Square"
+      },
+      {
+       "value": "4:5",
+       "label": "Portrait"
+      },
+      {
+       "value": "4:3",
+       "label": "Landscape"
+      }
+     ]
+    },
+    {
+     "name": "columnsDesktop",
+     "title": "Desktop",
+     "type": "number",
+     "group": "design",
+     "fieldset": "columns",
+     "layout": "slider",
+     "initialValue": 4,
+     "numeric": {
+      "min": 2,
+      "max": 5,
+      "step": 1
+     }
+    },
+    {
+     "name": "columnsMobile",
+     "title": "Phone",
+     "type": "select",
+     "group": "design",
+     "fieldset": "columns",
+     "layout": "segmented",
+     "initialValue": "2",
+     "options": [
+      {
+       "value": "1",
+       "label": "1"
+      },
+      {
+       "value": "2",
+       "label": "2"
+      }
+     ]
+    },
+    {
+     "name": "theme",
+     "title": "Theme",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "light",
+     "options": [
+      {
+       "value": "light",
+       "label": "Light"
+      },
+      {
+       "value": "dark",
+       "label": "Dark"
+      },
+      {
+       "value": "brand",
+       "label": "Brand"
+      }
+     ]
+    }
+   ]
+  },
+  "value": {
+   "_variant": "grid",
+   "eyebrow": "Built for the fire",
+   "heading": "Cast iron, best sellers first",
+   "intro": "Pre-seasoned in Bend, Oregon and backed by a lifetime warranty.",
+   "source": "query",
+   "query": {
+    "collection": "col_products",
+    "filters": [
+     {
+      "_key": "f1",
+      "field": "material",
+      "operator": "eq",
+      "value": "Cast iron"
+     },
+     {
+      "_key": "f2",
+      "field": "price",
+      "operator": "lte",
+      "value": "200"
+     }
+    ],
+    "sort": "bestselling",
+    "limit": 8,
+    "hideSoldOut": true,
+    "excludeCurrent": true
+   },
+   "products": [
+    "en_p2",
+    "en_p3",
+    "en_p1"
+   ],
+   "viewAllButton": {
+    "label": "Shop all cast iron",
+    "href": "/collections/cast-iron",
+    "type": "page",
+    "style": "outline",
+    "arrow": true
+   },
+   "showPrice": true,
+   "showRating": true,
+   "showSwatches": true,
+   "showQuickAdd": false,
+   "imageRatio": "4:5",
+   "columnsDesktop": 4,
+   "columnsMobile": "2",
+   "theme": "light"
+  }
+ },
+ {
+  "id": "commerce-product-detail",
+  "name": "Product detail page",
+  "category": "Commerce",
+  "kind": "entry",
+  "brand": "Caldera",
+  "previewLayout": "split",
+  "proves": "A Products ENTRY (not a block): Shopify-synced vs native commerce \u00b7 polymorphic gallery tied to options \u00b7 options \u2192 variants matrix \u00b7 grouped specs \u00b7 policy accordions",
+  "schema": {
+   "name": "product",
+   "title": "Product",
+   "kind": "entry",
+   "icon": "package",
+   "category": "Commerce",
+   "description": "One product page: story, gallery, options, specs and policies",
+   "preview": {
+    "title": "title",
+    "subtitle": "tagline",
+    "media": "gallery.0.image"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Story",
+     "default": true
+    },
+    {
+     "name": "media",
+     "title": "Gallery"
+    },
+    {
+     "name": "commerce",
+     "title": "Options & price"
+    },
+    {
+     "name": "details",
+     "title": "Specs & care"
+    },
+    {
+     "name": "policies",
+     "title": "Shipping & returns"
+    }
+   ],
+   "fieldsets": [
+    {
+     "name": "price",
+     "title": "Price",
+     "columns": 2
+    },
+    {
+     "name": "stock",
+     "title": "Stock",
+     "columns": 2
+    }
+   ],
+   "fields": [
+    {
+     "name": "title",
+     "title": "Product name",
+     "type": "string",
+     "validation": {
+      "required": true,
+      "max": 70
+     },
+     "localized": true,
+     "description": ""
+    },
+    {
+     "name": "slug",
+     "title": "URL",
+     "type": "slug",
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "tagline",
+     "title": "Tagline",
+     "type": "string",
+     "validation": {
+      "recommendedMax": 80
+     },
+     "ai": true,
+     "localized": true
+    },
+    {
+     "name": "description",
+     "title": "Description",
+     "type": "richtext",
+     "ai": true,
+     "localized": true
+    },
+    {
+     "name": "badges",
+     "title": "Badges",
+     "type": "multiselect",
+     "layout": "checkbox",
+     "options": [
+      {
+       "value": "new",
+       "label": "New"
+      },
+      {
+       "value": "bestseller",
+       "label": "Best seller"
+      },
+      {
+       "value": "limited",
+       "label": "Limited run"
+      },
+      {
+       "value": "made-usa",
+       "label": "Made in USA"
+      }
+     ],
+     "description": "Also shown on product cards everywhere."
+    },
+    {
+     "name": "source",
+     "title": "Price and stock come from",
+     "type": "select",
+     "group": "commerce",
+     "layout": "segmented",
+     "initialValue": "shopify",
+     "options": [
+      {
+       "value": "shopify",
+       "label": "Shopify",
+       "description": "Synced every few minutes, read-only here"
+      },
+      {
+       "value": "native",
+       "label": "BetterCMS",
+       "description": "You manage price, options and stock here"
+      }
+     ]
+    },
+    {
+     "name": "shopifyProduct",
+     "title": "Shopify product",
+     "type": "reference",
+     "group": "commerce",
+     "reference": {
+      "to": [
+       "shopify"
+      ]
+     },
+     "hidden": {
+      "field": "source",
+      "equals": "shopify"
+     },
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "price",
+     "title": "Price",
+     "type": "number",
+     "group": "commerce",
+     "fieldset": "price",
+     "numeric": {
+      "unit": "USD",
+      "min": 0,
+      "step": 0.01
+     },
+     "hidden": {
+      "field": "source",
+      "equals": "native"
+     },
+     "validation": {
+      "required": true,
+      "min": 0
+     },
+     "description": "A variant can override it."
+    },
+    {
+     "name": "compareAt",
+     "title": "Compare-at price",
+     "type": "number",
+     "group": "commerce",
+     "fieldset": "price",
+     "numeric": {
+      "unit": "USD",
+      "min": 0,
+      "step": 0.01
+     },
+     "hidden": {
+      "field": "source",
+      "equals": "native"
+     },
+     "description": "Must be higher than the price."
+    },
+    {
+     "name": "options",
+     "title": "Options",
+     "type": "array",
+     "group": "commerce",
+     "itemNoun": "option",
+     "hidden": {
+      "field": "source",
+      "equals": "native"
+     },
+     "validation": {
+      "max": 3
+     },
+     "description": "Up to 3. Each combination becomes a variant.",
+     "of": [
+      {
+       "name": "option",
+       "title": "Option",
+       "type": "object",
+       "icon": "adjustments",
+       "preview": {
+        "title": "name",
+        "fallback": "Untitled option"
+       },
+       "fields": [
+        {
+         "name": "name",
+         "title": "Option name",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 20
+         },
+         "placeholder": "Color"
+        },
+        {
+         "name": "display",
+         "title": "Show as",
+         "type": "select",
+         "layout": "segmented",
+         "initialValue": "buttons",
+         "options": [
+          {
+           "value": "buttons",
+           "label": "Buttons"
+          },
+          {
+           "value": "swatches",
+           "label": "Swatches"
+          },
+          {
+           "value": "dropdown",
+           "label": "Dropdown"
+          }
+         ]
+        },
+        {
+         "name": "values",
+         "title": "Values",
+         "type": "array",
+         "itemNoun": "value",
+         "validation": {
+          "min": 1,
+          "max": 12
+         },
+         "of": [
+          {
+           "name": "optionValue",
+           "title": "Value",
+           "type": "object",
+           "icon": "point",
+           "preview": {
+            "title": "label",
+            "media": "image",
+            "fallback": "Untitled value"
+           },
+           "fields": [
+            {
+             "name": "label",
+             "title": "Label",
+             "type": "string",
+             "validation": {
+              "required": true,
+              "max": 24
+             }
+            },
+            {
+             "name": "swatch",
+             "title": "Swatch color",
+             "type": "color"
+            },
+            {
+             "name": "image",
+             "title": "Image",
+             "type": "image"
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "variants",
+     "title": "Variants",
+     "type": "array",
+     "group": "commerce",
+     "itemNoun": "variant",
+     "hidden": {
+      "field": "source",
+      "equals": "native"
+     },
+     "validation": {
+      "max": 100
+     },
+     "helpMore": "Option values exactly as above, joined with \" / \", like \"5.5 qt / Ember red\".",
+     "of": [
+      {
+       "name": "variant",
+       "title": "Variant",
+       "type": "object",
+       "icon": "box",
+       "preview": {
+        "title": "combination",
+        "subtitle": "sku",
+        "fallback": "Untitled variant"
+       },
+       "fields": [
+        {
+         "name": "combination",
+         "title": "Combination",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 60
+         },
+         "placeholder": "5.5 qt / Ember red"
+        },
+        {
+         "name": "sku",
+         "title": "SKU",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "pattern": "^[A-Z0-9-]{3,24}$",
+          "patternMessage": "Use capital letters, numbers and hyphens, like CF-12.",
+          "unique": true
+         }
+        },
+        {
+         "name": "price",
+         "title": "Price override",
+         "type": "number",
+         "numeric": {
+          "unit": "USD",
+          "min": 0,
+          "step": 0.01
+         },
+         "description": "Leave empty to use the product price."
+        },
+        {
+         "name": "inventory",
+         "title": "In stock",
+         "type": "number",
+         "numeric": {
+          "min": 0,
+          "step": 1,
+          "unit": "units"
+         }
+        },
+        {
+         "name": "weight",
+         "title": "Shipping weight",
+         "type": "number",
+         "numeric": {
+          "min": 0,
+          "step": 0.1,
+          "unit": "lb"
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "inventoryPolicy",
+     "title": "When it sells out",
+     "type": "select",
+     "group": "commerce",
+     "fieldset": "stock",
+     "initialValue": "deny",
+     "options": [
+      {
+       "value": "deny",
+       "label": "Stop selling"
+      },
+      {
+       "value": "preorder",
+       "label": "Take pre-orders",
+       "description": "Shows the restock date below"
+      },
+      {
+       "value": "notify",
+       "label": "Collect back-in-stock emails"
+      }
+     ]
+    },
+    {
+     "name": "restockDate",
+     "title": "Back in stock",
+     "type": "date",
+     "group": "commerce",
+     "fieldset": "stock",
+     "hidden": {
+      "field": "inventoryPolicy",
+      "equals": "preorder"
+     }
+    },
+    {
+     "name": "lowStockAt",
+     "title": "Low-stock warning at",
+     "type": "number",
+     "group": "commerce",
+     "numeric": {
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "units"
+     },
+     "description": "0 turns it off."
+    },
+    {
+     "name": "gallery",
+     "title": "Gallery",
+     "type": "array",
+     "group": "media",
+     "arrayLayout": "grid",
+     "itemNoun": "media",
+     "validation": {
+      "min": 1,
+      "max": 16
+     },
+     "description": "The first item is the main image on cards and in shared links.",
+     "of": [
+      {
+       "name": "galleryImage",
+       "title": "Image",
+       "type": "object",
+       "icon": "photo",
+       "preview": {
+        "title": "image.alt",
+        "media": "image",
+        "fallback": "Untitled image"
+       },
+       "fields": [
+        {
+         "name": "image",
+         "title": "Image",
+         "type": "image",
+         "validation": {
+          "required": true
+         }
+        },
+        {
+         "name": "forValues",
+         "title": "Show for",
+         "type": "tags",
+         "description": "Leave empty for every variant."
+        }
+       ]
+      },
+      {
+       "name": "galleryVideo",
+       "title": "Video",
+       "type": "object",
+       "icon": "player-play",
+       "preview": {
+        "title": "caption",
+        "media": "poster",
+        "fallback": "Untitled video"
+       },
+       "fields": [
+        {
+         "name": "video",
+         "title": "Video",
+         "type": "video",
+         "validation": {
+          "required": true
+         }
+        },
+        {
+         "name": "poster",
+         "title": "Poster",
+         "type": "image",
+         "validation": {
+          "required": true
+         }
+        },
+        {
+         "name": "caption",
+         "title": "Caption",
+         "type": "string",
+         "validation": {
+          "max": 80
+         },
+         "description": "Also the video's accessible name."
+        }
+       ]
+      },
+      {
+       "name": "gallery3d",
+       "title": "3D model",
+       "type": "object",
+       "icon": "box",
+       "preview": {
+        "title": "caption",
+        "media": "poster",
+        "fallback": "Untitled 3D model"
+       },
+       "fields": [
+        {
+         "name": "model",
+         "title": "Model file",
+         "type": "file",
+         "validation": {
+          "required": true
+         },
+         "description": "A .glb file under 15 MB."
+        },
+        {
+         "name": "poster",
+         "title": "Poster",
+         "type": "image",
+         "validation": {
+          "required": true
+         }
+        },
+        {
+         "name": "caption",
+         "title": "Caption",
+         "type": "string",
+         "validation": {
+          "max": 80
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "highlights",
+     "title": "Highlights",
+     "type": "array",
+     "group": "details",
+     "itemNoun": "highlight",
+     "openMode": "inline",
+     "validation": {
+      "max": 4
+     },
+     "of": [
+      {
+       "name": "highlight",
+       "title": "Highlight",
+       "type": "object",
+       "icon": "sparkles",
+       "preview": {
+        "title": "label",
+        "fallback": "Untitled highlight"
+       },
+       "fields": [
+        {
+         "name": "icon",
+         "title": "Icon",
+         "type": "icon"
+        },
+        {
+         "name": "label",
+         "title": "Label",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 40
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "specs",
+     "title": "Specs",
+     "type": "array",
+     "group": "details",
+     "itemNoun": "spec group",
+     "validation": {
+      "max": 6
+     },
+     "of": [
+      {
+       "name": "specGroup",
+       "title": "Spec group",
+       "type": "object",
+       "icon": "list-details",
+       "preview": {
+        "title": "title",
+        "fallback": "Untitled group"
+       },
+       "fields": [
+        {
+         "name": "title",
+         "title": "Group title",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 32
+         },
+         "placeholder": "Dimensions"
+        },
+        {
+         "name": "rows",
+         "title": "Rows",
+         "type": "array",
+         "itemNoun": "row",
+         "openMode": "inline",
+         "validation": {
+          "min": 1,
+          "max": 12
+         },
+         "of": [
+          {
+           "name": "specRow",
+           "title": "Row",
+           "type": "object",
+           "icon": "table",
+           "preview": {
+            "title": "label",
+            "subtitle": "value",
+            "fallback": "Untitled row"
+           },
+           "fields": [
+            {
+             "name": "label",
+             "title": "Label",
+             "type": "string",
+             "validation": {
+              "required": true,
+              "max": 32
+             }
+            },
+            {
+             "name": "value",
+             "title": "Value",
+             "type": "string",
+             "validation": {
+              "required": true,
+              "max": 60
+             }
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "care",
+     "title": "Care",
+     "type": "richtext",
+     "group": "details",
+     "ai": true
+    },
+    {
+     "name": "useStorePolicies",
+     "title": "Use the store's shipping and returns",
+     "type": "boolean",
+     "group": "policies",
+     "initialValue": true,
+     "description": "Turn off to write product-specific ones."
+    },
+    {
+     "name": "policies",
+     "title": "Product policies",
+     "type": "array",
+     "group": "policies",
+     "itemNoun": "policy",
+     "hidden": {
+      "field": "useStorePolicies",
+      "equals": false
+     },
+     "validation": {
+      "max": 4
+     },
+     "of": [
+      {
+       "name": "policy",
+       "title": "Policy",
+       "type": "object",
+       "icon": "truck-delivery",
+       "preview": {
+        "title": "title",
+        "subtitle": "summary",
+        "fallback": "Untitled policy"
+       },
+       "fields": [
+        {
+         "name": "title",
+         "title": "Title",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 40
+         }
+        },
+        {
+         "name": "summary",
+         "title": "Summary",
+         "type": "string",
+         "validation": {
+          "max": 80
+         },
+         "placeholder": "Free over $80"
+        },
+        {
+         "name": "body",
+         "title": "Body",
+         "type": "richtext",
+         "validation": {
+          "required": true
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "related",
+     "title": "Pairs well with",
+     "type": "array",
+     "group": "details",
+     "validation": {
+      "max": 4,
+      "unique": true
+     },
+     "of": [
+      {
+       "name": "relatedProduct",
+       "title": "Product",
+       "type": "reference",
+       "reference": {
+        "to": [
+         "col_products"
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "name": "reviewsId",
+     "title": "Reviews product ID",
+     "type": "string",
+     "group": "details",
+     "advanced": true,
+     "access": {
+      "edit": "schema.manage"
+     },
+     "lockReason": "Set by the reviews app integration",
+     "description": "The product's ID in Okendo."
+    }
+   ]
+  },
+  "value": {
+   "title": "Ember Dutch Oven 5.5qt",
+   "slug": "ember-dutch-oven",
+   "tagline": "Bakes bread at 500\u00b0F, braises for eight, and the lid is a skillet.",
+   "description": "<p>Poured in our Bend foundry and pre-seasoned three times with flaxseed oil, the Ember is the pot you'll reach for at home and at camp. The flanged lid holds coals for top heat, then flips into a 10-inch skillet.</p><p>The enamel interior on the Ember red finish cleans up with soap and water; the bare iron finish gets better every time you cook.</p>",
+   "badges": [
+    "bestseller",
+    "made-usa"
+   ],
+   "source": "shopify",
+   "shopifyProduct": "gid://shopify/Product/8813",
+   "price": 165,
+   "compareAt": 195,
+   "options": [
+    {
+     "_key": "o1",
+     "name": "Size",
+     "display": "buttons",
+     "values": [
+      {
+       "_key": "v1",
+       "label": "3.5 qt"
+      },
+      {
+       "_key": "v2",
+       "label": "5.5 qt"
+      }
+     ]
+    },
+    {
+     "_key": "o2",
+     "name": "Finish",
+     "display": "swatches",
+     "values": [
+      {
+       "_key": "v3",
+       "label": "Bare iron",
+       "swatch": "#1E1B18"
+      },
+      {
+       "_key": "v4",
+       "label": "Ember red",
+       "swatch": "#B33A24"
+      },
+      {
+       "_key": "v5",
+       "label": "Speckled sage",
+       "image": {
+        "url": "https://picsum.photos/seed/caldera-sage-speckle/200/200",
+        "alt": "Sage green enamel with dark speckles",
+        "name": "caldera-sage-speckle.jpg",
+        "width": 200,
+        "height": 200
+       }
+      }
+     ]
+    }
+   ],
+   "variants": [
+    {
+     "_key": "va1",
+     "combination": "5.5 qt / Bare iron",
+     "sku": "ED-55-BI",
+     "inventory": 38,
+     "weight": 13.2
+    },
+    {
+     "_key": "va2",
+     "combination": "5.5 qt / Ember red",
+     "sku": "ED-55-ER",
+     "price": 185,
+     "inventory": 12,
+     "weight": 13.6
+    },
+    {
+     "_key": "va3",
+     "combination": "3.5 qt / Bare iron",
+     "sku": "ED-35-BI",
+     "price": 129,
+     "inventory": 0,
+     "weight": 9.4
+    }
+   ],
+   "inventoryPolicy": "preorder",
+   "restockDate": "2026-11-12",
+   "lowStockAt": 10,
+   "gallery": [
+    {
+     "_key": "g1",
+     "_type": "galleryImage",
+     "image": {
+      "url": "https://picsum.photos/seed/caldera-dutch-coals/1600/2000",
+      "alt": "Ember Dutch Oven sitting in glowing coals with a lid full of embers",
+      "name": "caldera-dutch-coals.jpg",
+      "width": 1600,
+      "height": 2000
+     },
+     "forValues": [
+      "Bare iron"
+     ]
+    },
+    {
+     "_key": "g2",
+     "_type": "galleryImage",
+     "image": {
+      "url": "https://picsum.photos/seed/caldera-dutch-red/1600/2000",
+      "alt": "Ember red Dutch oven on a wooden counter next to a sourdough loaf",
+      "name": "caldera-dutch-red.jpg",
+      "width": 1600,
+      "height": 2000
+     },
+     "forValues": [
+      "Ember red"
+     ]
+    },
+    {
+     "_key": "g3",
+     "_type": "galleryVideo",
+     "video": "https://www.youtube.com/watch?v=caldera-ember-bread",
+     "poster": {
+      "url": "https://picsum.photos/seed/caldera-dutch-bread-poster/1600/900",
+      "alt": "Hands lifting a lid off a fresh loaf",
+      "name": "caldera-dutch-bread-poster.jpg",
+      "width": 1600,
+      "height": 900
+     },
+     "caption": "Baking a no-knead loaf over coals"
+    },
+    {
+     "_key": "g4",
+     "_type": "galleryImage",
+     "image": {
+      "url": "https://picsum.photos/seed/caldera-dutch-lid-skillet/1600/2000",
+      "alt": "The lid flipped over and used as a skillet to fry eggs",
+      "name": "caldera-dutch-lid-skillet.jpg",
+      "width": 1600,
+      "height": 2000
+     }
+    }
+   ],
+   "highlights": [
+    {
+     "_key": "h1",
+     "icon": "flame",
+     "label": "Safe to 650\u00b0F and over open fire"
+    },
+    {
+     "_key": "h2",
+     "icon": "shield-check",
+     "label": "Lifetime warranty"
+    },
+    {
+     "_key": "h3",
+     "icon": "truck",
+     "label": "Free shipping over $80"
+    }
+   ],
+   "specs": [
+    {
+     "_key": "s1",
+     "title": "Dimensions",
+     "rows": [
+      {
+       "_key": "r1",
+       "label": "Capacity",
+       "value": "5.5 qt (5.2 L)"
+      },
+      {
+       "_key": "r2",
+       "label": "Diameter",
+       "value": "10.25 in"
+      },
+      {
+       "_key": "r3",
+       "label": "Weight",
+       "value": "13.2 lb with lid"
+      }
+     ]
+    },
+    {
+     "_key": "s2",
+     "title": "Materials",
+     "rows": [
+      {
+       "_key": "r4",
+       "label": "Body",
+       "value": "Cast iron, 3.8 mm wall"
+      },
+      {
+       "_key": "r5",
+       "label": "Seasoning",
+       "value": "Flaxseed oil, 3 coats"
+      },
+      {
+       "_key": "r6",
+       "label": "Heat sources",
+       "value": "Gas, electric, induction, oven, coals"
+      }
+     ]
+    }
+   ],
+   "care": "<p>Rinse warm, scrub with the chainmail pad, dry over low heat and wipe a few drops of oil inside. Never soak bare iron or run it through the dishwasher.</p>",
+   "useStorePolicies": false,
+   "policies": [
+    {
+     "_key": "pl1",
+     "title": "Shipping",
+     "summary": "Free over $80 \u00b7 ships in 1\u20132 days",
+     "body": "<p>Orders over $80 ship free in the contiguous US. Cast iron ships in a recycled-fibre box with no plastic.</p>"
+    },
+    {
+     "_key": "pl2",
+     "title": "Returns",
+     "summary": "60 days, even if you've cooked in it",
+     "body": "<p>Cook with it for 60 days. If it isn't for you, send it back for a full refund \u2014 seasoning and all.</p>"
+    }
+   ],
+   "related": [
+    "en_p3",
+    "en_p1"
+   ],
+   "reviewsId": "okendo-ED-55"
+  }
+ },
+ {
+  "id": "commerce-featured-product",
+  "name": "Featured product spotlight",
+  "category": "Commerce",
+  "kind": "block",
+  "brand": "Caldera",
+  "previewLayout": "split",
+  "proves": "One product reference + per-placement overrides (headline, image) that fall back to the entry \u00b7 inline add-to-cart vs link",
+  "schema": {
+   "name": "featuredProduct",
+   "title": "Featured product",
+   "kind": "block",
+   "icon": "star",
+   "category": "Commerce",
+   "description": "One product, told as a story, with a buy button",
+   "variants": [
+    {
+     "id": "image-left",
+     "name": "Image left"
+    },
+    {
+     "id": "image-right",
+     "name": "Image right"
+    },
+    {
+     "id": "full-bleed",
+     "name": "Full-bleed image",
+     "description": "Text over a full-width photo"
+    }
+   ],
+   "preview": {
+    "title": "heading",
+    "subtitle": "eyebrow",
+    "media": "image"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "design",
+     "title": "Design"
+    }
+   ],
+   "fields": [
+    {
+     "name": "product",
+     "title": "Product",
+     "type": "reference",
+     "reference": {
+      "to": [
+       "col_products"
+      ]
+     },
+     "description": "Name, price, rating and stock come from this product."
+    },
+    {
+     "name": "eyebrow",
+     "title": "Eyebrow",
+     "type": "string",
+     "validation": {
+      "max": 32
+     },
+     "placeholder": "New for fall"
+    },
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "validation": {
+      "recommendedMax": 70
+     },
+     "ai": true,
+     "localized": true,
+     "description": "Leave empty to use the product name."
+    },
+    {
+     "name": "body",
+     "title": "Body",
+     "type": "text",
+     "rows": 3,
+     "validation": {
+      "recommendedMax": 280
+     },
+     "ai": true,
+     "localized": true,
+     "description": "Leave empty to use the product tagline."
+    },
+    {
+     "name": "points",
+     "title": "Selling points",
+     "type": "array",
+     "itemNoun": "point",
+     "openMode": "inline",
+     "validation": {
+      "max": 4
+     },
+     "of": [
+      {
+       "name": "point",
+       "title": "Point",
+       "type": "object",
+       "icon": "check",
+       "preview": {
+        "title": "label",
+        "fallback": "Untitled point"
+       },
+       "fields": [
+        {
+         "name": "icon",
+         "title": "Icon",
+         "type": "icon"
+        },
+        {
+         "name": "label",
+         "title": "Label",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 48
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "image",
+     "title": "Image",
+     "type": "image",
+     "description": "Leave empty to use the product's first gallery image."
+    },
+    {
+     "name": "action",
+     "title": "Button does",
+     "type": "select",
+     "layout": "segmented",
+     "initialValue": "add",
+     "options": [
+      {
+       "value": "add",
+       "label": "Add to cart",
+       "description": "Variant picker + add button in place"
+      },
+      {
+       "value": "link",
+       "label": "Open the product"
+      }
+     ]
+    },
+    {
+     "name": "addLabel",
+     "title": "Add button label",
+     "type": "string",
+     "hidden": {
+      "field": "action",
+      "equals": "add"
+     },
+     "validation": {
+      "max": 24
+     },
+     "placeholder": "Add to cart",
+     "description": "Changes to Pre-order or Sold out on its own."
+    },
+    {
+     "name": "button",
+     "title": "Button",
+     "type": "button",
+     "hidden": {
+      "field": "action",
+      "equals": "link"
+     }
+    },
+    {
+     "name": "showPrice",
+     "title": "Show price",
+     "type": "boolean",
+     "initialValue": true,
+     "group": "design"
+    },
+    {
+     "name": "showRating",
+     "title": "Show rating",
+     "type": "boolean",
+     "initialValue": true,
+     "group": "design"
+    },
+    {
+     "name": "theme",
+     "title": "Theme",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "light",
+     "options": [
+      {
+       "value": "light",
+       "label": "Light"
+      },
+      {
+       "value": "dark",
+       "label": "Dark"
+      },
+      {
+       "value": "brand",
+       "label": "Brand"
+      }
+     ]
+    }
+   ]
+  },
+  "value": {
+   "_variant": "image-left",
+   "product": "en_p1",
+   "eyebrow": "Folds to 2 cm",
+   "heading": "The grill grate that lives in your pack",
+   "body": "Stainless steel, 1.1 kg, and it opens to cook for four over any fire ring. Cable hinges mean nothing to lose and nothing to rattle.",
+   "points": [
+    {
+     "_key": "pt1",
+     "icon": "weight",
+     "label": "1.1 kg, folds flat to 2 cm"
+    },
+    {
+     "_key": "pt2",
+     "icon": "flame",
+     "label": "Rated to 900\u00b0F direct flame"
+    },
+    {
+     "_key": "pt3",
+     "icon": "tool",
+     "label": "No loose parts, no tools"
+    }
+   ],
+   "image": {
+    "url": "https://picsum.photos/seed/caldera-cable-fold-fire/1600/1200",
+    "alt": "Cable Fold grill grate open over a campfire with two skewers of vegetables",
+    "name": "caldera-cable-fold-fire.jpg",
+    "width": 1600,
+    "height": 1200
+   },
+   "action": "add",
+   "addLabel": "Add to cart",
+   "button": {
+    "label": "See the details",
+    "href": "/products/cable-fold",
+    "type": "entry",
+    "title": "Cable Fold Grill",
+    "style": "outline"
+   },
+   "showPrice": true,
+   "showRating": true,
+   "theme": "light"
+  }
+ },
+ {
+  "id": "commerce-collection-header-facets",
+  "name": "Collection header + filters",
+  "category": "Commerce",
+  "kind": "block",
+  "brand": "Caldera",
+  "previewLayout": "centered",
+  "proves": "Collection reference with header overrides \u00b7 facet config array (source \u00d7 display) with conditional swatch/range settings \u00b7 sort options",
+  "schema": {
+   "name": "collectionHeader",
+   "title": "Collection header",
+   "kind": "block",
+   "icon": "category-2",
+   "category": "Commerce",
+   "description": "The top of a shop page: title, banner, filters and sort",
+   "variants": [
+    {
+     "id": "banner",
+     "name": "Banner image"
+    },
+    {
+     "id": "plain",
+     "name": "Plain title"
+    }
+   ],
+   "preview": {
+    "title": "title",
+    "subtitle": "description",
+    "media": "banner"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "filters",
+     "title": "Filters & sort"
+    }
+   ],
+   "fields": [
+    {
+     "name": "collection",
+     "title": "Collection",
+     "type": "reference",
+     "reference": {
+      "to": [
+       "collection"
+      ]
+     },
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "title",
+     "title": "Title override",
+     "type": "string",
+     "validation": {
+      "max": 60
+     },
+     "localized": true,
+     "description": "Leave empty to use the collection name."
+    },
+    {
+     "name": "description",
+     "title": "Intro",
+     "type": "text",
+     "rows": 2,
+     "validation": {
+      "recommendedMax": 200
+     },
+     "ai": true,
+     "localized": true
+    },
+    {
+     "name": "banner",
+     "title": "Banner",
+     "type": "image",
+     "description": "Shown at 1600\u00d7500."
+    },
+    {
+     "name": "facets",
+     "title": "Filters",
+     "type": "array",
+     "group": "filters",
+     "itemNoun": "filter",
+     "validation": {
+      "max": 8
+     },
+     "description": "Filters with one value hide themselves.",
+     "of": [
+      {
+       "name": "facet",
+       "title": "Filter",
+       "type": "object",
+       "icon": "adjustments-horizontal",
+       "preview": {
+        "title": "label",
+        "subtitle": "source",
+        "fallback": "Untitled filter"
+       },
+       "fields": [
+        {
+         "name": "label",
+         "title": "Label",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 24
+         }
+        },
+        {
+         "name": "source",
+         "title": "Filters on",
+         "type": "select",
+         "validation": {
+          "required": true
+         },
+         "options": [
+          {
+           "value": "option",
+           "label": "A product option",
+           "description": "Size, Color, Finish"
+          },
+          {
+           "value": "field",
+           "label": "A product field",
+           "description": "Material, Capacity"
+          },
+          {
+           "value": "tag",
+           "label": "Tags"
+          },
+          {
+           "value": "price",
+           "label": "Price"
+          },
+          {
+           "value": "availability",
+           "label": "In stock"
+          }
+         ]
+        },
+        {
+         "name": "key",
+         "title": "Option or field name",
+         "type": "string",
+         "hidden": {
+          "field": "source",
+          "equals": [
+           "option",
+           "field"
+          ]
+         },
+         "validation": {
+          "required": true,
+          "max": 32
+         },
+         "description": "Exactly as named on the products, e.g. Finish."
+        },
+        {
+         "name": "display",
+         "title": "Show as",
+         "type": "select",
+         "layout": "segmented",
+         "initialValue": "checkbox",
+         "options": [
+          {
+           "value": "checkbox",
+           "label": "Checkboxes"
+          },
+          {
+           "value": "swatch",
+           "label": "Swatches"
+          },
+          {
+           "value": "pills",
+           "label": "Pills"
+          },
+          {
+           "value": "range",
+           "label": "Range"
+          }
+         ]
+        },
+        {
+         "name": "rangeStep",
+         "title": "Range step",
+         "type": "number",
+         "hidden": {
+          "field": "display",
+          "equals": "range"
+         },
+         "numeric": {
+          "min": 1,
+          "max": 100,
+          "step": 1,
+          "unit": "USD"
+         }
+        },
+        {
+         "name": "swatches",
+         "title": "Swatch colors",
+         "type": "array",
+         "itemNoun": "swatch",
+         "openMode": "inline",
+         "hidden": {
+          "field": "display",
+          "equals": "swatch"
+         },
+         "validation": {
+          "max": 16
+         },
+         "description": "Values without a color show as a text pill.",
+         "of": [
+          {
+           "name": "swatch",
+           "title": "Swatch",
+           "type": "object",
+           "icon": "palette",
+           "preview": {
+            "title": "value",
+            "fallback": "Untitled swatch"
+           },
+           "fields": [
+            {
+             "name": "value",
+             "title": "Value",
+             "type": "string",
+             "validation": {
+              "required": true,
+              "max": 24
+             }
+            },
+            {
+             "name": "color",
+             "title": "Color",
+             "type": "color",
+             "validation": {
+              "required": true
+             }
+            }
+           ]
+          }
+         ]
+        },
+        {
+         "name": "isOpen",
+         "title": "Open by default",
+         "type": "boolean"
+        },
+        {
+         "name": "showCounts",
+         "title": "Show counts",
+         "type": "boolean",
+         "initialValue": true
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "sortOptions",
+     "title": "Sort options",
+     "type": "multiselect",
+     "group": "filters",
+     "layout": "checkbox",
+     "validation": {
+      "min": 1
+     },
+     "options": [
+      {
+       "value": "featured",
+       "label": "Featured"
+      },
+      {
+       "value": "bestselling",
+       "label": "Best selling"
+      },
+      {
+       "value": "newest",
+       "label": "Newest"
+      },
+      {
+       "value": "price-asc",
+       "label": "Price, low to high"
+      },
+      {
+       "value": "price-desc",
+       "label": "Price, high to low"
+      },
+      {
+       "value": "rating",
+       "label": "Highest rated"
+      }
+     ]
+    },
+    {
+     "name": "defaultSort",
+     "title": "Default sort",
+     "type": "select",
+     "group": "filters",
+     "initialValue": "featured",
+     "options": [
+      {
+       "value": "featured",
+       "label": "Featured"
+      },
+      {
+       "value": "bestselling",
+       "label": "Best selling"
+      },
+      {
+       "value": "newest",
+       "label": "Newest"
+      }
+     ],
+     "description": "Must be one of the sort options above."
+    },
+    {
+     "name": "perPage",
+     "title": "Products per page",
+     "type": "number",
+     "group": "filters",
+     "layout": "slider",
+     "initialValue": 24,
+     "numeric": {
+      "min": 12,
+      "max": 48,
+      "step": 12
+     }
+    },
+    {
+     "name": "showCount",
+     "title": "Show result count",
+     "type": "boolean",
+     "group": "filters",
+     "initialValue": true
+    }
+   ]
+  },
+  "value": {
+   "_variant": "banner",
+   "collection": "col_products",
+   "title": "Cast iron",
+   "description": "Skillets, Dutch ovens and griddles poured in Bend, Oregon. Pre-seasoned, ready for coals, guaranteed for life.",
+   "banner": {
+    "url": "https://picsum.photos/seed/caldera-castiron-banner/1600/500",
+    "alt": "A row of cast iron skillets hanging on a workshop wall",
+    "name": "caldera-castiron-banner.jpg",
+    "width": 1600,
+    "height": 500
+   },
+   "facets": [
+    {
+     "_key": "fc1",
+     "label": "Product type",
+     "source": "field",
+     "key": "productType",
+     "display": "pills",
+     "isOpen": true,
+     "showCounts": true
+    },
+    {
+     "_key": "fc2",
+     "label": "Finish",
+     "source": "option",
+     "key": "Finish",
+     "display": "swatch",
+     "isOpen": true,
+     "showCounts": false,
+     "swatches": [
+      {
+       "_key": "sw1",
+       "value": "Bare iron",
+       "color": "#1E1B18"
+      },
+      {
+       "_key": "sw2",
+       "value": "Ember red",
+       "color": "#B33A24"
+      },
+      {
+       "_key": "sw3",
+       "value": "Speckled sage",
+       "color": "#7D8F74"
+      }
+     ]
+    },
+    {
+     "_key": "fc3",
+     "label": "Price",
+     "source": "price",
+     "display": "range",
+     "rangeStep": 10
+    },
+    {
+     "_key": "fc4",
+     "label": "In stock only",
+     "source": "availability",
+     "display": "checkbox",
+     "showCounts": true
+    }
+   ],
+   "sortOptions": [
+    "featured",
+    "bestselling",
+    "newest",
+    "price-asc",
+    "price-desc"
+   ],
+   "defaultSort": "featured",
+   "perPage": 24,
+   "showCount": true
+  }
+ },
+ {
+  "id": "commerce-bundle-builder",
+  "name": "Bundle builder (choose N)",
+  "category": "Commerce",
+  "kind": "block",
+  "brand": "Caldera",
+  "previewLayout": "grid-3",
+  "proves": "Eligible products (query or picked) \u00b7 pick min/max \u00b7 tiered discount OR fixed bundle price as a conditional pair \u00b7 tier rows with validation",
+  "schema": {
+   "name": "bundleBuilder",
+   "title": "Bundle builder",
+   "kind": "block",
+   "icon": "packages",
+   "category": "Commerce",
+   "description": "Shoppers pick a set of products and save as they add more",
+   "preview": {
+    "title": "heading",
+    "subtitle": "eyebrow"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "rules",
+     "title": "Rules & savings"
+    }
+   ],
+   "fieldsets": [
+    {
+     "name": "pick",
+     "title": "How many",
+     "columns": 2
+    }
+   ],
+   "fields": [
+    {
+     "name": "eyebrow",
+     "title": "Eyebrow",
+     "type": "string",
+     "validation": {
+      "max": 32
+     }
+    },
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "validation": {
+      "required": true,
+      "recommendedMax": 48
+     },
+     "ai": true
+    },
+    {
+     "name": "body",
+     "title": "Body",
+     "type": "text",
+     "rows": 2,
+     "validation": {
+      "recommendedMax": 160
+     },
+     "ai": true
+    },
+    {
+     "name": "eligibleProducts",
+     "title": "Products to choose from",
+     "type": "array",
+     "validation": {
+      "min": 2,
+      "max": 12,
+      "unique": true
+     },
+     "of": [
+      {
+       "name": "eligibleProduct",
+       "title": "Product",
+       "type": "reference",
+       "reference": {
+        "to": [
+         "col_products"
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "name": "min",
+     "title": "At least",
+     "type": "number",
+     "group": "rules",
+     "fieldset": "pick",
+     "initialValue": 2,
+     "numeric": {
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "unit": "items"
+     },
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "max",
+     "title": "At most",
+     "type": "number",
+     "group": "rules",
+     "fieldset": "pick",
+     "initialValue": 4,
+     "numeric": {
+      "min": 1,
+      "max": 12,
+      "step": 1,
+      "unit": "items"
+     },
+     "validation": {
+      "required": true
+     },
+     "description": "Must be at least the minimum."
+    },
+    {
+     "name": "allowRepeats",
+     "title": "Allow the same product twice",
+     "type": "boolean",
+     "group": "rules"
+    },
+    {
+     "name": "pricing",
+     "title": "Savings",
+     "type": "select",
+     "group": "rules",
+     "layout": "cards",
+     "initialValue": "tiers",
+     "options": [
+      {
+       "value": "tiers",
+       "label": "Save more as they add",
+       "icon": "stairs-up",
+       "description": "e.g. 10% for 2, 15% for 3"
+      },
+      {
+       "value": "fixed",
+       "label": "One bundle price",
+       "icon": "tag",
+       "description": "e.g. any 3 for $199"
+      }
+     ]
+    },
+    {
+     "name": "tiers",
+     "title": "Discount steps",
+     "type": "array",
+     "group": "rules",
+     "itemNoun": "step",
+     "openMode": "inline",
+     "hidden": {
+      "field": "pricing",
+      "equals": "tiers"
+     },
+     "validation": {
+      "min": 1,
+      "max": 4
+     },
+     "description": "The highest step reached applies.",
+     "of": [
+      {
+       "name": "tier",
+       "title": "Step",
+       "type": "object",
+       "icon": "discount",
+       "preview": {
+        "title": "label",
+        "subtitle": "quantity",
+        "fallback": "Untitled step"
+       },
+       "fields": [
+        {
+         "name": "quantity",
+         "title": "Items",
+         "type": "number",
+         "numeric": {
+          "min": 1,
+          "max": 12,
+          "step": 1
+         },
+         "validation": {
+          "required": true
+         }
+        },
+        {
+         "name": "percent",
+         "title": "Off",
+         "type": "number",
+         "numeric": {
+          "min": 1,
+          "max": 50,
+          "step": 1,
+          "unit": "%"
+         },
+         "validation": {
+          "required": true
+         }
+        },
+        {
+         "name": "label",
+         "title": "Label",
+         "type": "string",
+         "validation": {
+          "max": 24
+         },
+         "placeholder": "Save 15%"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "bundlePrice",
+     "title": "Bundle price",
+     "type": "number",
+     "group": "rules",
+     "hidden": {
+      "field": "pricing",
+      "equals": "fixed"
+     },
+     "numeric": {
+      "unit": "USD",
+      "min": 0,
+      "step": 1
+     },
+     "validation": {
+      "required": true
+     },
+     "description": "Charged for exactly the maximum number of items."
+    },
+    {
+     "name": "discountCode",
+     "title": "Shopify discount",
+     "type": "string",
+     "group": "rules",
+     "access": {
+      "edit": "schema.manage"
+     },
+     "lockReason": "Created by the bundle app in Shopify",
+     "description": "The Shopify automatic discount that applies these savings."
+    },
+    {
+     "name": "addLabel",
+     "title": "Add bundle button",
+     "type": "string",
+     "validation": {
+      "required": true,
+      "max": 28
+     },
+     "placeholder": "Add kit to cart"
+    },
+    {
+     "name": "note",
+     "title": "Small print",
+     "type": "string",
+     "validation": {
+      "max": 120
+     }
+    }
+   ]
+  },
+  "value": {
+   "eyebrow": "Build your camp kit",
+   "heading": "Pick 3, save 15%",
+   "body": "Choose any three pieces from the camp range. Save 10% on two, 15% on three, 20% on four.",
+   "eligibleProducts": [
+    "en_p1",
+    "en_p2",
+    "en_p3",
+    "en_p4"
+   ],
+   "min": 2,
+   "max": 4,
+   "allowRepeats": false,
+   "pricing": "tiers",
+   "tiers": [
+    {
+     "_key": "t1",
+     "quantity": 2,
+     "percent": 10,
+     "label": "Save 10%"
+    },
+    {
+     "_key": "t2",
+     "quantity": 3,
+     "percent": 15,
+     "label": "Save 15%"
+    },
+    {
+     "_key": "t3",
+     "quantity": 4,
+     "percent": 20,
+     "label": "Save 20%"
+    }
+   ],
+   "bundlePrice": 279,
+   "discountCode": "BUNDLE-CAMPKIT-AUTO",
+   "addLabel": "Add kit to cart",
+   "note": "Gift cards and the Ember Pizza Oven aren't included."
+  }
+ },
+ {
+  "id": "commerce-cart-cross-sell",
+  "name": "Cart upsell & cross-sell",
+  "category": "Commerce",
+  "kind": "block",
+  "brand": "Caldera",
+  "previewLayout": "list",
+  "proves": "Rules array: when (condition type) \u2192 then (offer references) with condition-specific inputs \u00b7 fallback list \u00b7 placement",
+  "schema": {
+   "name": "cartOffers",
+   "title": "Cart offers",
+   "kind": "block",
+   "icon": "shopping-cart-plus",
+   "category": "Commerce",
+   "description": "Suggestions in the cart, chosen by what's already in it",
+   "preview": {
+    "title": "heading",
+    "subtitle": "placements"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "rules",
+     "title": "Rules"
+    }
+   ],
+   "fields": [
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "validation": {
+      "required": true,
+      "max": 40
+     },
+     "placeholder": "Goes well with",
+     "localized": true
+    },
+    {
+     "name": "placements",
+     "title": "Shows in",
+     "type": "multiselect",
+     "layout": "checkbox",
+     "validation": {
+      "min": 1
+     },
+     "options": [
+      {
+       "value": "drawer",
+       "label": "Cart drawer"
+      },
+      {
+       "value": "page",
+       "label": "Cart page"
+      }
+     ]
+    },
+    {
+     "name": "maxShown",
+     "title": "Show at most",
+     "type": "number",
+     "layout": "slider",
+     "initialValue": 3,
+     "numeric": {
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "unit": "products"
+     }
+    },
+    {
+     "name": "hideInCart",
+     "title": "Hide products already in the cart",
+     "type": "boolean",
+     "initialValue": true
+    },
+    {
+     "name": "rules",
+     "title": "Rules",
+     "type": "array",
+     "group": "rules",
+     "itemNoun": "rule",
+     "validation": {
+      "max": 10
+     },
+     "description": "Checked top to bottom. The first match decides the offers.",
+     "of": [
+      {
+       "name": "rule",
+       "title": "Rule",
+       "type": "object",
+       "icon": "arrow-guide",
+       "preview": {
+        "title": "name",
+        "subtitle": "when",
+        "fallback": "Untitled rule"
+       },
+       "fields": [
+        {
+         "name": "name",
+         "title": "Rule name",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 48
+         },
+         "description": "Only your team sees this."
+        },
+        {
+         "name": "when",
+         "title": "When the cart",
+         "type": "select",
+         "validation": {
+          "required": true
+         },
+         "options": [
+          {
+           "value": "contains-product",
+           "label": "contains a product"
+          },
+          {
+           "value": "contains-tag",
+           "label": "contains a product tagged"
+          },
+          {
+           "value": "subtotal-below",
+           "label": "is under an amount",
+           "description": "Good for free-shipping nudges"
+          }
+         ]
+        },
+        {
+         "name": "triggerProducts",
+         "title": "Any of these products",
+         "type": "array",
+         "hidden": {
+          "field": "when",
+          "equals": "contains-product"
+         },
+         "validation": {
+          "min": 1,
+          "max": 6
+         },
+         "of": [
+          {
+           "name": "triggerProduct",
+           "title": "Product",
+           "type": "reference",
+           "reference": {
+            "to": [
+             "col_products"
+            ]
+           }
+          }
+         ]
+        },
+        {
+         "name": "triggerTag",
+         "title": "Tag",
+         "type": "string",
+         "hidden": {
+          "field": "when",
+          "equals": "contains-tag"
+         },
+         "validation": {
+          "required": true,
+          "max": 32
+         },
+         "description": "Exactly as written on the products."
+        },
+        {
+         "name": "threshold",
+         "title": "Amount",
+         "type": "number",
+         "hidden": {
+          "field": "when",
+          "equals": "subtotal-below"
+         },
+         "numeric": {
+          "unit": "USD",
+          "min": 1,
+          "step": 1
+         },
+         "validation": {
+          "required": true
+         },
+         "description": "The offer shows while the subtotal is below this."
+        },
+        {
+         "name": "offer",
+         "title": "Then suggest",
+         "type": "object",
+         "icon": "gift",
+         "openMode": "drill",
+         "fields": [
+          {
+           "name": "products",
+           "title": "Products",
+           "type": "array",
+           "validation": {
+            "min": 1,
+            "max": 4
+           },
+           "of": [
+            {
+             "name": "offerProduct",
+             "title": "Product",
+             "type": "reference",
+             "reference": {
+              "to": [
+               "col_products"
+              ]
+             }
+            }
+           ]
+          },
+          {
+           "name": "message",
+           "title": "Message",
+           "type": "string",
+           "validation": {
+            "max": 80
+           },
+           "placeholder": "You're {{remaining}} from free shipping",
+           "description": "{{remaining}} becomes the amount left."
+          },
+          {
+           "name": "percentOff",
+           "title": "Discount on these",
+           "type": "number",
+           "numeric": {
+            "min": 0,
+            "max": 30,
+            "step": 5,
+            "unit": "%"
+           },
+           "description": "0 = full price."
+          }
+         ]
+        },
+        {
+         "name": "isActive",
+         "title": "Active",
+         "type": "boolean",
+         "initialValue": true
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "fallbackOffers",
+     "title": "When no rule matches",
+     "type": "array",
+     "group": "rules",
+     "validation": {
+      "max": 4
+     },
+     "description": "Leave empty to show nothing.",
+     "of": [
+      {
+       "name": "fallbackProduct",
+       "title": "Product",
+       "type": "reference",
+       "reference": {
+        "to": [
+         "col_products"
+        ]
+       }
+      }
+     ]
+    }
+   ]
+  },
+  "value": {
+   "heading": "Goes well with",
+   "placements": [
+    "drawer",
+    "page"
+   ],
+   "maxShown": 3,
+   "hideInCart": true,
+   "rules": [
+    {
+     "_key": "ru1",
+     "name": "Free-shipping nudge",
+     "when": "subtotal-below",
+     "threshold": 80,
+     "offer": {
+      "products": [
+       "en_p4"
+      ],
+      "message": "You're {{remaining}} from free shipping",
+      "percentOff": 0
+     },
+     "isActive": true
+    },
+    {
+     "_key": "ru2",
+     "name": "Dutch oven buyers",
+     "when": "contains-product",
+     "triggerProducts": [
+      "en_p2"
+     ],
+     "offer": {
+      "products": [
+       "en_p3",
+       "en_p1"
+      ],
+      "message": "The lid fits the Ridge Skillet too.",
+      "percentOff": 10
+     },
+     "isActive": true
+    },
+    {
+     "_key": "ru3",
+     "name": "Anything cast iron",
+     "when": "contains-tag",
+     "triggerTag": "cast-iron",
+     "offer": {
+      "products": [
+       "en_p1"
+      ],
+      "message": "Cook over coals with the Cable Fold."
+     },
+     "isActive": false
+    }
+   ],
+   "fallbackOffers": [
+    "en_p4",
+    "en_p1"
+   ]
+  }
+ },
+ {
+  "id": "commerce-promo-countdown",
+  "name": "Promo banner with code + countdown",
+  "category": "Commerce",
+  "kind": "block",
+  "brand": "Caldera",
+  "previewLayout": "banner",
+  "proves": "Discount code with pattern validation \u00b7 fixed-deadline vs per-visitor countdown (conditional) \u00b7 what happens after it ends \u00b7 schedule + audience",
+  "schema": {
+   "name": "promoBanner",
+   "title": "Promo banner",
+   "kind": "block",
+   "icon": "discount",
+   "category": "Commerce",
+   "description": "A sale message with a code to copy and a countdown",
+   "variants": [
+    {
+     "id": "bar",
+     "name": "Top bar",
+     "description": "One line above the navigation"
+    },
+    {
+     "id": "band",
+     "name": "Band",
+     "description": "A full-width section on the page"
+    }
+   ],
+   "preview": {
+    "title": "message",
+    "subtitle": "code",
+    "icon": "discount"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "timing",
+     "title": "Timing"
+    },
+    {
+     "name": "design",
+     "title": "Design"
+    }
+   ],
+   "fieldsets": [
+    {
+     "name": "schedule",
+     "title": "Schedule"
+    }
+   ],
+   "fields": [
+    {
+     "name": "message",
+     "title": "Message",
+     "type": "string",
+     "validation": {
+      "required": true,
+      "max": 90,
+      "recommendedMax": 60
+     },
+     "ai": true,
+     "localized": true
+    },
+    {
+     "name": "code",
+     "title": "Discount code",
+     "type": "string",
+     "validation": {
+      "pattern": "^[A-Z0-9]{3,20}$",
+      "patternMessage": "Use 3\u201320 capital letters and numbers, like SAVE20."
+     },
+     "description": "Must already exist in Shopify."
+    },
+    {
+     "name": "isAutoApplied",
+     "title": "Apply the code for them",
+     "type": "boolean",
+     "hidden": {
+      "field": "code",
+      "notEmpty": true
+     }
+    },
+    {
+     "name": "button",
+     "title": "Button",
+     "type": "button"
+    },
+    {
+     "name": "countdown",
+     "title": "Countdown",
+     "type": "select",
+     "group": "timing",
+     "layout": "segmented",
+     "initialValue": "none",
+     "options": [
+      {
+       "value": "none",
+       "label": "None"
+      },
+      {
+       "value": "deadline",
+       "label": "To a date",
+       "description": "Everyone sees the same end time"
+      },
+      {
+       "value": "evergreen",
+       "label": "Per visitor",
+       "description": "Starts on their first visit"
+      }
+     ]
+    },
+    {
+     "name": "endsAt",
+     "title": "Ends",
+     "type": "datetime",
+     "group": "timing",
+     "hidden": {
+      "field": "countdown",
+      "equals": "deadline"
+     },
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "durationHours",
+     "title": "Counts down from",
+     "type": "number",
+     "group": "timing",
+     "hidden": {
+      "field": "countdown",
+      "equals": "evergreen"
+     },
+     "numeric": {
+      "min": 1,
+      "max": 72,
+      "step": 1,
+      "unit": "hours"
+     },
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "afterEnd",
+     "title": "When the timer ends",
+     "type": "select",
+     "group": "timing",
+     "hidden": {
+      "field": "countdown",
+      "equals": [
+       "deadline",
+       "evergreen"
+      ]
+     },
+     "initialValue": "hide",
+     "options": [
+      {
+       "value": "hide",
+       "label": "Hide the banner"
+      },
+      {
+       "value": "message",
+       "label": "Show a different message"
+      }
+     ]
+    },
+    {
+     "name": "endedMessage",
+     "title": "Message after it ends",
+     "type": "string",
+     "group": "timing",
+     "hidden": {
+      "field": "afterEnd",
+      "equals": "message"
+     },
+     "validation": {
+      "max": 90
+     },
+     "placeholder": "The sale's over. Free shipping still applies over $80."
+    },
+    {
+     "name": "startsAt",
+     "title": "Show from",
+     "type": "datetime",
+     "group": "timing",
+     "fieldset": "schedule"
+    },
+    {
+     "name": "hideAfter",
+     "title": "Hide after",
+     "type": "datetime",
+     "group": "timing",
+     "fieldset": "schedule",
+     "description": "Leave empty to keep it until you remove it."
+    },
+    {
+     "name": "audience",
+     "title": "Who sees it",
+     "type": "select",
+     "group": "timing",
+     "initialValue": "everyone",
+     "options": [
+      {
+       "value": "everyone",
+       "label": "Everyone"
+      },
+      {
+       "value": "new",
+       "label": "First-time visitors"
+      },
+      {
+       "value": "returning",
+       "label": "Returning visitors"
+      },
+      {
+       "value": "utm",
+       "label": "Visitors from a campaign link"
+      }
+     ]
+    },
+    {
+     "name": "utmCampaign",
+     "title": "Campaign",
+     "type": "string",
+     "group": "timing",
+     "hidden": {
+      "field": "audience",
+      "equals": "utm"
+     },
+     "validation": {
+      "required": true,
+      "max": 48
+     },
+     "description": "Matches utm_campaign in the link."
+    },
+    {
+     "name": "isDismissible",
+     "title": "Visitors can close it",
+     "type": "boolean",
+     "group": "design",
+     "initialValue": true
+    },
+    {
+     "name": "theme",
+     "title": "Theme",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "light",
+     "options": [
+      {
+       "value": "light",
+       "label": "Light"
+      },
+      {
+       "value": "dark",
+       "label": "Dark"
+      },
+      {
+       "value": "brand",
+       "label": "Brand"
+      }
+     ]
+    }
+   ]
+  },
+  "value": {
+   "_variant": "bar",
+   "message": "Fireside Sale: 20% off all cast iron",
+   "code": "FIRESIDE20",
+   "isAutoApplied": true,
+   "button": {
+    "label": "Shop the sale",
+    "href": "/collections/cast-iron",
+    "type": "page",
+    "style": "link",
+    "arrow": true
+   },
+   "countdown": "deadline",
+   "endsAt": "2026-11-02T23:59:00-08:00[America/Los_Angeles]",
+   "afterEnd": "message",
+   "endedMessage": "The sale's over \u2014 free shipping still applies over $80.",
+   "startsAt": "2026-10-24T06:00:00-07:00[America/Los_Angeles]",
+   "hideAfter": "2026-11-09T23:59:00-08:00[America/Los_Angeles]",
+   "audience": "everyone",
+   "isDismissible": true,
+   "theme": "brand"
+  }
+ },
+ {
+  "id": "commerce-shop-the-look",
+  "name": "Shop the look (hotspots)",
+  "category": "Commerce",
+  "kind": "block",
+  "brand": "Caldera",
+  "previewLayout": "gallery",
+  "proves": "Looks \u203a look \u203a hotspots \u203a hotspot: image coordinates as numbers + a product reference per point \u00b7 accessible labels for every dot",
+  "schema": {
+   "name": "shopTheLook",
+   "title": "Shop the look",
+   "kind": "block",
+   "icon": "hanger",
+   "category": "Commerce",
+   "description": "Photos with dots that open the products in them",
+   "variants": [
+    {
+     "id": "single",
+     "name": "One look"
+    },
+    {
+     "id": "carousel",
+     "name": "Several looks in a carousel"
+    }
+   ],
+   "preview": {
+    "title": "heading",
+    "media": "looks.0.image"
+   },
+   "fields": [
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "validation": {
+      "recommendedMax": 48
+     },
+     "ai": true
+    },
+    {
+     "name": "looks",
+     "title": "Looks",
+     "type": "array",
+     "itemNoun": "look",
+     "arrayLayout": "grid",
+     "validation": {
+      "min": 1,
+      "max": 6
+     },
+     "of": [
+      {
+       "name": "look",
+       "title": "Look",
+       "type": "object",
+       "icon": "photo",
+       "preview": {
+        "title": "title",
+        "subtitle": "image.alt",
+        "media": "image",
+        "fallback": "Untitled look"
+       },
+       "fields": [
+        {
+         "name": "title",
+         "title": "Look name",
+         "type": "string",
+         "validation": {
+          "max": 40
+         }
+        },
+        {
+         "name": "image",
+         "title": "Image",
+         "type": "image",
+         "validation": {
+          "required": true
+         }
+        },
+        {
+         "name": "hotspots",
+         "title": "Dots",
+         "type": "array",
+         "itemNoun": "dot",
+         "validation": {
+          "min": 1,
+          "max": 8
+         },
+         "of": [
+          {
+           "name": "hotspot",
+           "title": "Dot",
+           "type": "object",
+           "icon": "point",
+           "preview": {
+            "title": "label",
+            "subtitle": "product",
+            "fallback": "Untitled dot"
+           },
+           "fields": [
+            {
+             "name": "product",
+             "title": "Product",
+             "type": "reference",
+             "reference": {
+              "to": [
+               "col_products"
+              ]
+             }
+            },
+            {
+             "name": "label",
+             "title": "Label for screen readers",
+             "type": "string",
+             "validation": {
+              "required": true,
+              "max": 60
+             },
+             "description": "Not shown. Read by screen readers."
+            },
+            {
+             "name": "x",
+             "title": "Across",
+             "type": "number",
+             "layout": "slider",
+             "numeric": {
+              "min": 0,
+              "max": 100,
+              "step": 0.5,
+              "unit": "%"
+             },
+             "validation": {
+              "required": true
+             },
+             "description": "From the left edge of the photo."
+            },
+            {
+             "name": "y",
+             "title": "Down",
+             "type": "number",
+             "layout": "slider",
+             "numeric": {
+              "min": 0,
+              "max": 100,
+              "step": 0.5,
+              "unit": "%"
+             },
+             "validation": {
+              "required": true
+             },
+             "description": "From the top edge of the photo."
+            },
+            {
+             "name": "variant",
+             "title": "Variant",
+             "type": "string",
+             "validation": {
+              "max": 40
+             },
+             "description": "Leave empty for the default."
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "showProductList",
+     "title": "List the products beside the photo",
+     "type": "boolean",
+     "initialValue": true
+    }
+   ]
+  },
+  "value": {
+   "_variant": "single",
+   "heading": "Sunday breakfast at camp",
+   "looks": [
+    {
+     "_key": "lk1",
+     "title": "Coals, coffee, cornbread",
+     "image": {
+      "url": "https://picsum.photos/seed/caldera-camp-breakfast/1600/2000",
+      "alt": "A campfire breakfast: a Dutch oven of cornbread on a grill grate, a kettle steaming beside it",
+      "name": "caldera-camp-breakfast.jpg",
+      "width": 1600,
+      "height": 2000
+     },
+     "hotspots": [
+      {
+       "_key": "hs1",
+       "product": "en_p2",
+       "label": "Ember Dutch Oven on the grate",
+       "x": 42,
+       "y": 58,
+       "variant": "Bare iron"
+      },
+      {
+       "_key": "hs2",
+       "product": "en_p1",
+       "label": "Cable Fold Grill over the fire",
+       "x": 50,
+       "y": 72
+      },
+      {
+       "_key": "hs3",
+       "product": "en_p4",
+       "label": "Trail Kettle on the rock",
+       "x": 78,
+       "y": 46
+      }
+     ]
+    }
+   ],
+   "showProductList": true
+  }
+ },
+ {
+  "id": "commerce-size-guide",
+  "name": "Size guide table",
+  "category": "Commerce",
+  "kind": "block",
+  "brand": "Caldera",
+  "previewLayout": "table",
+  "proves": "`table` type: sizes as row headers, a column group per unit (both measurements stored, never converted) \u00b7 measuring steps \u00b7 applies-to references",
+  "schema": {
+   "name": "sizeGuide",
+   "title": "Size guide",
+   "kind": "block",
+   "icon": "ruler-measure",
+   "category": "Commerce",
+   "description": "Size tables with inch and centimetre values, and how to measure",
+   "preview": {
+    "title": "title",
+    "subtitle": "intro"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Tables",
+     "default": true
+    },
+    {
+     "name": "measure",
+     "title": "How to measure"
+    }
+   ],
+   "fields": [
+    {
+     "name": "title",
+     "title": "Title",
+     "type": "string",
+     "validation": {
+      "required": true,
+      "max": 48
+     }
+    },
+    {
+     "name": "intro",
+     "title": "Intro",
+     "type": "text",
+     "rows": 2,
+     "validation": {
+      "recommendedMax": 160
+     }
+    },
+    {
+     "name": "appliesTo",
+     "title": "Used on",
+     "type": "array",
+     "validation": {
+      "max": 20
+     },
+     "of": [
+      {
+       "name": "guideProduct",
+       "title": "Product",
+       "type": "reference",
+       "reference": {
+        "to": [
+         "col_products"
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "name": "units",
+     "title": "Units",
+     "type": "select",
+     "layout": "segmented",
+     "initialValue": "both",
+     "options": [
+      {
+       "value": "in",
+       "label": "Inches only"
+      },
+      {
+       "value": "cm",
+       "label": "Centimeters only"
+      },
+      {
+       "value": "both",
+       "label": "Both, with a switch"
+      }
+     ]
+    },
+    {
+     "name": "tables",
+     "title": "Tables",
+     "type": "array",
+     "itemNoun": "table",
+     "validation": {
+      "min": 1,
+      "max": 4
+     },
+     "of": [
+      {
+       "name": "sizeTable",
+       "title": "Table",
+       "type": "object",
+       "icon": "table",
+       "preview": {
+        "title": "table.caption",
+        "fallback": "Untitled table"
+       },
+       "fields": [
+        {
+         "name": "table",
+         "title": "Sizes",
+         "type": "table",
+         "validation": {
+          "required": true
+         },
+         "table": {
+          "maxColumns": 9,
+          "maxRows": 10,
+          "columnTypes": [
+           "text",
+           "number"
+          ],
+          "allowGroups": false,
+          "settings": {
+           "totals": false,
+           "highlight": false
+          }
+         },
+         "description": "Give each measurement in inches and centimeters.",
+         "helpMore": "Ranges like 3.5\u20133.75 are fine."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "measureImage",
+     "title": "Measuring diagram",
+     "type": "image",
+     "group": "measure"
+    },
+    {
+     "name": "steps",
+     "title": "Steps",
+     "type": "array",
+     "group": "measure",
+     "itemNoun": "step",
+     "openMode": "inline",
+     "validation": {
+      "max": 4
+     },
+     "of": [
+      {
+       "name": "step",
+       "title": "Step",
+       "type": "object",
+       "icon": "list-numbers",
+       "preview": {
+        "title": "label",
+        "subtitle": "body",
+        "fallback": "Untitled step"
+       },
+       "fields": [
+        {
+         "name": "label",
+         "title": "What",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 32
+         }
+        },
+        {
+         "name": "body",
+         "title": "Body",
+         "type": "text",
+         "rows": 2,
+         "validation": {
+          "max": 160
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "fitNote",
+     "title": "Between sizes?",
+     "type": "richtext",
+     "group": "measure"
+    }
+   ]
+  },
+  "value": {
+   "title": "Fire glove and apron sizes",
+   "intro": "Our gloves are cut snug for grip. If you wear liners, size up.",
+   "appliesTo": [
+    "en_p1"
+   ],
+   "units": "both",
+   "tables": [
+    {
+     "_key": "tb1",
+     "table": {
+      "id": "tbl_glove_sizes",
+      "caption": "Leather fire gloves, hand size",
+      "headerRow": true,
+      "headerColumn": true,
+      "design": {
+       "responsive": "scroll"
+      },
+      "columnGroups": [
+       {
+        "_key": "in",
+        "label": "Inches"
+       },
+       {
+        "_key": "cm",
+        "label": "Centimetres"
+       }
+      ],
+      "columns": [
+       {
+        "type": "text",
+        "_key": "size",
+        "label": "Size"
+       },
+       {
+        "type": "text",
+        "_key": "palmIn",
+        "label": "Palm width",
+        "group": "in"
+       },
+       {
+        "type": "text",
+        "_key": "lengthIn",
+        "label": "Hand length",
+        "group": "in"
+       },
+       {
+        "type": "text",
+        "_key": "palmCm",
+        "label": "Palm width",
+        "group": "cm"
+       },
+       {
+        "type": "text",
+        "_key": "lengthCm",
+        "label": "Hand length",
+        "group": "cm"
+       }
+      ],
+      "rows": [
+       {
+        "_key": "r1",
+        "cells": {
+         "size": "S",
+         "palmIn": "3\u20133.25",
+         "lengthIn": "6.75\u20137",
+         "palmCm": "7.6\u20138.3",
+         "lengthCm": "17\u201318"
+        }
+       },
+       {
+        "_key": "r2",
+        "cells": {
+         "size": "M",
+         "palmIn": "3.5\u20133.75",
+         "lengthIn": "7.25\u20137.5",
+         "palmCm": "8.9\u20139.5",
+         "lengthCm": "18.5\u201319"
+        }
+       },
+       {
+        "_key": "r3",
+        "cells": {
+         "size": "L",
+         "palmIn": "4\u20134.25",
+         "lengthIn": "7.75\u20138",
+         "palmCm": "10.2\u201310.8",
+         "lengthCm": "19.7\u201320.3"
+        }
+       },
+       {
+        "_key": "r4",
+        "cells": {
+         "size": "XL",
+         "palmIn": "4.5\u20134.75",
+         "lengthIn": "8.25\u20138.5",
+         "palmCm": "11.4\u201312",
+         "lengthCm": "21\u201321.6"
+        }
+       }
+      ]
+     }
+    },
+    {
+     "_key": "tb2",
+     "table": {
+      "id": "tbl_apron_sizes",
+      "caption": "Waxed canvas apron, length",
+      "headerRow": true,
+      "headerColumn": true,
+      "design": {
+       "responsive": "scroll"
+      },
+      "columnGroups": [
+       {
+        "_key": "in",
+        "label": "Inches"
+       },
+       {
+        "_key": "cm",
+        "label": "Centimetres"
+       }
+      ],
+      "columns": [
+       {
+        "type": "text",
+        "_key": "size",
+        "label": "Size"
+       },
+       {
+        "type": "number",
+        "_key": "lengthIn",
+        "label": "Length",
+        "group": "in"
+       },
+       {
+        "type": "number",
+        "_key": "chestIn",
+        "label": "Chest width",
+        "group": "in"
+       },
+       {
+        "type": "number",
+        "_key": "lengthCm",
+        "label": "Length",
+        "group": "cm"
+       },
+       {
+        "type": "number",
+        "_key": "chestCm",
+        "label": "Chest width",
+        "group": "cm"
+       }
+      ],
+      "rows": [
+       {
+        "_key": "r1",
+        "cells": {
+         "size": "Regular",
+         "lengthIn": 34,
+         "chestIn": 24,
+         "lengthCm": 86,
+         "chestCm": 61
+        }
+       },
+       {
+        "_key": "r2",
+        "cells": {
+         "size": "Long",
+         "lengthIn": 38,
+         "chestIn": 26,
+         "lengthCm": 97,
+         "chestCm": 66
+        }
+       }
+      ]
+     }
+    }
+   ],
+   "measureImage": {
+    "url": "https://picsum.photos/seed/caldera-glove-measure/1200/800",
+    "alt": "Line drawing of an open hand with arrows across the palm below the knuckles and from wrist crease to fingertip",
+    "name": "caldera-glove-measure.jpg",
+    "width": 1200,
+    "height": 800
+   },
+   "steps": [
+    {
+     "_key": "st1",
+     "label": "Palm width",
+     "body": "Measure across your palm just below the knuckles, thumb excluded."
+    },
+    {
+     "_key": "st2",
+     "label": "Hand length",
+     "body": "From the crease of your wrist to the tip of your middle finger."
+    }
+   ],
+   "fitNote": "<p>Between sizes? Go up if you'll wear liners or handle cast iron straight from the coals; go down for camp-kitchen dexterity.</p>"
+  }
+ },
+ {
+  "id": "commerce-store-locator",
+  "name": "Store locator",
+  "category": "Commerce",
+  "kind": "block",
+  "brand": "Caldera",
+  "previewLayout": "media",
+  "proves": "Locations collection query vs written-here list \u00b7 geopoint \u00b7 weekly hours + holiday exceptions with HH:MM validation \u00b7 map provider settings",
+  "schema": {
+   "name": "storeLocator",
+   "title": "Store locator",
+   "kind": "block",
+   "icon": "map-pin",
+   "category": "Commerce",
+   "description": "A searchable map of shops and stockists, with hours",
+   "variants": [
+    {
+     "id": "map-list",
+     "name": "Map with list"
+    },
+    {
+     "id": "list",
+     "name": "List only"
+    }
+   ],
+   "preview": {
+    "title": "heading",
+    "subtitle": "source",
+    "icon": "map-pin"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "locations",
+     "title": "Locations"
+    },
+    {
+     "name": "map",
+     "title": "Map & search"
+    }
+   ],
+   "fields": [
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "validation": {
+      "required": true,
+      "recommendedMax": 48
+     }
+    },
+    {
+     "name": "intro",
+     "title": "Intro",
+     "type": "text",
+     "rows": 2,
+     "validation": {
+      "recommendedMax": 160
+     }
+    },
+    {
+     "name": "source",
+     "title": "Locations come from",
+     "type": "select",
+     "group": "locations",
+     "layout": "segmented",
+     "initialValue": "collection",
+     "options": [
+      {
+       "value": "collection",
+       "label": "Locations collection",
+       "description": "Each shop has its own page"
+      },
+      {
+       "value": "inline",
+       "label": "Written here",
+       "description": "For two or three shops"
+      }
+     ]
+    },
+    {
+     "name": "types",
+     "title": "Show these types",
+     "type": "multiselect",
+     "group": "locations",
+     "layout": "checkbox",
+     "hidden": {
+      "field": "source",
+      "equals": "collection"
+     },
+     "options": [
+      {
+       "value": "flagship",
+       "label": "Caldera stores"
+      },
+      {
+       "value": "stockist",
+       "label": "Stockists"
+      },
+      {
+       "value": "outfitter",
+       "label": "Outfitters with demo kits"
+      }
+     ],
+     "description": "Leave empty for every location."
+    },
+    {
+     "name": "locations",
+     "title": "Locations",
+     "type": "array",
+     "group": "locations",
+     "itemNoun": "location",
+     "hidden": {
+      "field": "source",
+      "equals": "inline"
+     },
+     "validation": {
+      "min": 1,
+      "max": 12
+     },
+     "of": [
+      {
+       "name": "location",
+       "title": "Location",
+       "type": "object",
+       "icon": "building-store",
+       "preview": {
+        "title": "name",
+        "subtitle": "address",
+        "fallback": "Untitled location"
+       },
+       "fields": [
+        {
+         "name": "name",
+         "title": "Name",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 48
+         }
+        },
+        {
+         "name": "type",
+         "title": "Type",
+         "type": "select",
+         "options": [
+          {
+           "value": "flagship",
+           "label": "Caldera store"
+          },
+          {
+           "value": "stockist",
+           "label": "Stockist"
+          },
+          {
+           "value": "outfitter",
+           "label": "Outfitter"
+          }
+         ]
+        },
+        {
+         "name": "address",
+         "title": "Address",
+         "type": "text",
+         "rows": 2,
+         "validation": {
+          "required": true
+         },
+         "description": "As it should appear, on two lines."
+        },
+        {
+         "name": "point",
+         "title": "Map pin",
+         "type": "geopoint",
+         "validation": {
+          "required": true
+         },
+         "description": "Drop it on the door."
+        },
+        {
+         "name": "phone",
+         "title": "Phone",
+         "type": "link"
+        },
+        {
+         "name": "hours",
+         "title": "Opening hours",
+         "type": "array",
+         "itemNoun": "hours row",
+         "openMode": "inline",
+         "validation": {
+          "max": 7
+         },
+         "description": "Days not listed show as closed.",
+         "of": [
+          {
+           "name": "hoursRow",
+           "title": "Hours",
+           "type": "object",
+           "icon": "clock",
+           "preview": {
+            "title": "opens",
+            "subtitle": "closes",
+            "fallback": "Untitled hours"
+           },
+           "fields": [
+            {
+             "name": "days",
+             "title": "Days",
+             "type": "multiselect",
+             "validation": {
+              "min": 1
+             },
+             "options": [
+              {
+               "value": "mon",
+               "label": "Mon"
+              },
+              {
+               "value": "tue",
+               "label": "Tue"
+              },
+              {
+               "value": "wed",
+               "label": "Wed"
+              },
+              {
+               "value": "thu",
+               "label": "Thu"
+              },
+              {
+               "value": "fri",
+               "label": "Fri"
+              },
+              {
+               "value": "sat",
+               "label": "Sat"
+              },
+              {
+               "value": "sun",
+               "label": "Sun"
+              }
+             ]
+            },
+            {
+             "name": "opens",
+             "title": "Opens",
+             "type": "string",
+             "validation": {
+              "required": true,
+              "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$",
+              "patternMessage": "Use 24-hour time, like 09:00."
+             },
+             "placeholder": "09:00"
+            },
+            {
+             "name": "closes",
+             "title": "Closes",
+             "type": "string",
+             "validation": {
+              "required": true,
+              "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$",
+              "patternMessage": "Use 24-hour time, like 18:00."
+             },
+             "placeholder": "18:00"
+            }
+           ]
+          }
+         ]
+        },
+        {
+         "name": "exceptions",
+         "title": "Holiday hours",
+         "type": "array",
+         "itemNoun": "date",
+         "openMode": "inline",
+         "validation": {
+          "max": 12
+         },
+         "of": [
+          {
+           "name": "exception",
+           "title": "Date",
+           "type": "object",
+           "icon": "calendar-off",
+           "preview": {
+            "title": "label",
+            "subtitle": "date",
+            "fallback": "Untitled date"
+           },
+           "fields": [
+            {
+             "name": "date",
+             "title": "Date",
+             "type": "date",
+             "validation": {
+              "required": true
+             }
+            },
+            {
+             "name": "label",
+             "title": "Label",
+             "type": "string",
+             "validation": {
+              "max": 32
+             },
+             "placeholder": "Thanksgiving"
+            },
+            {
+             "name": "isClosed",
+             "title": "Closed all day",
+             "type": "boolean",
+             "initialValue": true
+            }
+           ]
+          }
+         ]
+        },
+        {
+         "name": "services",
+         "title": "Services",
+         "type": "tags"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "provider",
+     "title": "Map",
+     "type": "select",
+     "group": "map",
+     "initialValue": "mapbox",
+     "options": [
+      {
+       "value": "mapbox",
+       "label": "Mapbox"
+      },
+      {
+       "value": "google",
+       "label": "Google Maps"
+      }
+     ]
+    },
+    {
+     "name": "center",
+     "title": "Start at",
+     "type": "geopoint",
+     "group": "map",
+     "description": "Where the map opens before a search."
+    },
+    {
+     "name": "zoom",
+     "title": "Start zoom",
+     "type": "number",
+     "group": "map",
+     "layout": "slider",
+     "initialValue": 6,
+     "numeric": {
+      "min": 2,
+      "max": 14,
+      "step": 1
+     }
+    },
+    {
+     "name": "showSearch",
+     "title": "Show search by city or ZIP",
+     "type": "boolean",
+     "group": "map",
+     "initialValue": true
+    },
+    {
+     "name": "radius",
+     "title": "Search radius",
+     "type": "select",
+     "group": "map",
+     "hidden": {
+      "field": "showSearch",
+      "equals": true
+     },
+     "initialValue": "50",
+     "options": [
+      {
+       "value": "25",
+       "label": "25 miles"
+      },
+      {
+       "value": "50",
+       "label": "50 miles"
+      },
+      {
+       "value": "100",
+       "label": "100 miles"
+      }
+     ]
+    },
+    {
+     "name": "useRichResults",
+     "title": "Local business rich results",
+     "type": "boolean",
+     "group": "map",
+     "initialValue": true,
+     "description": "Shows address and hours in search results."
+    }
+   ]
+  },
+  "value": {
+   "_variant": "map-list",
+   "heading": "Find Caldera near you",
+   "intro": "Two Caldera stores in Oregon, and 140 outfitters across the US who stock the range.",
+   "source": "inline",
+   "types": [
+    "flagship",
+    "stockist"
+   ],
+   "locations": [
+    {
+     "_key": "loc1",
+     "name": "Caldera Bend",
+     "type": "flagship",
+     "address": "1020 NW Wall St\nBend, OR 97703",
+     "point": {
+      "label": "Caldera Bend",
+      "address": "1020 NW Wall St, Bend, OR 97703",
+      "lat": 44.0596,
+      "lng": -121.3133
+     },
+     "phone": {
+      "type": "phone",
+      "href": "tel:+15415550182",
+      "phone": "+1 541 555 0182",
+      "label": "(541) 555-0182"
+     },
+     "hours": [
+      {
+       "_key": "hr1",
+       "days": [
+        "mon",
+        "tue",
+        "wed",
+        "thu",
+        "fri"
+       ],
+       "opens": "10:00",
+       "closes": "18:00"
+      },
+      {
+       "_key": "hr2",
+       "days": [
+        "sat"
+       ],
+       "opens": "09:00",
+       "closes": "18:00"
+      },
+      {
+       "_key": "hr3",
+       "days": [
+        "sun"
+       ],
+       "opens": "11:00",
+       "closes": "16:00"
+      }
+     ],
+     "exceptions": [
+      {
+       "_key": "ex1",
+       "date": "2026-11-26",
+       "label": "Thanksgiving",
+       "isClosed": true
+      },
+      {
+       "_key": "ex2",
+       "date": "2026-12-25",
+       "label": "Christmas Day",
+       "isClosed": true
+      }
+     ],
+     "services": [
+      "Re-seasoning",
+      "Engraving",
+      "Warranty swaps"
+     ]
+    },
+    {
+     "_key": "loc2",
+     "name": "Caldera Portland",
+     "type": "flagship",
+     "address": "2311 SE Division St\nPortland, OR 97202",
+     "point": {
+      "label": "Caldera Portland",
+      "address": "2311 SE Division St, Portland, OR 97202",
+      "lat": 45.5047,
+      "lng": -122.6406
+     },
+     "phone": {
+      "type": "phone",
+      "href": "tel:+15035550147",
+      "phone": "+1 503 555 0147",
+      "label": "(503) 555-0147"
+     },
+     "hours": [
+      {
+       "_key": "hr4",
+       "days": [
+        "tue",
+        "wed",
+        "thu",
+        "fri",
+        "sat",
+        "sun"
+       ],
+       "opens": "10:00",
+       "closes": "19:00"
+      }
+     ],
+     "exceptions": [],
+     "services": [
+      "Re-seasoning"
+     ]
+    }
+   ],
+   "provider": "mapbox",
+   "center": {
+    "label": "Oregon",
+    "lat": 44.5,
+    "lng": -121.5
+   },
+   "zoom": 6,
+   "showSearch": true,
+   "radius": "50",
+   "useRichResults": true
+  }
+ },
+ {
+  "id": "commerce-product-comparison",
+  "name": "Product comparison (2\u20134)",
+  "category": "Commerce",
+  "kind": "block",
+  "brand": "Caldera",
+  "previewLayout": "table",
+  "proves": "2\u20134 product references as columns \u00b7 a `table` keyed by product id (reorder-safe) \u00b7 row groups \u00b7 Yes / no columns with per-row and per-cell types",
+  "schema": {
+   "name": "productComparison",
+   "title": "Product comparison",
+   "kind": "block",
+   "icon": "columns-3",
+   "category": "Commerce",
+   "description": "Two to four products side by side, spec by spec",
+   "preview": {
+    "title": "heading",
+    "subtitle": "intro"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "design",
+     "title": "Design"
+    }
+   ],
+   "fields": [
+    {
+     "name": "heading",
+     "title": "Heading",
+     "type": "string",
+     "validation": {
+      "required": true,
+      "recommendedMax": 48
+     },
+     "ai": true
+    },
+    {
+     "name": "intro",
+     "title": "Intro",
+     "type": "text",
+     "rows": 2,
+     "validation": {
+      "recommendedMax": 160
+     }
+    },
+    {
+     "name": "products",
+     "title": "Products",
+     "type": "array",
+     "validation": {
+      "min": 2,
+      "max": 4,
+      "unique": true
+     },
+     "of": [
+      {
+       "name": "comparedProduct",
+       "title": "Product",
+       "type": "reference",
+       "reference": {
+        "to": [
+         "col_products"
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "name": "highlightLabel",
+     "title": "Highlight label",
+     "type": "string",
+     "validation": {
+      "max": 20
+     },
+     "placeholder": "Our pick"
+    },
+    {
+     "name": "specs",
+     "title": "Specs",
+     "type": "table",
+     "validation": {
+      "required": true
+     },
+     "table": {
+      "maxColumns": 5,
+      "maxRows": 40,
+      "columnTypes": [
+       "text",
+       "boolean",
+       "number",
+       "money",
+       "rating"
+      ],
+      "jsonLd": [
+       "ItemList"
+      ],
+      "settings": {
+       "totals": false,
+       "sticky": false
+      }
+     }
+    },
+    {
+     "name": "hideSame",
+     "title": "Offer Hide identical rows",
+     "type": "boolean",
+     "group": "design",
+     "initialValue": true
+    },
+    {
+     "name": "isHeaderSticky",
+     "title": "Keep the header row in view",
+     "type": "boolean",
+     "group": "design",
+     "initialValue": true
+    }
+   ]
+  },
+  "value": {
+   "heading": "Which pan is right for you?",
+   "intro": "Three ways to cook over fire. Here's how they compare where it matters.",
+   "products": [
+    "en_p3",
+    "en_p2",
+    "en_p1"
+   ],
+   "highlightLabel": "Our pick",
+   "specs": {
+    "id": "tbl_pan_compare",
+    "caption": "Ridge Skillet, Ember Dutch Oven and Cable Fold Grill compared for cooking and carrying",
+    "headerRow": true,
+    "headerColumn": true,
+    "design": {
+     "responsive": "scroll",
+     "sticky": true,
+     "hideCaption": true
+    },
+    "rowGroups": [
+     {
+      "_key": "cooking",
+      "label": "Cooking"
+     },
+     {
+      "_key": "carry",
+      "label": "Carry"
+     }
+    ],
+    "notes": "Weights in pounds, without lids. Open fire = directly on coals or over a fire ring.",
+    "jsonLd": {
+     "type": "ItemList",
+     "axis": "columns"
+    },
+    "columns": [
+     {
+      "type": "text",
+      "_key": "spec",
+      "label": "Spec"
+     },
+     {
+      "type": "boolean",
+      "_key": "en_p3",
+      "label": "Ridge Skillet 10\""
+     },
+     {
+      "type": "boolean",
+      "_key": "en_p2",
+      "label": "Ember Dutch Oven",
+      "highlight": true
+     },
+     {
+      "type": "boolean",
+      "_key": "en_p1",
+      "label": "Cable Fold Grill"
+     }
+    ],
+    "rows": [
+     {
+      "_key": "r1",
+      "group": "cooking",
+      "type": "text",
+      "cells": {
+       "spec": "Best for",
+       "en_p3": "Searing, eggs",
+       "en_p2": "Bread, braises",
+       "en_p1": "Grilling over flame"
+      }
+     },
+     {
+      "_key": "r2",
+      "group": "cooking",
+      "cells": {
+       "spec": "Induction",
+       "en_p3": true,
+       "en_p2": true,
+       "en_p1": false
+      }
+     },
+     {
+      "_key": "r3",
+      "group": "cooking",
+      "cells": {
+       "spec": "Open fire",
+       "en_p3": true,
+       "en_p2": true,
+       "en_p1": true
+      }
+     },
+     {
+      "_key": "r4",
+      "group": "cooking",
+      "cells": {
+       "spec": "Oven-safe lid",
+       "en_p3": false,
+       "en_p2": true,
+       "en_p1": {
+        "value": "No lid \u2014 use foil",
+        "type": "text"
+       }
+      }
+     },
+     {
+      "_key": "r5",
+      "group": "carry",
+      "type": "number",
+      "cells": {
+       "spec": {
+        "value": "Weight",
+        "type": "text"
+       },
+       "en_p3": 5.1,
+       "en_p2": 13.2,
+       "en_p1": 2.4
+      }
+     },
+     {
+      "_key": "r6",
+      "group": "carry",
+      "cells": {
+       "spec": "Packs flat",
+       "en_p3": false,
+       "en_p2": false,
+       "en_p1": true
+      }
+     }
+    ]
+   },
+   "hideSame": true,
+   "isHeaderSticky": true
+  }
+ }
+]

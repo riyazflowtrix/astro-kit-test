@@ -1,0 +1,5078 @@
+[
+ {
+  "id": "nav-simple-cta",
+  "name": "Simple navbar with CTA",
+  "category": "Navigation & chrome",
+  "kind": "global",
+  "brand": "Hearth & Ash",
+  "previewLayout": "nav",
+  "proves": "Smallest global header \u00b7 inline link rows \u00b7 one button unit \u00b7 tap-to-call link \u00b7 design kept out of content",
+  "schema": {
+   "name": "header",
+   "title": "Header",
+   "kind": "global",
+   "icon": "layout-navbar",
+   "category": "Navigation & chrome",
+   "description": "Logo, a few links and one main button. Synced across every page.",
+   "variants": [
+    {
+     "id": "logo-left",
+     "name": "Logo left",
+     "description": "Logo left, links and button right"
+    },
+    {
+     "id": "logo-center",
+     "name": "Centered logo",
+     "description": "Links split either side of the logo"
+    }
+   ],
+   "preview": {
+    "title": "logoText",
+    "media": "logo"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "design",
+     "title": "Design"
+    }
+   ],
+   "fieldsets": [
+    {
+     "name": "brand",
+     "title": "Brand"
+    }
+   ],
+   "fields": [
+    {
+     "name": "logo",
+     "title": "Logo",
+     "type": "image",
+     "fieldset": "brand",
+     "description": "SVG, or a PNG at least 64px tall."
+    },
+    {
+     "name": "logoText",
+     "title": "Logo text",
+     "type": "string",
+     "fieldset": "brand",
+     "validation": {
+      "required": true,
+      "max": 40
+     },
+     "description": "Read by screen readers. Shown if the logo can't load."
+    },
+    {
+     "name": "links",
+     "title": "Links",
+     "type": "array",
+     "itemNoun": "link",
+     "validation": {
+      "min": 1,
+      "max": 6
+     },
+     "of": [
+      {
+       "name": "link",
+       "title": "Link",
+       "type": "object",
+       "icon": "link",
+       "openMode": "inline",
+       "preview": {
+        "title": "label",
+        "subtitle": "link.href",
+        "fallback": "Untitled link"
+       },
+       "fields": [
+        {
+         "name": "label",
+         "title": "Label",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 24
+         }
+        },
+        {
+         "name": "link",
+         "title": "Links to",
+         "type": "link",
+         "validation": {
+          "required": true
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "phone",
+     "title": "Phone",
+     "type": "link",
+     "description": "Leave empty to hide it."
+    },
+    {
+     "name": "button",
+     "title": "Button",
+     "type": "button"
+    },
+    {
+     "name": "theme",
+     "title": "Theme",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "light",
+     "options": [
+      {
+       "value": "light",
+       "label": "Light"
+      },
+      {
+       "value": "dark",
+       "label": "Dark"
+      },
+      {
+       "value": "brand",
+       "label": "Brand"
+      }
+     ]
+    },
+    {
+     "name": "isSticky",
+     "title": "Stick to the top",
+     "type": "boolean",
+     "group": "design",
+     "initialValue": true
+    },
+    {
+     "name": "isTransparent",
+     "title": "Transparent over heroes",
+     "type": "boolean",
+     "group": "design"
+    },
+    {
+     "name": "mobileMenu",
+     "title": "Mobile menu",
+     "type": "select",
+     "group": "design",
+     "layout": "radio",
+     "initialValue": "drawer",
+     "options": [
+      {
+       "value": "drawer",
+       "label": "Drawer",
+       "description": "Slides in from the right"
+      },
+      {
+       "value": "fullscreen",
+       "label": "Full screen",
+       "description": "Covers the page, big type"
+      }
+     ]
+    }
+   ]
+  },
+  "value": {
+   "_variant": "logo-left",
+   "logo": {
+    "url": "https://picsum.photos/seed/hearth-ash-mark/240/64",
+    "alt": "Hearth & Ash",
+    "name": "hearth-ash-mark.jpg",
+    "width": 240,
+    "height": 64
+   },
+   "logoText": "Hearth & Ash",
+   "links": [
+    {
+     "_key": "l1",
+     "label": "Menus",
+     "link": {
+      "type": "page",
+      "href": "/menus",
+      "title": "Menus"
+     }
+    },
+    {
+     "_key": "l2",
+     "label": "Private dining",
+     "link": {
+      "type": "page",
+      "href": "/private-dining",
+      "title": "Private dining"
+     }
+    },
+    {
+     "_key": "l3",
+     "label": "Gift cards",
+     "link": {
+      "type": "page",
+      "href": "/gift-cards",
+      "title": "Gift cards"
+     }
+    },
+    {
+     "_key": "l4",
+     "label": "Our story",
+     "link": {
+      "type": "page",
+      "href": "/story",
+      "title": "Our story"
+     }
+    }
+   ],
+   "phone": {
+    "type": "phone",
+    "href": "tel:+15035550142",
+    "phone": "+1 503 555 0142",
+    "title": "(503) 555-0142"
+   },
+   "button": {
+    "label": "Book a table",
+    "href": "https://resy.com/cities/pdx/hearth-and-ash",
+    "type": "url",
+    "style": "primary",
+    "newTab": true,
+    "rel": "follow"
+   },
+   "theme": "dark",
+   "isSticky": true,
+   "isTransparent": true,
+   "mobileMenu": "fullscreen"
+  }
+ },
+ {
+  "id": "nav-announcement-utility",
+  "name": "Header with announcement + utility row",
+  "category": "Navigation & chrome",
+  "kind": "global",
+  "brand": "Caldera",
+  "previewLayout": "nav",
+  "proves": "Three stacked rows in one global \u00b7 conditional row content \u00b7 tab groups per row \u00b7 design values split from content",
+  "schema": {
+   "name": "utilityHeader",
+   "title": "Utility header",
+   "kind": "global",
+   "icon": "layout-navbar",
+   "category": "Navigation & chrome",
+   "description": "An announcement row, a utility row and the main menu. Synced across every page.",
+   "preview": {
+    "title": "logoText",
+    "subtitle": "announcement.message",
+    "media": "logo"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Main row",
+     "default": true
+    },
+    {
+     "name": "rows",
+     "title": "Top rows"
+    },
+    {
+     "name": "design",
+     "title": "Design"
+    }
+   ],
+   "fieldsets": [
+    {
+     "name": "brand",
+     "title": "Brand"
+    }
+   ],
+   "fields": [
+    {
+     "name": "logo",
+     "title": "Logo",
+     "type": "image",
+     "fieldset": "brand",
+     "description": "SVG, or a PNG at least 64px tall."
+    },
+    {
+     "name": "logoText",
+     "title": "Logo text",
+     "type": "string",
+     "fieldset": "brand",
+     "validation": {
+      "required": true,
+      "max": 40
+     },
+     "description": "Read by screen readers. Shown if the logo can't load."
+    },
+    {
+     "name": "items",
+     "title": "Menu items",
+     "type": "array",
+     "itemNoun": "menu item",
+     "validation": {
+      "min": 1,
+      "max": 7
+     },
+     "of": [
+      {
+       "name": "link",
+       "title": "Link",
+       "type": "object",
+       "icon": "link",
+       "openMode": "inline",
+       "preview": {
+        "title": "label",
+        "subtitle": "link.href",
+        "fallback": "Untitled link"
+       },
+       "fields": [
+        {
+         "name": "label",
+         "title": "Label",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 20
+         }
+        },
+        {
+         "name": "link",
+         "title": "Links to",
+         "type": "link",
+         "validation": {
+          "required": true
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "button",
+     "title": "Button",
+     "type": "button"
+    },
+    {
+     "name": "announcement",
+     "title": "Announcement row",
+     "type": "object",
+     "group": "rows",
+     "icon": "speakerphone",
+     "openMode": "drill",
+     "fields": [
+      {
+       "name": "showAnnouncement",
+       "title": "Show the announcement",
+       "type": "boolean",
+       "initialValue": true
+      },
+      {
+       "name": "message",
+       "title": "Message",
+       "type": "string",
+       "hidden": {
+        "field": "showAnnouncement",
+        "equals": true
+       },
+       "validation": {
+        "required": true,
+        "max": 90,
+        "recommendedMax": 70
+       },
+       "localized": true,
+       "ai": true
+      },
+      {
+       "name": "link",
+       "title": "Links to",
+       "type": "link",
+       "hidden": {
+        "field": "showAnnouncement",
+        "equals": true
+       },
+       "description": "Leave empty for plain text."
+      }
+     ]
+    },
+    {
+     "name": "utilityLinks",
+     "title": "Utility links",
+     "type": "array",
+     "group": "rows",
+     "itemNoun": "utility link",
+     "validation": {
+      "max": 4
+     },
+     "description": "Hidden on phones.",
+     "of": [
+      {
+       "name": "utilityLink",
+       "title": "Utility link",
+       "type": "object",
+       "icon": "link",
+       "openMode": "inline",
+       "preview": {
+        "title": "label",
+        "subtitle": "link.href",
+        "fallback": "Untitled link"
+       },
+       "fields": [
+        {
+         "name": "icon",
+         "title": "Icon",
+         "type": "icon"
+        },
+        {
+         "name": "label",
+         "title": "Label",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 20
+         }
+        },
+        {
+         "name": "link",
+         "title": "Links to",
+         "type": "link",
+         "validation": {
+          "required": true
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "announcementTone",
+     "title": "Announcement color",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "brand",
+     "options": [
+      {
+       "value": "neutral",
+       "label": "Neutral"
+      },
+      {
+       "value": "brand",
+       "label": "Brand"
+      },
+      {
+       "value": "sale",
+       "label": "Sale"
+      }
+     ]
+    },
+    {
+     "name": "stick",
+     "title": "What stays on scroll",
+     "type": "select",
+     "group": "design",
+     "layout": "radio",
+     "initialValue": "main",
+     "options": [
+      {
+       "value": "none",
+       "label": "Nothing",
+       "description": "The whole header scrolls away"
+      },
+      {
+       "value": "main",
+       "label": "Main row only",
+       "description": "Top rows scroll away, the menu stays"
+      },
+      {
+       "value": "all",
+       "label": "All rows"
+      }
+     ]
+    }
+   ]
+  },
+  "value": {
+   "logo": {
+    "url": "https://picsum.photos/seed/caldera-mark/240/64",
+    "alt": "Caldera",
+    "name": "caldera-mark.jpg",
+    "width": 240,
+    "height": 64
+   },
+   "logoText": "Caldera",
+   "items": [
+    {
+     "_key": "i1",
+     "label": "Shop",
+     "link": {
+      "type": "page",
+      "href": "/products",
+      "title": "Products"
+     }
+    },
+    {
+     "_key": "i2",
+     "label": "Bundles",
+     "link": {
+      "type": "page",
+      "href": "/shop/bundles",
+      "title": "Bundles"
+     }
+    },
+    {
+     "_key": "i3",
+     "label": "Recipes",
+     "link": {
+      "type": "page",
+      "href": "/recipes",
+      "title": "Recipes"
+     }
+    },
+    {
+     "_key": "i4",
+     "label": "Journal",
+     "link": {
+      "type": "page",
+      "href": "/journal",
+      "title": "Journal"
+     }
+    },
+    {
+     "_key": "i5",
+     "label": "About",
+     "link": {
+      "type": "page",
+      "href": "/about",
+      "title": "About"
+     }
+    }
+   ],
+   "button": {
+    "label": "Shop the Fold",
+    "href": "/products/cable-fold",
+    "type": "page",
+    "style": "primary"
+   },
+   "announcement": {
+    "showAnnouncement": true,
+    "message": "Free shipping over $80 \u00b7 Lifetime warranty on all cast iron",
+    "link": {
+     "type": "page",
+     "href": "/shipping",
+     "title": "Shipping & returns"
+    }
+   },
+   "utilityLinks": [
+    {
+     "_key": "u1",
+     "icon": "truck",
+     "label": "Track an order",
+     "link": {
+      "type": "page",
+      "href": "/orders/track",
+      "title": "Track an order"
+     }
+    },
+    {
+     "_key": "u2",
+     "icon": "help-circle",
+     "label": "Help centre",
+     "link": {
+      "type": "page",
+      "href": "/help",
+      "title": "Help centre"
+     }
+    },
+    {
+     "_key": "u3",
+     "icon": "map-pin",
+     "label": "Find a retailer",
+     "link": {
+      "type": "page",
+      "href": "/retailers",
+      "title": "Retailers"
+     }
+    },
+    {
+     "_key": "u4",
+     "icon": "building-store",
+     "label": "Wholesale",
+     "link": {
+      "type": "page",
+      "href": "/wholesale",
+      "title": "Wholesale pricing"
+     }
+    }
+   ],
+   "announcementTone": "brand",
+   "stick": "main"
+  }
+ },
+ {
+  "id": "nav-mega-featured-promo",
+  "name": "Mega menu with featured cards + promo slot",
+  "category": "Navigation & chrome",
+  "kind": "global",
+  "brand": "Caldera",
+  "previewLayout": "nav",
+  "proves": "Six levels deep \u00b7 product references inside a menu \u00b7 a marketer-owned promo SLOT next to structured columns",
+  "schema": {
+   "name": "megaMenuHeader",
+   "title": "Mega menu header",
+   "kind": "global",
+   "icon": "layout-navbar",
+   "category": "Navigation & chrome",
+   "description": "Menu items that open wide panels with link columns, product cards and a promo.",
+   "variants": [
+    {
+     "id": "full",
+     "name": "Full-width panel",
+     "description": "Panel spans the whole window"
+    },
+    {
+     "id": "card",
+     "name": "Dropdown card",
+     "description": "Panel is a card under the item"
+    }
+   ],
+   "preview": {
+    "title": "logoText",
+    "media": "logo"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "design",
+     "title": "Design"
+    }
+   ],
+   "fieldsets": [
+    {
+     "name": "brand",
+     "title": "Brand"
+    }
+   ],
+   "fields": [
+    {
+     "name": "logo",
+     "title": "Logo",
+     "type": "image",
+     "fieldset": "brand",
+     "description": "SVG, or a PNG at least 64px tall."
+    },
+    {
+     "name": "logoText",
+     "title": "Logo text",
+     "type": "string",
+     "fieldset": "brand",
+     "validation": {
+      "required": true,
+      "max": 40
+     },
+     "description": "Read by screen readers. Shown if the logo can't load."
+    },
+    {
+     "name": "items",
+     "title": "Menu items",
+     "type": "array",
+     "itemNoun": "menu item",
+     "validation": {
+      "min": 1,
+      "max": 6
+     },
+     "of": [
+      {
+       "name": "menuItem",
+       "title": "Menu item",
+       "type": "object",
+       "icon": "menu",
+       "preview": {
+        "title": "label",
+        "subtitle": "opens",
+        "fallback": "Untitled item"
+       },
+       "fields": [
+        {
+         "name": "label",
+         "title": "Label",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 20
+         }
+        },
+        {
+         "name": "opens",
+         "title": "Opens",
+         "type": "select",
+         "layout": "segmented",
+         "initialValue": "link",
+         "options": [
+          {
+           "value": "link",
+           "label": "A page"
+          },
+          {
+           "value": "panel",
+           "label": "A panel"
+          }
+         ]
+        },
+        {
+         "name": "link",
+         "title": "Links to",
+         "type": "link",
+         "hidden": {
+          "field": "opens",
+          "equals": "link"
+         },
+         "validation": {
+          "required": true
+         }
+        },
+        {
+         "name": "panel",
+         "title": "Panel",
+         "type": "object",
+         "icon": "layout-board",
+         "openMode": "drill",
+         "hidden": {
+          "field": "opens",
+          "equals": "panel"
+         },
+         "fields": [
+          {
+           "name": "columns",
+           "title": "Link columns",
+           "type": "array",
+           "itemNoun": "column",
+           "validation": {
+            "min": 1,
+            "max": 4
+           },
+           "of": [
+            {
+             "name": "column",
+             "title": "Column",
+             "type": "object",
+             "icon": "columns-3",
+             "preview": {
+              "title": "title",
+              "fallback": "Untitled column"
+             },
+             "fields": [
+              {
+               "name": "title",
+               "title": "Column title",
+               "type": "string",
+               "validation": {
+                "required": true,
+                "max": 24
+               }
+              },
+              {
+               "name": "viewAll",
+               "title": "View all link",
+               "type": "link"
+              },
+              {
+               "name": "links",
+               "title": "Links",
+               "type": "array",
+               "itemNoun": "link",
+               "validation": {
+                "max": 8
+               },
+               "of": [
+                {
+                 "name": "panelLink",
+                 "title": "Link",
+                 "type": "object",
+                 "icon": "link",
+                 "preview": {
+                  "title": "label",
+                  "subtitle": "description",
+                  "fallback": "Untitled link"
+                 },
+                 "fields": [
+                  {
+                   "name": "label",
+                   "title": "Label",
+                   "type": "string",
+                   "validation": {
+                    "required": true,
+                    "max": 32
+                   }
+                  },
+                  {
+                   "name": "link",
+                   "title": "Links to",
+                   "type": "link",
+                   "validation": {
+                    "required": true
+                   }
+                  },
+                  {
+                   "name": "description",
+                   "title": "Description",
+                   "type": "string",
+                   "validation": {
+                    "recommendedMax": 60
+                   }
+                  },
+                  {
+                   "name": "badge",
+                   "title": "Badge",
+                   "type": "object",
+                   "icon": "badge",
+                   "openMode": "popover",
+                   "fields": [
+                    {
+                     "name": "label",
+                     "title": "Label",
+                     "type": "string",
+                     "validation": {
+                      "max": 12
+                     }
+                    },
+                    {
+                     "name": "tone",
+                     "title": "Color",
+                     "type": "select",
+                     "layout": "segmented",
+                     "options": [
+                      {
+                       "value": "brand",
+                       "label": "Brand"
+                      },
+                      {
+                       "value": "sale",
+                       "label": "Sale"
+                      },
+                      {
+                       "value": "neutral",
+                       "label": "Neutral"
+                      }
+                     ]
+                    },
+                    {
+                     "name": "hideAfter",
+                     "title": "Hide after",
+                     "type": "datetime"
+                    }
+                   ]
+                  }
+                 ]
+                }
+               ]
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "name": "featuredCards",
+           "title": "Featured cards",
+           "type": "array",
+           "itemNoun": "card",
+           "validation": {
+            "max": 2
+           },
+           "of": [
+            {
+             "name": "featuredCard",
+             "title": "Card",
+             "type": "object",
+             "icon": "layout-cards",
+             "preview": {
+              "title": "title",
+              "subtitle": "source",
+              "media": "image",
+              "fallback": "Untitled product card"
+             },
+             "fields": [
+              {
+               "name": "source",
+               "title": "Shows",
+               "type": "select",
+               "layout": "segmented",
+               "initialValue": "product",
+               "options": [
+                {
+                 "value": "product",
+                 "label": "A product"
+                },
+                {
+                 "value": "custom",
+                 "label": "Custom card"
+                }
+               ]
+              },
+              {
+               "name": "product",
+               "title": "Product",
+               "type": "reference",
+               "reference": {
+                "to": [
+                 "shopify"
+                ]
+               },
+               "hidden": {
+                "field": "source",
+                "equals": "product"
+               },
+               "validation": {
+                "required": true
+               }
+              },
+              {
+               "name": "image",
+               "title": "Image",
+               "type": "image",
+               "hidden": {
+                "field": "source",
+                "equals": "custom"
+               },
+               "validation": {
+                "required": true
+               }
+              },
+              {
+               "name": "title",
+               "title": "Title",
+               "type": "string",
+               "hidden": {
+                "field": "source",
+                "equals": "custom"
+               },
+               "validation": {
+                "required": true,
+                "recommendedMax": 40
+               },
+               "ai": true
+              },
+              {
+               "name": "button",
+               "title": "Button",
+               "type": "button",
+               "hidden": {
+                "field": "source",
+                "equals": "custom"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "name": "promo",
+           "title": "Promo",
+           "type": "slot",
+           "validation": {
+            "max": 1
+           },
+           "of": {
+            "type": "block",
+            "allow": [
+             "ctaCard",
+             "imageBlock",
+             "productCard",
+             "videoBlock"
+            ]
+           }
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "button",
+     "title": "Button",
+     "type": "button"
+    },
+    {
+     "name": "openOn",
+     "title": "Panels open on",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "hover",
+     "options": [
+      {
+       "value": "hover",
+       "label": "Hover"
+      },
+      {
+       "value": "click",
+       "label": "Click"
+      }
+     ]
+    },
+    {
+     "name": "useBackdrop",
+     "title": "Dim the page behind",
+     "type": "boolean",
+     "group": "design",
+     "initialValue": true
+    }
+   ]
+  },
+  "value": {
+   "_variant": "full",
+   "logo": {
+    "url": "https://picsum.photos/seed/caldera-mark/240/64",
+    "alt": "Caldera",
+    "name": "caldera-mark.jpg",
+    "width": 240,
+    "height": 64
+   },
+   "logoText": "Caldera",
+   "items": [
+    {
+     "_key": "m1",
+     "label": "Shop",
+     "opens": "panel",
+     "panel": {
+      "columns": [
+       {
+        "_key": "c1",
+        "title": "Cookware",
+        "viewAll": {
+         "type": "page",
+         "href": "/products",
+         "title": "All cookware"
+        },
+        "links": [
+         {
+          "_key": "a1",
+          "label": "Skillets",
+          "link": {
+           "type": "page",
+           "href": "/products?type=skillet",
+           "title": "Skillets"
+          },
+          "description": "Cast iron and carbon steel, 8 to 14 inches"
+         },
+         {
+          "_key": "a2",
+          "label": "Dutch ovens",
+          "link": {
+           "type": "entry",
+           "href": "/products/ember-dutch-oven",
+           "title": "Ember Dutch Oven 5.5qt",
+           "entryId": "en_p2"
+          },
+          "description": "Enamelled, 3.5 to 7 quarts",
+          "badge": {
+           "label": "New",
+           "tone": "brand"
+          }
+         },
+         {
+          "_key": "a3",
+          "label": "Grills",
+          "link": {
+           "type": "entry",
+           "href": "/products/cable-fold",
+           "title": "Cable Fold Grill",
+           "entryId": "en_p1"
+          },
+          "description": "The Cable Fold and the Ridge grate"
+         }
+        ]
+       },
+       {
+        "_key": "c2",
+        "title": "Camp kitchen",
+        "links": [
+         {
+          "_key": "a4",
+          "label": "Kettles",
+          "link": {
+           "type": "entry",
+           "href": "/products/trail-kettle",
+           "title": "Trail Kettle 1L",
+           "entryId": "en_p4"
+          }
+         },
+         {
+          "_key": "a5",
+          "label": "Bundles",
+          "link": {
+           "type": "page",
+           "href": "/shop/bundles",
+           "title": "Bundles"
+          },
+          "description": "Save 15% on sets",
+          "badge": {
+           "label": "Sale",
+           "tone": "sale",
+           "hideAfter": "2026-12-01T23:59:00-08:00[America/Los_Angeles]"
+          }
+         }
+        ]
+       },
+       {
+        "_key": "c3",
+        "title": "Care",
+        "links": [
+         {
+          "_key": "a6",
+          "label": "Seasoning oil",
+          "link": {
+           "type": "page",
+           "href": "/products/seasoning-oil",
+           "title": "Seasoning oil"
+          }
+         },
+         {
+          "_key": "a7",
+          "label": "Chainmail scrubber",
+          "link": {
+           "type": "page",
+           "href": "/products/chainmail",
+           "title": "Chainmail scrubber"
+          }
+         }
+        ]
+       }
+      ],
+      "featuredCards": [
+       {
+        "_key": "f1",
+        "source": "product",
+        "product": "gid://shopify/Product/8812"
+       },
+       {
+        "_key": "f2",
+        "source": "custom",
+        "image": {
+         "url": "https://picsum.photos/seed/caldera-gift-guide/900/700",
+         "alt": "Cast iron set wrapped in brown paper on a cabin table",
+         "name": "caldera-gift-guide.jpg",
+         "width": 900,
+         "height": 700
+        },
+        "title": "The 2026 gift guide",
+        "button": {
+         "label": "Find a gift",
+         "href": "/journal/gift-guide",
+         "type": "page",
+         "style": "link",
+         "arrow": true
+        }
+       }
+      ],
+      "promo": [
+       {
+        "_key": "p1",
+        "_type": "ctaCard",
+        "_variant": "solid",
+        "heading": "Holiday sets ship free",
+        "body": "Order by December 18 for delivery before the 24th.",
+        "button": {
+         "label": "Shop sets",
+         "href": "/shop/bundles",
+         "type": "page",
+         "style": "primary"
+        }
+       }
+      ]
+     }
+    },
+    {
+     "_key": "m2",
+     "label": "Learn",
+     "opens": "panel",
+     "panel": {
+      "columns": [
+       {
+        "_key": "c4",
+        "title": "Cook",
+        "links": [
+         {
+          "_key": "b1",
+          "label": "Recipes",
+          "link": {
+           "type": "page",
+           "href": "/recipes",
+           "title": "Recipes"
+          },
+          "description": "Tested over coals and on the stove"
+         },
+         {
+          "_key": "b2",
+          "label": "Cast iron care",
+          "link": {
+           "type": "page",
+           "href": "/journal/cast-iron-care",
+           "title": "Cast iron care"
+          }
+         }
+        ]
+       }
+      ],
+      "featuredCards": [],
+      "promo": [
+       {
+        "_key": "p2",
+        "_type": "imageBlock",
+        "_variant": "cover",
+        "image": {
+         "url": "https://picsum.photos/seed/caldera-film-still/900/700",
+         "alt": "Cook kneeling at a campfire at dusk",
+         "name": "caldera-film-still.jpg",
+         "width": 900,
+         "height": 700
+        },
+        "caption": "Watch: Fire Lessons, episode 4",
+        "link": {
+         "type": "page",
+         "href": "/journal/fire-lessons-4",
+         "title": "Fire Lessons, episode 4"
+        }
+       }
+      ]
+     }
+    },
+    {
+     "_key": "m3",
+     "label": "About",
+     "opens": "link",
+     "link": {
+      "type": "page",
+      "href": "/about",
+      "title": "About"
+     }
+    }
+   ],
+   "button": {
+    "label": "Shop the Fold",
+    "href": "/products/cable-fold",
+    "type": "page",
+    "style": "primary"
+   },
+   "openOn": "click",
+   "useBackdrop": true
+  }
+ },
+ {
+  "id": "nav-docs-sidebar",
+  "name": "Docs sidebar navigation",
+  "category": "Navigation & chrome",
+  "kind": "global",
+  "brand": "Tideline",
+  "previewLayout": "list",
+  "proves": "Four-level tree at a fixed depth \u00b7 curated vs auto from the page tree \u00b7 version switcher \u00b7 status badges",
+  "schema": {
+   "name": "docsSidebar",
+   "title": "Docs sidebar",
+   "kind": "global",
+   "icon": "layout-sidebar",
+   "category": "Navigation & chrome",
+   "description": "The left-hand tree on every docs page, with search and a version switcher.",
+   "preview": {
+    "title": "searchPlaceholder"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "behavior",
+     "title": "Behavior"
+    }
+   ],
+   "fields": [
+    {
+     "name": "versions",
+     "title": "Versions",
+     "type": "array",
+     "itemNoun": "version",
+     "validation": {
+      "max": 6
+     },
+     "description": "Leave empty to hide the switcher.",
+     "of": [
+      {
+       "name": "version",
+       "title": "Version",
+       "type": "object",
+       "icon": "versions",
+       "openMode": "inline",
+       "preview": {
+        "title": "label",
+        "subtitle": "status",
+        "fallback": "Untitled version"
+       },
+       "fields": [
+        {
+         "name": "label",
+         "title": "Label",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 16
+         },
+         "placeholder": "v3"
+        },
+        {
+         "name": "link",
+         "title": "Docs home",
+         "type": "link",
+         "validation": {
+          "required": true
+         }
+        },
+        {
+         "name": "status",
+         "title": "Status",
+         "type": "select",
+         "options": [
+          {
+           "value": "current",
+           "label": "Current"
+          },
+          {
+           "value": "beta",
+           "label": "Beta"
+          },
+          {
+           "value": "legacy",
+           "label": "Legacy",
+           "description": "Shows an out-of-date warning on its pages"
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "searchPlaceholder",
+     "title": "Search placeholder",
+     "type": "string",
+     "validation": {
+      "max": 40
+     },
+     "placeholder": "Search docs"
+    },
+    {
+     "name": "source",
+     "title": "Tree comes from",
+     "type": "select",
+     "layout": "cards",
+     "initialValue": "curated",
+     "options": [
+      {
+       "value": "curated",
+       "label": "Curated",
+       "icon": "list-tree",
+       "description": "You order sections and pages here"
+      },
+      {
+       "value": "auto",
+       "label": "Page tree",
+       "icon": "folders",
+       "description": "Follows the docs folder; new pages appear on their own"
+      }
+     ]
+    },
+    {
+     "name": "root",
+     "title": "Docs root page",
+     "type": "reference",
+     "reference": {
+      "to": [
+       "page"
+      ]
+     },
+     "hidden": {
+      "field": "source",
+      "equals": "auto"
+     },
+     "validation": {
+      "required": true
+     },
+     "description": "Every page under this one is listed, in folder order."
+    },
+    {
+     "name": "sections",
+     "title": "Sections",
+     "type": "array",
+     "itemNoun": "section",
+     "hidden": {
+      "field": "source",
+      "equals": "curated"
+     },
+     "validation": {
+      "min": 1,
+      "max": 12
+     },
+     "of": [
+      {
+       "name": "section",
+       "title": "Section",
+       "type": "object",
+       "icon": "folder",
+       "preview": {
+        "title": "title",
+        "fallback": "Untitled section"
+       },
+       "fields": [
+        {
+         "name": "title",
+         "title": "Section title",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 32
+         }
+        },
+        {
+         "name": "icon",
+         "title": "Icon",
+         "type": "icon"
+        },
+        {
+         "name": "isCollapsed",
+         "title": "Start collapsed",
+         "type": "boolean"
+        },
+        {
+         "name": "pages",
+         "title": "Pages",
+         "type": "array",
+         "itemNoun": "page",
+         "validation": {
+          "min": 1,
+          "max": 30
+         },
+         "of": [
+          {
+           "name": "docLink",
+           "title": "Page",
+           "type": "object",
+           "icon": "file-text",
+           "preview": {
+            "title": "label",
+            "subtitle": "badge",
+            "fallback": "Untitled page"
+           },
+           "fields": [
+            {
+             "name": "label",
+             "title": "Label",
+             "type": "string",
+             "validation": {
+              "required": true,
+              "max": 40
+             }
+            },
+            {
+             "name": "link",
+             "title": "Links to",
+             "type": "link",
+             "validation": {
+              "required": true
+             }
+            },
+            {
+             "name": "badge",
+             "title": "Badge",
+             "type": "select",
+             "layout": "segmented",
+             "options": [
+              {
+               "value": "",
+               "label": "None"
+              },
+              {
+               "value": "new",
+               "label": "New"
+              },
+              {
+               "value": "beta",
+               "label": "Beta"
+              },
+              {
+               "value": "deprecated",
+               "label": "Deprecated"
+              }
+             ]
+            },
+            {
+             "name": "children",
+             "title": "Sub-pages",
+             "type": "array",
+             "itemNoun": "sub-page",
+             "validation": {
+              "max": 15
+             },
+             "description": "One level only.",
+             "of": [
+              {
+               "name": "docSubLink",
+               "title": "Sub-page",
+               "type": "object",
+               "icon": "file",
+               "openMode": "inline",
+               "preview": {
+                "title": "label",
+                "fallback": "Untitled sub-page"
+               },
+               "fields": [
+                {
+                 "name": "label",
+                 "title": "Label",
+                 "type": "string",
+                 "validation": {
+                  "required": true,
+                  "max": 40
+                 }
+                },
+                {
+                 "name": "link",
+                 "title": "Links to",
+                 "type": "link",
+                 "validation": {
+                  "required": true
+                 }
+                }
+               ]
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "footerLinks",
+     "title": "Footer links",
+     "type": "array",
+     "itemNoun": "link",
+     "validation": {
+      "max": 4
+     },
+     "of": [
+      {
+       "name": "link",
+       "title": "Link",
+       "type": "object",
+       "icon": "link",
+       "openMode": "inline",
+       "preview": {
+        "title": "label",
+        "subtitle": "link.href",
+        "fallback": "Untitled link"
+       },
+       "fields": [
+        {
+         "name": "label",
+         "title": "Label",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 24
+         }
+        },
+        {
+         "name": "link",
+         "title": "Links to",
+         "type": "link",
+         "validation": {
+          "required": true
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "isCurrentOpen",
+     "title": "Open the current section",
+     "type": "boolean",
+     "group": "behavior",
+     "initialValue": true
+    },
+    {
+     "name": "showPrevNext",
+     "title": "Previous and next links",
+     "type": "boolean",
+     "group": "behavior",
+     "initialValue": true
+    }
+   ]
+  },
+  "value": {
+   "versions": [
+    {
+     "_key": "v1",
+     "label": "v3",
+     "link": {
+      "type": "page",
+      "href": "/docs",
+      "title": "Docs"
+     },
+     "status": "current"
+    },
+    {
+     "_key": "v2",
+     "label": "v2",
+     "link": {
+      "type": "page",
+      "href": "/docs/v2",
+      "title": "Docs v2"
+     },
+     "status": "legacy"
+    }
+   ],
+   "searchPlaceholder": "Search docs \u2318K",
+   "source": "curated",
+   "sections": [
+    {
+     "_key": "s1",
+     "title": "Get started",
+     "icon": "rocket",
+     "isCollapsed": false,
+     "pages": [
+      {
+       "_key": "p1",
+       "label": "Quickstart",
+       "link": {
+        "type": "page",
+        "href": "/docs/quickstart",
+        "title": "Quickstart"
+       },
+       "badge": ""
+      },
+      {
+       "_key": "p2",
+       "label": "Install the agent",
+       "link": {
+        "type": "page",
+        "href": "/docs/install",
+        "title": "Install the agent"
+       },
+       "badge": "",
+       "children": [
+        {
+         "_key": "k1",
+         "label": "Kubernetes",
+         "link": {
+          "type": "page",
+          "href": "/docs/install/kubernetes",
+          "title": "Kubernetes"
+         }
+        },
+        {
+         "_key": "k2",
+         "label": "Docker",
+         "link": {
+          "type": "page",
+          "href": "/docs/install/docker",
+          "title": "Docker"
+         }
+        },
+        {
+         "_key": "k3",
+         "label": "Bare metal",
+         "link": {
+          "type": "page",
+          "href": "/docs/install/linux",
+          "title": "Linux hosts"
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "_key": "s2",
+     "title": "Traces",
+     "icon": "route",
+     "isCollapsed": true,
+     "pages": [
+      {
+       "_key": "p3",
+       "label": "Sampling rules",
+       "link": {
+        "type": "page",
+        "href": "/docs/traces/sampling",
+        "title": "Sampling rules"
+       },
+       "badge": "new"
+      },
+      {
+       "_key": "p4",
+       "label": "Service map",
+       "link": {
+        "type": "page",
+        "href": "/docs/traces/service-map",
+        "title": "Service map"
+       },
+       "badge": "beta"
+      },
+      {
+       "_key": "p5",
+       "label": "Legacy span API",
+       "link": {
+        "type": "page",
+        "href": "/docs/traces/span-api-v1",
+        "title": "Span API v1"
+       },
+       "badge": "deprecated"
+      }
+     ]
+    }
+   ],
+   "footerLinks": [
+    {
+     "_key": "f1",
+     "label": "Changelog",
+     "link": {
+      "type": "page",
+      "href": "/changelog",
+      "title": "Changelog"
+     }
+    },
+    {
+     "_key": "f2",
+     "label": "Status",
+     "link": {
+      "type": "url",
+      "href": "https://status.tideline.dev",
+      "newTab": true
+     }
+    }
+   ],
+   "isCurrentOpen": true,
+   "showPrevNext": true
+  }
+ },
+ {
+  "id": "nav-ecommerce-header",
+  "name": "E-commerce header",
+  "category": "Navigation & chrome",
+  "kind": "global",
+  "brand": "Caldera",
+  "previewLayout": "nav",
+  "proves": "Search, account and cart config in one global \u00b7 product references for search \u00b7 app state (cart count) NOT modelled",
+  "schema": {
+   "name": "storeHeader",
+   "title": "Store header",
+   "kind": "global",
+   "icon": "layout-navbar",
+   "category": "Navigation & chrome",
+   "description": "Logo, category bar, search, account and cart. Synced across every page.",
+   "variants": [
+    {
+     "id": "inline-search",
+     "name": "Search in the bar",
+     "description": "A wide search field between logo and icons"
+    },
+    {
+     "id": "icon-search",
+     "name": "Search icon",
+     "description": "A magnifier that opens a full-width search"
+    }
+   ],
+   "preview": {
+    "title": "logoText",
+    "media": "logo"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "search",
+     "title": "Search"
+    },
+    {
+     "name": "cart",
+     "title": "Account & cart"
+    },
+    {
+     "name": "design",
+     "title": "Design"
+    }
+   ],
+   "fieldsets": [
+    {
+     "name": "brand",
+     "title": "Brand"
+    }
+   ],
+   "fields": [
+    {
+     "name": "logo",
+     "title": "Logo",
+     "type": "image",
+     "fieldset": "brand",
+     "description": "SVG, or a PNG at least 64px tall."
+    },
+    {
+     "name": "logoText",
+     "title": "Logo text",
+     "type": "string",
+     "fieldset": "brand",
+     "validation": {
+      "required": true,
+      "max": 40
+     },
+     "description": "Read by screen readers. Shown if the logo can't load."
+    },
+    {
+     "name": "categories",
+     "title": "Categories",
+     "type": "array",
+     "itemNoun": "category",
+     "validation": {
+      "min": 1,
+      "max": 8
+     },
+     "of": [
+      {
+       "name": "category",
+       "title": "Category",
+       "type": "object",
+       "icon": "category",
+       "preview": {
+        "title": "label",
+        "subtitle": "link.href",
+        "media": "thumbnail",
+        "fallback": "Untitled category"
+       },
+       "fields": [
+        {
+         "name": "label",
+         "title": "Label",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 20
+         }
+        },
+        {
+         "name": "link",
+         "title": "Links to",
+         "type": "link",
+         "validation": {
+          "required": true
+         }
+        },
+        {
+         "name": "thumbnail",
+         "title": "Thumbnail",
+         "type": "image"
+        },
+        {
+         "name": "isHighlighted",
+         "title": "Show in the sale color",
+         "type": "boolean"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "searchPlaceholder",
+     "title": "Placeholder",
+     "type": "string",
+     "group": "search",
+     "validation": {
+      "max": 48
+     }
+    },
+    {
+     "name": "suggestions",
+     "title": "Suggested searches",
+     "type": "array",
+     "itemNoun": "suggestion",
+     "of": [
+      {
+       "name": "suggestion",
+       "title": "Suggestion",
+       "type": "string"
+      }
+     ],
+     "group": "search",
+     "validation": {
+      "max": 6
+     }
+    },
+    {
+     "name": "popularProducts",
+     "title": "Popular products",
+     "type": "array",
+     "group": "search",
+     "itemNoun": "product",
+     "validation": {
+      "max": 4
+     },
+     "of": [
+      {
+       "name": "product",
+       "title": "Product",
+       "type": "reference",
+       "reference": {
+        "to": [
+         "shopify"
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "name": "noResults",
+     "title": "No results message",
+     "type": "string",
+     "group": "search",
+     "validation": {
+      "max": 80
+     },
+     "placeholder": "Nothing matched. Try \"skillet\" or \"kettle\"."
+    },
+    {
+     "name": "accountLabel",
+     "title": "Account label",
+     "type": "string",
+     "group": "cart",
+     "initialValue": "Sign in",
+     "validation": {
+      "max": 16
+     },
+     "description": "Shown to signed-out visitors only."
+    },
+    {
+     "name": "accountLink",
+     "title": "Account page",
+     "type": "link",
+     "group": "cart"
+    },
+    {
+     "name": "cartOpens",
+     "title": "Cart opens",
+     "type": "select",
+     "group": "cart",
+     "layout": "radio",
+     "initialValue": "drawer",
+     "options": [
+      {
+       "value": "drawer",
+       "label": "A drawer",
+       "description": "Slides in; people keep their place"
+      },
+      {
+       "value": "page",
+       "label": "The cart page"
+      }
+     ]
+    },
+    {
+     "name": "emptyCart",
+     "title": "Empty cart message",
+     "type": "string",
+     "group": "cart",
+     "hidden": {
+      "field": "cartOpens",
+      "equals": "drawer"
+     },
+     "validation": {
+      "max": 80
+     }
+    },
+    {
+     "name": "drawerButton",
+     "title": "Drawer button",
+     "type": "button",
+     "group": "cart",
+     "hidden": {
+      "field": "cartOpens",
+      "equals": "drawer"
+     }
+    },
+    {
+     "name": "isSticky",
+     "title": "Stick to the top",
+     "type": "boolean",
+     "group": "design",
+     "initialValue": true
+    },
+    {
+     "name": "categoryBar",
+     "title": "Category bar",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "below",
+     "options": [
+      {
+       "value": "below",
+       "label": "Below the logo"
+      },
+      {
+       "value": "inline",
+       "label": "Next to the logo"
+      }
+     ]
+    }
+   ]
+  },
+  "value": {
+   "_variant": "inline-search",
+   "logo": {
+    "url": "https://picsum.photos/seed/caldera-mark/240/64",
+    "alt": "Caldera",
+    "name": "caldera-mark.jpg",
+    "width": 240,
+    "height": 64
+   },
+   "logoText": "Caldera",
+   "categories": [
+    {
+     "_key": "c1",
+     "label": "Skillets",
+     "link": {
+      "type": "page",
+      "href": "/collections/skillets",
+      "title": "Skillets"
+     },
+     "thumbnail": {
+      "url": "https://picsum.photos/seed/caldera-skillet-thumb/320/320",
+      "alt": "",
+      "name": "caldera-skillet-thumb.jpg",
+      "width": 320,
+      "height": 320
+     }
+    },
+    {
+     "_key": "c2",
+     "label": "Dutch ovens",
+     "link": {
+      "type": "page",
+      "href": "/collections/dutch-ovens",
+      "title": "Dutch ovens"
+     },
+     "thumbnail": {
+      "url": "https://picsum.photos/seed/caldera-dutch-thumb/320/320",
+      "alt": "",
+      "name": "caldera-dutch-thumb.jpg",
+      "width": 320,
+      "height": 320
+     }
+    },
+    {
+     "_key": "c3",
+     "label": "Grills",
+     "link": {
+      "type": "page",
+      "href": "/collections/grills",
+      "title": "Grills"
+     },
+     "thumbnail": {
+      "url": "https://picsum.photos/seed/caldera-grill-thumb/320/320",
+      "alt": "",
+      "name": "caldera-grill-thumb.jpg",
+      "width": 320,
+      "height": 320
+     }
+    },
+    {
+     "_key": "c4",
+     "label": "Camp kitchen",
+     "link": {
+      "type": "page",
+      "href": "/collections/camp-kitchen",
+      "title": "Camp kitchen"
+     }
+    },
+    {
+     "_key": "c5",
+     "label": "Bundles",
+     "link": {
+      "type": "page",
+      "href": "/shop/bundles",
+      "title": "Bundles"
+     }
+    },
+    {
+     "_key": "c6",
+     "label": "Sale",
+     "link": {
+      "type": "page",
+      "href": "/collections/sale",
+      "title": "Sale"
+     },
+     "isHighlighted": true
+    }
+   ],
+   "searchPlaceholder": "Search skillets, grills, recipes",
+   "suggestions": [
+    "cast iron skillet",
+    "dutch oven",
+    "seasoning",
+    "camp grill"
+   ],
+   "popularProducts": [
+    "gid://shopify/Product/8812",
+    "gid://shopify/Product/8813",
+    "gid://shopify/Product/8814"
+   ],
+   "noResults": "Nothing matched. Try \u201cskillet\u201d or \u201ckettle\u201d.",
+   "accountLabel": "Sign in",
+   "accountLink": {
+    "type": "page",
+    "href": "/account",
+    "title": "Account"
+   },
+   "cartOpens": "drawer",
+   "emptyCart": "Your cart is empty. The fire's still going.",
+   "drawerButton": {
+    "label": "Shop bestsellers",
+    "href": "/collections/bestsellers",
+    "type": "page",
+    "style": "primary"
+   },
+   "isSticky": true,
+   "categoryBar": "below"
+  }
+ },
+ {
+  "id": "nav-locale-header",
+  "name": "Multi-locale header with switchers",
+  "category": "Navigation & chrome",
+  "kind": "global",
+  "brand": "Caldera",
+  "previewLayout": "nav",
+  "proves": "Localized labels inside a global \u00b7 switcher config with conditional lists \u00b7 what belongs to site settings vs content",
+  "schema": {
+   "name": "multilingualHeader",
+   "title": "Multilingual header",
+   "kind": "global",
+   "icon": "layout-navbar",
+   "category": "Navigation & chrome",
+   "description": "Main menu plus language and currency switchers. Labels are translated per locale.",
+   "preview": {
+    "title": "logoText",
+    "media": "logo"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "switchers",
+     "title": "Switchers"
+    },
+    {
+     "name": "design",
+     "title": "Design"
+    }
+   ],
+   "fieldsets": [
+    {
+     "name": "brand",
+     "title": "Brand"
+    }
+   ],
+   "fields": [
+    {
+     "name": "logo",
+     "title": "Logo",
+     "type": "image",
+     "fieldset": "brand",
+     "description": "SVG, or a PNG at least 64px tall."
+    },
+    {
+     "name": "logoText",
+     "title": "Logo text",
+     "type": "string",
+     "fieldset": "brand",
+     "validation": {
+      "required": true,
+      "max": 40
+     },
+     "description": "Read by screen readers. Shown if the logo can't load."
+    },
+    {
+     "name": "items",
+     "title": "Menu items",
+     "type": "array",
+     "itemNoun": "menu item",
+     "validation": {
+      "min": 1,
+      "max": 6
+     },
+     "of": [
+      {
+       "name": "localizedLink",
+       "title": "Link",
+       "type": "object",
+       "icon": "link",
+       "openMode": "inline",
+       "preview": {
+        "title": "label",
+        "subtitle": "link.href",
+        "fallback": "Untitled link"
+       },
+       "fields": [
+        {
+         "name": "label",
+         "title": "Label",
+         "type": "string",
+         "localized": true,
+         "validation": {
+          "required": true,
+          "max": 20
+         }
+        },
+        {
+         "name": "link",
+         "title": "Links to",
+         "type": "link",
+         "validation": {
+          "required": true
+         },
+         "description": "Each language opens its own translation."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "button",
+     "title": "Button",
+     "type": "button",
+     "localized": true
+    },
+    {
+     "name": "showLanguage",
+     "title": "Language switcher",
+     "type": "boolean",
+     "group": "switchers",
+     "initialValue": true
+    },
+    {
+     "name": "languages",
+     "title": "Languages",
+     "type": "array",
+     "group": "switchers",
+     "itemNoun": "language",
+     "hidden": {
+      "field": "showLanguage",
+      "equals": true
+     },
+     "validation": {
+      "min": 2,
+      "max": 12
+     },
+     "description": "Only languages the site is published in.",
+     "of": [
+      {
+       "name": "language",
+       "title": "Language",
+       "type": "object",
+       "icon": "language",
+       "openMode": "inline",
+       "preview": {
+        "title": "nativeName",
+        "subtitle": "locale",
+        "fallback": "Untitled language"
+       },
+       "fields": [
+        {
+         "name": "locale",
+         "title": "Locale",
+         "type": "select",
+         "validation": {
+          "required": true,
+          "unique": true
+         },
+         "options": [
+          {
+           "value": "en-US",
+           "label": "English (US)"
+          },
+          {
+           "value": "en-GB",
+           "label": "English (UK)"
+          },
+          {
+           "value": "de-DE",
+           "label": "German"
+          },
+          {
+           "value": "fr-FR",
+           "label": "French"
+          },
+          {
+           "value": "ja-JP",
+           "label": "Japanese"
+          }
+         ]
+        },
+        {
+         "name": "nativeName",
+         "title": "Name in the menu",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 20
+         },
+         "description": "In its own language, e.g. Deutsch."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "showCurrency",
+     "title": "Currency switcher",
+     "type": "boolean",
+     "group": "switchers",
+     "initialValue": true
+    },
+    {
+     "name": "currencies",
+     "title": "Currencies",
+     "type": "multiselect",
+     "group": "switchers",
+     "hidden": {
+      "field": "showCurrency",
+      "equals": true
+     },
+     "options": [
+      {
+       "value": "USD",
+       "label": "US dollar \u00b7 $"
+      },
+      {
+       "value": "EUR",
+       "label": "Euro \u00b7 \u20ac"
+      },
+      {
+       "value": "GBP",
+       "label": "Pound sterling \u00b7 \u00a3"
+      },
+      {
+       "value": "CAD",
+       "label": "Canadian dollar \u00b7 CA$"
+      },
+      {
+       "value": "JPY",
+       "label": "Japanese yen \u00b7 \u00a5"
+      }
+     ]
+    },
+    {
+     "name": "firstVisit",
+     "title": "On the first visit",
+     "type": "select",
+     "group": "switchers",
+     "layout": "radio",
+     "initialValue": "suggest",
+     "options": [
+      {
+       "value": "suggest",
+       "label": "Suggest a locale",
+       "description": "A banner offers the visitor's language; nothing changes until they pick"
+      },
+      {
+       "value": "stay",
+       "label": "Stay on the address they opened"
+      }
+     ]
+    },
+    {
+     "name": "suggestMessage",
+     "title": "Suggestion message",
+     "type": "string",
+     "group": "switchers",
+     "localized": true,
+     "hidden": {
+      "field": "firstVisit",
+      "equals": "suggest"
+     },
+     "validation": {
+      "max": 80
+     },
+     "placeholder": "Looks like you're in Germany. Shop in Deutsch \u00b7 EUR?"
+    },
+    {
+     "name": "display",
+     "title": "Switcher shows",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "code",
+     "options": [
+      {
+       "value": "code",
+       "label": "EN \u00b7 USD"
+      },
+      {
+       "value": "name",
+       "label": "English \u00b7 $"
+      },
+      {
+       "value": "globe",
+       "label": "Globe icon"
+      }
+     ]
+    },
+    {
+     "name": "placement",
+     "title": "Placement",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "header",
+     "options": [
+      {
+       "value": "header",
+       "label": "Header"
+      },
+      {
+       "value": "footer",
+       "label": "Footer"
+      },
+      {
+       "value": "both",
+       "label": "Both"
+      }
+     ]
+    }
+   ]
+  },
+  "value": {
+   "logo": {
+    "url": "https://picsum.photos/seed/caldera-mark/240/64",
+    "alt": "Caldera",
+    "name": "caldera-mark.jpg",
+    "width": 240,
+    "height": 64
+   },
+   "logoText": "Caldera",
+   "items": [
+    {
+     "_key": "i1",
+     "label": "Shop",
+     "link": {
+      "type": "page",
+      "href": "/products",
+      "title": "Products"
+     }
+    },
+    {
+     "_key": "i2",
+     "label": "Recipes",
+     "link": {
+      "type": "page",
+      "href": "/recipes",
+      "title": "Recipes"
+     }
+    },
+    {
+     "_key": "i3",
+     "label": "Stockists",
+     "link": {
+      "type": "page",
+      "href": "/retailers",
+      "title": "Retailers"
+     }
+    },
+    {
+     "_key": "i4",
+     "label": "About",
+     "link": {
+      "type": "page",
+      "href": "/about",
+      "title": "About"
+     }
+    }
+   ],
+   "button": {
+    "label": "Shop the Fold",
+    "href": "/products/cable-fold",
+    "type": "page",
+    "style": "primary"
+   },
+   "showLanguage": true,
+   "languages": [
+    {
+     "_key": "g1",
+     "locale": "en-US",
+     "nativeName": "English"
+    },
+    {
+     "_key": "g2",
+     "locale": "de-DE",
+     "nativeName": "Deutsch"
+    },
+    {
+     "_key": "g3",
+     "locale": "fr-FR",
+     "nativeName": "Fran\u00e7ais"
+    },
+    {
+     "_key": "g4",
+     "locale": "ja-JP",
+     "nativeName": "\u65e5\u672c\u8a9e"
+    }
+   ],
+   "showCurrency": true,
+   "currencies": [
+    "USD",
+    "EUR",
+    "GBP",
+    "JPY"
+   ],
+   "firstVisit": "suggest",
+   "suggestMessage": "Looks like you're in Germany. Shop in Deutsch \u00b7 EUR?",
+   "display": "code",
+   "placement": "header"
+  }
+ },
+ {
+  "id": "sticky-mobile-cta-bar",
+  "name": "Sticky bottom CTA bar (mobile)",
+  "category": "Navigation & chrome",
+  "kind": "block",
+  "brand": "Caldera",
+  "previewLayout": "banner",
+  "proves": "A per-template block with breakpoint visibility, scroll triggers and a secondary contact action",
+  "schema": {
+   "name": "stickyBar",
+   "title": "Sticky action bar",
+   "kind": "block",
+   "icon": "layout-bottombar-expand",
+   "category": "Navigation & chrome",
+   "description": "A bar pinned to the bottom of the screen with one main action.",
+   "preview": {
+    "title": "message",
+    "subtitle": "button.label"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "behavior",
+     "title": "Behavior"
+    },
+    {
+     "name": "design",
+     "title": "Design"
+    }
+   ],
+   "fields": [
+    {
+     "name": "message",
+     "title": "Message",
+     "type": "string",
+     "validation": {
+      "recommendedMax": 40,
+      "max": 60
+     },
+     "ai": true
+    },
+    {
+     "name": "showPrice",
+     "title": "Show the product price",
+     "type": "boolean",
+     "description": "Product pages only."
+    },
+    {
+     "name": "button",
+     "title": "Button",
+     "type": "button",
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "secondaryAction",
+     "title": "Second action",
+     "type": "select",
+     "layout": "segmented",
+     "initialValue": "none",
+     "options": [
+      {
+       "value": "none",
+       "label": "None"
+      },
+      {
+       "value": "call",
+       "label": "Call"
+      },
+      {
+       "value": "chat",
+       "label": "Chat"
+      }
+     ]
+    },
+    {
+     "name": "phone",
+     "title": "Phone",
+     "type": "link",
+     "hidden": {
+      "field": "secondaryAction",
+      "equals": "call"
+     },
+     "validation": {
+      "required": true
+     }
+    },
+    {
+     "name": "showOn",
+     "title": "Show on",
+     "type": "multiselect",
+     "group": "behavior",
+     "initialValue": [
+      "mobile"
+     ],
+     "validation": {
+      "min": 1
+     },
+     "options": [
+      {
+       "value": "mobile",
+       "label": "Phones"
+      },
+      {
+       "value": "tablet",
+       "label": "Tablets"
+      },
+      {
+       "value": "desktop",
+       "label": "Desktop"
+      }
+     ]
+    },
+    {
+     "name": "trigger",
+     "title": "Appears",
+     "type": "select",
+     "group": "behavior",
+     "layout": "radio",
+     "initialValue": "pastHero",
+     "options": [
+      {
+       "value": "always",
+       "label": "Right away"
+      },
+      {
+       "value": "pastHero",
+       "label": "After the first section scrolls away",
+       "description": "Avoids two identical buttons on screen"
+      },
+      {
+       "value": "percent",
+       "label": "After part of the page"
+      }
+     ]
+    },
+    {
+     "name": "percent",
+     "title": "Scrolled",
+     "type": "number",
+     "group": "behavior",
+     "layout": "slider",
+     "hidden": {
+      "field": "trigger",
+      "equals": "percent"
+     },
+     "numeric": {
+      "min": 10,
+      "max": 90,
+      "step": 5,
+      "unit": "%"
+     },
+     "initialValue": 30
+    },
+    {
+     "name": "hideNearFooter",
+     "title": "Hide near the footer",
+     "type": "boolean",
+     "group": "behavior",
+     "initialValue": true
+    },
+    {
+     "name": "theme",
+     "title": "Theme",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "light",
+     "options": [
+      {
+       "value": "light",
+       "label": "Light"
+      },
+      {
+       "value": "dark",
+       "label": "Dark"
+      },
+      {
+       "value": "brand",
+       "label": "Brand"
+      }
+     ]
+    }
+   ]
+  },
+  "value": {
+   "message": "Cable Fold Grill \u00b7 ships in 1\u20132 days",
+   "showPrice": true,
+   "button": {
+    "label": "Add to cart",
+    "href": "#buy",
+    "type": "page",
+    "style": "primary"
+   },
+   "secondaryAction": "chat",
+   "showOn": [
+    "mobile",
+    "tablet"
+   ],
+   "trigger": "pastHero",
+   "percent": 30,
+   "hideNearFooter": true,
+   "theme": "dark"
+  }
+ },
+ {
+  "id": "announcement-countdown",
+  "name": "Announcement bar with countdown",
+  "category": "Navigation & chrome",
+  "kind": "global",
+  "brand": "Caldera",
+  "previewLayout": "banner",
+  "proves": "Scheduled global with time zone \u00b7 countdown with an after-end state \u00b7 dismiss memory \u00b7 rotating messages",
+  "schema": {
+   "name": "countdownBar",
+   "title": "Countdown bar",
+   "kind": "global",
+   "icon": "alarm",
+   "category": "Navigation & chrome",
+   "description": "A strip above the header for a sale or launch, with an optional countdown.",
+   "preview": {
+    "title": "messages.0.text",
+    "subtitle": "countdown.endsAt"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "schedule",
+     "title": "Schedule"
+    },
+    {
+     "name": "design",
+     "title": "Design"
+    }
+   ],
+   "fields": [
+    {
+     "name": "messages",
+     "title": "Messages",
+     "type": "array",
+     "itemNoun": "message",
+     "validation": {
+      "min": 1,
+      "max": 3
+     },
+     "description": "Messages rotate every 5 seconds.",
+     "of": [
+      {
+       "name": "message",
+       "title": "Message",
+       "type": "object",
+       "icon": "message",
+       "openMode": "inline",
+       "preview": {
+        "title": "text",
+        "subtitle": "link.href",
+        "fallback": "Untitled message"
+       },
+       "fields": [
+        {
+         "name": "text",
+         "title": "Text",
+         "type": "string",
+         "localized": true,
+         "ai": true,
+         "validation": {
+          "required": true,
+          "max": 80,
+          "recommendedMax": 60
+         }
+        },
+        {
+         "name": "link",
+         "title": "Links to",
+         "type": "link"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "countdown",
+     "title": "Countdown",
+     "type": "object",
+     "icon": "clock",
+     "openMode": "drill",
+     "fields": [
+      {
+       "name": "showCountdown",
+       "title": "Show a countdown",
+       "type": "boolean"
+      },
+      {
+       "name": "endsAt",
+       "title": "Counts down to",
+       "type": "datetime",
+       "hidden": {
+        "field": "showCountdown",
+        "equals": true
+       },
+       "validation": {
+        "required": true
+       },
+       "description": "In the sale's time zone. Visitors see their local time."
+      },
+      {
+       "name": "label",
+       "title": "Label",
+       "type": "string",
+       "hidden": {
+        "field": "showCountdown",
+        "equals": true
+       },
+       "validation": {
+        "max": 20
+       },
+       "placeholder": "Ends in"
+      },
+      {
+       "name": "afterEnd",
+       "title": "When it reaches zero",
+       "type": "select",
+       "hidden": {
+        "field": "showCountdown",
+        "equals": true
+       },
+       "layout": "radio",
+       "initialValue": "hide",
+       "options": [
+        {
+         "value": "hide",
+         "label": "Hide the bar"
+        },
+        {
+         "value": "message",
+         "label": "Show a different message"
+        }
+       ]
+      },
+      {
+       "name": "endedText",
+       "title": "Message after the end",
+       "type": "string",
+       "localized": true,
+       "hidden": {
+        "field": "afterEnd",
+        "equals": "message"
+       },
+       "validation": {
+        "max": 80
+       },
+       "placeholder": "The sale has ended. Thanks for shopping."
+      }
+     ]
+    },
+    {
+     "name": "isDismissible",
+     "title": "Visitors can close it",
+     "type": "boolean",
+     "initialValue": true
+    },
+    {
+     "name": "rememberDays",
+     "title": "Stay closed for",
+     "type": "number",
+     "hidden": {
+      "field": "isDismissible",
+      "equals": true
+     },
+     "numeric": {
+      "min": 1,
+      "max": 90,
+      "step": 1,
+      "unit": "days"
+     },
+     "initialValue": 7,
+     "description": "Changing the message shows it again to people who closed it."
+    },
+    {
+     "name": "startsAt",
+     "title": "Show from",
+     "type": "datetime",
+     "group": "schedule",
+     "description": "Leave empty to show it as soon as it's published."
+    },
+    {
+     "name": "endsAt",
+     "title": "Hide after",
+     "type": "datetime",
+     "group": "schedule",
+     "description": "Must be on or after the countdown's end."
+    },
+    {
+     "name": "tone",
+     "title": "Color",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "brand",
+     "options": [
+      {
+       "value": "neutral",
+       "label": "Neutral"
+      },
+      {
+       "value": "brand",
+       "label": "Brand"
+      },
+      {
+       "value": "sale",
+       "label": "Sale"
+      }
+     ]
+    },
+    {
+     "name": "usePauseOnHover",
+     "title": "Pause on hover and focus",
+     "type": "boolean",
+     "group": "design",
+     "initialValue": true,
+     "access": {
+      "edit": "schema.manage"
+     },
+     "lockReason": "Required for accessibility: moving content must be pausable."
+    }
+   ]
+  },
+  "value": {
+   "messages": [
+    {
+     "_key": "a1",
+     "text": "Black Friday: 25% off every skillet and Dutch oven",
+     "link": {
+      "type": "page",
+      "href": "/collections/sale",
+      "title": "Sale"
+     }
+    },
+    {
+     "_key": "a2",
+     "text": "Free shipping over $80 \u00b7 Order by Dec 18 for the holidays",
+     "link": {
+      "type": "page",
+      "href": "/shipping",
+      "title": "Shipping & returns"
+     }
+    }
+   ],
+   "countdown": {
+    "showCountdown": true,
+    "endsAt": "2026-11-30T23:59:00-08:00[America/Los_Angeles]",
+    "label": "Ends in",
+    "afterEnd": "message",
+    "endedText": "The sale has ended \u2014 thanks for cooking with us."
+   },
+   "isDismissible": true,
+   "rememberDays": 3,
+   "startsAt": "2026-11-26T00:00:00-08:00[America/Los_Angeles]",
+   "endsAt": "2026-12-02T23:59:00-08:00[America/Los_Angeles]",
+   "tone": "sale",
+   "usePauseOnHover": true
+  }
+ },
+ {
+  "id": "cookie-consent",
+  "name": "Cookie consent banner",
+  "category": "Navigation & chrome",
+  "kind": "global",
+  "brand": "Open Water Trust",
+  "previewLayout": "banner",
+  "proves": "Consent categories as data \u00b7 action labels that are NOT links \u00b7 developer-locked keys \u00b7 localized legal copy",
+  "schema": {
+   "name": "cookieBanner",
+   "title": "Cookie banner",
+   "kind": "global",
+   "icon": "cookie",
+   "category": "Navigation & chrome",
+   "description": "The consent banner and its preferences panel. Shown until a visitor chooses.",
+   "variants": [
+    {
+     "id": "bar",
+     "name": "Bottom bar",
+     "description": "Full width, doesn't block the page"
+    },
+    {
+     "id": "box",
+     "name": "Corner box",
+     "description": "Small card in the bottom-left corner"
+    },
+    {
+     "id": "modal",
+     "name": "Centered modal",
+     "description": "Blocks the page until a choice is made"
+    }
+   ],
+   "preview": {
+    "title": "title",
+    "subtitle": "body"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Banner",
+     "default": true
+    },
+    {
+     "name": "categories",
+     "title": "Categories"
+    },
+    {
+     "name": "settings",
+     "title": "Settings"
+    }
+   ],
+   "fields": [
+    {
+     "name": "title",
+     "title": "Title",
+     "type": "string",
+     "localized": true,
+     "validation": {
+      "max": 48
+     },
+     "placeholder": "We use cookies"
+    },
+    {
+     "name": "body",
+     "title": "Body",
+     "type": "text",
+     "rows": 3,
+     "localized": true,
+     "validation": {
+      "required": true,
+      "recommendedMax": 220
+     }
+    },
+    {
+     "name": "policyLink",
+     "title": "Cookie policy",
+     "type": "link",
+     "validation": {
+      "required": true
+     },
+     "description": "Most privacy laws require it."
+    },
+    {
+     "name": "labels",
+     "title": "Button labels",
+     "type": "object",
+     "icon": "click",
+     "openMode": "drill",
+     "fields": [
+      {
+       "name": "acceptAll",
+       "title": "Accept all",
+       "type": "string",
+       "localized": true,
+       "validation": {
+        "required": true,
+        "max": 20
+       },
+       "initialValue": "Accept all"
+      },
+      {
+       "name": "rejectAll",
+       "title": "Reject all",
+       "type": "string",
+       "localized": true,
+       "validation": {
+        "required": true,
+        "max": 20
+       },
+       "initialValue": "Reject all"
+      },
+      {
+       "name": "customize",
+       "title": "Open preferences",
+       "type": "string",
+       "localized": true,
+       "validation": {
+        "required": true,
+        "max": 24
+       },
+       "initialValue": "Choose cookies"
+      },
+      {
+       "name": "save",
+       "title": "Save preferences",
+       "type": "string",
+       "localized": true,
+       "validation": {
+        "required": true,
+        "max": 24
+       },
+       "initialValue": "Save my choices"
+      }
+     ]
+    },
+    {
+     "name": "categories",
+     "title": "Categories",
+     "type": "array",
+     "group": "categories",
+     "itemNoun": "category",
+     "validation": {
+      "min": 1,
+      "max": 6
+     },
+     "of": [
+      {
+       "name": "category",
+       "title": "Category",
+       "type": "object",
+       "icon": "toggle-right",
+       "preview": {
+        "title": "label",
+        "subtitle": "key",
+        "fallback": "Untitled category"
+       },
+       "fields": [
+        {
+         "name": "key",
+         "title": "Key",
+         "type": "string",
+         "access": {
+          "edit": "schema.manage"
+         },
+         "lockReason": "Scripts check this key before they load.",
+         "validation": {
+          "required": true,
+          "unique": true,
+          "pattern": "^[a-z][a-z_]*$",
+          "patternMessage": "Use lowercase letters and underscores, like analytics_storage."
+         }
+        },
+        {
+         "name": "label",
+         "title": "Label",
+         "type": "string",
+         "localized": true,
+         "validation": {
+          "required": true,
+          "max": 32
+         }
+        },
+        {
+         "name": "description",
+         "title": "What it covers",
+         "type": "text",
+         "rows": 2,
+         "localized": true,
+         "validation": {
+          "required": true,
+          "recommendedMax": 200
+         }
+        },
+        {
+         "name": "isRequired",
+         "title": "Always on",
+         "type": "boolean",
+         "description": "Visitors can't switch it off."
+        },
+        {
+         "name": "isOnByDefault",
+         "title": "On by default",
+         "type": "boolean",
+         "hidden": {
+          "field": "isRequired",
+          "equals": false
+         },
+         "description": "Must stay off in the EU and UK for anything but essential cookies."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "showTo",
+     "title": "Show the banner to",
+     "type": "select",
+     "group": "settings",
+     "layout": "radio",
+     "initialValue": "everyone",
+     "options": [
+      {
+       "value": "everyone",
+       "label": "Everyone"
+      },
+      {
+       "value": "regulated",
+       "label": "Visitors in regions that require consent",
+       "description": "EU, UK, Switzerland, Brazil, California"
+      }
+     ]
+    },
+    {
+     "name": "useGpcSignal",
+     "title": "Honor Global Privacy Control",
+     "type": "boolean",
+     "group": "settings",
+     "initialValue": true,
+     "description": "Browsers that send GPC start with optional cookies off."
+    },
+    {
+     "name": "renewMonths",
+     "title": "Ask again after",
+     "type": "number",
+     "group": "settings",
+     "numeric": {
+      "min": 1,
+      "max": 13,
+      "step": 1,
+      "unit": "months"
+     },
+     "initialValue": 12,
+     "description": "EU regulators expect 13 months at most."
+    }
+   ]
+  },
+  "value": {
+   "_variant": "bar",
+   "title": "Cookies, briefly",
+   "body": "We use essential cookies to run this site and, if you agree, analytics to see which stories help rivers most. We never sell your data.",
+   "policyLink": {
+    "type": "page",
+    "href": "/privacy/cookies",
+    "title": "Cookie policy"
+   },
+   "labels": {
+    "acceptAll": "Accept all",
+    "rejectAll": "Reject all",
+    "customize": "Choose cookies",
+    "save": "Save my choices"
+   },
+   "categories": [
+    {
+     "_key": "c1",
+     "key": "essential",
+     "label": "Essential",
+     "description": "Keeps you signed in and remembers this choice. Always on.",
+     "isRequired": true
+    },
+    {
+     "_key": "c2",
+     "key": "analytics",
+     "label": "Analytics",
+     "description": "Plausible and Google Analytics, to count visits and see which pages people read.",
+     "isRequired": false,
+     "isOnByDefault": false
+    },
+    {
+     "_key": "c3",
+     "key": "marketing",
+     "label": "Marketing",
+     "description": "Meta Pixel, to show our campaigns to people who visited \u2014 and to measure if they work.",
+     "isRequired": false,
+     "isOnByDefault": false
+    }
+   ],
+   "showTo": "everyone",
+   "useGpcSignal": true,
+   "renewMonths": 12
+  }
+ },
+ {
+  "id": "breadcrumb-config",
+  "name": "Breadcrumb trail",
+  "category": "Navigation & chrome",
+  "kind": "block",
+  "brand": "Caldera",
+  "previewLayout": "banner",
+  "proves": "A mostly-automatic block: trail from the page tree, manual override only when needed \u00b7 native JSON-LD",
+  "schema": {
+   "name": "breadcrumbs",
+   "title": "Breadcrumbs",
+   "kind": "block",
+   "icon": "chevrons-right",
+   "category": "Navigation & chrome",
+   "description": "The trail of links back up to home. Built from where the page sits.",
+   "preview": {
+    "title": "source",
+    "subtitle": "homeLabel"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "design",
+     "title": "Design"
+    }
+   ],
+   "fields": [
+    {
+     "name": "source",
+     "title": "Trail comes from",
+     "type": "select",
+     "layout": "cards",
+     "initialValue": "auto",
+     "options": [
+      {
+       "value": "auto",
+       "label": "Where the page sits",
+       "icon": "sitemap",
+       "description": "Folders and parent pages, updated on its own"
+      },
+      {
+       "value": "manual",
+       "label": "Written here",
+       "icon": "pencil",
+       "description": "For pages whose address doesn't match the trail"
+      }
+     ]
+    },
+    {
+     "name": "parent",
+     "title": "Treat as a child of",
+     "type": "reference",
+     "reference": {
+      "to": [
+       "page"
+      ]
+     },
+     "hidden": {
+      "field": "source",
+      "equals": "auto"
+     }
+    },
+    {
+     "name": "crumbs",
+     "title": "Crumbs",
+     "type": "array",
+     "itemNoun": "crumb",
+     "hidden": {
+      "field": "source",
+      "equals": "manual"
+     },
+     "validation": {
+      "min": 1,
+      "max": 5
+     },
+     "description": "Home and the current page are added for you.",
+     "of": [
+      {
+       "name": "link",
+       "title": "Link",
+       "type": "object",
+       "icon": "link",
+       "openMode": "inline",
+       "preview": {
+        "title": "label",
+        "subtitle": "link.href",
+        "fallback": "Untitled link"
+       },
+       "fields": [
+        {
+         "name": "label",
+         "title": "Label",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 32
+         }
+        },
+        {
+         "name": "link",
+         "title": "Links to",
+         "type": "link",
+         "validation": {
+          "required": true
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "homeLabel",
+     "title": "Home label",
+     "type": "string",
+     "validation": {
+      "max": 16
+     },
+     "initialValue": "Home",
+     "description": "Leave empty to show a house icon."
+    },
+    {
+     "name": "showCurrent",
+     "title": "Show the current page",
+     "type": "boolean",
+     "initialValue": true
+    },
+    {
+     "name": "separator",
+     "title": "Separator",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "chevron",
+     "options": [
+      {
+       "value": "chevron",
+       "label": "\u203a"
+      },
+      {
+       "value": "slash",
+       "label": "/"
+      },
+      {
+       "value": "dot",
+       "label": "\u00b7"
+      }
+     ]
+    },
+    {
+     "name": "collapseAfter",
+     "title": "Shorten trails longer than",
+     "type": "number",
+     "group": "design",
+     "numeric": {
+      "min": 3,
+      "max": 6,
+      "step": 1,
+      "unit": "crumbs"
+     },
+     "initialValue": 4,
+     "description": "Phones only."
+    }
+   ]
+  },
+  "value": {
+   "source": "auto",
+   "parent": "pg_cablefold",
+   "homeLabel": "Home",
+   "showCurrent": true,
+   "separator": "chevron",
+   "collapseAfter": 4
+  }
+ },
+ {
+  "id": "footer-multi-column",
+  "name": "Multi-column footer",
+  "category": "Navigation & chrome",
+  "kind": "global",
+  "brand": "Caldera",
+  "previewLayout": "footer",
+  "proves": "Link groups \u00b7 newsletter as a form reference \u00b7 social profiles \u00b7 legal row with a year token \u00b7 payment badges as a fixed set",
+  "schema": {
+   "name": "footer",
+   "title": "Footer",
+   "kind": "global",
+   "icon": "layout-bottombar",
+   "category": "Navigation & chrome",
+   "description": "Link columns, newsletter sign-up, social links and the legal row. Synced across every page.",
+   "variants": [
+    {
+     "id": "columns",
+     "name": "Columns",
+     "description": "Brand and newsletter left, link columns right"
+    },
+    {
+     "id": "stacked",
+     "name": "Newsletter on top",
+     "description": "A full-width sign-up band above the columns"
+    }
+   ],
+   "preview": {
+    "title": "tagline",
+    "media": "logo"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Links",
+     "default": true
+    },
+    {
+     "name": "newsletter",
+     "title": "Newsletter"
+    },
+    {
+     "name": "legal",
+     "title": "Legal"
+    },
+    {
+     "name": "design",
+     "title": "Design"
+    }
+   ],
+   "fields": [
+    {
+     "name": "logo",
+     "title": "Logo",
+     "type": "image"
+    },
+    {
+     "name": "tagline",
+     "title": "Tagline",
+     "type": "text",
+     "rows": 2,
+     "validation": {
+      "recommendedMax": 120
+     },
+     "ai": true
+    },
+    {
+     "name": "groups",
+     "title": "Link groups",
+     "type": "array",
+     "itemNoun": "group",
+     "validation": {
+      "min": 1,
+      "max": 5
+     },
+     "of": [
+      {
+       "name": "linkGroup",
+       "title": "Link group",
+       "type": "object",
+       "icon": "list",
+       "preview": {
+        "title": "title",
+        "fallback": "Untitled group"
+       },
+       "fields": [
+        {
+         "name": "title",
+         "title": "Group title",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 24
+         }
+        },
+        {
+         "name": "links",
+         "title": "Links",
+         "type": "array",
+         "itemNoun": "link",
+         "validation": {
+          "min": 1,
+          "max": 8
+         },
+         "of": [
+          {
+           "name": "link",
+           "title": "Link",
+           "type": "object",
+           "icon": "link",
+           "openMode": "inline",
+           "preview": {
+            "title": "label",
+            "subtitle": "link.href",
+            "fallback": "Untitled link"
+           },
+           "fields": [
+            {
+             "name": "label",
+             "title": "Label",
+             "type": "string",
+             "validation": {
+              "required": true,
+              "max": 32
+             }
+            },
+            {
+             "name": "link",
+             "title": "Links to",
+             "type": "link",
+             "validation": {
+              "required": true
+             }
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "socialLinks",
+     "title": "Social profiles",
+     "type": "array",
+     "itemNoun": "profile",
+     "validation": {
+      "max": 6
+     },
+     "of": [
+      {
+       "name": "socialLink",
+       "title": "Social profile",
+       "type": "object",
+       "icon": "share",
+       "openMode": "inline",
+       "preview": {
+        "title": "platform",
+        "subtitle": "url",
+        "fallback": "Untitled profile"
+       },
+       "fields": [
+        {
+         "name": "platform",
+         "title": "Platform",
+         "type": "select",
+         "validation": {
+          "required": true
+         },
+         "options": [
+          {
+           "value": "instagram",
+           "label": "Instagram",
+           "icon": "brand-instagram"
+          },
+          {
+           "value": "youtube",
+           "label": "YouTube",
+           "icon": "brand-youtube"
+          },
+          {
+           "value": "tiktok",
+           "label": "TikTok",
+           "icon": "brand-tiktok"
+          },
+          {
+           "value": "facebook",
+           "label": "Facebook",
+           "icon": "brand-facebook"
+          },
+          {
+           "value": "x",
+           "label": "X",
+           "icon": "brand-x"
+          },
+          {
+           "value": "linkedin",
+           "label": "LinkedIn",
+           "icon": "brand-linkedin"
+          },
+          {
+           "value": "pinterest",
+           "label": "Pinterest",
+           "icon": "brand-pinterest"
+          },
+          {
+           "value": "dribbble",
+           "label": "Dribbble",
+           "icon": "brand-dribbble"
+          }
+         ]
+        },
+        {
+         "name": "url",
+         "title": "Profile address",
+         "type": "url",
+         "validation": {
+          "required": true,
+          "pattern": "^https://",
+          "patternMessage": "Use the full address, like https://your-site.com."
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "newsletterHeading",
+     "title": "Heading",
+     "type": "string",
+     "group": "newsletter",
+     "validation": {
+      "max": 48
+     }
+    },
+    {
+     "name": "newsletterBody",
+     "title": "Body",
+     "type": "text",
+     "group": "newsletter",
+     "rows": 2,
+     "validation": {
+      "recommendedMax": 140
+     }
+    },
+    {
+     "name": "newsletterForm",
+     "title": "Form",
+     "type": "reference",
+     "group": "newsletter",
+     "reference": {
+      "to": [
+       "form"
+      ]
+     }
+    },
+    {
+     "name": "legalLinks",
+     "title": "Legal links",
+     "type": "array",
+     "group": "legal",
+     "itemNoun": "link",
+     "validation": {
+      "max": 6
+     },
+     "of": [
+      {
+       "name": "link",
+       "title": "Link",
+       "type": "object",
+       "icon": "link",
+       "openMode": "inline",
+       "preview": {
+        "title": "label",
+        "subtitle": "link.href",
+        "fallback": "Untitled link"
+       },
+       "fields": [
+        {
+         "name": "label",
+         "title": "Label",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 28
+         }
+        },
+        {
+         "name": "link",
+         "title": "Links to",
+         "type": "link",
+         "validation": {
+          "required": true
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "copyright",
+     "title": "Copyright line",
+     "type": "string",
+     "group": "legal",
+     "validation": {
+      "max": 80
+     },
+     "description": "{year} becomes the current year.",
+     "placeholder": "\u00a9 {year} Caldera Cookware Co."
+    },
+    {
+     "name": "payments",
+     "title": "Payment badges",
+     "type": "multiselect",
+     "group": "legal",
+     "options": [
+      {
+       "value": "visa",
+       "label": "Visa"
+      },
+      {
+       "value": "mastercard",
+       "label": "Mastercard"
+      },
+      {
+       "value": "amex",
+       "label": "American Express"
+      },
+      {
+       "value": "apple-pay",
+       "label": "Apple Pay"
+      },
+      {
+       "value": "google-pay",
+       "label": "Google Pay"
+      },
+      {
+       "value": "shop-pay",
+       "label": "Shop Pay"
+      },
+      {
+       "value": "paypal",
+       "label": "PayPal"
+      },
+      {
+       "value": "klarna",
+       "label": "Klarna"
+      }
+     ]
+    },
+    {
+     "name": "theme",
+     "title": "Theme",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "light",
+     "options": [
+      {
+       "value": "light",
+       "label": "Light"
+      },
+      {
+       "value": "dark",
+       "label": "Dark"
+      },
+      {
+       "value": "brand",
+       "label": "Brand"
+      }
+     ]
+    }
+   ]
+  },
+  "value": {
+   "_variant": "columns",
+   "logo": {
+    "url": "https://picsum.photos/seed/caldera-mark-light/240/64",
+    "alt": "Caldera",
+    "name": "caldera-mark-light.jpg",
+    "width": 240,
+    "height": 64
+   },
+   "tagline": "Cookware built for the open fire. Forged in Bend, Oregon, and guaranteed for life.",
+   "groups": [
+    {
+     "_key": "g1",
+     "title": "Shop",
+     "links": [
+      {
+       "_key": "a1",
+       "label": "Skillets",
+       "link": {
+        "type": "page",
+        "href": "/collections/skillets",
+        "title": "Skillets"
+       }
+      },
+      {
+       "_key": "a2",
+       "label": "Dutch ovens",
+       "link": {
+        "type": "page",
+        "href": "/collections/dutch-ovens",
+        "title": "Dutch ovens"
+       }
+      },
+      {
+       "_key": "a3",
+       "label": "Grills",
+       "link": {
+        "type": "page",
+        "href": "/collections/grills",
+        "title": "Grills"
+       }
+      },
+      {
+       "_key": "a4",
+       "label": "Gift cards",
+       "link": {
+        "type": "page",
+        "href": "/gift-cards",
+        "title": "Gift cards"
+       }
+      }
+     ]
+    },
+    {
+     "_key": "g2",
+     "title": "Help",
+     "links": [
+      {
+       "_key": "b1",
+       "label": "Shipping & returns",
+       "link": {
+        "type": "page",
+        "href": "/shipping",
+        "title": "Shipping & returns"
+       }
+      },
+      {
+       "_key": "b2",
+       "label": "Lifetime warranty",
+       "link": {
+        "type": "page",
+        "href": "/warranty",
+        "title": "Warranty"
+       }
+      },
+      {
+       "_key": "b3",
+       "label": "Care guides",
+       "link": {
+        "type": "page",
+        "href": "/journal/cast-iron-care",
+        "title": "Cast iron care"
+       }
+      },
+      {
+       "_key": "b4",
+       "label": "Contact",
+       "link": {
+        "type": "page",
+        "href": "/contact",
+        "title": "Contact"
+       }
+      }
+     ]
+    },
+    {
+     "_key": "g3",
+     "title": "Company",
+     "links": [
+      {
+       "_key": "c1",
+       "label": "About",
+       "link": {
+        "type": "page",
+        "href": "/about",
+        "title": "About"
+       }
+      },
+      {
+       "_key": "c2",
+       "label": "Journal",
+       "link": {
+        "type": "page",
+        "href": "/journal",
+        "title": "Journal"
+       }
+      },
+      {
+       "_key": "c3",
+       "label": "Wholesale",
+       "link": {
+        "type": "page",
+        "href": "/wholesale",
+        "title": "Wholesale pricing"
+       }
+      },
+      {
+       "_key": "c4",
+       "label": "Careers",
+       "link": {
+        "type": "page",
+        "href": "/careers",
+        "title": "Careers"
+       }
+      }
+     ]
+    }
+   ],
+   "socialLinks": [
+    {
+     "_key": "s1",
+     "platform": "instagram",
+     "url": "https://instagram.com/caldera.cookware"
+    },
+    {
+     "_key": "s2",
+     "platform": "youtube",
+     "url": "https://youtube.com/@calderacookware"
+    },
+    {
+     "_key": "s3",
+     "platform": "pinterest",
+     "url": "https://pinterest.com/calderacookware"
+    }
+   ],
+   "newsletterHeading": "Recipes from the fire, monthly",
+   "newsletterBody": "One email a month: a new recipe, a care tip and first word on launches. No spam.",
+   "newsletterForm": "form_newsletter",
+   "legalLinks": [
+    {
+     "_key": "l1",
+     "label": "Privacy",
+     "link": {
+      "type": "page",
+      "href": "/privacy",
+      "title": "Privacy policy"
+     }
+    },
+    {
+     "_key": "l2",
+     "label": "Terms",
+     "link": {
+      "type": "page",
+      "href": "/terms",
+      "title": "Terms of service"
+     }
+    },
+    {
+     "_key": "l3",
+     "label": "Accessibility",
+     "link": {
+      "type": "page",
+      "href": "/accessibility",
+      "title": "Accessibility"
+     }
+    }
+   ],
+   "copyright": "\u00a9 {year} Caldera Cookware Co.",
+   "payments": [
+    "visa",
+    "mastercard",
+    "amex",
+    "apple-pay",
+    "shop-pay"
+   ],
+   "theme": "dark"
+  }
+ },
+ {
+  "id": "footer-minimal",
+  "name": "Minimal footer",
+  "category": "Navigation & chrome",
+  "kind": "global",
+  "brand": "Northbound Studio",
+  "previewLayout": "footer",
+  "proves": "The smallest useful global: one line of links, an email, socials, the year token \u2014 nothing invented",
+  "schema": {
+   "name": "compactFooter",
+   "title": "Compact footer",
+   "kind": "global",
+   "icon": "layout-bottombar",
+   "category": "Navigation & chrome",
+   "description": "One row: a line of links, a contact email, social icons and the copyright.",
+   "preview": {
+    "title": "copyright"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Content",
+     "default": true
+    },
+    {
+     "name": "design",
+     "title": "Design"
+    }
+   ],
+   "fields": [
+    {
+     "name": "statement",
+     "title": "Sign-off",
+     "type": "string",
+     "validation": {
+      "max": 60
+     },
+     "ai": true
+    },
+    {
+     "name": "email",
+     "title": "Contact email",
+     "type": "link"
+    },
+    {
+     "name": "links",
+     "title": "Links",
+     "type": "array",
+     "itemNoun": "link",
+     "validation": {
+      "max": 5
+     },
+     "of": [
+      {
+       "name": "link",
+       "title": "Link",
+       "type": "object",
+       "icon": "link",
+       "openMode": "inline",
+       "preview": {
+        "title": "label",
+        "subtitle": "link.href",
+        "fallback": "Untitled link"
+       },
+       "fields": [
+        {
+         "name": "label",
+         "title": "Label",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 20
+         }
+        },
+        {
+         "name": "link",
+         "title": "Links to",
+         "type": "link",
+         "validation": {
+          "required": true
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "socialLinks",
+     "title": "Social profiles",
+     "type": "array",
+     "itemNoun": "profile",
+     "validation": {
+      "max": 4
+     },
+     "of": [
+      {
+       "name": "socialLink",
+       "title": "Social profile",
+       "type": "object",
+       "icon": "share",
+       "openMode": "inline",
+       "preview": {
+        "title": "platform",
+        "subtitle": "url",
+        "fallback": "Untitled profile"
+       },
+       "fields": [
+        {
+         "name": "platform",
+         "title": "Platform",
+         "type": "select",
+         "validation": {
+          "required": true
+         },
+         "options": [
+          {
+           "value": "instagram",
+           "label": "Instagram",
+           "icon": "brand-instagram"
+          },
+          {
+           "value": "youtube",
+           "label": "YouTube",
+           "icon": "brand-youtube"
+          },
+          {
+           "value": "tiktok",
+           "label": "TikTok",
+           "icon": "brand-tiktok"
+          },
+          {
+           "value": "facebook",
+           "label": "Facebook",
+           "icon": "brand-facebook"
+          },
+          {
+           "value": "x",
+           "label": "X",
+           "icon": "brand-x"
+          },
+          {
+           "value": "linkedin",
+           "label": "LinkedIn",
+           "icon": "brand-linkedin"
+          },
+          {
+           "value": "pinterest",
+           "label": "Pinterest",
+           "icon": "brand-pinterest"
+          },
+          {
+           "value": "dribbble",
+           "label": "Dribbble",
+           "icon": "brand-dribbble"
+          }
+         ]
+        },
+        {
+         "name": "url",
+         "title": "Profile address",
+         "type": "url",
+         "validation": {
+          "required": true,
+          "pattern": "^https://",
+          "patternMessage": "Use the full address, like https://your-site.com."
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "copyright",
+     "title": "Copyright line",
+     "type": "string",
+     "validation": {
+      "max": 60
+     },
+     "description": "{year} becomes the current year."
+    },
+    {
+     "name": "alignment",
+     "title": "Alignment",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "between",
+     "options": [
+      {
+       "value": "between",
+       "label": "Spread"
+      },
+      {
+       "value": "center",
+       "label": "Centered"
+      }
+     ]
+    },
+    {
+     "name": "theme",
+     "title": "Theme",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "light",
+     "options": [
+      {
+       "value": "light",
+       "label": "Light"
+      },
+      {
+       "value": "dark",
+       "label": "Dark"
+      },
+      {
+       "value": "brand",
+       "label": "Brand"
+      }
+     ]
+    }
+   ]
+  },
+  "value": {
+   "statement": "Let's make something worth keeping.",
+   "email": {
+    "type": "email",
+    "href": "mailto:hello@northbound.studio",
+    "email": "hello@northbound.studio",
+    "subject": "New project"
+   },
+   "links": [
+    {
+     "_key": "l1",
+     "label": "Work",
+     "link": {
+      "type": "page",
+      "href": "/work",
+      "title": "Work"
+     }
+    },
+    {
+     "_key": "l2",
+     "label": "Studio",
+     "link": {
+      "type": "page",
+      "href": "/studio",
+      "title": "Studio"
+     }
+    },
+    {
+     "_key": "l3",
+     "label": "Careers",
+     "link": {
+      "type": "page",
+      "href": "/careers",
+      "title": "Careers"
+     }
+    },
+    {
+     "_key": "l4",
+     "label": "Privacy",
+     "link": {
+      "type": "page",
+      "href": "/privacy",
+      "title": "Privacy"
+     }
+    }
+   ],
+   "socialLinks": [
+    {
+     "_key": "s1",
+     "platform": "instagram",
+     "url": "https://instagram.com/northbound.studio"
+    },
+    {
+     "_key": "s2",
+     "platform": "linkedin",
+     "url": "https://linkedin.com/company/northbound-studio"
+    },
+    {
+     "_key": "s3",
+     "platform": "dribbble",
+     "url": "https://dribbble.com/northbound"
+    }
+   ],
+   "copyright": "\u00a9 {year} Northbound Studio, Lisbon",
+   "alignment": "between",
+   "theme": "light"
+  }
+ },
+ {
+  "id": "footer-mega-locations",
+  "name": "Mega footer with locations + app badges",
+  "category": "Navigation & chrome",
+  "kind": "global",
+  "brand": "Hearth & Ash",
+  "previewLayout": "footer",
+  "proves": "Locations \u2192 opening hours at four levels \u00b7 geopoints \u00b7 store badges with URL patterns \u00b7 LocalBusiness data from content",
+  "schema": {
+   "name": "locationsFooter",
+   "title": "Locations footer",
+   "kind": "global",
+   "icon": "layout-bottombar",
+   "category": "Navigation & chrome",
+   "description": "Every location with its hours, app download badges, link columns and the legal row.",
+   "preview": {
+    "title": "tagline",
+    "media": "logo"
+   },
+   "groups": [
+    {
+     "name": "content",
+     "title": "Locations",
+     "default": true
+    },
+    {
+     "name": "links",
+     "title": "Links & app"
+    },
+    {
+     "name": "design",
+     "title": "Design"
+    }
+   ],
+   "fields": [
+    {
+     "name": "logo",
+     "title": "Logo",
+     "type": "image",
+     "group": "links"
+    },
+    {
+     "name": "tagline",
+     "title": "Tagline",
+     "type": "string",
+     "group": "links",
+     "validation": {
+      "max": 80
+     }
+    },
+    {
+     "name": "locations",
+     "title": "Locations",
+     "type": "array",
+     "itemNoun": "location",
+     "validation": {
+      "min": 1,
+      "max": 8
+     },
+     "description": "Also feeds the details search engines show.",
+     "of": [
+      {
+       "name": "location",
+       "title": "Location",
+       "type": "object",
+       "icon": "map-pin",
+       "preview": {
+        "title": "name",
+        "subtitle": "address",
+        "media": "photo",
+        "fallback": "Untitled location"
+       },
+       "fields": [
+        {
+         "name": "name",
+         "title": "Name",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 32
+         },
+         "placeholder": "Pearl District"
+        },
+        {
+         "name": "photo",
+         "title": "Photo",
+         "type": "image"
+        },
+        {
+         "name": "address",
+         "title": "Address",
+         "type": "text",
+         "rows": 2,
+         "validation": {
+          "required": true
+         }
+        },
+        {
+         "name": "geo",
+         "title": "Map pin",
+         "type": "geopoint",
+         "description": "Drop it on the entrance. Directions use it."
+        },
+        {
+         "name": "phone",
+         "title": "Phone",
+         "type": "link"
+        },
+        {
+         "name": "hours",
+         "title": "Opening hours",
+         "type": "array",
+         "itemNoun": "row",
+         "validation": {
+          "min": 1,
+          "max": 7
+         },
+         "description": "One row per set of days with the same hours.",
+         "of": [
+          {
+           "name": "hoursRow",
+           "title": "Hours",
+           "type": "object",
+           "icon": "clock",
+           "preview": {
+            "title": "days",
+            "subtitle": "opens",
+            "fallback": "Untitled row"
+           },
+           "fields": [
+            {
+             "name": "days",
+             "title": "Days",
+             "type": "multiselect",
+             "validation": {
+              "required": true
+             },
+             "options": [
+              {
+               "value": "mon",
+               "label": "Mon"
+              },
+              {
+               "value": "tue",
+               "label": "Tue"
+              },
+              {
+               "value": "wed",
+               "label": "Wed"
+              },
+              {
+               "value": "thu",
+               "label": "Thu"
+              },
+              {
+               "value": "fri",
+               "label": "Fri"
+              },
+              {
+               "value": "sat",
+               "label": "Sat"
+              },
+              {
+               "value": "sun",
+               "label": "Sun"
+              }
+             ]
+            },
+            {
+             "name": "isClosed",
+             "title": "Closed",
+             "type": "boolean"
+            },
+            {
+             "name": "opens",
+             "title": "Opens",
+             "type": "string",
+             "hidden": {
+              "field": "isClosed",
+              "equals": false
+             },
+             "validation": {
+              "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$",
+              "patternMessage": "Use 24-hour time, like 17:00."
+             },
+             "placeholder": "17:00"
+            },
+            {
+             "name": "closes",
+             "title": "Closes",
+             "type": "string",
+             "hidden": {
+              "field": "isClosed",
+              "equals": false
+             },
+             "validation": {
+              "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$",
+              "patternMessage": "Use 24-hour time, like 22:30."
+             },
+             "placeholder": "22:30"
+            }
+           ]
+          }
+         ]
+        },
+        {
+         "name": "reserveButton",
+         "title": "Reserve button",
+         "type": "button"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "appBadges",
+     "title": "App badges",
+     "type": "array",
+     "group": "links",
+     "itemNoun": "badge",
+     "validation": {
+      "max": 2
+     },
+     "of": [
+      {
+       "name": "appBadge",
+       "title": "Badge",
+       "type": "object",
+       "icon": "device-mobile",
+       "openMode": "inline",
+       "preview": {
+        "title": "store",
+        "subtitle": "url"
+       },
+       "fields": [
+        {
+         "name": "store",
+         "title": "Store",
+         "type": "select",
+         "validation": {
+          "required": true,
+          "unique": true
+         },
+         "options": [
+          {
+           "value": "app-store",
+           "label": "App Store"
+          },
+          {
+           "value": "google-play",
+           "label": "Google Play"
+          }
+         ]
+        },
+        {
+         "name": "url",
+         "title": "Store address",
+         "type": "url",
+         "validation": {
+          "required": true,
+          "pattern": "^https://(apps\\.apple\\.com|play\\.google\\.com)/",
+          "patternMessage": "Use an apps.apple.com or play.google.com address, like https://apps.apple.com/app/id123."
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "groups",
+     "title": "Link groups",
+     "type": "array",
+     "group": "links",
+     "itemNoun": "group",
+     "validation": {
+      "max": 3
+     },
+     "of": [
+      {
+       "name": "linkGroup",
+       "title": "Link group",
+       "type": "object",
+       "icon": "list",
+       "preview": {
+        "title": "title",
+        "fallback": "Untitled group"
+       },
+       "fields": [
+        {
+         "name": "title",
+         "title": "Group title",
+         "type": "string",
+         "validation": {
+          "required": true,
+          "max": 24
+         }
+        },
+        {
+         "name": "links",
+         "title": "Links",
+         "type": "array",
+         "itemNoun": "link",
+         "validation": {
+          "min": 1,
+          "max": 6
+         },
+         "of": [
+          {
+           "name": "link",
+           "title": "Link",
+           "type": "object",
+           "icon": "link",
+           "openMode": "inline",
+           "preview": {
+            "title": "label",
+            "subtitle": "link.href",
+            "fallback": "Untitled link"
+           },
+           "fields": [
+            {
+             "name": "label",
+             "title": "Label",
+             "type": "string",
+             "validation": {
+              "required": true,
+              "max": 32
+             }
+            },
+            {
+             "name": "link",
+             "title": "Links to",
+             "type": "link",
+             "validation": {
+              "required": true
+             }
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "socialLinks",
+     "title": "Social profiles",
+     "type": "array",
+     "group": "links",
+     "itemNoun": "profile",
+     "validation": {
+      "max": 5
+     },
+     "of": [
+      {
+       "name": "socialLink",
+       "title": "Social profile",
+       "type": "object",
+       "icon": "share",
+       "openMode": "inline",
+       "preview": {
+        "title": "platform",
+        "subtitle": "url",
+        "fallback": "Untitled profile"
+       },
+       "fields": [
+        {
+         "name": "platform",
+         "title": "Platform",
+         "type": "select",
+         "validation": {
+          "required": true
+         },
+         "options": [
+          {
+           "value": "instagram",
+           "label": "Instagram",
+           "icon": "brand-instagram"
+          },
+          {
+           "value": "youtube",
+           "label": "YouTube",
+           "icon": "brand-youtube"
+          },
+          {
+           "value": "tiktok",
+           "label": "TikTok",
+           "icon": "brand-tiktok"
+          },
+          {
+           "value": "facebook",
+           "label": "Facebook",
+           "icon": "brand-facebook"
+          },
+          {
+           "value": "x",
+           "label": "X",
+           "icon": "brand-x"
+          },
+          {
+           "value": "linkedin",
+           "label": "LinkedIn",
+           "icon": "brand-linkedin"
+          },
+          {
+           "value": "pinterest",
+           "label": "Pinterest",
+           "icon": "brand-pinterest"
+          },
+          {
+           "value": "dribbble",
+           "label": "Dribbble",
+           "icon": "brand-dribbble"
+          }
+         ]
+        },
+        {
+         "name": "url",
+         "title": "Profile address",
+         "type": "url",
+         "validation": {
+          "required": true,
+          "pattern": "^https://",
+          "patternMessage": "Use the full address, like https://your-site.com."
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "copyright",
+     "title": "Copyright line",
+     "type": "string",
+     "group": "links",
+     "validation": {
+      "max": 80
+     },
+     "description": "{year} becomes the current year."
+    },
+    {
+     "name": "locationLayout",
+     "title": "Locations shown as",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "cards",
+     "options": [
+      {
+       "value": "cards",
+       "label": "Photo cards"
+      },
+      {
+       "value": "list",
+       "label": "Compact list"
+      }
+     ]
+    },
+    {
+     "name": "theme",
+     "title": "Theme",
+     "type": "select",
+     "group": "design",
+     "layout": "segmented",
+     "initialValue": "light",
+     "options": [
+      {
+       "value": "light",
+       "label": "Light"
+      },
+      {
+       "value": "dark",
+       "label": "Dark"
+      },
+      {
+       "value": "brand",
+       "label": "Brand"
+      }
+     ]
+    }
+   ]
+  },
+  "value": {
+   "logo": {
+    "url": "https://picsum.photos/seed/hearth-ash-mark/240/64",
+    "alt": "Hearth & Ash",
+    "name": "hearth-ash-mark.jpg",
+    "width": 240,
+    "height": 64
+   },
+   "tagline": "Wood-fired cooking in three Portland neighbourhoods.",
+   "locations": [
+    {
+     "_key": "loc1",
+     "name": "Pearl District",
+     "photo": {
+      "url": "https://picsum.photos/seed/hearth-pearl/1200/900",
+      "alt": "Long wooden bar lit by the open hearth",
+      "name": "hearth-pearl.jpg",
+      "width": 1200,
+      "height": 900
+     },
+     "address": "1120 NW Couch St\nPortland, OR 97209",
+     "geo": {
+      "label": "Hearth & Ash Pearl",
+      "address": "1120 NW Couch St, Portland, OR 97209",
+      "lat": 45.5236,
+      "lng": -122.6833
+     },
+     "phone": {
+      "type": "phone",
+      "href": "tel:+15035550142",
+      "phone": "+1 503 555 0142",
+      "title": "(503) 555-0142"
+     },
+     "hours": [
+      {
+       "_key": "h1",
+       "days": [
+        "tue",
+        "wed",
+        "thu"
+       ],
+       "isClosed": false,
+       "opens": "17:00",
+       "closes": "22:00"
+      },
+      {
+       "_key": "h2",
+       "days": [
+        "fri",
+        "sat"
+       ],
+       "isClosed": false,
+       "opens": "17:00",
+       "closes": "23:00"
+      },
+      {
+       "_key": "h3",
+       "days": [
+        "sun"
+       ],
+       "isClosed": false,
+       "opens": "10:00",
+       "closes": "14:30"
+      },
+      {
+       "_key": "h4",
+       "days": [
+        "mon"
+       ],
+       "isClosed": true
+      }
+     ],
+     "reserveButton": {
+      "label": "Reserve",
+      "href": "https://resy.com/cities/pdx/hearth-and-ash-pearl",
+      "type": "url",
+      "style": "outline",
+      "newTab": true
+     }
+    },
+    {
+     "_key": "loc2",
+     "name": "Alberta Arts",
+     "photo": {
+      "url": "https://picsum.photos/seed/hearth-alberta/1200/900",
+      "alt": "Patio tables under string lights",
+      "name": "hearth-alberta.jpg",
+      "width": 1200,
+      "height": 900
+     },
+     "address": "2940 NE Alberta St\nPortland, OR 97211",
+     "geo": {
+      "label": "Hearth & Ash Alberta",
+      "address": "2940 NE Alberta St, Portland, OR 97211",
+      "lat": 45.559,
+      "lng": -122.6365
+     },
+     "phone": {
+      "type": "phone",
+      "href": "tel:+15035550178",
+      "phone": "+1 503 555 0178",
+      "title": "(503) 555-0178"
+     },
+     "hours": [
+      {
+       "_key": "h5",
+       "days": [
+        "wed",
+        "thu",
+        "fri",
+        "sat",
+        "sun"
+       ],
+       "isClosed": false,
+       "opens": "16:30",
+       "closes": "22:00"
+      },
+      {
+       "_key": "h6",
+       "days": [
+        "mon",
+        "tue"
+       ],
+       "isClosed": true
+      }
+     ],
+     "reserveButton": {
+      "label": "Reserve",
+      "href": "https://resy.com/cities/pdx/hearth-and-ash-alberta",
+      "type": "url",
+      "style": "outline",
+      "newTab": true
+     }
+    }
+   ],
+   "appBadges": [
+    {
+     "_key": "b1",
+     "store": "app-store",
+     "url": "https://apps.apple.com/us/app/hearth-ash/id6450012345"
+    },
+    {
+     "_key": "b2",
+     "store": "google-play",
+     "url": "https://play.google.com/store/apps/details?id=com.hearthandash.order"
+    }
+   ],
+   "groups": [
+    {
+     "_key": "g1",
+     "title": "Visit",
+     "links": [
+      {
+       "_key": "a1",
+       "label": "Menus",
+       "link": {
+        "type": "page",
+        "href": "/menus",
+        "title": "Menus"
+       }
+      },
+      {
+       "_key": "a2",
+       "label": "Private dining",
+       "link": {
+        "type": "page",
+        "href": "/private-dining",
+        "title": "Private dining"
+       }
+      },
+      {
+       "_key": "a3",
+       "label": "Gift cards",
+       "link": {
+        "type": "page",
+        "href": "/gift-cards",
+        "title": "Gift cards"
+       }
+      }
+     ]
+    },
+    {
+     "_key": "g2",
+     "title": "Company",
+     "links": [
+      {
+       "_key": "a4",
+       "label": "Our story",
+       "link": {
+        "type": "page",
+        "href": "/story",
+        "title": "Our story"
+       }
+      },
+      {
+       "_key": "a5",
+       "label": "Jobs",
+       "link": {
+        "type": "page",
+        "href": "/jobs",
+        "title": "Jobs"
+       }
+      },
+      {
+       "_key": "a6",
+       "label": "Press",
+       "link": {
+        "type": "page",
+        "href": "/press",
+        "title": "Press"
+       }
+      }
+     ]
+    }
+   ],
+   "socialLinks": [
+    {
+     "_key": "s1",
+     "platform": "instagram",
+     "url": "https://instagram.com/hearthandash.pdx"
+    }
+   ],
+   "copyright": "\u00a9 {year} Hearth & Ash Restaurant Group",
+   "locationLayout": "cards",
+   "theme": "dark"
+  }
+ }
+]

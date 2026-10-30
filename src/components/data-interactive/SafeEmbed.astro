@@ -1,0 +1,138 @@
+---
+---
+
+<section id="safe-embed" class="section embed" data-variant="framed" data-kind="iframe" data-consent-category="functional">
+  <!-- kit: safe-embed -->
+  <div class="container">
+    <figure class="embed__frame">
+      <div class="embed__bar" aria-hidden="true">
+        <span></span><span></span><span></span>
+        <p>stackblitz.com</p>
+      </div>
+      <div
+        class="embed__stage"
+        style="height:560px"
+        data-src="https://stackblitz.com/edit/northwind-sdk-quickstart?embed=1&file=src%2Findex.ts&view=editor"
+        data-title="Northwind SDK quickstart running in StackBlitz"
+        data-sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+        data-allow="clipboard-write; fullscreen"
+      >
+        <div class="embed__consent">
+          <img src="https://picsum.photos/seed/northwind-stackblitz/1400/800" alt="Screenshot of the quickstart code editor with index.ts open" width="2800" height="1600" loading="lazy" />
+          <div class="embed__consent-box">
+            <p>This demo runs on StackBlitz, which sets cookies. Load it to try the SDK in your browser.</p>
+            <div class="btn-row">
+              <button type="button" class="btn btn-primary embed__load">Load StackBlitz demo</button>
+              <a class="btn btn-secondary" href="https://stackblitz.com/privacy-policy" target="_blank" rel="noopener">StackBlitz privacy policy</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <figcaption>Edit the API key line and press Run. Nothing leaves the sandbox.</figcaption>
+      <noscript>
+        <p class="embed__fallback">Open the quickstart on StackBlitz: <a href="https://stackblitz.com/edit/northwind-sdk-quickstart">https://stackblitz.com/edit/northwind-sdk-quickstart</a></p>
+      </noscript>
+    </figure>
+  </div>
+</section>
+
+<style>
+  .embed__frame {
+    margin: 0;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--bg);
+    box-shadow: var(--shadow);
+  }
+
+  .embed__bar {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.6rem 1rem;
+    border-bottom: 1px solid var(--line);
+    background: var(--surface);
+  }
+
+  .embed__bar span {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: var(--line);
+  }
+
+  .embed__bar p {
+    margin: 0 0 0 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--ink-3);
+  }
+
+  .embed__stage {
+    position: relative;
+    max-height: 70vh;
+    min-height: 360px;
+  }
+
+  .embed__stage :global(iframe) {
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  .embed__consent {
+    position: absolute;
+    inset: 0;
+  }
+
+  .embed__consent img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: blur(2px) brightness(0.55);
+  }
+
+  .embed__consent-box {
+    position: absolute;
+    inset: 50% auto auto 50%;
+    transform: translate(-50%, -50%);
+    width: min(460px, calc(100% - 2rem));
+    padding: 1.5rem;
+    border-radius: var(--radius);
+    background: var(--bg);
+    text-align: center;
+    box-shadow: 0 16px 40px rgb(0 0 0 / 0.3);
+  }
+
+  .embed__consent-box .btn-row {
+    justify-content: center;
+  }
+
+  .embed__frame figcaption,
+  .embed__fallback {
+    margin: 0;
+    padding: 0.875rem 1rem;
+    font-size: 0.875rem;
+    color: var(--ink-2);
+    border-top: 1px solid var(--line);
+  }
+</style>
+
+<script is:inline>
+  (() => {
+    const root = document.getElementById("safe-embed");
+    if (!root) return;
+    const stage = root.querySelector(".embed__stage");
+    root.querySelector(".embed__load").addEventListener("click", () => {
+      const frame = document.createElement("iframe");
+      frame.src = stage.dataset.src;
+      frame.title = stage.dataset.title;
+      frame.setAttribute("sandbox", stage.dataset.sandbox);
+      frame.setAttribute("allow", stage.dataset.allow);
+      frame.setAttribute("loading", "lazy");
+      frame.setAttribute("allowfullscreen", "");
+      stage.replaceChildren(frame);
+    });
+  })();
+</script>

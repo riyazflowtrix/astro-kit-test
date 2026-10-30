@@ -1,0 +1,286 @@
+---
+// Recipe article whose rich-text body embeds component instances, a table, an image, a callout, footnotes and glossary terms.
+---
+
+<section id="rich-text-embedded-components" class="section rt">
+  <!-- kit: rich-text-embedded-components -->
+  <article class="container rt__inner">
+    <header class="rt__head">
+      <span class="eyebrow">Recipes</span>
+      <h1>Campfire paella for eight</h1>
+      <p class="lead">One pan, one fire, and the crust everybody fights over.</p>
+    </header>
+
+    <figure class="rt__cover">
+      <img src="https://picsum.photos/seed/campfire-paella/1600/1000" alt="A wide paella pan over a wood fire with lemons on the rim" width="3200" height="2000" />
+    </figure>
+
+    <div class="prose">
+      <p>Paella was always outdoor food. In Valencia it's still cooked over orange-wood fires on Sundays, and the <abbr data-term="socarrat" title="The toasted crust of rice on the bottom of the pan">socarrat</abbr> is the point of the whole exercise.<sup class="fn-ref" id="fnref-valencia"><a href="#fn-valencia" aria-describedby="rt-footnotes-label">1</a></sup></p>
+      <p>We cook it on the <a href="/products/cable-fold">Cable Fold Grill</a> so the pan sits level over an even bed of coals.</p>
+
+      <aside class="embed-product" aria-label="Product used in this recipe">
+        <img src="https://picsum.photos/seed/caldera-cable-fold/400/400" alt="The Cable Fold Grill set up over a fire pit" width="400" height="400" loading="lazy" />
+        <div class="embed-product__body">
+          <span class="badge">Used in this recipe</span>
+          <h3><a href="/products/cable-fold">Cable Fold Grill</a></h3>
+          <p>A folding steel grate that stands level over any fire pit.</p>
+          <p class="embed-product__price">$140</p>
+        </div>
+        <a class="btn btn-primary" href="/products/cable-fold">Shop the grill</a>
+      </aside>
+
+      <h2>What you need</h2>
+      <div class="table-wrap">
+        <table>
+          <caption>Ingredients for eight</caption>
+          <thead>
+            <tr><th scope="col">Ingredient</th><th scope="col">Amount</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Bomba rice</td><td>600 g</td></tr>
+            <tr><td>Chicken thighs</td><td>1 kg</td></tr>
+            <tr><td>Saffron</td><td>0.5 g<sup class="fn-ref" id="fnref-saffron"><a href="#fn-saffron" aria-describedby="rt-footnotes-label">2</a></sup></td></tr>
+            <tr><td>Stock</td><td>2.4 L</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="prose__figure prose__figure--wide">
+        <img src="https://picsum.photos/seed/paella-crust/1600/1000" alt="A spoon lifting rice to show a dark, crisp crust underneath" width="1600" height="1000" loading="lazy" />
+        <figcaption>Listen for the crackle: that's the socarrat forming.</figcaption>
+      </figure>
+
+      <div class="callout callout--warning" role="note">
+        <p class="callout__title">Don't stir</p>
+        <p>Once the rice is in, leave it. Stirring releases starch and you'll get risotto.</p>
+      </div>
+
+      <aside class="embed-newsletter">
+        <h3>Fire-cooking notes, once a month</h3>
+        <p>New recipes and the occasional workshop date. No sales spam.</p>
+        <form class="embed-newsletter__form" action="#" method="post">
+          <label class="visually-hidden" for="rt-newsletter-email">Email address</label>
+          <input id="rt-newsletter-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required />
+          <button class="btn btn-primary" type="submit">Subscribe</button>
+        </form>
+      </aside>
+    </div>
+
+    <footer class="rt__notes">
+      <section class="footnotes" aria-labelledby="rt-footnotes-label">
+        <h2 id="rt-footnotes-label" class="rt__notes-title">Notes</h2>
+        <ol>
+          <li id="fn-valencia">The Valencian regional government registered paella valenciana as a protected cultural asset in 2021. <a href="https://www.gva.es" target="_blank" rel="noopener">Source</a> <a href="#fnref-valencia" aria-label="Back to reference 1">&#8617;</a></li>
+          <li id="fn-saffron">About 30 threads. Toast them in a dry spoon over the fire before crumbling them in. <a href="#fnref-saffron" aria-label="Back to reference 2">&#8617;</a></li>
+        </ol>
+      </section>
+      <section class="glossary" aria-labelledby="rt-glossary-label">
+        <h2 id="rt-glossary-label" class="rt__notes-title">Glossary</h2>
+        <dl>
+          <dt>socarrat</dt>
+          <dd>The toasted crust of rice on the bottom of the pan.</dd>
+        </dl>
+      </section>
+    </footer>
+  </article>
+</section>
+
+<style>
+  .rt__inner {
+    max-width: 880px;
+  }
+  .rt__head {
+    max-width: 720px;
+    margin-bottom: 2rem;
+  }
+  .rt__cover {
+    margin: 0 0 2.5rem;
+  }
+  .rt__cover img {
+    width: 100%;
+    border-radius: var(--radius);
+  }
+  .prose {
+    max-width: 680px;
+    margin-inline: auto;
+    font-size: 1.125rem;
+    line-height: 1.75;
+  }
+  .prose > * + * {
+    margin-top: 1.5rem;
+  }
+  .prose p {
+    margin: 0;
+  }
+  .prose h2 {
+    margin-top: 2.5rem;
+    font-size: 1.75rem;
+  }
+  .prose a {
+    color: var(--brand);
+    text-underline-offset: 3px;
+  }
+  abbr[title] {
+    text-decoration: underline dotted;
+    cursor: help;
+  }
+  .fn-ref a {
+    margin-left: 0.125rem;
+    font-size: 0.75em;
+    text-decoration: none;
+  }
+  .embed-product {
+    display: grid;
+    grid-template-columns: 96px minmax(0, 1fr) auto;
+    gap: 1rem;
+    align-items: center;
+    padding: 1rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  .embed-product img {
+    width: 96px;
+    height: 96px;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+  }
+  .embed-product h3 {
+    margin: 0.375rem 0 0.125rem;
+    font-size: 1.0625rem;
+  }
+  .prose .embed-product h3 a {
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .embed-product p {
+    font-size: 0.9375rem;
+    color: var(--ink-2);
+  }
+  .embed-product__price {
+    font-weight: 600;
+    color: var(--ink) !important;
+  }
+  .prose .embed-product .btn {
+    color: var(--brand-ink);
+  }
+  @media (max-width: 560px) {
+    .embed-product {
+      grid-template-columns: 80px minmax(0, 1fr);
+    }
+    .embed-product img {
+      width: 80px;
+      height: 80px;
+    }
+    .embed-product .btn {
+      grid-column: 1 / -1;
+    }
+  }
+  .table-wrap {
+    overflow-x: auto;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1rem;
+  }
+  caption {
+    text-align: left;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  th,
+  td {
+    padding: 0.625rem 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid var(--line);
+  }
+  thead th {
+    background: var(--surface);
+    font-size: 0.875rem;
+  }
+  .prose__figure {
+    margin-inline: 0;
+  }
+  .prose__figure img {
+    width: 100%;
+    border-radius: var(--radius);
+  }
+  .prose__figure figcaption {
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--ink-2);
+  }
+  .callout {
+    padding: 1rem 1.25rem;
+    border-radius: var(--radius-sm);
+    background: #fff8e6;
+    border-left: 4px solid var(--warning);
+    font-size: 1rem;
+  }
+  .callout__title {
+    font-weight: 700;
+    color: var(--warning);
+    margin-bottom: 0.25rem !important;
+  }
+  .embed-newsletter {
+    padding: 1.5rem;
+    border: 2px solid var(--ink);
+    border-radius: var(--radius);
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  .embed-newsletter p {
+    color: var(--ink-2);
+    margin-bottom: 1rem;
+  }
+  .embed-newsletter__form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .embed-newsletter__form input {
+    flex: 1 1 200px;
+    min-width: 0;
+    min-height: 44px;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+  }
+  .rt__notes {
+    display: grid;
+    gap: 2rem;
+    max-width: 680px;
+    margin: 3rem auto 0;
+    padding-top: 2rem;
+    border-top: 1px solid var(--line);
+    font-size: 0.9375rem;
+    color: var(--ink-2);
+  }
+  .rt__notes-title {
+    font-size: 0.8125rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-3);
+  }
+  .footnotes ol {
+    margin: 0;
+    padding-left: 1.25rem;
+  }
+  .footnotes li + li {
+    margin-top: 0.5rem;
+  }
+  .glossary dl {
+    margin: 0;
+  }
+  .glossary dt {
+    font-weight: 700;
+    font-style: italic;
+    color: var(--ink);
+  }
+  .glossary dd {
+    margin: 0;
+  }
+</style>

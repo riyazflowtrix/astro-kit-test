@@ -1,0 +1,293 @@
+---
+// Pricing page overlays: a demo modal, a plan-details drawer and an exit-intent modal, each opened by triggers.
+---
+
+<section id="overlays-with-triggers" class="section section--muted overlays">
+  <!-- kit: overlays-with-triggers -->
+  <div class="container">
+    <div class="section-head section-head--center">
+      <span class="eyebrow">Pricing page overlays</span>
+      <h2>Growth plan</h2>
+      <p class="lead">Payroll, benefits and reviews for teams of 20 to 500. Open the details or book time with a specialist.</p>
+    </div>
+    <div class="btn-row overlays__triggers">
+      <button type="button" class="btn btn-primary" data-open="book-demo" aria-haspopup="dialog">Book a 20-minute demo</button>
+      <button type="button" class="btn btn-secondary" data-open="growth-details" aria-haspopup="dialog">What's included in Growth</button>
+      <button type="button" class="btn btn-secondary" data-open="exit-guide" aria-haspopup="dialog">Preview the exit offer</button>
+    </div>
+  </div>
+
+  <!-- Modal: book-demo (size md, opened by click only, backdrop click does not close) -->
+  <dialog class="overlay overlay--modal overlay--md" id="book-demo" data-frequency="once" data-backdrop-close="false" aria-labelledby="book-demo-title">
+    <div class="overlay__inner">
+      <header class="overlay__head">
+        <h2 id="book-demo-title">Book a 20-minute demo</h2>
+        <button type="button" class="overlay__close" data-close aria-label="Close">&times;</button>
+      </header>
+      <div class="overlay__text">
+        <h3>See Betterwork with your own data</h3>
+        <p>A product specialist walks through payroll, benefits and reviews for a company your size. No slides.</p>
+      </div>
+      <figure class="overlay__quote">
+        <div class="stars" role="img" aria-label="Rated 5 out of 5">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <blockquote><p>The demo was the first one where they used our actual org chart.</p></blockquote>
+        <figcaption><strong>Dana Whitfield</strong>, Head of People, Larkspur Health</figcaption>
+      </figure>
+      <form class="overlay__form" action="#" method="post">
+        <div class="field">
+          <label for="ovl-demo-name">Full name</label>
+          <input id="ovl-demo-name" name="name" type="text" autocomplete="name" required />
+        </div>
+        <div class="field">
+          <label for="ovl-demo-email">Work email</label>
+          <input id="ovl-demo-email" name="email" type="email" autocomplete="email" required />
+        </div>
+        <div class="field">
+          <label for="ovl-demo-size">Company size</label>
+          <select id="ovl-demo-size" name="companySize">
+            <option>1-49</option>
+            <option>50-199</option>
+            <option>200-1000</option>
+            <option>1000+</option>
+          </select>
+        </div>
+        <button class="btn btn-primary" type="submit">Request my demo</button>
+      </form>
+    </div>
+  </dialog>
+
+  <!-- Drawer: growth-details (right side, once per session) -->
+  <dialog class="overlay overlay--drawer" id="growth-details" data-frequency="session" data-backdrop-close="true" aria-labelledby="growth-details-title">
+    <div class="overlay__inner">
+      <header class="overlay__head">
+        <h2 id="growth-details-title">What's included in Growth</h2>
+        <button type="button" class="overlay__close" data-close aria-label="Close">&times;</button>
+      </header>
+      <ul class="overlay__features">
+        <li>
+          <span class="feature__icon" aria-hidden="true">$</span>
+          <div>
+            <h3>Payroll in 50 states</h3>
+            <p>Automatic tax filings, garnishments and year-end forms.</p>
+          </div>
+        </li>
+        <li>
+          <span class="feature__icon" aria-hidden="true">&hearts;</span>
+          <div>
+            <h3>Benefits administration</h3>
+            <p>Open enrolment, carrier connections and COBRA.</p>
+          </div>
+        </li>
+      </ul>
+      <div class="overlay__cta" style="--tone: #EEF2FF">
+        <h3>Ready to compare plans?</h3>
+        <p>See every feature side by side.</p>
+        <a class="btn btn-primary" href="#compare" data-close>Compare plans</a>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Modal: exit-guide (size sm, triggers: exit intent or 70% scroll, once a week) -->
+  <dialog class="overlay overlay--modal overlay--sm" id="exit-guide" data-frequency="week" data-backdrop-close="true" data-triggers="exit scroll:70" aria-labelledby="exit-guide-title">
+    <div class="overlay__inner">
+      <header class="overlay__head">
+        <h2 id="exit-guide-title">Leaving already?</h2>
+        <button type="button" class="overlay__close" data-close aria-label="Close">&times;</button>
+      </header>
+      <div class="overlay__cta overlay__cta--outline">
+        <h3>Take the 2026 payroll compliance guide</h3>
+        <p>38 pages, every state change this year.</p>
+        <a class="btn btn-primary" href="/guides/payroll-compliance-2026">Get the guide <span aria-hidden="true">&rarr;</span></a>
+      </div>
+    </div>
+  </dialog>
+</section>
+
+<script>
+  {
+    const root = document.getElementById("overlays-with-triggers");
+    if (root) {
+      const get = (id: string) => root.querySelector<HTMLDialogElement>(`dialog#${id}`);
+      const open = (d: HTMLDialogElement | null) => {
+        if (d && !d.open) d.showModal();
+      };
+      root.querySelectorAll<HTMLButtonElement>("[data-open]").forEach((btn) => {
+        btn.addEventListener("click", () => open(get(btn.dataset.open || "")));
+      });
+      root.querySelectorAll<HTMLDialogElement>("dialog").forEach((d) => {
+        d.querySelectorAll("[data-close]").forEach((el) => el.addEventListener("click", () => d.close()));
+        d.addEventListener("click", (e) => {
+          if (e.target === d && d.dataset.backdropClose === "true") d.close();
+        });
+      });
+
+      // Automatic triggers for the exit offer, at most once a week.
+      const exit = get("exit-guide");
+      const key = "bw-exit-guide-shown";
+      const recentlyShown = () => {
+        try {
+          const t = Number(localStorage.getItem(key) || 0);
+          return Date.now() - t < 7 * 24 * 60 * 60 * 1000;
+        } catch {
+          return true;
+        }
+      };
+      const auto = () => {
+        if (!exit || recentlyShown() || document.querySelector("dialog[open]")) return;
+        try {
+          localStorage.setItem(key, String(Date.now()));
+        } catch {}
+        open(exit);
+      };
+      document.addEventListener("mouseout", (e) => {
+        if (!e.relatedTarget && e.clientY <= 0) auto();
+      });
+      const onScroll = () => {
+        const r = root.getBoundingClientRect();
+        const seen = (innerHeight - r.top) / (r.height + innerHeight);
+        if (seen >= 0.7) {
+          window.removeEventListener("scroll", onScroll);
+          auto();
+        }
+      };
+      window.addEventListener("scroll", onScroll, { passive: true });
+    }
+  }
+</script>
+
+<style>
+  .overlays__triggers {
+    justify-content: center;
+  }
+  .overlay {
+    padding: 0;
+    border: 0;
+    color: var(--ink);
+    background: var(--bg);
+    box-shadow: 0 24px 80px rgb(0 0 0 / 0.25);
+  }
+  .overlay::backdrop {
+    background: rgb(20 19 23 / 0.55);
+  }
+  .overlay--modal {
+    width: min(100% - 32px, 560px);
+    max-height: calc(100dvh - 32px);
+    border-radius: var(--radius-lg);
+  }
+  .overlay--sm {
+    width: min(100% - 32px, 420px);
+  }
+  .overlay--drawer {
+    width: min(100%, 420px);
+    height: 100dvh;
+    max-height: 100dvh;
+    margin: 0 0 0 auto;
+    border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+  }
+  .overlay__inner {
+    display: grid;
+    gap: 1.25rem;
+    padding: 1.5rem;
+  }
+  .overlay__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  .overlay__head h2 {
+    margin: 0;
+    font-size: 1.375rem;
+  }
+  .overlay__close {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    background: var(--bg);
+    font-size: 1.375rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+  .overlay__text h3 {
+    font-size: 1.0625rem;
+    margin-bottom: 0.25rem;
+  }
+  .overlay__text p {
+    margin: 0;
+    color: var(--ink-2);
+  }
+  .overlay__quote {
+    margin: 0;
+    padding: 1rem;
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+  .stars {
+    color: var(--warning);
+    font-size: 0.875rem;
+  }
+  .overlay__quote blockquote {
+    margin: 0.25rem 0 0.5rem;
+    font-weight: 500;
+  }
+  .overlay__quote blockquote p {
+    margin: 0;
+  }
+  .overlay__quote figcaption {
+    font-size: 0.8125rem;
+    color: var(--ink-2);
+  }
+  .overlay__form {
+    display: grid;
+    gap: 0.875rem;
+  }
+  .overlay__features {
+    display: grid;
+    gap: 1.25rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .overlay__features li {
+    display: flex;
+    gap: 0.875rem;
+  }
+  .feature__icon {
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-sm);
+    background: #eef2ff;
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .overlay__features h3 {
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+  }
+  .overlay__features p {
+    margin: 0;
+    font-size: 0.9375rem;
+    color: var(--ink-2);
+  }
+  .overlay__cta {
+    padding: 1.25rem;
+    border-radius: var(--radius);
+    background: var(--tone, var(--surface));
+  }
+  .overlay__cta--outline {
+    background: transparent;
+    border: 1px solid var(--line);
+  }
+  .overlay__cta h3 {
+    font-size: 1.0625rem;
+    margin-bottom: 0.25rem;
+  }
+  .overlay__cta p {
+    color: var(--ink-2);
+  }
+</style>

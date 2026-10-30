@@ -1,0 +1,115 @@
+<section id="pricing-usage-calculator" class="section section--muted calc">
+  <!-- kit: pricing-usage-calculator -->
+  <div class="container calc__layout">
+    <div class="calc__intro">
+      <h2>Estimate your monthly bill</h2>
+      <p class="lead">Pay for the events you send. No per-endpoint fees, no surprise overages.</p>
+
+      <form class="calc__form" action="#" onsubmit="return false">
+        <div class="calc__input">
+          <div class="calc__label-row">
+            <label for="calc-events">Events a month</label>
+            <output for="calc-events" data-out="events">5M events</output>
+          </div>
+          <input id="calc-events" type="range" min="0" max="1000" step="1" value="566" data-scale="log" data-min="100000" data-max="100000000" aria-describedby="calc-events-help" />
+          <div class="calc__ticks" aria-hidden="true"><span>100k</span><span>1M</span><span>10M</span><span>100M</span></div>
+          <p id="calc-events-help" class="calc__help">Count every webhook delivery attempt, retries included.</p>
+        </div>
+        <div class="calc__input">
+          <div class="calc__label-row">
+            <label for="calc-retention">Event history</label>
+            <output for="calc-retention" data-out="retention">30 days</output>
+          </div>
+          <input id="calc-retention" type="range" min="3" max="90" step="1" value="30" />
+          <div class="calc__ticks" aria-hidden="true"><span>3 days</span><span>90 days</span></div>
+        </div>
+      </form>
+    </div>
+
+    <div class="calc__result" aria-live="polite">
+      <p class="calc__result-label">Estimated monthly total</p>
+      <p class="calc__total"><strong data-total>$61</strong><span>/ month</span></p>
+      <dl class="calc__breakdown">
+        <div><dt>Pro base plan</dt><dd>$49.00</dd></div>
+        <div><dt>Events <small data-events-note>(3M over 2M included)</small></dt><dd data-events-cost>$12.00</dd></div>
+        <div><dt>Event history <small data-ret-note>(30 days included)</small></dt><dd data-ret-cost>$0.00</dd></div>
+      </dl>
+      <div class="calc__sales" data-sales hidden>
+        <p>Spending over $2,500 a month? Volume pricing will beat this.</p>
+        <a class="btn btn-secondary" href="/contact-sales">Get volume pricing</a>
+      </div>
+      <a class="btn btn-primary calc__cta" href="https://app.northwind.dev/signup?plan=pro">Start 14-day trial <span aria-hidden="true">&rarr;</span></a>
+      <p class="calc__disclaimer">An estimate before tax. Your invoice uses your actual usage for the month.</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  const root = document.getElementById("pricing-usage-calculator");
+  if (root) {
+    const events = root.querySelector<HTMLInputElement>("#calc-events");
+    const retention = root.querySelector<HTMLInputElement>("#calc-retention");
+    const money = (n: number) => `$${n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    const short = (n: number) => (n >= 1e6 ? `${+(n / 1e6).toFixed(n >= 1e7 ? 0 : 1)}M` : `${Math.round(n / 1e3)}k`);
+    const set = (sel: string, text: string) => { const el = root.querySelector<HTMLElement>(sel); if (el) el.textContent = text; };
+    const tiers = [
+      { upTo: 10_000_000, price: 0.4 },
+      { upTo: 50_000_000, price: 0.3 },
+      { upTo: Infinity, price: 0.2 },
+    ];
+    const update = () => {
+      if (!events || !retention) return;
+      const t = Number(events.value) / 1000;
+      const raw = Math.pow(10, 5 + t * 3);
+      const ev = Math.round(raw / 100_000) * 100_000;
+      const days = Number(retention.value);
+      let cost = 0;
+      let from = 2_000_000;
+      for (const tier of tiers) {
+        if (ev <= from) break;
+        const upper = Math.min(ev, tier.upTo);
+        if (upper > from) cost += ((upper - from) / 100_000) * tier.price;
+        from = Math.max(from, tier.upTo);
+      }
+      const retCost = days > 30 ? Math.ceil((days - 30) / 30) * 20 : 0;
+      const total = 49 + cost + retCost;
+      set('[data-out="events"]', `${short(ev)} events`);
+      set('[data-out="retention"]', `${days} days`);
+      set("[data-events-cost]", money(cost));
+      set("[data-events-note]", ev > 2_000_000 ? `(${short(ev - 2_000_000)} over 2M included)` : "(within 2M included)");
+      set("[data-ret-cost]", money(retCost));
+      set("[data-ret-note]", days > 30 ? `(${days - 30} days over 30 included)` : "(30 days included)");
+      set("[data-total]", `$${Math.round(total).toLocaleString("en-US")}`);
+      const sales = root.querySelector<HTMLElement>("[data-sales]");
+      if (sales) sales.hidden = total <= 2500;
+    };
+    events?.addEventListener("input", update);
+    retention?.addEventListener("input", update);
+    update();
+  }
+</script>
+
+<style>
+  .calc__layout { display: grid; gap: 2.5rem; }
+  @media (min-width: 900px) { .calc__layout { grid-template-columns: 1.2fr 1fr; gap: 4rem; align-items: start; } }
+  .calc__form { display: grid; gap: 2rem; margin-top: 2rem; }
+  .calc__label-row { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; margin-bottom: 0.5rem; }
+  .calc__label-row label { font-weight: 600; }
+  .calc__label-row output { font-weight: 700; font-variant-numeric: tabular-nums; color: var(--brand); }
+  .calc__input input[type="range"] { width: 100%; accent-color: var(--brand); min-height: 32px; }
+  .calc__ticks { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--ink-3); }
+  .calc__help { margin: 0.5rem 0 0; font-size: 0.875rem; color: var(--ink-2); }
+  .calc__result { padding: clamp(1.5rem, 3vw, 2rem); border-radius: var(--radius-lg); background: var(--bg); border: 1px solid var(--line); box-shadow: var(--shadow); }
+  .calc__result-label { margin: 0; font-size: 0.875rem; color: var(--ink-2); font-weight: 600; }
+  .calc__total { display: flex; align-items: baseline; gap: 0.375rem; margin: 0.25rem 0 1.25rem; }
+  .calc__total strong { font-size: 3rem; letter-spacing: -0.03em; line-height: 1; font-variant-numeric: tabular-nums; }
+  .calc__total span { color: var(--ink-3); }
+  .calc__breakdown { margin: 0 0 1.5rem; display: grid; gap: 0.5rem; padding-top: 1rem; border-top: 1px solid var(--line); font-size: 0.9375rem; }
+  .calc__breakdown div { display: flex; justify-content: space-between; gap: 1rem; }
+  .calc__breakdown dt small { display: block; color: var(--ink-3); font-size: 0.8125rem; }
+  .calc__breakdown dd { margin: 0; font-variant-numeric: tabular-nums; font-weight: 600; }
+  .calc__sales { padding: 1rem; margin-bottom: 1rem; border-radius: var(--radius); background: var(--brand-soft); }
+  .calc__sales p { margin-bottom: 0.75rem; font-size: 0.9375rem; }
+  .calc__cta { width: 100%; }
+  .calc__disclaimer { margin: 0.875rem 0 0; font-size: 0.8125rem; color: var(--ink-3); }
+</style>

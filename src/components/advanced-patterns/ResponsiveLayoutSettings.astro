@@ -1,0 +1,141 @@
+---
+// Service cards: 4 columns on desktop, 2 on tablet, a peeking carousel on phones (Interiors hidden on phones).
+---
+
+<section id="responsive-layout-settings" class="section rls">
+  <!-- kit: responsive-layout-settings -->
+  <div class="container">
+    <div class="section-head">
+      <h2>What we do</h2>
+      <p class="lead">Four services, one team from first sketch to handover.</p>
+    </div>
+
+    <ul class="rls__grid">
+      <li class="rls__item" style="--mobile-order: 1">
+        <a class="rls__card" href="/services/residential">
+          <img src="https://picsum.photos/seed/lumen-residential/1600/1000" alt="A living room lit by a tall slit window" width="3200" height="2000" loading="lazy" />
+          <div class="rls__body">
+            <h3>Residential</h3>
+            <p>Houses and apartment renovations shaped around light and air.</p>
+            <span class="rls__more">Learn more <span aria-hidden="true">&rarr;</span></span>
+          </div>
+        </a>
+      </li>
+      <li class="rls__item" style="--mobile-order: 2">
+        <a class="rls__card" href="/services/civic">
+          <img src="https://picsum.photos/seed/lumen-library/1600/1000" alt="A library reading room under a sawtooth roof" width="3200" height="2000" loading="lazy" />
+          <div class="rls__body">
+            <h3>Civic &amp; cultural</h3>
+            <p>Libraries, schools and small museums for municipalities.</p>
+            <span class="rls__more">Learn more <span aria-hidden="true">&rarr;</span></span>
+          </div>
+        </a>
+      </li>
+      <li class="rls__item rls__item--hide-mobile">
+        <a class="rls__card" href="/services/interiors">
+          <img src="https://picsum.photos/seed/lumen-joinery/1600/1000" alt="Oak joinery with integrated lighting" width="3200" height="2000" loading="lazy" />
+          <div class="rls__body">
+            <h3>Interiors</h3>
+            <p>Joinery, lighting and material palettes, specified to the millimetre.</p>
+            <span class="rls__more">Learn more <span aria-hidden="true">&rarr;</span></span>
+          </div>
+        </a>
+      </li>
+      <li class="rls__item" style="--mobile-order: 3">
+        <a class="rls__card" href="/services/daylight">
+          <img src="https://picsum.photos/seed/lumen-daylight/1600/1000" alt="A sun-path diagram over a site plan" width="3200" height="2000" loading="lazy" />
+          <div class="rls__body">
+            <h3>Daylight studies</h3>
+            <p>Sun-path and glare modelling for other architects' projects.</p>
+            <span class="rls__more">Learn more <span aria-hidden="true">&rarr;</span></span>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<style>
+  /* Desktop: 4 columns, large gap, xl vertical padding */
+  .rls {
+    padding-block: clamp(80px, 10vw, 128px);
+  }
+  .rls__grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .rls__card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+    text-decoration: none;
+    background: var(--bg);
+    transition: border-color 150ms ease, transform 150ms ease;
+  }
+  .rls__card:hover {
+    border-color: var(--ink-3);
+    transform: translateY(-2px);
+  }
+  .rls__card img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+  .rls__body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 1.25rem;
+  }
+  .rls__body p {
+    color: var(--ink-2);
+    font-size: 0.9375rem;
+    flex: 1;
+  }
+  .rls__more {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--brand);
+  }
+
+  /* Tablet: own layout, 2 columns, medium gap, large padding */
+  @media (max-width: 1023px) {
+    .rls {
+      padding-block: clamp(64px, 9vw, 96px);
+    }
+    .rls__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.5rem;
+    }
+  }
+
+  /* Mobile: carousel with a peek of the next card, medium padding, custom order */
+  @media (max-width: 639px) {
+    .rls {
+      padding-block: 56px;
+    }
+    .rls__grid {
+      display: flex;
+      gap: 1rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      padding-bottom: 0.25rem;
+    }
+    .rls__item {
+      flex: 0 0 82%;
+      scroll-snap-align: start;
+      order: var(--mobile-order, 99);
+    }
+    .rls__item--hide-mobile {
+      display: none;
+    }
+  }
+</style>

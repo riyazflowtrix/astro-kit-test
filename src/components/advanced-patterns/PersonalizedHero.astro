@@ -1,0 +1,133 @@
+---
+// Split hero: default content is server-rendered; audience segments and an A/B variant swap in client-side.
+---
+
+<section id="personalized-hero" class="section phero" data-experiment="Q4 hero: outcome vs product headline" data-goal="demo">
+  <!-- kit: personalized-hero -->
+  <div class="container phero__grid">
+    <div class="phero__copy" data-slot="copy">
+      <span class="eyebrow">HR, payroll and benefits</span>
+      <h1 data-slot="heading">Run your people ops from one place.</h1>
+      <p class="lead" data-slot="body">Hiring, payroll, benefits and reviews in one system your team will actually open.</p>
+      <div class="btn-row">
+        <a class="btn btn-primary" data-slot="button" href="/demo" title="Book a demo">Book a demo <span aria-hidden="true">&rarr;</span></a>
+      </div>
+      <p class="phero__audience" aria-live="polite"><span class="phero__dot" aria-hidden="true"></span><span data-slot="audience">Showing: everyone</span></p>
+    </div>
+    <div class="phero__media">
+      <img data-slot="image" src="https://picsum.photos/seed/betterwork-dashboard/1600/1000" alt="Betterwork's people dashboard showing headcount and upcoming payroll" width="3200" height="2000" fetchpriority="high" />
+    </div>
+  </div>
+
+  <!-- Segment: Healthcare, 200+ people (industry is Healthcare AND companySize is 200-1000) -->
+  <template data-segment="healthcare" data-match="all" data-rules="industry=Healthcare;companySize=200-1000" data-label="Healthcare, 200+ people">
+    <h1 data-slot="heading">Shift-based payroll without the spreadsheet.</h1>
+    <p data-slot="body">Overtime, differentials and multi-state rules handled for clinics and care teams.</p>
+    <a data-slot="button" href="/industries/healthcare">See healthcare payroll <span aria-hidden="true">&rarr;</span></a>
+    <img data-slot="image" src="https://picsum.photos/seed/betterwork-shifts/1600/1000" alt="A shift schedule with overtime highlighted for a clinic team" width="3200" height="2000" />
+  </template>
+
+  <!-- Segment: came from the payroll campaign (utmCampaign contains payroll-q4) -->
+  <template data-segment="payroll-campaign" data-match="any" data-rules="utmCampaign~payroll-q4" data-label="Came from the payroll campaign">
+    <h1 data-slot="heading">Close payroll in 20 minutes, not two days.</h1>
+  </template>
+
+  <!-- Experiment variant B: outcome headline (50%), control A is the default content (50%) -->
+  <template data-variant="B" data-weight="50" data-label="B: outcome headline">
+    <h1 data-slot="heading">Give your HR team back a day every week.</h1>
+    <p data-slot="body">Teams on Betterwork spend 72% less time on payroll and benefits admin.</p>
+    <a data-slot="button" href="/demo?v=b">Book a 20-minute demo <span aria-hidden="true">&rarr;</span></a>
+  </template>
+</section>
+
+<script>
+  {
+    const root = document.getElementById("personalized-hero");
+    if (root) {
+      const params = new URLSearchParams(location.search);
+      const apply = (tpl: HTMLTemplateElement) => {
+        tpl.content.querySelectorAll<HTMLElement>("[data-slot]").forEach((src) => {
+          const slot = src.dataset.slot;
+          const target = root.querySelector<HTMLElement>(`.phero__grid [data-slot="${slot}"]`);
+          if (!target) return;
+          if (slot === "image" && target instanceof HTMLImageElement && src instanceof HTMLImageElement) {
+            target.src = src.src;
+            target.alt = src.alt;
+          } else {
+            target.innerHTML = src.innerHTML;
+            const href = src.getAttribute("href");
+            if (href) target.setAttribute("href", href);
+          }
+        });
+        const audience = root.querySelector('[data-slot="audience"]');
+        if (audience) audience.textContent = "Showing: " + (tpl.dataset.label || "");
+      };
+      const pick = (sel: string) => root.querySelector<HTMLTemplateElement>(sel);
+      const healthcare = params.get("industry") === "Healthcare" && params.get("companySize") === "200-1000";
+      const campaign = (params.get("utm_campaign") || "").includes("payroll-q4");
+      let chosen: HTMLTemplateElement | null = null;
+      if (healthcare) chosen = pick('template[data-segment="healthcare"]');
+      else if (campaign) chosen = pick('template[data-segment="payroll-campaign"]');
+      else {
+        let bucket: string | null = null;
+        try {
+          bucket = localStorage.getItem("bw-hero-q4");
+          if (!bucket) {
+            bucket = Math.random() < 0.5 ? "A" : "B";
+            localStorage.setItem("bw-hero-q4", bucket);
+          }
+        } catch {
+          bucket = "A";
+        }
+        if (bucket === "B") chosen = pick('template[data-variant="B"]');
+        else {
+          const audience = root.querySelector('[data-slot="audience"]');
+          if (audience) audience.textContent = "Showing: A: control";
+        }
+      }
+      if (chosen) apply(chosen);
+    }
+  }
+</script>
+
+<style>
+  .phero {
+    background: linear-gradient(180deg, #eef2ff 0%, var(--bg) 100%);
+  }
+  .phero__grid {
+    display: grid;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: center;
+    grid-template-columns: minmax(0, 1fr);
+  }
+  @media (min-width: 900px) {
+    .phero__grid {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+    }
+  }
+  .phero__copy .lead {
+    margin-bottom: 1.75rem;
+  }
+  .phero__audience {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 1.5rem 0 0;
+    font-size: 0.8125rem;
+    color: var(--ink-3);
+  }
+  .phero__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--success);
+  }
+  .phero__media img {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+    box-shadow: 0 20px 60px rgb(47 91 216 / 0.18);
+    border: 1px solid var(--line);
+  }
+</style>

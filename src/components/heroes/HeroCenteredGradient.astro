@@ -1,0 +1,126 @@
+<section id="hero-centered-gradient" class="section section--dark hcg" data-variant="screenshot" data-width="narrow">
+  <!-- kit: hero-centered-gradient -->
+  <div class="container hcg__inner">
+    <a class="hcg__chip" href="/changelog/kubernetes-traces">
+      <span class="hcg__chip-dot" aria-hidden="true"></span>
+      New: Traces for Kubernetes
+      <span aria-hidden="true">→</span>
+    </a>
+    <h2 class="hcg__title">Find the <mark>slow service</mark> before your customers do.</h2>
+    <p class="lead hcg__lead">Tideline links every trace, log and deploy so on-call engineers see the cause in one view — not twelve tabs.</p>
+    <div class="btn-row hcg__buttons">
+      <a class="btn btn-primary" href="https://app.tideline.dev/signup">Start free</a>
+      <a class="btn btn-secondary hcg__outline" href="/demo">Book a demo</a>
+    </div>
+    <p class="hcg__note">Free for 3 engineers · No credit card required</p>
+
+    <figure class="hcg__shot">
+      <div class="hcg__chrome" aria-hidden="true"><span></span><span></span><span></span></div>
+      <img src="https://picsum.photos/seed/tideline-service-map/2400/1500" alt="Tideline service map with the checkout service highlighted in red at 1.8 seconds" width="2400" height="1500" />
+    </figure>
+  </div>
+</section>
+
+<style>
+  .hcg {
+    background: radial-gradient(ellipse at 50% 0%, #1b2a4a 0%, #0b1020 70%);
+    overflow: hidden;
+  }
+
+  .hcg__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .hcg__chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.75rem;
+    padding: 0.375rem 0.875rem;
+    border: 1px solid rgb(255 255 255 / 0.18);
+    border-radius: 999px;
+    background: rgb(255 255 255 / 0.06);
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  .hcg__chip:hover {
+    border-color: rgb(255 255 255 / 0.4);
+  }
+
+  .hcg__chip-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #5ee0a0;
+    box-shadow: 0 0 0 4px rgb(94 224 160 / 0.2);
+  }
+
+  .hcg__title {
+    max-width: 18ch;
+    font-size: clamp(2.25rem, 6vw, 4rem);
+  }
+
+  .hcg__title mark {
+    background: linear-gradient(90deg, #ff8a6b, #ffc56b);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .hcg__lead {
+    margin-inline: auto;
+  }
+
+  .hcg__buttons {
+    justify-content: center;
+    margin-top: 0.75rem;
+  }
+
+  .hcg__outline {
+    border-color: rgb(255 255 255 / 0.3);
+  }
+
+  .hcg__outline:hover {
+    border-color: rgb(255 255 255 / 0.7);
+  }
+
+  .hcg__note {
+    margin-top: 1rem;
+    font-size: 0.875rem;
+    color: color-mix(in srgb, var(--dark-ink) 60%, transparent);
+  }
+
+  .hcg__shot {
+    width: 100%;
+    max-width: 1040px;
+    margin: clamp(2.5rem, 6vw, 4rem) 0 0;
+    padding: 0.5rem;
+    border: 1px solid rgb(255 255 255 / 0.12);
+    border-radius: var(--radius-lg);
+    background: rgb(255 255 255 / 0.04);
+    box-shadow: 0 40px 80px rgb(0 0 0 / 0.45);
+  }
+
+  .hcg__chrome {
+    display: flex;
+    gap: 6px;
+    padding: 0.25rem 0.5rem 0.625rem;
+  }
+
+  .hcg__chrome span {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgb(255 255 255 / 0.2);
+  }
+
+  .hcg__shot img {
+    width: 100%;
+    border-radius: var(--radius);
+  }
+</style>

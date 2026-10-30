@@ -1,0 +1,182 @@
+---
+// Code tabs (variant: tabs) — Ledgerline API. Tabs sync across the page by the "sdk" key.
+---
+
+<section id="code-tabs" class="section code-tabs-section" data-variant="tabs">
+  <!-- kit: code-tabs -->
+  <div class="container">
+    <div class="code-tabs" data-sync-key="sdk">
+      <div class="bar">
+        <h2 class="title">Post a journal entry</h2>
+        <div class="tabs" role="tablist" aria-label="Language">
+      <button type="button" role="tab" id="code-tabs-tab-curl" aria-controls="code-tabs-panel-curl" aria-selected="true" data-lang="curl">cURL</button>
+      <button type="button" role="tab" id="code-tabs-tab-typescript" aria-controls="code-tabs-panel-typescript" aria-selected="false" data-lang="typescript" tabindex="-1">Node.js</button>
+      <button type="button" role="tab" id="code-tabs-tab-python" aria-controls="code-tabs-panel-python" aria-selected="false" data-lang="python" tabindex="-1">Python</button>
+        </div>
+        <button type="button" class="copy" aria-label="Copy code">Copy</button>
+      </div>
+    <div class="panel" role="tabpanel" id="code-tabs-panel-curl" aria-labelledby="code-tabs-tab-curl" data-lang="curl">
+        <pre class="code"><code class="language-curl"><span class="line">curl https://api.ledgerline.com/v2/journal-entries \</span><span class="line">  -H "Authorization: Bearer $LEDGERLINE_KEY" \</span><span class="line">  -H "Content-Type: application/json" \</span><span class="line">  -d '&#123;</span><span class="line hl">    "date": "2026-09-30",</span><span class="line hl">    "lines": [</span><span class="line hl">      &#123; "account": "6100", "debit": 1250.00 &#125;,</span><span class="line hl">      &#123; "account": "2000", "credit": 1250.00 &#125;</span><span class="line">    ]</span><span class="line">  &#125;'</span></code></pre>
+    </div>
+    <div class="panel" role="tabpanel" id="code-tabs-panel-typescript" aria-labelledby="code-tabs-tab-typescript" data-lang="typescript" hidden>
+        <p class="filename">post-entry.ts</p>
+        <pre class="code"><code class="language-typescript"><span class="line">import &#123; Ledgerline &#125; from "@ledgerline/node";</span><span class="line"></span><span class="line">const ll = new Ledgerline(process.env.LEDGERLINE_KEY!);</span><span class="line"></span><span class="line hl">await ll.journalEntries.create(&#123;</span><span class="line hl">  date: "2026-09-30",</span><span class="line hl">  lines: [</span><span class="line hl">    &#123; account: "6100", debit: 1250 &#125;,</span><span class="line hl">    &#123; account: "2000", credit: 1250 &#125;,</span><span class="line hl">  ],</span><span class="line hl">&#125;);</span></code></pre>
+    </div>
+    <div class="panel" role="tabpanel" id="code-tabs-panel-python" aria-labelledby="code-tabs-tab-python" data-lang="python" hidden>
+        <p class="filename">post_entry.py</p>
+        <pre class="code"><code class="language-python"><span class="line">from ledgerline import Ledgerline</span><span class="line"></span><span class="line">ll = Ledgerline(os.environ["LEDGERLINE_KEY"])</span><span class="line"></span><span class="line">ll.journal_entries.create(</span><span class="line">    date="2026-09-30",</span><span class="line">    lines=[</span><span class="line">        &#123;"account": "6100", "debit": 1250&#125;,</span><span class="line">        &#123;"account": "2000", "credit": 1250&#125;,</span><span class="line">    ],</span><span class="line">)</span></code></pre>
+    </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .code-tabs {
+    max-width: 860px;
+    margin-inline: auto;
+    overflow: hidden;
+    border-radius: var(--radius);
+    background: #17161c;
+    color: #e9e7f0;
+    box-shadow: var(--shadow);
+  }
+  .bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 1rem;
+    padding: 0.5rem 0.75rem 0.5rem 1.125rem;
+    border-bottom: 1px solid rgb(255 255 255 / 0.08);
+  }
+  .title {
+    margin: 0;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    letter-spacing: 0;
+    color: #fff;
+  }
+  .tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    margin-right: auto;
+  }
+  .tabs button,
+  .copy {
+    min-height: 36px;
+    padding: 0 0.75rem;
+    border: 0;
+    border-radius: var(--radius-sm);
+    background: transparent;
+    color: rgb(233 231 240 / 0.7);
+    font: inherit;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .tabs button:hover,
+  .copy:hover {
+    color: #fff;
+  }
+  .tabs button[aria-selected="true"] {
+    background: rgb(255 255 255 / 0.1);
+    color: #fff;
+  }
+  .copy {
+    border: 1px solid rgb(255 255 255 / 0.16);
+  }
+  .filename {
+    margin: 0;
+    padding: 0.5rem 1.125rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: rgb(233 231 240 / 0.55);
+    border-bottom: 1px solid rgb(255 255 255 / 0.06);
+  }
+  .code {
+    margin: 0;
+    max-height: 420px;
+    overflow: auto;
+    padding: 0.875rem 0;
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    line-height: 1.7;
+    counter-reset: line;
+  }
+  .code code {
+    display: block;
+    min-width: max-content;
+  }
+  .code :global(.line) {
+    display: block;
+    min-height: 1.7em;
+    padding-right: 1.25rem;
+    white-space: pre;
+  }
+  .code :global(.line)::before {
+    counter-increment: line;
+    content: counter(line);
+    display: inline-block;
+    width: 2.25rem;
+    margin-right: 1rem;
+    padding-left: 0.5rem;
+    text-align: right;
+    color: rgb(233 231 240 / 0.3);
+    user-select: none;
+  }
+  .code :global(.line.hl) {
+    background: rgb(212 72 59 / 0.18);
+    box-shadow: inset 3px 0 0 var(--brand);
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    var root = document.getElementById("code-tabs");
+    if (!root) return;
+    var group = root.querySelector(".code-tabs");
+    var key = group.getAttribute("data-sync-key");
+    var tabs = Array.prototype.slice.call(group.querySelectorAll('[role="tab"]'));
+    function select(lang, broadcast) {
+      var found = tabs.some(function (t) { return t.dataset.lang === lang; });
+      if (!found) return;
+      tabs.forEach(function (t) {
+        var on = t.dataset.lang === lang;
+        t.setAttribute("aria-selected", String(on));
+        t.tabIndex = on ? 0 : -1;
+        document.getElementById(t.getAttribute("aria-controls")).hidden = !on;
+      });
+      if (broadcast) {
+        try { localStorage.setItem("codetabs:" + key, lang); } catch (e) {}
+        window.dispatchEvent(new CustomEvent("codetabs:sync", { detail: { key: key, lang: lang, source: group } }));
+      }
+    }
+    tabs.forEach(function (t, i) {
+      t.addEventListener("click", function () { select(t.dataset.lang, true); });
+      t.addEventListener("keydown", function (e) {
+        var n = null;
+        if (e.key === "ArrowRight") n = tabs[(i + 1) % tabs.length];
+        if (e.key === "ArrowLeft") n = tabs[(i - 1 + tabs.length) % tabs.length];
+        if (n) { e.preventDefault(); select(n.dataset.lang, true); n.focus(); }
+      });
+    });
+    window.addEventListener("codetabs:sync", function (e) {
+      if (e.detail.key === key && e.detail.source !== group) select(e.detail.lang, false);
+    });
+    try {
+      var saved = localStorage.getItem("codetabs:" + key);
+      if (saved) select(saved, false);
+    } catch (e) {}
+    var copy = group.querySelector(".copy");
+    copy.addEventListener("click", function () {
+      var panel = group.querySelector(".panel:not([hidden])");
+      var text = Array.prototype.map.call(panel.querySelectorAll(".line"), function (l) { return l.textContent; }).join("\n");
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(text).then(function () {
+          copy.textContent = "Copied";
+          setTimeout(function () { copy.textContent = "Copy"; }, 1600);
+        });
+      }
+    });
+  })();
+</script>

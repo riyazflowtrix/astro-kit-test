@@ -1,0 +1,115 @@
+<section id="commerce-shop-the-look" class="section section--muted look">
+  <!-- kit: commerce-shop-the-look -->
+  <div class="container">
+    <div class="section-head">
+      <h2>Sunday breakfast at camp</h2>
+    </div>
+    <div class="look__layout">
+      <figure class="look__figure">
+        <img src="https://picsum.photos/seed/caldera-camp-breakfast/1600/2000" alt="A campfire breakfast: a Dutch oven of cornbread on a grill grate, a kettle steaming beside it" width="1600" height="2000" loading="lazy" />
+        <figcaption>Coals, coffee, cornbread</figcaption>
+
+        <div class="look__spot" style="left:42%;top:58%">
+          <button type="button" class="look__pin" aria-expanded="false" aria-controls="look-pop-1"><span class="visually-hidden">Ember Dutch Oven on the grate</span></button>
+          <div class="look__pop" id="look-pop-1" hidden>
+            <p class="look__pop-name">Ember Dutch Oven 5.5qt</p>
+            <p class="look__pop-meta">Bare iron &middot; $165</p>
+            <a href="/products/ember-dutch-oven?finish=bare-iron">View product</a>
+          </div>
+        </div>
+        <div class="look__spot" style="left:50%;top:72%">
+          <button type="button" class="look__pin" aria-expanded="false" aria-controls="look-pop-2"><span class="visually-hidden">Cable Fold Grill over the fire</span></button>
+          <div class="look__pop" id="look-pop-2" hidden>
+            <p class="look__pop-name">Cable Fold Grill</p>
+            <p class="look__pop-meta">$89</p>
+            <a href="/products/cable-fold">View product</a>
+          </div>
+        </div>
+        <div class="look__spot look__spot--right" style="left:78%;top:46%">
+          <button type="button" class="look__pin" aria-expanded="false" aria-controls="look-pop-3"><span class="visually-hidden">Trail Kettle on the rock</span></button>
+          <div class="look__pop" id="look-pop-3" hidden>
+            <p class="look__pop-name">Trail Kettle 1.2L</p>
+            <p class="look__pop-meta">$49</p>
+            <a href="/products/trail-kettle">View product</a>
+          </div>
+        </div>
+      </figure>
+
+      <div class="look__list">
+        <h3>In this look</h3>
+        <ol role="list">
+          <li>
+            <img src="https://picsum.photos/seed/caldera-dutch-coals/200/200" alt="Ember Dutch Oven" width="200" height="200" loading="lazy" />
+            <div><a href="/products/ember-dutch-oven?finish=bare-iron">Ember Dutch Oven 5.5qt</a><span>On the grate &middot; Bare iron</span></div>
+            <strong>$165</strong>
+          </li>
+          <li>
+            <img src="https://picsum.photos/seed/caldera-cable-fold-card/200/200" alt="Cable Fold Grill" width="200" height="200" loading="lazy" />
+            <div><a href="/products/cable-fold">Cable Fold Grill</a><span>Over the fire</span></div>
+            <strong>$89</strong>
+          </li>
+          <li>
+            <img src="https://picsum.photos/seed/caldera-trail-kettle/200/200" alt="Trail Kettle" width="200" height="200" loading="lazy" />
+            <div><a href="/products/trail-kettle">Trail Kettle 1.2L</a><span>On the rock</span></div>
+            <strong>$49</strong>
+          </li>
+        </ol>
+        <form action="#" method="post">
+          <input type="hidden" name="items" value="ember-dutch-oven,cable-fold,trail-kettle" />
+          <button class="btn btn-primary look__all" type="submit">Add all three &middot; $303</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const root = document.getElementById("commerce-shop-the-look");
+  if (root) {
+    const pins = Array.from(root.querySelectorAll<HTMLButtonElement>(".look__pin"));
+    const close = () => pins.forEach((p) => {
+      p.setAttribute("aria-expanded", "false");
+      const pop = root.querySelector<HTMLElement>(`#${p.getAttribute("aria-controls")}`);
+      if (pop) pop.hidden = true;
+    });
+    pins.forEach((pin) => pin.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const open = pin.getAttribute("aria-expanded") === "true";
+      close();
+      if (!open) {
+        pin.setAttribute("aria-expanded", "true");
+        const pop = root.querySelector<HTMLElement>(`#${pin.getAttribute("aria-controls")}`);
+        if (pop) pop.hidden = false;
+      }
+    }));
+    document.addEventListener("click", (e) => { if (!(e.target as HTMLElement).closest(".look__pop")) close(); });
+    root.addEventListener("keydown", (e) => { if (e.key === "Escape") close(); });
+  }
+</script>
+
+<style>
+  .look__layout { display: grid; gap: 2rem; }
+  @media (min-width: 860px) { .look__layout { grid-template-columns: 1.2fr 1fr; gap: 3rem; align-items: center; } }
+  .look__figure { position: relative; margin: 0; border-radius: var(--radius-lg); overflow: visible; }
+  .look__figure > img { width: 100%; border-radius: var(--radius-lg); aspect-ratio: 4 / 5; object-fit: cover; }
+  .look__figure figcaption { position: absolute; left: 1rem; top: 1rem; padding: 0.25rem 0.75rem; border-radius: 999px; background: rgb(255 255 255 / 0.9); font-size: 0.875rem; font-weight: 600; }
+  .look__spot { position: absolute; translate: -50% -50%; }
+  .look__pin { position: relative; width: 32px; height: 32px; border-radius: 50%; border: 3px solid #fff; background: var(--brand); box-shadow: 0 2px 10px rgb(0 0 0 / 0.35); cursor: pointer; }
+  .look__pin::after { content: ""; position: absolute; inset: -8px; border-radius: 50%; border: 2px solid rgb(255 255 255 / 0.7); animation: look-pulse 2s ease-out infinite; }
+  .look__pin[aria-expanded="true"] { background: var(--ink); }
+  @keyframes look-pulse { from { opacity: 1; scale: 0.8; } to { opacity: 0; scale: 1.4; } }
+  @media (prefers-reduced-motion: reduce) { .look__pin::after { animation: none; } }
+  .look__pop { position: absolute; z-index: 2; left: 50%; bottom: calc(100% + 10px); translate: -50% 0; width: 200px; padding: 0.875rem 1rem; background: var(--bg); border-radius: var(--radius); box-shadow: var(--shadow); }
+  .look__spot--right .look__pop { left: auto; right: -12px; translate: 0 0; }
+  .look__pop p { margin: 0; }
+  .look__pop-name { font-weight: 600; line-height: 1.3; }
+  .look__pop-meta { font-size: 0.875rem; color: var(--ink-2); margin-bottom: 0.375rem !important; }
+  .look__pop a { font-size: 0.875rem; font-weight: 600; color: var(--brand); }
+  .look__list ol { list-style: none; margin: 0 0 1.5rem; padding: 0; }
+  .look__list li { display: grid; grid-template-columns: 56px 1fr auto; gap: 0.875rem; align-items: center; padding: 0.875rem 0; border-bottom: 1px solid var(--line); }
+  .look__list li img { border-radius: var(--radius-sm); aspect-ratio: 1; object-fit: cover; }
+  .look__list li div { display: grid; min-width: 0; }
+  .look__list li a { font-weight: 600; text-decoration: none; }
+  .look__list li span { font-size: 0.875rem; color: var(--ink-3); }
+  .look__all { width: 100%; }
+</style>

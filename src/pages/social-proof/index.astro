@@ -1,0 +1,37 @@
+---
+import Base from "../../layouts/Base.astro";
+import TestimonialGrid from "../../components/social-proof/TestimonialGrid.astro";
+import TestimonialVideoSlider from "../../components/social-proof/TestimonialVideoSlider.astro";
+import WallOfLove from "../../components/social-proof/WallOfLove.astro";
+import CaseStudyCards from "../../components/social-proof/CaseStudyCards.astro";
+import LogoCloud from "../../components/social-proof/LogoCloud.astro";
+import PressMentions from "../../components/social-proof/PressMentions.astro";
+import AwardsCertifications from "../../components/social-proof/AwardsCertifications.astro";
+import ReviewSummary from "../../components/social-proof/ReviewSummary.astro";
+---
+
+<Base title="Social proof" description="Testimonials, video stories, walls of love, case studies, logos, press, awards and review summaries from the BetterCMS Kit.">
+  <section class="section kit-intro">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Kit library</span>
+        <h1>Social proof</h1>
+        <p class="lead">Eight ways to let customers, press and auditors make the case for you.</p>
+      </div>
+    </div>
+  </section>
+
+  <TestimonialGrid />
+  <TestimonialVideoSlider />
+  <WallOfLove />
+  <CaseStudyCards />
+  <LogoCloud />
+  <PressMentions />
+  <AwardsCertifications />
+  <ReviewSummary />
+</Base>
+
+<style>
+  .kit-intro { padding-bottom: 0; }
+  .kit-intro .section-head { margin-bottom: 0; }
+</style>

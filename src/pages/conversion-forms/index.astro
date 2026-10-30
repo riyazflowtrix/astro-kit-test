@@ -1,0 +1,42 @@
+---
+import Base from "../../layouts/Base.astro";
+import ConversionCtaBand from "../../components/conversion-forms/ConversionCtaBand.astro";
+import ConversionNewsletterConsent from "../../components/conversion-forms/ConversionNewsletterConsent.astro";
+import ConversionLeadCapture from "../../components/conversion-forms/ConversionLeadCapture.astro";
+import ConversionMultiStepForm from "../../components/conversion-forms/ConversionMultiStepForm.astro";
+import ConversionBookingEmbed from "../../components/conversion-forms/ConversionBookingEmbed.astro";
+import ConversionWaitlistReferral from "../../components/conversion-forms/ConversionWaitlistReferral.astro";
+import ConversionContactSection from "../../components/conversion-forms/ConversionContactSection.astro";
+import ConversionQuizProductFinder from "../../components/conversion-forms/ConversionQuizProductFinder.astro";
+import ConversionExitIntentPopup from "../../components/conversion-forms/ConversionExitIntentPopup.astro";
+import ConversionTrustBadges from "../../components/conversion-forms/ConversionTrustBadges.astro";
+---
+
+<Base title="Conversion & forms" description="CTA bands, sign-up and lead forms, multi-step forms, bookings, waitlists, contact, quizzes, popups and trust badges.">
+  <section class="section category-intro">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Kit library</span>
+        <h1>Conversion &amp; forms</h1>
+        <p class="lead">Every way a visitor signs up, books, asks or buys: from a single CTA band to a branching quiz.</p>
+      </div>
+    </div>
+  </section>
+
+  <ConversionCtaBand />
+  <ConversionNewsletterConsent />
+  <ConversionLeadCapture />
+  <ConversionMultiStepForm />
+  <ConversionBookingEmbed />
+  <ConversionWaitlistReferral />
+  <ConversionContactSection />
+  <ConversionQuizProductFinder />
+  <ConversionExitIntentPopup />
+  <ConversionTrustBadges />
+</Base>
+
+<style>
+  .category-intro {
+    padding-bottom: 0;
+  }
+</style>
